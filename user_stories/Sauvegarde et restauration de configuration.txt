@@ -1,0 +1,23 @@
+## Nom
+
+Sauvegarde et restauration de configuration (#SAVE)
+
+## Description
+
+Je veux que la configuration des modules et des connexions puisse être sauvegardée et rechargée plus tard, afin de limiter le temps consacré à la construction d’une configuration.
+
+## Compléments
+
+   
+
+## Critères d'acceptance
+
+   - quand je sauvegarde puis recharge cette configuration je retrouve exactement la composition du montage en terme de modules, connexions et réglages des modules
+
+## Valeur métier
+
+100
+
+## Complexité 
+
+À estimer par l'équipe en sprint planning.

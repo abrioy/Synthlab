@@ -1,0 +1,33 @@
+## Nom
+
+Création de module mixer (#MIX)
+
+## Description
+
+Je veux pouvoir créer un module mixer  afin de pouvoir mélanger plusieurs signaux venant de différents modules et d’envoyer le mélange sur u port de sortie
+
+## Compléments
+
+- le module doit comporter 
+
+	- quatre entrées de signal nommée `in1`, `in2`, `in3` et `in4`
+
+	- une sortie de signal nommée `out`
+
+	- quatre réglages de gain en entrée (un pour chaque entrée de signal), gradué en décibels de -inf à +12 dB
+
+
+
+## Critères d'acceptance
+
+- le signal émis sur le port `out` est la somme des quatre signaux en entrée, chacun atténué par le réglage de gain 
+qui le concerne
+
+## Valeur métier
+
+200
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

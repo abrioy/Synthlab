@@ -1,0 +1,3 @@
+# Objectifs du sprint n°1
+
+L’objectif du sprint n° 1 est d’obtenir un son sur la sortie son d’un PC, produit par un VCO réglé à 1 kHz, forme d’onde carrée, connecté au module de sortie.

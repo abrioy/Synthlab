@@ -1,0 +1,41 @@
+## Nom
+
+Clavier de commande (#KEYB)
+## Description
+
+Je veux pouvoir jouer de la musique en appuyant sur les touches du clavier du PC, en pilotant la fréquence d'un VCO et en déclenchant une ou plusieurs enveloppes.
+
+## Compléments
+
+Q donne do
+S donne ré
+D donne mi
+F donne fa
+G donne sol
+H donne la
+J donne si
+K donne do (à l'octave supérieure)
+Z donne do #
+E donne ré #
+T donne fa #
+Y donne sol #
+U donne la #
+X décale toutes les notes jouées ensuite d'une octave vers le haut
+W décale toutes les notes jouées ensuite d'une octave vers le bas
+
+Le module clavier a une sortie cv et une sortie gate
+
+## Critères d'acceptance
+
+- lors de l'appui sur une des touches mentionnées plus haut, une tension appropriée est  produite sur le port de sortie  nommé cv, selon le standard 1 volt par octave, et la sortie gate produit une valeur de +5 V
+
+-lorsqu'aucune touche est enfoncée, la sortie gate produit une valeur de -5 V et la sortie cv  produit la  valeur  correspondant à la dernière touche de clavier enfoncée (0 volt si aucune touche n'a été enfoncée depuis la création du module  clavier sur la table de montage)
+
+## Valeur métier
+
+150
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

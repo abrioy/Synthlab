@@ -1,0 +1,27 @@
+# Objectifs du sprint n°2
+
+L’objectif du sprint n° 2 est de pouvoir réaliser le montage suivant.
+Les composants du montage sont :
+
+- un VCO n°1 réglé à la fréquence de 1 Hz (comme un LFO) ;
+
+- un VCO n°2 réglé à la fréquence de base de 1 kHz ;
+
+- un VCA ;
+
+- un EG ;
+
+- un module de sortie son.
+
+Câblage :
+
+- la sortie `out` du VCO n°1 est reliée à l’entrée `fm` du VCO n°2 ;
+
+- la sortie `out` du VCO n°2 est reliée à l’entrée `in` du VCA ;
+
+- la sortie `out` du VCA est reliée  à l’entrée `in` du module de sortie son.
+
+- la sortie `out` du VCO n°1 est reliée à l’entrée `gate`de l’EG ;
+
+- la sortie `out` de l’EG est reliée à l’entrée `am` du VCA.
+

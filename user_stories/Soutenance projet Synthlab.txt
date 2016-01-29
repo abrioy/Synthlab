@@ -1,0 +1,6 @@
+La soutenance du projet Synthlab a pour objectifs :
+
+- de démontrer le savoir-faire de l’équipe en terme de conception, gestion du temps et autres ressources
+
+- de démontrer le bon fonctionnement de l’architecture conçue, codée et testée par le groupe
+

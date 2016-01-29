@@ -1,0 +1,24 @@
+## Nom
+
+Changement d'aspect IHM (#SKIN)
+
+## Description
+
+Je veux pouvoir changer l'apparence ("skin") de l'interface homme-machine
+
+## Compléments
+
+
+
+## Critères d'acceptance
+
+- au moins deux "finitions" sont disponibles pour l'utilisateur (p. ex. aspect métal et aspect bois, ou  marbre, ou autre)
+
+## Valeur métier
+
+150
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

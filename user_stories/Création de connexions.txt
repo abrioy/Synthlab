@@ -1,0 +1,34 @@
+## Nom
+
+Création de connexions (#CABL)
+
+## Description
+
+Je veux pouvoir créer des connexions câblées, par clics entre mes composants afin de créer un montage.
+
+## Compléments
+
+   - les câbles doivent relier les entrées et les sorties(une entrée pour une sortie)
+
+   - on crée un câble en cliquant sur une sortie puis sur une entrée
+
+   - un câble transmet le signal de la sortie sur laquelle il est branché du composant 1 à l'entrée sur laquelle il est branché du composant 2.
+
+## Critères d'acceptance
+
+   - en connectant 2 composants via un câble, on voit(ou entend) que le signal de sortie du premier est bien transmis au second
+
+   - on ne peut avoir qu'un câble par entrée et qu'un par sortie
+
+   - visuellement, un câble part d'une sortie et arrive sur une entrée
+
+   - visuellement, si je bouge un composant, les câbles liés se déplacent en conséquence
+
+## Valeur métier
+
+500
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

@@ -1,0 +1,31 @@
+# User domain
+
+## Nom
+
+Caractéristique des signaux
+
+## Description
+
+Je veux pouvoir créer et traiter des signaux avec les caractéristiques suivantes :
+
+- amplitude des signaux audio : −5 V à + 5V 
+
+- les signaux de modulation peuvent dépasser cette amplitude (de −10 V à +10 V)
+
+- bande passante de 22 kHz minimum
+
+## Compléments
+
+
+## Critères d'acceptance
+
+Conformité aux spécifs ci-dessus
+
+## Valeur métier
+
+500
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

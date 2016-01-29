@@ -1,0 +1,25 @@
+## Nom
+
+Sauvegarde du son produit dans un fichier son au format WAV ou MP3 (#MP3)
+
+## Description
+
+Je veux pouvoir enregistrer le son entrant dans le module OUT dans un fichier au format  Wave ou MP3
+
+## Compléments
+
+- l'enregistrement doit être optionnel et non systématique
+- on doit pouvoir démarrer et arrêt l'enregistrement à tout moment (en donnant des fichiers sons distincts pour chaque phase d'enregistrement activé)
+
+## Critères d'acceptance
+
+- production d'un fichier son au format WAV ou MP3 lisible  par tout lecteur multimédia
+
+## Valeur métier
+
+150
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

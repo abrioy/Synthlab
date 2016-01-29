@@ -1,0 +1,27 @@
+## Nom
+
+Création de boucles dans un montage (#LOOP)
+
+## Description
+
+Je veux pouvoir créer n’importe quelle topologie de montage, sans provoquer la défaillance du simulateur
+
+## Compléments
+
+   - n’importe quelle sortie peut être reliée à n’importe quelle entrée
+
+   - des cycles sont possibles
+
+## Critères d'acceptance
+
+   - en présence d’un cycle le simulateur continue à fonctionner normalement
+
+
+## Valeur métier
+
+300
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

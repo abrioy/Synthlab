@@ -1,0 +1,40 @@
+## Nom
+
+Création de module VCO type A (#VCOA)
+
+## Description
+
+Je veux pouvoir créer un module VCO (Voltage Control Oscillator) afin de produire  un signal périodique dont la forme peut être choisie et dont la fréquence est pilotée par un autre signal.
+
+## Compléments
+
+- le module VCO type A  produit les formes carré, triangle et dent de scie
+
+- le module doit comporter 
+
+	- une entrée de modulation de fréquence nommée `fm`
+
+	- une sortie de signal nommée `out`
+
+	- un réglage manuel en façade de la fréquence d’oscillation de base `f0`, obtenue lorsque `fm = 0`, avec un sélecteur d’octave et un réglage fin
+
+	- un réglage de forme d’onde, sélecteur parmi les possibilités listées ci-dessus
+
+
+
+## Critères d'acceptance
+
+- lorsque que l’entrée `fm` est déconnectée ou nulle, l’oscillateur doit produire un signal à la fréquence `f0`
+
+- lorsque la tension d’entrée sur `fm` augmente d’1 V, la fréquence double
+
+- lorsque la tension d’entrée sur `fm` diminue d’1 V, la fréquence est divisée par deux
+
+## Valeur métier
+
+500
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

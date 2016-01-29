@@ -1,0 +1,30 @@
+## Nom
+
+Aspect visuel des connexions (#SPAG)
+
+## Description
+
+Je veux que les connexions soient représentées par des câbles ayant un aspect "pendouillant" et pouvoir choisir la couleur de chaque câble afin de mieux les visualiser et les différencier.
+
+## Compléments
+
+   - Quand je crée un câble, je veux pouvoir choisir sa couleur.
+
+   - Plus un câble est long, plus il pendouille bas.
+
+## Critères d'acceptance
+
+   - quand je crée un câble, un choix de couleur est proposé et ce choix est appliqué sur mon câble
+
+   - le câble a un aspect "pendouillant" et un câble plus long, pendouille plus bas qu'un câble plus court
+
+   - si je bouge mes composants, la courbe du câble s'ajuste aux nouvelles positions
+
+## Valeur métier
+
+150
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

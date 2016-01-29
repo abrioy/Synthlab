@@ -1,0 +1,44 @@
+## Nom
+
+Création de module VCF type A, catégorie LP24 (#VCFA)
+
+## Description
+
+Je veux pouvoir créer un module VCF (Voltage Control Filter) type Low Pass (passe bas) d’obtenir un signal filtré
+par un filtre passe-bas du type 24 dB/octave, dont la fréquence de coupure est déterminée par un réglage manuel et une entrée `fm`.
+
+## Compléments
+
+- le module doit comporter 
+
+	- une entrée de signal nommée `in`
+
+	- une entrée de modulation de fréquence nommée `fm`
+
+	- une sortie de signal nommée `out`
+
+	- un réglage manuel en façade de la fréquence de coupure de base `f0`, obtenue lorsque `fm = 0`
+
+	- un réglage de résonance du filtre
+
+
+
+## Critères d'acceptance
+
+- lorsque que l’entrée `fm` est déconnectée ou nulle, l’oscillateur doit produire un signal à la fréquence `f0`
+
+- lorsque le filtre est totalement ouvert (fréquence de coupure infinie) le signal de sortie est identique au signal d’entrée
+
+- lorsque le filtre est totalement fermé (fréquence de coupure nulle), le signal de sortie est nul
+
+- lorsque la tension d’entrée sur `fm` augmente d’1 V, la fréquence de coupure double
+
+- lorsque la tension d’entrée sur `fm` diminue d’1 V, la fréquence de coupure divisée par deux
+
+## Valeur métier
+
+300
+
+## Complexité
+
+À estimer par l'équipe en sprint planning.

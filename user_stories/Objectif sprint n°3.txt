@@ -1,0 +1,53 @@
+# Objectifs du sprint n°3
+
+L’objectif du sprint n° 3 est de pouvoir réaliser les deux montages A et B suivants.
+Les composants du montage A sont :
+
+- un VCO n°1 réglé à la fréquence de 0,5 Hz (comme un LFO) ;
+
+- un VCO n°2 réglé à la fréquence de base de 1 kHz, signal dent de scie ;
+
+- un VCF LP 24 dB/octave réglé à la fréquence de 1 kHz
+
+- un VCA ;
+
+- un EG ;
+
+- un module de sortie son.
+
+Câblage du montage A :
+
+- la sortie `out` du VCO n°1 est reliée à l’entrée `fm` du VCF ;
+
+- la sortie `out` du VCO n°2 est reliée à l’entrée `in` du VCF ;
+
+- la sortie `out` du VCF  est reliée à l’entrée `in` du VCA ;
+
+- la sortie `out` du VCA est reliée  à l’entrée `in` du module de sortie son ;
+
+- la sortie `out` du VCO n°1 est reliée à l’entrée `gate`de l’EG ;
+
+- la sortie `out` de l’EG est reliée à l’entrée `am` du VCA.
+
+Les composants du montage B sont :
+
+- un VCO n°1 réglé à la fréquence de 1,5 kHz, signal triangle ;
+
+- un VCO n°2 réglé à la fréquence de base de 1 kHz, signal triangle ;
+
+- un réplicateur de ports ;
+
+- un module de sortie son.
+
+Câblage du montage B :
+
+- la sortie `out` du VCO n°1 est reliée à l’entrée `fm` du VCO n°2 ;
+
+- la sortie `out` du VCO n°2 est reliée à l’entrée `in` du réplicateur ;
+
+- la sortie `out1` du réplicateur  est reliée à l’entrée `fm` du VCO n° 1 ;
+
+- la sortie `out2` du réplicateur est reliée  à l’entrée `in` du module de sortie son.
+
+Les configurations seront préparées à l’avance et chargées à partir de leurs sauvegardes.
+

@@ -1,0 +1,55 @@
+## Nom
+
+Evaluation du travail par un rapport
+
+## Description
+
+En tant qu’évaluateur du travail réalisé par un groupe en projet, au moyen d’un rapport je veux pouvoir comprendre la nature et la qualité du travail effectué par le groupe, afin de noter ce travail.
+
+## Compléments
+
+   - par rapport on entend les livrables suivants 
+
+	- manuel utilisateur (environ 10 p)
+
+	- rapport d’organisation (données Scrum, décision tactiques, synthèse globale sur le déroulement, etc)
+
+	- rapport de conception (diagrammes UML et explication des choix techniques)
+
+	- rapport de test (cas de test, résultats)
+
+	- code source (y compris cas de test)
+
+	- code exécutable de façon autonome
+
+	- documentation du code (Javadoc)
+
+  - le tout livré dans une archive unique
+
+
+## Critères d'acceptance
+
+     - les aspects suivants sont évalués prioritairement
+
+	- organisation du projet, 
+
+	- respect de la pratique Scrum, 
+
+	- qualité de la conception, 
+
+	- qualité des tests
+
+	- qualité de la documentation technique
+
+	- clarté de la rédaction  
+
+
+
+## Valeur métier
+
+user story à réaliser obligatoirement et en priorité
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

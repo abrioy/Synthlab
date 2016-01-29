@@ -1,0 +1,48 @@
+## Nom
+
+Evaluation du travail par une soutenance
+
+## Description
+
+En tant qu’évaluateur du travail réalisé par un groupe en projet, au moyen d’une soutenance je veux pouvoir comprendre la nature et la qualité du travail effectué par chaque personne d’un groupe, afin de noter ce travail.
+
+## Compléments
+
+   - la présentation du travail se fait en groupe
+
+   - un créneau de 45 minutes est alloué à chaque groupe
+
+   - chaque membre du groupe devra s’exprimer au moins 5 minutes
+
+   - la présentation comprendra une démonstration mettant en valeur le produit
+
+   - à l’issue de la présentation le jury doit avoir compris le fonctionnement interne du produit
+
+   - des montages peuvent être demandés par le jury lors de la soutenance
+
+   - une version courante du rapport final sera présentée pour avis
+
+## Critères d'acceptance
+
+     - les aspects suivants sont évalués prioritairement
+
+	- organisation du groupe, 
+
+	- respect de la pratique Scrum, 
+
+	- qualité de la conception, 
+
+	- qualité des tests
+
+	- clarté de la présentation  
+
+
+
+## Valeur métier
+
+user story à réaliser obligatoirement et en priorité
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

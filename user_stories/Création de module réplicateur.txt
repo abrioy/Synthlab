@@ -1,0 +1,30 @@
+## Nom
+
+Création de module réplicateur (#REP)
+
+## Description
+
+Je veux pouvoir créer un module réplicateur  afin de pouvoir relier une sortie à plusieurs entrées (comme une multiprise)
+
+## Compléments
+
+- le module doit comporter 
+
+	- une entrée  nommée `in`
+
+	- trois sorties de signal nommées `out1`, `out2`, `out3`
+
+
+
+## Critères d'acceptance
+
+- le signal reçu dans l’entrée `in` est recopié simultanément sur les trois sorties 
+
+## Valeur métier
+
+200
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

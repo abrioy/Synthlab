@@ -1,0 +1,42 @@
+## Nom
+
+Création de module EG (#EG)
+
+## Description
+
+Je veux pouvoir créer un module EG (Enveloppe Generator) afin de produire une forme d’onde « one shot »
+
+## Compléments
+
+- le module doit comporter 
+
+	- une entrée de déclenchement nommée `gate`
+
+	- une sortie de signal nommée `out`
+
+	- un réglage manuel en façade des paramètres suivants : temps de montée (Attack), d’extinction (Decay), niveau de maintien (Sustain) et temps de relâchement (Release)
+
+
+
+## Critères d'acceptance
+
+- lorsque que l’enveloppe est au repos le signal `out` vaut 0
+
+- lors d’un front montant du signal `gate` l’enveloppe commence son cycle (déclenchement)
+
+- lors d’un front descendant sur `gate` l’enveloppe termine son cycle par la phase de relâchement
+
+- en cas de redéclenchement pendant la phase de relâchement le cycle redémarre au début
+
+- la tension sur `out` varie de 0 à 5 V lors du déroulement de l’enveloppe
+
+- le paramètre Sustain est une atténuation en dB du niveau maximum atteint en fin de phase de montée 
+
+## Valeur métier
+
+200
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

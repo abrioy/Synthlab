@@ -1,0 +1,32 @@
+## Nom
+
+Création de module de sortie (#OUT)
+
+## Description
+
+Je veux pouvoir créer un module de sortie pour transférer le signal audio produit par un montage vers une sortie audio du PC
+
+## Compléments
+
+- le module de sortie doit être créé implicitement lors de la création du plan de montage
+ 
+- le module de sortie doit avoir une représentation graphique sur le plan de montage
+
+- le module de sortie doit posséder une entrée mono au minimum
+
+- le module de sortie doit posséder un atténuateur gradué en dB, dans une plage de -inf à +12 dB
+
+- le module de sortie doit posséder un interrupteur nommé Mute, qui coupe le son lorsqu’il est en position travail
+
+## Critères d'acceptance
+
+- lorsqu’on envoie un signal de +/- 5 Vcc le signal audio vers la carte son doit être d’amplitude maximale
+
+## Valeur métier
+
+500
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

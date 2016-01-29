@@ -1,0 +1,41 @@
+## Nom
+
+Création de module séquenceur (#SEQ)
+
+## Description
+
+Je veux pouvoir créer un module séquenceur afin de produire une série de tensions préréglées vers un port de sortie
+
+## Compléments
+
+- le module doit comporter 
+
+	- une entrées de signal nommée `gate`
+
+	- une sortie de signal nommée `out`
+
+	- huit boutons de réglage de niveau, chacun dans une plage allant de −1 V à + 1 V
+
+	- un bouton de remise à un
+
+Le séquenceur comporte huit pas numéroté de 1 à 8.
+
+
+## Critères d'acceptance
+
+- le pas initial lors de la création d’un séquenceur sur le plan de montage est le pas 1
+
+- à chaque front montant sur l’entrée `gate`, le numéro de pas courant est augmenté de 1, le pas successeur du pas 8 est le pas 1
+
+- le signal émis sur le port `out` est la valeur de tension indiquée par le bouton de niveau du pas courant
+
+- l’appui sur le bouton de remise à un ramène le pas courant au pas 1
+
+## Valeur métier
+
+200
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

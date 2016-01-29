@@ -1,0 +1,34 @@
+## Nom
+
+Création de module oscilloscope (#SCOP)
+
+## Description
+
+Je veux pouvoir créer un module oscilloscope afin d’afficher  un signal pour analyse
+
+## Compléments
+
+
+- le module doit comporter 
+
+	- une entrée de signal nommée `in`
+
+	- une sortie de signal nommée `out`
+
+	- une fenêtre graphique
+
+
+## Critères d'acceptance
+
+- la fenêtre graphique montre le tracé dans le temps (à la façon d’un oscilloscope) du signal reçu sur le port `in`
+
+- le port `out` réplique le signal en entrée `in`
+
+## Valeur métier
+
+200
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+

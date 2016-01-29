@@ -1,0 +1,26 @@
+## Nom
+
+Création de module bruit blanc (#BRUI)
+
+## Description
+
+Je veux pouvoir créer un module bruit blanc afin de produire un signal conforme à la définition du bruit blanc.
+
+## Compléments
+
+- le module doit comporter 
+
+	- une sortie de signal nommée `out`
+
+
+## Critères d'acceptance
+
+- le signal produit sur le port `out` est conforme au spectre du bruit blanc (dans la mesure de la bande passante du simulateur)
+
+## Valeur métier
+
+80
+
+## Complexité
+
+À estimer par l'équipe en sprint planning

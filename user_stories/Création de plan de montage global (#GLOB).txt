@@ -1,0 +1,24 @@
+## Nom
+
+Création de plan de montage global (#GLOB)
+
+## Description
+
+Je veux pouvoir créer un plan de montage graphique sur lequel les modules seront placés et connectés.
+
+## Compléments
+
+
+
+## Critères d'acceptance
+
+- le plan de montage se présente sous forme de fenêtre où on peut installer les modules, les déplacer et les connecter au moyen d’une IHM
+
+## Valeur métier
+
+500
+
+## Complexité
+
+À estimer par l'équipe en sprint planning
+
