@@ -7,9 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
-/**
- * Created by miow on 2/1/16.
- */
+
 public class Main extends Application {
 	private static final Logger logger = Logger.getLogger(Main.class);
 
@@ -18,9 +16,13 @@ public class Main extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/MainWindow.fxml"));
 
 		Scene scene = new Scene(root);
-
 		stage.setTitle("Sythlab");
 		stage.setScene(scene);
+		stage.setOnShown(we -> logger.info("Main window opened."));
+		stage.setOnCloseRequest(we -> {
+				stage.close();
+				logger.info("Main window closed.");
+		});
 		stage.show();
 	}
 

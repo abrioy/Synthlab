@@ -1,7 +1,12 @@
 package fr.synthlab.model.module.port;
 
+import org.apache.log4j.Logger;
+
+
 public class Port {
-    private String name;
+	private static final Logger logger = Logger.getLogger(Port.class);
+
+	private String name;
     private Port port;
 
     public Port(String name) {

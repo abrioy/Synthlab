@@ -1,7 +1,9 @@
 package fr.synthlab.model.module.Out;
 
-/**
- * Created by johan on 01/02/16.
- */
+import org.apache.log4j.Logger;
+
+
 public class ModuleOut {
+	private static final Logger logger = Logger.getLogger(ModuleOut.class);
+
 }

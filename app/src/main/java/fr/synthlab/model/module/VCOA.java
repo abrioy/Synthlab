@@ -6,11 +6,13 @@ import com.jsyn.unitgen.TriangleOscillator;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class VCOA implements Module {
+	private static final Logger logger = Logger.getLogger(VCOA.class);
 
     private Collection<Port> ports = new ArrayList<>();
 
