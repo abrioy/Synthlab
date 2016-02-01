@@ -104,4 +104,9 @@ public class ModuleOut implements Module{
         res.add(in);
         return res;
     }
+
+    @Override
+    public void update() {
+
+    }
 }

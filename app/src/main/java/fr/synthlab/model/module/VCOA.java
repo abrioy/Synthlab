@@ -53,6 +53,7 @@ public class VCOA implements Module {
         return ports;
     }
 
+
     public double getFrequency() {
         return frequency;
     }
@@ -83,4 +84,19 @@ public class VCOA implements Module {
     public void setTone(double tone) {
         this.tone = tone;
     }
+
+    @Override
+    public void update() {
+        if (fmInput.getConnected() == null) {
+            fmFilter.output.disconnectAll();
+            squareOscillator.frequency.set(frequency);
+            triangleOscillator.frequency.set(frequency);
+            sawtoothOscillator.frequency.set(frequency);
+        } else {
+            fmFilter.output.connect(squareOscillator.frequency);
+            fmFilter.output.connect(triangleOscillator.frequency);
+            fmFilter.output.connect(sawtoothOscillator.frequency);
+        }
+    }
+
 }

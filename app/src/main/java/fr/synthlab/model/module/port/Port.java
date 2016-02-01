@@ -23,11 +23,11 @@ public class Port {
 
     public void connect(Port port){
         this.port = port;
-        // TODO
     }
 
     public void disconnect(){
-        //TODO
+        port = null;
+        module.update();
     }
 
     public Port getConnected(){
