@@ -5,6 +5,7 @@ import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.LineOut;
 import com.jsyn.unitgen.LinearRamp;
 import com.jsyn.unitgen.SawtoothOscillatorBL;
+import fr.synthlab.model.filter.FilterAttenuator;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.Port;
@@ -23,6 +24,8 @@ public class ModuleOut implements Module{
     private final LineOut lineOut;
 
     private final InputPort in;
+    private final FilterAttenuator attenuator;
+    public final Synthesizer syn;
 
     public boolean isMute() {
         return mute;
@@ -30,9 +33,15 @@ public class ModuleOut implements Module{
 
     private boolean mute = true;
 
-    public ModuleOut(){
+    public ModuleOut(Synthesizer synthesizer){
         lineOut = new LineOut();
-        in = new InputPort("in", lineOut.getInput());
+        in = new InputPort("in", lineOut.input);
+        attenuator = new FilterAttenuator();
+        lineOut.input.connect(attenuator.output);
+        synthesizer.add(attenuator);
+        synthesizer.add(lineOut);
+        syn = synthesizer;
+        attenuator.start();
     }
 
     public void start(){
@@ -69,19 +78,15 @@ public class ModuleOut implements Module{
         synth.add( osc = new SawtoothOscillatorBL() );
         // Add a lag to smooth out amplitude changes and avoid pops.
         LinearRamp lag;
-        synth.add( lag = new LinearRamp() );
+        //synth.add( lag = new LinearRamp() );
         // Add an output mixer.
-        ModuleOut b =new ModuleOut();
+        ModuleOut b =new ModuleOut(synth);
         LineOut a = b.lineOut;
-        synth.add( a );
-        synth.start();
-        osc.output.connect( 0, a.input, 0 );
-        osc.output.connect( 0, a.input, 1 );
+        //synth.add( a );
+        b.syn.start();
+        osc.output.connect( 0, b.attenuator.input, 0 );
+        //osc.output.connect( 0, a.input, 1 );
         b.start();
-        lag.output.connect( osc.amplitude );
-        lag.input.setup( 0.0, 0.5, 1.0 );
-        lag.time.set(  0.2 );
-        osc.frequency.setup( 50.0, 300.0, 10000.0 );
         int i;
         while (true) {
             try {
@@ -90,6 +95,7 @@ public class ModuleOut implements Module{
                     Thread.sleep(300);
                     b.setMute(!b.isMute());
                     i++;
+                    b.attenuator.setAttenuation(b.attenuator.getAttenuation()-800);
                 }
                 while(i<12){
                     if (b.isMute()){
