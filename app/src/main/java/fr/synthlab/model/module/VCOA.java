@@ -29,10 +29,10 @@ public class VCOA implements Module {
     private SawtoothOscillator sawtoothOscillator = new SawtoothOscillator();
 
     public VCOA() {
-        ports.add(new InputPort("fm", fm.input));
-        ports.add(new OutputPort("square", squareOscillator.output));
-        ports.add(new OutputPort("triangle", triangleOscillator.output));
-        ports.add(new OutputPort("sawtooth", sawtoothOscillator.output));
+        ports.add(new InputPort("fm", this, fm.input));
+        ports.add(new OutputPort("square", this, squareOscillator.output));
+        ports.add(new OutputPort("triangle", this, triangleOscillator.output));
+        ports.add(new OutputPort("sawtooth", this, sawtoothOscillator.output));
     }
 
     @Override
