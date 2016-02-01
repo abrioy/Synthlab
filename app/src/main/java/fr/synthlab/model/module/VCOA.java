@@ -3,6 +3,7 @@ package fr.synthlab.model.module;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.TriangleOscillator;
+import fr.synthlab.model.module.filter.VcoFm;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -16,20 +17,86 @@ public class VCOA implements Module {
 
     private Collection<Port> ports = new ArrayList<>();
 
+    private double frequency = 20;
+    private double octave = 0;
+    private double tone = 0;
+
+    private VcoFm fmFilter = new VcoFm(frequency);
+
     // Oscillators
     private SquareOscillator squareOscillator = new SquareOscillator();
     private TriangleOscillator triangleOscillator = new TriangleOscillator();
     private SawtoothOscillator sawtoothOscillator = new SawtoothOscillator();
 
+    // Ports
+    private InputPort fmInput;
+    private OutputPort squareOutput;
+    private OutputPort triangleOutput;
+    private OutputPort sawtoothOutput;
+
     public VCOA() {
-        ports.add(new InputPort("fm", /*TODO*/null));
-        ports.add(new OutputPort("square", squareOscillator.output));
-        ports.add(new OutputPort("triangle", triangleOscillator.output));
-        ports.add(new OutputPort("sawtooth", sawtoothOscillator.output));
+        fmInput = new InputPort("fm", this, fmFilter.input);
+        squareOutput = new OutputPort("square", this, squareOscillator.output);
+        triangleOutput = new OutputPort("triangle", this, triangleOscillator.output);
+        sawtoothOutput = new OutputPort("sawtooth", this, sawtoothOscillator.output);
+
+        ports.add(fmInput);
+        ports.add(squareOutput);
+        ports.add(triangleOutput);
+        ports.add(sawtoothOutput);
+
+        setFrequency(20);
     }
 
     @Override
     public Collection<Port> getPorts() {
         return ports;
     }
+
+
+    public double getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(double frequency) {
+        this.frequency = frequency;
+        fmFilter.setf0(frequency);
+
+        if (fmInput.getConnected() == null) {
+            squareOscillator.frequency.set(frequency);
+            triangleOscillator.frequency.set(frequency);
+            sawtoothOscillator.frequency.set(frequency);
+        }
+    }
+
+    public double getOctave() {
+        return octave;
+    }
+
+    public void setOctave(double octave) {
+        this.octave = octave;
+    }
+
+    public double getTone() {
+        return tone;
+    }
+
+    public void setTone(double tone) {
+        this.tone = tone;
+    }
+
+    @Override
+    public void update() {
+        if (fmInput.getConnected() == null) {
+            fmFilter.output.disconnectAll();
+            squareOscillator.frequency.set(frequency);
+            triangleOscillator.frequency.set(frequency);
+            sawtoothOscillator.frequency.set(frequency);
+        } else {
+            fmFilter.output.connect(squareOscillator.frequency);
+            fmFilter.output.connect(triangleOscillator.frequency);
+            fmFilter.output.connect(sawtoothOscillator.frequency);
+        }
+    }
+
 }
