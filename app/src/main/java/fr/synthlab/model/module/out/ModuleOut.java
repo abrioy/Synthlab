@@ -1,4 +1,4 @@
-package fr.synthlab.model.module.Out;
+package fr.synthlab.model.module.out;
 
 import org.apache.log4j.Logger;
 
