@@ -1,5 +1,7 @@
 package fr.synthlab.model.module;
 
+import fr.synthlab.model.module.port.Port;
+
 import java.util.Collection;
 
 /**
