@@ -1,8 +1,8 @@
 package fr.synthlab.model.module.oscilloscope;
 
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.Port;
 import org.apache.log4j.Logger;
+import fr.synthlab.model.module.port.Port;
 
 import java.util.Collection;
 
