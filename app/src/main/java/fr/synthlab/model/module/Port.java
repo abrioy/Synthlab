@@ -1,10 +1,14 @@
 package fr.synthlab.model.module;
 
+import org.apache.log4j.Logger;
+
 /**
  * Created by johan on 01/02/16.
  */
 public class Port {
-    private String name;
+	private static final Logger logger = Logger.getLogger(Port.class);
+
+	private String name;
     private Port port;
 
     public String getName(){

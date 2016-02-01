@@ -1,14 +1,15 @@
 package fr.synthlab.view;
 
 import javafx.fxml.Initializable;
+import org.apache.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by miow on 2/1/16.
- */
-public class MainWindowController implements Initializable{
+
+public class MainWindowController implements Initializable {
+	private static final Logger logger = Logger.getLogger(MainWindowController.class);
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
