@@ -1,11 +1,12 @@
-package fr.synthlab.model.module;
+package fr.synthlab.model.module.port;
 
-/**
- * Created by johan on 01/02/16.
- */
 public class Port {
     private String name;
     private Port port;
+
+    public Port(String name) {
+        this.name = name;
+    }
 
     public String getName(){
         return name;
