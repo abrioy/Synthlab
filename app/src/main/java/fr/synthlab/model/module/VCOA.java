@@ -18,7 +18,11 @@ public class VCOA implements Module {
     private Collection<Port> ports = new ArrayList<>();
 
     private double frequency = 20;
+    private double octave = 0;
+    private double tone = 0;
+
     private VcoFm fm = new VcoFm(frequency);
+
     // Oscillators
     private SquareOscillator squareOscillator = new SquareOscillator();
     private TriangleOscillator triangleOscillator = new TriangleOscillator();
@@ -45,4 +49,19 @@ public class VCOA implements Module {
         fm.setf0(frequency);
     }
 
+    public double getOctave() {
+        return octave;
+    }
+
+    public void setOctave(double octave) {
+        this.octave = octave;
+    }
+
+    public double getTone() {
+        return tone;
+    }
+
+    public void setTone(double tone) {
+        this.tone = tone;
+    }
 }
