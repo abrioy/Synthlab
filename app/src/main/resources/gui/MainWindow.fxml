@@ -1,0 +1,10 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="480.0" prefWidth="640.0"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.synthlab.view.MainWindowController"
+            stylesheets="/gui/style/MainWindow.css">
+
+</AnchorPane>
