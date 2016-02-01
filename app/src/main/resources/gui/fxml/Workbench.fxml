@@ -1,0 +1,10 @@
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<ScrollPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.synthlab.view.WorkbenchController"
+            stylesheets="/gui/fxml/style/Workbench.css">
+    <StackPane fx:id="workbench">
+
+    </StackPane>
+</ScrollPane>
