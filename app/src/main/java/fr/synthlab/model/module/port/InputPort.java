@@ -13,4 +13,13 @@ public class InputPort extends Port {
         super(name, m);
         this.input = input;
     }
+
+    public ConnectableInput getInput() {
+        return input;
+    }
+
+    public void connect(OutputPort port) {
+        super.connect(port);
+        input.connect(port.getOutput());
+    }
 }
