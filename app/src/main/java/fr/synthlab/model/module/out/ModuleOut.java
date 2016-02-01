@@ -8,6 +8,7 @@ import com.jsyn.unitgen.SawtoothOscillatorBL;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.Port;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +17,8 @@ import java.util.Collection;
  * Created by johan on 01/02/16.
  */
 public class ModuleOut implements Module{
+
+    private static final Logger logger = Logger.getLogger(ModuleOut.class);
 
     private final LineOut lineOut;
 
@@ -29,7 +32,7 @@ public class ModuleOut implements Module{
 
     public ModuleOut(){
         lineOut = new LineOut();
-        in = new InputPort("in");
+        in = new InputPort("in", lineOut.getInput());
     }
 
     public void start(){

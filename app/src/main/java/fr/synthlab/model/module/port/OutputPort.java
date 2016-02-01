@@ -1,7 +1,6 @@
 package fr.synthlab.model.module.port;
 
 import com.jsyn.ports.ConnectableOutput;
-import com.jsyn.ports.UnitOutputPort;
 import org.apache.log4j.Logger;
 
 public class OutputPort extends Port {
@@ -9,8 +8,8 @@ public class OutputPort extends Port {
 
     private ConnectableOutput output;
 
-    public OutputPort(String name) {
+    public OutputPort(String name, ConnectableOutput output) {
         super(name);
-        output = new UnitOutputPort(name);
+        this.output = output;
     }
 }
