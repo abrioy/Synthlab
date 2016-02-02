@@ -3,7 +3,6 @@ package fr.synthlab.view;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
-import com.jsyn.ports.UnitOutputPort;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.OutputPort;
@@ -36,14 +35,41 @@ public class WorkbenchController implements Initializable {
 
 		synth.start();
 
+		Port o1 = null;
+		Port o2 = null;
+		Port o3 = null;
+
 		for (Port p : vcoa.getPorts()) {
 			if (p.getName().equals("square")) {
+				o1 = p;
 				((OutputPort) p).connect(b.getInput());
-				oscillo.connect((OutputPort) p);
+			}
+			if (p.getName().equals("triangle")) {
+				o2 = p;
+				((OutputPort) p).connect(b.getInput());
+			}
+			if (p.getName().equals("sawtooth")) {
+				o3 = p;
+				((OutputPort) p).connect(b.getInput());
 			}
 		}
 
+		oscillo.connect((OutputPort) o3);
+
 		b.start();
 		workbench.getChildren().add(new ViewModuleOscillator(oscillo));
+
+		final Port finalO = o1;
+		Thread test = new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                oscillo.connect((OutputPort) finalO);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+		test.start();
+
 	}
 }
