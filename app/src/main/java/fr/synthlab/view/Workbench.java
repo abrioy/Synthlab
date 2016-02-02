@@ -35,7 +35,7 @@ public class Workbench extends Pane {
 
 		synth.start();
 
-		OutputPort p = (OutputPort) vcoa.getPort("square");
+		OutputPort p = (OutputPort) vcoa.getPort("triangle");
 		p.connect(b.getInput());
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
 		p.connect(inOsc);
@@ -43,6 +43,24 @@ public class Workbench extends Pane {
 		vcoa.start();
 		oscillo.start();
 		b.start();
+
+		Thread test = new Thread(() -> {
+			try {
+				Thread.sleep(5000);
+				OutputPort p2 = (OutputPort) vcoa.getPort("triangle");
+				p2.disconnect();
+				p2 = (OutputPort) vcoa.getPort("square");
+				p2.connect(b.getInput());
+				InputPort in = (InputPort) oscillo.getPort("in");
+
+				p2.connect(in);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+
+		test.start();
+
 		this.getChildren().add(new ViewModuleOscillator(oscillo));
 	}
 }
