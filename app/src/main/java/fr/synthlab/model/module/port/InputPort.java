@@ -3,6 +3,7 @@ package fr.synthlab.model.module.port;
 import com.jsyn.ports.ConnectableInput;
 import com.jsyn.ports.UnitInputPort;
 import fr.synthlab.model.module.Module;
+
 import java.util.logging.Logger;
 
 public class InputPort extends Port {
@@ -23,8 +24,10 @@ public class InputPort extends Port {
         return (UnitInputPort) input;
     }
 
-    public void connect(OutputPort port) {
-        input.connect(port.getOutput());
+    @Override
+    public void connect(Port port) {
+        if (port instanceof OutputPort)
+            input.connect(((OutputPort) port).getOutput());
         super.connect(port);
     }
 
