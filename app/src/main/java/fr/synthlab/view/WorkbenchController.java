@@ -7,18 +7,17 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import fr.synthlab.model.module.vcoa.VCOA;
-import fr.synthlab.view.module.ViewModuleOscillator;
+import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
-import org.apache.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class WorkbenchController implements Initializable {
-	private static final Logger logger = Logger.getLogger(WorkbenchController.class);
+	private static final Logger logger = Logger.getLogger(WorkbenchController.class.getName());
 
 	@FXML
 	private StackPane workbench;
@@ -27,7 +26,7 @@ public class WorkbenchController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		Synthesizer synth = JSyn.createSynthesizer();
 
-		VCOA vcoa = new VCOA(synth);
+		ModuleVCOA vcoa = new ModuleVCOA(synth);
 		// Add an output mixer.
 		ModuleOut b = new ModuleOut(synth);
 
@@ -43,6 +42,7 @@ public class WorkbenchController implements Initializable {
 			if (p.getName().equals("square")) {
 				o1 = p;
 				((OutputPort) p).connect(b.getInput());
+				oscillo.getPort("in").connect((OutputPort) p);
 			}
 			if (p.getName().equals("triangle")) {
 				o2 = p;
@@ -54,7 +54,7 @@ public class WorkbenchController implements Initializable {
 			}
 		}
 
-		oscillo.connect((OutputPort) o3);
+		/*oscillo.connect((OutputPort) o3);
 
 		b.start();
 		workbench.getChildren().add(new ViewModuleOscillator(oscillo));
@@ -69,7 +69,7 @@ public class WorkbenchController implements Initializable {
             }
         });
 
-		test.start();
+		test.start();*/
 
 	}
 }

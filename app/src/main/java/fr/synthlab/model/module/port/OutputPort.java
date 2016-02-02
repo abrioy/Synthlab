@@ -2,10 +2,11 @@ package fr.synthlab.model.module.port;
 
 import com.jsyn.ports.ConnectableOutput;
 import fr.synthlab.model.module.Module;
-import org.apache.log4j.Logger;
+
+import java.util.logging.Logger;
 
 public class OutputPort extends Port {
-	private static final Logger logger = Logger.getLogger(OutputPort.class);
+	private static final Logger logger = Logger.getLogger(OutputPort.class.getName());
 
     private ConnectableOutput output;
 
@@ -18,8 +19,10 @@ public class OutputPort extends Port {
         return output;
     }
 
-    public void connect(InputPort port) {
-        output.connect(port.getInput());
+    @Override
+    public void connect(Port port) {
+        if (port instanceof InputPort)
+            output.connect(((InputPort) port).getInput());
         super.connect(port);
     }
 

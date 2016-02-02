@@ -9,17 +9,17 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 
-public class VCOA implements Module {
-	private static final Logger logger = Logger.getLogger(VCOA.class);
+public class ModuleVCOA implements Module {
+	private static final Logger logger = Logger.getLogger(ModuleVCOA.class.getName());
 
     private Collection<Port> ports = new ArrayList<>();
 
-    private double frequency = 20;
+    private double frequency = 1000;
     private double octave = 0;
     private double tone = 0;
 
@@ -36,7 +36,7 @@ public class VCOA implements Module {
     private OutputPort triangleOutput;
     private OutputPort sawtoothOutput;
 
-    public VCOA(Synthesizer synthesizer) {
+    public ModuleVCOA(Synthesizer synthesizer) {
         synthesizer.add(squareOscillator);
         synthesizer.add(triangleOscillator);
         synthesizer.add(sawtoothOscillator);
@@ -52,8 +52,16 @@ public class VCOA implements Module {
         ports.add(triangleOutput);
         ports.add(sawtoothOutput);
 
-        setFrequency(1000);
+        setFrequency(frequency);
+    }
 
+    @Override
+    public Collection<Port> getPorts() {
+        return ports;
+    }
+
+    @Override
+    public void start() {
         fmFilter.start();
         squareOscillator.start();
         sawtoothOscillator.start();
@@ -61,8 +69,11 @@ public class VCOA implements Module {
     }
 
     @Override
-    public Collection<Port> getPorts() {
-        return ports;
+    public void stop() {
+        fmFilter.stop();
+        squareOscillator.stop();
+        sawtoothOscillator.stop();
+        triangleOscillator.stop();
     }
 
     public double getFrequency() {
@@ -88,6 +99,7 @@ public class VCOA implements Module {
         this.octave = octave;
         setFrequency(frequency);
     }
+
 
     public double getTone() {
         return tone;

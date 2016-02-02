@@ -1,11 +1,12 @@
 package fr.synthlab.model.module.port;
 
 import fr.synthlab.model.module.Module;
-import org.apache.log4j.Logger;
+
+import java.util.logging.Logger;
 
 
-abstract public class Port {
-	private static final Logger logger = Logger.getLogger(Port.class);
+public class Port {
+	private static final Logger logger = Logger.getLogger(Port.class.getName());
 
 	private String name;
     private Port port;
@@ -24,11 +25,13 @@ abstract public class Port {
     public void connect(Port port){
         this.port = port;
         module.update();
+        port.getModule().update();
     }
 
     public void disconnect(){
         port = null;
         module.update();
+        port.getModule().update();
     }
 
     public Port getConnected(){
