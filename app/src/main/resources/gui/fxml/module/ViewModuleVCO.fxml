@@ -1,4 +1,4 @@
-<?import javafx.scene.control.Button?>
+<?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <Pane prefHeight="300.0" prefWidth="500.0"
@@ -6,7 +6,7 @@
       stylesheets="/gui/fxml/style/Module.css">
 
     <Label fx:id="test" text="dqsdqsdqsdqsdqsdqsdqsdd" />
-    <Button text="Click Me"/>
+    <Plug />
 
 </Pane>
 

@@ -1,6 +1,7 @@
 package fr.synthlab.view;
 
 
+import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
@@ -17,6 +18,6 @@ public class WorkbenchController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//workbench.getChildren().add(new ViewModuleVCO());
+		workbench.getChildren().add(new ViewModuleVCO());
 	}
 }
