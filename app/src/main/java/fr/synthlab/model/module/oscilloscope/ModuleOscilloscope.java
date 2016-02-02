@@ -7,6 +7,7 @@ import com.jsyn.unitgen.Multiply;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
+import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
 import javax.swing.*;
@@ -21,6 +22,7 @@ public class ModuleOscilloscope implements Module {
 
     private AudioScope scope;
     private InputPort in;
+    private OutputPort out;
     private PassThrough pt;
     private ArrayList<Port> ports = new ArrayList<>();
 
@@ -28,7 +30,10 @@ public class ModuleOscilloscope implements Module {
         scope = new AudioScope(synth);
         pt = new PassThrough();
         in = new InputPort("in", this, pt.input);
+        out = new OutputPort("out", this, pt.output);
+
         ports.add(in);
+        ports.add(out);
         scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
         scope.addProbe(pt.output);
     }

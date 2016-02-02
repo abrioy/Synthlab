@@ -29,20 +29,25 @@ public class Workbench extends Pane {
 
 		ModuleVCOA vcoa = new ModuleVCOA(synth);
 		// Add an output mixer.
-		ModuleOut b = new ModuleOut(synth);
+		ModuleOut sound = new ModuleOut(synth);
 
 		ModuleOscilloscope oscillo = new ModuleOscilloscope(synth);
 
 		synth.start();
 
-		OutputPort p = (OutputPort) vcoa.getPort("square");
-		p.connect(b.getInput());
+		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
-		p.connect(inOsc);
+		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
+
+		// Connect square output to oscillo in
+		squarePort.connect(inOsc);
+
+		// Connect oscillo out to sound
+		outOsc.connect(sound.getPort("in"));
 
 		vcoa.start();
 		oscillo.start();
-		b.start();
+		sound.start();
 		this.getChildren().add(new ViewModuleOscillator(oscillo));
 	}
 }
