@@ -1,4 +1,4 @@
-package fr.synthlab.model.module.VCOA;
+package fr.synthlab.model.module.vcoa;
 
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SquareOscillator;
