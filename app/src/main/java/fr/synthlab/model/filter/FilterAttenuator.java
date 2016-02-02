@@ -14,10 +14,10 @@ public class FilterAttenuator extends UnitFilter {
         double[] outputs = output.getValues();
         for (int i = start; i < limit; i++) {
             double in = inputs[i];
-            double out = Math.abs(attenuation) * Math.abs(in);
+            double out = attenuation * in;/*Math.abs(attenuation) * Math.abs(in);
             if (attenuation < 0 || in < 0 ){
                 out = -out;
-            }
+            }*/
             outputs[i] = out;
         }
         System.out.println(inputs[0]+" "+outputs[0] + " "+ attenuation);
