@@ -33,6 +33,7 @@
         </executions>
         <configuration>
           <mainClass>fr.synthlab.Main</mainClass>
+          <classpathScope>compile</classpathScope>
           <executable>mvn</executable>
           <arguments>
             <argument>install</argument>

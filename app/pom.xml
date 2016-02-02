@@ -39,12 +39,12 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>2.4.1</version>
                 <executions>
-                  <execution>
-                    <phase>package</phase>
-                    <goals>
-                      <goal>shade</goal>
-                    </goals>
-                  </execution>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -53,14 +53,15 @@
                 <version>1.2.1</version>
                 <executions>
                     <execution>
-                      <goals>
-                        <goal>exec</goal>
-                        <goal>java</goal>
-                      </goals>
+                        <goals>
+                            <goal>exec</goal>
+                            <goal>java</goal>
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
                     <mainClass>fr.synthlab.Main</mainClass>
+                    <classpathScope>compile</classpathScope>
                     <executable>mvn</executable>
                     <arguments>
                         <argument>install</argument>
