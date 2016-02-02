@@ -1,6 +1,5 @@
 package fr.synthlab.model.module.out;
 
-import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.LineOut;
 import fr.synthlab.model.filter.FilterAttenuator;
@@ -8,7 +7,6 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import fr.synthlab.model.module.vcoa.VCOA;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -66,53 +64,6 @@ public class ModuleOut implements Module{
         interIn.connect(interOut);
         syn = synthesizer;
         attenuator.start();
-    }
-
-    /**
-     * test main on SOS
-     * @param args argument
-     */
-    public static void main(String[] args) {
-        Synthesizer synth = JSyn.createSynthesizer();
-
-        VCOA vcoa = new VCOA(synth);
-        // Add an output mixer.
-        ModuleOut b = new ModuleOut(synth);
-        synth.start();
-
-        for (Port p : vcoa.getPorts()) {
-            if (p.getName().equals("sawtooth")) {
-                ((OutputPort) p).connect(b.getInput());
-            }
-        }
-
-        b.start();
-        b.attenuator.setAttenuation(10.0);
-        /*int i;
-        while (true) {
-            try {
-                i = 0;
-                while (i < 6) {
-                    Thread.sleep(300);
-                    //b.setMute(!b.isMute());
-                    i++;
-                    b.attenuator.setAttenuation(b.attenuator.getAttenuation()-1);
-                    b.stop();
-                    b.start();
-                }
-                while (i < 12) {
-                    b.attenuator.setAttenuation(b.attenuator.getAttenuation()-1);
-                    if (b.isMute()) {
-                        Thread.sleep(300);
-                        //b.setMute(!b.isMute());
-                    } else {
-                        Thread.sleep(600);
-                        //b.setMute(!b.isMute());
-                    }
-                    i++;
-                }
-            } catch (InterruptedException ignored) {}
-        }*/
     }
 
     /**
