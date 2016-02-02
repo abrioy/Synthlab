@@ -34,6 +34,8 @@ public class ModuleOut implements Module{
      */
     private final InputPort in;
 
+    //todo outputPort
+
     /**
      * attenuator
      */
@@ -64,7 +66,6 @@ public class ModuleOut implements Module{
         new InputPort("in", this, lineOut.input.getConnectablePart(1)).connect(interOut);
         syn = synthesizer;
         attenuator.start();
-        lineOut.input.getConnectablePart(1);
     }
 
     /**
@@ -139,5 +140,21 @@ public class ModuleOut implements Module{
     @Override
     public void update() {
         //TODO nothink
+    }
+
+    /**
+     * getter on attenuation
+     * @return attenuation
+     */
+    public double getAttenuation(){
+        return attenuator.getAttenuation();
+    }
+
+    /**
+     * setter on attenuation
+     * @param attenuation new attenuation
+     */
+    public void setAttenuation(double attenuation){
+        attenuator.setAttenuation(attenuation);
     }
 }
