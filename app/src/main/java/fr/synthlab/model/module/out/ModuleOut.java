@@ -58,10 +58,10 @@ public class ModuleOut implements Module{
         attenuator = new FilterAttenuator();
         synthesizer.add(attenuator);
         synthesizer.add(lineOut);
-        InputPort interIn = new InputPort("in", this, lineOut.input);
         in = new InputPort("in", this, attenuator.input);
         OutputPort interOut = new OutputPort("out",this, attenuator.output);
-        interIn.connect(interOut);
+        new InputPort("in", this, lineOut.input.getConnectablePart(0)).connect(interOut);
+        new InputPort("in", this, lineOut.input.getConnectablePart(1)).connect(interOut);
         syn = synthesizer;
         attenuator.start();
         lineOut.input.getConnectablePart(1);
