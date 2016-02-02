@@ -43,7 +43,7 @@ public class Workbench extends Pane {
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
 		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
 		InputPort fm1 = (InputPort) vcoa.getPort("fm");
-		OutputPort trianglePort2 = (OutputPort) vcoa2.getPort("triangle");
+		OutputPort trianglePort2 = (OutputPort) vcoa2.getPort("square");
 
 		// Connect square output to oscillo in
 		squarePort.connect(inOsc);
@@ -61,15 +61,20 @@ public class Workbench extends Pane {
 		this.getChildren().add(new ViewModuleOscillator(oscillo));
 
 		Scanner sc = new Scanner(System.in);
-		while (true) {
-			String f = sc.next();
-			String[] res = f.split("/");
-			if (res[0].equals("1")) {
-				vcoa.setFrequency(Integer.parseInt(res[1]));
-			} else if (res[0].equals("2")) {
-				vcoa2.setFrequency(Integer.parseInt(res[1]));
+		Thread t = new Thread(() -> {
+			while (true) {
+				String f = sc.next();
+				String[] res = f.split("/");
+				if (res[0].equals("1")) {
+					vcoa.setFrequency(Integer.parseInt(res[1]));
+				} else if (res[0].equals("2")) {
+					vcoa2.setFrequency(Integer.parseInt(res[1]));
+				}
 			}
-		}
+		});
+
+		t.start();
+
 
 	}
 }
