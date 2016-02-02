@@ -1,9 +1,10 @@
-package fr.synthlab.model.module;
+package fr.synthlab.model.module.VCOA;
 
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.TriangleOscillator;
-import fr.synthlab.model.module.filter.VcoFm;
+import fr.synthlab.model.filter.VcoFm;
+import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;

@@ -1,4 +1,4 @@
-package fr.synthlab.model.module.filter;
+package fr.synthlab.model.filter;
 
 
 import com.jsyn.unitgen.UnitFilter;
