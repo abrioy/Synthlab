@@ -31,15 +31,6 @@
             </goals>
           </execution>
         </executions>
-        <dependencies>
-          <dependency>
-            <groupId>com.jsyn</groupId>
-            <artifactId>jsyn</artifactId>
-            <version>16.7.3</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/jsyn_16_7_3.jar</systemPath>
-          </dependency>
-        </dependencies>
         <configuration>
           <mainClass>fr.synthlab.Main</mainClass>
           <executable>mvn</executable>
