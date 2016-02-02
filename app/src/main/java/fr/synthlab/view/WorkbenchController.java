@@ -3,10 +3,13 @@ package fr.synthlab.view;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
-import com.jsyn.scope.AudioScope;
+import com.jsyn.ports.UnitOutputPort;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
+import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.port.OutputPort;
+import fr.synthlab.model.module.port.Port;
+import fr.synthlab.model.module.vcoa.VCOA;
 import fr.synthlab.view.module.ViewModuleOscillator;
-import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
@@ -23,8 +26,24 @@ public class WorkbenchController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//Synthesizer synth = JSyn.createSynthesizer();
-		//ModuleOscilloscope osc = new ModuleOscilloscope(synth);
-		//workbench.getChildren().add(new ViewModuleOscillator(osc));
+		Synthesizer synth = JSyn.createSynthesizer();
+
+		VCOA vcoa = new VCOA(synth);
+		// Add an output mixer.
+		ModuleOut b = new ModuleOut(synth);
+
+		ModuleOscilloscope oscillo = new ModuleOscilloscope(synth);
+
+		synth.start();
+
+		for (Port p : vcoa.getPorts()) {
+			if (p.getName().equals("square")) {
+				((OutputPort) p).connect(b.getInput());
+				oscillo.connect((UnitOutputPort)((OutputPort) p).getOutput());
+			}
+		}
+
+		b.start();
+		workbench.getChildren().add(new ViewModuleOscillator(oscillo));
 	}
 }
