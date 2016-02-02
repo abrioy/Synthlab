@@ -80,6 +80,7 @@ public class ModuleOscilloscope implements Module {
             scope.setTriggerMode( AudioScope.TriggerMode.NORMAL );
             scope.getView().setShowControls(false);
             scope.getView().setBorder(BorderFactory.createLineBorder(Color.RED));
+            scope.getView().setBackground(Color.CYAN);
             scope.start();
             add(BorderLayout.CENTER, scope.getView());
 
