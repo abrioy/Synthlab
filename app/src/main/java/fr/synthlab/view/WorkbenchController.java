@@ -1,12 +1,13 @@
 package fr.synthlab.view;
 
 
-import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,6 +19,12 @@ public class WorkbenchController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		workbench.getChildren().add(new ViewModuleVCO());
+		try {
+			workbench.getChildren().add(
+					FXMLLoader.load(getClass().getResource("/gui/fxml/module/ViewModuleVCO.fxml"))
+			);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

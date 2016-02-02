@@ -9,6 +9,6 @@ public abstract class ViewModuleFrame extends StackPane {
 	public ViewModuleFrame() {
 		super();
 
-		this.getStyleClass().add("view-module");
+		this.getStyleClass().add("module-frame");
 	}
 }
