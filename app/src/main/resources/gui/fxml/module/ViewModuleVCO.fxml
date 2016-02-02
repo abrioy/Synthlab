@@ -1,10 +1,9 @@
-<?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
+<?import fr.synthlab.view.component.Plug?>
 <Pane prefHeight="300.0" prefWidth="500.0"
       xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       stylesheets="/gui/fxml/style/Module.css">
-
     <Label fx:id="test" text="dqsdqsdqsdqsdqsdqsdqsdd" />
     <Plug />
 

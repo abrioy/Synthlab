@@ -1,10 +1,10 @@
 package fr.synthlab.model.filter;
 
 import com.jsyn.unitgen.UnitFilter;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 public class FilterAttenuator extends UnitFilter {
-    private static final Logger logger = Logger.getLogger(FilterAttenuator.class);
+    private static final Logger logger = Logger.getLogger(FilterAttenuator.class.getName());
 
     private double attenuation = 1; // Attenuation value in volts
 
