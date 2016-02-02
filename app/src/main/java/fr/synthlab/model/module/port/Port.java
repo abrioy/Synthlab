@@ -23,6 +23,7 @@ public class Port {
 
     public void connect(Port port){
         this.port = port;
+        module.update();
     }
 
     public void disconnect(){
