@@ -28,6 +28,9 @@ public class Workbench extends Pane {
 		Synthesizer synth = JSyn.createSynthesizer();
 
 		ModuleVCOA vcoa = new ModuleVCOA(synth);
+		ModuleVCOA vcoa2 = new ModuleVCOA(synth);
+		vcoa2.setFrequency(500);
+
 		// Add an output mixer.
 		ModuleOut sound = new ModuleOut(synth);
 
@@ -38,6 +41,8 @@ public class Workbench extends Pane {
 		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
 		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
+		InputPort fm1 = (InputPort) vcoa.getPort("fm");
+		OutputPort trianglePort2 = (OutputPort) vcoa2.getPort("triangle");
 
 		// Connect square output to oscillo in
 		squarePort.connect(inOsc);
@@ -45,7 +50,11 @@ public class Workbench extends Pane {
 		// Connect oscillo out to sound
 		outOsc.connect(sound.getPort("in"));
 
+		// Connect 2nd VCOA output to 1st VCOA input
+		trianglePort2.connect(fm1);
+
 		vcoa.start();
+		vcoa2.start();
 		oscillo.start();
 		sound.start();
 		this.getChildren().add(new ViewModuleOscillator(oscillo));
