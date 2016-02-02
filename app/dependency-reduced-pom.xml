@@ -39,24 +39,6 @@
             <argument>install</argument>
             <argument>exec:java</argument>
           </arguments>
-          <systemProperties>
-            <systemProperty>
-              <key>java.util.logging.config.file</key>
-              <value>src/main/resources/logging.properties</value>
-            </systemProperty>
-          </systemProperties>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.19.1</version>
-        <configuration>
-          <systemProperties>
-            <systemProperty>
-              <key>java.util.logging.config.file</key>
-              <value>src/main/resources/logging.properties</value>
-            </systemProperty>
-          </systemProperties>
         </configuration>
       </plugin>
     </plugins>
