@@ -12,10 +12,10 @@ import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.scene.layout.Pane;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 public class Workbench extends Pane {
-	private static final Logger logger = Logger.getLogger(Workbench.class);
+	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
 
 	public Workbench() {
 
@@ -35,12 +35,9 @@ public class Workbench extends Pane {
 
 		synth.start();
 
-		for (Port p : vcoa.getPorts()) {
-			if (p.getName().equals("square")) {
-				((OutputPort) p).connect(b.getInput());
-				oscillo.connect((UnitOutputPort)((OutputPort) p).getOutput());
-			}
-		}
+		Port p = vcoa.getPort("square");
+		((OutputPort) p).connect(b.getInput());
+		oscillo.connect((UnitOutputPort)((OutputPort) p).getOutput());
 
 		b.start();
 		this.getChildren().add(new ViewModuleOscillator(oscillo));

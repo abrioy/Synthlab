@@ -1,13 +1,13 @@
 package fr.synthlab.view.component;
 
-import javafx.scene.image.Image;
+
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 public class Plug extends Circle {
-	private static final Logger logger = Logger.getLogger(Plug.class);
+	private static final Logger logger = Logger.getLogger(Plug.class.getName());
+
 	public Plug() {
 		super();
 		this.setFill(Color.DARKRED);

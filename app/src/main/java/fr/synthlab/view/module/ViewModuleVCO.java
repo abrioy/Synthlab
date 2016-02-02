@@ -1,12 +1,9 @@
 package fr.synthlab.view.module;
 
-import javafx.fxml.FXML;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 public class ViewModuleVCO extends ViewModuleFrame {
-	private static final Logger logger = Logger.getLogger(ViewModuleVCO.class);
-
-
+	private static final Logger logger = Logger.getLogger(ViewModuleVCO.class.getName());
 
 	public ViewModuleVCO() {
 		super();
