@@ -19,8 +19,8 @@ public class ModuleOscilloscope implements Module {
     private AudioScope scope;
 
     public ModuleOscilloscope(Synthesizer synth) {
-        this.input = new InputPort("in");
         scope = new AudioScope(synth);
+        this.input = new InputPort("in", this,null);//TODO check that
         scope.start();
     }
 
@@ -31,5 +31,8 @@ public class ModuleOscilloscope implements Module {
         return ports;
     }
 
+    @Override
+    public void update() {
 
+    }
 }
