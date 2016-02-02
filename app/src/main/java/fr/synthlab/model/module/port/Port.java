@@ -30,10 +30,9 @@ public class Port {
     }
 
     public void disconnect(){
+        port.getModule().update();
         port = null;
         module.update();
-        port.setPort(null);
-        port.getModule().update();
     }
 
     public Port getConnected(){
