@@ -1,11 +1,12 @@
 package fr.synthlab.model.module.oscilloscope;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.unitgen.LinearRamp;
 import com.jsyn.unitgen.Multiply;
+import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.Port;
 
 import javax.swing.*;
@@ -19,20 +20,32 @@ public class ModuleOscilloscope implements Module {
     private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class.getName());
 
     private AudioScope scope;
+    private InputPort in;
+    private PassThrough pt;
+    private ArrayList<Port> ports = new ArrayList<>();
 
     public ModuleOscilloscope(Synthesizer synth) {
         scope = new AudioScope(synth);
+        pt = new PassThrough();
+        in = new InputPort("in", this, pt.input);
+        ports.add(in);
+        scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
+        scope.addProbe(pt.output);
     }
 
     @Override
     public Collection<Port> getPorts() {
-        return new ArrayList<>();
+        return ports;
     }
 
-    public void connect(UnitOutputPort output){
-        scope.addProbe(output);
+    @Override
+    public void start() {
         scope.start();
-        scope.setTriggerMode( AudioScope.TriggerMode.NORMAL );
+    }
+
+    @Override
+    public void stop() {
+
     }
 
     @Override

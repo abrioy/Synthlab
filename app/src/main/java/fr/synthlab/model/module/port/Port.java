@@ -1,6 +1,7 @@
 package fr.synthlab.model.module.port;
 
 import fr.synthlab.model.module.Module;
+
 import java.util.logging.Logger;
 
 
@@ -24,11 +25,13 @@ public class Port {
     public void connect(Port port){
         this.port = port;
         module.update();
+        port.getModule().update();
     }
 
     public void disconnect(){
         port = null;
         module.update();
+        port.getModule().update();
     }
 
     public Port getConnected(){

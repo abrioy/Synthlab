@@ -7,10 +7,10 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import java.util.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 /**
  * out module to play sound on sound card
@@ -104,6 +104,7 @@ public class ModuleOut implements Module{
     /**
      * start play audio
      */
+    @Override
     public void start() {
         if (!isMute()) {
             lineOut.start();
@@ -114,6 +115,7 @@ public class ModuleOut implements Module{
     /**
      * stop play audio
      */
+    @Override
     public void stop() {
         lineOut.stop();
         attenuator.stop();

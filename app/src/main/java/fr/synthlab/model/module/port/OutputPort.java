@@ -1,7 +1,6 @@
 package fr.synthlab.model.module.port;
 
 import com.jsyn.ports.ConnectableOutput;
-import com.jsyn.ports.UnitOutputPort;
 import fr.synthlab.model.module.Module;
 
 import java.util.logging.Logger;
@@ -18,10 +17,6 @@ public class OutputPort extends Port {
 
     public ConnectableOutput getOutput() {
         return output;
-    }
-
-    public UnitOutputPort getUnitOutputPort() {
-        return (UnitOutputPort) output;
     }
 
     @Override
