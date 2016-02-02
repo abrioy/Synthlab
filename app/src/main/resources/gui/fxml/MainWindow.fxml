@@ -1,10 +1,52 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import fr.synthlab.view.Workbench?>
-<BorderPane prefHeight="480.0" prefWidth="640.0"
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.MenuBar?>
+<BorderPane fx:id="Parent" prefHeight="480.0" prefWidth="640.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fr.synthlab.view.MainWindowController"
+            fx:controller="fr.synthlab.view.controller.MainWindowController"
             stylesheets="/gui/fxml/style/MainWindow.css">
+
+    <top>
+        <MenuBar xmlns:fx="http://javafx.com/fxml">
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New"/>
+                        <MenuItem text="Open"/>
+                        <MenuItem text="Save"/>
+                        <MenuItem text="Save As"/>
+                        <SeparatorMenuItem  />
+                        <MenuItem text="Exit"/>
+                    </items>
+                </Menu>
+                <Menu text="Edit">
+                    <items>
+                        <MenuItem text="Copy"/>
+                        <MenuItem text="Cut"/>
+                        <MenuItem text="Paste"/>
+                    </items>
+                </Menu>
+                <Menu text="Help">
+                    <items>
+                        <MenuItem text="Search" disable="true"/>
+                        <MenuItem text="Online Manual" visible="false"/>
+                        <SeparatorMenuItem />
+                        <MenuItem text="About"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <left>
+        <fx:include fx:id="toolbox" source="Toolbox.fxml"/>
+    </left>
 
     <center>
         <ScrollPane>
