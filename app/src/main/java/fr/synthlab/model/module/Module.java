@@ -7,4 +7,6 @@ import java.util.Collection;
 
 public interface Module {
     Collection<Port> getPorts();
+
+    void update();
 }
