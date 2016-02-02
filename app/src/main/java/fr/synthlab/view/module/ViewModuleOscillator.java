@@ -20,6 +20,7 @@ public class ViewModuleOscillator extends ViewModuleFrame {
 		this.osc = osc;
 		swingNode = new SwingNode();
 		swingNode.setContent(osc.getOscillatorJComponent());
+		swingNode.setMouseTransparent(true);
 		StackPane pane = new StackPane();
 		pane.getChildren().add(swingNode);
 		this.getChildren().add(pane);

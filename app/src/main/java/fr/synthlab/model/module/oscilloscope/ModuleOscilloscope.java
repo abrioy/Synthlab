@@ -3,6 +3,9 @@ package fr.synthlab.model.module.oscilloscope;
 import com.jsyn.Synthesizer;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.unitgen.PassThrough;
+import com.jsyn.scope.swing.AudioScopeProbeView;
+import com.jsyn.scope.swing.AudioScopeView;
+import com.jsyn.scope.swing.MultipleWaveDisplay;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -66,8 +69,13 @@ public class ModuleOscilloscope implements Module {
         public JOscillatorComponent(AudioScope scope){
             setLayout( new BorderLayout() );
 
-            scope.getView().setBorder(BorderFactory.createLineBorder(Color.RED));
-            scope.getView().setBackground(Color.CYAN);
+            scope.getView().setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            scope.getView().setOpaque(true);
+            scope.getView().setPreferredSize(new Dimension(300,300));
+            setBackground(Color.BLACK);
+            for (AudioScopeProbeView a : scope.getView().getProbeViews()) {
+                a.getWaveTraceView().setColor(Color.BLUE);
+            }
             add(BorderLayout.CENTER, scope.getView());
 
             oscPanel = new JPanel();
