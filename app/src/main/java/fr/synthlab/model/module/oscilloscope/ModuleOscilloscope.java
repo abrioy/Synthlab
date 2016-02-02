@@ -21,8 +21,6 @@ public class ModuleOscilloscope implements Module {
 
     public ModuleOscilloscope(Synthesizer synth) {
         scope = new AudioScope(synth);
-        scope.start();
-        scope.setTriggerMode( AudioScope.TriggerMode.NORMAL );
     }
 
     @Override
@@ -32,6 +30,8 @@ public class ModuleOscilloscope implements Module {
 
     public void connect(UnitOutputPort output){
         scope.addProbe(output);
+        scope.start();
+        scope.setTriggerMode( AudioScope.TriggerMode.NORMAL );
     }
 
     @Override
