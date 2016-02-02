@@ -25,7 +25,6 @@ public class OscillatorPane extends Pane {
 		swingNode = new SwingNode();
 		JOscillatorComponent osc = new JOscillatorComponent();
 		osc.start();
-        //swingNode.setContent(new JButton("Toppest of keks"));
         swingNode.setContent(osc);
         this.getChildren().add(swingNode);
 	}
@@ -55,9 +54,6 @@ class JOscillatorComponent extends JComponent
 	private void setupGUI()
 	{
 		setLayout( new BorderLayout() );
-
-		add( BorderLayout.NORTH, new JLabel(
-				"Show Oscillators in an AudioScope" ) );
 
 		scope = new AudioScope( synth );
 		scope.addProbe( oscGain.output );
@@ -98,7 +94,7 @@ class JOscillatorComponent extends JComponent
 		setupGUI();
 
 		// Create a square oscillator and connects it
-		UnitOscillator osc = new SquareOscillator();
+		UnitOscillator osc = new TriangleOscillator();
 		synth.add( osc );
 		freqRamp.output.connect( osc.frequency );
 		osc.amplitude.set( 1.0 );
