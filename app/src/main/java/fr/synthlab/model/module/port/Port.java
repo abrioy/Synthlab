@@ -29,9 +29,9 @@ public class Port {
     }
 
     public void disconnect(){
+        port.getModule().update();
         port = null;
         module.update();
-        port.getModule().update();
     }
 
     public Port getConnected(){
