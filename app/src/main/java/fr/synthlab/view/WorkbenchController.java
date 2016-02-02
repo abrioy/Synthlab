@@ -18,6 +18,11 @@ public class WorkbenchController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		workbench.getChildren().add(new ViewModuleVCO());
+
+		//Synthesizer synth = JSyn.createSynthesizer();
+		//ModuleOscilloscope osc = new ModuleOscilloscope(synth);
+		//workbench.getChildren().add(new ViewModuleOscillator(osc));
 	}
 }
