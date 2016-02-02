@@ -19,7 +19,12 @@ public class InputPort extends Port {
     }
 
     public void connect(OutputPort port) {
-        super.connect(port);
         input.connect(port.getOutput());
+        super.connect(port);
+    }
+
+    public void disconnect() {
+        input.disconnect(((OutputPort) getConnected()).getOutput());
+        super.disconnect();
     }
 }
