@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-
 public class Main extends Application {
 	private static final Logger APP_ROOT_LOGGER = Logger.getLogger("fr.synthlab");
 	private static final Logger logger = Logger.getLogger(Main.class.getName());

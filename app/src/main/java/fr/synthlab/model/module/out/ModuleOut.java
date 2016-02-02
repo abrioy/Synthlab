@@ -30,8 +30,6 @@ public class ModuleOut implements Module{
      */
     private final InputPort in;
 
-    //todo outputPort
-
     /**
      * attenuator
      */
