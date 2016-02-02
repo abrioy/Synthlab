@@ -3,10 +3,11 @@ package fr.synthlab.model.module.oscilloscope;
 import com.jsyn.Synthesizer;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.scope.AudioScope;
-import com.jsyn.unitgen.*;
+import com.jsyn.unitgen.LinearRamp;
+import com.jsyn.unitgen.Multiply;
 import fr.synthlab.model.module.Module;
-import org.apache.log4j.Logger;
 import fr.synthlab.model.module.port.Port;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,9 +46,6 @@ public class ModuleOscilloscope implements Module {
 
     class JOscillatorComponent extends JComponent
     {
-        //private static final long serialVersionUID = -8315903842197137926L;
-        //private ArrayList<UnitOscillator> oscillators = new ArrayList<UnitOscillator>();
-        private LineOut lineOut;
         private Synthesizer synth;
         private JPanel oscPanel;
         private Multiply oscGain;
@@ -56,8 +54,6 @@ public class ModuleOscilloscope implements Module {
         public JOscillatorComponent(AudioScope scope){
             synth = scope.getModel().getSynthesizer();
 
-            // Use a multiplier for gain control and so we can hook up to the scope
-            // from a single unit.
             synth.add(oscGain = new Multiply());
             oscGain.inputB.setup(0.02, 0.5, 1.0);
             oscGain.inputB.setName("Amplitude");
@@ -67,20 +63,10 @@ public class ModuleOscilloscope implements Module {
             freqRamp.input.setName("Frequency");
             freqRamp.time.set(0.1);
 
-            // Add an output so we can hear the oscillators.
-            synth.add(lineOut = new LineOut());
-
-            oscGain.output.connect(lineOut.input);
-
             setLayout( new BorderLayout() );
 
-            scope = new AudioScope( synth );
-            scope.addProbe( oscGain.output );
-            scope.setTriggerMode( AudioScope.TriggerMode.NORMAL );
-            scope.getView().setShowControls(false);
             scope.getView().setBorder(BorderFactory.createLineBorder(Color.RED));
             scope.getView().setBackground(Color.CYAN);
-            scope.start();
             add(BorderLayout.CENTER, scope.getView());
 
             oscPanel = new JPanel();
@@ -88,21 +74,6 @@ public class ModuleOscilloscope implements Module {
 
             oscPanel.validate();
             validate();
-
-            // Create a square oscillator and connects it
-            UnitOscillator osc = new TriangleOscillator();
-            synth.add(osc);
-            freqRamp.output.connect(osc.frequency);
-            osc.amplitude.set(1.0);
-            oscGain.inputA.disconnectAll(0);
-            osc.output.connect(oscGain.inputA);
-
-            // Start lineOut so it can pull data from other units.
-            lineOut.start();
-
-            // We only need to start the LineOut. It will pull data from the
-            // oscillator.
-            lineOut.start();
         }
     }
 }
