@@ -4,7 +4,7 @@ import fr.synthlab.model.module.Module;
 import org.apache.log4j.Logger;
 
 
-public class Port {
+abstract public class Port {
 	private static final Logger logger = Logger.getLogger(Port.class);
 
 	private String name;

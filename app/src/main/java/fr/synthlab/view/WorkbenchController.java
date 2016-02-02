@@ -39,7 +39,7 @@ public class WorkbenchController implements Initializable {
 		for (Port p : vcoa.getPorts()) {
 			if (p.getName().equals("square")) {
 				((OutputPort) p).connect(b.getInput());
-				oscillo.connect((UnitOutputPort)((OutputPort) p).getOutput());
+				oscillo.connect((OutputPort) p);
 			}
 		}
 
