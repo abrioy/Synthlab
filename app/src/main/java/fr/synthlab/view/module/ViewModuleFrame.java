@@ -4,12 +4,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 import java.io.IOException;
 
 public class ViewModuleFrame extends StackPane {
-	private static final Logger logger = Logger.getLogger(ViewModuleFrame.class);
+	private static final Logger logger = Logger.getLogger(ViewModuleFrame.class.getName());
 
 	double mouseX ;
 	double mouseY ;
@@ -49,7 +49,7 @@ public class ViewModuleFrame extends StackPane {
 			this.getChildren().add(root);
 
 		} catch (IOException exception) {
-			logger.error("Cannot load the specified FXML file: \""+fxmlPath+"\".");
+			logger.severe("Cannot load the specified FXML file: \""+fxmlPath+"\".");
 			throw new RuntimeException(exception);
 		}
 	}

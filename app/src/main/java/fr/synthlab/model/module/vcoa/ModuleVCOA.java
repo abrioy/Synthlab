@@ -9,13 +9,13 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class ModuleVCOA implements Module {
-	private static final Logger logger = Logger.getLogger(ModuleVCOA.class);
+	private static final Logger logger = Logger.getLogger(ModuleVCOA.class.getName());
 
     private Collection<Port> ports = new ArrayList<>();
 

@@ -4,10 +4,14 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.layout.StackPane;
 
+import java.util.logging.Logger;
+
 /**
  * Created by corentin on 01/02/16.
  */
 public class ViewModuleOscillator extends ViewModuleFrame {
+	private static final Logger logger = Logger.getLogger(ViewModuleOscillator.class.getName());
+
 	ModuleOscilloscope osc;
 	SwingNode swingNode;
 

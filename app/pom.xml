@@ -23,12 +23,6 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/jsyn_16_7_3.jar</systemPath>
         </dependency>
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
     </dependencies>
 
     <build>

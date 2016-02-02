@@ -7,16 +7,16 @@ import com.jsyn.unitgen.LinearRamp;
 import com.jsyn.unitgen.Multiply;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.Port;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 
 public class ModuleOscilloscope implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class);
+    private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class.getName());
 
     private AudioScope scope;
 
