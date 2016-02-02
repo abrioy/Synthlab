@@ -8,6 +8,7 @@ public class ViewModuleVCO extends ViewModuleFrame {
 	public ViewModuleVCO() {
 		super();
 		this.loadFXML("/gui/fxml/module/ViewModuleVCO.fxml");
+
 	}
 
 }

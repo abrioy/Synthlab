@@ -1,4 +1,4 @@
-package fr.synthlab.view;
+package fr.synthlab.view.controller;
 
 import javafx.fxml.Initializable;
 import java.util.logging.Logger;

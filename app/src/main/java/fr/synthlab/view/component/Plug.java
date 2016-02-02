@@ -1,5 +1,6 @@
 package fr.synthlab.view.component;
 
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import java.util.logging.Logger;
@@ -9,8 +10,11 @@ public class Plug extends Circle {
 
 	public Plug() {
 		super();
-
-		this.setFill(Color.BEIGE);
+		this.setFill(Color.DARKRED);
 		this.setRadius(10.0f);
 	}
+    public Plug(double centerX, double centerY) {
+        super(centerX,centerY,10.0f);
+        this.setFill(Color.DARKRED);
+    }
 }

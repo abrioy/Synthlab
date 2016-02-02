@@ -22,7 +22,7 @@ public class Main extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/fxml/MainWindow.fxml"));
 
 		Scene scene = new Scene(root);
-		stage.setTitle("Sythlab");
+		stage.setTitle("Synthlab");
 		stage.setScene(scene);
 		stage.setOnShown(we -> logger.info("Main window opened."));
 		stage.setOnCloseRequest(we -> {
@@ -49,8 +49,7 @@ public class Main extends Application {
 			}
 		}
 
-		logger.finest("sdqsdqs");
-		logger.severe("sdsqddqsdqs");
+		
 		launch(args);
 	}
 
