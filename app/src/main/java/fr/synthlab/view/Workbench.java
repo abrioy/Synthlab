@@ -8,27 +8,26 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import fr.synthlab.model.module.vcoa.VCOA;
+import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModuleOscillator;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.layout.StackPane;
+import fr.synthlab.view.module.ViewModuleVCO;
+import javafx.scene.layout.Pane;
 import org.apache.log4j.Logger;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+public class Workbench extends Pane {
+	private static final Logger logger = Logger.getLogger(Workbench.class);
 
-public class WorkbenchController implements Initializable {
-	private static final Logger logger = Logger.getLogger(WorkbenchController.class);
+	public Workbench() {
 
-	@FXML
-	private StackPane workbench;
+		ViewModuleVCO module = new ViewModuleVCO();
+		this.getChildren().add(module);
+		//Synthesizer synth = JSyn.createSynthesizer();
+		//ModuleOscilloscope osc = new ModuleOscilloscope(synth);
+		//workbench.getChildren().add(new ViewModuleOscillator(osc));
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
 		Synthesizer synth = JSyn.createSynthesizer();
 
-		VCOA vcoa = new VCOA(synth);
+		ModuleVCOA vcoa = new ModuleVCOA(synth);
 		// Add an output mixer.
 		ModuleOut b = new ModuleOut(synth);
 
@@ -44,6 +43,6 @@ public class WorkbenchController implements Initializable {
 		}
 
 		b.start();
-		workbench.getChildren().add(new ViewModuleOscillator(oscillo));
+		this.getChildren().add(new ViewModuleOscillator(oscillo));
 	}
 }
