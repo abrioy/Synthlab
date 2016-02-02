@@ -64,6 +64,7 @@ public class ModuleOut implements Module{
         interIn.connect(interOut);
         syn = synthesizer;
         attenuator.start();
+        lineOut.input.getConnectablePart(1);
     }
 
     /**
@@ -97,7 +98,7 @@ public class ModuleOut implements Module{
 
     /**
      * getter on input
-     * @return
+     * @return InputPort
      */
     public InputPort getInput() {
         return in;
