@@ -19,7 +19,7 @@ public class VCOA implements Module {
     private Collection<Port> ports = new ArrayList<>();
 
     private double frequency = 20;
-    private double octave = 1;
+    private double octave = 0;
     private double tone = 0;
 
     private VcoFm fmFilter = new VcoFm(frequency);
@@ -61,12 +61,12 @@ public class VCOA implements Module {
 
     public void setFrequency(double frequency) {
         this.frequency = frequency;
-        fmFilter.setf0(frequency * octave);
+        fmFilter.setf0(frequency * Math.pow(2, octave));
 
         if (fmInput.getConnected() == null) {
-            squareOscillator.frequency.set(frequency * octave);
-            triangleOscillator.frequency.set(frequency * octave);
-            sawtoothOscillator.frequency.set(frequency * octave);
+            squareOscillator.frequency.set(frequency * Math.pow(2, octave));
+            triangleOscillator.frequency.set(frequency * Math.pow(2, octave));
+            sawtoothOscillator.frequency.set(frequency * Math.pow(2, octave));
         }
     }
 
@@ -91,9 +91,9 @@ public class VCOA implements Module {
     public void update() {
         if (fmInput.getConnected() == null) {
             fmFilter.output.disconnectAll();
-            squareOscillator.frequency.set(frequency * octave);
-            triangleOscillator.frequency.set(frequency * octave);
-            sawtoothOscillator.frequency.set(frequency * octave);
+            squareOscillator.frequency.set(frequency * Math.pow(2, octave));
+            triangleOscillator.frequency.set(frequency * Math.pow(2, octave));
+            sawtoothOscillator.frequency.set(frequency * Math.pow(2, octave));
         } else {
             fmFilter.output.connect(squareOscillator.frequency);
             fmFilter.output.connect(triangleOscillator.frequency);
