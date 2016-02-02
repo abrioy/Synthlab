@@ -12,6 +12,7 @@ import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.scene.layout.Pane;
 
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -29,7 +30,7 @@ public class Workbench extends Pane {
 
 		ModuleVCOA vcoa = new ModuleVCOA(synth);
 		ModuleVCOA vcoa2 = new ModuleVCOA(synth);
-		vcoa2.setFrequency(500);
+		vcoa2.setFrequency(1);
 
 		// Add an output mixer.
 		ModuleOut sound = new ModuleOut(synth);
@@ -58,5 +59,17 @@ public class Workbench extends Pane {
 		oscillo.start();
 		sound.start();
 		this.getChildren().add(new ViewModuleOscillator(oscillo));
+
+		Scanner sc = new Scanner(System.in);
+		while (true) {
+			String f = sc.next();
+			String[] res = f.split("/");
+			if (res[0].equals("1")) {
+				vcoa.setFrequency(Integer.parseInt(res[1]));
+			} else if (res[0].equals("2")) {
+				vcoa2.setFrequency(Integer.parseInt(res[1]));
+			}
+		}
+
 	}
 }
