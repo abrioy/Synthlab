@@ -1,11 +1,10 @@
 package fr.synthlab.model.module.oscilloscope;
 
-import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
+import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.unitgen.*;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.port.InputPort;
 import org.apache.log4j.Logger;
 import fr.synthlab.model.module.port.Port;
 
@@ -18,21 +17,21 @@ import java.util.Collection;
 public class ModuleOscilloscope implements Module {
     private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class);
 
-    private InputPort input;
-
     private AudioScope scope;
 
     public ModuleOscilloscope(Synthesizer synth) {
         scope = new AudioScope(synth);
-        this.input = new InputPort("in", this,null);//TODO check that
-        scope.start();
     }
 
     @Override
     public Collection<Port> getPorts() {
-        Collection<Port> ports = new ArrayList<Port>();
-        ports.add(input);
-        return ports;
+        return new ArrayList<>();
+    }
+
+    public void connect(UnitOutputPort output){
+        scope.addProbe(output);
+        scope.start();
+        scope.setTriggerMode( AudioScope.TriggerMode.NORMAL );
     }
 
     @Override
@@ -46,8 +45,8 @@ public class ModuleOscilloscope implements Module {
 
     class JOscillatorComponent extends JComponent
     {
-        private static final long serialVersionUID = -8315903842197137926L;
-        private ArrayList<UnitOscillator> oscillators = new ArrayList<UnitOscillator>();
+        //private static final long serialVersionUID = -8315903842197137926L;
+        //private ArrayList<UnitOscillator> oscillators = new ArrayList<UnitOscillator>();
         private LineOut lineOut;
         private Synthesizer synth;
         private JPanel oscPanel;

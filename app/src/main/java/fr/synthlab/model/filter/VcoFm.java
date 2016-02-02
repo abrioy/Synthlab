@@ -13,8 +13,11 @@ public class VcoFm extends UnitFilter {
 
     @Override
     public void generate(int start, int limit) {
+        double[] inputs = input.getValues();
+        double[] outputs = output.getValues();
+
         for (int i = start; i < limit; i++) {
-            output.getValues()[i] = f0 * Math.pow(2, input.getValue(i));
+            outputs[i] = f0 * Math.pow(2, inputs[i]);
         }
     }
 

@@ -1,5 +1,6 @@
 package fr.synthlab.model.module.vcoa;
 
+import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.TriangleOscillator;
@@ -35,7 +36,12 @@ public class VCOA implements Module {
     private OutputPort triangleOutput;
     private OutputPort sawtoothOutput;
 
-    public VCOA() {
+    public VCOA(Synthesizer synthesizer) {
+        synthesizer.add(squareOscillator);
+        synthesizer.add(triangleOscillator);
+        synthesizer.add(sawtoothOscillator);
+        synthesizer.add(fmFilter);
+
         fmInput = new InputPort("fm", this, fmFilter.input);
         squareOutput = new OutputPort("square", this, squareOscillator.output);
         triangleOutput = new OutputPort("triangle", this, triangleOscillator.output);
@@ -46,14 +52,18 @@ public class VCOA implements Module {
         ports.add(triangleOutput);
         ports.add(sawtoothOutput);
 
-        setFrequency(20);
+        setFrequency(1000);
+
+        fmFilter.start();
+        squareOscillator.start();
+        sawtoothOscillator.start();
+        triangleOscillator.start();
     }
 
     @Override
     public Collection<Port> getPorts() {
         return ports;
     }
-
 
     public double getFrequency() {
         return frequency;
