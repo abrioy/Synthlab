@@ -5,11 +5,13 @@ import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.scene.layout.Pane;
+
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -35,8 +37,11 @@ public class Workbench extends Pane {
 
 		OutputPort p = (OutputPort) vcoa.getPort("square");
 		p.connect(b.getInput());
-		oscillo.connect(p.getUnitOutputPort());
+		InputPort inOsc = (InputPort) oscillo.getPort("in");
+		p.connect(inOsc);
 
+		vcoa.start();
+		oscillo.start();
 		b.start();
 		this.getChildren().add(new ViewModuleOscillator(oscillo));
 	}
