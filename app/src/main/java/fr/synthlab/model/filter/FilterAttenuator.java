@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 public class FilterAttenuator extends UnitFilter {
     private static final Logger logger = Logger.getLogger(FilterAttenuator.class);
 
-    private double attenuation = 0; // Attenuation value in volts
+    private double attenuation = 1; // Attenuation value in volts
 
     @Override
     public void generate(int start, int limit) {
@@ -20,7 +20,6 @@ public class FilterAttenuator extends UnitFilter {
             }*/
             outputs[i] = out;
         }
-        System.out.println(inputs[0]+" "+outputs[0] + " "+ attenuation);
     }
 
     public void setAttenuation(double attenuation) {

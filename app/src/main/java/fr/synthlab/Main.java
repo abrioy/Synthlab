@@ -1,6 +1,7 @@
 package fr.synthlab;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/MainWindow.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/fxml/MainWindow.fxml"));
 
 		Scene scene = new Scene(root);
 		stage.setTitle("Sythlab");
@@ -24,6 +25,10 @@ public class Main extends Application {
 				logger.info("Main window closed.");
 		});
 		stage.show();
+		stage.setOnCloseRequest(t -> {
+			Platform.exit();
+			System.exit(0);
+		});
 	}
 
 	public static void main(String[] args) {
