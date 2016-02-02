@@ -1,4 +1,4 @@
 
 .module-frame {
-    -fx-background-color: red;
+    -fx-border-color: red;
 }
