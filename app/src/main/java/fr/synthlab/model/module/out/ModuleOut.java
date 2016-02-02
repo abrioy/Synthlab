@@ -3,7 +3,6 @@ package fr.synthlab.model.module.out;
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.LineOut;
-import com.jsyn.unitgen.LinearRamp;
 import com.jsyn.unitgen.SawtoothOscillatorBL;
 import fr.synthlab.model.filter.FilterAttenuator;
 import fr.synthlab.model.module.Module;
@@ -16,6 +15,7 @@ import java.util.Collection;
 
 /**
  * Created by johan on 01/02/16.
+ *
  */
 public class ModuleOut implements Module{
 
@@ -33,9 +33,9 @@ public class ModuleOut implements Module{
         lineOut = new LineOut();
         in = new InputPort("in", this, lineOut.input);
         attenuator = new FilterAttenuator();
-        lineOut.input.connect(attenuator.output);
         synthesizer.add(attenuator);
         synthesizer.add(lineOut);
+        lineOut.input.connect(attenuator.output);
         syn = synthesizer;
         attenuator.start();
     }
@@ -46,12 +46,13 @@ public class ModuleOut implements Module{
         // Add a tone generator. (band limited sawtooth)
         synth.add(osc = new SawtoothOscillatorBL());
         // Add a lag to smooth out amplitude changes and avoid pops.
-        LinearRamp lag;
+        //LinearRamp lag;
         //synth.add( lag = new LinearRamp() );
         // Add an output mixer.
         ModuleOut b =new ModuleOut(synth);
         LineOut a = b.lineOut;
         //synth.add( a );
+        synth=b.syn;
         b.syn.start();
         osc.output.connect( 0, b.attenuator.input, 0 );
         //osc.output.connect( 0, a.input, 1 );
@@ -64,7 +65,9 @@ public class ModuleOut implements Module{
                     Thread.sleep(300);
                     b.setMute(!b.isMute());
                     i++;
-                    b.attenuator.setAttenuation(b.attenuator.getAttenuation()-800);
+                    b.attenuator.setAttenuation(b.attenuator.getAttenuation()-1);
+                    b.stop();
+                    b.start();
                 }
                 while (i < 12) {
                     if (b.isMute()) {
@@ -98,11 +101,13 @@ public class ModuleOut implements Module{
     public void start(){
         if (!isMute()) {
             lineOut.start();
+            attenuator.start();
         }
     }
 
     public void stop(){
         lineOut.stop();
+        attenuator.stop();
     }
 
     @Override
@@ -114,6 +119,6 @@ public class ModuleOut implements Module{
 
     @Override
     public void update() {
-
+        //TODO nothink
     }
 }

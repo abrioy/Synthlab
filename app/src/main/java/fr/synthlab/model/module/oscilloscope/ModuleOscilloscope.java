@@ -16,4 +16,9 @@ public class ModuleOscilloscope implements Module {
     public Collection<Port> getPorts() {
         return null;
     }
+
+    @Override
+    public void update() {
+
+    }
 }
