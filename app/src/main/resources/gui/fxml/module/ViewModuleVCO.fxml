@@ -2,7 +2,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <Pane prefHeight="300.0" prefWidth="500.0"
-      fx:controller="fr.synthlab.view.module.ViewModuleControllerVCO"
       xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       stylesheets="/gui/fxml/style/Module.css">
 
