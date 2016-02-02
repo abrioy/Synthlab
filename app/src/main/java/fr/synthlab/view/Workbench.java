@@ -35,12 +35,9 @@ public class Workbench extends Pane {
 
 		synth.start();
 
-		for (Port p : vcoa.getPorts()) {
-			if (p.getName().equals("square")) {
-				((OutputPort) p).connect(b.getInput());
-				oscillo.connect((UnitOutputPort)((OutputPort) p).getOutput());
-			}
-		}
+		Port p = vcoa.getPort("square");
+		((OutputPort) p).connect(b.getInput());
+		oscillo.connect((UnitOutputPort)((OutputPort) p).getOutput());
 
 		b.start();
 		this.getChildren().add(new ViewModuleOscillator(oscillo));
