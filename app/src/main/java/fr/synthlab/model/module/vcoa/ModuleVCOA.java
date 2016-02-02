@@ -14,8 +14,8 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class VCOA implements Module {
-	private static final Logger logger = Logger.getLogger(VCOA.class);
+public class ModuleVCOA implements Module {
+	private static final Logger logger = Logger.getLogger(ModuleVCOA.class);
 
     private Collection<Port> ports = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class VCOA implements Module {
     private OutputPort triangleOutput;
     private OutputPort sawtoothOutput;
 
-    public VCOA(Synthesizer synthesizer) {
+    public ModuleVCOA(Synthesizer synthesizer) {
         synthesizer.add(squareOscillator);
         synthesizer.add(triangleOscillator);
         synthesizer.add(sawtoothOscillator);

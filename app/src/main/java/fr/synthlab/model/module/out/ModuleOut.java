@@ -8,7 +8,7 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import fr.synthlab.model.module.vcoa.VCOA;
+import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class ModuleOut implements Module{
     public static void main(String[] args) {
         Synthesizer synth = JSyn.createSynthesizer();
 
-        VCOA vcoa = new VCOA(synth);
+        ModuleVCOA vcoa = new ModuleVCOA(synth);
         // Add an output mixer.
         ModuleOut b = new ModuleOut(synth);
         synth.start();
