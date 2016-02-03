@@ -17,5 +17,8 @@ public interface Module {
         return null;
     }
 
+    void start();
+    void stop();
     void update();
+    String getName();
 }

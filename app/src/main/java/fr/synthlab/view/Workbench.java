@@ -1,16 +1,15 @@
 package fr.synthlab.view;
 
 
-import com.jsyn.JSyn;
-import com.jsyn.Synthesizer;
-import com.jsyn.ports.UnitOutputPort;
+import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
-import fr.synthlab.model.module.port.Port;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
+import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -22,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -40,29 +40,60 @@ public class Workbench extends Pane {
 		ViewModuleOUT out = new ViewModuleOUT();
 		addModule(out);
 
+		ModuleVCOA vcoa = ModuleFactory.createVCO();
+		ModuleVCOA vcoa2 = ModuleFactory.createVCO();
+
+		vcoa2.setFrequency(1);
 
 
-
-		// SCOP init
-		Synthesizer synth = JSyn.createSynthesizer();
-
-		ModuleVCOA vcoa = new ModuleVCOA(synth);
 		// Add an output mixer.
-		ModuleOut b = new ModuleOut(synth);
+		ModuleOut sound = ModuleFactory.createOut();
 
-		ModuleOscilloscope oscillo = new ModuleOscilloscope(synth);
+		ModuleOscilloscope oscillo = ModuleFactory.createOscilloscope();
 
-		synth.start();
+		ModuleFactory.getSyn().start();
 
-		Port p = vcoa.getPort("square");
-		((OutputPort) p).connect(b.getInput());
-		oscillo.connect((UnitOutputPort)((OutputPort) p).getOutput());
+		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
 
-		b.start();
+		InputPort inOsc = (InputPort) oscillo.getPort("in");
+		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
+		InputPort fm1 = (InputPort) vcoa.getPort("fm");
+		OutputPort trianglePort2 = (OutputPort) vcoa2.getPort("square");
+
+		// Connect square output to oscillo in
+		squarePort.connect(inOsc);
+
+		// Connect oscillo out to sound
+		outOsc.connect(sound.getPort("in"));
+
+		// Connect 2nd VCOA output to 1st VCOA input
+		trianglePort2.connect(fm1);
+
+		vcoa.start();
+		vcoa2.start();
+		oscillo.start();
+		sound.start();
+		this.getChildren().add(new ViewModuleOscillator(oscillo));
+
+		Scanner sc = new Scanner(System.in);
+		Thread t = new Thread(() -> {
+			while (true) {
+				String f = sc.next();
+				String[] res = f.split("/");
+				if (res[0].equals("1")) {
+					vcoa.setFrequency(Integer.parseInt(res[1]));
+				} else if (res[0].equals("2")) {
+					vcoa2.setFrequency(Integer.parseInt(res[1]));
+				}
+			}
+		});
+
+		t.start();
+
 		//addModule(new ViewModuleOscillator(oscillo));
 	}
 
-	private void addModule(ViewModule module){
+	private void addModule(ViewModule module) {
 		this.getChildren().add(module);
 
 		makeDraggable(module);
@@ -112,7 +143,8 @@ public class Workbench extends Pane {
 
 	/**
 	 * Checks if a Bounds is colliding with any module except the one provided in the parameter
-	 * @param node The module to exclude for collision checking
+	 *
+	 * @param node   The module to exclude for collision checking
 	 * @param bounds The bounds to check
 	 * @return The Bounds of the first colliding module if there any
 	 */
@@ -131,6 +163,7 @@ public class Workbench extends Pane {
 
 	/**
 	 * Computes the 2D center of a Bounds object
+	 *
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
@@ -141,8 +174,6 @@ public class Workbench extends Pane {
 
 		return new Point2D(x, y);
 	}
-
-
 
 	private void moveModule(ViewModule node, double expectedX, double expectedY) {
 		// Moving the ghost to where the module should be

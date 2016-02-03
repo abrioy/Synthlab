@@ -13,25 +13,25 @@ import java.text.MessageFormat;
 
 /**
  * Knob view.
- * @see Region
+ *
  * @author johan
+ * @see Region
  */
 public class Knob extends Region {
 
-    private boolean movable = false;
-    private Region knob;// = RegionBuilder.create().id("knob").build(); // NOI18N.
     private final double minAngle = -20;
     private final double maxAngle = 200;
+    private final DoubleProperty value = new SimpleDoubleProperty(this, "value", 0);
+    private final DoubleProperty min = new SimpleDoubleProperty(this, "min", 0);
+    private final DoubleProperty max = new SimpleDoubleProperty(this, "max", 100);
+    private final DoubleProperty diameter = new SimpleDoubleProperty(this, "diameter", 200);
+    private boolean movable = false;
+    private Region knob;// = RegionBuilder.create().id("knob").build(); // NOI18N.
     private int scaleSize = 20;
     private Rotate rotate = new Rotate();
     private Line minLine = new Line();
     private Line maxLine = new Line();
     private Text text = new Text();
-
-    private final DoubleProperty value = new SimpleDoubleProperty(this, "value", 0);
-    private final DoubleProperty min = new SimpleDoubleProperty(this, "min", 0);
-    private final DoubleProperty max = new SimpleDoubleProperty(this, "max", 100);
-    private final DoubleProperty diameter = new SimpleDoubleProperty(this, "diameter", 200);
 
 
     public Knob() {
@@ -125,50 +125,50 @@ public class Knob extends Region {
         return value;
     }
 
-    public final void setValue(double v) {
-        value.set(v);
-    }
-
     public final double getValue() {
         return value.get();
+    }
+
+    public final void setValue(double v) {
+        value.set(v);
     }
 
     public final DoubleProperty valueProperty() {
         return value;
     }
 
+    public final double getMin() {
+        return min.get();
+    }
 
     public final void setMin(double v) {
         min.set(v);
-    }
-
-    public final double getMin() {
-        return min.get();
     }
 
     public final DoubleProperty minProperty() {
         return min;
     }
 
-    public final void setMax(double v) {
-        max.set(v);
-    }
-
     public final double getMax() {
         return max.get();
+    }
+
+    public final void setMax(double v) {
+        max.set(v);
     }
 
     public final DoubleProperty maxProperty() {
         return max;
     }
-    public final void setDiameter(double v) {
-        diameter.set(v);
-        knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
-        scaleSize= (int) (diameter.get() / 5);
-    }
 
     public final double getDiameter() {
         return diameter.get();
+    }
+
+    public final void setDiameter(double v) {
+        diameter.set(v);
+        knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        scaleSize = (int) (diameter.get() / 5);
     }
 
     public final DoubleProperty diameterProperty() {

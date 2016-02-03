@@ -12,29 +12,9 @@ import java.io.InputStream;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-
 public class Main extends Application {
 	private static final Logger APP_ROOT_LOGGER = Logger.getLogger("fr.synthlab");
 	private static final Logger logger = Logger.getLogger(Main.class.getName());
-
-	@Override
-	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/fxml/MainWindow.fxml"));
-
-		Scene scene = new Scene(root);
-		stage.setTitle("Synthlab");
-		stage.setScene(scene);
-		stage.setOnShown(we -> logger.fine("Main window opened."));
-		stage.setOnCloseRequest(we -> {
-				stage.close();
-				logger.fine("Main window closed.");
-		});
-		stage.show();
-		stage.setOnCloseRequest(t -> {
-			Platform.exit();
-			System.exit(0);
-		});
-	}
 
 	public static void main(String[] args) {
 
@@ -49,8 +29,28 @@ public class Main extends Application {
 			}
 		}
 
-		
+
 		launch(args);
+
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/fxml/MainWindow.fxml"));
+
+		Scene scene = new Scene(root);
+		stage.setTitle("Synthlab");
+		stage.setScene(scene);
+		stage.setOnShown(we -> logger.fine("Main window opened."));
+		stage.setOnCloseRequest(we -> {
+				stage.close();
+			logger.fine("Main window closed.");
+		});
+		stage.show();
+		stage.setOnCloseRequest(t -> {
+			Platform.exit();
+			System.exit(0);
+		});
 	}
 
 }
