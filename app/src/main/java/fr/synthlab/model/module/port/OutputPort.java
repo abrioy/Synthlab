@@ -2,6 +2,7 @@ package fr.synthlab.model.module.port;
 
 import com.jsyn.ports.ConnectableOutput;
 import fr.synthlab.model.module.Module;
+
 import java.util.logging.Logger;
 
 public class OutputPort extends Port {
@@ -9,20 +10,43 @@ public class OutputPort extends Port {
 
     private ConnectableOutput output;
 
+    /**
+     * Constructor
+     *
+     * @param name   The name of this port
+     * @param m      The module containing this port
+     * @param output The JSyn port to assign
+     */
     public OutputPort(String name, Module m, ConnectableOutput output) {
         super(name, m);
         this.output = output;
     }
 
+    /**
+     *
+     * @return The JSyn output port
+     */
     public ConnectableOutput getOutput() {
         return output;
     }
 
-    public void connect(InputPort port) {
-        output.connect(port.getInput());
+    /**
+     * Connect another port to this port
+     * @param port
+     */
+    @Override
+    public void connect(Port port) {
+        if (getConnected() != null)
+            throw new RuntimeException("A port was already connected");
+
+        if (port instanceof InputPort)
+            output.connect(((InputPort) port).getInput());
         super.connect(port);
     }
 
+    /**
+     * Disconnect the current connected port
+     */
     public void disconnect() {
         output.disconnect(((InputPort) getConnected()).getInput());
         super.disconnect();

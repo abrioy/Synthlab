@@ -6,16 +6,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<AnchorPane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="/gui/fxml/style/Module.css">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="root" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0"
+            xmlns="http://javafx.com/javafx/8" stylesheets="/gui/fxml/style/Module.css">
     <children>
-        <Circle id="Freq" fill="DODGERBLUE" layoutX="89.0" layoutY="252.0" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
-        <Circle id="FreqFine" fill="DODGERBLUE" layoutX="172.0" layoutY="252.0" radius="26.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle id="Freq" fill="DODGERBLUE" layoutX="89.0" layoutY="252.0" radius="42.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="FreqFine" fill="DODGERBLUE" layoutX="172.0" layoutY="252.0" radius="26.0" stroke="BLACK"
+                strokeType="INSIDE"/>
         <Knob id="Picker" layoutX="128.0" layoutY="125.0" diameter="100.0" step="3" />
-        <Plug id="In" layoutX="42.0" layoutY="344.0" type="input" stroke="BLACK" strokeType="INSIDE" />
-        <Plug id="Out" layoutX="220.0" layoutY="344.0" stroke="BLACK" strokeType="INSIDE" />
+        <Plug id="In" layoutX="42.0" layoutY="344.0" radius="22.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Plug id="Out" layoutX="220.0" layoutY="344.0" radius="22.0" stroke="BLACK" strokeType="INSIDE"/>
         <Label layoutX="14.0" prefHeight="44.0" prefWidth="75.0" text="VCOA">
             <font>
-                <Font size="26.0" />
+                <Font size="26.0"/>
             </font>
         </Label>
     </children>
