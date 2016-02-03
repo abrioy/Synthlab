@@ -11,7 +11,6 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
-import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -19,17 +18,27 @@ import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
 
+	private Rectangle dragGhost = new Rectangle();
+
 	public Workbench() {
+
+		dragGhost.setStroke(Color.GREEN);
+		dragGhost.setFill(Color.TRANSPARENT);
+
+
 		ViewModule module = new ViewModuleVCO();
 		addModule(module);
 		ViewModuleOUT out = new ViewModuleOUT();
 		addModule(out);
+
 
 
 
@@ -58,34 +67,46 @@ public class Workbench extends Pane {
 	}
 
 
-	private void makeDraggable(Node node) {
+	private void makeDraggable(ViewModule module) {
 		// Making the frame draggable
 		class mouseDelta {
 			double x ;
 			double y ;
 		}
 
+		final Workbench workbench = this;
+
 		mouseDelta delta = new mouseDelta();
-		node.setOnMousePressed(event -> {
+		module.setOnMousePressed(event -> {
 			delta.x = event.getSceneX() ;
 			delta.y = event.getSceneY() ;
-		});
-		node.setOnMouseDragEntered(event -> node.setCursor(Cursor.MOVE));
-		node.setOnMouseReleased(mouseEvent -> {
-			node.setCursor(Cursor.HAND);
+
+
+			module.toFront();
+			// Creating a ghost image
+			dragGhost.setWidth(module.getBoundsInParent().getWidth());
+			dragGhost.setHeight(module.getBoundsInParent().getHeight());
+			dragGhost.toFront();
+			workbench.getChildren().add(dragGhost);
 		});
 
-		node.setOnMouseDragged(event -> {
+		module.setOnMouseReleased(mouseEvent -> {
+			module.setCursor(Cursor.HAND);
+
+			workbench.getChildren().remove(dragGhost);
+		});
+
+		module.setOnMouseDragged(event -> {
 			double deltaX = event.getSceneX() - delta.x ;
 			double deltaY = event.getSceneY() - delta.y ;
 
-			moveModule(node, deltaX, deltaY);
+			moveModule(module, deltaX, deltaY);
 			delta.x = event.getSceneX();
 			delta.y = event.getSceneY();
 
 		});
 
-		node.setOnMouseEntered(mouseEvent -> node.setCursor(Cursor.HAND));
+		module.setOnMouseEntered(mouseEvent -> module.setCursor(Cursor.HAND));
 	}
 
 	/**
@@ -96,7 +117,7 @@ public class Workbench extends Pane {
 	 */
 	private Bounds checkCollisions(Node node, Bounds bounds) {
 		for (Node child : this.getChildren()) {
-			if (node != child) {
+			if (child != dragGhost && node != child) {
 				Bounds childBounds = child.getBoundsInParent();
 
 				if (bounds.intersects(childBounds)) {
@@ -120,7 +141,11 @@ public class Workbench extends Pane {
 		return new Point2D(x, y);
 	}
 
-	private void moveModule(Node node, double deltaX, double deltaY) {
+	private void moveModule(ViewModule node, double deltaX, double deltaY) {
+		double expectedX = dragGhost.getLayoutX() + deltaX;
+		double expectedY = dragGhost.getLayoutY() + deltaY;
+		double newX, newY;
+
 		Bounds oldBounds = node.getBoundsInParent();
 		Bounds newBounds = new BoundingBox(
 				oldBounds.getMinX() + deltaX,
@@ -132,7 +157,8 @@ public class Workbench extends Pane {
 		Bounds collidingBounds = checkCollisions(node, newBounds);
 		if (collidingBounds == null) {
 			// The new position is not colliding with something
-			node.relocate(node.getLayoutX() + deltaX, node.getLayoutY() + deltaY);
+			newX = expectedX;
+			newY = expectedY;
 		}
 		else {
 			// Snapping to the colliding bounds
@@ -144,11 +170,9 @@ public class Workbench extends Pane {
 			double distanceX = Math.abs(newCenter.getX() - collidingNodeCenter.getX());
 			double distanceY = Math.abs(newCenter.getY() - collidingNodeCenter.getY());
 
-			double newX, newY;
-
 			if(distanceX > distanceY){
 				// We need to push it along the X axis
-				newY = node.getLayoutY() + deltaY;
+				newY = expectedY;
 				if(newCenter.getX() > collidingNodeCenter.getX()){
 					// Right
 					newX = collidingBounds.getMaxX() + 1;
@@ -160,7 +184,7 @@ public class Workbench extends Pane {
 			}
 			else {
 				// We need to push it along the Y axis
-				newX = node.getLayoutX() + deltaX;
+				newX = expectedX;
 				if(newCenter.getY() > collidingNodeCenter.getY()){
 					// Bottom
 					newY = collidingBounds.getMaxY() + 1;
@@ -171,7 +195,12 @@ public class Workbench extends Pane {
 				}
 			}
 
-			node.relocate(newX, newY);
 		}
+
+		// Moving the ghost to where the module should be
+		dragGhost.relocate(expectedX, expectedY);
+
+		// Snapping the module in a non-colliding position
+		node.relocate(newX, newY);
 	}
 }
