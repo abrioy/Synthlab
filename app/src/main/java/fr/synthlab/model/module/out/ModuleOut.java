@@ -182,6 +182,11 @@ public class ModuleOut implements Module{
     @Override
     public void update() {}
 
+    @Override
+    public String getName() {
+        return "OUT";
+    }
+
     /**
      * getter on attenuation.
      * @return attenuation
