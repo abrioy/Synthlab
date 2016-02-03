@@ -32,7 +32,7 @@ public class FilterAttenuator extends UnitFilter {
             double out = attenuation * in;
             outputs[i] = out;
         }
-        System.out.println(outputs[0]);
+        System.out.println(outputs[0]+" "+this.attenuation);
     }
 
     /**
