@@ -42,12 +42,13 @@ public class Workbench extends Pane {
 
 		ModuleFactory.getSyn().start();
 
-		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
+		OutputPort squarePort = (OutputPort) vcoa.getPort("out");
 
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
 		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
 		InputPort fm1 = (InputPort) vcoa.getPort("fm");
-		OutputPort trianglePort2 = (OutputPort) vcoa2.getPort("square");
+		OutputPort trianglePort2 = (OutputPort) vcoa2.getPort("out");
+
 
 		// Connect square output to oscillo in
 		squarePort.connect(inOsc);
@@ -73,6 +74,12 @@ public class Workbench extends Pane {
 					vcoa.setFrequency(Integer.parseInt(res[1]));
 				} else if (res[0].equals("2")) {
 					vcoa2.setFrequency(Integer.parseInt(res[1]));
+				} else if (res[0].equals("s")) {
+					vcoa.setShape("sawtooth");
+				} else if (res[0].equals("c")) {
+					vcoa.setShape("square");
+				} else if (res[0].equals("t")) {
+					vcoa.setShape("triangle");
 				}
 			}
 		});

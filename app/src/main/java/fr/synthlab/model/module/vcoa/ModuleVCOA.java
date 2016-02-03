@@ -1,6 +1,7 @@
 package fr.synthlab.model.module.vcoa;
 
 import com.jsyn.Synthesizer;
+import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.TriangleOscillator;
@@ -58,20 +59,10 @@ public class ModuleVCOA implements Module {
      */
     private InputPort fmInput;
 
-    /**
-     * Square oscillator output port
-     */
-    private OutputPort squareOutput;
 
-    /**
-     * Triangle oscillator output port
-     */
-    private OutputPort triangleOutput;
+    private OutputPort outputPort;
 
-    /**
-     * Sawtooth oscillator output port
-     */
-    private OutputPort sawtoothOutput;
+    private PassThrough passThrough = new PassThrough();
 
 
     /**
@@ -84,16 +75,15 @@ public class ModuleVCOA implements Module {
         synthesizer.add(triangleOscillator);
         synthesizer.add(sawtoothOscillator);
         synthesizer.add(fmFilter);
+        synthesizer.add(passThrough);
 
         fmInput = new InputPort("fm", this, fmFilter.input);
-        squareOutput = new OutputPort("square", this, squareOscillator.output);
-        triangleOutput = new OutputPort("triangle", this, triangleOscillator.output);
-        sawtoothOutput = new OutputPort("sawtooth", this, sawtoothOscillator.output);
+        outputPort = new OutputPort("out", this, passThrough.output);
 
         ports.add(fmInput);
-        ports.add(squareOutput);
-        ports.add(triangleOutput);
-        ports.add(sawtoothOutput);
+        ports.add(outputPort);
+
+        squareOscillator.output.connect(passThrough.input);
 
         // Initialize the frequency of the fm filter and the 3 oscillators
         setFrequency(frequency);
@@ -117,6 +107,7 @@ public class ModuleVCOA implements Module {
         squareOscillator.start();
         sawtoothOscillator.start();
         triangleOscillator.start();
+        passThrough.start();
     }
 
     /**
@@ -210,5 +201,22 @@ public class ModuleVCOA implements Module {
     @Override
     public String getName() {
         return "VCOA";
+    }
+
+    public void setShape(String s) {
+        switch (s) {
+            case "triangle":
+                passThrough.input.disconnectAll();
+                triangleOscillator.output.connect(passThrough.input);
+                break;
+            case "square":
+                passThrough.input.disconnectAll();
+                squareOscillator.output.connect(passThrough.input);
+                break;
+            case "sawtooth":
+                passThrough.input.disconnectAll();
+                sawtoothOscillator.output.connect(passThrough.input);
+                break;
+        }
     }
 }
