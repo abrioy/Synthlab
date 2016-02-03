@@ -121,7 +121,6 @@ public class Workbench extends Pane {
 			dragGhost.toFront();
 			workbench.getChildren().add(dragGhost);
 
-			event.consume();
 		});
 
 		module.setOnMouseReleased(mouseEvent -> {
@@ -135,7 +134,6 @@ public class Workbench extends Pane {
 
 			moveModule(module, localPoint.getX() - mouseDelta.x, localPoint.getY() - mouseDelta.y);
 
-			event.consume();
 		});
 
 		module.setOnMouseEntered(mouseEvent -> module.setCursor(Cursor.HAND));
