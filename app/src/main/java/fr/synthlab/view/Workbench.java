@@ -126,6 +126,10 @@ public class Workbench extends Pane {
 			WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
 			dragGhost.setImage(snapshot);
 			dragGhost.toFront();
+
+			// Initial position of the ghost
+			Bounds moduleBounds = module.getBoundsInParent();
+			dragGhost.relocate(moduleBounds.getMinX(), moduleBounds.getMinY());
 			workbench.getChildren().add(dragGhost);
 
 			event.consume();
