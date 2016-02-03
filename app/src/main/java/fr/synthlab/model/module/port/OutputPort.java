@@ -21,6 +21,9 @@ public class OutputPort extends Port {
 
     @Override
     public void connect(Port port) {
+        if (getConnected() != null)
+            throw new RuntimeException("A port was already connected");
+
         if (port instanceof InputPort)
             output.connect(((InputPort) port).getInput());
         super.connect(port);
