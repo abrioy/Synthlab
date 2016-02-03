@@ -44,7 +44,7 @@ public class Main extends Application {
 		stage.setOnShown(we -> logger.fine("Main window opened."));
 		stage.setOnCloseRequest(we -> {
 				stage.close();
-				logger.fine("Main window closed.");
+			logger.fine("Main window closed.");
 		});
 		stage.show();
 		stage.setOnCloseRequest(t -> {
