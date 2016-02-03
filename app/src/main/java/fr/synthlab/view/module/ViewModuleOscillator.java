@@ -18,6 +18,7 @@ public class ViewModuleOscillator extends ViewModuleFrame {
 	public ViewModuleOscillator(ModuleOscilloscope osc) {
 		super();
 		this.osc = osc;
+		//osc.setScale(0);
 		swingNode = new SwingNode();
 		swingNode.setContent(osc.getOscillatorJComponent());
 		swingNode.setMouseTransparent(true);
