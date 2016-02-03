@@ -5,6 +5,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import fr.synthlab.view.Workbench?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane fx:id="Parent" prefHeight="480.0" prefWidth="640.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="fr.synthlab.view.controller.MainWindowController"
@@ -18,8 +19,10 @@
     </left>
 
     <center>
-        <ScrollPane>
-            <Workbench />
+        <ScrollPane fx:id="workbenchScrollPane" fitToWidth="false" fitToHeight="false">
+            <StackPane>
+                <Workbench fx:id="workbench"/>
+            </StackPane>
         </ScrollPane>
     </center>
 
