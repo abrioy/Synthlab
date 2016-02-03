@@ -30,6 +30,7 @@ public class Port {
     }
 
     public void disconnect(){
+        port.setPort(null);
         port.getModule().update();
         port = null;
         module.update();
