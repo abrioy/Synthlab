@@ -1,4 +1,10 @@
 
 .module-frame {
     -fx-border-color: red;
+
+}
+#root{
+    -fx-background-image: url("../../texture/carbon.jpeg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
 }

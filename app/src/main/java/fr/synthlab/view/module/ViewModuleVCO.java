@@ -8,7 +8,7 @@ public class ViewModuleVCO extends ViewModule {
 	public ViewModuleVCO() {
 		super();
 		this.loadFXML("/gui/fxml/module/ViewModuleVCO.fxml");
-
+		this.setId("pane");
 	}
 
 }

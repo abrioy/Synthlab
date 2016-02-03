@@ -10,6 +10,7 @@ import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModule;
+import fr.synthlab.view.module.ViewModuleOUT;
 import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.geometry.BoundingBox;
@@ -25,14 +26,14 @@ public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
 
 	public Workbench() {
-
-		addModule(new ViewModuleVCO());
-		addModule(new ViewModuleVCO());
 		ViewModule module = new ViewModuleVCO();
 		addModule(module);
+		ViewModuleOUT out = new ViewModuleOUT();
+		addModule(out);
+
+
 
 		// SCOP init
-
 		Synthesizer synth = JSyn.createSynthesizer();
 
 		ModuleVCOA vcoa = new ModuleVCOA(synth);
@@ -48,7 +49,7 @@ public class Workbench extends Pane {
 		oscillo.connect((UnitOutputPort)((OutputPort) p).getOutput());
 
 		b.start();
-		addModule(new ViewModuleOscillator(oscillo));
+		//addModule(new ViewModuleOscillator(oscillo));
 	}
 
 	private void addModule(ViewModule module){
