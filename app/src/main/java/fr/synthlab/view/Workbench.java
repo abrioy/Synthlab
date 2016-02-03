@@ -3,12 +3,10 @@ package fr.synthlab.view;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
-import com.jsyn.ports.UnitOutputPort;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
-import fr.synthlab.model.module.port.Port;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
@@ -20,6 +18,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -84,8 +84,6 @@ public class Workbench extends Pane {
 
 		t.start();
 
-
-		b.start();
 		//addModule(new ViewModuleOscillator(oscillo));
 	}
 
