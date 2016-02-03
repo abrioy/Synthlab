@@ -409,6 +409,7 @@ public class ModuleOscilloscope implements Module {
                     value = waveTraceModel.getSample(offset + i);
                     int y2 = convertRealToY(value);
                     ((Graphics2D) g).setStroke(new BasicStroke(2));
+                    ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                     g.drawLine(x1, y1, x2, y2);
                     x1 = x2;
                     y1 = y2;
