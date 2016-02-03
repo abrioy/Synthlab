@@ -68,18 +68,17 @@ public class Workbench extends Pane {
 
 
 	private void makeDraggable(ViewModule module) {
-		// Making the frame draggable
-		class mouseDelta {
-			double x ;
-			double y ;
-		}
-
 		final Workbench workbench = this;
 
-		mouseDelta delta = new mouseDelta();
+		class Delta {
+			double x, y;
+		}
+		final Delta mouseDelta = new Delta();
+
 		module.setOnMousePressed(event -> {
-			delta.x = event.getSceneX() ;
-			delta.y = event.getSceneY() ;
+			Point2D localPoint = module.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+			mouseDelta.x = localPoint.getX();
+			mouseDelta.y = localPoint.getY();
 
 
 			module.toFront();
@@ -88,6 +87,8 @@ public class Workbench extends Pane {
 			dragGhost.setHeight(module.getBoundsInParent().getHeight());
 			dragGhost.toFront();
 			workbench.getChildren().add(dragGhost);
+
+			event.consume();
 		});
 
 		module.setOnMouseReleased(mouseEvent -> {
@@ -97,13 +98,11 @@ public class Workbench extends Pane {
 		});
 
 		module.setOnMouseDragged(event -> {
-			double deltaX = event.getSceneX() - delta.x ;
-			double deltaY = event.getSceneY() - delta.y ;
+			Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
-			moveModule(module, deltaX, deltaY);
-			delta.x = event.getSceneX();
-			delta.y = event.getSceneY();
+			moveModule(module, localPoint.getX() - mouseDelta.x, localPoint.getY() - mouseDelta.y);
 
+			event.consume();
 		});
 
 		module.setOnMouseEntered(mouseEvent -> module.setCursor(Cursor.HAND));
@@ -141,15 +140,13 @@ public class Workbench extends Pane {
 		return new Point2D(x, y);
 	}
 
-	private void moveModule(ViewModule node, double deltaX, double deltaY) {
-		double expectedX = dragGhost.getLayoutX() + deltaX;
-		double expectedY = dragGhost.getLayoutY() + deltaY;
+	private void moveModule(ViewModule node, double expectedX, double expectedY) {
 		double newX, newY;
 
 		Bounds oldBounds = node.getBoundsInParent();
 		Bounds newBounds = new BoundingBox(
-				oldBounds.getMinX() + deltaX,
-				oldBounds.getMinY() + deltaY,
+				expectedX,
+				expectedY,
 				oldBounds.getWidth(),
 				oldBounds.getHeight()
 		);
@@ -202,5 +199,6 @@ public class Workbench extends Pane {
 
 		// Snapping the module in a non-colliding position
 		node.relocate(newX, newY);
+
 	}
 }
