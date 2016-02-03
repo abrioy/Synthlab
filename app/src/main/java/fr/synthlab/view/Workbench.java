@@ -12,6 +12,7 @@ import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.scene.layout.Pane;
 
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -28,39 +29,53 @@ public class Workbench extends Pane {
 		Synthesizer synth = JSyn.createSynthesizer();
 
 		ModuleVCOA vcoa = new ModuleVCOA(synth);
+		ModuleVCOA vcoa2 = new ModuleVCOA(synth);
+		vcoa2.setFrequency(1);
+
 		// Add an output mixer.
-		ModuleOut b = new ModuleOut(synth);
+		ModuleOut sound = new ModuleOut(synth);
 
 		ModuleOscilloscope oscillo = new ModuleOscilloscope(synth);
 
 		synth.start();
 
-		OutputPort p = (OutputPort) vcoa.getPort("triangle");
-		p.connect(b.getInput());
+		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
+
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
-		p.connect(inOsc);
+		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
+		InputPort fm1 = (InputPort) vcoa.getPort("fm");
+		OutputPort trianglePort2 = (OutputPort) vcoa2.getPort("square");
+
+		// Connect square output to oscillo in
+		squarePort.connect(inOsc);
+
+		// Connect oscillo out to sound
+		outOsc.connect(sound.getPort("in"));
+
+		// Connect 2nd VCOA output to 1st VCOA input
+		trianglePort2.connect(fm1);
 
 		vcoa.start();
+		vcoa2.start();
 		oscillo.start();
-		b.start();
+		sound.start();
+		this.getChildren().add(new ViewModuleOscillator(oscillo));
 
-		Thread test = new Thread(() -> {
-			try {
-				Thread.sleep(5000);
-				OutputPort p2 = (OutputPort) vcoa.getPort("triangle");
-				p2.disconnect();
-				p2 = (OutputPort) vcoa.getPort("square");
-				p2.connect(b.getInput());
-				InputPort in = (InputPort) oscillo.getPort("in");
-
-				p2.connect(in);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		Scanner sc = new Scanner(System.in);
+		Thread t = new Thread(() -> {
+			while (true) {
+				String f = sc.next();
+				String[] res = f.split("/");
+				if (res[0].equals("1")) {
+					vcoa.setFrequency(Integer.parseInt(res[1]));
+				} else if (res[0].equals("2")) {
+					vcoa2.setFrequency(Integer.parseInt(res[1]));
+				}
 			}
 		});
 
-		test.start();
+		t.start();
 
-		this.getChildren().add(new ViewModuleOscillator(oscillo));
+
 	}
 }

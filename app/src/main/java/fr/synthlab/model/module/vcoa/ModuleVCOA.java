@@ -19,7 +19,7 @@ public class ModuleVCOA implements Module {
 
     private Collection<Port> ports = new ArrayList<>();
 
-    private double frequency = 10000;
+    private double frequency = 450;
     private double octave = 0;
     private double tone = 0;
 
