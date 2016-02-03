@@ -40,6 +40,7 @@ public class Workbench extends Pane {
 		synth.start();
 
 		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
+
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
 		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
 		InputPort fm1 = (InputPort) vcoa.getPort("fm");
