@@ -88,6 +88,7 @@ public class ModuleOscilloscope implements Module {
 
             scope.getView().setBorder(BorderFactory.createLineBorder(Color.BLACK));
             scope.getView().setOpaque(true);
+            scope.getView().setBackground(Color.BLACK);
             scope.getView().setPreferredSize(new Dimension(300,300));
             setBackground(Color.BLACK);
             for (AudioScopeProbeView a : scope.getView().getProbeViews()) {
@@ -141,6 +142,8 @@ public class ModuleOscilloscope implements Module {
         public AudioScopeView getView() {
             if (audioScopeView == null) {
                 audioScopeView = new AudioScopeView();
+                audioScopeView.setOpaque(true);
+                audioScopeView.setBackground(Color.BLACK);
                 audioScopeView.setModel(audioScopeModel);
             }
             return audioScopeView;
@@ -176,7 +179,8 @@ public class ModuleOscilloscope implements Module {
         private ScopeControlPanel controlPanel = null;
 
         public CustomAudioScopeView() {
-            setBackground(Color.GREEN);
+            setOpaque(true);
+            setBackground(Color.YELLOW);
         }
 
         public void setModel(AudioScopeModel audioScopeModel) {
@@ -202,7 +206,11 @@ public class ModuleOscilloscope implements Module {
         private void setupGUI() {
             removeAll();
             setLayout(new BorderLayout());
+            setOpaque(true);
+            setBackground(Color.BLACK);
             multipleWaveDisplay = new CustomMultipleWaveDisplay();
+            multipleWaveDisplay.setOpaque(true);
+            multipleWaveDisplay.setBackground(Color.BLACK);
 
             for (AudioScopeProbeView probeView : probeViews) {
                 multipleWaveDisplay.addWaveTrace(probeView.getWaveTraceView());
@@ -248,7 +256,13 @@ public class ModuleOscilloscope implements Module {
 
         @Override
         public void paintComponent(Graphics g) {
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, getWidth(), getHeight());
+            super.setOpaque(true);
+            super.setBackground(Color.BLACK);
             super.paintComponent(g);
+            this.setOpaque(true);
+            this.setBackground(Color.BLACK);
             int width = getWidth();
             int height = getHeight();
             for (WaveTraceView waveTraceView : waveTraceViews.toArray(new WaveTraceView[0])) {
