@@ -63,7 +63,10 @@ public class ModuleOscilloscope implements Module {
         scope = new CustomAudioScope(synth);
         pt = new PassThrough();
         in = new InputPort("in", this, pt.input);
+        out = new OutputPort("out", this, pt.output);
+
         ports.add(in);
+        ports.add(out);
         scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
         scope.addProbe(pt.output);
         out = new OutputPort("out", this, pt.output);

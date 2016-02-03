@@ -5,6 +5,7 @@ import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
@@ -38,21 +39,9 @@ public class WorkbenchController implements Initializable {
 		Port o2 = null;
 		Port o3 = null;
 
-		for (Port p : vcoa.getPorts()) {
-			if (p.getName().equals("square")) {
-				o1 = p;
-				((OutputPort) p).connect(b.getInput());
-				oscillo.getPort("in").connect((OutputPort) p);
-			}
-			if (p.getName().equals("triangle")) {
-				o2 = p;
-				((OutputPort) p).connect(b.getInput());
-			}
-			if (p.getName().equals("sawtooth")) {
-				o3 = p;
-				((OutputPort) p).connect(b.getInput());
-			}
-		}
+		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
+		InputPort inOsc = (InputPort) oscillo.getPort("in");
+		squarePort.connect(inOsc);
 
 		/*oscillo.connect((OutputPort) o3);
 

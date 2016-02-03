@@ -25,6 +25,7 @@ public class Port {
     public void connect(Port port){
         this.port = port;
         module.update();
+        port.setPort(this);
         port.getModule().update();
     }
 
@@ -44,5 +45,9 @@ public class Port {
 
     public void setModule(Module module) {
         this.module = module;
+    }
+
+    public void setPort(Port port) {
+        this.port = port;
     }
 }

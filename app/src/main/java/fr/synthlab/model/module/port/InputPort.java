@@ -1,7 +1,6 @@
 package fr.synthlab.model.module.port;
 
 import com.jsyn.ports.ConnectableInput;
-import com.jsyn.ports.UnitInputPort;
 import fr.synthlab.model.module.Module;
 
 import java.util.logging.Logger;
@@ -20,12 +19,11 @@ public class InputPort extends Port {
         return input;
     }
 
-    public UnitInputPort getUnitInputPort() {
-        return (UnitInputPort) input;
-    }
-
     @Override
     public void connect(Port port) {
+        if (getConnected() != null)
+            throw new RuntimeException("A port was already connected");
+
         if (port instanceof OutputPort)
             input.connect(((OutputPort) port).getOutput());
         super.connect(port);
