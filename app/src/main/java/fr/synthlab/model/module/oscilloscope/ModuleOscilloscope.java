@@ -113,8 +113,10 @@ public class ModuleOscilloscope implements Module {
 
     }
 
-    public void setScale(int scale) {
-        scope.getView().setScale(scale);
+
+    @Override
+    public String getName() {
+        return "OSCILLOSCOPE";
     }
 
     /**
@@ -227,12 +229,12 @@ public class ModuleOscilloscope implements Module {
             audioScopeModel.setTriggerSource(probe);
         }
 
-        public void setTriggerLevel(double level) {
-            getModel().getTriggerModel().getLevelModel().setDoubleValue(level);
-        }
-
         public double getTriggerLevel() {
             return getModel().getTriggerModel().getLevelModel().getDoubleValue();
+        }
+
+        public void setTriggerLevel(double level) {
+            getModel().getTriggerModel().getLevelModel().setDoubleValue(level);
         }
 
         public void setViewMode(AudioScope.ViewMode waveform) {
@@ -251,25 +253,6 @@ public class ModuleOscilloscope implements Module {
         public CustomAudioScopeView() {
         }
 
-        public void setModel(AudioScopeModel audioScopeModel) {
-            this.audioScopeModel = audioScopeModel;
-            // Create a view for each probe.
-            probeViews.clear();
-            for (AudioScopeProbe probeModel : audioScopeModel.getProbes()) {
-                CustomAudioScopeProbeView audioScopeProbeView = new CustomAudioScopeProbeView(probeModel);
-                probeViews.add(audioScopeProbeView);
-            }
-            setupGUI();
-
-            // Listener for signal change events.
-            audioScopeModel.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent e) {
-                    multipleWaveDisplay.repaint();
-                }
-            });
-
-        }
 
         private void setupGUI() {
             removeAll();
@@ -292,6 +275,26 @@ public class ModuleOscilloscope implements Module {
 
         public AudioScopeModel getModel() {
             return audioScopeModel;
+        }
+
+        public void setModel(AudioScopeModel audioScopeModel) {
+            this.audioScopeModel = audioScopeModel;
+            // Create a view for each probe.
+            probeViews.clear();
+            for (AudioScopeProbe probeModel : audioScopeModel.getProbes()) {
+				CustomAudioScopeProbeView audioScopeProbeView = new CustomAudioScopeProbeView(probeModel);
+                probeViews.add(audioScopeProbeView);
+            }
+            setupGUI();
+
+            // Listener for signal change events.
+            audioScopeModel.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    multipleWaveDisplay.repaint();
+                }
+            });
+
         }
 
         public AudioScopeProbeView[] getProbeViews() {

@@ -1,27 +1,28 @@
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.TitledPane?>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<ScrollPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fr.synthlab.view.controller.ToolboxController"
-            stylesheets="/gui/fxml/style/Toolbox.css">
-    <Accordion fx:id="toolbox">
-        <expandedPane>
-            <TitledPane id="Type" fx:id="accordian" animated="false" text="Type">
-                <content>
-                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                </content>
+<ScrollPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="/gui/fxml/style/Toolbox.css"
+            xmlns="http://javafx.com/javafx/8" fx:controller="fr.synthlab.view.controller.ToolboxController">
+    <content>
+        <Accordion fx:id="toolbox">
+            <panes>
+                <TitledPane id="Type" fx:id="accordian" animated="false" text="Input">
+                    <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                    </content>
+                </TitledPane>
+                <TitledPane fx:id="properties" animated="false" text="Output">
+                    <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                    </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Filter">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                    </content>
             </TitledPane>
-        </expandedPane>
-        <panes>
-            <fx:reference source="accordian" />
-            <TitledPane fx:id="properties" animated="false" text="Size and colors">
-                <content>
-                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                </content>
-            </TitledPane>
-        </panes>
-    </Accordion>
+            </panes>
+        </Accordion>
+    </content>
 </ScrollPane>

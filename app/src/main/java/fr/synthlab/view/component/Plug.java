@@ -3,6 +3,7 @@ package fr.synthlab.view.component;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
 import java.util.logging.Logger;
 
 public class Plug extends Circle {
