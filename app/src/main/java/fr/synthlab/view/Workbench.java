@@ -1,8 +1,7 @@
 package fr.synthlab.view;
 
 
-import com.jsyn.JSyn;
-import com.jsyn.Synthesizer;
+import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.InputPort;
@@ -22,22 +21,17 @@ public class Workbench extends Pane {
 
 		ViewModuleVCO module = new ViewModuleVCO();
 		this.getChildren().add(module);
-		//Synthesizer synth = JSyn.createSynthesizer();
-		//ModuleOscilloscope osc = new ModuleOscilloscope(synth);
-		//workbench.getChildren().add(new ViewModuleOscillator(osc));
 
-		Synthesizer synth = JSyn.createSynthesizer();
-
-		ModuleVCOA vcoa = new ModuleVCOA(synth);
-		ModuleVCOA vcoa2 = new ModuleVCOA(synth);
+		ModuleVCOA vcoa = ModuleFactory.createVCO();
+		ModuleVCOA vcoa2 = ModuleFactory.createVCO();
 		vcoa2.setFrequency(1);
 
 		// Add an output mixer.
-		ModuleOut sound = new ModuleOut(synth);
+		ModuleOut sound = ModuleFactory.createOut();
 
-		ModuleOscilloscope oscillo = new ModuleOscilloscope(synth);
+		ModuleOscilloscope oscillo = ModuleFactory.createOscilloscope();
 
-		synth.start();
+		ModuleFactory.getSyn().start();
 
 		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
 

@@ -144,6 +144,7 @@ public class ModuleVCOA implements Module {
      */
     public void setFrequency(double frequency) {
         this.frequency = frequency;
+        fmFilter.setf0(frequency * Math.pow(2, octave));
 
         if (fmInput.getConnected() == null) {
             squareOscillator.frequency.set(frequency * Math.pow(2, octave));
