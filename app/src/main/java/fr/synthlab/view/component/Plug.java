@@ -11,8 +11,7 @@ import java.util.logging.Logger;
 public class Plug extends Circle {
 	private static final Logger logger = Logger.getLogger(Plug.class.getName());
 
-
-    public Plug() {
+	public Plug() {
 		super();
 		this.setFill(Color.DARKRED);
 		this.setRadius(10.0f);

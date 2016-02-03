@@ -1,0 +1,5 @@
+.knob {
+    -fx-background-color: transparent;
+    -fx-background-image: url("../../texture/knob.png");
+    -fx-background-size: stretch;
+}
