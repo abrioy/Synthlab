@@ -21,19 +21,19 @@ public class ModuleOut implements Module{
     private static final Logger logger = Logger.getLogger(ModuleOut.class.getName());
 
     /**
-     * audio left exit
+     * audio stereo left exit
      */
     private final LineOut lineOutLeft;
 
     /**
-     * audio right exit
+     * audio stereo right exit
      */
     private final LineOut lineOutRight;
 
     /**
-     * input port
+     * input port mono
      */
-    //private final InputPort in;
+    private final InputPort in;
 
     /**
      * left attenuator
@@ -49,10 +49,26 @@ public class ModuleOut implements Module{
      * synthesizer
      */
     private final Synthesizer syn;
+
+    /**
+     * input stereo Left
+     */
     private final InputPort inLeft;
-    private final InputPort inRigth;
-    //private final LineOut lineOut;
-    //private final FilterAttenuator attenuator;
+
+    /**
+     * input stereo right
+     */
+    private final InputPort inRight;
+
+    /**
+     * audio output mono
+     */
+    private final LineOut lineOut;
+
+    /**
+     * attenuator filter mono
+     */
+    private final FilterAttenuator attenuator;
 
     /**
      * if audio is mute
@@ -66,26 +82,26 @@ public class ModuleOut implements Module{
     public ModuleOut(Synthesizer synthesizer){
         lineOutLeft = new LineOut();
         lineOutRight = new LineOut();
-        //lineOut = new LineOut();
-        //attenuator = new FilterAttenuator();
+        lineOut = new LineOut();
+        attenuator = new FilterAttenuator();
         attenuatorLeft = new FilterAttenuator();
         attenuatorRight = new FilterAttenuator();
         synthesizer.add(attenuatorLeft);
         synthesizer.add(attenuatorRight);
-        //synthesizer.add(attenuator);
+        synthesizer.add(attenuator);
         synthesizer.add(lineOutLeft);
         synthesizer.add(lineOutRight);
-        //synthesizer.add(lineOut);
-        //in = new InputPort("in", this, attenuator.input);
+        synthesizer.add(lineOut);
+        in = new InputPort("in", this, attenuator.input);
         inLeft = new InputPort("inLeft", this, attenuatorLeft.input);
-        inRigth = new InputPort("inRight", this, attenuatorRight.input);
-        //OutputPort interOut = new OutputPort("out",this, attenuator.output);
+        inRight = new InputPort("inRight", this, attenuatorRight.input);
+        OutputPort interOut = new OutputPort("out",this, attenuator.output);
         OutputPort interOutLeft = new OutputPort("outLeft",this, attenuatorLeft.output);
         OutputPort interOutRight = new OutputPort("outRight",this, attenuatorRight.output);
         new InputPort("inLeft", this, lineOutLeft.input.getConnectablePart(0)).connect(interOutLeft);
         new InputPort("inRight", this, lineOutRight.input.getConnectablePart(1)).connect(interOutRight);
-        //new InputPort("in0", this, lineOut.input.getConnectablePart(0)).connect(interOut);
-        //new InputPort("in1", this, lineOut.input.getConnectablePart(1)).connect(interOut);
+        new InputPort("in0", this, lineOut.input.getConnectablePart(0)).connect(interOut);
+        new InputPort("in1", this, lineOut.input.getConnectablePart(1)).connect(interOut);
         syn = synthesizer;
         attenuatorLeft.setAttenuation(5);//todo delete
         attenuatorRight.setAttenuation(-5);//todo delete
@@ -121,23 +137,15 @@ public class ModuleOut implements Module{
     }
 
     /**
-     * getter on input
-     * @return InputPort
-     */
-    /*public InputPort getInput() {
-        return in;
-    }*/
-
-    /**
      * start play audio
      */
     @Override
     public void start() {
         if (!isMute()) {
-       //     lineOut.start();
+            lineOut.start();
             lineOutLeft.start();
             lineOutRight.start();
-           // attenuator.start();
+            attenuator.start();
             attenuatorLeft.start();
             attenuatorRight.start();
         }
@@ -148,10 +156,10 @@ public class ModuleOut implements Module{
      */
     @Override
     public void stop() {
-        //lineOut.stop();
+        lineOut.stop();
         lineOutLeft.stop();
         lineOutRight.stop();
-        //attenuator.stop();
+        attenuator.stop();
         attenuatorLeft.stop();
         attenuatorRight.stop();
     }
@@ -163,9 +171,9 @@ public class ModuleOut implements Module{
     @Override
     public Collection<Port> getPorts() {
         ArrayList<Port> res = new ArrayList<>();
-       // res.add(in);
+        res.add(in);
         res.add(inLeft);
-        res.add(inRigth);
+        res.add(inRight);
         return res;
     }
 

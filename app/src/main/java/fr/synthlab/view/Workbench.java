@@ -40,7 +40,6 @@ public class Workbench extends Pane {
 		synth.start();
 
 		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
-		squarePort.connect(sound .getPort("inRight"));
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
 		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
 		InputPort fm1 = (InputPort) vcoa.getPort("fm");
@@ -50,7 +49,7 @@ public class Workbench extends Pane {
 		squarePort.connect(inOsc);
 
 		// Connect oscillo out to sound
-		outOsc.connect(sound.getPort("in"));
+		outOsc.connect(sound.getPort("inRight"));
 
 		// Connect 2nd VCOA output to 1st VCOA input
 		trianglePort2.connect(fm1);
