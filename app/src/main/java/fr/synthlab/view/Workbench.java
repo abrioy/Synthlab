@@ -9,6 +9,7 @@ import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
+import fr.synthlab.view.module.ViewModuleOUT;
 import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.scene.layout.Pane;
@@ -21,6 +22,8 @@ public class Workbench extends Pane {
 
 		ViewModuleVCO module = new ViewModuleVCO();
 		this.getChildren().add(module);
+		ViewModuleOUT out = new ViewModuleOUT();
+		this.getChildren().add(out);
 		//Synthesizer synth = JSyn.createSynthesizer();
 		//ModuleOscilloscope osc = new ModuleOscilloscope(synth);
 		//workbench.getChildren().add(new ViewModuleOscillator(osc));

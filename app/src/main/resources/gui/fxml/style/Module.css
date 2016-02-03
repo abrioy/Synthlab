@@ -1,4 +1,11 @@
 
 .module-frame {
     -fx-border-color: red;
+
+}
+#root{
+    -fx-background-image: url("../../texture/carbon.jpeg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
