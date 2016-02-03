@@ -59,6 +59,7 @@ public class Port {
      * disconnect this port
      */
     public void disconnect(){
+        port.setPort(null);
         port.getModule().update();
         port = null;
         module.update();

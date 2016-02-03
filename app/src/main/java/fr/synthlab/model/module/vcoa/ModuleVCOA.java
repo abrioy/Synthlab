@@ -205,4 +205,9 @@ public class ModuleVCOA implements Module {
             fmFilter.output.connect(sawtoothOscillator.frequency);
         }
     }
+
+    @Override
+    public String getName() {
+        return "VCOA";
+    }
 }

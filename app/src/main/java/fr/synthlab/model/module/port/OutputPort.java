@@ -10,15 +10,30 @@ public class OutputPort extends Port {
 
     private ConnectableOutput output;
 
+    /**
+     * Constructor
+     *
+     * @param name   The name of this port
+     * @param m      The module containing this port
+     * @param output The JSyn port to assign
+     */
     public OutputPort(String name, Module m, ConnectableOutput output) {
         super(name, m);
         this.output = output;
     }
 
+    /**
+     *
+     * @return The JSyn output port
+     */
     public ConnectableOutput getOutput() {
         return output;
     }
 
+    /**
+     * Connect another port to this port
+     * @param port
+     */
     @Override
     public void connect(Port port) {
         if (getConnected() != null)
@@ -29,6 +44,9 @@ public class OutputPort extends Port {
         super.connect(port);
     }
 
+    /**
+     * Disconnect the current connected port
+     */
     public void disconnect() {
         output.disconnect(((InputPort) getConnected()).getInput());
         super.disconnect();
