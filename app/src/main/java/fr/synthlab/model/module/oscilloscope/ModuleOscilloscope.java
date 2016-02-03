@@ -1,51 +1,64 @@
 package fr.synthlab.model.module.oscilloscope;
 
 import com.jsyn.Synthesizer;
+import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.scope.AudioScopeModel;
 import com.jsyn.scope.AudioScopeProbe;
-import com.jsyn.scope.swing.*;
+import com.jsyn.scope.swing.AudioScopeProbeView;
+import com.jsyn.scope.swing.ScopeControlPanel;
+import com.jsyn.scope.swing.WaveTraceView;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import com.jsyn.ports.UnitOutputPort;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.ArrayList;
-
-import javax.swing.JPanel;
-
-import javax.swing.JPanel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import com.jsyn.scope.AudioScopeModel;
-import com.jsyn.scope.AudioScopeProbe;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
-
+/**
+ * Module oscilloscope to display the transmitted signal.
+ * @author Anthony Cobac & Corentin Beauce
+ * @see Module
+ */
 public class ModuleOscilloscope implements Module {
     private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class.getName());
 
+    /**
+     * Audio Scope
+     */
     private CustomAudioScope scope;
-    private InputPort in;
-    private PassThrough pt;
-    private ArrayList<Port> ports = new ArrayList<>();
 
-    // Ports
+    /**
+     * Input port
+     */
+    private InputPort in;
+
+    /**
+     * Output port
+     */
     private OutputPort out;
 
+    /**
+     * All ports
+     */
+    private ArrayList<Port> ports = new ArrayList<>();
+
+    /**
+     * Pass through
+     */
+    private PassThrough pt;
+
+    /**
+     * Constructor
+     * @param synth Synthesizer
+     */
     public ModuleOscilloscope(Synthesizer synth) {
         scope = new CustomAudioScope(synth);
         pt = new PassThrough();
@@ -53,32 +66,54 @@ public class ModuleOscilloscope implements Module {
         ports.add(in);
         scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
         scope.addProbe(pt.output);
+        out = new OutputPort("out", this, pt.output);
+        ports.add(out);
     }
 
+    /**
+     * Getter on ports input and output.
+     * @return Scope port
+     */
     @Override
     public Collection<Port> getPorts() {
         return ports;
     }
 
+    /**
+     * Start scope
+     */
     @Override
     public void start() {
         scope.start();
     }
 
+    /**
+     * Stop scope
+     */
     @Override
     public void stop() {
         scope.stop();
     }
 
+    /**
+     * Inherit method.
+     */
     @Override
     public void update() {
 
     }
 
+    /**
+     * Getter on the Scope panel.
+     * @return JComponent that displays the scope
+     */
     public JComponent getOscillatorJComponent() {
         return new JOscillatorComponent(scope);
     }
 
+    /**
+     * JComponent class
+     */
     class JOscillatorComponent extends JComponent
     {
         private JPanel oscPanel;
