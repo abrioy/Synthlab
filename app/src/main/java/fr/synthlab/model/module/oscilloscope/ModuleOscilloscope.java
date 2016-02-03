@@ -105,14 +105,36 @@ public class ModuleOscilloscope implements Module {
     }
 
 
-    /*************************
+    /** **********************************************************
      * Below: Custom classes made from JSyn scope classes in order to
      * get a decent-looking oscillator.
+     *
+     * These three classes, slightly modified by us, are under the
+     * following licence:
+     *
+     * ***********************************************************
+     *
+     * Copyright 2009 Phil Burk, Mobileer Inc
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *     http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     *
+     * ***********************************************************
+     *
      */
 
-    public class CustomAudioScope {
+    private class CustomAudioScope {
 
-        private AudioScopeView audioScopeView = null;
+        private CustomAudioScopeView audioScopeView = null;
         private AudioScopeModel audioScopeModel;
 
         public CustomAudioScope(Synthesizer synth) {
@@ -139,11 +161,9 @@ public class ModuleOscilloscope implements Module {
             return audioScopeModel;
         }
 
-        public AudioScopeView getView() {
+        public CustomAudioScopeView getView() {
             if (audioScopeView == null) {
-                audioScopeView = new AudioScopeView();
-                audioScopeView.setOpaque(true);
-                audioScopeView.setBackground(Color.BLACK);
+                audioScopeView = new CustomAudioScopeView();
                 audioScopeView.setModel(audioScopeModel);
             }
             return audioScopeView;
@@ -170,7 +190,7 @@ public class ModuleOscilloscope implements Module {
 
     }
 
-    public class CustomAudioScopeView extends JPanel {
+    private class CustomAudioScopeView extends JPanel {
         private static final long serialVersionUID = -7507986850757860853L;
         private AudioScopeModel audioScopeModel;
         private ArrayList<AudioScopeProbeView> probeViews = new ArrayList<AudioScopeProbeView>();
@@ -209,8 +229,6 @@ public class ModuleOscilloscope implements Module {
             setOpaque(true);
             setBackground(Color.BLACK);
             multipleWaveDisplay = new CustomMultipleWaveDisplay();
-            multipleWaveDisplay.setOpaque(true);
-            multipleWaveDisplay.setBackground(Color.BLACK);
 
             for (AudioScopeProbeView probeView : probeViews) {
                 multipleWaveDisplay.addWaveTrace(probeView.getWaveTraceView());
@@ -234,7 +252,7 @@ public class ModuleOscilloscope implements Module {
 
     }
 
-    public class CustomMultipleWaveDisplay extends JPanel {
+    private class CustomMultipleWaveDisplay extends JPanel {
         private static final long serialVersionUID = -5157397030540800373L;
 
         private ArrayList<WaveTraceView> waveTraceViews = new ArrayList<WaveTraceView>();
@@ -256,13 +274,8 @@ public class ModuleOscilloscope implements Module {
 
         @Override
         public void paintComponent(Graphics g) {
-            g.setColor(Color.BLACK);
-            g.fillRect(0, 0, getWidth(), getHeight());
             super.setOpaque(true);
-            super.setBackground(Color.BLACK);
             super.paintComponent(g);
-            this.setOpaque(true);
-            this.setBackground(Color.BLACK);
             int width = getWidth();
             int height = getHeight();
             for (WaveTraceView waveTraceView : waveTraceViews.toArray(new WaveTraceView[0])) {
