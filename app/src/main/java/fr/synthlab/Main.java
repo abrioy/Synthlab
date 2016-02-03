@@ -24,10 +24,10 @@ public class Main extends Application {
 		Scene scene = new Scene(root);
 		stage.setTitle("Synthlab");
 		stage.setScene(scene);
-		stage.setOnShown(we -> logger.info("Main window opened."));
+		stage.setOnShown(we -> logger.fine("Main window opened."));
 		stage.setOnCloseRequest(we -> {
 				stage.close();
-				logger.info("Main window closed.");
+				logger.fine("Main window closed.");
 		});
 		stage.show();
 		stage.setOnCloseRequest(t -> {

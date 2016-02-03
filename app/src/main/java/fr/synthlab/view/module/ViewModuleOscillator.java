@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * Created by corentin on 01/02/16.
  */
-public class ViewModuleOscillator extends ViewModuleFrame {
+public class ViewModuleOscillator extends ViewModule {
 	private static final Logger logger = Logger.getLogger(ViewModuleOscillator.class.getName());
 
 	ModuleOscilloscope osc;
@@ -17,6 +17,7 @@ public class ViewModuleOscillator extends ViewModuleFrame {
 
 	public ViewModuleOscillator(ModuleOscilloscope osc) {
 		super();
+
 		this.osc = osc;
 		swingNode = new SwingNode();
 		swingNode.setContent(osc.getOscillatorJComponent());
