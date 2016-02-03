@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 /**
- * out module to play sound on sound card
+ * out module to play sound on sound card.
  * @author johan
  * @see Module
  */
@@ -21,62 +21,62 @@ public class ModuleOut implements Module{
     private static final Logger logger = Logger.getLogger(ModuleOut.class.getName());
 
     /**
-     * audio stereo left exit
+     * audio stereo left exit.
      */
     private final LineOut lineOutLeft;
 
     /**
-     * audio stereo right exit
+     * audio stereo right exit.
      */
     private final LineOut lineOutRight;
 
     /**
-     * input port mono
+     * input port mono.
      */
     private final InputPort in;
 
     /**
-     * left attenuator
+     * left attenuator stereo.
      */
     private final FilterAttenuator attenuatorLeft;
 
     /**
-     * right attenuator
+     * right attenuator stereo.
      */
     private final FilterAttenuator attenuatorRight;
 
     /**
-     * synthesizer
+     * synthesizer.
      */
     private final Synthesizer syn;
 
     /**
-     * input stereo Left
+     * input stereo Left.
      */
     private final InputPort inLeft;
 
     /**
-     * input stereo right
+     * input stereo right.
      */
     private final InputPort inRight;
 
     /**
-     * audio output mono
+     * audio output mono.
      */
     private final LineOut lineOut;
 
     /**
-     * attenuator filter mono
+     * attenuator filter mono.
      */
     private final FilterAttenuator attenuator;
 
     /**
-     * if audio is mute
+     * if audio is mute.
      */
     private boolean mute = false;
 
     /**
-     * constructor
+     * constructor.
      * @param synthesizer where we get sound
      */
     public ModuleOut(Synthesizer synthesizer){
@@ -103,12 +103,10 @@ public class ModuleOut implements Module{
         new InputPort("in0", this, lineOut.input.getConnectablePart(0)).connect(interOut);
         new InputPort("in1", this, lineOut.input.getConnectablePart(1)).connect(interOut);
         syn = synthesizer;
-        attenuatorLeft.setAttenuation(5);//todo delete
-        attenuatorRight.setAttenuation(-5);//todo delete
     }
 
     /**
-     * getter on mute
+     * getter on mute.
      * @return true if we play sound
      */
     public boolean isMute() {
@@ -116,7 +114,7 @@ public class ModuleOut implements Module{
     }
 
     /**
-     * setter on mute start or stop play audio
+     * setter on mute start or stop play audio.
      * @param mute true if play sound
      */
     public void setMute(boolean mute) {
@@ -129,7 +127,7 @@ public class ModuleOut implements Module{
     }
 
     /**
-     * getter on synthesizer
+     * getter on synthesizer.
      * @return synthesizer
      */
     public Synthesizer getSyn() {
@@ -137,7 +135,7 @@ public class ModuleOut implements Module{
     }
 
     /**
-     * start play audio
+     * start play audio.
      */
     @Override
     public void start() {
@@ -152,7 +150,7 @@ public class ModuleOut implements Module{
     }
 
     /**
-     * stop play audio
+     * stop play audio.
      */
     @Override
     public void stop() {
@@ -165,8 +163,8 @@ public class ModuleOut implements Module{
     }
 
     /**
-     * getter on ports input and output
-     * @return only input port
+     * getter on ports input and output.
+     * @return only input port : mono, stero right and stereo left
      */
     @Override
     public Collection<Port> getPorts() {
@@ -178,15 +176,14 @@ public class ModuleOut implements Module{
     }
 
     /**
-     * inherit method
+     * inherit method.
+     * nothing to do in the disconnect of port.
      */
     @Override
-    public void update() {
-        //TODO nothink
-    }
+    public void update() {}
 
     /**
-     * getter on attenuation
+     * getter on attenuation.
      * @return attenuation
      */
     public double getAttenuation(){
@@ -194,10 +191,12 @@ public class ModuleOut implements Module{
     }
 
     /**
-     * setter on attenuation
+     * setter on attenuation.
      * @param attenuation new attenuation
      */
     public void setAttenuation(double attenuation){
         attenuatorLeft.setAttenuation(attenuation);
+        attenuatorRight.setAttenuation(attenuation);
+        attenuator.setAttenuation(attenuation);
     }
 }

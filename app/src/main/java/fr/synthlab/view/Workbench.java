@@ -49,7 +49,7 @@ public class Workbench extends Pane {
 		squarePort.connect(inOsc);
 
 		// Connect oscillo out to sound
-		outOsc.connect(sound.getPort("inRight"));
+		outOsc.connect(sound.getPort("in"));
 
 		// Connect 2nd VCOA output to 1st VCOA input
 		trianglePort2.connect(fm1);
