@@ -17,21 +17,22 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
 
-	private Rectangle dragGhost = new Rectangle();
+	private ImageView dragGhost = new ImageView();
 
 	public Workbench() {
 
-		dragGhost.setStroke(Color.GREEN);
-		dragGhost.setFill(Color.TRANSPARENT);
+		// Making the ghost a bit spookier
+		dragGhost.setOpacity(0.40d);
 
 
 		ViewModule module = new ViewModuleVCO();
@@ -63,6 +64,7 @@ public class Workbench extends Pane {
 
 	private void addModule(ViewModule module){
 		this.getChildren().add(module);
+
 		makeDraggable(module);
 	}
 
@@ -83,8 +85,8 @@ public class Workbench extends Pane {
 
 			module.toFront();
 			// Creating a ghost image
-			dragGhost.setWidth(module.getBoundsInParent().getWidth());
-			dragGhost.setHeight(module.getBoundsInParent().getHeight());
+			WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
+			dragGhost.setImage(snapshot);
 			dragGhost.toFront();
 			workbench.getChildren().add(dragGhost);
 
@@ -140,65 +142,72 @@ public class Workbench extends Pane {
 		return new Point2D(x, y);
 	}
 
+
+
 	private void moveModule(ViewModule node, double expectedX, double expectedY) {
-		double newX, newY;
-
-		Bounds oldBounds = node.getBoundsInParent();
-		Bounds newBounds = new BoundingBox(
-				expectedX,
-				expectedY,
-				oldBounds.getWidth(),
-				oldBounds.getHeight()
-		);
-
-		Bounds collidingBounds = checkCollisions(node, newBounds);
-		if (collidingBounds == null) {
-			// The new position is not colliding with something
-			newX = expectedX;
-			newY = expectedY;
-		}
-		else {
-			// Snapping to the colliding bounds
-
-			// Finding out where to snap the node
-			Point2D newCenter = getBoundsCenter(newBounds);
-			Point2D collidingNodeCenter = getBoundsCenter(collidingBounds);
-
-			double distanceX = Math.abs(newCenter.getX() - collidingNodeCenter.getX());
-			double distanceY = Math.abs(newCenter.getY() - collidingNodeCenter.getY());
-
-			if(distanceX > distanceY){
-				// We need to push it along the X axis
-				newY = expectedY;
-				if(newCenter.getX() > collidingNodeCenter.getX()){
-					// Right
-					newX = collidingBounds.getMaxX() + 1;
-				}
-				else{
-					// Left
-					newX = collidingBounds.getMinX() - newBounds.getWidth() - 1;
-				}
-			}
-			else {
-				// We need to push it along the Y axis
-				newX = expectedX;
-				if(newCenter.getY() > collidingNodeCenter.getY()){
-					// Bottom
-					newY = collidingBounds.getMaxY() + 1;
-				}
-				else{
-					// Top
-					newY = collidingBounds.getMinY() - newBounds.getHeight() - 1;
-				}
-			}
-
-		}
-
 		// Moving the ghost to where the module should be
 		dragGhost.relocate(expectedX, expectedY);
 
-		// Snapping the module in a non-colliding position
-		node.relocate(newX, newY);
+		double newX = expectedX;
+		double newY = expectedY;
+
+		// We will try 3 times to find a place for the node
+		for (int i = 0; i < 3; i++) {
+			if(newX < 0){
+				newX = 0;
+			}
+			if(newY < 0){
+				newY = 0;
+			}
+
+			Bounds oldBounds = node.getBoundsInParent();
+			Bounds newBounds = new BoundingBox(
+					newX,
+					newY,
+					oldBounds.getWidth(),
+					oldBounds.getHeight()
+			);
+
+			Bounds collidingBounds = checkCollisions(node, newBounds);
+			if (collidingBounds == null) {
+				// The new position is not colliding with something
+				// We move the node
+				node.relocate(newX, newY);
+				return;
+			} else {
+				// Snapping to the colliding bounds
+
+				// Finding out where to put back the node
+				Point2D newCenter = getBoundsCenter(newBounds);
+				Point2D collidingNodeCenter = getBoundsCenter(collidingBounds);
+
+				double distanceX = Math.abs(newCenter.getX() - collidingNodeCenter.getX());
+				double distanceY = Math.abs(newCenter.getY() - collidingNodeCenter.getY());
+
+				if (distanceX > distanceY) {
+					// We need to push it along the X axis
+					if (newCenter.getX() > collidingNodeCenter.getX()) {
+						// Right
+						newX = collidingBounds.getMaxX() + 1;
+					} else {
+						// Left
+						newX = collidingBounds.getMinX() - newBounds.getWidth() - 1;
+					}
+				} else {
+					// We need to push it along the Y axis
+					if (newCenter.getY() > collidingNodeCenter.getY()) {
+						// Bottom
+						newY = collidingBounds.getMaxY() + 1;
+					} else {
+						// Top
+						newY = collidingBounds.getMinY() - newBounds.getHeight() - 1;
+					}
+				}
+
+			}
+
+		}
+		// The loop didn't succeed in finding a non-colliding location, we don't move the node
 
 	}
 }
