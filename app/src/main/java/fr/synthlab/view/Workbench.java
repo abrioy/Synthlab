@@ -9,6 +9,7 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.model.module.vcoa.ShapeEnum;
+import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
@@ -26,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -122,9 +124,13 @@ public class Workbench extends Pane {
 
     public void plugClicked(Plug plug){
         if(lastClickedPlug != null){
+            logger.log(Level.INFO, "Second plug");
+            Cable c = new Cable(this, lastClickedPlug, plug);
+            this.getChildren().add(c.create());
+            lastClickedPlug = null;
         }else{
+            logger.log(Level.INFO, "first plug");
             lastClickedPlug = plug;
-
         }
         logger.info("PLUG CLICKED");
     }
@@ -169,13 +175,15 @@ public class Workbench extends Pane {
 			Bounds moduleBounds = module.getBoundsInParent();
 			dragGhost.relocate(moduleBounds.getMinX(), moduleBounds.getMinY());
 			workbench.getChildren().add(dragGhost);
-
+//debit
 		});
 
 		module.setOnMouseReleased(mouseEvent -> {
 			module.setCursor(Cursor.HAND);
 
 			workbench.getChildren().remove(dragGhost);
+
+            //fin
 		});
 
 		module.setOnMouseDragged(event -> {

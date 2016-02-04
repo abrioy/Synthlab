@@ -1,5 +1,7 @@
 package fr.synthlab.view.component;
 
+import fr.synthlab.view.Workbench;
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -25,8 +27,13 @@ public class Cable {
     private Point2D in;
     private Point2D out;
 
-    public Cable(Line node) {
-        this.node = node;
+    public Cable(Workbench workbench, Plug pIn, Plug pOut) {
+        Bounds pInBounds = pIn.getBoundsInLocal();
+        Bounds pOutBounds = pOut.getBoundsInLocal();
+        Bounds pInPosition = workbench.sceneToLocal(pIn.localToScene(pInBounds));
+        Bounds pOutPosition = workbench.sceneToLocal(pOut.localToScene(pOutBounds));
+        in = new Point2D(pInPosition.getMinX(), pInPosition.getMinY());
+        out = new Point2D(pOutPosition.getMinY(), pOutPosition.getMinY());
     }
 
     public Line create() {
