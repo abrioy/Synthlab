@@ -1,4 +1,4 @@
-package fr.synthlab.view;
+package fr.synthlab.view.controller;
 
 
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
@@ -11,7 +11,6 @@ import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
 import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
-import javafx.event.EventHandler;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -20,8 +19,6 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.util.Scanner;
@@ -33,7 +30,7 @@ public class Workbench extends Pane {
 	private ImageView dragGhost = new ImageView();
 
 	//
-    private Boolean dragCable;
+    private Boolean dragCable = false;
 
 	public Workbench() {
 
@@ -41,7 +38,7 @@ public class Workbench extends Pane {
         //so spooky
 		dragGhost.setOpacity(0.40d);
 
-        dragCable=false;
+
 		ViewModule module = new ViewModuleVCO();
 		addModule(module);
 		ViewModuleOUT out = new ViewModuleOUT();
@@ -53,31 +50,8 @@ public class Workbench extends Pane {
 		vcoa2.setFrequency(1);
 
 
-        // Mouse Listener for click event
-
-        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-
-                MouseButton button = event.getButton();
-                if (button == MouseButton.PRIMARY) {
-                    if (dragCable) {
-                        System.out.print("Connect cable ");
-                        dragCable= false;
-                    }
-                    else {
-                        System.out.print("Drag cable ");
-                        dragCable = true;
-                    }
-                } else if (button == MouseButton.SECONDARY) {
-                    if (dragCable) System.out.println("Delete Cable");
-                }
-                System.out.println("to X:" + event.getSceneX() + " Y:"+event.getSceneY());
 
 
-            }
-        });
 		// Add an output mixer.
 		ModuleOut sound = ModuleFactory.createOut();
 
@@ -160,7 +134,6 @@ public class Workbench extends Pane {
 			dragGhost.toFront();
 			workbench.getChildren().add(dragGhost);
 
-			event.consume();
 		});
 
 		module.setOnMouseReleased(mouseEvent -> {
@@ -174,7 +147,6 @@ public class Workbench extends Pane {
 
 			moveModule(module, localPoint.getX() - mouseDelta.x, localPoint.getY() - mouseDelta.y);
 
-			event.consume();
 		});
 
 		module.setOnMouseEntered(mouseEvent -> module.setCursor(Cursor.HAND));

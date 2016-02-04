@@ -39,6 +39,8 @@ public class Main extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/fxml/MainWindow.fxml"));
 
 		Scene scene = new Scene(root);
+		// Mouse Listener for click event
+
 		stage.setTitle("Synthlab");
 		stage.setScene(scene);
 		stage.setOnShown(we -> logger.fine("Main window opened."));
