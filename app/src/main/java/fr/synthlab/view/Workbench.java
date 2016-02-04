@@ -7,9 +7,10 @@ import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
+import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
-import fr.synthlab.view.module.ViewModuleOscillator;
+import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -39,6 +40,8 @@ public class Workbench extends Pane {
 		addModule(module);
 		ViewModuleOUT out = new ViewModuleOUT();
 		addModule(out);
+		ViewModuleOscilloscope viewOscilloscope = new ViewModuleOscilloscope();
+		addModule(viewOscilloscope);
 
 		ModuleVCOA vcoa = ModuleFactory.createVCO();
 		ModuleVCOA vcoa2 = ModuleFactory.createVCO();
@@ -73,7 +76,7 @@ public class Workbench extends Pane {
 		vcoa2.start();
 		oscillo.start();
 		sound.start();
-		this.getChildren().add(new ViewModuleOscillator(oscillo));
+		//this.getChildren().add(new OscilloscopeDrawing(oscillo));
 
 		Scanner sc = new Scanner(System.in);
 		Thread t = new Thread(() -> {
@@ -90,7 +93,7 @@ public class Workbench extends Pane {
 
 		t.start();
 
-		//addModule(new ViewModuleOscillator(oscillo));
+		//addModule(new OscilloscopeDrawing(oscillo));
 	}
 
 	private void addModule(ViewModule module) {

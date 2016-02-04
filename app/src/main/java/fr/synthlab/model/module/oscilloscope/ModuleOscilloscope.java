@@ -261,7 +261,7 @@ public class ModuleOscilloscope implements Module {
             add(multipleWaveDisplay, BorderLayout.CENTER);
 
             setMinimumSize(new Dimension(400, 200));
-            setPreferredSize(new Dimension(600, 250));
+            setPreferredSize(new Dimension(400, 250));
             setMaximumSize(new Dimension(1200, 300));
         }
 

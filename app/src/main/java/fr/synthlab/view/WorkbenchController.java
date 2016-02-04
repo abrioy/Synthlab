@@ -42,11 +42,11 @@ public class WorkbenchController implements Initializable {
 		OutputPort squarePort = (OutputPort) vcoa.getPort("square");
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
 		squarePort.connect(inOsc);
-
+		
 		/*oscillo.connect((OutputPort) o3);
 
 		b.start();
-		workbench.getChildren().add(new ViewModuleOscillator(oscillo));
+		workbench.getChildren().add(new OscilloscopeDrawing(oscillo));
 
 		final Port finalO = o1;
 		Thread test = new Thread(() -> {
