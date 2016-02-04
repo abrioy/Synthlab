@@ -106,7 +106,6 @@ public class Workbench extends Pane {
             connect(plug, lastClickedPlug);
             lastClickedPlug = null;
         }
-        logger.info("PLUG CLICKED");
     }
 
 	public void removeModule(ViewModule module) {
@@ -296,8 +295,6 @@ public class Workbench extends Pane {
     private void connect(Plug in, Plug out){
         Port n1 = in.getPort();
         Port n2 = out.getPort();
-		logger.info(n1.toString());
-		logger.info(n2.toString());
         n1.connect(n2);
     }
 }
