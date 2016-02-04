@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
-
-<ScrollPane stylesheets="/gui/fxml/style/Toolbox.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.synthlab.view.controller.ToolboxController">
-   <content>
-       <Accordion fx:id="toolbox">
-           <panes>
-               <TitledPane id="Type" fx:id="input" animated="false" text="Input">
-                   <content>
-                       <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                   </content>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.*?>
+<AnchorPane stylesheets="/gui/fxml/style/Toolbox.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.synthlab.view.controller.ToolboxController">
+   <children>
+          <Accordion fx:id="toolbox" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+              <panes>
+                  <TitledPane fx:id="input" animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Input">
+                      <content>
+                          <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      </content>
+                  </TitledPane>
+                  <TitledPane fx:id="output" animated="false" text="Output">
+                      <content>
+                          <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      </content>
+                  </TitledPane>
+               <TitledPane fx:id="filter" animated="false" text="Filter">
+                 <content>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                 </content>
                </TitledPane>
-               <TitledPane fx:id="output" animated="false" text="Output">
-                   <content>
-                       <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                   </content>
-               </TitledPane>
-            <TitledPane fx:id="filter" animated="false" text="Filter">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </TitledPane>
-            </panes>
-        </Accordion>
-    </content>
-</ScrollPane>
+               </panes>
+           </Accordion>
+   </children>
+</AnchorPane>

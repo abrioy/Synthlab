@@ -15,28 +15,33 @@ import javafx.scene.input.TransferMode;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 public class ToolboxController implements Initializable {
     private static final Logger logger = Logger.getLogger(ToolboxController.class.getName());
 
-    @FXML
-    private Accordion toolbox;
+
+    @FXML private TitledPane input;
+    @FXML private TitledPane output;
+
+    //TODO try a treeView ?
+    @FXML private Accordion toolbox;
+
+
+	private Consumer<String> onDragDone = null;
+	public void setOnDragDone(Consumer<String> onDragDone) {
+		this.onDragDone = onDragDone;
+	}
 
     @FXML
-    private TitledPane input;
-
-    @FXML
-    private TitledPane output;
-
-    //TODO Sprint 2
-    //@FXML
-    //private TitledPane filter;
+    private TitledPane filter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO found the bug on the drag and drop
+        toolbox.setExpandedPane(input);
+
         ListView<String> list1 = new ListView<>();
         ObservableList<String> items = FXCollections.observableArrayList(ModuleEnum.VCOA.toString());
         list1.setItems(items);
@@ -52,9 +57,15 @@ public class ToolboxController implements Initializable {
 
         output.setContent(list2);
         makeListDraggable(list2);
+
+        //TODO sprint 2
+        ListView<String> list3 = new ListView<>();
+
+        filter.setContent(list3);
     }
 
     private void makeListDraggable(ListView<String> list){
+
         list.setCellFactory(lv -> {
             ListCell<String> cell = new ListCell<String>() {
                 @Override
@@ -73,7 +84,11 @@ public class ToolboxController implements Initializable {
                 }
             });
 
-            cell.setOnDragDone(event -> logger.log(Level.INFO, "done"));
+            cell.setOnDragDone(event -> {
+				if(onDragDone != null) {
+					onDragDone.accept(cell.getItem());
+				}
+			});
 
             return cell;
         });
