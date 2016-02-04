@@ -43,7 +43,9 @@ public abstract class ViewModule extends StackPane {
 
 		for(Node child : this.lookupAll("Plug")){
 			if(child instanceof Plug){
-				((Plug)child).setWorkbench(workbench);
+				Plug plug = (Plug)child;
+				plug.setWorkbench(workbench);
+				plug.setGetPortCommand(() -> module.getPort(plug.nameProperty().getName()));
 			}
 		}
 	}
