@@ -1,21 +1,15 @@
 package fr.synthlab.view.controller;
 
-import fr.synthlab.model.module.Module;
-import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class MainWindowController implements Initializable {
@@ -31,11 +25,11 @@ public class MainWindowController implements Initializable {
             logger.log(Level.INFO, db.getString());
             logger.log(Level.INFO, "ENTER");
         });
-        workbench.setOnDragExited(event -> {
-            logger.log(Level.INFO, "EXIT");
-        });
         workbench.setOnDragOver(mouseEvent -> {
-            logger.log(Level.INFO, "OVER");
+            mouseEvent.acceptTransferModes(TransferMode.MOVE);
+        });
+        workbench.setOnDragDropped(event -> {
+            logger.log(Level.INFO, "DROPPED");
         });
     }
 }
