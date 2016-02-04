@@ -90,7 +90,7 @@ public class MainWindowController implements Initializable {
 		toolboxController.setOnDragDone(type -> {
 			if(!draggedNewViewModule.isVisible()){
 				// We never found a good position for the module
-				workbench.removeModule(draggedNewViewModule);
+				workbench.removeModule(draggedNewViewModule); // FIXME: Does not delete the module
 			}
 			else{
 				workbench.addModule(draggedNewViewModule);

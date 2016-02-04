@@ -30,71 +30,9 @@ public class Workbench extends Pane {
 
 		// Making the ghost a bit spookier
 		dragGhost.setOpacity(0.40d); // #SoSpooky
-		ModuleFactory.getSyn().start();
-
-		/*
-		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
-		addModule(vco);
-		ViewModule vco2 = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
-		addModule(vco2);
-		ViewModule out = ViewModuleFactory.createViewModule(ModuleEnum.OUT, this);
-		addModule(out);
-		ViewModule scop = ViewModuleFactory.createViewModule(ModuleEnum.SCOP, this);
-		addModule(scop);
-
-		ModuleVCOA vcoa = (ModuleVCOA) vco.getModule();
-		ModuleVCOA vcoa2 = (ModuleVCOA) vco2.getModule();
-		ModuleOut sound = (ModuleOut) out.getModule();
-		ModuleOscilloscope oscillo = (ModuleOscilloscope) scop.getModule();
-
-		vcoa2.setFrequency(1);
 
 		ModuleFactory.getSyn().start();
 
-		OutputPort squarePort = (OutputPort) vcoa.getPort("out");
-		InputPort inOsc = (InputPort) oscillo.getPort("in");
-		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
-		InputPort fm1 = (InputPort) vcoa.getPort("fm");
-		OutputPort trianglePort2 = (OutputPort) vcoa2.getPort("out");
-
-
-		// Connect square output to oscillo in
-		squarePort.connect(inOsc);
-
-		// Connect oscillo out to sound
-		outOsc.connect(sound.getPort("in"));
-
-		// Connect 2nd VCOA output to 1st VCOA input
-		trianglePort2.connect(fm1);
-
-		vcoa.start();
-		vcoa2.start();
-		oscillo.start();
-		sound.start();
-		//this.getChildren().add(new OscilloscopeDrawing(oscillo));
-
-		Scanner sc = new Scanner(System.in);
-		Thread t = new Thread(() -> {
-			while (true) {
-				String f = sc.next();
-				String[] res = f.split("/");
-				if (res[0].equals("1")) {
-					vcoa.setFrequency(Integer.parseInt(res[1]));
-				} else if (res[0].equals("2")) {
-					vcoa2.setFrequency(Integer.parseInt(res[1]));
-				} else if (res[0].equals("s")) {
-					vcoa.setShape(ShapeEnum.SAWTOOTH);
-				} else if (res[0].equals("c")) {
-					vcoa.setShape(ShapeEnum.SQUARE);
-				} else if (res[0].equals("t")) {
-					vcoa.setShape(ShapeEnum.TRIANGLE);
-				}
-			}
-		});
-
-		t.start();
-		((OscilloscopeDrawing) ((AnchorPane) scop.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
-		*/
 	}
 
 	public void onRightClick() {dropCable();
