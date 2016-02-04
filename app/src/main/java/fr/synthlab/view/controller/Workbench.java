@@ -113,6 +113,10 @@ public class Workbench extends Pane {
 		logger.info("RIGHT CLICK");
 	}
 
+    public void plugClicked(){
+        logger.info("PLUG CLICKED");
+    }
+
 	private void addModule(ViewModule module) {
 		this.getChildren().add(module);
 

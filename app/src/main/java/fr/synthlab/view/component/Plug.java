@@ -1,12 +1,8 @@
 package fr.synthlab.view.component;
 
 import fr.synthlab.view.controller.Workbench;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
@@ -19,7 +15,6 @@ public class Plug extends Circle {
 	private Workbench workbench;
 	public void setWorkbench(Workbench workbench) {
 		this.workbench = workbench;
-		
 	}
 
     public enum Type {
@@ -51,9 +46,6 @@ public class Plug extends Circle {
 
 	public Plug() {
 		super();
-        this.setOnMouseClicked(event -> {
-            System.out.println("tg");
-        });
         init();
 
 	}
@@ -65,6 +57,17 @@ public class Plug extends Circle {
         this.setRadius(Type.getType(type.get()).size);
         this.setStroke(Color.BLACK);
         this.setStrokeType(StrokeType.INSIDE);
+
+        this.setOnMouseClicked(event -> {
+            logger.info("CLICK");
+            //workbench.plugClicked();
+
+        });
+        this.setOnMouseMoved(event -> {
+            logger.info("MOVE IT MOVE IT");
+            //workbench.plugClicked();
+
+        });
     }
 
     public final void setType(String v) {
