@@ -32,7 +32,6 @@ public class ModuleVCOA implements Module {
      */
     private double frequency = 450;
     private double octave = 0;
-    private double tone = 0;
 
     /**
      * Filter modulator
@@ -161,21 +160,7 @@ public class ModuleVCOA implements Module {
         setFrequency(frequency);
     }
 
-    /**
-     *
-     * @return
-     */
-    public double getTone() {
-        return tone;
-    }
 
-    /**
-     *
-     * @param tone
-     */
-    public void setTone(double tone) {
-        this.tone = tone;
-    }
 
     /**
      * This method is called by the input port fm of the VCO when its state has changed
