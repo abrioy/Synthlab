@@ -1,7 +1,10 @@
 package fr.synthlab.view.module;
 
+import fr.synthlab.view.Workbench;
+import fr.synthlab.view.component.Plug;
 import fr.synthlab.model.module.Module;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
@@ -11,10 +14,14 @@ import java.util.logging.Logger;
 public abstract class ViewModule extends StackPane {
 	private static final Logger logger = Logger.getLogger(ViewModule.class.getName());
 
+	private Workbench workbench;
 	private Module module;
 
-	public ViewModule() {
+	public ViewModule(Workbench workbench) {
+	
 		super();
+
+		this.workbench = workbench;
 
 		this.getStyleClass().add("module-frame");
 		this.getStylesheets().add("/gui/fxml/style/Module.css");
@@ -32,6 +39,12 @@ public abstract class ViewModule extends StackPane {
 		} catch (IOException exception) {
 			logger.severe("Cannot load the specified FXML file: \""+fxmlPath+"\".");
 			throw new RuntimeException(exception);
+		}
+
+		for(Node child : this.lookupAll("Plug")){
+			if(child instanceof Plug){
+				((Plug)child).setWorkbench(workbench);
+			}
 		}
 	}
 

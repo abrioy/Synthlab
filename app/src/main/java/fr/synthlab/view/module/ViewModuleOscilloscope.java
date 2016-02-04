@@ -1,6 +1,7 @@
 package fr.synthlab.view.module;
 
 import fr.synthlab.model.Command;
+import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.OscilloscopeDrawing;
 import javafx.fxml.FXML;
@@ -21,8 +22,8 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 
 	private Command pickerCmd;
 
-	public ViewModuleOscilloscope() {
-		super();
+	public ViewModuleOscilloscope(Workbench workbench) {
+		super(workbench);
 		this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
 	}
 

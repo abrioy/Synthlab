@@ -1,12 +1,9 @@
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import fr.synthlab.view.Workbench?>
-<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
-<BorderPane fx:id="Parent" prefHeight="480.0" prefWidth="640.0"
+<BorderPane fx:id="Parent" prefHeight="480.0" prefWidth="800.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="fr.synthlab.view.controller.MainWindowController"
             stylesheets="/gui/fxml/style/MainWindow.css">
@@ -14,16 +11,15 @@
     <top>
         <fx:include fx:id="menubar" source="MenuBar.fxml"/>
     </top>
-    <left>
-        <fx:include fx:id="toolbox" source="Toolbox.fxml"/>
-    </left>
-
     <center>
-        <ScrollPane fx:id="workbenchScrollPane" fitToWidth="false" fitToHeight="false">
-            <StackPane>
-                <Workbench fx:id="workbench"/>
-            </StackPane>
-        </ScrollPane>
+        <SplitPane dividerPositions="0.15">
+            <fx:include fx:id="toolbox" source="Toolbox.fxml"/>
+            <ScrollPane fx:id="workbenchScrollPane" fitToWidth="false" fitToHeight="false">
+                <StackPane>
+                    <Workbench fx:id="workbench"/>
+                </StackPane>
+            </ScrollPane>
+        </SplitPane>
     </center>
 
 </BorderPane>
