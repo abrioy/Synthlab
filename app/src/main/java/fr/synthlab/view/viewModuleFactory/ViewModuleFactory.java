@@ -13,14 +13,14 @@ import fr.synthlab.view.module.ViewModuleVCO;
 public class ViewModuleFactory {
 
 
-    public static ViewModule creatViewModule(ModuleEnum m) {
+    public static ViewModule createViewModule(ModuleEnum m) {
         switch (m) {
             case VCOA:
-                return creatViewModuleVCO();
+                return createViewModuleVCO();
             case OUT:
-                return creatViewModuleOut();
+                return createViewModuleOut();
             case SCOP:
-                return creatViewModuleScop();
+                return createViewModuleOscilloscope();
         }
         return null;
     }
@@ -31,7 +31,7 @@ public class ViewModuleFactory {
     /**
      * @return a viewModuleVCO attached to its module
      */
-    private static ViewModuleVCO creatViewModuleVCO() {
+    private static ViewModuleVCO createViewModuleVCO() {
         Module vco = ModuleFactory.createModule(ModuleEnum.VCOA);
         ViewModuleVCO viewVco = new ViewModuleVCO();
         viewVco.setModule(vco);
@@ -47,7 +47,7 @@ public class ViewModuleFactory {
         return viewVco;
     }
 
-    private static ViewModule creatViewModuleOut() {
+    private static ViewModule createViewModuleOut() {
         Module out = ModuleFactory.createModule(ModuleEnum.OUT);
         ViewModuleOUT viewOut = new ViewModuleOUT();
         viewOut.setModule(out);
@@ -58,7 +58,7 @@ public class ViewModuleFactory {
         return viewOut;
     }
 
-    private static ViewModule creatViewModuleScop() {
+    private static ViewModule createViewModuleOscilloscope() {
         Module scop = ModuleFactory.createModule(ModuleEnum.SCOP);
         ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope();
         viewScop.setModule(scop);
