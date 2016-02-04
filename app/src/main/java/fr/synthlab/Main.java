@@ -1,9 +1,9 @@
 package fr.synthlab;
 
+import fr.synthlab.view.controller.MainWindowController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -36,23 +36,26 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/fxml/MainWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/MainWindow.fxml"));
+		loader.load();
+		Scene scene = new Scene(loader.getRoot());
 
-		Scene scene = new Scene(root);
-		// Mouse Listener for click event
 
 		stage.setTitle("Synthlab");
 		stage.setScene(scene);
 		stage.setOnShown(we -> logger.fine("Main window opened."));
 		stage.setOnCloseRequest(we -> {
-				stage.close();
+			stage.close();
 			logger.fine("Main window closed.");
 		});
-		stage.show();
 		stage.setOnCloseRequest(t -> {
 			Platform.exit();
 			System.exit(0);
 		});
+
+		MainWindowController controller = loader.getController();
+		controller.setStageAndSetupListeners(stage);
+		stage.show();
 	}
 
 }
