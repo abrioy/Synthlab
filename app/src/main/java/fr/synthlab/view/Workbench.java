@@ -97,8 +97,7 @@ public class Workbench extends Pane {
 		*/
 	}
 
-	public void onRightClick() {
-		logger.info("RIGHT CLICK");
+	public void onRightClick() {dropCable();
 	}
 
     public void plugClicked(Plug plug){
@@ -106,8 +105,9 @@ public class Workbench extends Pane {
             lastClickedPlug = plug;
 
         }else{
-            connect(plug, lastClickedPlug);
-            lastClickedPlug = null;
+            if(lastClickedPlug!=plug){connect(plug, lastClickedPlug);}
+            dropCable();
+
         }
     }
 
@@ -300,5 +300,14 @@ public class Workbench extends Pane {
         Port n1 = in.getPort();
         Port n2 = out.getPort();
         n1.connect(n2);
+    }
+
+    /** Drop cable based on lastClickedPlug
+     *
+     */
+    private void dropCable(){
+        lastClickedPlug=null;
+        // TODO Method to remove the cable from the view
+        logger.info("Cable dropped");
     }
 }
