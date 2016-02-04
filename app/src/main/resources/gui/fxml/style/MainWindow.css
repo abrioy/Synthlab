@@ -4,3 +4,8 @@
 
 .scroll-pane {
 }
+#workbench {
+    -fx-background-image: url("../../texture/workbenchbg.jpeg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+}
