@@ -6,6 +6,8 @@ import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModule;
+import fr.synthlab.view.module.ViewModuleOUT;
+import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.module.ViewModuleVCO;
 
 public class ViewModuleFactory {
@@ -46,11 +48,21 @@ public class ViewModuleFactory {
     }
 
     private static ViewModule creatViewModuleOut() {
-        return null;
+        Module out = ModuleFactory.createModule(ModuleEnum.OUT);
+        ViewModuleOUT viewOut = new ViewModuleOUT();
+        viewOut.setModule(out);
+
+        //Todo Creat Command
+
+
+        return viewOut;
     }
 
     private static ViewModule creatViewModuleScop() {
-        return null;
+        Module scop = ModuleFactory.createModule(ModuleEnum.SCOP);
+        ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope();
+        viewScop.setModule(scop);
+        return viewScop;
     }
 
 
