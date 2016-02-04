@@ -2,27 +2,24 @@ package fr.synthlab.model.module.oscilloscope;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.ports.UnitOutputPort;
-import com.jsyn.scope.*;
-import com.jsyn.scope.swing.AudioScopeProbeView;
-import com.jsyn.scope.swing.ScopeControlPanel;
-import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.scope.AudioScopeModel;
 import com.jsyn.scope.AudioScopeProbe;
+import com.jsyn.scope.WaveTraceModel;
+import com.jsyn.scope.swing.AudioScopeProbeView;
+import com.jsyn.scope.swing.ScopeControlPanel;
+import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-
-import javax.swing.JPanel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -78,8 +75,6 @@ public class ModuleOscilloscope implements Module {
         ports.add(out);
         scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
         scope.addProbe(pt.output);
-        out = new OutputPort("out", this, pt.output);
-        ports.add(out);
         jOscillatorComponent = new JOscillatorComponent(scope);
     }
 

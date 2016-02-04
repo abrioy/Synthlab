@@ -4,6 +4,7 @@ package fr.synthlab.view.viewModuleFactory;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
+import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
@@ -51,10 +52,8 @@ public class ViewModuleFactory {
         Module out = ModuleFactory.createModule(ModuleEnum.OUT);
         ViewModuleOUT viewOut = new ViewModuleOUT();
         viewOut.setModule(out);
-
-        //Todo Creat Command
-
-
+        viewOut.setVolume(() -> ((ModuleOut) out).setAttenuation(viewOut.getPicker().getValue()));
+        viewOut.setMute(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
         return viewOut;
     }
 

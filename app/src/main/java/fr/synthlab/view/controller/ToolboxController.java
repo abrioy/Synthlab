@@ -21,9 +21,12 @@ import java.util.logging.Logger;
 public class ToolboxController implements Initializable {
     private static final Logger logger = Logger.getLogger(ToolboxController.class.getName());
 
-    @FXML private Accordion toolbox;
+
     @FXML private TitledPane input;
     @FXML private TitledPane output;
+
+    //TODO try a treeView ?
+    @FXML private Accordion toolbox;
 
 
 	private Consumer<String> onDragDone = null;
@@ -31,13 +34,14 @@ public class ToolboxController implements Initializable {
 		this.onDragDone = onDragDone;
 	}
 
-    //TODO Sprint 2
-    //@FXML
-    //private TitledPane filter;
+    @FXML
+    private TitledPane filter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO found the bug on the drag and drop
+        toolbox.setExpandedPane(input);
+
         ListView<String> list1 = new ListView<>();
         ObservableList<String> items = FXCollections.observableArrayList(ModuleEnum.VCOA.toString());
         list1.setItems(items);
@@ -53,9 +57,15 @@ public class ToolboxController implements Initializable {
 
         output.setContent(list2);
         makeListDraggable(list2);
+
+        //TODO sprint 2
+        ListView<String> list3 = new ListView<>();
+
+        filter.setContent(list3);
     }
 
     private void makeListDraggable(ListView<String> list){
+
         list.setCellFactory(lv -> {
             ListCell<String> cell = new ListCell<String>() {
                 @Override
