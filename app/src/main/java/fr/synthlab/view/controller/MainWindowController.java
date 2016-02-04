@@ -32,6 +32,12 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+		// Setting the workspace to at least be as big as the scrollpane
+		workbenchScrollPane.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
+			workbench.setMinSize(newValue.getWidth(), newValue.getHeight());
+		});
+
+
 		// Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
             Dragboard db = event.getDragboard();
