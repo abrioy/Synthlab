@@ -11,7 +11,6 @@ import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -40,26 +39,23 @@ public class Workbench extends Pane {
 
 		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA);
 		addModule(vco);
+		ViewModule vco2 = ViewModuleFactory.createViewModule(ModuleEnum.VCOA);
+		addModule(vco2);
 		ViewModule out = ViewModuleFactory.createViewModule(ModuleEnum.OUT);
 		addModule(out);
-		ViewModule scop = ViewModuleFactory.createViewModule(ModuleEnum.OUT);
+		ViewModule scop = ViewModuleFactory.createViewModule(ModuleEnum.SCOP);
 		addModule(scop);
 
-		ModuleVCOA vcoa = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
-		ModuleVCOA vcoa2 = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
+		ModuleVCOA vcoa = (ModuleVCOA) vco.getModule();
+		ModuleVCOA vcoa2 = (ModuleVCOA) vco2.getModule();
+		ModuleOut sound = (ModuleOut) out.getModule();
+		ModuleOscilloscope oscillo = (ModuleOscilloscope) scop.getModule();
 
 		vcoa2.setFrequency(1);
-
-
-		// Add an output mixer.
-		ModuleOut sound = (ModuleOut) ModuleFactory.createModule(ModuleEnum.OUT);
-
-		ModuleOscilloscope oscillo = (ModuleOscilloscope) ModuleFactory.createModule(ModuleEnum.SCOP);
 
 		ModuleFactory.getSyn().start();
 
 		OutputPort squarePort = (OutputPort) vcoa.getPort("out");
-
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
 		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
 		InputPort fm1 = (InputPort) vcoa.getPort("fm");
@@ -101,15 +97,11 @@ public class Workbench extends Pane {
 		});
 
 		t.start();
-		if (scop instanceof ViewModuleOscilloscope){
-			((OscilloscopeDrawing) ((AnchorPane) ((ViewModuleOscilloscope) scop).getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
-		}
+		((OscilloscopeDrawing) ((AnchorPane) scop.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
 	}
 
-
-	public void removeModule(ViewModule module){
+	public void removeModule(ViewModule module) {
 		this.getChildren().remove(module);
-		// TODO: unplug module et dispose of it properly
 	}
 
 	/**

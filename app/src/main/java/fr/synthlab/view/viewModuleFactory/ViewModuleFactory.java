@@ -26,9 +26,6 @@ public class ViewModuleFactory {
         return null;
     }
 
-
-
-
     /**
      * @return a viewModuleVCO attached to its module
      */

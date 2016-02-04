@@ -12,7 +12,7 @@
         <fx:include fx:id="menubar" source="MenuBar.fxml"/>
     </top>
     <center>
-        <SplitPane dividerPositions="0.2">
+        <SplitPane dividerPositions="0.15">
             <fx:include fx:id="toolbox" source="Toolbox.fxml"/>
             <ScrollPane fx:id="workbenchScrollPane" fitToWidth="false" fitToHeight="false">
                 <StackPane>
