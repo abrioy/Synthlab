@@ -1,5 +1,6 @@
 package fr.synthlab.view.component;
 
+import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -7,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
 
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +20,12 @@ public class Plug extends Circle {
 		this.workbench = workbench;
 	}
 
-    public enum Type {
+	private Callable<Port> getPortCommand = null;
+	public void setGetPortCommand(Callable<Port> getPortCommand) {
+		this.getPortCommand = getPortCommand;
+	}
+
+	public enum Type {
         input(Color.DARKRED,22.0),
         output(Color.DARKGOLDENROD,22.0),
         other(Color.DARKBLUE,22.0);
@@ -42,6 +49,8 @@ public class Plug extends Circle {
         }
     }
 
+
+
 	private final StringProperty name = new SimpleStringProperty(this, "name", "");
 	private final StringProperty type = new SimpleStringProperty(this, "type", "other");
 
@@ -50,8 +59,6 @@ public class Plug extends Circle {
         init();
 
 	}
-
-
 
     private void init() {
         this.setFill(Type.getType(type.get()).color);
@@ -75,6 +82,17 @@ public class Plug extends Circle {
         });
     }
 
+	public Port getPort() {
+		if(getPortCommand != null){
+			try {
+				return getPortCommand.call();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
     public final void setType(String v) {
         type.set(v);
         this.setFill(Type.getType(type.get()).color);
@@ -88,4 +106,16 @@ public class Plug extends Circle {
     public final StringProperty typeProperty() {
         return type;
     }
+
+	public String getName() {
+		return name.get();
+	}
+
+	public StringProperty nameProperty() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name.set(name);
+	}
 }
