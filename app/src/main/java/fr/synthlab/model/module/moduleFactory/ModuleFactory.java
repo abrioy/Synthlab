@@ -24,6 +24,7 @@ public class ModuleFactory {
                 break;
             default : m = createOut(); //OUT
         }
+		m.start();
         return m;
     }
 
