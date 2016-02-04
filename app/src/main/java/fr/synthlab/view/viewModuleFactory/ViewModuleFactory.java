@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 public class ViewModuleFactory {
 
 
-    public static ViewModule createViewModule(ModuleEnum m,Workbench workbench) {
+    public static ViewModule createViewModule(ModuleEnum m, Workbench workbench) {
         switch (m) {
             case VCOA:
                 return createViewModuleVCO(workbench);
@@ -56,6 +56,7 @@ public class ViewModuleFactory {
         viewOut.setModule(out);
         viewOut.setVolume(() -> ((ModuleOut) out).setAttenuation(viewOut.getPicker().getValue()));
         viewOut.setMute(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
+
         return viewOut;
     }
 
@@ -63,6 +64,10 @@ public class ViewModuleFactory {
         Module scop = ModuleFactory.createModule(ModuleEnum.SCOP);
         ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope(workbench);
         viewScop.setModule(scop);
+        viewScop.setPickerCmd(() -> {
+            ((ModuleOscilloscope) scop).setScale(viewScop.getScale());
+        });
+
 		// FIXME: Code à Corentin
 		((OscilloscopeDrawing) ((AnchorPane) viewScop.getChildren().get(0)).getChildren().get(0)).setModuleOscillo((ModuleOscilloscope)scop);
         return viewScop;
