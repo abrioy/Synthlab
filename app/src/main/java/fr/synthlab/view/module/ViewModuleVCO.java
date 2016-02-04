@@ -6,7 +6,6 @@ import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,13 +35,19 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 		this.setId("pane");
 	}
 
-	private void OnMouseDragOverFreq(MouseEvent event) {
-		System.out.println(event.getX());
-	}
-
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		//freq.setOnMouseMoved(event -> OnMouseDragOverFreq(event));
+		freq.valueProperty().addListener(event -> {
+			changeFreqCommand.execute();
+		});
+
+		freqLine.valueProperty().addListener(event -> {
+			changeFreqCommand.execute();
+		});
+
+		picker.valueProperty().addListener(event -> {
+			changeShapeCommand.execute();
+		});
 	}
 
 	public void setChangeShapeCommand(Command changeShape) {

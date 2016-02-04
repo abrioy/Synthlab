@@ -35,10 +35,11 @@ public abstract class ViewModule extends StackPane {
 		}
 	}
 
+	public Module getModule() {
+		return module;
+	}
+
 	public void setModule(Module module) {
 		this.module = module;
 	}
-
-
-
 }
