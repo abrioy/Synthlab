@@ -18,6 +18,8 @@ public class MainWindowController implements Initializable {
     private static final Logger logger = Logger.getLogger(MainWindowController.class.getName());
 
     @FXML private Workbench workbench;
+	@FXML private ToolboxController toolboxController;
+
 	private ViewModule draggedNewViewModule = null;
 
     @Override
@@ -32,22 +34,23 @@ public class MainWindowController implements Initializable {
 			}
 			else {
 				// We create a new module to add to the workbench
-				if(draggedNewViewModule != null){
-					logger.warning("A new module dragged from the toolbox has not properly been added or disposed of.");
-					workbench.removeModule(draggedNewViewModule);
-					draggedNewViewModule = null;
+				if(draggedNewViewModule == null){
+					ViewModule viewModule = ViewModuleFactory.createViewModule(moduleType);
+					if(viewModule == null) {
+						logger.warning("Error while creating a ViewModule of type "+moduleType+".");
+					}
+					else{
+						draggedNewViewModule = viewModule;
+					}
 				}
-				ViewModule viewModule = ViewModuleFactory.createViewModule(moduleType);
-				if(viewModule == null) {
-					logger.warning("Error while creating a ViewModule of type "+moduleType+".");
-				}
-				else{
-					draggedNewViewModule = viewModule;
-					// We add the module to the workbench
-					workbench.addModule(viewModule);
-					viewModule.setVisible(false);
-					workbench.displayGhost(viewModule);
-				}
+
+				// We add the module to the workbench
+				workbench.addModule(draggedNewViewModule);
+
+				// We make it visible only to create a ghost
+				draggedNewViewModule.setVisible(true);
+				workbench.displayGhost(draggedNewViewModule);
+				draggedNewViewModule.setVisible(false);
 
 			}
         });
@@ -67,11 +70,21 @@ public class MainWindowController implements Initializable {
 
 		// Cleaning up if the module get out of the workbench
 		workbench.setOnDragExited(event -> {
-			workbench.removeModule(draggedNewViewModule);
-			draggedNewViewModule = null;
-
 			workbench.hideGhost();
+			workbench.removeModule(draggedNewViewModule);
+		});
 
+		toolboxController.setOnDragDone(type -> {
+			if(!draggedNewViewModule.isVisible()){
+				// We never found a good position for the module
+				workbench.removeModule(draggedNewViewModule);
+			}
+			else{
+				workbench.addModule(draggedNewViewModule);
+			}
+
+			draggedNewViewModule = null;
+			workbench.hideGhost();
 		});
 
     }

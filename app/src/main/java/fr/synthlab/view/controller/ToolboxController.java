@@ -15,20 +15,21 @@ import javafx.scene.input.TransferMode;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 public class ToolboxController implements Initializable {
     private static final Logger logger = Logger.getLogger(ToolboxController.class.getName());
 
-    @FXML
-    private Accordion toolbox;
+    @FXML private Accordion toolbox;
+    @FXML private TitledPane input;
+    @FXML private TitledPane output;
 
-    @FXML
-    private TitledPane input;
 
-    @FXML
-    private TitledPane output;
+	private Consumer<String> onDragDone = null;
+	public void setOnDragDone(Consumer<String> onDragDone) {
+		this.onDragDone = onDragDone;
+	}
 
     //TODO Sprint 2
     //@FXML
@@ -73,7 +74,11 @@ public class ToolboxController implements Initializable {
                 }
             });
 
-            cell.setOnDragDone(event -> logger.log(Level.INFO, "done"));
+            cell.setOnDragDone(event -> {
+				if(onDragDone != null) {
+					onDragDone.accept(cell.getItem());
+				}
+			});
 
             return cell;
         });
