@@ -1,5 +1,6 @@
 package fr.synthlab.view.module;
 
+import fr.synthlab.model.module.Module;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
@@ -9,6 +10,8 @@ import java.util.logging.Logger;
 
 public abstract class ViewModule extends StackPane {
 	private static final Logger logger = Logger.getLogger(ViewModule.class.getName());
+
+	private Module module;
 
 	public ViewModule() {
 		super();
@@ -31,6 +34,11 @@ public abstract class ViewModule extends StackPane {
 			throw new RuntimeException(exception);
 		}
 	}
+
+	public void setModule(Module module) {
+		this.module = module;
+	}
+
 
 
 }

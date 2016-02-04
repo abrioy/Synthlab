@@ -32,7 +32,6 @@ public class ModuleVCOA implements Module {
      */
     private double frequency = 450;
     private double octave = 0;
-    private double tone = 0;
 
     /**
      * Filter modulator
@@ -63,6 +62,8 @@ public class ModuleVCOA implements Module {
     private OutputPort outputPort;
 
     private PassThrough passThrough = new PassThrough();
+
+    private ShapeEnum shape;
 
 
     /**
@@ -161,21 +162,7 @@ public class ModuleVCOA implements Module {
         setFrequency(frequency);
     }
 
-    /**
-     *
-     * @return
-     */
-    public double getTone() {
-        return tone;
-    }
 
-    /**
-     *
-     * @param tone
-     */
-    public void setTone(double tone) {
-        this.tone = tone;
-    }
 
     /**
      * This method is called by the input port fm of the VCO when its state has changed
@@ -203,17 +190,24 @@ public class ModuleVCOA implements Module {
         return "VCOA";
     }
 
-    public void setShape(String s) {
-        switch (s) {
-            case "triangle":
+
+    public ShapeEnum getShape() {
+        return shape;
+    }
+
+    public void setShape(ShapeEnum shape) {
+        this.shape = shape;
+
+        switch (shape) {
+            case TRIANGLE:
                 passThrough.input.disconnectAll();
                 triangleOscillator.output.connect(passThrough.input);
                 break;
-            case "square":
+            case SQUARE:
                 passThrough.input.disconnectAll();
                 squareOscillator.output.connect(passThrough.input);
                 break;
-            case "sawtooth":
+            case SAWTOOTH:
                 passThrough.input.disconnectAll();
                 sawtoothOscillator.output.connect(passThrough.input);
                 break;

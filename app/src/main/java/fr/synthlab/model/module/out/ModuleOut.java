@@ -31,11 +31,6 @@ public class ModuleOut implements Module{
     private final LineOut lineOutRight;
 
     /**
-     * input port mono.
-     */
-    private final InputPort in;
-
-    /**
      * left attenuator stereo.
      */
     private final FilterAttenuator attenuatorLeft;
@@ -51,16 +46,6 @@ public class ModuleOut implements Module{
     private final Synthesizer syn;
 
     /**
-     * input stereo Left.
-     */
-    private final InputPort inLeft;
-
-    /**
-     * input stereo right.
-     */
-    private final InputPort inRight;
-
-    /**
      * audio output mono.
      */
     private final LineOut lineOut;
@@ -69,6 +54,12 @@ public class ModuleOut implements Module{
      * attenuator filter mono.
      */
     private final FilterAttenuator attenuator;
+
+    /**
+     * list of ports.
+     * contain in, inLeft, inRight.
+     */
+    private final ArrayList<Port> ports;
 
     /**
      * if audio is mute.
@@ -92,9 +83,9 @@ public class ModuleOut implements Module{
         synthesizer.add(lineOutLeft);
         synthesizer.add(lineOutRight);
         synthesizer.add(lineOut);
-        in = new InputPort("in", this, attenuator.input);
-        inLeft = new InputPort("inLeft", this, attenuatorLeft.input);
-        inRight = new InputPort("inRight", this, attenuatorRight.input);
+        InputPort in = new InputPort("in", this, attenuator.input);
+        InputPort inLeft = new InputPort("inLeft", this, attenuatorLeft.input);
+        InputPort inRight = new InputPort("inRight", this, attenuatorRight.input);
         OutputPort interOut = new OutputPort("out",this, attenuator.output);
         OutputPort interOutLeft = new OutputPort("outLeft",this, attenuatorLeft.output);
         OutputPort interOutRight = new OutputPort("outRight",this, attenuatorRight.output);
@@ -103,6 +94,11 @@ public class ModuleOut implements Module{
         new InputPort("in0", this, lineOut.input.getConnectablePart(0)).connect(interOut);
         new InputPort("in1", this, lineOut.input.getConnectablePart(1)).connect(interOut);
         syn = synthesizer;
+
+        ports = new ArrayList<>();
+        ports.add(in);
+        ports.add(inLeft);
+        ports.add(inRight);
     }
 
     /**
@@ -164,15 +160,11 @@ public class ModuleOut implements Module{
 
     /**
      * getter on ports input and output.
-     * @return only input port : mono, stero right and stereo left
+     * @return only input port : mono, stereo right and stereo left
      */
     @Override
     public Collection<Port> getPorts() {
-        ArrayList<Port> res = new ArrayList<>();
-        res.add(in);
-        res.add(inLeft);
-        res.add(inRight);
-        return res;
+        return ports;
     }
 
     /**

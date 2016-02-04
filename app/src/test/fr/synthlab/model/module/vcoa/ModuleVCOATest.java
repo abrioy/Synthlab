@@ -51,8 +51,7 @@ public class ModuleVCOATest {
     public void testGetPorts() throws Exception {
         Collection<Port> ports = moduleVCOA.getPorts();
         for (Port p : ports) {
-            assertEquals(true, p.getName().equals("fm") || p.getName().equals("square")
-                    || p.getName().equals("triangle") || p.getName().equals("sawtooth"));
+            assertEquals(true, p.getName().equals("fm") || p.getName().equals("out"));
         }
     }
 

@@ -1,5 +1,7 @@
 package fr.synthlab.view.module;
 
+import fr.synthlab.model.Command;
+import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXML;
@@ -24,6 +26,10 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 	@FXML
 	private Plug out;
 
+	// Commands
+	private Command changeShapeCommand;
+	private Command changeFreqCommand;
+
 	public ViewModuleVCO() {
 		super();
 		this.loadFXML("/gui/fxml/module/ViewModuleVCO.fxml");
@@ -37,5 +43,34 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		//freq.setOnMouseMoved(event -> OnMouseDragOverFreq(event));
+	}
+
+	public void setChangeShapeCommand(Command changeShape) {
+		this.changeShapeCommand = changeShape;
+	}
+
+
+	public void setChangeFreqCommand(Command changeFreq) {
+		this.changeFreqCommand = changeFreq;
+	}
+
+
+	public double getFreq() {
+		return freq.getValue();
+	}
+
+	public double getFreqFin() {
+		return freqLine.getValue();
+	}
+
+	public ShapeEnum getSelectedShape() {
+		switch((int)picker.getValue()) {
+			case 0:
+				return ShapeEnum.TRIANGLE;
+			case 1:
+				return ShapeEnum.SQUARE;
+			default:
+				return ShapeEnum.SAWTOOTH;
+		}
 	}
 }
