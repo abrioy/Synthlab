@@ -65,7 +65,7 @@ public class Plug extends Circle {
         this.setStroke(Color.BLACK);
         this.setStrokeType(StrokeType.INSIDE);
 
-        this.setOnMouseClicked(event -> {
+        this.setOnMouseReleased(event -> {
 			workbench.plugClicked(this);
         });
     }

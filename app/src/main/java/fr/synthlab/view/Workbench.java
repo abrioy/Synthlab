@@ -3,6 +3,7 @@ package fr.synthlab.view;
 
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.port.Port;
+import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
@@ -16,6 +17,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -97,8 +100,7 @@ public class Workbench extends Pane {
 		*/
 	}
 
-	public void onRightClick() {
-		logger.info("RIGHT CLICK");
+	public void onRightClick() {dropCable();
 	}
 
     public void plugClicked(Plug plug){
@@ -106,8 +108,17 @@ public class Workbench extends Pane {
             lastClickedPlug = plug;
 
         }else{
-            connect(plug, lastClickedPlug);
-            lastClickedPlug = null;
+            if(lastClickedPlug != plug){
+                connect(plug, lastClickedPlug);
+
+                Cable c = new Cable(this, plug, lastClickedPlug);
+                this.getChildren().add(c);
+
+                lastClickedPlug = null;
+            }
+            else{
+                dropCable();
+            }
         }
     }
 
@@ -142,10 +153,17 @@ public class Workbench extends Pane {
 			mouseDelta.y = localPoint.getY();
 
 			displayGhost(module);
+            for(Cable cable : workbench.getCables()){
+                cable.setVisible(false);
+            }
 		});
 
 		module.setOnMouseReleased(mouseEvent -> {
 			hideGhost();
+            for(Cable cable : workbench.getCables()){
+                cable.setVisible(true);
+                cable.update();
+            }
 		});
 
 		module.setOnMouseDragged(event -> {
@@ -170,7 +188,6 @@ public class Workbench extends Pane {
 		WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
 		dragGhost.setImage(snapshot);
 		dragGhost.toFront();
-		dragGhost.setMouseTransparent(true);
 
 		// Initial position of the ghost
 		Bounds moduleBounds = module.getBoundsInParent();
@@ -194,11 +211,13 @@ public class Workbench extends Pane {
 	private Bounds checkCollisions(Node node, Bounds bounds) {
 		for (Node child : this.getChildren()) {
 			if (child != dragGhost && node != child) {
-				Bounds childBounds = child.getBoundsInParent();
+				if(child instanceof ViewModule) {
+                    Bounds childBounds = child.getBoundsInParent();
 
-				if (bounds.intersects(childBounds)) {
-					return childBounds;
-				}
+                    if (bounds.intersects(childBounds)) {
+                        return childBounds;
+                    }
+                }
 			}
 		}
 		return null;
@@ -209,7 +228,7 @@ public class Workbench extends Pane {
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
-	private Point2D getBoundsCenter(Bounds bounds) {
+	public Point2D getBoundsCenter(Bounds bounds) {
 		double x, y;
 		x = bounds.getMinX() + (bounds.getWidth() / 2.0d);
 		y = bounds.getMinY() + (bounds.getHeight() / 2.0d);
@@ -301,4 +320,29 @@ public class Workbench extends Pane {
         Port n2 = out.getPort();
         n1.connect(n2);
     }
+
+    /** Drop cable based on lastClickedPlug
+     *
+     */
+    private void dropCable(){
+        lastClickedPlug=null;
+        // TODO Method to remove the cable from the view
+        logger.info("Cable dropped");
+    }
+
+
+    /**
+     * Returns the list of all currently active cables
+     * @return
+     */
+    private Collection<Cable> getCables() {
+        Collection<Cable> cables = new ArrayList<>();
+        for (Node child : this.getChildren()) {
+            if (child instanceof Cable) {
+                cables.add((Cable) child);
+            }
+        }
+        return cables;
+    }
+
 }

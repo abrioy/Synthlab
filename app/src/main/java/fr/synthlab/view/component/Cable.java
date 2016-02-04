@@ -6,46 +6,44 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+import java.util.logging.Logger;
+
 /**
  * Created by pollt on 2/2/16.
  */
 
-public class Cable {
-    Line node;
+public class Cable extends Line {
+    private static final Logger logger = Logger.getLogger(Cable.class.getName());
 
-    public void setIn(Point2D in) {
+    private Plug in;
+    private Plug out;
+
+    private Workbench workbench;
+
+    public Cable(Workbench workbench, Plug in, Plug out) {
         this.in = in;
-    }
-
-    public void setOut(Point2D out) {
         this.out = out;
-    }
+        this.workbench = workbench;
 
-    private Point2D in;
-    private Point2D out;
+        this.setFill(Color.BLACK);
+        this.setStrokeWidth(20);
 
-    public Cable(Workbench workbench, Plug pIn, Plug pOut) {
-        Bounds pInBounds = pIn.getBoundsInLocal();
-        Bounds pOutBounds = pOut.getBoundsInLocal();
-        Bounds pInPosition = workbench.sceneToLocal(pIn.localToScene(pInBounds));
-        Bounds pOutPosition = workbench.sceneToLocal(pOut.localToScene(pOutBounds));
-        in = new Point2D(pInPosition.getMinX(), pInPosition.getMinY());
-        out = new Point2D(pOutPosition.getMinY(), pOutPosition.getMinY());
-    }
-
-    public Line create() {
-        node = new Line(in.getX(), in.getY(), out.getX(), out.getY());
-        node.setFill(Color.BLACK);
-        node.setStrokeWidth(20);
-        return node;
+        update();
     }
 
     public void update(){
-        node.setStartX(in.getX());
-        node.setStartY(in.getY());
-        node.setStartX(out.getX());
-        node.setStartY(out.getY());
-    }
+        Bounds inBounds = in.getBoundsInLocal();
+        Bounds outBounds = out.getBoundsInLocal();
+        Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(in.localToScene(inBounds)));
+        Point2D outPosition = workbench.getBoundsCenter(workbench.sceneToLocal(out.localToScene(outBounds)));
 
+
+        this.setStartX(inPosition.getX());
+        this.setStartY(inPosition.getY());
+        this.setEndX(outPosition.getX());
+        this.setEndY(outPosition.getY());
+
+        this.toFront();
+    }
 
 }
