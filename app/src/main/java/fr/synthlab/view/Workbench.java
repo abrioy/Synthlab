@@ -33,7 +33,7 @@ public class Workbench extends Pane {
 	private ImageView dragGhost = new ImageView();
 
 	//
-    private Boolean dragging;
+    private Boolean dragCable;
 
 	public Workbench() {
 
@@ -41,7 +41,7 @@ public class Workbench extends Pane {
         //so spooky
 		dragGhost.setOpacity(0.40d);
 
-
+        dragCable=false;
 		ViewModule module = new ViewModuleVCO();
 		addModule(module);
 		ViewModuleOUT out = new ViewModuleOUT();
@@ -59,14 +59,23 @@ public class Workbench extends Pane {
 
             @Override
             public void handle(MouseEvent event) {
+
                 MouseButton button = event.getButton();
                 if (button == MouseButton.PRIMARY) {
-                    
+                    if (dragCable) {
+                        System.out.print("Connect cable ");
+                        dragCable= false;
+                    }
+                    else {
+                        System.out.print("Drag cable ");
+                        dragCable = true;
+                    }
                 } else if (button == MouseButton.SECONDARY) {
-
-                } else if (button == MouseButton.MIDDLE) {
-
+                    if (dragCable) System.out.println("Delete Cable");
                 }
+                System.out.println("to X:" + event.getSceneX() + " Y:"+event.getSceneY());
+
+
             }
         });
 		// Add an output mixer.
