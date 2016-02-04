@@ -7,9 +7,10 @@ import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
+import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
-import fr.synthlab.view.module.ViewModuleOscillator;
+import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
@@ -19,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.util.Scanner;
@@ -43,6 +45,8 @@ public class Workbench extends Pane {
 		addModule(module);
 		ViewModuleOUT out = new ViewModuleOUT();
 		addModule(out);
+		ViewModuleOscilloscope viewOscilloscope = new ViewModuleOscilloscope();
+		addModule(viewOscilloscope);
 
 		ModuleVCOA vcoa = ModuleFactory.createVCO();
 		ModuleVCOA vcoa2 = ModuleFactory.createVCO();
@@ -80,7 +84,7 @@ public class Workbench extends Pane {
 		vcoa2.start();
 		oscillo.start();
 		sound.start();
-		this.getChildren().add(new ViewModuleOscillator(oscillo));
+		//this.getChildren().add(new OscilloscopeDrawing(oscillo));
 
 		Scanner sc = new Scanner(System.in);
 		Thread t = new Thread(() -> {
@@ -102,8 +106,7 @@ public class Workbench extends Pane {
 		});
 
 		t.start();
-
-		//addModule(new ViewModuleOscillator(oscillo));
+		((OscilloscopeDrawing) ((AnchorPane) viewOscilloscope.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
 	}
 
 	private void addModule(ViewModule module) {
@@ -132,6 +135,10 @@ public class Workbench extends Pane {
 			WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
 			dragGhost.setImage(snapshot);
 			dragGhost.toFront();
+
+			// Initial position of the ghost
+			Bounds moduleBounds = module.getBoundsInParent();
+			dragGhost.relocate(moduleBounds.getMinX(), moduleBounds.getMinY());
 			workbench.getChildren().add(dragGhost);
 
 		});

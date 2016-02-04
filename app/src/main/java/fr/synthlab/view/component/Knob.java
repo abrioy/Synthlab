@@ -1,15 +1,12 @@
 package fr.synthlab.view.component;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.geometry.VPos;
+import javafx.beans.property.*;
+import javafx.geometry.Insets;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
-
-import java.text.MessageFormat;
 
 /**
  * Knob view.
@@ -17,26 +14,30 @@ import java.text.MessageFormat;
  * @author johan
  * @see Region
  */
-public class Knob extends Region {
+public class Knob extends Pane {
+    private boolean movable = false;
+    private Region knob;
 
     private final double minAngle = -20;
     private final double maxAngle = 200;
-    private final DoubleProperty value = new SimpleDoubleProperty(this, "value", 0);
-    private final DoubleProperty min = new SimpleDoubleProperty(this, "min", 0);
-    private final DoubleProperty max = new SimpleDoubleProperty(this, "max", 100);
-    private final DoubleProperty diameter = new SimpleDoubleProperty(this, "diameter", 200);
-    private boolean movable = false;
-    private Region knob;// = RegionBuilder.create().id("knob").build(); // NOI18N.
     private int scaleSize = 20;
     private Rotate rotate = new Rotate();
     private Line minLine = new Line();
     private Line maxLine = new Line();
-    private Text text = new Text();
 
+    private final DoubleProperty value = new SimpleDoubleProperty(this, "value", 0);
+    private final DoubleProperty min = new SimpleDoubleProperty(this, "min", 0);
+    private final DoubleProperty max = new SimpleDoubleProperty(this, "max", 100);
+    private final DoubleProperty diameter = new SimpleDoubleProperty(this, "diameter", 200);
+    private final StringProperty scaleType = new SimpleStringProperty(this, "scaleType", "linear");
+    private final StringProperty label = new SimpleStringProperty(this, "label", "");
+    private final IntegerProperty step = new SimpleIntegerProperty(this, "step", 0);
 
     public Knob() {
         super();
         knob = new Region();
+        knob.getStylesheets().add(
+                getClass().getResource("/gui/fxml/style/Knob.css").toExternalForm());
         knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
         knob.getStyleClass().add("knob");
         knob.getTransforms().add(rotate);
@@ -46,8 +47,8 @@ public class Knob extends Region {
             if (movable) {
                 double x = event.getX();
                 double y = event.getY();
-                double centerX = getWidth() / 2.0;
-                double centerY = getHeight() / 2.0;
+                double centerX = 0;
+                double centerY = 0;
                 double theta = Math.atan2((y - centerY), (x - centerX));
                 double angle = Math.toDegrees(theta);
                 if (angle > 0.0) {
@@ -59,17 +60,14 @@ public class Knob extends Region {
                     angle = angle - 360;
                 }
                 double value1 = angleToValue(angle);
-                text.setText(MessageFormat.format("{0}\n{1}", angle, value1));
                 setValue(value1);
             }
         });
         minLine.setStroke(Color.GREEN);
         maxLine.setStroke(Color.BLUE);
-        text.setTextOrigin(VPos.TOP);
         getChildren().addAll(minLine, maxLine);
         getChildren().add(knob);
-        getChildren().addAll(text);
-        setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        setPrefSize(diameter.doubleValue() / 5, diameter.doubleValue() / 5);
         valueProperty().addListener((arg0, arg1, arg2) -> {
             requestLayout();
         });
@@ -87,8 +85,8 @@ public class Knob extends Region {
     @Override
     protected void layoutChildren() {
         super.layoutChildren();
-        double centerX = getWidth() / 2.0;
-        double centerY = getHeight() / 2.0;
+        double centerX = 0;
+        double centerY = 0;
         minLine.setStartX(centerX);
         minLine.setStartY(centerY);
         minLine.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(-minAngle)));
@@ -97,8 +95,8 @@ public class Knob extends Region {
         maxLine.setStartY(centerY);
         maxLine.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(-maxAngle)));
         maxLine.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(-maxAngle)));
-        double knobX = (getWidth() - knob.getPrefWidth()) / 2.0;
-        double knobY = (getHeight() - knob.getPrefHeight()) / 2.0;
+        double knobX = 0 - getDiameter() / 2.0;
+        double knobY = 0 - getDiameter() / 2.0;
         knob.setLayoutX(knobX);
         knob.setLayoutY(knobY);
         double angle = valueToAngle(getValue());
@@ -106,6 +104,21 @@ public class Knob extends Region {
             rotate.setPivotX(knob.getWidth() / 2.0);
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
+        }
+        if (step.get()!=0) {
+            double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
+            Line line;
+            double angleLocal;
+            for (int x = 1; x < step.get()-1; x++) {
+                angleLocal = -(angleInterval*x + minAngle);
+                line = new Line();
+                line.setStroke(Color.ANTIQUEWHITE);
+                line.setStartX(centerX + (diameter.doubleValue() / 2.0) * Math.cos(Math.toRadians(angleLocal)));
+                line.setStartY(centerY + (diameter.doubleValue() / 2.0) * Math.sin(Math.toRadians(angleLocal)));
+                line.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(angleLocal)));
+                line.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(angleLocal)));
+                getChildren().add(line);
+            }
         }
     }
 
@@ -118,10 +131,16 @@ public class Knob extends Region {
     double angleToValue(double angle) {
         double maxValue = getMax();
         double minValue = getMin();
-        double value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+        double value;
+        if (scaleType.get().equals("log")){
+            //TODO make value log
+            value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+        }
+        else {
+            value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+        }
         value = Math.max(minValue, value);
         value = Math.min(maxValue, value);
-        System.out.println(value);
         return value;
     }
 
@@ -173,5 +192,46 @@ public class Knob extends Region {
 
     public final DoubleProperty diameterProperty() {
         return diameter;
+    }
+
+    public final void setScaleType(String v) {
+        if (!v.equals("log")){
+            v="linear";
+        }
+        scaleType.set(v);
+    }
+
+    public final String getScaleType() {
+        return scaleType.get();
+    }
+
+    public final StringProperty scaleTypeProperty() {
+        return scaleType;
+    }
+
+    public final void setLabel(String v) {
+        label.set(v);
+    }
+
+    public final String getLabel() {
+        if (label.get().equals("")){
+            return scaleType.toString();
+        }
+        return label.get();
+    }
+
+    public final StringProperty labelProperty() {
+        return label;
+    }
+    public final void setStep(int v) {
+        step.set(v);
+    }
+
+    public final int getStep() {
+        return step.get();
+    }
+
+    public final IntegerProperty stepProperty() {
+        return step;
     }
 }
