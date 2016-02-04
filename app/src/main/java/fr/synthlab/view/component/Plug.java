@@ -1,5 +1,6 @@
 package fr.synthlab.view.component;
 
+import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -87,5 +88,9 @@ public class Plug extends Circle {
 
     public final StringProperty typeProperty() {
         return type;
+    }
+
+    public Port getPort(){
+        return null;
     }
 }
