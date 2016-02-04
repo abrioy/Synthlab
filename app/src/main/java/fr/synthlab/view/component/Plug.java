@@ -1,7 +1,11 @@
 package fr.synthlab.view.component;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
@@ -40,12 +44,14 @@ public class Plug extends Circle {
 
 	public Plug() {
 		super();
+        this.setOnMouseClicked(event -> {
+            System.out.println("tg");
+        });
         init();
+
 	}
-    public Plug(double centerX, double centerY) {
-        super(centerX, centerY, 10.0f);
-        init();
-    }
+
+
 
     private void init() {
         this.setFill(Type.getType(type.get()).color);
