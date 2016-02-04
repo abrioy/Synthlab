@@ -1,6 +1,7 @@
 package fr.synthlab.view.module;
 
 import fr.synthlab.model.Command;
+import fr.synthlab.model.module.vcoa.ShapeEnum;
 
 import java.util.logging.Logger;
 
@@ -8,11 +9,12 @@ public class ViewModuleVCO extends ViewModule {
 	private static final Logger logger = Logger.getLogger(ViewModuleVCO.class.getName());
 
 	// Commands
-	private Command changeShape;
-	private Command changeFreq;
+	private Command changeShapeCommand;
+	private Command changeFreqCommand;
 
 	private double freq;
 	private double freqFin;
+	private ShapeEnum shape;
 
 
 
@@ -23,13 +25,13 @@ public class ViewModuleVCO extends ViewModule {
 	}
 
 
-	public void setChangeShape(Command changeShape) {
-		this.changeShape = changeShape;
+	public void setChangeShapeCommand(Command changeShape) {
+		this.changeShapeCommand = changeShape;
 	}
 
 
-	public void setChangeFreq(Command changeFreq) {
-		this.changeFreq = changeFreq;
+	public void setChangeFreqCommand(Command changeFreq) {
+		this.changeFreqCommand = changeFreq;
 	}
 
 
@@ -42,4 +44,11 @@ public class ViewModuleVCO extends ViewModule {
 		return freqFin;
 	}
 
+	public ShapeEnum getSelectedShape() {
+		return shape;
+	}
+
+	public void setShape(ShapeEnum shape) {
+		this.shape = shape;
+	}
 }

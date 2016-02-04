@@ -8,6 +8,7 @@ import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
+import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
@@ -91,11 +92,11 @@ public class Workbench extends Pane {
 				} else if (res[0].equals("2")) {
 					vcoa2.setFrequency(Integer.parseInt(res[1]));
 				} else if (res[0].equals("s")) {
-					vcoa.setShape("sawtooth");
+					vcoa.setShape(ShapeEnum.SAWTOOTH);
 				} else if (res[0].equals("c")) {
-					vcoa.setShape("square");
+					vcoa.setShape(ShapeEnum.SQUARE);
 				} else if (res[0].equals("t")) {
-					vcoa.setShape("triangle");
+					vcoa.setShape(ShapeEnum.TRIANGLE);
 				}
 			}
 		});

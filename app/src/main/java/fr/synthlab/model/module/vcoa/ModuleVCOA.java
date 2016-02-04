@@ -63,6 +63,8 @@ public class ModuleVCOA implements Module {
 
     private PassThrough passThrough = new PassThrough();
 
+    private ShapeEnum shape;
+
 
     /**
      * Constructor
@@ -188,17 +190,24 @@ public class ModuleVCOA implements Module {
         return "VCOA";
     }
 
-    public void setShape(String s) {
-        switch (s) {
-            case "triangle":
+
+    public ShapeEnum getShape() {
+        return shape;
+    }
+
+    public void setShape(ShapeEnum shape) {
+        this.shape = shape;
+
+        switch (shape) {
+            case TRIANGLE:
                 passThrough.input.disconnectAll();
                 triangleOscillator.output.connect(passThrough.input);
                 break;
-            case "square":
+            case SQUARE:
                 passThrough.input.disconnectAll();
                 squareOscillator.output.connect(passThrough.input);
                 break;
-            case "sawtooth":
+            case SAWTOOTH:
                 passThrough.input.disconnectAll();
                 sawtoothOscillator.output.connect(passThrough.input);
                 break;
