@@ -1,20 +1,10 @@
 package fr.synthlab.view;
 
 
-import fr.synthlab.model.module.ModuleEnum;
-import fr.synthlab.model.module.moduleFactory.ModuleFactory;
-import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
-import fr.synthlab.model.module.out.ModuleOut;
-import fr.synthlab.model.module.port.InputPort;
-import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
-import fr.synthlab.model.module.vcoa.ModuleVCOA;
-import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.component.Cable;
-import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -22,11 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import java.util.Scanner;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -39,9 +26,10 @@ public class Workbench extends Pane {
 	public Workbench() {
 
 		// Making the ghost a bit spookier
-        //so spooky
-		dragGhost.setOpacity(0.40d);
+		dragGhost.setOpacity(0.40d); // #SoSpooky
 
+
+		/*
 		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
 		addModule(vco);
 		ViewModule vco2 = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
@@ -103,6 +91,7 @@ public class Workbench extends Pane {
 
 		t.start();
 		((OscilloscopeDrawing) ((AnchorPane) scop.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
+		*/
 	}
 
 	public void onRightClick() {

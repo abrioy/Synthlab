@@ -15,9 +15,7 @@
         <SplitPane dividerPositions="0.15">
             <fx:include fx:id="toolbox" source="Toolbox.fxml"/>
             <ScrollPane fx:id="workbenchScrollPane" fitToWidth="false" fitToHeight="false">
-                <StackPane>
-                    <Workbench fx:id="workbench"/>
-                </StackPane>
+                <Workbench fx:id="workbench"/>
             </ScrollPane>
         </SplitPane>
     </center>
