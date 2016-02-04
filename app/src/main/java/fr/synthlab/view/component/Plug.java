@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.StrokeType;
 
 import java.util.logging.Logger;
 
@@ -39,13 +40,18 @@ public class Plug extends Circle {
 
 	public Plug() {
 		super();
-        this.setFill(Type.getType(type.get()).color);
-        this.setRadius(Type.getType(type.get()).size);
+        init();
 	}
     public Plug(double centerX, double centerY) {
-        super(centerX,centerY,10.0f);
+        super(centerX, centerY, 10.0f);
+        init();
+    }
+
+    private void init() {
         this.setFill(Type.getType(type.get()).color);
         this.setRadius(Type.getType(type.get()).size);
+        this.setStroke(Color.BLACK);
+        this.setStrokeType(StrokeType.INSIDE);
     }
 
     public final void setType(String v) {

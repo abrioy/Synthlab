@@ -1,6 +1,7 @@
 package fr.synthlab.view;
 
 
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
@@ -44,16 +45,16 @@ public class Workbench extends Pane {
 		ViewModuleOscilloscope viewOscilloscope = new ViewModuleOscilloscope();
 		addModule(viewOscilloscope);
 
-		ModuleVCOA vcoa = ModuleFactory.createVCO();
-		ModuleVCOA vcoa2 = ModuleFactory.createVCO();
+		ModuleVCOA vcoa = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
+		ModuleVCOA vcoa2 = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
 
 		vcoa2.setFrequency(1);
 
 
 		// Add an output mixer.
-		ModuleOut sound = ModuleFactory.createOut();
+		ModuleOut sound = (ModuleOut) ModuleFactory.createModule(ModuleEnum.OUT);
 
-		ModuleOscilloscope oscillo = ModuleFactory.createOscilloscope();
+		ModuleOscilloscope oscillo = (ModuleOscilloscope) ModuleFactory.createModule(ModuleEnum.SCOP);
 
 		ModuleFactory.getSyn().start();
 
