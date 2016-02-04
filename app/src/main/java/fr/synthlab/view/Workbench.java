@@ -6,7 +6,6 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -14,12 +13,10 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -188,6 +185,7 @@ public class Workbench extends Pane {
 		WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
 		dragGhost.setImage(snapshot);
 		dragGhost.toFront();
+		dragGhost.setMouseTransparent(true);
 
 		// Initial position of the ghost
 		Bounds moduleBounds = module.getBoundsInParent();
