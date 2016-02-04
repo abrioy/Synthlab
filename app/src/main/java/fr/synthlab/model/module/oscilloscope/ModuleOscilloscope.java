@@ -9,9 +9,6 @@ import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.scope.AudioScopeModel;
 import com.jsyn.scope.AudioScopeProbe;
-import com.jsyn.scope.swing.AudioScopeProbeView;
-import com.jsyn.scope.swing.ScopeControlPanel;
-import com.jsyn.scope.swing.WaveTraceView;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
@@ -63,6 +60,11 @@ public class ModuleOscilloscope implements Module {
     private PassThrough pt;
 
     /**
+     * Oscilloscope graphical (Swing) representation
+     */
+    private JOscillatorComponent jOscillatorComponent;
+
+    /**
      * Constructor
      * @param synth Synthesizer
      */
@@ -78,6 +80,7 @@ public class ModuleOscilloscope implements Module {
         scope.addProbe(pt.output);
         out = new OutputPort("out", this, pt.output);
         ports.add(out);
+        jOscillatorComponent = new JOscillatorComponent(scope);
     }
 
     /**
@@ -113,6 +116,12 @@ public class ModuleOscilloscope implements Module {
 
     }
 
+    /**
+     * Changes the scale (i.e. the zoom) of the graphical output of the module.
+     */
+    public void setScale(int scale) {
+        jOscillatorComponent.setScale(scale);
+    }
 
     @Override
     public String getName() {
@@ -124,7 +133,7 @@ public class ModuleOscilloscope implements Module {
      * @return JComponent that displays the scope
      */
     public JComponent getOscillatorJComponent() {
-        return new JOscillatorComponent(scope);
+        return jOscillatorComponent;
     }
 
     /**
