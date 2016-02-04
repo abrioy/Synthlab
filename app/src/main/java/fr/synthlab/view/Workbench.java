@@ -16,7 +16,6 @@ import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
@@ -108,12 +107,16 @@ public class Workbench extends Pane {
 	}
 
 
+	public void removeModule(ViewModule module){
+		this.getChildren().remove(module);
+		// TODO: unplug module et dispose of it properly
+	}
 
 	/**
 	 * Adds a module to the workbench at the position (0,0)
 	 * @param module
 	 */
-	private void addModule(ViewModule module) {
+	public void addModule(ViewModule module) {
 		this.getChildren().add(module);
 		makeDraggable(module);
 	}
@@ -135,34 +138,46 @@ public class Workbench extends Pane {
 			mouseDelta.x = localPoint.getX();
 			mouseDelta.y = localPoint.getY();
 
-
-			module.toFront();
-			// Creating a ghost image
-			WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
-			dragGhost.setImage(snapshot);
-			dragGhost.toFront();
-
-			// Initial position of the ghost
-			Bounds moduleBounds = module.getBoundsInParent();
-			dragGhost.relocate(moduleBounds.getMinX(), moduleBounds.getMinY());
-			workbench.getChildren().add(dragGhost);
-
+			displayGhost(module);
 		});
 
 		module.setOnMouseReleased(mouseEvent -> {
-			module.setCursor(Cursor.HAND);
-
-			workbench.getChildren().remove(dragGhost);
+			hideGhost();
 		});
 
 		module.setOnMouseDragged(event -> {
 			Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
-			moveModule(module, localPoint.getX() - mouseDelta.x, localPoint.getY() - mouseDelta.y);
+			double expectedX = localPoint.getX() - mouseDelta.x;
+			double expectedY = localPoint.getY() - mouseDelta.y;
+			// Moving the ghost to where the module should be
+			workbench.moveGhost(expectedX, expectedY);
 
+			Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
+			if (newLocation != null){
+				module.relocate(newLocation.getX(), newLocation.getY());
+			}
 		});
 
-		module.setOnMouseEntered(mouseEvent -> module.setCursor(Cursor.HAND));
+	}
+
+	public void displayGhost(ViewModule module){
+		module.toFront();
+		// Creating a ghost image
+		WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
+		dragGhost.setImage(snapshot);
+		dragGhost.toFront();
+
+		// Initial position of the ghost
+		Bounds moduleBounds = module.getBoundsInParent();
+		this.moveGhost(moduleBounds.getMinX(), moduleBounds.getMinY());
+		this.getChildren().add(dragGhost);
+	}
+	public void hideGhost(){
+		this.getChildren().remove(dragGhost);
+	}
+	public void moveGhost(double x, double y){
+		dragGhost.relocate(x, y);
 	}
 
 	/**
@@ -206,11 +221,9 @@ public class Workbench extends Pane {
 	 * @param node The module to move
 	 * @param expectedX The desired X coordinate
 	 * @param expectedY The desired Y coordinate
+	 * @return A suggested location to move the module to
 	 */
-	private void moveModule(ViewModule node, double expectedX, double expectedY) {
-		// Moving the ghost to where the module should be
-		dragGhost.relocate(expectedX, expectedY);
-
+	public Point2D computeNewModulePosition(ViewModule node, double expectedX, double expectedY) {
 		double newX = expectedX;
 		double newY = expectedY;
 
@@ -235,8 +248,7 @@ public class Workbench extends Pane {
 			if (collidingBounds == null) {
 				// The new position is not colliding with something
 				// We move the node
-				node.relocate(newX, newY);
-				return;
+				return new Point2D(newX, newY);
 			} else {
 				// Snapping to the colliding bounds
 
@@ -271,6 +283,6 @@ public class Workbench extends Pane {
 
 		}
 		// The loop didn't succeed in finding a non-colliding location, we don't move the node
-
+		return null;
 	}
 }
