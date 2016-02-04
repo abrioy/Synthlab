@@ -1,7 +1,6 @@
 package fr.synthlab.view.component;
 
 import javafx.beans.property.*;
-import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -10,7 +9,6 @@ import javafx.scene.transform.Rotate;
 
 /**
  * Knob view.
- *
  * @author johan
  * @see Region
  */
@@ -59,6 +57,21 @@ public class Knob extends Pane {
                 if (angle >= 270) {
                     angle = angle - 360;
                 }
+                double angleLocal;
+                double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
+                if (step.get()!=0){
+                    double angleLocalNext = minAngle;
+                    for (int t = 0; t < step.get()-1; t++) {
+                        angleLocal = angleLocalNext;
+                        angleLocalNext = (angleInterval*(t+1) + minAngle);
+                        if (angleLocal<angle && angle<((angleLocalNext-angleLocal)/2)+angleLocal) {
+                            rotate.setAngle(-angleLocal);
+                        }
+                        else if (((angleLocalNext-angleLocal)/2)+angleLocal<angle && angle<angleLocalNext){
+                            rotate.setAngle(-angleLocalNext);
+                        }
+                    }
+                }
                 double value1 = angleToValue(angle);
                 setValue(value1);
             }
@@ -100,15 +113,15 @@ public class Knob extends Pane {
         knob.setLayoutX(knobX);
         knob.setLayoutY(knobY);
         double angle = valueToAngle(getValue());
+        double angleLocal;
+        double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
         if (minAngle <= angle && angle <= maxAngle) {
             rotate.setPivotX(knob.getWidth() / 2.0);
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
         if (step.get()!=0) {
-            double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
             Line line;
-            double angleLocal;
             for (int x = 1; x < step.get()-1; x++) {
                 angleLocal = -(angleInterval*x + minAngle);
                 line = new Line();
@@ -132,16 +145,19 @@ public class Knob extends Pane {
         double maxValue = getMax();
         double minValue = getMin();
         double value;
-        if (scaleType.get().equals("log")){
-            //TODO make value log
-            value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+        if (step.get()==0) {
+            if (scaleType.get().equals("log")) {
+                //TODO make value log
+                value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+            } else {
+                value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+            }
+            value = Math.max(minValue, value);
+            return Math.min(maxValue, value);
         }
         else {
-            value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+            return (angle / (maxAngle-minAngle)) * minValue / maxValue;
         }
-        value = Math.max(minValue, value);
-        value = Math.min(maxValue, value);
-        return value;
     }
 
     public final double getValue() {
