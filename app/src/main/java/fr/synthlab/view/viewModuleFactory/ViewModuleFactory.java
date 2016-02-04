@@ -4,13 +4,16 @@ package fr.synthlab.view.viewModuleFactory;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
+import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
+import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
 import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.module.ViewModuleVCO;
+import javafx.scene.layout.AnchorPane;
 
 public class ViewModuleFactory {
 
@@ -60,6 +63,8 @@ public class ViewModuleFactory {
         Module scop = ModuleFactory.createModule(ModuleEnum.SCOP);
         ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope(workbench);
         viewScop.setModule(scop);
+		// FIXME: Code à Corentin
+		((OscilloscopeDrawing) ((AnchorPane) viewScop.getChildren().get(0)).getChildren().get(0)).setModuleOscillo((ModuleOscilloscope)scop);
         return viewScop;
     }
 

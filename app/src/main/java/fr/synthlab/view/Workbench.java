@@ -1,6 +1,7 @@
 package fr.synthlab.view;
 
 
+import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
@@ -26,7 +27,7 @@ public class Workbench extends Pane {
 
 		// Making the ghost a bit spookier
 		dragGhost.setOpacity(0.40d); // #SoSpooky
-
+		ModuleFactory.getSyn().start();
 
 		/*
 		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
