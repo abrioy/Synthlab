@@ -139,9 +139,11 @@ public class Knob extends Pane {
                         angleLocalNext = (angleInterval*(t+1) + minAngle);
                         if (angleLocal<angle && angle<((angleLocalNext-angleLocal)/2)+angleLocal) {
                             rotate.setAngle(-angleLocal);
+                            angle=angleLocal;
                         }
                         else if (((angleLocalNext-angleLocal)/2)+angleLocal<angle && angle<angleLocalNext){
                             rotate.setAngle(-angleLocalNext);
+                            angle=angleLocalNext;
                         }
                     }
                 }
@@ -228,19 +230,14 @@ public class Knob extends Pane {
         double maxValue = getMax();
         double minValue = getMin();
         double value;
-        if (step.get()==0) {
-            if (scaleType.get().equals("log")) {
-                //TODO make value log
-                value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
-            } else {
-                value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
-            }
-            value = Math.max(minValue, value);
-            return Math.min(maxValue, value);
+        if (scaleType.get().equals("log")) {
+            //TODO make value log
+            value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+        } else {
+            value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
         }
-        else {//if step
-            return (angle / (maxAngle-minAngle)) * minValue / maxValue;
-        }
+        value = Math.max(minValue, value);
+        return Math.min(maxValue, value);
     }
 
     /**

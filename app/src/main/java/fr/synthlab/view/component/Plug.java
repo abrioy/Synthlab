@@ -9,7 +9,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
 
 import java.util.concurrent.Callable;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Plug extends Circle {
@@ -66,19 +65,8 @@ public class Plug extends Circle {
         this.setStroke(Color.BLACK);
         this.setStrokeType(StrokeType.INSIDE);
 
-        this.setOnMouseClicked(event -> {
-            logger.info("CLICK");
-            //workbench.plugClicked(this);
-
-        });
         this.setOnMouseReleased(event -> {
-            logger.log(Level.INFO, "Released");
-            workbench.plugClicked(this);
-        });
-        this.setOnMouseMoved(event -> {
-            //logger.info("MOVE IT MOVE IT");
-            //workbench.plugClicked(this);
-
+			workbench.plugClicked(this);
         });
     }
 

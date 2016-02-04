@@ -6,6 +6,7 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
+import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -13,10 +14,12 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -97,19 +100,25 @@ public class Workbench extends Pane {
 		*/
 	}
 
-	public void onRightClick() {
-		logger.info("RIGHT CLICK");
+	public void onRightClick() {dropCable();
 	}
 
     public void plugClicked(Plug plug){
         if(lastClickedPlug == null){
             lastClickedPlug = plug;
-            
+
         }else{
-            Cable c = new Cable(this, plug, lastClickedPlug);
-            this.getChildren().add(c);
-            connect(plug, lastClickedPlug);
-            lastClickedPlug = null;
+            if(lastClickedPlug != plug){
+                connect(plug, lastClickedPlug);
+
+                Cable c = new Cable(this, plug, lastClickedPlug);
+                this.getChildren().add(c);
+
+                lastClickedPlug = null;
+            }
+            else{
+                dropCable();
+            }
         }
     }
 
@@ -312,6 +321,20 @@ public class Workbench extends Pane {
         n1.connect(n2);
     }
 
+    /** Drop cable based on lastClickedPlug
+     *
+     */
+    private void dropCable(){
+        lastClickedPlug=null;
+        // TODO Method to remove the cable from the view
+        logger.info("Cable dropped");
+    }
+
+
+    /**
+     * Returns the list of all currently active cables
+     * @return
+     */
     private Collection<Cable> getCables() {
         Collection<Cable> cables = new ArrayList<>();
         for (Node child : this.getChildren()) {
