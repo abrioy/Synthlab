@@ -109,6 +109,10 @@ public class Workbench extends Pane {
 		((OscilloscopeDrawing) ((AnchorPane) viewOscilloscope.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
 	}
 
+	public void onRightClick() {
+		logger.info("RIGHT CLICK");
+	}
+
 	private void addModule(ViewModule module) {
 		this.getChildren().add(module);
 
