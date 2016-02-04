@@ -4,6 +4,7 @@ package fr.synthlab.view.viewModuleFactory;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
+import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
@@ -49,7 +50,7 @@ public class ViewModuleFactory {
         ViewModuleOUT viewOut = new ViewModuleOUT();
         viewOut.setModule(out);
 
-        //Todo Creat Command
+
 
 
         return viewOut;
@@ -59,6 +60,10 @@ public class ViewModuleFactory {
         Module scop = ModuleFactory.createModule(ModuleEnum.SCOP);
         ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope();
         viewScop.setModule(scop);
+
+        viewScop.setPickerCmd(() -> {
+            ((ModuleOscilloscope) scop).setScale(viewScop.getScale());
+        });
         return viewScop;
     }
 
