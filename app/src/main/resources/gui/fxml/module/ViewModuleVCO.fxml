@@ -8,8 +8,8 @@
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0"
             xmlns="http://javafx.com/javafx/8" stylesheets="/gui/fxml/style/Module.css">
     <children>
-        <Knob fx:id="freq" layoutX="89.0" layoutY="252.0" diameter="84.0" min="0" max="100"/>
-        <Knob fx:id="freqLine" layoutX="172.0" layoutY="252.0" diameter="52.0" min="0" max="22000"/>
+        <Knob fx:id="freq" layoutX="89.0" layoutY="252.0" diameter="84.0" min="0" max="22000"/>
+        <Knob fx:id="freqLine" layoutX="172.0" layoutY="252.0" diameter="52.0" min="0" max="100"/>
         <Knob fx:id="picker" layoutX="128.0" layoutY="125.0" diameter="100.0" step="3" min="0" max="2"/>
         <Plug fx:id="in" layoutX="42.0" layoutY="344.0" type="input" />
         <Plug fx:id="out" layoutX="220.0" layoutY="344.0" type="output" />
