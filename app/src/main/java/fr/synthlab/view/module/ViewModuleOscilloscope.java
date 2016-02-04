@@ -1,7 +1,7 @@
 package fr.synthlab.view.module;
 
+import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.OscilloscopeDrawing;
-import fr.synthlab.view.controller.Workbench;
 import javafx.fxml.FXML;
 
 import java.util.logging.Logger;

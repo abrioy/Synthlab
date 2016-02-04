@@ -1,6 +1,6 @@
 package fr.synthlab.view.component;
 
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.paint.Color;

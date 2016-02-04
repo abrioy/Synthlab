@@ -1,6 +1,6 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.Workbench;
 
 import java.util.logging.Logger;
 

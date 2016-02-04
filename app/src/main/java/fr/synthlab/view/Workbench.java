@@ -1,17 +1,18 @@
-package fr.synthlab.view.controller;
+package fr.synthlab.view;
 
 
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
+import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.module.ViewModuleOUT;
 import fr.synthlab.view.module.ViewModuleOscilloscope;
-import fr.synthlab.view.module.ViewModuleVCO;
+import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -41,25 +42,24 @@ public class Workbench extends Pane {
 		dragGhost.setOpacity(0.40d);
 
 
-		ViewModule module = new ViewModuleVCO(this);
-		addModule(module);
-		ViewModuleOUT out = new ViewModuleOUT(this);
-		addModule(out);
-		ViewModuleOscilloscope viewOscilloscope = new ViewModuleOscilloscope(this);
-		addModule(viewOscilloscope);
 
-		ModuleVCOA vcoa = ModuleFactory.createVCO();
-		ModuleVCOA vcoa2 = ModuleFactory.createVCO();
+		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA,this);
+		addModule(vco);
+		ViewModule out = ViewModuleFactory.createViewModule(ModuleEnum.OUT,this);
+		addModule(out);
+		ViewModule scop = ViewModuleFactory.createViewModule(ModuleEnum.OUT,this);
+		addModule(scop);
+
+		ModuleVCOA vcoa = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
+		ModuleVCOA vcoa2 = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
 
 		vcoa2.setFrequency(1);
 
 
-
-
 		// Add an output mixer.
-		ModuleOut sound = ModuleFactory.createOut();
+		ModuleOut sound = (ModuleOut) ModuleFactory.createModule(ModuleEnum.OUT);
 
-		ModuleOscilloscope oscillo = ModuleFactory.createOscilloscope();
+		ModuleOscilloscope oscillo = (ModuleOscilloscope) ModuleFactory.createModule(ModuleEnum.SCOP);
 
 		ModuleFactory.getSyn().start();
 
@@ -96,17 +96,19 @@ public class Workbench extends Pane {
 				} else if (res[0].equals("2")) {
 					vcoa2.setFrequency(Integer.parseInt(res[1]));
 				} else if (res[0].equals("s")) {
-					vcoa.setShape("sawtooth");
+					vcoa.setShape(ShapeEnum.SAWTOOTH);
 				} else if (res[0].equals("c")) {
-					vcoa.setShape("square");
+					vcoa.setShape(ShapeEnum.SQUARE);
 				} else if (res[0].equals("t")) {
-					vcoa.setShape("triangle");
+					vcoa.setShape(ShapeEnum.TRIANGLE);
 				}
 			}
 		});
 
 		t.start();
-		((OscilloscopeDrawing) ((AnchorPane) viewOscilloscope.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
+		if (scop instanceof ViewModuleOscilloscope){
+			((OscilloscopeDrawing) ((AnchorPane) ((ViewModuleOscilloscope) scop).getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
+		}
 	}
 
 	public void onRightClick() {
@@ -117,13 +119,22 @@ public class Workbench extends Pane {
         logger.info("PLUG CLICKED");
     }
 
+
+
+	/**
+	 * Adds a module to the workbench at the position (0,0)
+	 * @param module
+	 */
 	private void addModule(ViewModule module) {
 		this.getChildren().add(module);
 
 		makeDraggable(module);
 	}
 
-
+	/**
+	 * Ads listeners to a module to make it draggable across the workbench
+	 * @param module
+	 */
 	private void makeDraggable(ViewModule module) {
 		final Workbench workbench = this;
 
@@ -189,7 +200,6 @@ public class Workbench extends Pane {
 
 	/**
 	 * Computes the 2D center of a Bounds object
-	 *
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
@@ -201,6 +211,15 @@ public class Workbench extends Pane {
 		return new Point2D(x, y);
 	}
 
+	/**
+	 * Try and moves a module to the expected position.
+	 * If the position is already occupied by another module or is out out bound,
+	 * a ghost will be placed at this location and the module will be move to an
+	 * adjacent free position.
+	 * @param node The module to move
+	 * @param expectedX The desired X coordinate
+	 * @param expectedY The desired Y coordinate
+	 */
 	private void moveModule(ViewModule node, double expectedX, double expectedY) {
 		// Moving the ghost to where the module should be
 		dragGhost.relocate(expectedX, expectedY);
