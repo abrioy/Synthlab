@@ -23,8 +23,8 @@
         </Label>
         <Plug fx:id="inStereoR" layoutX="98.0" layoutY="342.0" type="input"  />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="50.0" layoutX="8.0" layoutY="317.0"
-                   stroke="BLACK" strokeType="INSIDE" width="120.0"/>
+                   stroke="BLACK" strokeType="INSIDE" width="120.0" mouseTransparent="true"/>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="50.0" layoutX="8.0" layoutY="255.0"
-                   stroke="BLACK" strokeType="INSIDE" width="59.0"/>
+                   stroke="BLACK" strokeType="INSIDE" width="59.0" mouseTransparent="true"/>
     </children>
 </AnchorPane>

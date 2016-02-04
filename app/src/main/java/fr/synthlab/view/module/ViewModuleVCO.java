@@ -2,6 +2,7 @@ package fr.synthlab.view.module;
 
 import fr.synthlab.model.Command;
 import fr.synthlab.model.module.vcoa.ShapeEnum;
+import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXML;
@@ -29,8 +30,8 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 	private Command changeShapeCommand;
 	private Command changeFreqCommand;
 
-	public ViewModuleVCO() {
-		super();
+	public ViewModuleVCO(Workbench workbench) {
+		super(workbench);
 		this.loadFXML("/gui/fxml/module/ViewModuleVCO.fxml");
 		this.setId("pane");
 	}

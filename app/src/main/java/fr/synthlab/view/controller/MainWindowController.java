@@ -7,7 +7,12 @@ import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +24,8 @@ public class MainWindowController implements Initializable {
 
     @FXML private Workbench workbench;
 	@FXML private ToolboxController toolboxController;
+	@FXML private BorderPane mainPane;
+	@FXML private ScrollPane workbenchScrollPane;
 
 	private ViewModule draggedNewViewModule = null;
 
@@ -35,7 +42,7 @@ public class MainWindowController implements Initializable {
 			else {
 				// We create a new module to add to the workbench
 				if(draggedNewViewModule == null){
-					ViewModule viewModule = ViewModuleFactory.createViewModule(moduleType);
+					ViewModule viewModule = ViewModuleFactory.createViewModule(moduleType, workbench);
 					if(viewModule == null) {
 						logger.warning("Error while creating a ViewModule of type "+moduleType+".");
 					}
@@ -88,4 +95,13 @@ public class MainWindowController implements Initializable {
 		});
 
     }
+
+	public void setStageAndSetupListeners(Stage stage) {
+		stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                //Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+                workbench.onRightClick();
+            }
+        });
+	}
 }

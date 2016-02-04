@@ -10,6 +10,7 @@ import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.component.OscilloscopeDrawing;
+import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
@@ -29,21 +30,22 @@ public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
 
 	private ImageView dragGhost = new ImageView();
+    private Plug lastClickedPlug = null;
+    private Boolean dragCable = false;
 
 	public Workbench() {
 
 		// Making the ghost a bit spookier
+        //so spooky
 		dragGhost.setOpacity(0.40d);
 
-
-
-		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA);
+		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
 		addModule(vco);
-		ViewModule vco2 = ViewModuleFactory.createViewModule(ModuleEnum.VCOA);
+		ViewModule vco2 = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
 		addModule(vco2);
-		ViewModule out = ViewModuleFactory.createViewModule(ModuleEnum.OUT);
+		ViewModule out = ViewModuleFactory.createViewModule(ModuleEnum.OUT, this);
 		addModule(out);
-		ViewModule scop = ViewModuleFactory.createViewModule(ModuleEnum.SCOP);
+		ViewModule scop = ViewModuleFactory.createViewModule(ModuleEnum.SCOP, this);
 		addModule(scop);
 
 		ModuleVCOA vcoa = (ModuleVCOA) vco.getModule();
@@ -99,6 +101,19 @@ public class Workbench extends Pane {
 		t.start();
 		((OscilloscopeDrawing) ((AnchorPane) scop.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
 	}
+
+	public void onRightClick() {
+		logger.info("RIGHT CLICK");
+	}
+
+    public void plugClicked(Plug plug){
+        if(lastClickedPlug != null){
+        }else{
+            lastClickedPlug = plug;
+
+        }
+        logger.info("PLUG CLICKED");
+    }
 
 	public void removeModule(ViewModule module) {
 		this.getChildren().remove(module);

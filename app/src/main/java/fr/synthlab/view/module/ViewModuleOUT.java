@@ -1,6 +1,7 @@
 package fr.synthlab.view.module;
 
 import fr.synthlab.model.Command;
+import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,8 +26,8 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         return picker;
     }
 
-    public ViewModuleOUT() {
-        super();
+    public ViewModuleOUT(Workbench workbench) {
+        super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
         this.setId("pane");
         //todo add listener on mute

@@ -6,6 +6,7 @@ import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
+import fr.synthlab.view.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
 import fr.synthlab.view.module.ViewModuleOscilloscope;
@@ -14,24 +15,25 @@ import fr.synthlab.view.module.ViewModuleVCO;
 public class ViewModuleFactory {
 
 
-    public static ViewModule createViewModule(ModuleEnum m) {
+    public static ViewModule createViewModule(ModuleEnum m,Workbench workbench) {
         switch (m) {
             case VCOA:
-                return createViewModuleVCO();
+                return createViewModuleVCO(workbench);
             case OUT:
-                return createViewModuleOut();
+                return createViewModuleOut(workbench);
             case SCOP:
-                return createViewModuleOscilloscope();
+                return createViewModuleOscilloscope(workbench);
         }
         return null;
     }
 
     /**
      * @return a viewModuleVCO attached to its module
+     * @param workbench
      */
-    private static ViewModuleVCO createViewModuleVCO() {
+    private static ViewModuleVCO createViewModuleVCO(Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleEnum.VCOA);
-        ViewModuleVCO viewVco = new ViewModuleVCO();
+        ViewModuleVCO viewVco = new ViewModuleVCO(workbench);
         viewVco.setModule(vco);
 
         viewVco.setChangeFreqCommand(() -> {
@@ -45,18 +47,18 @@ public class ViewModuleFactory {
         return viewVco;
     }
 
-    private static ViewModule createViewModuleOut() {
+    private static ViewModule createViewModuleOut(Workbench workbench) {
         Module out = ModuleFactory.createModule(ModuleEnum.OUT);
-        ViewModuleOUT viewOut = new ViewModuleOUT();
+        ViewModuleOUT viewOut = new ViewModuleOUT(workbench);
         viewOut.setModule(out);
         viewOut.setVolume(() -> ((ModuleOut) out).setAttenuation(viewOut.getPicker().getValue()));
         viewOut.setMute(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
         return viewOut;
     }
 
-    private static ViewModule createViewModuleOscilloscope() {
+    private static ViewModule createViewModuleOscilloscope(Workbench workbench) {
         Module scop = ModuleFactory.createModule(ModuleEnum.SCOP);
-        ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope();
+        ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope(workbench);
         viewScop.setModule(scop);
         return viewScop;
     }
