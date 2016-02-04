@@ -20,8 +20,8 @@ public class ModuleOutTest {
 
     @Before
     public void setUp() throws Exception {
-        Synthesizer synth = JSyn.createSynthesizer();
-        moduleOut = new ModuleOut(synth);
+        Synthesizer synthesizer = JSyn.createSynthesizer();
+        moduleOut = new ModuleOut(synthesizer);
     }
 
     /**
@@ -70,5 +70,10 @@ public class ModuleOutTest {
     public void testSetAttenuation() throws Exception {
         moduleOut.setAttenuation(2);
         assertEquals(2,moduleOut.getAttenuation(),0.000000001);
+    }
+
+    @Test
+    public void testLenthGetPort(){
+        assertEquals(3,moduleOut.getPorts().size());
     }
 }

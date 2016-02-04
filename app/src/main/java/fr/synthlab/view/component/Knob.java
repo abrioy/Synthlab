@@ -22,7 +22,7 @@ public class Knob extends Pane {
     /**
      * draw zone.
      */
-    private Region knob;
+    private final Region knob;
 
     /**
      * angle where is the min.
@@ -42,17 +42,17 @@ public class Knob extends Pane {
     /**
      * button rotation.
      */
-    private Rotate rotate = new Rotate();
+    private final Rotate rotate = new Rotate();
 
     /**
      * scale max.
      */
-    private Line minLine = new Line();
+    private final Line minLine = new Line();
 
     /**
      * scale min.
      */
-    private Line maxLine = new Line();
+    private final Line maxLine = new Line();
 
     /**
      * current value of button position.
@@ -193,7 +193,7 @@ public class Knob extends Pane {
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
-        if (step.get()!=0) {//drax scale
+        if (step.get()!=0) {//draw scale
             Line line;
             for (int x = 1; x < step.get()-1; x++) {
                 angleLocal = -(angleInterval*x + minAngle);
@@ -213,7 +213,7 @@ public class Knob extends Pane {
      * @param value value to transform in angle
      * @return angle in degree
      */
-    double valueToAngle(double value) {
+    private double valueToAngle(double value) {
         double maxValue = getMax();
         double minValue = getMin();
         return minAngle + (maxAngle - minAngle) * (value - minValue) / (maxValue - minValue);
@@ -224,7 +224,7 @@ public class Knob extends Pane {
      * @param angle in degree
      * @return value including log, linear and step.
      */
-    double angleToValue(double angle) {
+    private double angleToValue(double angle) {
         double maxValue = getMax();
         double minValue = getMin();
         double value;
