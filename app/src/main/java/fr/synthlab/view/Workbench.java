@@ -98,8 +98,8 @@ public class Workbench extends Pane {
 	}
 
     public void plugClicked(Plug plug){
-        if(lastClickedPlug != null){
-            lastClickedPlug=plug;
+        if(lastClickedPlug == null){
+            lastClickedPlug = plug;
             
         }else{
             connect(plug, lastClickedPlug);
@@ -295,6 +295,8 @@ public class Workbench extends Pane {
     private void connect(Plug in, Plug out){
         Port n1 = in.getPort();
         Port n2 = out.getPort();
+		logger.info(n1.toString());
+		logger.info(n2.toString());
         n1.connect(n2);
     }
 }
