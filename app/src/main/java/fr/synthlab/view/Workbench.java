@@ -20,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.util.Scanner;
@@ -92,8 +93,7 @@ public class Workbench extends Pane {
 		});
 
 		t.start();
-
-		//addModule(new OscilloscopeDrawing(oscillo));
+		((OscilloscopeDrawing) ((AnchorPane) viewOscilloscope.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
 	}
 
 	private void addModule(ViewModule module) {

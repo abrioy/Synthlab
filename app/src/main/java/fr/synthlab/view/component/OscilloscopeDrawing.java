@@ -1,8 +1,8 @@
 package fr.synthlab.view.component;
 
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
-import fr.synthlab.view.module.ViewModule;
 import javafx.embed.swing.SwingNode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 import java.util.logging.Logger;
@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * Created by corentin on 01/02/16.
  */
-public class OscilloscopeDrawing extends ViewModule {
+public class OscilloscopeDrawing extends Pane {
 	private static final Logger logger = Logger.getLogger(OscilloscopeDrawing.class.getName());
 
 	ModuleOscilloscope osc;

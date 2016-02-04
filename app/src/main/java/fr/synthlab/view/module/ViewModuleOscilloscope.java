@@ -15,7 +15,7 @@ public class ViewModuleOscilloscope extends ViewModule {
 	public ViewModuleOscilloscope() {
 		super();
 		this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
-		this.setId("pane");
+		this.setId("oscillo");
 	}
 
 }
