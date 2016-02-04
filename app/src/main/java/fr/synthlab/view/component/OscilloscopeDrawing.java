@@ -20,7 +20,6 @@ public class OscilloscopeDrawing extends Pane {
 		super();
 		init();
 		setModuleOscillo(osc);
-
 	}
 
 	public OscilloscopeDrawing() {
@@ -29,6 +28,7 @@ public class OscilloscopeDrawing extends Pane {
 	}
 
 	private void init() {
+		this.osc = osc;
 		swingNode = new SwingNode();
 		StackPane pane = new StackPane();
 		pane.getChildren().add(swingNode);
