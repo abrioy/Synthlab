@@ -8,7 +8,6 @@ import javafx.scene.transform.Rotate;
 
 /**
  * Knob view.
- *
  * @author johan
  * @see Region
  */
@@ -51,11 +50,14 @@ public class Knob extends Region {
                 double angle = Math.toDegrees(theta);
                 if (angle > 0.0) {
                     angle = 180 + (180 - angle);
+                    System.out.println("echo");
                 } else {
                     angle = 180 - (180 - Math.abs(angle));
+                    System.out.println("not");
                 }
                 if (angle >= 270) {
                     angle = angle - 360;
+                    System.out.println("lol");
                 }
                 double value1 = angleToValue(angle);
                 setValue(value1);
@@ -98,15 +100,23 @@ public class Knob extends Region {
         knob.setLayoutX(knobX);
         knob.setLayoutY(knobY);
         double angle = valueToAngle(getValue());
+        double angleLocal;
+        double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
         if (minAngle <= angle && angle <= maxAngle) {
             rotate.setPivotX(knob.getWidth() / 2.0);
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
+        else if (step.get()!=0){
+            double angleLocalNext = -(angleInterval*(1) + minAngle);
+            for (int x = 1; x < step.get()-1; x++) {
+                angleLocal = angleLocalNext;
+                angleLocalNext = -(angleInterval*(x+1) + minAngle);
+
+            }
+        }
         if (step.get()!=0) {
-            double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
             Line line;
-            double angleLocal;
             for (int x = 1; x < step.get()-1; x++) {
                 angleLocal = -(angleInterval*x + minAngle);
                 line = new Line();
