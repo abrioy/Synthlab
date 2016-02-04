@@ -10,6 +10,7 @@ import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.component.OscilloscopeDrawing;
+import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
@@ -31,6 +32,7 @@ public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
 
 	private ImageView dragGhost = new ImageView();
+    private Plug lastClickedPlug = null;
 
 	//
     private Boolean dragCable = false;
@@ -109,13 +111,21 @@ public class Workbench extends Pane {
 		if (scop instanceof ViewModuleOscilloscope){
 			((OscilloscopeDrawing) ((AnchorPane) ((ViewModuleOscilloscope) scop).getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
 		}
+
+
+
 	}
 
 	public void onRightClick() {
 		logger.info("RIGHT CLICK");
 	}
 
-    public void plugClicked(){
+    public void plugClicked(Plug plug){
+        if(lastClickedPlug != null){
+        }else{
+            lastClickedPlug = plug;
+
+        }
         logger.info("PLUG CLICKED");
     }
 

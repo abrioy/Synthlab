@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Plug extends Circle {
@@ -60,12 +61,16 @@ public class Plug extends Circle {
 
         this.setOnMouseClicked(event -> {
             logger.info("CLICK");
-            //workbench.plugClicked();
+            //workbench.plugClicked(this);
 
         });
+        this.setOnMouseReleased(event -> {
+            logger.log(Level.INFO, "Released");
+            workbench.plugClicked(this);
+        });
         this.setOnMouseMoved(event -> {
-            logger.info("MOVE IT MOVE IT");
-            //workbench.plugClicked();
+            //logger.info("MOVE IT MOVE IT");
+            //workbench.plugClicked(this);
 
         });
     }
