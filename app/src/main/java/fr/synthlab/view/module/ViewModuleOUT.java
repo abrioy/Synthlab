@@ -4,13 +4,17 @@ import fr.synthlab.model.Command;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ViewModuleOUT extends ViewModule {
+public class ViewModuleOUT extends ViewModule implements Initializable{
     private static final Logger logger = Logger.getLogger(ViewModuleOUT.class.getName());
 
-    @FXML Knob picker;
+    @FXML
+    private Knob picker;
 
     private Command volume;
 
@@ -25,10 +29,7 @@ public class ViewModuleOUT extends ViewModule {
     public ViewModuleOUT(Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
-
-        picker.valueProperty().addListener((arg0, arg1, arg2) -> {
-            volume.execute();
-        });
+        this.setId("pane");
         //todo add listener on mute
     }
 
@@ -42,5 +43,12 @@ public class ViewModuleOUT extends ViewModule {
 
     public boolean isMute() {
         return mute;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        picker.valueProperty().addListener(event -> {
+            volume.execute();
+        });
     }
 }

@@ -16,7 +16,7 @@ public class FilterAttenuator extends UnitFilter {
     /**
      * attenuation
      */
-    private double attenuation = 1;
+    private double attenuation = 0;//in volt
 
     /**
      * generate new values
@@ -29,7 +29,7 @@ public class FilterAttenuator extends UnitFilter {
         double[] outputs = output.getValues();
         for (int i = start; i < limit; i++) {
             double in = inputs[i];
-            double out = attenuation * in;
+            double out = in * Math.pow(10, attenuation/20) ;
             outputs[i] = out;
         }
     }
