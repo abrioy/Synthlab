@@ -1,8 +1,5 @@
 package fr.synthlab.view.controller;
 
-
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,19 +29,28 @@ public class ToolboxController implements Initializable {
     //@FXML
     //private TitledPane filter;
 
-    private final ObjectProperty<ListCell<String>> dragSource = new SimpleObjectProperty<>();
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ListView<String> list1 = new ListView<String>();
+        //TODO found the bug on the drag and drop
+        ListView<String> list1 = new ListView<>();
         ObservableList<String> items = FXCollections.observableArrayList("VCOA");
         list1.setItems(items);
         list1.setPrefHeight(70);
 
         input.setContent(list1);
+        makeListDraggable(list1);
 
+        ListView<String> list2 = new ListView<>();
+        items = FXCollections.observableArrayList("OUT", "SCOPE");
+        list2.setItems(items);
+        list2.setPrefHeight(70);
 
-        list1.setCellFactory(lv -> {
+        output.setContent(list2);
+        makeListDraggable(list2);
+    }
+
+    private void makeListDraggable(ListView<String> list){
+        list.setCellFactory(lv -> {
             ListCell<String> cell = new ListCell<String>(){
                 @Override
                 public void updateItem(String item , boolean empty) {
@@ -59,14 +65,6 @@ public class ToolboxController implements Initializable {
                     ClipboardContent cc = new ClipboardContent();
                     cc.putString(cell.getItem());
                     db.setContent(cc);
-                    dragSource.set(cell);
-                }
-            });
-
-            cell.setOnDragOver(event -> {
-                Dragboard db = event.getDragboard();
-                if (db.hasString()) {
-                    event.acceptTransferModes(TransferMode.MOVE);
                 }
             });
 
@@ -74,14 +72,6 @@ public class ToolboxController implements Initializable {
 
             return cell ;
         });
-
-
-        ListView<String> list2 = new ListView<String>();
-        items = FXCollections.observableArrayList("OUT", "SCOPE");
-        list2.setItems(items);
-        list2.setPrefHeight(70);
-
-        output.setContent(list2);
     }
 
 }
