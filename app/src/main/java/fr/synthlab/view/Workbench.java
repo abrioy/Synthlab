@@ -1,6 +1,7 @@
 package fr.synthlab.view;
 
 
+import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
@@ -105,13 +106,21 @@ public class Workbench extends Pane {
 		((OscilloscopeDrawing) ((AnchorPane) viewOscilloscope.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
 	}
 
-	private void addModule(ViewModule module) {
-		this.getChildren().add(module);
+	public Module createAndAddModule
 
+	/**
+	 * Adds a module to the workbench at the position (0,0)
+	 * @param module
+	 */
+	private void addModule(ViewModule module, Point2D pos) {
+		this.getChildren().add(module);
 		makeDraggable(module);
 	}
 
-
+	/**
+	 * Ads listeners to a module to make it draggable across the workbench
+	 * @param module
+	 */
 	private void makeDraggable(ViewModule module) {
 		final Workbench workbench = this;
 
@@ -177,7 +186,6 @@ public class Workbench extends Pane {
 
 	/**
 	 * Computes the 2D center of a Bounds object
-	 *
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
@@ -189,6 +197,15 @@ public class Workbench extends Pane {
 		return new Point2D(x, y);
 	}
 
+	/**
+	 * Try and moves a module to the expected position.
+	 * If the position is already occupied by another module or is out out bound,
+	 * a ghost will be placed at this location and the module will be move to an
+	 * adjacent free position.
+	 * @param node The module to move
+	 * @param expectedX The desired X coordinate
+	 * @param expectedY The desired Y coordinate
+	 */
 	private void moveModule(ViewModule node, double expectedX, double expectedY) {
 		// Moving the ghost to where the module should be
 		dragGhost.relocate(expectedX, expectedY);
