@@ -11,6 +11,7 @@ import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
 import fr.synthlab.view.module.ViewModuleOscillator;
 import fr.synthlab.view.module.ViewModuleVCO;
+import javafx.event.EventHandler;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -19,6 +20,8 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.util.Scanner;
@@ -29,9 +32,13 @@ public class Workbench extends Pane {
 
 	private ImageView dragGhost = new ImageView();
 
+	//
+    private Boolean dragging;
+
 	public Workbench() {
 
 		// Making the ghost a bit spookier
+        //so spooky
 		dragGhost.setOpacity(0.40d);
 
 
@@ -46,6 +53,22 @@ public class Workbench extends Pane {
 		vcoa2.setFrequency(1);
 
 
+        // Mouse Listener for click event
+
+        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                MouseButton button = event.getButton();
+                if (button == MouseButton.PRIMARY) {
+                    
+                } else if (button == MouseButton.SECONDARY) {
+
+                } else if (button == MouseButton.MIDDLE) {
+
+                }
+            }
+        });
 		// Add an output mixer.
 		ModuleOut sound = ModuleFactory.createOut();
 
