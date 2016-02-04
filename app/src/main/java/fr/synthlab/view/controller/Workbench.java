@@ -41,11 +41,11 @@ public class Workbench extends Pane {
 		dragGhost.setOpacity(0.40d);
 
 
-		ViewModule module = new ViewModuleVCO();
+		ViewModule module = new ViewModuleVCO(this);
 		addModule(module);
-		ViewModuleOUT out = new ViewModuleOUT();
+		ViewModuleOUT out = new ViewModuleOUT(this);
 		addModule(out);
-		ViewModuleOscilloscope viewOscilloscope = new ViewModuleOscilloscope();
+		ViewModuleOscilloscope viewOscilloscope = new ViewModuleOscilloscope(this);
 		addModule(viewOscilloscope);
 
 		ModuleVCOA vcoa = ModuleFactory.createVCO();

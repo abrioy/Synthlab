@@ -1,7 +1,7 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.view.component.OscilloscopeDrawing;
+import fr.synthlab.view.controller.Workbench;
 import javafx.fxml.FXML;
 
 import java.util.logging.Logger;
@@ -12,8 +12,8 @@ public class ViewModuleOscilloscope extends ViewModule {
 	@FXML
 	OscilloscopeDrawing oscilloscopeDrawing;
 
-	public ViewModuleOscilloscope() {
-		super();
+	public ViewModuleOscilloscope(Workbench workbench) {
+		super(workbench);
 		this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
 	}
 

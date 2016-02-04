@@ -1,5 +1,6 @@
 package fr.synthlab.view.component;
 
+import fr.synthlab.view.controller.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.paint.Color;
@@ -10,6 +11,12 @@ import java.util.logging.Logger;
 
 public class Plug extends Circle {
 	private static final Logger logger = Logger.getLogger(Plug.class.getName());
+
+	private Workbench workbench;
+	public void setWorkbench(Workbench workbench) {
+		this.workbench = workbench;
+		
+	}
 
     public enum Type {
         input(Color.DARKRED,22.0),
