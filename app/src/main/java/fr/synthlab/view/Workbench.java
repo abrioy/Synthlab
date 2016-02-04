@@ -7,18 +7,17 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
+import fr.synthlab.model.module.port.Port;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
@@ -35,8 +34,6 @@ public class Workbench extends Pane {
 
 	private ImageView dragGhost = new ImageView();
     private Plug lastClickedPlug = null;
-
-	//
     private Boolean dragCable = false;
 
 	public Workbench() {
@@ -45,30 +42,25 @@ public class Workbench extends Pane {
         //so spooky
 		dragGhost.setOpacity(0.40d);
 
-
-
-		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA,this);
+		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
 		addModule(vco);
-		ViewModule out = ViewModuleFactory.createViewModule(ModuleEnum.OUT,this);
+		ViewModule vco2 = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
+		addModule(vco2);
+		ViewModule out = ViewModuleFactory.createViewModule(ModuleEnum.OUT, this);
 		addModule(out);
-		ViewModule scop = ViewModuleFactory.createViewModule(ModuleEnum.OUT,this);
+		ViewModule scop = ViewModuleFactory.createViewModule(ModuleEnum.SCOP, this);
 		addModule(scop);
 
-		ModuleVCOA vcoa = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
-		ModuleVCOA vcoa2 = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
+		ModuleVCOA vcoa = (ModuleVCOA) vco.getModule();
+		ModuleVCOA vcoa2 = (ModuleVCOA) vco2.getModule();
+		ModuleOut sound = (ModuleOut) out.getModule();
+		ModuleOscilloscope oscillo = (ModuleOscilloscope) scop.getModule();
 
 		vcoa2.setFrequency(1);
-
-
-		// Add an output mixer.
-		ModuleOut sound = (ModuleOut) ModuleFactory.createModule(ModuleEnum.OUT);
-
-		ModuleOscilloscope oscillo = (ModuleOscilloscope) ModuleFactory.createModule(ModuleEnum.SCOP);
 
 		ModuleFactory.getSyn().start();
 
 		OutputPort squarePort = (OutputPort) vcoa.getPort("out");
-
 		InputPort inOsc = (InputPort) oscillo.getPort("in");
 		OutputPort outOsc = (OutputPort) oscillo.getPort("out");
 		InputPort fm1 = (InputPort) vcoa.getPort("fm");
@@ -110,12 +102,7 @@ public class Workbench extends Pane {
 		});
 
 		t.start();
-		if (scop instanceof ViewModuleOscilloscope){
-			((OscilloscopeDrawing) ((AnchorPane) ((ViewModuleOscilloscope) scop).getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
-		}
-
-
-
+		((OscilloscopeDrawing) ((AnchorPane) scop.getChildren().get(0)).getChildren().get(0)).setModuleOscillo(oscillo);
 	}
 
 	public void onRightClick() {
@@ -124,26 +111,26 @@ public class Workbench extends Pane {
 
     public void plugClicked(Plug plug){
         if(lastClickedPlug != null){
-            logger.log(Level.INFO, "Second plug");
             Cable c = new Cable(this, lastClickedPlug, plug);
             this.getChildren().add(c.create());
+            connect(plug, lastClickedPlug);
             lastClickedPlug = null;
         }else{
-            logger.log(Level.INFO, "first plug");
-            lastClickedPlug = plug;
+            lastClickedPlug=plug;
         }
         logger.info("PLUG CLICKED");
     }
 
-
+	public void removeModule(ViewModule module) {
+		this.getChildren().remove(module);
+	}
 
 	/**
 	 * Adds a module to the workbench at the position (0,0)
 	 * @param module
 	 */
-	private void addModule(ViewModule module) {
+	public void addModule(ViewModule module) {
 		this.getChildren().add(module);
-
 		makeDraggable(module);
 	}
 
@@ -164,36 +151,46 @@ public class Workbench extends Pane {
 			mouseDelta.x = localPoint.getX();
 			mouseDelta.y = localPoint.getY();
 
-
-			module.toFront();
-			// Creating a ghost image
-			WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
-			dragGhost.setImage(snapshot);
-			dragGhost.toFront();
-
-			// Initial position of the ghost
-			Bounds moduleBounds = module.getBoundsInParent();
-			dragGhost.relocate(moduleBounds.getMinX(), moduleBounds.getMinY());
-			workbench.getChildren().add(dragGhost);
-//debit
+			displayGhost(module);
 		});
 
 		module.setOnMouseReleased(mouseEvent -> {
-			module.setCursor(Cursor.HAND);
-
-			workbench.getChildren().remove(dragGhost);
-
-            //fin
+			hideGhost();
 		});
 
 		module.setOnMouseDragged(event -> {
-			Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+            Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
-			moveModule(module, localPoint.getX() - mouseDelta.x, localPoint.getY() - mouseDelta.y);
+            double expectedX = localPoint.getX() - mouseDelta.x;
+            double expectedY = localPoint.getY() - mouseDelta.y;
+            // Moving the ghost to where the module should be
+            workbench.moveGhost(expectedX, expectedY);
 
-		});
+            Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
+            if (newLocation != null) {
+                module.relocate(newLocation.getX(), newLocation.getY());
+            }
+        });
 
-		module.setOnMouseEntered(mouseEvent -> module.setCursor(Cursor.HAND));
+	}
+
+	public void displayGhost(ViewModule module){
+		module.toFront();
+		// Creating a ghost image
+		WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
+		dragGhost.setImage(snapshot);
+		dragGhost.toFront();
+
+		// Initial position of the ghost
+		Bounds moduleBounds = module.getBoundsInParent();
+		this.moveGhost(moduleBounds.getMinX(), moduleBounds.getMinY());
+		this.getChildren().add(dragGhost);
+	}
+	public void hideGhost(){
+		this.getChildren().remove(dragGhost);
+	}
+	public void moveGhost(double x, double y){
+		dragGhost.relocate(x, y);
 	}
 
 	/**
@@ -237,11 +234,9 @@ public class Workbench extends Pane {
 	 * @param node The module to move
 	 * @param expectedX The desired X coordinate
 	 * @param expectedY The desired Y coordinate
+	 * @return A suggested location to move the module to
 	 */
-	private void moveModule(ViewModule node, double expectedX, double expectedY) {
-		// Moving the ghost to where the module should be
-		dragGhost.relocate(expectedX, expectedY);
-
+	public Point2D computeNewModulePosition(ViewModule node, double expectedX, double expectedY) {
 		double newX = expectedX;
 		double newY = expectedY;
 
@@ -266,8 +261,7 @@ public class Workbench extends Pane {
 			if (collidingBounds == null) {
 				// The new position is not colliding with something
 				// We move the node
-				node.relocate(newX, newY);
-				return;
+				return new Point2D(newX, newY);
 			} else {
 				// Snapping to the colliding bounds
 
@@ -302,6 +296,18 @@ public class Workbench extends Pane {
 
 		}
 		// The loop didn't succeed in finding a non-colliding location, we don't move the node
-
+		return null;
 	}
+
+    /** Function that call a connection between two port
+     * This function first retrieve the port of the two plug in parameter
+     *
+     * @param in the name is mandatory, we dont care if its in or out
+     * @param out the name is mandatory, we dont care if its in or out
+     */
+    private void connect(Plug in, Plug out){
+        Port n1 = in.getPort();
+        Port n2 = out.getPort();
+        n1.connect(n2);
+    }
 }
