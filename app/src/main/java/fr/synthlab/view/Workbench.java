@@ -165,7 +165,6 @@ public class Workbench extends Pane {
 				module.relocate(newLocation.getX(), newLocation.getY());
 			}
 		});
-
 	}
 
 	public void displayGhost(ViewModule module){
@@ -174,6 +173,7 @@ public class Workbench extends Pane {
 		WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
 		dragGhost.setImage(snapshot);
 		dragGhost.toFront();
+		dragGhost.setMouseTransparent(true);
 
 		// Initial position of the ghost
 		Bounds moduleBounds = module.getBoundsInParent();
