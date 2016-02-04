@@ -1,35 +1,91 @@
 package fr.synthlab.view.controller;
 
+import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.view.Workbench;
+import fr.synthlab.view.module.ViewModule;
+import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class MainWindowController implements Initializable {
     private static final Logger logger = Logger.getLogger(MainWindowController.class.getName());
 
-    @FXML private Pane workbench;
+    @FXML private Workbench workbench;
+	@FXML private ToolboxController toolboxController;
+
+	private ViewModule draggedNewViewModule = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+		// Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
             Dragboard db = event.getDragboard();
-            logger.log(Level.INFO, db.getString());
-            logger.log(Level.INFO, "ENTER");
+			ModuleEnum moduleType = ModuleEnum.valueOf(db.getString());
+			if(moduleType == null) {
+				logger.warning("Unknown incoming drag: \""+db.getString()+"\" is not a valid module.");
+			}
+			else {
+				// We create a new module to add to the workbench
+				if(draggedNewViewModule == null){
+					ViewModule viewModule = ViewModuleFactory.createViewModule(moduleType);
+					if(viewModule == null) {
+						logger.warning("Error while creating a ViewModule of type "+moduleType+".");
+					}
+					else{
+						draggedNewViewModule = viewModule;
+					}
+				}
+
+				// We add the module to the workbench
+				workbench.addModule(draggedNewViewModule);
+
+				// We make it visible only to create a ghost
+				draggedNewViewModule.setVisible(true);
+				workbench.displayGhost(draggedNewViewModule);
+				draggedNewViewModule.setVisible(false);
+
+			}
         });
-        workbench.setOnDragOver(mouseEvent -> {
-            mouseEvent.acceptTransferModes(TransferMode.MOVE);
-        });
-        workbench.setOnDragDropped(event -> {
-            logger.log(Level.INFO, "DROPPED");
-        });
+
+		workbench.setOnDragOver(event -> {
+			if (draggedNewViewModule != null) {
+				Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+				workbench.moveGhost(localPoint.getX(), localPoint.getY());
+
+				Point2D newLocation = workbench.computeNewModulePosition(draggedNewViewModule, localPoint.getX(), localPoint.getY());
+				if(newLocation != null){
+					draggedNewViewModule.setVisible(true);
+					draggedNewViewModule.relocate(newLocation.getX(), newLocation.getY());
+				}
+			}
+		});
+
+		// Cleaning up if the module get out of the workbench
+		workbench.setOnDragExited(event -> {
+			workbench.hideGhost();
+			workbench.removeModule(draggedNewViewModule);
+		});
+
+		toolboxController.setOnDragDone(type -> {
+			if(!draggedNewViewModule.isVisible()){
+				// We never found a good position for the module
+				workbench.removeModule(draggedNewViewModule);
+			}
+			else{
+				workbench.addModule(draggedNewViewModule);
+			}
+
+			draggedNewViewModule = null;
+			workbench.hideGhost();
+		});
+
     }
 }
