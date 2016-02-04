@@ -1,6 +1,8 @@
 package fr.synthlab.view.component;
 
 import javafx.beans.property.*;
+import javafx.geometry.Insets;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -11,7 +13,7 @@ import javafx.scene.transform.Rotate;
  * @author johan
  * @see Region
  */
-public class Knob extends Region {
+public class Knob extends Pane {
     private boolean movable = false;
     private Region knob;
 
@@ -67,7 +69,7 @@ public class Knob extends Region {
         maxLine.setStroke(Color.BLUE);
         getChildren().addAll(minLine, maxLine);
         getChildren().add(knob);
-        setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        setPrefSize(diameter.doubleValue() / 5, diameter.doubleValue() / 5);
         valueProperty().addListener((arg0, arg1, arg2) -> {
             requestLayout();
         });
