@@ -1,7 +1,7 @@
 package fr.synthlab;
 
 /**
- * Created by pollt on 2/4/16.
+ * Created by miow (ptdr) on 2/4/16.
  */
 public class WorkbenchController {
     public static void main(String[] args) {
