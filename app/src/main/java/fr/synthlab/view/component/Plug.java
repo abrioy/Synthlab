@@ -107,6 +107,7 @@ public class Plug extends Circle {
         return type;
     }
 
+
 	public String getName() {
 		return name.get();
 	}

@@ -7,6 +7,7 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
+import fr.synthlab.model.module.port.Port;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.component.OscilloscopeDrawing;
@@ -108,9 +109,11 @@ public class Workbench extends Pane {
 
     public void plugClicked(Plug plug){
         if(lastClickedPlug != null){
+            lastClickedPlug=plug;
+            
         }else{
-            lastClickedPlug = plug;
-
+            connect(plug, lastClickedPlug);
+            lastClickedPlug = null;
         }
         logger.info("PLUG CLICKED");
     }
@@ -153,18 +156,18 @@ public class Workbench extends Pane {
 		});
 
 		module.setOnMouseDragged(event -> {
-			Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+            Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
-			double expectedX = localPoint.getX() - mouseDelta.x;
-			double expectedY = localPoint.getY() - mouseDelta.y;
-			// Moving the ghost to where the module should be
-			workbench.moveGhost(expectedX, expectedY);
+            double expectedX = localPoint.getX() - mouseDelta.x;
+            double expectedY = localPoint.getY() - mouseDelta.y;
+            // Moving the ghost to where the module should be
+            workbench.moveGhost(expectedX, expectedY);
 
-			Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
-			if (newLocation != null){
-				module.relocate(newLocation.getX(), newLocation.getY());
-			}
-		});
+            Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
+            if (newLocation != null) {
+                module.relocate(newLocation.getX(), newLocation.getY());
+            }
+        });
 
 	}
 
@@ -292,4 +295,16 @@ public class Workbench extends Pane {
 		// The loop didn't succeed in finding a non-colliding location, we don't move the node
 		return null;
 	}
+
+    /** Function that call a connection between two port
+     * This function first retrieve the port of the two plug in parameter
+     *
+     * @param in the name is mandatory, we dont care if its in or out
+     * @param out the name is mandatory, we dont care if its in or out
+     */
+    private void connect(Plug in, Plug out){
+        Port n1 = in.getPort();
+        Port n2 = out.getPort();
+        n1.connect(n2);
+    }
 }
