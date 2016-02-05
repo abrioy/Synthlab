@@ -53,6 +53,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         picker.valueProperty().addListener(event -> {
+            System.out.println(picker.getValue());
             volume.execute();
         });
         muteButton.addEventHandler(MouseEvent.MOUSE_CLICKED,e -> {
