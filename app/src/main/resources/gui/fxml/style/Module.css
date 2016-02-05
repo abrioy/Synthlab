@@ -1,6 +1,6 @@
 
 .module-frame {
-    -fx-border-color: #333333 ;
+    -fx-border-color: #333 ;
 
 }
 
@@ -11,7 +11,14 @@
 }
 
 
-#frequencyLabel {
+.display {
+    -fx-padding: 0px 5px 0px 5px;
+    -fx-font-family: monospace;
+    -fx-font-size: 13px;
+    -fx-pref-height: 23px;
+    -fx-alignment:center-right;
+
+    -fx-border-color: #333;
     -fx-background-color: #000;
     -fx-text-fill: #A0E632;
 }

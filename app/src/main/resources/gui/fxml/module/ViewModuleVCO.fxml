@@ -21,7 +21,7 @@
                 <Font size="26.0" />
             </font>
         </Label>
-      <Label fx:id="frequencyLabel" layoutX="94.0" layoutY="312.0" prefHeight="44.0" prefWidth="75.0" text="">
+      <Label fx:id="frequencyLabel" styleClass="display" layoutX="94.0" layoutY="312.0" prefHeight="44.0" prefWidth="75.0" text="">
          <font>
             <Font size="15.0" />
          </font>
