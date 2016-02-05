@@ -25,7 +25,6 @@ public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
 
 	private ImageView dragGhost = new ImageView();
-    private Boolean dragCable = false;
     private Cable draggedCable;
 
 	public Workbench() {
@@ -52,14 +51,16 @@ public class Workbench extends Pane {
      */
     public void plugClicked(Plug plug){
         if(draggedCable == null){
+            //TODO click on cable already created
+            //TODO DROP CABLE
             draggedCable= new Cable(this,plug);
             this.getChildren().add(draggedCable);
         }else{
-            Plug fixedPlug
-            Plug oppositePlug = getConnectedPlug(plug);
-            if(draggedCable.getPlug() != plug) {
-                draggedCable.setPlug(oppositePlug);
-                connect(plug, oppositePlug );
+            Plug fixedPlug = draggedCable.getPlug();
+            if(fixedPlug != plug) {
+                draggedCable.setPlug(plug);
+                connect(plug, fixedPlug );
+                draggedCable.update();
                 draggedCable = null;
             }
             else{
@@ -108,7 +109,7 @@ public class Workbench extends Pane {
             hideGhost();
             for (Cable cable : workbench.getCables()) {
                 cable.setVisible(true);
-                cable.update();
+                if(draggedCable==null)cable.update();
             }
         });
 
