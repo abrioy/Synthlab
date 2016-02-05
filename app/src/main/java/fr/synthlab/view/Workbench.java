@@ -40,6 +40,10 @@ public class Workbench extends Pane {
 
     public void plugClicked(Plug plug){
         if(lastClickedPlug == null){
+            Plug opposite = getConnectedPlug(plug);
+            if (opposite == null){
+                logger.info("YOW " +plug.getName());
+            }
 			lastClickedPlug = plug;
         }else{
             if(lastClickedPlug != plug){
