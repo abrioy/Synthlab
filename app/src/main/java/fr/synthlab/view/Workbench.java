@@ -6,6 +6,7 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
+import javafx.event.EventHandler;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -13,11 +14,11 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -26,12 +27,18 @@ public class Workbench extends Pane {
 	private ImageView dragGhost = new ImageView();
     private Plug lastClickedPlug = null;
     private Boolean dragCable = false;
+    private Cable draggedCable;
 
 	public Workbench() {
 
 		// Making the ghost a bit spookier
 		dragGhost.setOpacity(0.40d); // #SoSpooky
 
+        this.setOnMouseMoved(event -> {
+            if(draggedCable!=null){
+                draggedCable.update();
+            }
+        });
 		ModuleFactory.startSyn();
 
 	}
@@ -42,8 +49,9 @@ public class Workbench extends Pane {
     public void plugClicked(Plug plug){
         if(lastClickedPlug == null){
             Plug opposite = getConnectedPlug(plug);
-            if (opposite == null){
-                logger.info("YOW " +plug.getName());
+            if (opposite != null){
+                // TODO disconnect plug and opposite$
+                // make it draggable
             }
 			lastClickedPlug = plug;
         }else{
@@ -67,7 +75,7 @@ public class Workbench extends Pane {
 	/**
 	 * Adds a module to the workbench at the position (0,0)
 	 * @param module
-	 */
+     */
 	public void addModule(ViewModule module) {
 		this.getChildren().add(module);
 		makeDraggable(module);
@@ -91,12 +99,12 @@ public class Workbench extends Pane {
 			mouseDelta.y = localPoint.getY();
 
 			displayGhost(module);
-            for(Cable cable : workbench.getCables()){
+            for(Cable cable : workbench.getCables()) {
                 cable.setVisible(false);
             }
-		});
+        });
 
-		module.setOnMouseReleased(mouseEvent -> {
+        module.setOnMouseReleased(mouseEvent -> {
             hideGhost();
             for (Cable cable : workbench.getCables()) {
                 cable.setVisible(true);
@@ -104,7 +112,7 @@ public class Workbench extends Pane {
             }
         });
 
-		module.setOnMouseDragged(event -> {
+        module.setOnMouseDragged(event -> {
             Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
             double expectedX = localPoint.getX() - mouseDelta.x;
@@ -128,10 +136,10 @@ public class Workbench extends Pane {
 		dragGhost.toFront();
 		dragGhost.setMouseTransparent(true);
 
-		// Initial position of the ghost
-		Bounds moduleBounds = module.getBoundsInParent();
+        // Initial position of the ghost
+        Bounds moduleBounds = module.getBoundsInParent();
 		this.moveGhost(moduleBounds.getMinX(), moduleBounds.getMinY());
-		this.getChildren().add(dragGhost);
+        this.getChildren().add(dragGhost);
 	}
 	public void hideGhost(){
 		this.getChildren().remove(dragGhost);
@@ -288,6 +296,7 @@ public class Workbench extends Pane {
         Plug opposite = null;
         for(Cable c : getCables()){
             opposite = c.getOppositePlug(plug);
+            if(opposite!=null)return opposite;
         }
 		return opposite;
 	}
