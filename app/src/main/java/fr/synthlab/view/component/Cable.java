@@ -46,4 +46,14 @@ public class Cable extends Line {
         this.toFront();
     }
 
+    public Plug getOppositePlug(Plug plug){
+        if(in.equals(plug)){
+            return out;
+        } else if (out.equals(plug)){
+            return in;
+        } else {
+            return null;
+        }
+    }
+
 }

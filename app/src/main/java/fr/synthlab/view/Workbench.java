@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -96,12 +97,12 @@ public class Workbench extends Pane {
 		});
 
 		module.setOnMouseReleased(mouseEvent -> {
-			hideGhost();
-            for(Cable cable : workbench.getCables()){
+            hideGhost();
+            for (Cable cable : workbench.getCables()) {
                 cable.setVisible(true);
                 cable.update();
             }
-		});
+        });
 
 		module.setOnMouseDragged(event -> {
             Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
@@ -284,7 +285,11 @@ public class Workbench extends Pane {
     }
 
 	private Plug getConnectedPlug(Plug plug){
-		return null;
+        Plug opposite = null;
+        for(Cable c : getCables()){
+            opposite = c.getOppositePlug(plug);
+        }
+		return opposite;
 	}
 
 }
