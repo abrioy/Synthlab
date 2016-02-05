@@ -51,17 +51,14 @@ public class Workbench extends Pane {
      * @param plug
      */
     public void plugClicked(Plug plug){
-        Plug oppositePlug = getConnectedPlug(plug);
         if(draggedCable == null){
-            if (oppositePlug != null){
-                // TODO disconnect plug and opposite$
-                // make it draggable
-            }
             draggedCable= new Cable(this,plug);
             this.getChildren().add(draggedCable);
         }else{
-            if(oppositePlug != plug) {
-                //draggedCable.setPlug(oppositePlug);
+            Plug fixedPlug
+            Plug oppositePlug = getConnectedPlug(plug);
+            if(draggedCable.getPlug() != plug) {
+                draggedCable.setPlug(oppositePlug);
                 connect(plug, oppositePlug );
                 draggedCable = null;
             }
