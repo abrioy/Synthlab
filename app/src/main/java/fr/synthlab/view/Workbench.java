@@ -25,7 +25,6 @@ public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
 
 	private ImageView dragGhost = new ImageView();
-    private Plug lastClickedPlug = null;
     private Boolean dragCable = false;
     private Cable draggedCable;
 
@@ -36,7 +35,8 @@ public class Workbench extends Pane {
 
         this.setOnMouseMoved(event -> {
             if(draggedCable!=null){
-                draggedCable.update();
+                Point2D localPoint = this.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+                draggedCable.update(localPoint);
             }
         });
 		ModuleFactory.startSyn();
@@ -46,21 +46,24 @@ public class Workbench extends Pane {
 	public void onRightClick() {dropCable();
 	}
 
+    /**
+     * Handling event when plug is clicked
+     * @param plug
+     */
     public void plugClicked(Plug plug){
-        if(lastClickedPlug == null){
-            Plug opposite = getConnectedPlug(plug);
-            if (opposite != null){
+        Plug oppositePlug = getConnectedPlug(plug);
+        if(draggedCable == null){
+            if (oppositePlug != null){
                 // TODO disconnect plug and opposite$
                 // make it draggable
             }
-			lastClickedPlug = plug;
+            draggedCable= new Cable(this,plug);
+            this.getChildren().add(draggedCable);
         }else{
-            if(lastClickedPlug != plug){
-                connect(plug, lastClickedPlug);
-
-                Cable c = new Cable(this, plug, lastClickedPlug);
-                this.getChildren().add(c);
-                lastClickedPlug = null;
+            if(oppositePlug != plug) {
+                //draggedCable.setPlug(oppositePlug);
+                connect(plug, oppositePlug );
+                draggedCable = null;
             }
             else{
                 dropCable();
@@ -272,7 +275,7 @@ public class Workbench extends Pane {
      *
      */
     private void dropCable(){
-        lastClickedPlug=null;
+        draggedCable=null;
         // TODO Method to remove the cable from the view
         logger.info("Cable dropped");
     }
