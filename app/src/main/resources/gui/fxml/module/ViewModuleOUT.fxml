@@ -14,16 +14,16 @@
     <children>
         <Circle fx:id="woofer" fill="#4d443ed4" layoutX="128.0" layoutY="141.0" radius="83.0" stroke="BLACK"
                 strokeType="INSIDE"/>
-        <Knob fx:id="picker" layoutX="186.0" layoutY="294.0" diameter="96.0" min="-12" max="12"/>
-        <Plug fx:id="inStereoL" name="inLeft" layoutX="36.0" layoutY="342.0" type="input" />
-        <Plug fx:id="inMono" name="in" layoutX="36.0" layoutY="280.0" type="input"  />
+        <Knob fx:id="picker" layoutX="186.0" layoutY="294.0" diameter="96.0" />
+        <Plug fx:id="inStereoL" name="inLeft" layoutX="14.0" layoutY="320.0" type="input" />
+        <Plug fx:id="inMono" name="in" layoutX="14.0" layoutY="258.0" type="input"  />
         <Label layoutX="14.0" prefHeight="44.0" prefWidth="75.0" text="OUT">
             <font>
                 <Font size="26.0"/>
             </font>
         </Label>
         <Button fx:id="muteButton" layoutX="120.0" layoutY="10"> Mute</Button>
-        <Plug fx:id="inStereoR" name="inRight" layoutX="98.0" layoutY="342.0" type="input"  />
+        <Plug fx:id="inStereoR" name="inRight" layoutX="76.0" layoutY="320.0" type="input"  />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="50.0" layoutX="8.0" layoutY="317.0"
                    stroke="BLACK" strokeType="INSIDE" width="120.0" mouseTransparent="true"/>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="50.0" layoutX="8.0" layoutY="255.0"

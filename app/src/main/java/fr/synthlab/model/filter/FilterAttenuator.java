@@ -32,7 +32,6 @@ public class FilterAttenuator extends UnitFilter {
             double out = in * Math.pow(2, attenuation/6) ;
             outputs[i] = out;
         }
-        System.out.println(outputs[1]+" "+inputs[1]+" "+Math.pow(2, attenuation/6));
     }
 
     /**
