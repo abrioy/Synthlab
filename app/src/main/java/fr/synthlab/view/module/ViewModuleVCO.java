@@ -46,7 +46,7 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 			changeFreqCommand.execute();
 		});
 
-		picker.onMouseClickedProperty().addListener(event -> {
+		picker.valueProperty().addListener(event -> {
 			changeShapeCommand.execute();
 		});
 	}
