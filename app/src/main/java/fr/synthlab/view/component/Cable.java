@@ -20,6 +20,15 @@ public class Cable extends Line {
 
     private Workbench workbench;
 
+    public Cable(Workbench workbench, Plug in) {
+        this.in = in;
+        this.workbench = workbench;
+
+        this.setFill(Color.BLACK);
+        this.setStrokeWidth(20);
+        this.setMouseTransparent(true);
+    }
+
     public Cable(Workbench workbench, Plug in, Plug out) {
         this.in = in;
         this.out = out;
@@ -27,6 +36,7 @@ public class Cable extends Line {
 
         this.setFill(Color.BLACK);
         this.setStrokeWidth(20);
+        this.setMouseTransparent(true);
 
         update();
     }
@@ -42,6 +52,18 @@ public class Cable extends Line {
         this.setStartY(inPosition.getY());
         this.setEndX(outPosition.getX());
         this.setEndY(outPosition.getY());
+
+        this.toFront();
+    }
+
+    public void update(Point2D mouse){
+        Bounds inBounds = in.getBoundsInLocal();
+        Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(in.localToScene(inBounds)));
+
+        this.setStartX(inPosition.getX());
+        this.setStartY(inPosition.getY());
+        this.setEndX(mouse.getX());
+        this.setEndY(mouse.getY());
 
         this.toFront();
     }
