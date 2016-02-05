@@ -1,5 +1,6 @@
 #workbench {
+    -fx-background-image: url("../../texture/workbenchbg.jpg");
     -fx-background-repeat: repeat;
     -fx-background-size: 200 200;
-    -fx-background-position: center center;
+    -fx-background-attachment: fixed;
 }
