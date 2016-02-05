@@ -40,15 +40,13 @@ public class Workbench extends Pane {
 
     public void plugClicked(Plug plug){
         if(lastClickedPlug == null){
-            lastClickedPlug = plug;
-
+			lastClickedPlug = plug;
         }else{
             if(lastClickedPlug != plug){
                 connect(plug, lastClickedPlug);
 
                 Cable c = new Cable(this, plug, lastClickedPlug);
                 this.getChildren().add(c);
-
                 lastClickedPlug = null;
             }
             else{
@@ -280,5 +278,9 @@ public class Workbench extends Pane {
         }
         return cables;
     }
+
+	private Plug getConnectedPlug(Plug plug){
+		return null;
+	}
 
 }
