@@ -63,12 +63,6 @@ public class Cable extends Line {
         Bounds inBounds = in.getBoundsInLocal();
         Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(in.localToScene(inBounds)));
 
-        Circle c1 = new Circle();
-        c1.setCenterX(100.0f);
-        c1.setCenterY(100.0f);
-        c1.setRadius(100);
-        workbench.getChildren().add(c1);
-
         this.setStartX(inPosition.getX());
         this.setStartY(inPosition.getY());
         this.setEndX(mouse.getX());
