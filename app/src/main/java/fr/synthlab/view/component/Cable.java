@@ -91,6 +91,14 @@ public class Cable extends Line {
         }
     }
 
+    public Plug getPlug(){
+        if(in == null){
+            return out;
+        } else {
+            return in;
+        }
+    }
+
     private void addCircle(double x, double y){
         Circle c = new Circle();
         c.setCenterX(x);
