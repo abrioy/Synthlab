@@ -9,3 +9,9 @@
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
 }
+
+
+#frequencyLabel {
+    -fx-background-color: #000;
+    -fx-text-fill: #A0E632;
+}

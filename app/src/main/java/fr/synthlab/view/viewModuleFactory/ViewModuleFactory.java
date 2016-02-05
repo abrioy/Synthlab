@@ -48,7 +48,7 @@ public class ViewModuleFactory {
         viewVco.setModule(vco);
 
         viewVco.setChangeFreqCommand(() -> {
-            ((ModuleVCOA) vco).setFrequency(viewVco.getFreq() + viewVco.getFreqFin());
+            ((ModuleVCOA) vco).setFrequency(viewVco.getFreq());
         });
 
         viewVco.setChangeShapeCommand(() -> {

@@ -7,6 +7,7 @@ import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +26,8 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 	private Plug in;
 	@FXML
 	private Plug out;
+	@FXML
+	private Label frequencyLabel;
 
 	// Commands
 	private Command changeShapeCommand;
@@ -39,16 +42,23 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		freq.valueProperty().addListener(event -> {
-			changeFreqCommand.execute();
+			updateFrequency();
 		});
 
 		freqLine.valueProperty().addListener(event -> {
-			changeFreqCommand.execute();
+			updateFrequency();
 		});
 
 		picker.valueProperty().addListener(event -> {
 			changeShapeCommand.execute();
 		});
+
+		frequencyLabel.setText(((int)getFreq())+" Hz");
+	}
+
+	private void updateFrequency() {
+		changeFreqCommand.execute();
+		frequencyLabel.setText(((int)getFreq())+" Hz");
 	}
 
 	public void setChangeShapeCommand(Command changeShape) {
@@ -62,12 +72,9 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 
 
 	public double getFreq() {
-		return freq.getValue();
+		return freq.getValue() + freqLine.getValue();
 	}
 
-	public double getFreqFin() {
-		return freqLine.getValue();
-	}
 
 	public ShapeEnum getSelectedShape() {
 		switch((int)picker.getValue()) {
