@@ -31,7 +31,7 @@ public class Workbench extends Pane {
 		// Making the ghost a bit spookier
 		dragGhost.setOpacity(0.40d); // #SoSpooky
 
-		ModuleFactory.getSyn().start();
+		ModuleFactory.startSyn();
 
 	}
 

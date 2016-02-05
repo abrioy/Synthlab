@@ -15,19 +15,27 @@ import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.module.ViewModuleVCO;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.logging.Logger;
+
 public class ViewModuleFactory {
+	private static final Logger logger = Logger.getLogger(ViewModuleFactory.class.getName());
 
 
     public static ViewModule createViewModule(ModuleEnum m, Workbench workbench) {
-        switch (m) {
+        ViewModule module = null;
+		switch (m) {
             case VCOA:
-                return createViewModuleVCO(workbench);
+				module = createViewModuleVCO(workbench);
+				break;
             case OUT:
-                return createViewModuleOut(workbench);
+                module = createViewModuleOut(workbench);
+				break;
             case SCOP:
-                return createViewModuleOscilloscope(workbench);
+                module = createViewModuleOscilloscope(workbench);
+				break;
         }
-        return null;
+		logger.finer("ViewModule created: "+m.toString());
+        return module;
     }
 
     /**

@@ -8,9 +8,13 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 
+import java.util.logging.Logger;
+
 
 public class ModuleFactory {
-    /**
+	private static final Logger logger = Logger.getLogger(ModuleFactory.class.getName());
+
+	/**
      * JSyn Synthesizer
      */
     private static Synthesizer syn = JSyn.createSynthesizer();
@@ -25,6 +29,7 @@ public class ModuleFactory {
             default : m = createOut(); //OUT
         }
 		m.start();
+		logger.finer("Module created: "+m.toString());
         return m;
     }
 
@@ -52,5 +57,9 @@ public class ModuleFactory {
     public static Synthesizer getSyn() {
         return syn;
     }
+
+	public static void startSyn() {
+		syn.start();
+	}
 }
 
