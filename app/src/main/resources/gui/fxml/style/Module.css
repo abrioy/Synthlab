@@ -22,3 +22,22 @@
     -fx-background-color: #000;
     -fx-text-fill: #A0E632;
 }
+
+
+.button {
+    -fx-background-image: url("../../texture/brushed-aluminum.jpg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: top left;
+
+    -fx-background-color: #000;
+    -fx-border-color: #333;
+    -fx-text-fill: #000;
+}
+
+.button:hover{
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,.2), 50, 0.01, 0, 0);
+}
+
+.button:armed {
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,.4), 50, .1, 0, 0);
+}
