@@ -100,17 +100,11 @@ public class Workbench extends Pane {
 			mouseDelta.y = localPoint.getY();
 
 			displayGhost(module);
-            for(Cable cable : workbench.getCables()) {
-                cable.visible(false);
-            }
+			workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::front);
         });
 
         module.setOnMouseReleased(mouseEvent -> {
             hideGhost();
-            for (Cable cable : workbench.getCables()) {
-                cable.visible(true);
-                if(draggedCable==null)cable.update();
-            }
         });
 
         module.setOnMouseDragged(event -> {
@@ -125,6 +119,7 @@ public class Workbench extends Pane {
             if (newLocation != null) {
                 module.relocate(newLocation.getX(), newLocation.getY());
             }
+			workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
         });
 
 	}

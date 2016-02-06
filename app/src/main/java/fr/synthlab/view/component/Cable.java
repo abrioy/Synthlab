@@ -103,10 +103,10 @@ public class Cable extends Line {
         c.toFront();
     }
 
-    public void visible(boolean visible){
-        this.setVisible(visible);
-        circleIn.setVisible(visible);
-        circleOut.setVisible(visible);
+    public void front(){
+        this.toFront();
+        circleIn.toFront();
+        circleOut.toFront();
     }
 
 }
