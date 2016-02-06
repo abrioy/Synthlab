@@ -101,14 +101,14 @@ public class Workbench extends Pane {
 
 			displayGhost(module);
             for(Cable cable : workbench.getCables()) {
-                cable.setVisible(false);
+                cable.visible(false);
             }
         });
 
         module.setOnMouseReleased(mouseEvent -> {
             hideGhost();
             for (Cable cable : workbench.getCables()) {
-                cable.setVisible(true);
+                cable.visible(true);
                 if(draggedCable==null)cable.update();
             }
         });

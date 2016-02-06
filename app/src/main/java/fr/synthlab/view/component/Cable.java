@@ -19,27 +19,24 @@ public class Cable extends Line {
     private Plug in;
     private Plug out;
 
+    private Circle circleIn;
+    private Circle circleOut;
+
     private Workbench workbench;
 
     public Cable(Workbench workbench, Plug in) {
         this.in = in;
         this.workbench = workbench;
 
-        this.setFill(Color.BLACK);
-        this.setStrokeWidth(10);
-        this.setMouseTransparent(true);
-    }
+        circleIn = new Circle();
+        circleOut = new Circle();
 
-    public Cable(Workbench workbench, Plug in, Plug out) {
-        this.in = in;
-        this.out = out;
-        this.workbench = workbench;
+        workbench.getChildren().add(circleIn);
+        workbench.getChildren().add(circleOut);
 
         this.setFill(Color.BLACK);
         this.setStrokeWidth(10);
         this.setMouseTransparent(true);
-
-        update();
     }
 
     public void update(){
@@ -53,8 +50,8 @@ public class Cable extends Line {
         this.setEndX(outPosition.getX());
         this.setEndY(outPosition.getY());
 
-        addCircle(inPosition.getX(), inPosition.getY());
-        addCircle(outPosition.getX(), outPosition.getY());
+        addCircle(circleIn, inPosition.getX(), inPosition.getY());
+        addCircle(circleOut, outPosition.getX(), outPosition.getY());
 
         this.toFront();
     }
@@ -68,7 +65,7 @@ public class Cable extends Line {
         this.setEndX(mouse.getX());
         this.setEndY(mouse.getY());
 
-        addCircle(inPosition.getX(), inPosition.getY());
+        addCircle(circleIn, inPosition.getX(), inPosition.getY());
 
         this.toFront();
     }
@@ -99,12 +96,17 @@ public class Cable extends Line {
         }
     }
 
-    private void addCircle(double x, double y){
-        Circle c = new Circle();
+    private void addCircle(Circle c, double x, double y){
         c.setCenterX(x);
         c.setCenterY(y);
         c.setRadius(12);
-        workbench.getChildren().add(c);
+        c.toFront();
+    }
+
+    public void visible(boolean visible){
+        this.setVisible(visible);
+        circleIn.setVisible(visible);
+        circleOut.setVisible(visible);
     }
 
 }
