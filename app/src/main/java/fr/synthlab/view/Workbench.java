@@ -37,16 +37,6 @@ public class Workbench extends Pane {
             }
         });
 		ModuleFactory.startSyn();
-
-		/*
-		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
-		ViewModule osc = ViewModuleFactory.createViewModule(ModuleEnum.SCOP, this);
-
-//		vco.getModule().getPort("out").connect(osc.getModule().getPort("in"));
-
-		this.addModule(vco);
-		this.addModule(osc);
-		*/
 	}
 
 	public void onRightClick() {dropCable();
