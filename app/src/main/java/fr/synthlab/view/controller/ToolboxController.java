@@ -45,12 +45,11 @@ public class ToolboxController implements Initializable {
         loadTreeItems(input,items);
 
         items = FXCollections.observableArrayList(ModuleEnum.OUT.toString(), ModuleEnum.SCOP.toString());
-
         loadTreeItems(output,items);
 
-        items = FXCollections.observableArrayList(ModuleEnum.REP.toString());
-
+        items = FXCollections.observableArrayList(ModuleEnum.REP.toString(), ModuleEnum.EG.toString());
         loadTreeItems(filter,items);
+        
         root.setExpanded(true);
         toolbox.setRoot(root);
     }
