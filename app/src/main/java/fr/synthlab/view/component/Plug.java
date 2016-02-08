@@ -4,6 +4,7 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -28,16 +29,14 @@ public class Plug extends StackPane {
 	}
 
 	public enum Type {
-        input(Color.DARKCYAN,22.0),
-        output(Color.DARKGREEN,22.0),
-        other(Color.DARKSALMON,22.0);
+        input(Color.DARKCYAN),
+        output(Color.DARKGREEN),
+        other(Color.DARKSALMON);
 
         public Color color;
-        public double size;
 
-        Type(Color color, double size) {
+        Type(Color color) {
             this.color = color;
-            this.size = size;
         }
 
         public static Type getType(String name) {
@@ -67,12 +66,12 @@ public class Plug extends StackPane {
 				getClass().getResource("/gui/fxml/style/Plug.css").toExternalForm());
 		this.getStyleClass().add("plug");
 
-		this.setPrefWidth(Type.getType(type.get()).size);
-		this.setPrefHeight(Type.getType(type.get()).size);
+		this.setAlignment(Pos.CENTER);
+		this.setPrefSize(25.0d, 25.0d);
 
 		colorCircle = new Circle();
         colorCircle.setFill(Color.TRANSPARENT);
-        colorCircle.setRadius(Type.getType(type.get()).size);
+        colorCircle.setRadius(22.0d);
         colorCircle.setStroke(Type.getType(type.get()).color);
         colorCircle.setStrokeType(StrokeType.INSIDE);
 		this.getChildren().add(colorCircle);
@@ -96,7 +95,6 @@ public class Plug extends StackPane {
     public final void setType(String v) {
         type.set(v);
         colorCircle.setStroke(Type.getType(type.get()).color);
-		colorCircle.setRadius(Type.getType(type.get()).size);
     }
 
     public final String getType() {
