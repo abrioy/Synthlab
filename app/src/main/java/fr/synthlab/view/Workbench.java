@@ -23,14 +23,19 @@ public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
 
 	private ImageView dragGhost = new ImageView();
-    private Plug lastClickedPlug = null;
-    private Boolean dragCable = false;
+    private Cable draggedCable;
 
 	public Workbench() {
 
 		// Making the ghost a bit spookier
 		dragGhost.setOpacity(0.40d); // #SoSpooky
 
+        this.setOnMouseMoved(event -> {
+            if(draggedCable!=null){
+                Point2D localPoint = this.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+                draggedCable.update(localPoint);
+            }
+        });
 		ModuleFactory.startSyn();
 
 		/*
@@ -47,18 +52,29 @@ public class Workbench extends Pane {
 	public void onRightClick() {dropCable();
 	}
 
+    /**
+     * Handling event when plug is clicked
+     * @param plug
+     */
     public void plugClicked(Plug plug){
-        if(lastClickedPlug == null){
-            lastClickedPlug = plug;
+        if(draggedCable == null){
+			Plug opposite = getConnectedPlug(plug);
+			if (opposite!=null){
+                disconnect(plug);
+                draggedCable=getConnectedCable(plug);
+                dragCable(draggedCable,plug);
 
+            }else {
+                draggedCable = new Cable(this, plug);
+                this.getChildren().add(draggedCable);
+            }
         }else{
-            if(lastClickedPlug != plug){
-                connect(plug, lastClickedPlug);
-
-                Cable c = new Cable(this, plug, lastClickedPlug);
-                this.getChildren().add(c);
-
-                lastClickedPlug = null;
+            Plug fixedPlug = draggedCable.getPlug();
+            if(fixedPlug != plug) {
+                draggedCable.setPlug(plug);
+                connect(plug, fixedPlug);
+                draggedCable.update();
+                draggedCable = null;
             }
             else{
                 dropCable();
@@ -87,7 +103,7 @@ public class Workbench extends Pane {
 	/**
 	 * Adds a module to the workbench at the position (0,0)
 	 * @param module
-	 */
+     */
 	public void addModule(ViewModule module) {
 		this.getChildren().add(module);
 		makeDraggable(module);
@@ -111,20 +127,14 @@ public class Workbench extends Pane {
 			mouseDelta.y = localPoint.getY();
 
 			displayGhost(module);
-            for(Cable cable : workbench.getCables()){
-                cable.setVisible(false);
-            }
-		});
+			workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::front);
+        });
 
-		module.setOnMouseReleased(mouseEvent -> {
-			hideGhost();
-            for(Cable cable : workbench.getCables()){
-                cable.setVisible(true);
-                cable.update();
-            }
-		});
+        module.setOnMouseReleased(mouseEvent -> {
+            hideGhost();
+        });
 
-		module.setOnMouseDragged(event -> {
+        module.setOnMouseDragged(event -> {
             Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
             double expectedX = localPoint.getX() - mouseDelta.x;
@@ -136,6 +146,7 @@ public class Workbench extends Pane {
             if (newLocation != null) {
                 module.relocate(newLocation.getX(), newLocation.getY());
             }
+            workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
         });
 
 	}
@@ -148,10 +159,10 @@ public class Workbench extends Pane {
 		dragGhost.toFront();
 		dragGhost.setMouseTransparent(true);
 
-		// Initial position of the ghost
-		Bounds moduleBounds = module.getBoundsInParent();
+        // Initial position of the ghost
+        Bounds moduleBounds = module.getBoundsInParent();
 		this.moveGhost(moduleBounds.getMinX(), moduleBounds.getMinY());
-		this.getChildren().add(dragGhost);
+        this.getChildren().add(dragGhost);
 	}
 	public void hideGhost(){
 		this.getChildren().remove(dragGhost);
@@ -280,13 +291,22 @@ public class Workbench extends Pane {
         n1.connect(n2);
     }
 
+    /** Function that call a connection between two port
+     * This function disconnect a plug from all its relation
+     *
+     * @param plug the name is mandatory, we dont care if its in or out
+     */
+    private void disconnect(Plug plug){
+        Port p = plug.getPort();
+        p.disconnect();
+    }
     /** Drop cable based on lastClickedPlug
      *
      */
     private void dropCable(){
-        lastClickedPlug=null;
-        // TODO Method to remove the cable from the view
-        logger.info("Cable dropped");
+        getCables().remove(draggedCable);
+        this.getChildren().remove(draggedCable);
+        draggedCable=null;
     }
 
 
@@ -302,6 +322,28 @@ public class Workbench extends Pane {
             }
         }
         return cables;
+    }
+
+    private Cable getConnectedCable(Plug plug){
+        Plug test = null;
+        for(Cable c : getCables()){
+            test = c.getOppositePlug(plug);
+            if(test!=null)return c;
+        }
+        return null;
+    }
+	private Plug getConnectedPlug(Plug plug){
+        Plug opposite = null;
+        for(Cable c : getCables()){
+            opposite = c.getOppositePlug(plug);
+            if(opposite!=null)return opposite;
+        }
+		return opposite;
+	}
+
+    private void dragCable(Cable cable,Plug plug){
+        cable.unplug(plug);
+
     }
 
 }

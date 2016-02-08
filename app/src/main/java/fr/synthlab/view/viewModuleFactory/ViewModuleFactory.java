@@ -8,6 +8,7 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
+import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
 import fr.synthlab.view.module.ViewModuleOscilloscope;
@@ -74,8 +75,9 @@ public class ViewModuleFactory {
             ((ModuleOscilloscope) scop).setScale(viewScop.getScale());
         });
 
+		((OscilloscopeDrawing) viewScop.getOscilloscopeDrawing()).setModuleOscilloscope((ModuleOscilloscope) scop);
 
-        return viewScop;
+		return viewScop;
     }
 
 

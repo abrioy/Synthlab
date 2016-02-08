@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" id="root" maxHeight="-Infinity" maxWidth="-Infinity"
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
       minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0"
       xmlns="http://javafx.com/javafx/8">
     <Circle fx:id="woofer" fill="#4d443ed4" layoutX="128.0" layoutY="130.0" radius="83.0" stroke="BLACK"

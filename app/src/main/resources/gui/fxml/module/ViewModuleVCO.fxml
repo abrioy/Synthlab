@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import fr.synthlab.view.component.*?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
-<Pane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0" stylesheets="/gui/fxml/style/Module.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <Knob fx:id="freq" diameter="84.0" layoutX="89.0" layoutY="252.0" max="22000" min="0" />
+<?import javafx.scene.layout.Pane?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0"
+      xmlns="http://javafx.com/javafx/8">
+    <Knob fx:id="freq" diameter="84.0" layoutX="89.0" layoutY="252.0" max="22000"
+          min="0" scaleType="log" value="450"/>
     <Knob fx:id="freqLine" diameter="52.0" layoutX="172.0" layoutY="252.0" max="100" min="0" />
     <Knob fx:id="picker" diameter="100.0" layoutX="128.0" layoutY="125.0" max="2" min="0" step="3" />
     <Plug fx:id="in" layoutX="20.0" layoutY="322.0" name="fm" type="input" />

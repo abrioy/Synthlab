@@ -45,7 +45,6 @@ public class ToolboxController implements Initializable {
         ListView<String> list1 = new ListView<>();
         ObservableList<String> items = FXCollections.observableArrayList(ModuleEnum.VCOA.toString());
         list1.setItems(items);
-        list1.setPrefHeight(70);
 
         input.setContent(list1);
         makeListDraggable(list1);
@@ -53,7 +52,6 @@ public class ToolboxController implements Initializable {
         ListView<String> list2 = new ListView<>();
         items = FXCollections.observableArrayList(ModuleEnum.OUT.toString(), ModuleEnum.SCOP.toString());
         list2.setItems(items);
-        list2.setPrefHeight(70);
 
         output.setContent(list2);
         makeListDraggable(list2);
