@@ -1,13 +1,13 @@
 package fr.synthlab.model.filter;
 
 
-import com.jsyn.ports.UnitInputPort;
+import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitFilter;
 
 public class VcaAM extends UnitFilter {
-    public UnitInputPort inputVca;
+    public UnitOutputPort inputVca;
 
-    public VcaAM(UnitInputPort in) {
+    public VcaAM(UnitOutputPort in) {
         inputVca = in;
     }
 
