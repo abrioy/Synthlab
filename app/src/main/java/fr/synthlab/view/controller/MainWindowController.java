@@ -94,16 +94,17 @@ public class MainWindowController implements Initializable {
 		});
 
 		toolboxController.setOnDragDone(type -> {
-			if(!draggedNewViewModule.isVisible()){
-				// We never found a good position for the module
-				logger.fine("Deleting module \""+draggedNewViewModule.getModule().getName()+
-						"\" because we failed to find a place for it in the workspace.");
-				workbench.removeModule(draggedNewViewModule); // FIXME: Does not delete the module
-			}
-			else{
-				logger.fine("Adding module \""+draggedNewViewModule.getModule().getName()+
-						"\" to the workspace.");
-				workbench.addModule(draggedNewViewModule);
+			if (draggedNewViewModule != null) {
+				if (!draggedNewViewModule.isVisible()) {
+					// We never found a good position for the module
+					logger.fine("Deleting module \"" + draggedNewViewModule.getModule().getName() +
+							"\" because we failed to find a place for it in the workspace.");
+					workbench.removeModule(draggedNewViewModule); // FIXME: Does not delete the module
+				} else {
+					logger.fine("Adding module \"" + draggedNewViewModule.getModule().getName() +
+							"\" to the workspace.");
+					workbench.addModule(draggedNewViewModule);
+				}
 			}
 
 			draggedNewViewModule = null;
