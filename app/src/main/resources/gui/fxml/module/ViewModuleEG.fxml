@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import fr.synthlab.view.component.*?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
-
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
 
-<Knob fx:id="attack"
+<Knob fx:id="attack" label="Attack"
       diameter="70.0" layoutX="70.0" layoutY="120.0"
       min="0" max="10" value="1"/>
-<Knob fx:id="sustain"
+<Knob fx:id="sustain" label="Sustain"
       diameter="70.0" layoutX="70.0" layoutY="250.0"
       min="0" max="12" value="0"/>
-<Knob fx:id="decay"
+<Knob fx:id="decay" label="Decay"
       diameter="70.0" layoutX="180.0" layoutY="120.0"
       min="0" max="10" value="1"/>
-<Knob fx:id="release"
+<Knob fx:id="release" label="Release"
       diameter="70.0" layoutX="180.0" layoutY="250.0"
       min="0" max="10" value="1"/>
 

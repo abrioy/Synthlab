@@ -9,7 +9,7 @@
       prefHeight="400" prefWidth="500" minHeight="400" minWidth="500" maxHeight="400" maxWidth="500">
     <OscilloscopeDrawing fx:id="oscilloscopeDrawing" layoutX="15.0" layoutY="40.0" />
 
-    <Knob fx:id="picker"
+    <Knob fx:id="picker" label="picker"
           diameter="40.0" layoutX="250.0" layoutY="365.0"
           max="-12" min="12"/>
 

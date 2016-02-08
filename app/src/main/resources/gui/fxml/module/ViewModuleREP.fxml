@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import fr.synthlab.view.component.*?>
-<?import javafx.scene.control.Label?>
+<?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.layout.Pane?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="200" prefWidth="250" minHeight="200" minWidth="250" maxHeight="200" maxWidth="250">

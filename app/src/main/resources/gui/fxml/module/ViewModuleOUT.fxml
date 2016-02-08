@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import fr.synthlab.view.component.*?>
+<?import fr.synthlab.view.component.Knob?>
+<?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="200" prefWidth="250" minHeight="200" minWidth="250" maxHeight="200" maxWidth="250">
 
-    <Knob fx:id="picker"
+    <Knob fx:id="picker" label="Volume"
           diameter="80.0" layoutX="190.0" layoutY="100.0"
           max="-12" min="12"/>
 
