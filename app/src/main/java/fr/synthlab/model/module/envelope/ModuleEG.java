@@ -23,7 +23,7 @@ public class ModuleEG implements Module {
 
         InputPort gate = new InputPort("gate", this, envelope.input);
         ports.add(gate);
-        OutputPort out = new OutputPort("out", this, null);
+        OutputPort out = new OutputPort("out", this, envelope.output);
         ports.add(out);
 
         envelope.attack.setup(0,1,10.0);
