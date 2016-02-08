@@ -22,7 +22,11 @@ public class VcaAM extends UnitFilter {
         for (int i = start; i < limit; i++) {
             double am = inputs[i];
             double inVca = inputsVca[i];
-            outputs[i] = inVca * AudioMath.decibelsToAmplitude(am * 12);
+
+            if (am > 0.0 || am < 0.0)
+                outputs[i] = inVca * AudioMath.decibelsToAmplitude(am * 12);
+            else
+                outputs[i] = 0.0;
         }
     }
 }
