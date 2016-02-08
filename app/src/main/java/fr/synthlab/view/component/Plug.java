@@ -76,7 +76,7 @@ public class Plug extends StackPane {
         colorCircle.setStrokeType(StrokeType.INSIDE);
 		this.getChildren().add(colorCircle);
 
-        this.setOnMouseClicked(event -> {
+		colorCircle.setOnMouseClicked(event -> {
 			workbench.plugClicked(this);
         });
     }
