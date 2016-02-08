@@ -43,7 +43,8 @@ public class ToolboxController implements Initializable {
         toolbox.setExpandedPane(input);
 
         ListView<String> list1 = new ListView<>();
-        ObservableList<String> items = FXCollections.observableArrayList(ModuleEnum.VCOA.toString());
+        ObservableList<String> items = FXCollections.observableArrayList(ModuleEnum.VCOA.toString(),
+                ModuleEnum.VCA.toString());
         list1.setItems(items);
 
         input.setContent(list1);

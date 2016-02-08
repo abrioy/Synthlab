@@ -6,14 +6,13 @@ import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.port.Port;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.OscilloscopeDrawing;
-import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.module.ViewModuleOUT;
-import fr.synthlab.view.module.ViewModuleOscilloscope;
-import fr.synthlab.view.module.ViewModuleVCO;
+import fr.synthlab.view.module.*;
 
+import java.util.Collection;
 import java.util.logging.Logger;
 
 public class ViewModuleFactory {
@@ -26,6 +25,9 @@ public class ViewModuleFactory {
             case VCOA:
 				module = createViewModuleVCO(workbench);
 				break;
+            case VCA:
+                module = createViewModuleVCA(workbench);
+                break;
             case OUT:
                 module = createViewModuleOut(workbench);
 				break;
@@ -35,6 +37,23 @@ public class ViewModuleFactory {
         }
 		logger.finer("ViewModule created: "+m.toString());
         return module;
+    }
+
+    private static ViewModule createViewModuleVCA(Workbench workbench) {
+        //todo add modeleModule and decomment command
+        Module vca = new Module() {//todo delete this false implementation
+            @Override public Collection<Port> getPorts() { return null;}
+            @Override public void start() {}
+            @Override public void stop() {}
+            @Override public void update() {}
+            @Override public String getName() {return "VCA";}
+        };
+        ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
+        viewVca.setModule(vca);
+        /*viewVca.setChangeAmpliCommand(()->
+                ((ModuleVCA) vca).setAmpli(viewVca.getAmpli())
+        );*/
+        return viewVca;
     }
 
     /**
