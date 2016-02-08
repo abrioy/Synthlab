@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import fr.synthlab.view.component.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity" minWidth="-Infinity" prefHeight="189.0" prefWidth="256.0"
+      xmlns="http://javafx.com/javafx/8">
+    <Plug fx:id="in" layoutX="64.0" layoutY="72.5" name="in" type="input" />
+    <Plug fx:id="out1" layoutX="148.0" layoutY="22.5" name="out1" type="output" />
+    <Plug fx:id="out2" layoutX="148.0" layoutY="72.5" name="out2" type="output" />
+    <Plug fx:id="out3" layoutX="148.0" layoutY="122.5" name="out3" type="output" />
+</Pane>

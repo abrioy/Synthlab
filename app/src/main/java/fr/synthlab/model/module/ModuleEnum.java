@@ -3,9 +3,10 @@ package fr.synthlab.model.module;
 public enum ModuleEnum {
 
     VCOA("VCOA"),
+    VCA("VCA"),
     OUT("OUT"),
     SCOP("SCOP"),
-    VCA("VCA");
+    REP("REP");
 
     private String moduleName;
 

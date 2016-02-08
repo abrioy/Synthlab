@@ -6,7 +6,6 @@ import fr.synthlab.view.component.Knob;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,11 +37,15 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         return picker;
     }
 
-    public void setVolume(Command volume) {
+    public void setVolumeCommand(Command volume) {
         this.volume = volume;
 
         // Init volume to the correct value
         volume.execute();
+    }
+
+    public void setMuteCommand(Command mute) {
+        this.muteCommand = mute;
     }
 
     public boolean isMute() {
@@ -58,7 +61,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         picker.valueProperty().addListener(event -> {
             volume.execute();
         });
-        muteButton.addEventHandler(MouseEvent.MOUSE_CLICKED,e -> {
+        muteButton.setOnAction(event -> {
             mute = !mute;
             muteCommand.execute();
         });

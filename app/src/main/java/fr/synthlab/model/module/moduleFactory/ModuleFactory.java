@@ -6,6 +6,7 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.replicator.ModuleREP;
 import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 
@@ -27,8 +28,9 @@ public class ModuleFactory {
                 break;
             case SCOP: m = createOscilloscope();
                 break;
-            case VCA:
-                m = createVCA();
+            case VCA: m = createVCA();
+                break;
+            case REP : m = createREP();
                 break;
             default : m = createOut(); //OUT
         }
@@ -63,6 +65,13 @@ public class ModuleFactory {
      */
     private static ModuleVCA createVCA() {
         return new ModuleVCA(syn);
+    }
+
+    /**
+     * @return a new ModuleREP
+     */
+    private static Module createREP() {
+        return new ModuleREP();
     }
 
     public static Synthesizer getSyn() {

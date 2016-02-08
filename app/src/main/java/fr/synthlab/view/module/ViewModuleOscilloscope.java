@@ -25,7 +25,9 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 	public ViewModuleOscilloscope(Workbench workbench) {
 		super(workbench);
 		this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
+		w=workbench;
 	}
+	private Workbench w;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -33,13 +35,30 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 			pickerCmd.execute();
 		});
 
+		/*
+
+		this.setOnMouseClicked(event -> {
+			logger.info("CLICKED");
+			ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, w);
+
+			vco.getModule().getPort("out").connect(this.getModule().getPort("in"));
+
+			w.addModule(vco);
+		});
+
+		*/
+
 	}
 
-	public void setPickerCmd(Command pickerCmd) {
+	public void setPickerCommand(Command pickerCmd) {
 		this.pickerCmd = pickerCmd;
 	}
 
 	public int getScale() {
 		return (int) picker.getValue();
+	}
+
+	public OscilloscopeDrawing getOscilloscopeDrawing() {
+		return oscilloscopeDrawing;
 	}
 }

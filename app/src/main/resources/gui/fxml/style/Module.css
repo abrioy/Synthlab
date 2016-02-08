@@ -1,10 +1,6 @@
 
 .module-frame {
     -fx-border-color: #333 ;
-
-}
-
-#root {
     -fx-background-image: url("../../texture/carbon.jpeg");
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
@@ -22,6 +18,19 @@
     -fx-background-color: #000;
     -fx-text-fill: #A0E632;
 }
+
+
+.close-button {
+    -fx-background-image: url("../../texture/closemark.png") !important;
+    -fx-background-repeat: stretch !important;
+    -fx-background-position: center center !important;
+    -fx-background-size: contain !important;
+    -fx-background-color: transparent !important;
+
+    -fx-border-color: transparent !important;
+    -fx-text-fill: transparent !important;
+}
+
 
 
 .button {

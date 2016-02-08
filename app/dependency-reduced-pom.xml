@@ -39,6 +39,12 @@
             <argument>install</argument>
             <argument>exec:java</argument>
           </arguments>
+          <systemProperties>
+            <systemProperty>
+              <key>javafx.embed.singleThread</key>
+              <value>true</value>
+            </systemProperty>
+          </systemProperties>
         </configuration>
       </plugin>
     </plugins>

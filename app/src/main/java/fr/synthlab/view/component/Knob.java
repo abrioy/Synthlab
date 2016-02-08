@@ -23,12 +23,12 @@ public class Knob extends Pane {
     /**
      * angle where is the min.
      */
-    private final double minAngle = -20;
+    private final double minAngle = 200;
 
     /**
      * angle where is the max.
      */
-    private final double maxAngle = 200;
+    private final double maxAngle = -20;
 
     /**
      * size of scale.
@@ -85,6 +85,10 @@ public class Knob extends Pane {
      * if = 0 it is a button continue.
      */
     private final IntegerProperty step = new SimpleIntegerProperty(this, "step", 0);
+    private double minExp = Math.log(min.get());
+    private double maxExp = Math.log(max.get());
+    private double scale= (maxExp - minExp) / max.get() - min.get();
+    private double coef = scale * 0 - minExp ;
 
     /**
      * constructor.
@@ -97,7 +101,6 @@ public class Knob extends Pane {
         knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
         knob.getStyleClass().add("knob");
         knob.getTransforms().add(rotate);
-
 
 		setOnMousePressed(Event::consume);
 		setOnMouseReleased(Event::consume);
@@ -138,12 +141,12 @@ public class Knob extends Pane {
 			angle = angle - 360;
 		}
 		double angleLocal;
-		double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
+		double angleInterval = ((minAngle - maxAngle ) / (step.get()-1));
 		if (step.get()!=0){//go to step if there are
-			double angleLocalNext = minAngle;
+			double angleLocalNext = maxAngle;
 			for (int t = 0; t < step.get()-1; t++) {
 				angleLocal = angleLocalNext;
-				angleLocalNext = (angleInterval*(t+1) + minAngle);
+				angleLocalNext = (angleInterval*(t+1) + maxAngle);
 				if (angleLocal<angle && angle<((angleLocalNext-angleLocal)/2)+angleLocal) {
 					rotate.setAngle(-angleLocal);
 					angle=angleLocal;
@@ -181,7 +184,7 @@ public class Knob extends Pane {
         double angle = valueToAngle(getValue());
         double angleLocal;
         double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
-        if (minAngle <= angle && angle <= maxAngle) {
+        if (minAngle >= angle && angle >= maxAngle) {
             rotate.setPivotX(knob.getWidth() / 2.0);
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
@@ -209,6 +212,9 @@ public class Knob extends Pane {
     private double valueToAngle(double value) {
         double maxValue = getMax();
         double minValue = getMin();
+        if (scaleType.get().equals("log")){
+            return minAngle + (maxAngle - minAngle) * (((Math.log(value) + coef) / scale) - minValue) / (maxValue - minValue);
+        }
         return minAngle + (maxAngle - minAngle) * (value - minValue) / (maxValue - minValue);
     }
 
@@ -222,8 +228,9 @@ public class Knob extends Pane {
         double minValue = getMin();
         double value;
         if (scaleType.get().equals("log")) {
-            //TODO make value log
             value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+            value = Math.exp(minExp + scale*(value-minValue));
+            value = Math.max((minValue <= 10.0 ? 10 : minValue),value);
         } else {
             value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
         }
@@ -268,6 +275,10 @@ public class Knob extends Pane {
      * @param v value to set
      */
     public final void setMin(double v) {
+        double v2 = (v <= 10.0) ? 10 : v;
+        minExp = Math.log(v2);
+        scale = (maxExp - minExp) / max.get() - min.get();
+        coef = (scale * 0) - minExp;
         min.set(v);
     }
 
@@ -293,6 +304,9 @@ public class Knob extends Pane {
      */
     public final void setMax(double v) {
         max.set(v);
+        maxExp = Math.log(v);
+        scale = (maxExp - minExp) / max.get() - min.get();
+        coef = (scale * 0) - minExp;
     }
 
     /**
@@ -370,7 +384,7 @@ public class Knob extends Pane {
      */
     public final String getLabel() {
         if (label.get().equals("")){
-            return scaleType.toString();
+            return scaleType.get().toString();
         }
         return label.get();
     }
