@@ -3,17 +3,14 @@ package fr.synthlab.view.viewModuleFactory;
 
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.OscilloscopeDrawing;
-import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.module.ViewModuleOUT;
-import fr.synthlab.view.module.ViewModuleREP;
-import fr.synthlab.view.module.ViewModuleOscilloscope;
-import fr.synthlab.view.module.ViewModuleVCO;
+import fr.synthlab.view.module.*;
 
 import java.util.logging.Logger;
 
@@ -35,6 +32,9 @@ public class ViewModuleFactory {
 				break;
             case REP:
                 module = createViewModuleREP(workbench);
+                break;
+            case EG:
+                module = createViewModuleEG(workbench);
                 break;
         }
 		logger.finer("ViewModule created: "+m.toString());
@@ -92,5 +92,28 @@ public class ViewModuleFactory {
         return viewREP;
     }
 
+    private static ViewModule createViewModuleEG(Workbench workbench) {
+        Module eg = ModuleFactory.createModule(ModuleEnum.EG);
+        ViewModuleEG viewEG = new ViewModuleEG(workbench);
+        viewEG.setModule(eg);
+
+        viewEG.setChangeAttackCommand(() -> {
+            ((ModuleEG) eg).setAttack(viewEG.getAttack());
+        });
+
+        viewEG.setChangeDecayCommand(() -> {
+            ((ModuleEG) eg).setDecay(viewEG.getDecay());
+        });
+
+        viewEG.setChangeSustainCommand(() -> {
+            ((ModuleEG) eg).setSustain(viewEG.getSustain());
+        });
+
+        viewEG.setChangeReleaseCommand(() -> {
+            ((ModuleEG) eg).setRelease(viewEG.getRelease());
+        });
+
+        return viewEG;
+    }
 
 }
