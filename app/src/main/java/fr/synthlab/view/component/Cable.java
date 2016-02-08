@@ -71,6 +71,7 @@ public class Cable extends Line {
         this.setEndY(mouse.getY());
 
         addCircle(circleIn, inPosition.getX(), inPosition.getY());
+        addCircle(circleOut,mouse.getX(),mouse.getY());
 
         this.toFront();
     }
