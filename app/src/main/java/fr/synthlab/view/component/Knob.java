@@ -384,7 +384,7 @@ public class Knob extends Pane {
      */
     public final String getLabel() {
         if (label.get().equals("")){
-            return scaleType.toString();
+            return scaleType.get().toString();
         }
         return label.get();
     }
