@@ -1,6 +1,7 @@
 package fr.synthlab.view.component;
 
 import javafx.beans.property.*;
+import javafx.event.Event;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -13,11 +14,6 @@ import javafx.scene.transform.Rotate;
  * @see Region
  */
 public class Knob extends Pane {
-
-    /**
-     * say if we can turn button.
-     */
-    private boolean movable = false;
 
     /**
      * draw zone.
@@ -106,57 +102,17 @@ public class Knob extends Pane {
         knob.getStyleClass().add("knob");
         knob.getTransforms().add(rotate);
 
-        /**
-         * un/block button to rotate on click
-         */
-        setOnMouseClicked(event -> movable = !movable);
-        /**
-         * on mouse exit block button
-         */
-        setOnMouseExited(event -> movable = false);
-
-        /**
-         * rotate button on mouse moving
-         */
-        setOnMouseMoved(event -> {
-            if (movable) {
-                double x = event.getX();
-                double y = event.getY();
-                double centerX = 0;
-                double centerY = 0;
-                double theta = Math.atan2((y - centerY), (x - centerX));
-                double angle = Math.toDegrees(theta);
-                if (angle > 0.0) {
-                    angle = 180 + (180 - angle);
-                } else {
-                    angle = 180 - (180 - Math.abs(angle));
-                }
-                if (angle >= 270) {
-                    angle = angle - 360;
-                }
-                double angleLocal;
-                double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
-                if (step.get()!=0){//go to step if there are
-                    double angleLocalNext = minAngle;
-                    for (int t = 0; t < step.get()-1; t++) {
-                        angleLocal = angleLocalNext;
-                        angleLocalNext = (angleInterval*(t+1) + minAngle);
-                        if (angleLocal<angle && angle<((angleLocalNext-angleLocal)/2)+angleLocal) {
-                            rotate.setAngle(-angleLocal);
-                            angle=angleLocal;
-                        }
-                        else if (((angleLocalNext-angleLocal)/2)+angleLocal<angle && angle<angleLocalNext){
-                            rotate.setAngle(-angleLocalNext);
-                            angle=angleLocalNext;
-                        }
-                    }
-                }
-                double value1 = angleToValue(angle);
-                setValue(value1);
-            }
+		setOnMousePressed(Event::consume);
+		setOnMouseReleased(Event::consume);
+		setOnMouseDragged(Event::consume);
+		setOnMouseDragReleased(Event::consume);
+        setOnMouseDragged(event -> {
+			moveKnob(event.getX(), event.getY());
+			event.consume();
         });
-        minLine.setStroke(Color.GREEN);
-        maxLine.setStroke(Color.BLUE);
+
+        minLine.setStroke(Color.DARKGRAY);
+        maxLine.setStroke(Color.DARKRED);
         getChildren().addAll(minLine, maxLine);
         getChildren().add(knob);
         setPrefSize(diameter.doubleValue() / 5, diameter.doubleValue() / 5);
@@ -170,6 +126,40 @@ public class Knob extends Pane {
             requestLayout();
         });
     }
+
+	private void moveKnob(double x, double y) {
+		double centerX = 0;
+		double centerY = 0;
+		double theta = Math.atan2((y - centerY), (x - centerX));
+		double angle = Math.toDegrees(theta);
+		if (angle > 0.0) {
+			angle = 180 + (180 - angle);
+		} else {
+			angle = 180 - (180 - Math.abs(angle));
+		}
+		if (angle >= 270) {
+			angle = angle - 360;
+		}
+		double angleLocal;
+		double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
+		if (step.get()!=0){//go to step if there are
+			double angleLocalNext = minAngle;
+			for (int t = 0; t < step.get()-1; t++) {
+				angleLocal = angleLocalNext;
+				angleLocalNext = (angleInterval*(t+1) + minAngle);
+				if (angleLocal<angle && angle<((angleLocalNext-angleLocal)/2)+angleLocal) {
+					rotate.setAngle(-angleLocal);
+					angle=angleLocal;
+				}
+				else if (((angleLocalNext-angleLocal)/2)+angleLocal<angle && angle<angleLocalNext){
+					rotate.setAngle(-angleLocalNext);
+					angle=angleLocalNext;
+				}
+			}
+		}
+		double value1 = angleToValue(angle);
+		setValue(value1);
+	}
 
     /**
      * {@inheritDoc}

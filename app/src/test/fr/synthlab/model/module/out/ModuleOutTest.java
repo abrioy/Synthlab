@@ -59,7 +59,7 @@ public class ModuleOutTest {
      */
     @Test
     public void testGetAttenuation() throws Exception {
-        assertEquals(1,moduleOut.getAttenuation(),0.000000001);
+        assertEquals(0,moduleOut.getAttenuation(),0.000000001);
     }
 
     /**
