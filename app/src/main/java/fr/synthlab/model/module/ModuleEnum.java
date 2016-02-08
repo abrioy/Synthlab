@@ -4,7 +4,8 @@ public enum ModuleEnum {
 
     VCOA("VCOA"),
     OUT("OUT"),
-    SCOP("SCOP");
+    SCOP("SCOP"),
+    VCA("VCA");
 
     private String moduleName;
 
