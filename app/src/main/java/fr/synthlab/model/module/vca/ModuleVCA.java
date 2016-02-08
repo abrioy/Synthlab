@@ -51,6 +51,7 @@ public class ModuleVCA implements Module {
     @Override
     public void start() {
         filterAttenuator.start();
+        vcaAM.start();
     }
 
     @Override

@@ -3,6 +3,7 @@ package fr.synthlab.model.filter;
 
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitFilter;
+import com.softsynth.math.AudioMath;
 
 public class VcaAM extends UnitFilter {
     public UnitOutputPort inputVca;
@@ -21,7 +22,7 @@ public class VcaAM extends UnitFilter {
         for (int i = start; i < limit; i++) {
             double am = inputs[i];
             double inVca = inputsVca[i];
-            outputs[i] = inVca * (am * 12);
+            outputs[i] = inVca * AudioMath.decibelsToAmplitude(am * 12);
         }
     }
 }
