@@ -23,12 +23,12 @@ public class Knob extends Pane {
     /**
      * angle where is the min.
      */
-    private final double minAngle = -20;
+    private final double minAngle = 200;
 
     /**
      * angle where is the max.
      */
-    private final double maxAngle = 200;
+    private final double maxAngle = -20;
 
     /**
      * size of scale.
@@ -141,12 +141,12 @@ public class Knob extends Pane {
 			angle = angle - 360;
 		}
 		double angleLocal;
-		double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
+		double angleInterval = ((minAngle - maxAngle ) / (step.get()-1));
 		if (step.get()!=0){//go to step if there are
-			double angleLocalNext = minAngle;
+			double angleLocalNext = maxAngle;
 			for (int t = 0; t < step.get()-1; t++) {
 				angleLocal = angleLocalNext;
-				angleLocalNext = (angleInterval*(t+1) + minAngle);
+				angleLocalNext = (angleInterval*(t+1) + maxAngle);
 				if (angleLocal<angle && angle<((angleLocalNext-angleLocal)/2)+angleLocal) {
 					rotate.setAngle(-angleLocal);
 					angle=angleLocal;
@@ -184,7 +184,7 @@ public class Knob extends Pane {
         double angle = valueToAngle(getValue());
         double angleLocal;
         double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
-        if (minAngle <= angle && angle <= maxAngle) {
+        if (minAngle >= angle && angle >= maxAngle) {
             rotate.setPivotX(knob.getWidth() / 2.0);
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
