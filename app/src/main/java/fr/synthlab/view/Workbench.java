@@ -1,14 +1,11 @@
 package fr.synthlab.view;
 
 
-import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -69,9 +66,23 @@ public class Workbench extends Pane {
         }
     }
 
+	/**
+	 * Removes a module and all its connections for the workbench
+	 * @param module
+	 */
 	public void removeModule(ViewModule module) {
 		this.getChildren().remove(module);
 	}
+
+
+	/**
+	 * Called when a module wants to be closed
+	 * @param module
+	 */
+	public void onModuleCloseRequest(ViewModule module){
+		removeModule(module);
+	}
+
 
 	/**
 	 * Adds a module to the workbench at the position (0,0)
