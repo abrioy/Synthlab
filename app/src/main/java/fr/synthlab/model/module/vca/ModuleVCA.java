@@ -2,6 +2,7 @@ package fr.synthlab.model.module.vca;
 
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterAttenuator;
+import fr.synthlab.model.filter.VcaAM;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -18,15 +19,28 @@ public class ModuleVCA implements Module {
     private OutputPort outputPort;
 
     private FilterAttenuator filterAttenuator = new FilterAttenuator();
+    private VcaAM vcaAM;
+
+    private double attenuation = 0.0;
 
     public ModuleVCA(Synthesizer synthesizer) {
+        vcaAM = new VcaAM(filterAttenuator.output);
+
+        synthesizer.add(filterAttenuator);
+        synthesizer.add(vcaAM);
+
         inputPort = new InputPort("in", this, filterAttenuator.input);
-        inputPortAm = new InputPort("am", this, null/*TODO*/);
-        outputPort = new OutputPort("out", this, null/*TODO*/);
+        inputPortAm = new InputPort("am", this, vcaAM.input);
+        outputPort = new OutputPort("out", this, vcaAM.output);
 
         ports.add(inputPort);
         ports.add(inputPortAm);
         ports.add(outputPort);
+    }
+
+    public void setAttenuation(double attenuation) {
+        this.attenuation = attenuation;
+        filterAttenuator.setAttenuation(attenuation);
     }
 
     @Override
