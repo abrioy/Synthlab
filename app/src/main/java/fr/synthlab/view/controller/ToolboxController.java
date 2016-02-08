@@ -58,8 +58,11 @@ public class ToolboxController implements Initializable {
 
         //TODO sprint 2
         ListView<String> list3 = new ListView<>();
+        items = FXCollections.observableArrayList(ModuleEnum.REP.toString());
+        list3.setItems(items);
 
         filter.setContent(list3);
+        makeListDraggable(list3);
     }
 
     private void makeListDraggable(ListView<String> list){

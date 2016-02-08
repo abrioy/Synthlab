@@ -11,6 +11,7 @@ import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
+import fr.synthlab.view.module.ViewModuleREP;
 import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.module.ViewModuleVCO;
 
@@ -32,6 +33,9 @@ public class ViewModuleFactory {
             case SCOP:
                 module = createViewModuleOscilloscope(workbench);
 				break;
+            case REP:
+                module = createViewModuleREP(workbench);
+                break;
         }
 		logger.finer("ViewModule created: "+m.toString());
         return module;
@@ -78,6 +82,14 @@ public class ViewModuleFactory {
 		((OscilloscopeDrawing) viewScop.getOscilloscopeDrawing()).setModuleOscilloscope((ModuleOscilloscope) scop);
 
 		return viewScop;
+    }
+
+    private static ViewModule createViewModuleREP(Workbench workbench) {
+        Module rep = ModuleFactory.createModule(ModuleEnum.REP);
+        ViewModuleREP viewREP = new ViewModuleREP(workbench);
+        viewREP.setModule(rep);
+
+        return viewREP;
     }
 
 
