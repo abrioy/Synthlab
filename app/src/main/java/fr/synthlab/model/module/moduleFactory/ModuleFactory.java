@@ -4,6 +4,7 @@ import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.replicator.ModuleREP;
@@ -28,6 +29,8 @@ public class ModuleFactory {
             case SCOP: m = createOscilloscope();
                 break;
             case REP : m = createREP();
+                break;
+            case EG : m = createEG();
                 break;
             default : m = createOut(); //OUT
         }
@@ -62,6 +65,13 @@ public class ModuleFactory {
      */
     private static Module createREP() {
         return new ModuleREP();
+    }
+
+    /**
+     * @return a new ModuleEG
+     */
+    private static Module createEG() {
+        return new ModuleEG();
     }
 
     public static Synthesizer getSyn() {

@@ -5,7 +5,8 @@ public enum ModuleEnum {
     VCOA("VCOA"),
     OUT("OUT"),
     SCOP("SCOP"),
-    REP("REP");
+    REP("REP"),
+    EG("EG");
 
     private String moduleName;
 
