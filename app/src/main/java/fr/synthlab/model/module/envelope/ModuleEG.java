@@ -2,14 +2,17 @@ package fr.synthlab.model.module.envelope;
 
 import com.jsyn.unitgen.EnvelopeDAHDSR;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 public class ModuleEG implements Module {
+    private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class.getName());
 
     /**
      * All ports
