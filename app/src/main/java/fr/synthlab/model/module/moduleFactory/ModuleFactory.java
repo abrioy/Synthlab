@@ -26,6 +26,8 @@ public class ModuleFactory {
                 break;
             case SCOP: m = createOscilloscope();
                 break;
+            /*case VCA: m = createVCA();
+                break;*/
             default : m = createOut(); //OUT
         }
 		m.start();
@@ -53,6 +55,13 @@ public class ModuleFactory {
     private static ModuleOut createOut() {
         return new ModuleOut(syn);
     }
+
+    /**
+     * @return a new ModuleVCA
+     */
+    /*private static ModuleVCA createVCA() {
+        return new ModuleVCA(syn);
+    }*/
 
     public static Synthesizer getSyn() {
         return syn;
