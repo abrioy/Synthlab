@@ -16,11 +16,13 @@ public class OscilloscopeDrawing extends Pane {
 	ModuleOscilloscope osc;
 	SwingNode swingNode;
 
+	/*
 	public OscilloscopeDrawing(ModuleOscilloscope osc) {
 		super();
 		init();
 		setModuleOscillo(osc);
 	}
+	*/
 
 	public OscilloscopeDrawing() {
 		super();
@@ -28,7 +30,6 @@ public class OscilloscopeDrawing extends Pane {
 	}
 
 	private void init() {
-		this.osc = osc;
 		swingNode = new SwingNode();
 		StackPane pane = new StackPane();
 		pane.getChildren().add(swingNode);
@@ -39,5 +40,8 @@ public class OscilloscopeDrawing extends Pane {
 		this.osc = osc;
 		swingNode.setContent(osc.getOscillatorJComponent());
 		swingNode.setMouseTransparent(true);
+		//swingNode.getContent().revalidate();
+		//swingNode.getContent().repaint();
 	}
+
 }
