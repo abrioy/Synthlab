@@ -5,17 +5,17 @@
 <?import javafx.scene.layout.Pane?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="200" prefWidth="250" minHeight="200" minWidth="250" maxHeight="200" maxWidth="250">
-<Knob fx:id="ampli"
-      diameter="75.0" layoutX="125.0" layoutY="90.0"
-      min="-12" max="12" />
+    <Knob fx:id="ampli"
+          diameter="75.0" layoutX="125.0" layoutY="90.0"
+          min="-12" max="12" />
 
-<Plug fx:id="in"
-      layoutX="15.0" layoutY="70.0"
-      name="in" type="input" />
-<Plug fx:id="am"
-      layoutX="15.0" layoutY="145.0"
-      name="am" type="modulation" />
-<Plug fx:id="out"
-      layoutX="195.0" layoutY="145.0"
-      name="out" type="output" />
+    <Plug fx:id="in"
+          layoutX="15.0" layoutY="70.0"
+          name="in" type="input" />
+    <Plug fx:id="am"
+          layoutX="15.0" layoutY="145.0"
+          name="am" type="modulation" />
+    <Plug fx:id="out"
+          layoutX="195.0" layoutY="145.0"
+          name="out" type="output" />
 </Pane>

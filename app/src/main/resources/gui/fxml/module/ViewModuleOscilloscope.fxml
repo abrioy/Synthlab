@@ -4,14 +4,19 @@
 <?import fr.synthlab.view.component.OscilloscopeDrawing?>
 <?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="512.0"
-            xmlns="http://javafx.com/javafx/8" stylesheets="/gui/fxml/style/Module.css">
-    <OscilloscopeDrawing fx:id="oscilloscopeDrawing" layoutX="26.0" layoutY="45.0" />
-    <Plug fx:id="in" name="in" layoutX="28.0" layoutY="312.0" type="input"  />
-    <Plug fx:id="out" name="out" layoutX="440.0" layoutY="312.0" type="output"  />
-    <Knob fx:id="picker" layoutX="256.0" layoutY="334.0" diameter="44.0" />
+
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+      prefHeight="400" prefWidth="500" minHeight="400" minWidth="500" maxHeight="400" maxWidth="500">
+    <OscilloscopeDrawing fx:id="oscilloscopeDrawing" layoutX="15.0" layoutY="40.0" />
+
+    <Knob fx:id="picker"
+          diameter="40.0" layoutX="250.0" layoutY="365.0"
+          max="-12" min="12"/>
+
+    <Plug fx:id="in"
+          layoutX="15.0" layoutY="345.0"
+          name="in" type="input" />
+    <Plug fx:id="out"
+          layoutX="445.0" layoutY="345.0"
+          name="out" type="output" />
 </Pane>
