@@ -6,7 +6,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
+import javafx.scene.shape.StrokeLineCap;
 
 import java.util.logging.Logger;
 
@@ -33,11 +33,14 @@ public class Cable extends Line {
         circleOut = new Circle();
         circleIn.setMouseTransparent(true);
         circleOut.setMouseTransparent(true);
+        circleIn.setFill(Color.DARKGRAY);
+        circleOut.setFill(Color.DARKGRAY);
         workbench.getChildren().add(circleIn);
         workbench.getChildren().add(circleOut);
 
-        this.setFill(Color.BLACK);
+        this.setFill(Color.RED);
         this.setStrokeWidth(10);
+        this.setStrokeLineCap(StrokeLineCap.ROUND);
         this.setMouseTransparent(true);
 
     }
