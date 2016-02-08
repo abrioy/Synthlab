@@ -6,6 +6,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 
 import java.util.logging.Logger;
 
@@ -30,13 +31,15 @@ public class Cable extends Line {
 
         circleIn = new Circle();
         circleOut = new Circle();
-
+        circleIn.setMouseTransparent(true);
+        circleOut.setMouseTransparent(true);
         workbench.getChildren().add(circleIn);
         workbench.getChildren().add(circleOut);
 
         this.setFill(Color.BLACK);
         this.setStrokeWidth(10);
         this.setMouseTransparent(true);
+
     }
 
     public void update(){
@@ -57,6 +60,8 @@ public class Cable extends Line {
     }
 
     public void update(Point2D mouse){
+        in=getPlug();
+        out=null;
         Bounds inBounds = in.getBoundsInLocal();
         Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(in.localToScene(inBounds)));
 
@@ -71,6 +76,7 @@ public class Cable extends Line {
     }
 
     public Plug getOppositePlug(Plug plug){
+        if(in==null || out==null)return null;
         if(in.equals(plug)){
             return out;
         } else if (out.equals(plug)){
@@ -107,6 +113,11 @@ public class Cable extends Line {
         this.toFront();
         circleIn.toFront();
         circleOut.toFront();
+    }
+
+    public void unplug(Plug plug){
+        if(in==plug)in=null;
+        else out=null;
     }
 
 }

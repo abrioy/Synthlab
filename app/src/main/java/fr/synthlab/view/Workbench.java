@@ -6,7 +6,6 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
-import javafx.event.EventHandler;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -14,8 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,15 +50,22 @@ public class Workbench extends Pane {
      */
     public void plugClicked(Plug plug){
         if(draggedCable == null){
-            //TODO click on cable already created
-            //TODO DROP CABLE
-            draggedCable= new Cable(this,plug);
-            this.getChildren().add(draggedCable);
+			Plug opposite = getConnectedPlug(plug);
+			if (opposite!=null){
+                logger.info("TRY DRAG");
+                disconnect(plug);
+                draggedCable=getConnectedCable(plug);
+                dragCable(draggedCable,plug);
+
+            }else {
+                draggedCable = new Cable(this, plug);
+                this.getChildren().add(draggedCable);
+            }
         }else{
             Plug fixedPlug = draggedCable.getPlug();
             if(fixedPlug != plug) {
                 draggedCable.setPlug(plug);
-                connect(plug, fixedPlug );
+                connect(plug, fixedPlug);
                 draggedCable.update();
                 draggedCable = null;
             }
@@ -119,7 +125,7 @@ public class Workbench extends Pane {
             if (newLocation != null) {
                 module.relocate(newLocation.getX(), newLocation.getY());
             }
-			workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
+            workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
         });
 
 	}
@@ -264,10 +270,21 @@ public class Workbench extends Pane {
         n1.connect(n2);
     }
 
+    /** Function that call a connection between two port
+     * This function disconnect a plug from all its relation
+     *
+     * @param plug the name is mandatory, we dont care if its in or out
+     */
+    private void disconnect(Plug plug){
+        Port p = plug.getPort();
+        p.disconnect();
+    }
     /** Drop cable based on lastClickedPlug
      *
      */
     private void dropCable(){
+        getCables().remove(draggedCable);
+        this.getChildren().remove(draggedCable);
         draggedCable=null;
         // TODO Method to remove the cable from the view
         logger.info("Cable dropped");
@@ -288,6 +305,14 @@ public class Workbench extends Pane {
         return cables;
     }
 
+    private Cable getConnectedCable(Plug plug){
+        Plug test = null;
+        for(Cable c : getCables()){
+            test = c.getOppositePlug(plug);
+            if(test!=null)return c;
+        }
+        return null;
+    }
 	private Plug getConnectedPlug(Plug plug){
         Plug opposite = null;
         for(Cable c : getCables()){
@@ -296,5 +321,10 @@ public class Workbench extends Pane {
         }
 		return opposite;
 	}
+
+    private void dragCable(Cable cable,Plug plug){
+        cable.unplug(plug);
+
+    }
 
 }
