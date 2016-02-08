@@ -13,7 +13,6 @@ import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleOUT;
 import fr.synthlab.view.module.ViewModuleOscilloscope;
 import fr.synthlab.view.module.ViewModuleVCO;
-import javafx.scene.layout.AnchorPane;
 
 import java.util.logging.Logger;
 
@@ -62,8 +61,8 @@ public class ViewModuleFactory {
         Module out = ModuleFactory.createModule(ModuleEnum.OUT);
         ViewModuleOUT viewOut = new ViewModuleOUT(workbench);
         viewOut.setModule(out);
-        viewOut.setVolume(() -> ((ModuleOut) out).setAttenuation(viewOut.getPicker().getValue()));
-        viewOut.setMute(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
+        viewOut.setVolumeCommand(() -> ((ModuleOut) out).setAttenuation(viewOut.getPicker().getValue()));
+        viewOut.setMuteCommand(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
 
         return viewOut;
     }
@@ -72,15 +71,13 @@ public class ViewModuleFactory {
         Module scop = ModuleFactory.createModule(ModuleEnum.SCOP);
         ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope(workbench);
         viewScop.setModule(scop);
-        viewScop.setPickerCmd(() -> {
+        viewScop.setPickerCommand(() -> {
             ((ModuleOscilloscope) scop).setScale(viewScop.getScale());
         });
 
-		// FIXME: Code à Corentin
-        ((OscilloscopeDrawing) viewScop.getOscilloscopeDrawing()).setModuleOscillo((ModuleOscilloscope) scop);
+		((OscilloscopeDrawing) viewScop.getOscilloscopeDrawing()).setModuleOscilloscope((ModuleOscilloscope) scop);
 
-
-        return viewScop;
+		return viewScop;
     }
 
 

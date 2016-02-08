@@ -1,11 +1,9 @@
 package fr.synthlab.view.module;
 
 import fr.synthlab.model.Command;
-import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.OscilloscopeDrawing;
-import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -52,7 +50,7 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 
 	}
 
-	public void setPickerCmd(Command pickerCmd) {
+	public void setPickerCommand(Command pickerCmd) {
 		this.pickerCmd = pickerCmd;
 	}
 
