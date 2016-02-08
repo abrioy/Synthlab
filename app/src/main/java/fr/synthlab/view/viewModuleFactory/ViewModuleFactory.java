@@ -6,18 +6,11 @@ import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
-import fr.synthlab.model.module.port.Port;
+import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
-import fr.synthlab.view.component.OscilloscopeDrawing;
-import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.module.ViewModuleOUT;
-import fr.synthlab.view.module.ViewModuleREP;
-import fr.synthlab.view.module.ViewModuleOscilloscope;
-import fr.synthlab.view.module.ViewModuleVCO;
-import fr.synthlab.view.module.ViewModuleVCA;
+import fr.synthlab.view.module.*;
 
-import java.util.Collection;
 import java.util.logging.Logger;
 
 public class ViewModuleFactory {
@@ -48,19 +41,11 @@ public class ViewModuleFactory {
     }
 
     private static ViewModule createViewModuleVCA(Workbench workbench) {
-        //todo add modeleModule and decomment command
-        Module vca = new Module() {//todo delete this false implementation
-            @Override public Collection<Port> getPorts() { return null;}
-            @Override public void start() {}
-            @Override public void stop() {}
-            @Override public void update() {}
-            @Override public String getName() {return "VCA";}
-        };
+        Module vca = ModuleFactory.createModule(ModuleEnum.VCA);
         ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
         viewVca.setModule(vca);
-        /*viewVca.setChangeAmpliCommand(()->
-                ((ModuleVCA) vca).setAmpli(viewVca.getAmpli())
-        );*/
+        viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca).setAttenuation(viewVca.getAmpli()));
+
         return viewVca;
     }
 
@@ -102,7 +87,7 @@ public class ViewModuleFactory {
             ((ModuleOscilloscope) scop).setScale(viewScop.getScale());
         });
 
-		((OscilloscopeDrawing) viewScop.getOscilloscopeDrawing()).setModuleOscilloscope((ModuleOscilloscope) scop);
+        viewScop.getOscilloscopeDrawing().setModuleOscilloscope((ModuleOscilloscope) scop);
 
 		return viewScop;
     }

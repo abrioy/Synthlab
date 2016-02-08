@@ -2,12 +2,11 @@ package fr.synthlab.model.module.out;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
+import com.softsynth.math.AudioMath;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Test on ModuleOut
@@ -59,7 +58,7 @@ public class ModuleOutTest {
      */
     @Test
     public void testGetAttenuation() throws Exception {
-        assertEquals(0,moduleOut.getAttenuation(),0.000000001);
+        assertEquals(1, moduleOut.getAttenuation(), 0.000000001);
     }
 
     /**
@@ -69,7 +68,7 @@ public class ModuleOutTest {
     @Test
     public void testSetAttenuation() throws Exception {
         moduleOut.setAttenuation(2);
-        assertEquals(2,moduleOut.getAttenuation(),0.000000001);
+        assertEquals(AudioMath.decibelsToAmplitude(2), moduleOut.getAttenuation(), 0.000000001);
     }
 
     @Test
