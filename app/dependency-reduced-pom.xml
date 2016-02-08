@@ -38,6 +38,7 @@
           <arguments>
             <argument>install</argument>
             <argument>exec:java</argument>
+            <argument>"-Dexec.args=-Djavax.embed.singleThread=true"</argument>
           </arguments>
         </configuration>
       </plugin>

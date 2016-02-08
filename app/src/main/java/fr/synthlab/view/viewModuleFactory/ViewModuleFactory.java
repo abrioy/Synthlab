@@ -77,7 +77,9 @@ public class ViewModuleFactory {
         });
 
 		// FIXME: Code à Corentin
-		((OscilloscopeDrawing) ((AnchorPane) viewScop.getChildren().get(0)).getChildren().get(0)).setModuleOscillo((ModuleOscilloscope)scop);
+        ((OscilloscopeDrawing) viewScop.getOscilloscopeDrawing()).setModuleOscillo((ModuleOscilloscope) scop);
+
+
         return viewScop;
     }
 
