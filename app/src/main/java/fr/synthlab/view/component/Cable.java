@@ -38,7 +38,6 @@ public class Cable extends Line {
         workbench.getChildren().add(circleIn);
         workbench.getChildren().add(circleOut);
 
-        this.setFill(Color.RED);
         this.setStrokeWidth(10);
         this.setStrokeLineCap(StrokeLineCap.ROUND);
         this.setMouseTransparent(true);
@@ -123,5 +122,9 @@ public class Cable extends Line {
         if(in==plug)in=null;
         else out=null;
     }
+    public void deleteCircles(){
+        workbench.getChildren().remove(circleIn);
+        workbench.getChildren().remove(circleOut);
 
+    }
 }

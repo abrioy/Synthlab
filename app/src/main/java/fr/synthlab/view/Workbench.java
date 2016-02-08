@@ -1,14 +1,11 @@
 package fr.synthlab.view;
 
 
-import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -17,7 +14,6 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,14 +42,15 @@ public class Workbench extends Pane {
 		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
 		ViewModule osc = ViewModuleFactory.createViewModule(ModuleEnum.SCOP, this);
 
-//		vco.getModule().getPort("out").connect(osc.getModule().getPort("in"));
+		vco.getModule().getPort("out").connect(osc.getModule().getPort("in"));
 
 		this.addModule(vco);
 		this.addModule(osc);
 		*/
 	}
 
-	public void onRightClick() {dropCable();
+	public void onRightClick() {
+		dropCable();
 	}
 
     /**
@@ -73,16 +70,18 @@ public class Workbench extends Pane {
                 this.getChildren().add(draggedCable);
             }
         }else{
-            Plug fixedPlug = draggedCable.getPlug();
-            if(fixedPlug != plug) {
-                draggedCable.setPlug(plug);
-                connect(plug, fixedPlug);
-                draggedCable.update();
-                draggedCable = null;
+            if(plug!=null) {
+                Plug fixedPlug = draggedCable.getPlug();
+                if (fixedPlug != plug) {
+                    draggedCable.setPlug(plug);
+                    connect(plug, fixedPlug);
+                    draggedCable.update();
+                    draggedCable = null;
+                } else {
+                    dropCable();
+                }
             }
-            else{
-                dropCable();
-            }
+
         }
     }
 
@@ -136,7 +135,16 @@ public class Workbench extends Pane {
             if (newLocation != null) {
                 module.relocate(newLocation.getX(), newLocation.getY());
             }
-            workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
+            Point2D mousePoint = this.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+            //workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
+            for(Cable c: getCables()){
+                if (draggedCable!=c){
+                    c.update();
+                }
+                else{
+                    c.update(mousePoint);
+                }
+            }
         });
 
 	}
@@ -290,14 +298,7 @@ public class Workbench extends Pane {
         Port p = plug.getPort();
         p.disconnect();
     }
-    /** Drop cable based on lastClickedPlug
-     *
-     */
-    private void dropCable(){
-        getCables().remove(draggedCable);
-        this.getChildren().remove(draggedCable);
-        draggedCable=null;
-    }
+
 
 
     /**
@@ -336,4 +337,13 @@ public class Workbench extends Pane {
 
     }
 
+    /** Drop cable based on lastClickedPlug
+     *
+     */
+    private void dropCable(){
+        draggedCable.deleteCircles();
+        getCables().remove(draggedCable);
+        this.getChildren().remove(draggedCable);
+        draggedCable=null;
+    }
 }
