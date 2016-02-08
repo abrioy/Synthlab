@@ -3,13 +3,28 @@
 <?import fr.synthlab.view.component.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
-      minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0"
-      xmlns="http://javafx.com/javafx/8">
-    <Knob fx:id="attack" diameter="70.0" layoutX="68.0" layoutY="120.0" />
-    <Knob fx:id="decay" diameter="70.0" layoutX="198.0" layoutY="120.0" />
-    <Knob fx:id="sustain" diameter="70.0" layoutX="68.0" layoutY="258.0" />
-    <Knob fx:id="release" diameter="70.0" layoutX="198.0" layoutY="258.0" />
-    <Plug fx:id="in" layoutX="20.0" layoutY="322.0" name="gate" type="input" />
-    <Plug fx:id="out" layoutX="198.0" layoutY="322.0" name="out" type="output" />
+
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+      prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
+
+<Knob fx:id="attack"
+      diameter="70.0" layoutX="70.0" layoutY="120.0"
+      min="0" max="10" value="1"/>
+<Knob fx:id="sustain"
+      diameter="70.0" layoutX="70.0" layoutY="250.0"
+      min="0" max="12" value="0"/>
+<Knob fx:id="decay"
+      diameter="70.0" layoutX="180.0" layoutY="120.0"
+      min="0" max="10" value="1"/>
+<Knob fx:id="release"
+      diameter="70.0" layoutX="180.0" layoutY="250.0"
+      min="0" max="10" value="1"/>
+
+
+<Plug fx:id="in"
+      layoutX="15.0" layoutY="345.0"
+      name="gate" type="modulation" />
+<Plug fx:id="out"
+      layoutX="195.0" layoutY="345.0"
+      name="out" type="output" />
 </Pane>
