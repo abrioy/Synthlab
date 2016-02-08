@@ -52,7 +52,6 @@ public class Workbench extends Pane {
         if(draggedCable == null){
 			Plug opposite = getConnectedPlug(plug);
 			if (opposite!=null){
-                logger.info("TRY DRAG");
                 disconnect(plug);
                 draggedCable=getConnectedCable(plug);
                 dragCable(draggedCable,plug);
@@ -286,8 +285,6 @@ public class Workbench extends Pane {
         getCables().remove(draggedCable);
         this.getChildren().remove(draggedCable);
         draggedCable=null;
-        // TODO Method to remove the cable from the view
-        logger.info("Cable dropped");
     }
 
 
