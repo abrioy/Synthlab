@@ -54,7 +54,6 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>exec</goal>
                             <goal>java</goal>
                         </goals>
                     </execution>
@@ -62,10 +61,8 @@
                 <configuration>
                     <mainClass>fr.synthlab.Main</mainClass>
                     <classpathScope>compile</classpathScope>
-                    <executable>mvn</executable>
                     <arguments>
-                        <argument>install</argument>
-                        <argument>exec:java</argument>
+                        <argument>-Djavafx.embed.singleThread=true</argument>
                     </arguments>
                 </configuration>
             </plugin>

@@ -63,6 +63,7 @@ public class MainWindowController implements Initializable {
 				// We make it visible only to create a ghost
 				draggedNewViewModule.setVisible(true);
 				workbench.displayGhost(draggedNewViewModule);
+
 				draggedNewViewModule.setVisible(false);
 
 			}

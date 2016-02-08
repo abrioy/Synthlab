@@ -128,6 +128,8 @@ public class ModuleOscilloscope implements Module {
      * @return JComponent that displays the scope
      */
     public JComponent getOscillatorJComponent() {
+        jOscillatorComponent.revalidate();
+        jOscillatorComponent.repaint();
         return jOscillatorComponent;
     }
 
@@ -275,6 +277,11 @@ public class ModuleOscilloscope implements Module {
             setMinimumSize(new Dimension(400, 200));
             setPreferredSize(new Dimension(400, 250));
             setMaximumSize(new Dimension(1200, 300));
+
+            multipleWaveDisplay.revalidate();
+            multipleWaveDisplay.repaint();
+            repaint();
+            revalidate();
         }
 
         public AudioScopeModel getModel() {
@@ -295,6 +302,7 @@ public class ModuleOscilloscope implements Module {
             audioScopeModel.addChangeListener(new ChangeListener() {
                 @Override
                 public void stateChanged(ChangeEvent e) {
+                    multipleWaveDisplay.revalidate();
                     multipleWaveDisplay.repaint();
                 }
             });
