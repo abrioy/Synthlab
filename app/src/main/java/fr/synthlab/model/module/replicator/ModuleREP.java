@@ -46,6 +46,6 @@ public class ModuleREP implements Module {
 
     @Override
     public String getName() {
-        return null;
+        return "REP";
     }
 }
