@@ -1,5 +1,6 @@
 package fr.synthlab.model.filter;
 
+import com.softsynth.math.AudioMath;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,15 +30,15 @@ public class FilterAttenuatorTest {
      * @throws Exception
      */
     @Test
-    public void testGetAttenuation() throws Exception {
+    public void testSetAttenuation() throws Exception {
         filter.setAttenuation(10);
-        assertEquals(10,filter.getAttenuation(),0.00000000000001);
+        assertEquals(AudioMath.decibelsToAmplitude(10), filter.getAttenuation(), 0.00000000000001);
         filter.setAttenuation(13);
-        assertEquals(12,filter.getAttenuation(),0.00000000000001);
+        assertEquals(AudioMath.decibelsToAmplitude(13), filter.getAttenuation(), 0.00000000000001);
     }
 
     @Test
-    public void testSetAttenuation() throws Exception {
-        assertEquals(1,filter.getAttenuation(),0.00000000000001);
+    public void testGetAttenuation() throws Exception {
+        assertEquals(0, filter.getAttenuation(), 0.00000000000001);
     }
 }

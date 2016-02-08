@@ -1,6 +1,8 @@
 package fr.synthlab.model.filter;
 
 import com.jsyn.unitgen.UnitFilter;
+import com.softsynth.math.AudioMath;
+
 import java.util.logging.Logger;
 
 /**
@@ -14,9 +16,9 @@ public class FilterAttenuator extends UnitFilter {
     private static final Logger logger = Logger.getLogger(FilterAttenuator.class.getName());
 
     /**
-     * attenuation
+     * attenuation amplitude
      */
-    private double attenuation = 0;//in volt
+    private double attenuation = 0;
 
     /**
      * generate new values
@@ -29,20 +31,9 @@ public class FilterAttenuator extends UnitFilter {
         double[] outputs = output.getValues();
         for (int i = start; i < limit; i++) {
             double in = inputs[i];
-            double out = in * Math.pow(2, attenuation/6) ;
+            double out = in * attenuation;
             outputs[i] = out;
         }
-    }
-
-    /**
-     * setter attenuation
-     * @param attenuation attenuation param
-     */
-    public void setAttenuation(double attenuation) {
-        if (attenuation > 12){
-            attenuation = 12;
-        }
-        this.attenuation = attenuation;
     }
 
     /**
@@ -51,5 +42,13 @@ public class FilterAttenuator extends UnitFilter {
      */
     public double getAttenuation() {
         return this.attenuation;
+    }
+
+    /**
+     * setter attenuation in dB
+     * @param decibels attenuation param
+     */
+    public void setAttenuation(double decibels) {
+        this.attenuation = AudioMath.decibelsToAmplitude(decibels);
     }
 }
