@@ -1,11 +1,14 @@
 package fr.synthlab.view;
 
 
+import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
+import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -39,6 +42,15 @@ public class Workbench extends Pane {
         });
 		ModuleFactory.startSyn();
 
+		/*
+		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
+		ViewModule osc = ViewModuleFactory.createViewModule(ModuleEnum.SCOP, this);
+
+//		vco.getModule().getPort("out").connect(osc.getModule().getPort("in"));
+
+		this.addModule(vco);
+		this.addModule(osc);
+		*/
 	}
 
 	public void onRightClick() {dropCable();

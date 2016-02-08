@@ -29,7 +29,7 @@ public class FilterAttenuator extends UnitFilter {
         double[] outputs = output.getValues();
         for (int i = start; i < limit; i++) {
             double in = inputs[i];
-            double out = in * Math.pow(10, attenuation/20) ;
+            double out = in * Math.pow(2, attenuation/6) ;
             outputs[i] = out;
         }
     }
