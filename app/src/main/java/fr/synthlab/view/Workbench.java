@@ -117,6 +117,14 @@ public class Workbench extends Pane {
 
 			displayGhost(module);
 			workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::front);
+			/*for(Cable c: getCables()){
+				if (draggedCable!=c){
+					c.toFront();
+				}
+				else{
+					c.toFront();
+				}
+			}*/
         });
 
         module.setOnMouseReleased(mouseEvent -> {

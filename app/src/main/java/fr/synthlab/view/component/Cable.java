@@ -4,6 +4,7 @@ import fr.synthlab.view.Workbench;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
@@ -55,17 +56,19 @@ public class Cable extends Line {
         this.setEndX(outPosition.getX());
         this.setEndY(outPosition.getY());
 
+
         addCircle(circleIn, inPosition.getX(), inPosition.getY());
         addCircle(circleOut, outPosition.getX(), outPosition.getY());
+        this.setFill(Color.RED);
 
         this.toFront();
     }
 
     public void update(Point2D mouse){
-        in=getPlug();
-        out=null;
-        Bounds inBounds = in.getBoundsInLocal();
-        Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(in.localToScene(inBounds)));
+        //in=getPlug();
+        //out=null;
+        Bounds inBounds = getPlug().getBoundsInLocal();
+        Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(getPlug().localToScene(inBounds)));
 
         this.setStartX(inPosition.getX());
         this.setStartY(inPosition.getY());
@@ -74,6 +77,7 @@ public class Cable extends Line {
 
         addCircle(circleIn, inPosition.getX(), inPosition.getY());
         addCircle(circleOut,mouse.getX(),mouse.getY());
+        this.setFill(Color.RED);
 
         this.toFront();
     }
@@ -113,9 +117,9 @@ public class Cable extends Line {
     }
 
     public void front(){
-        this.toFront();
         circleIn.toFront();
         circleOut.toFront();
+        this.toFront();
     }
 
     public void unplug(Plug plug){
