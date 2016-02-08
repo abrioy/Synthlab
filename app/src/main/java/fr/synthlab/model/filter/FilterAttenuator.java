@@ -18,7 +18,7 @@ public class FilterAttenuator extends UnitFilter {
     /**
      * attenuation amplitude
      */
-    private double attenuation = 0;
+    private double attenuation = 1;
 
     /**
      * generate new values

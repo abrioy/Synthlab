@@ -1,12 +1,8 @@
 package fr.synthlab.view;
 
 
-import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
-import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.port.Port;
-import fr.synthlab.model.module.vca.ModuleVCA;
-import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
@@ -36,19 +32,6 @@ public class Workbench extends Pane {
 		dragGhost.setOpacity(0.40d); // #SoSpooky
 
 		ModuleFactory.startSyn();
-
-		ModuleVCA vca = (ModuleVCA) ModuleFactory.createModule(ModuleEnum.VCA);
-		ModuleVCOA vco = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
-		ModuleVCOA vco2 = (ModuleVCOA) ModuleFactory.createModule(ModuleEnum.VCOA);
-		ModuleOut out = (ModuleOut) ModuleFactory.createModule(ModuleEnum.OUT);
-
-		vco.setFrequency(800);
-		vco2.setFrequency(5);
-		vca.setAttenuation(0);
-
-		vco.getPort("out").connect(vca.getPort("in"));
-		vco2.getPort("out").connect(vca.getPort("am"));
-		vca.getPort("out").connect(out.getPort("in"));
 	}
 
 	public void onRightClick() {dropCable();

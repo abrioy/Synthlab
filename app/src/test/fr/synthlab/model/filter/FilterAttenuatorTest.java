@@ -39,6 +39,6 @@ public class FilterAttenuatorTest {
 
     @Test
     public void testGetAttenuation() throws Exception {
-        assertEquals(0, filter.getAttenuation(), 0.00000000000001);
+        assertEquals(1, filter.getAttenuation(), 0.00000000000001);
     }
 }
