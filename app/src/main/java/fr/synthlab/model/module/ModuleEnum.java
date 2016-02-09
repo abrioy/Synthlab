@@ -9,7 +9,8 @@ public enum ModuleEnum {
     SCOP("SCOP", "Oscilloscope"),
     REP("REP", "Repeater"),
     EG("EG", "Envelope Generator"),
-	VCFLP("VCFLP", "VCF (LP)");
+	VCFLP("VCFLP", "VCF (LP)"),
+    KEYB("KEYB", "Keyboard");
 
 
     private String moduleName;
