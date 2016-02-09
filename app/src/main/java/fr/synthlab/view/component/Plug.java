@@ -32,9 +32,10 @@ public class Plug extends StackPane {
 
 	private Label nameLabel;
 	public enum Type {
-        input(Color.DARKCYAN),
-        output(Color.DARKGREEN),
-        other(Color.DARKSALMON);
+        input(Color.LIGHTBLUE),
+        output(Color.ORANGE),
+		modulation(Color.HOTPINK),
+        other(Color.WHITE);
 
         public Color color;
 
@@ -48,6 +49,8 @@ public class Plug extends StackPane {
                     return input;
                 case "output":
                     return output;
+				case "modulation":
+					return modulation;
             }
             return other;
         }

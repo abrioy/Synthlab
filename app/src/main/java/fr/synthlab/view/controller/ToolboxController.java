@@ -40,14 +40,23 @@ public class ToolboxController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> items = FXCollections.observableArrayList(ModuleEnum.VCOA.toString(),
-                ModuleEnum.VCA.toString());
+        ObservableList<String> items = FXCollections.observableArrayList(
+				ModuleEnum.VCOA.toString(),
+                ModuleEnum.VCA.toString()
+		);
         loadTreeItems(input,items);
 
-        items = FXCollections.observableArrayList(ModuleEnum.OUT.toString(), ModuleEnum.SCOP.toString());
+        items = FXCollections.observableArrayList(
+				ModuleEnum.OUT.toString(),
+				ModuleEnum.SCOP.toString()
+		);
         loadTreeItems(output,items);
 
-        items = FXCollections.observableArrayList(ModuleEnum.REP.toString(), ModuleEnum.EG.toString());
+        items = FXCollections.observableArrayList(
+				ModuleEnum.REP.toString(),
+				ModuleEnum.EG.toString(),
+				ModuleEnum.VCFLP.toString()
+		);
         loadTreeItems(filter,items);
         
         root.setExpanded(true);

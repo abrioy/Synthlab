@@ -2,12 +2,15 @@ package fr.synthlab.model.module;
 
 public enum ModuleEnum {
 
+
     VCOA("VCOA", "VCO Type A"),
     VCA("VCA", "VCA"),
     OUT("OUT", "Output"),
     SCOP("SCOP", "Oscilloscope"),
     REP("REP", "Repeater"),
-    EG("EG", "Envelope Generator");
+    EG("EG", "Envelope Generator"),
+	VCFLP("VCFLP", "VCF (LP)");
+
 
     private String moduleName;
     private String moduleLongName;
