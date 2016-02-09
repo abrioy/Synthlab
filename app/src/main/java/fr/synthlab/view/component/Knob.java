@@ -86,11 +86,30 @@ public class Knob extends Pane {
      * if = 0 it is a button continue.
      */
     private final IntegerProperty step = new SimpleIntegerProperty(this, "step", 0);
+
+    /**
+     * min with exponential
+     */
     private double minExp = Math.log(min.get());
+
+    /**
+     * maximum with exponential
+     */
     private double maxExp = Math.log(max.get());
+
+    /**
+     * scale to exponential.
+     */
     private double scale= (maxExp - minExp) / max.get() - min.get();
+
+    /**
+     * coef to exponential
+     */
     private double coef = scale * 0 - minExp ;
 
+    /**
+     * label name.
+     */
     private Label name;
 
     /**
