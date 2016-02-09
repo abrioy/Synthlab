@@ -8,6 +8,10 @@
           diameter="75.0" layoutX="125.0" layoutY="90.0"
           min="0" max="22000" scaleType="log" value="440" />
 
+    <Knob fx:id="resonance" label="Resonance"
+          diameter="40.0" layoutX="125.0" layoutY="165.0"
+          min="0" max="100" value="0" />
+
     <Plug fx:id="fm"
           layoutX="15.0" layoutY="70.0"
           name="fm" type="modulation" />

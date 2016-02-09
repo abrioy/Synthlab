@@ -44,6 +44,10 @@ public class ModuleVCFLP implements Module {
         filterAttenuator.setAttenuation(threshold);
     }
 
+	public void setResonance(double resonnace) {
+		
+	}
+
     @Override
     public Collection<Port> getPorts() {
         return ports;
