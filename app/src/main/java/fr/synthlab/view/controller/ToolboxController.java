@@ -101,7 +101,7 @@ public class ToolboxController implements Initializable {
                 };
 
                 cell.setOnDragDetected(event -> {
-                    if (!cell.isEmpty()) {
+                    if (!cell.isEmpty() && !ModuleEnum.getNameFromLong(cell.getItem()).equals("")) {
                         Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
                         ClipboardContent cc = new ClipboardContent();
                         cc.putString(cell.getItem());
@@ -119,11 +119,7 @@ public class ToolboxController implements Initializable {
     }
 
     private void drag(TreeItem<String> item, TreeView<String> draggable) {
-        if (item.isExpanded()) {
-            makeListDraggable(draggable);
-        } else {
-            makeListDraggable(draggable);
-        }
+        makeListDraggable(draggable);
         input.relocate(0, 0);
         if (rootInput.isExpanded()) {
             input.setPrefHeight((rootInput.getChildren().size() + 1) * 25);
