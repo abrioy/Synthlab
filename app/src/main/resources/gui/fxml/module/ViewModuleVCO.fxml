@@ -22,8 +22,8 @@
 
     <Plug fx:id="fm"
           layoutX="15.0" layoutY="345.0"
-          name="fm" type="modulation" />
+          label="fm" name="fm" type="modulation" />
     <Plug fx:id="out"
           layoutX="195.0" layoutY="345.0"
-          name="out" type="output" />
+          label="out" name="out" type="output" />
 </Pane>
