@@ -52,20 +52,20 @@ public class ToolboxController implements Initializable {
         rootFilter.expandedProperty().addListener(listener -> drag(rootFilter, filter));
 
         ObservableList<String> items = FXCollections.observableArrayList(
-                ModuleEnum.VCOA.toString(),
-                ModuleEnum.VCA.toString()
+                ModuleEnum.VCOA.getLongName(),
+                ModuleEnum.VCA.getLongName()
         );
         loadTreeItems(rootInput, items, input);
         items = FXCollections.observableArrayList(
-                ModuleEnum.OUT.toString(),
-                ModuleEnum.SCOP.toString()
+                ModuleEnum.OUT.getLongName(),
+                ModuleEnum.SCOP.getLongName()
         );
         loadTreeItems(rootOutput, items, output);
 
         items = FXCollections.observableArrayList(
-                ModuleEnum.REP.toString(),
-                ModuleEnum.EG.toString(),
-                ModuleEnum.VCFLP.toString()
+                ModuleEnum.REP.getLongName(),
+                ModuleEnum.EG.getLongName(),
+                ModuleEnum.VCFLP.getLongName()
         );
         loadTreeItems(rootFilter, items, filter);
 
