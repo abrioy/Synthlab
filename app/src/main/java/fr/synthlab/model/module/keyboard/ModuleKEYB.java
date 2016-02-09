@@ -34,6 +34,6 @@ public class ModuleKEYB implements Module {
 
     @Override
     public ModuleEnum getType() {
-        return null;
+        return ModuleEnum.KEYB;
     }
 }

@@ -43,6 +43,9 @@ public class ViewModuleFactory {
 			case VCFLP:
 				module = createViewModuleVCFLP(workbench);
 				break;
+            case KEYB:
+                module = createViewModuleKEYB(workbench);
+                break;
         }
 		if (module != null) {
 			logger.finer("ViewModule created: " + type.toString());
