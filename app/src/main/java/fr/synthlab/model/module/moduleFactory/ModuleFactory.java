@@ -9,6 +9,7 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.replicator.ModuleREP;
 import fr.synthlab.model.module.vca.ModuleVCA;
+import fr.synthlab.model.module.vcflp.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 
 import java.util.logging.Logger;
@@ -22,24 +23,32 @@ public class ModuleFactory {
      */
     private static Synthesizer syn = JSyn.createSynthesizer();
 
-    public static Module createModule(ModuleEnum module){
-        Module m;
-        switch(module){
-            case VCOA: m = createVCO();
+    public static Module createModule(ModuleEnum type){
+        Module module = null;
+        switch(type){
+            case VCOA: module = createVCO();
                 break;
-            case SCOP: m = createOscilloscope();
+            case SCOP: module = createOscilloscope();
                 break;
-            case VCA: m = createVCA();
+			case OUT: module = createOut();
+				break;
+            case VCA: module = createVCA();
                 break;
-            case REP : m = createREP();
+            case REP : module = createREP();
                 break;
-            case EG : m = createEG();
+            case EG : module = createEG();
                 break;
-            default : m = createOut(); //OUT
+			case VCFLP : module = createVCFLP();
+				break;
         }
-		m.start();
-		logger.finer("Module created: "+m.toString());
-        return m;
+		if(module != null){
+			logger.finer("Module created: "+module.toString());
+			module.start();
+		}
+		else{
+			logger.severe("Unrecognised module type \""+type.toString()+"\".");
+		}
+        return module;
     }
 
     /**
@@ -83,6 +92,15 @@ public class ModuleFactory {
     private static Module createEG() {
         return new ModuleEG(syn);
     }
+
+	/**
+	 * @return a new ModuleVCFLP
+	 */
+	private static ModuleVCFLP createVCFLP() {
+		return new ModuleVCFLP(syn);
+	}
+
+
 
     public static Synthesizer getSyn() {
         return syn;

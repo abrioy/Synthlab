@@ -8,6 +8,7 @@ import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.vca.ModuleVCA;
+import fr.synthlab.model.module.vcflp.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.module.*;
@@ -18,9 +19,9 @@ public class ViewModuleFactory {
 	private static final Logger logger = Logger.getLogger(ViewModuleFactory.class.getName());
 
 
-    public static ViewModule createViewModule(ModuleEnum m, Workbench workbench) {
+    public static ViewModule createViewModule(ModuleEnum type, Workbench workbench) {
         ViewModule module = null;
-		switch (m) {
+		switch (type) {
             case VCOA:
 				module = createViewModuleVCO(workbench);
 				break;
@@ -39,25 +40,25 @@ public class ViewModuleFactory {
             case EG:
                 module = createViewModuleEG(workbench);
                 break;
+			case VCFLP:
+				module = createViewModuleVCFLP(workbench);
+				break;
         }
-		logger.finer("ViewModule created: "+m.toString());
+		if (module != null) {
+			logger.finer("ViewModule created: " + type.toString());
+		}
+		else{
+			logger.severe("Unrecognised module type \""+type.toString()+"\".");
+		}
         return module;
     }
 
-    private static ViewModule createViewModuleVCA(Workbench workbench) {
-        Module vca = ModuleFactory.createModule(ModuleEnum.VCA);
-        ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
-        viewVca.setModule(vca);
-        viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca).setAttenuation(viewVca.getAmpli()));
-
-        return viewVca;
-    }
 
     /**
      * @return a viewModuleVCO attached to its module
      * @param workbench
      */
-    private static ViewModuleVCO createViewModuleVCO(Workbench workbench) {
+    private static ViewModule createViewModuleVCO(Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleEnum.VCOA);
         ViewModuleVCO viewVco = new ViewModuleVCO(workbench);
         viewVco.setModule(vco);
@@ -72,6 +73,15 @@ public class ViewModuleFactory {
 
         return viewVco;
     }
+
+	private static ViewModule createViewModuleVCA(Workbench workbench) {
+		Module vca = ModuleFactory.createModule(ModuleEnum.VCA);
+		ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
+		viewVca.setModule(vca);
+		viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca).setAttenuation(viewVca.getAmpli()));
+
+		return viewVca;
+	}
 
     private static ViewModule createViewModuleOut(Workbench workbench) {
         Module out = ModuleFactory.createModule(ModuleEnum.OUT);
@@ -127,5 +137,15 @@ public class ViewModuleFactory {
 
         return viewEG;
     }
+
+	private static ViewModule createViewModuleVCFLP(Workbench workbench) {
+		Module vcflp = ModuleFactory.createModule(ModuleEnum.VCFLP);
+		ViewModuleVCFLP viewVcflp = new ViewModuleVCFLP(workbench);
+		viewVcflp.setModule(vcflp);
+		viewVcflp.setChangeThresholdCommand(() -> ((ModuleVCFLP) vcflp).setThreshold(viewVcflp.getThreshold()));
+
+		return viewVcflp;
+	}
+
 
 }
