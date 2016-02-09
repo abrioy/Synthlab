@@ -2,7 +2,7 @@ package fr.synthlab.model.module.vcf;
 
 
 import com.jsyn.Synthesizer;
-import fr.synthlab.model.filter.VcoFm;
+import fr.synthlab.model.filter.FmFilter;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -27,10 +27,10 @@ public class ModuleVCF implements Module {
     /**
      * Filter modulator
      */
-    protected VcoFm fmFilter;
+    protected FmFilter fmFilter;
 
     public ModuleVCF(Synthesizer synthesizer) {
-        fmFilter = new VcoFm(f0);
+        fmFilter = new FmFilter(f0);
 
         synthesizer.add(fmFilter);
 

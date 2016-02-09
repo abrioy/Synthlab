@@ -3,11 +3,11 @@ package fr.synthlab.model.filter;
 
 import com.jsyn.unitgen.UnitFilter;
 
-public class VcoFm extends UnitFilter {
+public class FmFilter extends UnitFilter {
 
     private double f0;
 
-    public VcoFm(double f0) {
+    public FmFilter(double f0) {
         this.f0 = f0;
     }
 

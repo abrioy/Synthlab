@@ -142,7 +142,7 @@ public class ViewModuleFactory {
 		Module vcflp = ModuleFactory.createModule(ModuleEnum.VCFLP);
 		ViewModuleVCFLP viewVcflp = new ViewModuleVCFLP(workbench);
 		viewVcflp.setModule(vcflp);
-		viewVcflp.setChangeThresholdCommand(() -> ((ModuleVCFLP) vcflp).setThreshold(viewVcflp.getThreshold()));
+        viewVcflp.setChangeThresholdCommand(() -> ((ModuleVCFLP) vcflp).setF0(viewVcflp.getThreshold()));
 
 		return viewVcflp;
 	}
