@@ -25,7 +25,6 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
     private Knob threshold;
 
     private Command changeThresholdCommand;
-    private Command changeResonanceCommand;
 
     public ViewModuleVCFHP(Workbench workbench) {
         super(workbench);
@@ -45,15 +44,12 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
 
     public void setChangeThresholdCommand(Command changeThresholdCommand) {
         this.changeThresholdCommand = changeThresholdCommand;
+
+        changeThresholdCommand.execute();
     }
 
     public double getThreshold() {
         return threshold.getValue();
-    }
-
-
-    public void setChangeResonanceCommand(Command changeResonanceCommand) {
-        this.changeResonanceCommand = changeResonanceCommand;
     }
 
 }

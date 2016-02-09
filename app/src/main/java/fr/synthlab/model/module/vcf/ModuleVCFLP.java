@@ -49,7 +49,7 @@ public class ModuleVCFLP extends ModuleVCF {
             fmFilter.output.disconnectAll();
             lpFilter.frequency.set(f0);
         } else {
-            fmFilter.output.connect(lpFilter.input);
+            fmFilter.output.connect(lpFilter.frequency);
         }
     }
 

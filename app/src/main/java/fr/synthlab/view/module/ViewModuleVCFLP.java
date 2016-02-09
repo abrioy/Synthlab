@@ -52,7 +52,9 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 
     public void setChangeThresholdCommand(Command changeThresholdCommand) {
         this.changeThresholdCommand = changeThresholdCommand;
-    }
+
+		changeThresholdCommand.execute();
+	}
 
     public double getThreshold() {
         return threshold.getValue();
@@ -65,6 +67,8 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 
 	public void setChangeResonanceCommand(Command changeResonanceCommand) {
 		this.changeResonanceCommand = changeResonanceCommand;
+
+		changeResonanceCommand.execute();
 	}
 
 	public double getResonance() {
