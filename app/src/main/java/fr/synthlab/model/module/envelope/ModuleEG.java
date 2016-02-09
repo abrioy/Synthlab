@@ -26,11 +26,12 @@ public class ModuleEG implements Module {
         OutputPort out = new OutputPort("out", this, null);
         ports.add(out);
 
+        /*
         envelope.attack.setup(0,1,10.0);
         envelope.decay.setup(0,1,10.0);
         envelope.sustain.setup(0,0,12.0);
         envelope.release.setup(0,1,10.0);
-
+        */
     }
 
     @Override
