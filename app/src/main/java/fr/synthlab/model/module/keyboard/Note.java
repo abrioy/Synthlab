@@ -1,8 +1,5 @@
 package fr.synthlab.model.module.keyboard;
 
-/**
- * Created by corentin on 09/02/16.
- */
 public enum Note {
     C(3),
     CSharp(4),

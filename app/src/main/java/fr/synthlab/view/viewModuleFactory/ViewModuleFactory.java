@@ -4,6 +4,7 @@ package fr.synthlab.view.viewModuleFactory;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.envelope.ModuleEG;
+import fr.synthlab.model.module.keyboard.ModuleKEYB;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
@@ -151,11 +152,13 @@ public class ViewModuleFactory {
 		return viewVcflp;
 	}
 
-
     private static ViewModule createViewModuleKEYB(Workbench workbench) {
         Module keyb = ModuleFactory.createModule(ModuleEnum.KEYB);
         ViewModuleKEYB viewKEYB = new ViewModuleKEYB(workbench);
         viewKEYB.setModule(keyb);
+
+        viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb).pressKey(viewKEYB.getNotePressed()));
+        viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb).releaseKey());
 
         return viewKEYB;
     }

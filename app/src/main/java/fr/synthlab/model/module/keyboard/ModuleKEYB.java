@@ -96,5 +96,9 @@ public class ModuleKEYB implements Module {
             break;
         }
     }
+
+    public void releaseKey() {
+
+    }
 }
 

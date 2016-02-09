@@ -8,9 +8,6 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.logging.Logger;
 
-/**
- * Created by corentin on 09/02/16.
- */
 public class KEYBKey extends Rectangle {
     private static final Logger logger = Logger.getLogger(KEYBKey.class.getName());
 
@@ -24,9 +21,6 @@ public class KEYBKey extends Rectangle {
         this.setFill(Color.WHITE);
         this.setWidth(50);
         this.setHeight(140);
-
-        setOnMousePressed(event -> System.out.println("CLICKED"));
-        setOnMouseReleased(event -> System.out.println("RELEASED"));
     }
 
     public final void setIsWhiteKey(boolean whiteKey) {
