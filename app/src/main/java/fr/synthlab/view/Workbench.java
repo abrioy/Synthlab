@@ -185,16 +185,25 @@ public class Workbench extends Pane {
 
 	/**
 	 * Computes the 2D center of a Bounds object
+	 * @param plug
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
-	public Point2D getBoundsCenter(Bounds bounds) {
+	public Point2D getBoundsCenter(Plug plug, Bounds bounds) {
+		double x, y;
+		x = bounds.getMinX() + (plug.getCenter().getX());
+		y = bounds.getMinY() + (plug.getCenter().getY());
+        System.out.println(plug.getCenter());
+        return new Point2D(x, y);
+	}
+
+	private Point2D getBoundsCenter(Bounds bounds) {
 		double x, y;
 		x = bounds.getMinX() + (bounds.getWidth() / 2.0d);
 		y = bounds.getMinY() + (bounds.getHeight() / 2.0d);
-
 		return new Point2D(x, y);
 	}
+
 
 	/**
 	 * Try and moves a module to the expected position.
@@ -270,7 +279,7 @@ public class Workbench extends Pane {
 		return null;
 	}
 
-    /** Function that call a connection between two port
+	/** Function that call a connection between two port
      * This function first retrieve the port of the two plug in parameter
      *
      * @param in the name is mandatory, we dont care if its in or out

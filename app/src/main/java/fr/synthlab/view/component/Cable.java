@@ -6,7 +6,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 
 import java.util.logging.Logger;
 
@@ -45,8 +44,8 @@ public class Cable extends Line {
     public void update(){
         Bounds inBounds = in.getBoundsInLocal();
         Bounds outBounds = out.getBoundsInLocal();
-        Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(in.localToScene(inBounds)));
-        Point2D outPosition = workbench.getBoundsCenter(workbench.sceneToLocal(out.localToScene(outBounds)));
+        Point2D inPosition = workbench.getBoundsCenter(in, workbench.sceneToLocal(in.localToScene(inBounds)));
+        Point2D outPosition = workbench.getBoundsCenter(out, workbench.sceneToLocal(out.localToScene(outBounds)));
 
         this.setStartX(inPosition.getX());
         this.setStartY(inPosition.getY());
@@ -63,7 +62,7 @@ public class Cable extends Line {
         in=getPlug();
         out=null;
         Bounds inBounds = in.getBoundsInLocal();
-        Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(in.localToScene(inBounds)));
+        Point2D inPosition = workbench.getBoundsCenter(in, workbench.sceneToLocal(in.localToScene(inBounds)));
 
         this.setStartX(inPosition.getX());
         this.setStartY(inPosition.getY());
