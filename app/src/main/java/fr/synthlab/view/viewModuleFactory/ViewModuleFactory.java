@@ -8,6 +8,7 @@ import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.vca.ModuleVCA;
+import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
@@ -43,6 +44,9 @@ public class ViewModuleFactory {
 			case VCFLP:
 				module = createViewModuleVCFLP(workbench);
 				break;
+            case VCFHP:
+                module = createViewModuleVCFHP(workbench);
+                break;
         }
 		if (module != null) {
 			logger.finer("ViewModule created: " + type.toString());
@@ -52,7 +56,6 @@ public class ViewModuleFactory {
 		}
         return module;
     }
-
 
     /**
      * @return a viewModuleVCO attached to its module
@@ -148,6 +151,15 @@ public class ViewModuleFactory {
 
 		return viewVcflp;
 	}
+
+    private static ViewModule createViewModuleVCFHP(Workbench workbench) {
+        Module vcfhp = ModuleFactory.createModule(ModuleEnum.VCFHP);
+        ViewModuleVCFHP viewVcfhp = new ViewModuleVCFHP(workbench);
+        viewVcfhp.setModule(vcfhp);
+        viewVcfhp.setChangeThresholdCommand(() -> ((ModuleVCFHP) vcfhp).setF0(viewVcfhp.getThreshold()));
+
+        return viewVcfhp;
+    }
 
 
 }

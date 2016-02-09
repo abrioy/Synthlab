@@ -55,7 +55,8 @@ public class ToolboxController implements Initializable {
         items = FXCollections.observableArrayList(
 				ModuleEnum.REP.toString(),
 				ModuleEnum.EG.toString(),
-				ModuleEnum.VCFLP.toString()
+				ModuleEnum.VCFLP.toString(),
+                ModuleEnum.VCFHP.toString()
 		);
         loadTreeItems(filter,items);
         
