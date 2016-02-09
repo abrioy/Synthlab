@@ -8,7 +8,8 @@ public enum ModuleEnum {
     SCOP("SCOP"),
     REP("REP"),
     EG("EG"),
-	VCFLP("VCFLP");
+	VCFLP("VCFLP"),
+    VCFHP("VCFHP");
 
     private String moduleName;
 
