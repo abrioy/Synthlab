@@ -37,9 +37,20 @@ public class Workbench extends Pane {
             }
         });
 		ModuleFactory.startSyn();
+
+		/*
+		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
+		ViewModule osc = ViewModuleFactory.createViewModule(ModuleEnum.SCOP, this);
+
+		vco.getModule().getPort("out").connect(osc.getModule().getPort("in"));
+
+		this.addModule(vco);
+		this.addModule(osc);
+		*/
 	}
 
-	public void onRightClick() {dropCable();
+	public void onRightClick() {
+		dropCable();
 	}
 
     /**
@@ -47,6 +58,9 @@ public class Workbench extends Pane {
      * @param plug
      */
     public void plugClicked(Plug plug){
+        String str;
+        if (draggedCable==null){str="null";}
+        else str="full";
         if(draggedCable == null){
 			Plug opposite = getConnectedPlug(plug);
 			if (opposite!=null){
@@ -59,16 +73,18 @@ public class Workbench extends Pane {
                 this.getChildren().add(draggedCable);
             }
         }else{
-            Plug fixedPlug = draggedCable.getPlug();
-            if(fixedPlug != plug) {
-                draggedCable.setPlug(plug);
-                connect(plug, fixedPlug);
-                draggedCable.update();
-                draggedCable = null;
+            if(getConnectedCable(plug)==null) {
+                Plug fixedPlug = draggedCable.getPlug();
+                if (fixedPlug != plug) {
+                    draggedCable.setPlug(plug);
+                    connect(plug, fixedPlug);
+                    draggedCable.update();
+                    draggedCable = null;
+                } else {
+                    dropCable();
+                }
             }
-            else{
-                dropCable();
-            }
+
         }
     }
 
@@ -77,6 +93,24 @@ public class Workbench extends Pane {
 	 * @param module
 	 */
 	public void removeModule(ViewModule module) {
+        for (Node child : module.getChildren()) {
+            if (child instanceof Pane) {
+                Pane core = (Pane)child;
+                for (Node plug : core.getChildren()) {
+                    if (plug instanceof Plug) {
+                        Cable c =getConnectedCable((Plug)plug);
+                        if (c!=null) {
+                            disconnect((Plug) plug);
+                            c.deleteCircles();
+                            getCables().remove(c);
+                            this.getChildren().remove(c);
+                        }
+
+                    }
+                }
+
+            }
+        }
 		this.getChildren().remove(module);
 	}
 
@@ -112,12 +146,21 @@ public class Workbench extends Pane {
 		final Delta mouseDelta = new Delta();
 
 		module.setOnMousePressed(event -> {
-			Point2D localPoint = module.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+            Point2D mousePoint = this.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+            Point2D localPoint = module.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 			mouseDelta.x = localPoint.getX();
 			mouseDelta.y = localPoint.getY();
 
 			displayGhost(module);
-			workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::front);
+			//workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::front);
+			for(Cable c: getCables()){
+				if (draggedCable!=c){
+					c.update();
+				}
+				else{
+					c.update(mousePoint);
+				}
+			}
         });
 
         module.setOnMouseReleased(mouseEvent -> {
@@ -125,19 +168,26 @@ public class Workbench extends Pane {
         });
 
         module.setOnMouseDragged(event -> {
-            Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+			Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
-            double expectedX = localPoint.getX() - mouseDelta.x;
-            double expectedY = localPoint.getY() - mouseDelta.y;
-            // Moving the ghost to where the module should be
-            workbench.moveGhost(expectedX, expectedY);
+			double expectedX = localPoint.getX() - mouseDelta.x;
+			double expectedY = localPoint.getY() - mouseDelta.y;
+			// Moving the ghost to where the module should be
+			workbench.moveGhost(expectedX, expectedY);
 
-            Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
-            if (newLocation != null) {
-                module.relocate(newLocation.getX(), newLocation.getY());
-            }
-            workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
-        });
+			Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
+			if (newLocation != null) {
+				module.relocate(newLocation.getX(), newLocation.getY());
+			}
+			//workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
+			for (Cable c : getCables()) {
+				if (draggedCable != c) {
+					c.update();
+				} else {
+					c.update(localPoint);
+				}
+			}
+		});
 
 	}
 
@@ -185,16 +235,25 @@ public class Workbench extends Pane {
 
 	/**
 	 * Computes the 2D center of a Bounds object
+	 * @param plug
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
-	public Point2D getBoundsCenter(Bounds bounds) {
+	public Point2D getBoundsCenter(Plug plug, Bounds bounds) {
+		double x, y;
+		x = bounds.getMinX() + (plug.getCenter().getX());
+		y = bounds.getMinY() + (plug.getCenter().getY());
+        System.out.println(plug.getCenter());
+        return new Point2D(x, y);
+	}
+
+	private Point2D getBoundsCenter(Bounds bounds) {
 		double x, y;
 		x = bounds.getMinX() + (bounds.getWidth() / 2.0d);
 		y = bounds.getMinY() + (bounds.getHeight() / 2.0d);
-
 		return new Point2D(x, y);
 	}
+
 
 	/**
 	 * Try and moves a module to the expected position.
@@ -270,7 +329,7 @@ public class Workbench extends Pane {
 		return null;
 	}
 
-    /** Function that call a connection between two port
+	/** Function that call a connection between two port
      * This function first retrieve the port of the two plug in parameter
      *
      * @param in the name is mandatory, we dont care if its in or out
@@ -291,15 +350,6 @@ public class Workbench extends Pane {
         Port p = plug.getPort();
         p.disconnect();
     }
-    /** Drop cable based on lastClickedPlug
-     *
-     */
-    private void dropCable(){
-        getCables().remove(draggedCable);
-        this.getChildren().remove(draggedCable);
-        draggedCable=null;
-    }
-
 
     /**
      * Returns the list of all currently active cables
@@ -316,7 +366,7 @@ public class Workbench extends Pane {
     }
 
     private Cable getConnectedCable(Plug plug){
-        Plug test = null;
+        Plug test;
         for(Cable c : getCables()){
             test = c.getOppositePlug(plug);
             if(test!=null)return c;
@@ -337,4 +387,15 @@ public class Workbench extends Pane {
 
     }
 
+    /** Drop cable based on lastClickedPlug
+     *
+     */
+    private void dropCable(){
+		if(draggedCable!=null) {
+			draggedCable.deleteCircles();
+			getCables().remove(draggedCable);
+			this.getChildren().remove(draggedCable);
+			draggedCable = null;
+		}
+    }
 }

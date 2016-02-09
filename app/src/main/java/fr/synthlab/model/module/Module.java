@@ -20,5 +20,5 @@ public interface Module {
     void start();
     void stop();
     void update();
-    String getName();
+    ModuleEnum getType();
 }

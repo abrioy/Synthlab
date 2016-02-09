@@ -54,7 +54,8 @@ public class InputPort extends Port {
      * Disconnect a connected port from this port
      */
     public void disconnect() {
-        input.disconnect(((OutputPort) getConnected()).getOutput());
+        if(getConnected() instanceof OutputPort)
+            input.disconnect(((OutputPort) getConnected()).getOutput());
         super.disconnect();
     }
 }

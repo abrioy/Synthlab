@@ -24,7 +24,11 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
     @FXML
     private Knob threshold;
 
+	@FXML
+	private Knob resonance;
+
     private Command changeThresholdCommand;
+	private Command changeResonanceCommand;
 
     public ViewModuleVCFLP(Workbench workbench) {
 		super(workbench);
@@ -36,6 +40,10 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 		threshold.valueProperty().addListener(event -> {
             updateThreshold();
         });
+
+		resonance.valueProperty().addListener(event -> {
+			updateResonance();
+		});
     }
 
     private void updateThreshold() {
@@ -49,4 +57,17 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
     public double getThreshold() {
         return threshold.getValue();
     }
+
+
+	private void updateResonance() {
+		changeResonanceCommand.execute();
+	}
+
+	public void setChangeResonanceCommand(Command changeResonanceCommand) {
+		this.changeResonanceCommand = changeResonanceCommand;
+	}
+
+	public double getResonance() {
+		return resonance.getValue();
+	}
 }

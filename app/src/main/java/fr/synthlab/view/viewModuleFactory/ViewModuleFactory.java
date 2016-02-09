@@ -143,6 +143,8 @@ public class ViewModuleFactory {
 		ViewModuleVCFLP viewVcflp = new ViewModuleVCFLP(workbench);
 		viewVcflp.setModule(vcflp);
         viewVcflp.setChangeThresholdCommand(() -> ((ModuleVCFLP) vcflp).setF0(viewVcflp.getThreshold()));
+		viewVcflp.setChangeResonanceCommand(() -> ((ModuleVCFLP) vcflp).setResonance(viewVcflp.getResonance()));
+
 
 		return viewVcflp;
 	}

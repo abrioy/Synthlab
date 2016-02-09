@@ -4,6 +4,7 @@ package fr.synthlab.model.module.vcf;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FmFilter;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
-public class ModuleVCF implements Module {
+public abstract class ModuleVCF implements Module {
 
     private static final Logger logger = Logger.getLogger(ModuleVCF.class.getName());
 
@@ -59,6 +60,11 @@ public class ModuleVCF implements Module {
     }
 
     @Override
+    public abstract ModuleEnum getType();
+
+
+
+
     public String getName() {
         return "VCF";
     }

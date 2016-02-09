@@ -2,14 +2,19 @@ package fr.synthlab.model.module.replicator;
 
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 public class ModuleREP implements Module {
+    private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class.getName());
+
     /**
      * All ports
      */
@@ -66,7 +71,7 @@ public class ModuleREP implements Module {
     }
 
     @Override
-    public String getName() {
-        return "REP";
+    public ModuleEnum getType() {
+        return ModuleEnum.REP;
     }
 }

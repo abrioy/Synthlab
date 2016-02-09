@@ -7,6 +7,7 @@ import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.TriangleOscillator;
 import fr.synthlab.model.filter.FmFilter;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -186,8 +187,8 @@ public class ModuleVCOA implements Module {
     }
 
     @Override
-    public String getName() {
-        return "VCOA";
+    public ModuleEnum getType() {
+        return ModuleEnum.VCOA;
     }
 
 

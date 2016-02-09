@@ -361,7 +361,7 @@ public class Knob extends Pane {
         diameter.set(v);
         knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
         scaleSize = (int) (diameter.get() / 5);
-        name.setLayoutX(-5*getLabel().length()/2);
+        name.setLayoutX(-8*getLabel().length()/2);
         name.setLayoutY(-getDiameter()/2-25);
     }
 
@@ -407,6 +407,8 @@ public class Knob extends Pane {
     public final void setLabel(String v) {
         label.set(v);
         name.setText(v);
+        name.setLayoutX(-8*getLabel().length()/2);
+        name.setLayoutY(-getDiameter()/2-25);
     }
 
     /**

@@ -2,6 +2,7 @@ package fr.synthlab.model.module.vcf;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.FilterLowPass;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 
@@ -55,6 +56,11 @@ public class ModuleVCFLP extends ModuleVCF {
         } else {
             fmFilter.output.connect(lpFilter.input);
         }
+    }
+
+    @Override
+    public ModuleEnum getType() {
+        return ModuleEnum.VCFLP;
     }
 
     public void setResonance(double value) {
