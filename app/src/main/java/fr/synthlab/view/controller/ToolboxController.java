@@ -21,17 +21,18 @@ import java.util.logging.Logger;
 public class ToolboxController implements Initializable {
     private static final Logger logger = Logger.getLogger(ToolboxController.class.getName());
 
-    @FXML
-    private TreeItem<String> input;
-    @FXML
-    private TreeItem<String> output;
-    @FXML
-    private TreeItem<String> filter;
+    private TreeItem<String> input = new TreeItem<>("Input");
+    private TreeItem<String> output = new TreeItem<>("output");
+    private TreeItem<String> filter = new TreeItem<>("Filter");
 
-    private TreeItem<String> root = new TreeItem<>("Modules");
+    @FXML
+    private TreeItem<String> root;
 
     @FXML private TreeView<String> toolbox;
 
+    private ObservableList<String> items1;
+    private ObservableList<String> items2;
+    private ObservableList<String> items3;
 
 	private Consumer<String> onDragDone = null;
 	public void setOnDragDone(Consumer<String> onDragDone) {
@@ -40,24 +41,29 @@ public class ToolboxController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> items = FXCollections.observableArrayList(
+
+        input.expandedProperty().addListener(listener -> drag(input));
+        output.expandedProperty().addListener(listener -> drag(output));
+        filter.expandedProperty().addListener(listener -> drag(filter));
+
+        items1 = FXCollections.observableArrayList(
 				ModuleEnum.VCOA.toString(),
                 ModuleEnum.VCA.toString()
 		);
-        loadTreeItems(input,items);
+        loadTreeItems(input,items1);
 
-        items = FXCollections.observableArrayList(
+        items2 = FXCollections.observableArrayList(
 				ModuleEnum.OUT.toString(),
 				ModuleEnum.SCOP.toString()
 		);
-        loadTreeItems(output,items);
+        loadTreeItems(output,items2);
 
-        items = FXCollections.observableArrayList(
+        items3 = FXCollections.observableArrayList(
 				ModuleEnum.REP.toString(),
 				ModuleEnum.EG.toString(),
 				ModuleEnum.VCFLP.toString()
 		);
-        loadTreeItems(filter,items);
+        loadTreeItems(filter,items3);
         
         root.setExpanded(true);
         toolbox.setRoot(root);
@@ -67,21 +73,32 @@ public class ToolboxController implements Initializable {
         item.setExpanded(true);
         for (String itemString : rootItems) {
             item.getChildren().add(new TreeItem<>(itemString));
-            makeListDraggable();
+            //makeListDraggable(itemString, item);
         }
         root.getChildren().add(item);
     }
 
     private void makeListDraggable(){
+        init();
         toolbox.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
             public TreeCell<String> call(TreeView<String> stringTreeView) {
                 TreeCell<String> cell = new TreeCell<String>() {
                     protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
                         if (item != null) {
                             super.updateItem(item, empty);
-                            setText(item);
+                            if (input.isExpanded()){
+                                super.updateItem(item, empty);
+                                setText(item);
+                            }
+                            else if  (output.isExpanded()){
+                                super.updateItem(item, empty);
+                                setText(item);
+                            }
+                            else if  (filter.isExpanded()){
+                                super.updateItem(item, empty);
+                                setText(item);
+                            }
                         }
                     }
                 };
@@ -94,7 +111,6 @@ public class ToolboxController implements Initializable {
                         db.setContent(cc);
                     }
                 });
-
                 cell.setOnDragDone(event -> {
                     if (onDragDone != null) {
                         onDragDone.accept(cell.getItem());
@@ -102,8 +118,22 @@ public class ToolboxController implements Initializable {
                 });
                 return cell;
             }
-
         });
+    }
+
+    private void init() {
+        toolbox = new TreeView<>();
+        toolbox.setRoot(root);
+    }
+
+    private void drag(TreeItem<String> item){
+        System.out.println("echo");
+        //if (item.isExpanded()) {
+            makeListDraggable();
+        /*}
+        else {
+            //toolbox.getCellFactory(
+        }*/
     }
 
 }

@@ -243,7 +243,6 @@ public class Workbench extends Pane {
 		double x, y;
 		x = bounds.getMinX() + (plug.getCenter().getX());
 		y = bounds.getMinY() + (plug.getCenter().getY());
-        System.out.println(plug.getCenter());
         return new Point2D(x, y);
 	}
 

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.TreeItem?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.TreeItem?>
 <AnchorPane stylesheets="/gui/fxml/style/Toolbox.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.synthlab.view.controller.ToolboxController">
    <children>
         <TreeView fx:id="toolbox" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <TreeItem fx:id="input" value="Input"/>
-            <TreeItem fx:id="output" value="Output"/>
-            <TreeItem fx:id="filter" value="Filter"/>
         </TreeView>
    </children>
 </AnchorPane>
