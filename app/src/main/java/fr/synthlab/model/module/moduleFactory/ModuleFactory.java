@@ -5,6 +5,7 @@ import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.envelope.ModuleEG;
+import fr.synthlab.model.module.keyboard.ModuleKEYB;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.replicator.ModuleREP;
@@ -41,7 +42,10 @@ public class ModuleFactory {
                 break;
 			case VCFLP : module = createVCFLP();
 				break;
+
             case VCFHP : module = createVCFHP();
+                break;
+            case KEYB : module = createKEYB();
                 break;
         }
 		if(module != null){
@@ -111,6 +115,12 @@ public class ModuleFactory {
     }
 
 
+    /**
+     * @return a new ModuleKEYB
+     */
+    private static ModuleKEYB createKEYB() {
+        return new ModuleKEYB(syn);
+    }
 
     public static Synthesizer getSyn() {
         return syn;

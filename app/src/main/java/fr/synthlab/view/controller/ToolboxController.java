@@ -41,22 +41,23 @@ public class ToolboxController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<String> items = FXCollections.observableArrayList(
-				ModuleEnum.VCOA.toString(),
-                ModuleEnum.VCA.toString()
+				ModuleEnum.VCOA.getLongName(),
+                ModuleEnum.VCA.getLongName(),
+                ModuleEnum.KEYB.getLongName()
 		);
         loadTreeItems(input,items);
 
         items = FXCollections.observableArrayList(
-				ModuleEnum.OUT.toString(),
-				ModuleEnum.SCOP.toString()
+				ModuleEnum.OUT.getLongName(),
+				ModuleEnum.SCOP.getLongName()
 		);
         loadTreeItems(output,items);
 
         items = FXCollections.observableArrayList(
-				ModuleEnum.REP.toString(),
-				ModuleEnum.EG.toString(),
-				ModuleEnum.VCFLP.toString(),
-                ModuleEnum.VCFHP.toString()
+				ModuleEnum.REP.getLongName(),
+				ModuleEnum.EG.getLongName(),
+				ModuleEnum.VCFLP.getLongName(),
+                ModuleEnum.VCFHP.getLongName()
 		);
         loadTreeItems(filter,items);
         

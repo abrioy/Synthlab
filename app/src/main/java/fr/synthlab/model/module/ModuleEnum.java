@@ -11,7 +11,8 @@ public enum ModuleEnum {
     REP("REP", "Repeater"),
     EG("EG", "Envelope Generator"),
 	VCFLP("VCFLP", "VCF (LP)"),
-    VCFHP("VCFHP", "VCF (HP)");
+    VCFHP("VCFHP", "VCF (HP)"),
+    KEYB("KEYB", "Keyboard");
 
 
     private String moduleName;
@@ -25,6 +26,15 @@ public enum ModuleEnum {
 	public String getLongName() {
 		return this.moduleLongName;
 	}
+
+    public static String getNameFromLong(String longName) {
+        for (ModuleEnum m : values()) {
+            if (m.getLongName().equals(longName)) {
+                return m.moduleName;
+            }
+        }
+        return "";
+    }
 
     @Override
     public String toString() {
