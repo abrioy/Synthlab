@@ -19,7 +19,7 @@ public class ModuleVCFLP extends ModuleVCF {
         ports.add(input);
         ports.add(output);
 
-        setF0(getF0());
+        setF0(f0);
     }
 
     @Override
@@ -45,5 +45,19 @@ public class ModuleVCFLP extends ModuleVCF {
         if (fmInput.getConnected() == null) {
             lpFilter.frequency.set(f0);
         }
+    }
+
+    @Override
+    public void update() {
+        if (fmInput.getConnected() == null) {
+            fmFilter.output.disconnectAll();
+            lpFilter.frequency.set(f0);
+        } else {
+            fmFilter.output.connect(lpFilter.input);
+        }
+    }
+
+    public void setResonance(double value) {
+        lpFilter.Q.set(value);
     }
 }
