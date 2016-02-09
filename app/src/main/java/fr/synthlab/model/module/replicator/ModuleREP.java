@@ -2,6 +2,7 @@ package fr.synthlab.model.module.replicator;
 
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -66,7 +67,7 @@ public class ModuleREP implements Module {
     }
 
     @Override
-    public String getName() {
-        return "REP";
+    public ModuleEnum getType() {
+        return ModuleEnum.REP;
     }
 }

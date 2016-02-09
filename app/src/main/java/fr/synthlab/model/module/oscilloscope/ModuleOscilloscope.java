@@ -11,6 +11,7 @@ import com.jsyn.scope.swing.ScopeControlPanel;
 import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -119,8 +120,8 @@ public class ModuleOscilloscope implements Module {
     }
 
     @Override
-    public String getName() {
-        return "OSCILLOSCOPE";
+    public ModuleEnum getType() {
+        return ModuleEnum.SCOP;
     }
 
     /**

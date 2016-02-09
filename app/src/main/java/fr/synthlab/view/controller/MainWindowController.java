@@ -88,7 +88,7 @@ public class MainWindowController implements Initializable {
 
 		// Cleaning up if the module get out of the workbench
 		workbench.setOnDragExited(event -> {
-			logger.fine("Hiding module \""+draggedNewViewModule.getModule().getName()+
+			logger.fine("Hiding module \""+draggedNewViewModule.getModule().getType()+
 					"\" because it got out of the workspace.");
 			workbench.hideGhost();
 			workbench.removeModule(draggedNewViewModule);
@@ -98,11 +98,11 @@ public class MainWindowController implements Initializable {
 			if (draggedNewViewModule != null) {
 				if (!draggedNewViewModule.isVisible()) {
 					// We never found a good position for the module
-					logger.fine("Deleting module \"" + draggedNewViewModule.getModule().getName() +
+					logger.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
 							"\" because we failed to find a place for it in the workspace.");
 					workbench.removeModule(draggedNewViewModule); // FIXME: Does not delete the module
 				} else {
-					logger.fine("Adding module \"" + draggedNewViewModule.getModule().getName() +
+					logger.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
 							"\" to the workspace.");
 					workbench.addModule(draggedNewViewModule);
 				}

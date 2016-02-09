@@ -4,6 +4,7 @@ import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.LineOut;
 import fr.synthlab.model.filter.FilterAttenuator;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -175,8 +176,8 @@ public class ModuleOut implements Module{
     public void update() {}
 
     @Override
-    public String getName() {
-        return "OUT";
+    public ModuleEnum getType() {
+        return ModuleEnum.OUT;
     }
 
     /**

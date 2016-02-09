@@ -4,6 +4,7 @@ import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterAttenuator;
 import fr.synthlab.model.filter.VcaAM;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -65,7 +66,7 @@ public class ModuleVCA implements Module {
     }
 
     @Override
-    public String getName() {
-        return "VCA";
+    public ModuleEnum getType() {
+        return ModuleEnum.VCA;
     }
 }

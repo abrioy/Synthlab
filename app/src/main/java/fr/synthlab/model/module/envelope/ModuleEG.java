@@ -2,6 +2,7 @@ package fr.synthlab.model.module.envelope;
 
 import com.jsyn.unitgen.EnvelopeDAHDSR;
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -54,8 +55,8 @@ public class ModuleEG implements Module {
     }
 
     @Override
-    public String getName() {
-        return "EG ADSR";
+    public ModuleEnum getType() {
+        return ModuleEnum.EG;
     }
 
     public void setAttack(double attack){
