@@ -29,6 +29,7 @@ public class Main extends Application {
 			}
 		}
 
+		System.setProperty("javafx.embed.singleThread", "true");
 
 		launch(args);
 

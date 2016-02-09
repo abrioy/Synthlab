@@ -4,20 +4,35 @@
 <?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
-      minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0"
-      xmlns="http://javafx.com/javafx/8">
-    <Circle fx:id="woofer" fill="#4d443ed4" layoutX="128.0" layoutY="130.0" radius="83.0" stroke="BLACK"
-            strokeType="INSIDE"/>
-    <Knob fx:id="picker" layoutX="186.0" layoutY="270.0" diameter="96.0" min="-12" max="12"/>
-    <Button fx:id="muteButton" layoutX="160.0" layoutY="330"> Mute</Button>
-    <Plug fx:id="inStereoL" name="inLeft" layoutX="14.0" layoutY="320.0" type="input" />
-    <Plug fx:id="inMono" name="in" layoutX="14.0" layoutY="258.0" type="input"  />
-    <Plug fx:id="inStereoR" name="inRight" layoutX="76.0" layoutY="320.0" type="input"  />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="50.0" layoutX="8.0" layoutY="317.0"
-               stroke="BLACK" strokeType="INSIDE" width="120.0" mouseTransparent="true"/>
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00" height="50.0" layoutX="8.0" layoutY="255.0"
-               stroke="BLACK" strokeType="INSIDE" width="59.0" mouseTransparent="true"/>
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+      prefHeight="198" prefWidth="250" minHeight="198" minWidth="250" maxHeight="198" maxWidth="250">
+
+    <Knob fx:id="picker" label="Volume"
+          diameter="80.0" layoutX="190.0" layoutY="100.0"
+          min="-12" max="12"/>
+
+    <Button fx:id="muteButton"
+            layoutX="165.0" layoutY="145.0">
+        Mute
+    </Button>
+
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00"
+               height="65.0" width="115.0" layoutX="5" layoutY="60.0"
+               stroke="BLACK" strokeType="INSIDE"  mouseTransparent="true"/>
+    <Plug fx:id="inStereoL"
+          layoutX="15.0" layoutY="75.0"
+          name="Left" type="input" />
+
+    <Plug fx:id="inStereoR"
+          layoutX="65.0" layoutY="75.0"
+          name="Right" type="input" />
+
+
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00"
+               height="65.0" width="65.0" layoutX="5.0" layoutY="130.0"
+               stroke="BLACK" strokeType="INSIDE" mouseTransparent="true"/>
+    <Plug fx:id="inMono"
+          layoutX="15.0" layoutY="145.0"
+          name="in" type="input" />
 </Pane>

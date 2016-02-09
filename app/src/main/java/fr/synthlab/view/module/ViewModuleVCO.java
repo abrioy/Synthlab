@@ -76,7 +76,14 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 
 
 	public double getFreq() {
-		return freq.getValue() + freqLine.getValue();
+		double f = freq.getValue() + freqLine.getValue();
+		if (f < 0) {
+			f = 0;
+		}
+		else if (f > 22000) {
+			f = 22000;
+		}
+		return f;
 	}
 
 

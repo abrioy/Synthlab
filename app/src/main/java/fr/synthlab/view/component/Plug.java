@@ -4,6 +4,8 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -27,17 +29,18 @@ public class Plug extends StackPane {
 		this.getPortCommand = getPortCommand;
 	}
 
+
+	private Label nameLabel;
 	public enum Type {
-        input(Color.DARKCYAN,22.0),
-        output(Color.DARKGREEN,22.0),
-        other(Color.DARKSALMON,22.0);
+        input(Color.LIGHTBLUE),
+        output(Color.ORANGE),
+		modulation(Color.HOTPINK),
+        other(Color.WHITE);
 
         public Color color;
-        public double size;
 
-        Type(Color color, double size) {
+        Type(Color color) {
             this.color = color;
-            this.size = size;
         }
 
         public static Type getType(String name) {
@@ -46,6 +49,8 @@ public class Plug extends StackPane {
                     return input;
                 case "output":
                     return output;
+				case "modulation":
+					return modulation;
             }
             return other;
         }
@@ -59,7 +64,6 @@ public class Plug extends StackPane {
 	public Plug() {
 		super();
         init();
-
 	}
 
     private void init() {
@@ -67,19 +71,20 @@ public class Plug extends StackPane {
 				getClass().getResource("/gui/fxml/style/Plug.css").toExternalForm());
 		this.getStyleClass().add("plug");
 
-		this.setPrefWidth(Type.getType(type.get()).size);
-		this.setPrefHeight(Type.getType(type.get()).size);
+		this.setAlignment(Pos.CENTER);
+		this.setPrefSize(25.0d, 25.0d);
 
 		colorCircle = new Circle();
         colorCircle.setFill(Color.TRANSPARENT);
-        colorCircle.setRadius(Type.getType(type.get()).size);
+        colorCircle.setRadius(22.0d);
         colorCircle.setStroke(Type.getType(type.get()).color);
         colorCircle.setStrokeType(StrokeType.INSIDE);
 		this.getChildren().add(colorCircle);
 
-        this.setOnMouseClicked(event -> {
-			workbench.plugClicked(this);
-        });
+		colorCircle.setOnMouseClicked(event -> workbench.plugClicked(this));
+
+        nameLabel = new Label();
+		getChildren().add(nameLabel);
     }
 
 	public Port getPort() {
@@ -96,7 +101,6 @@ public class Plug extends StackPane {
     public final void setType(String v) {
         type.set(v);
         colorCircle.setStroke(Type.getType(type.get()).color);
-		colorCircle.setRadius(Type.getType(type.get()).size);
     }
 
     public final String getType() {
@@ -109,7 +113,7 @@ public class Plug extends StackPane {
 
 
 	public String getName() {
-		return name.get();
+        return name.get();
 	}
 
 	public StringProperty nameProperty() {
@@ -118,5 +122,8 @@ public class Plug extends StackPane {
 
 	public void setName(String name) {
 		this.name.set(name);
+        nameLabel.setText(this.name.get());
+		nameLabel.setLayoutX(200);//-25/2-25);
+		nameLabel.setLayoutY(-25/2-25);
 	}
 }
