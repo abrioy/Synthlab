@@ -62,13 +62,6 @@ public abstract class ModuleVCF implements Module {
     @Override
     public abstract ModuleEnum getType();
 
-
-
-
-    public String getName() {
-        return "VCF";
-    }
-
     public double getF0() {
         return f0;
     }

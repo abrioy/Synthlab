@@ -34,11 +34,6 @@ public class ModuleVCFHP extends ModuleVCF {
     }
 
     @Override
-    public String getName() {
-        return "VCFHP";
-    }
-
-    @Override
     public void setF0(double f0) {
         super.setF0(f0);
         if (fmInput.getConnected() == null) {
