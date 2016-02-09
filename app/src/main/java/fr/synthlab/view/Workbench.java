@@ -50,8 +50,7 @@ public class Workbench extends Pane {
 	}
 
 	public void onRightClick() {
-		dropCable(draggedCable);
-        draggedCable=null;
+		dropCable();
 	}
 
     /**
@@ -82,8 +81,7 @@ public class Workbench extends Pane {
                     draggedCable.update();
                     draggedCable = null;
                 } else {
-                    dropCable(draggedCable);
-                    draggedCable=null;
+                    dropCable();
                 }
             }
 
@@ -170,27 +168,26 @@ public class Workbench extends Pane {
         });
 
         module.setOnMouseDragged(event -> {
-            Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+			Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
-            double expectedX = localPoint.getX() - mouseDelta.x;
-            double expectedY = localPoint.getY() - mouseDelta.y;
-            // Moving the ghost to where the module should be
-            workbench.moveGhost(expectedX, expectedY);
+			double expectedX = localPoint.getX() - mouseDelta.x;
+			double expectedY = localPoint.getY() - mouseDelta.y;
+			// Moving the ghost to where the module should be
+			workbench.moveGhost(expectedX, expectedY);
 
-            Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
-            if (newLocation != null) {
-                module.relocate(newLocation.getX(), newLocation.getY());
-            }
-            //workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
-            for(Cable c: getCables()){
-                if (draggedCable!=c){
-                    c.update();
-                }
-                else{
-                    c.update(localPoint);
-                }
-            }
-        });
+			Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
+			if (newLocation != null) {
+				module.relocate(newLocation.getX(), newLocation.getY());
+			}
+			//workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
+			for (Cable c : getCables()) {
+				if (draggedCable != c) {
+					c.update();
+				} else {
+					c.update(localPoint);
+				}
+			}
+		});
 
 	}
 
@@ -384,10 +381,12 @@ public class Workbench extends Pane {
     /** Drop cable based on lastClickedPlug
      *
      */
-    private void dropCable(Cable cable){
-        cable.deleteCircles();
-        getCables().remove(cable);
-        this.getChildren().remove(cable);
-        cable=null;
+    private void dropCable(){
+		if(draggedCable!=null) {
+			draggedCable.deleteCircles();
+			getCables().remove(draggedCable);
+			this.getChildren().remove(draggedCable);
+			draggedCable = null;
+		}
     }
 }
