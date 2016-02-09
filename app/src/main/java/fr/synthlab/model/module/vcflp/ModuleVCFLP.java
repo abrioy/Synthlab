@@ -45,7 +45,7 @@ public class ModuleVCFLP implements Module {
     }
 
 	public void setResonance(double resonnace) {
-		
+
 	}
 
     @Override
