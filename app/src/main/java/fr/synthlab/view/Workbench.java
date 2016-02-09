@@ -239,13 +239,6 @@ public class Workbench extends Pane {
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
-	public Point2D getBoundsCenter(Plug plug, Bounds bounds) {
-		double x, y;
-		x = bounds.getMinX() + (plug.getCenter().getX());
-		y = bounds.getMinY() + (plug.getCenter().getY());
-        return new Point2D(x, y);
-	}
-
 	private Point2D getBoundsCenter(Bounds bounds) {
 		double x, y;
 		x = bounds.getMinX() + (bounds.getWidth() / 2.0d);
@@ -365,20 +358,22 @@ public class Workbench extends Pane {
     }
 
     private Cable getConnectedCable(Plug plug){
-        Plug test;
         for(Cable c : getCables()){
-            test = c.getOppositePlug(plug);
-            if(test!=null)return c;
+			Plug test = c.getOppositePlug(plug);
+            if(test != null){
+				return c;
+			}
         }
         return null;
     }
 	private Plug getConnectedPlug(Plug plug){
-        Plug opposite = null;
         for(Cable c : getCables()){
-            opposite = c.getOppositePlug(plug);
-            if(opposite!=null)return opposite;
+			Plug opposite = c.getOppositePlug(plug);
+            if(opposite != null){
+				return opposite;
+			}
         }
-		return opposite;
+		return null;
 	}
 
     private void dragCable(Cable cable,Plug plug){
