@@ -2,12 +2,16 @@ package fr.synthlab.view.component;
 
 import javafx.beans.property.*;
 import javafx.event.Event;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Knob view.
@@ -102,6 +106,8 @@ public class Knob extends Pane {
      */
     private double scale= (maxExp - minExp) / max.get() - min.get();
 
+	private Collection<Line> lines = new ArrayList<>();
+
     /**
      * coef to exponential
      */
@@ -153,11 +159,25 @@ public class Knob extends Pane {
         maxProperty().addListener((arg0, arg1, arg2) -> {
             requestLayout();
         });
+
+		diameter.addListener((observable, oldValue, newValue) -> {
+			knob.setPrefSize(newValue.doubleValue(), newValue.doubleValue());
+			scaleSize = (int) (diameter.get() / 5);
+			name.setLayoutX(-5*getLabel().length()/2);
+			name.setLayoutY(-getDiameter()/2-25);
+		});
+
+		widthProperty().addListener((observable, oldValue, newValue) -> {
+			updatePositions();
+		});
+		heightProperty().addListener((observable, oldValue, newValue) -> {
+			updatePositions();
+		});
     }
 
 	private void moveKnob(double x, double y) {
-		double centerX = 0;
-		double centerY = 0;
+		double centerX = getWidth() / 2.0d;
+		double centerY = getHeight() / 2.0d;
 		double theta = Math.atan2((y - centerY), (x - centerX));
 		double angle = Math.toDegrees(theta);
 		if (angle > 0.0) {
@@ -218,18 +238,21 @@ public class Knob extends Pane {
             rotate.setAngle(-angle);
         }
         if (step.get()!=0) {//draw scale
-            Line line;
+			getChildren().removeAll(lines);
+			lines.clear();
             for (int x = 1; x < step.get()-1; x++) {
                 angleLocal = -(angleInterval*x + minAngle);
-                line = new Line();
+                Line line = new Line();
                 line.setStroke(Color.ANTIQUEWHITE);
                 line.setStartX(centerX + (diameter.doubleValue() / 2.0) * Math.cos(Math.toRadians(angleLocal)));
                 line.setStartY(centerY + (diameter.doubleValue() / 2.0) * Math.sin(Math.toRadians(angleLocal)));
                 line.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(angleLocal)));
                 line.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(angleLocal)));
-                getChildren().add(line);
+                lines.add(line);
+				getChildren().add(line);
             }
         }
+		updatePositions();
     }
 
     /**
@@ -265,6 +288,13 @@ public class Knob extends Pane {
         value = Math.max(minValue, value);
         return Math.min(maxValue, value);
     }
+
+	private void updatePositions() {
+		for(Node node : getChildren()){
+			node.translateXProperty().set(getWidth() / 2.0d);
+			node.translateYProperty().set(getHeight() / 2.0d);
+		}
+	}
 
     /**
      * getter on current value
@@ -359,10 +389,6 @@ public class Knob extends Pane {
      */
     public final void setDiameter(double v) {
         diameter.set(v);
-        knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
-        scaleSize = (int) (diameter.get() / 5);
-        name.setLayoutX(-5*getLabel().length()/2);
-        name.setLayoutY(-getDiameter()/2-25);
     }
 
     /**
