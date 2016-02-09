@@ -21,6 +21,7 @@ public class ModuleVCFLP extends ModuleVCF {
         ports.add(output);
 
         setF0(f0);
+        setResonance(1);
     }
 
     @Override

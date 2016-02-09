@@ -24,7 +24,7 @@ public abstract class ModuleVCF implements Module {
     /**
      * Fréquence de coupure f0
      */
-    protected double f0 = 450;
+    protected double f0 = 440;
     /**
      * Filter modulator
      */

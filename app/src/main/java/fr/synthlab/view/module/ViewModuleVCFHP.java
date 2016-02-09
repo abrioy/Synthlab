@@ -6,6 +6,7 @@ import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +25,9 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
     @FXML
     private Knob threshold;
 
+    @FXML
+    private Label frequencyLabel;
+
     private Command changeThresholdCommand;
 
     public ViewModuleVCFHP(Workbench workbench) {
@@ -36,10 +40,12 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
         threshold.valueProperty().addListener(event -> {
             updateThreshold();
         });
+        frequencyLabel.setText(((int)getThreshold())+" Hz");
     }
 
     private void updateThreshold() {
         changeThresholdCommand.execute();
+        frequencyLabel.setText(((int)getThreshold())+" Hz");
     }
 
     public void setChangeThresholdCommand(Command changeThresholdCommand) {
