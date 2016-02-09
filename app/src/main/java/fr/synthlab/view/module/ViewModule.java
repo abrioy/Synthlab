@@ -42,7 +42,7 @@ public abstract class ViewModule extends Pane {
 		this.getChildren().add(topPane);
 
 		moduleName = new Label();
-		moduleName.setFont(new Font("Arial", 25));
+		moduleName.setFont(new Font("Arial", 20));
 		topPane.getChildren().add(moduleName);
 		AnchorPane.setLeftAnchor(moduleName, 0.0d);
 
@@ -52,7 +52,7 @@ public abstract class ViewModule extends Pane {
 		topPane.getChildren().add(closeButton);
 		AnchorPane.setRightAnchor(closeButton, 0.0d);
 		closeButton.setOnMouseClicked(event -> {
-			logger.fine("Module \""+module.getName()+"\" is asking to be closed.");
+			logger.fine("Module \""+module.getType()+"\" is asking to be closed.");
 			workbench.onModuleCloseRequest(this);
 			event.consume();
 		});
@@ -86,6 +86,6 @@ public abstract class ViewModule extends Pane {
 
 	public void setModule(Module module) {
 		this.module = module;
-		moduleName.setText(module.getName());
+		moduleName.setText(module.getType().getLongName());
 	}
 }

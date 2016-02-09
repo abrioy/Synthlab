@@ -10,7 +10,7 @@
 
     <Knob fx:id="picker" label="Volume"
           diameter="80.0" layoutX="190.0" layoutY="100.0"
-          max="12" min="-12"/>
+          min="-12" max="12"/>
 
     <Button fx:id="muteButton"
             layoutX="165.0" layoutY="145.0">

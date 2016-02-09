@@ -4,14 +4,13 @@
 <?import fr.synthlab.view.component.OscilloscopeDrawing?>
 <?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.layout.Pane?>
-
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="400" prefWidth="504" minHeight="400" minWidth="504" maxHeight="400" maxWidth="504">
     <OscilloscopeDrawing fx:id="oscilloscopeDrawing" layoutX="15.0" layoutY="40.0" />
 
     <Knob fx:id="picker" label="picker"
           diameter="40.0" layoutX="250.0" layoutY="365.0"
-          max="100" min="0"/>
+          min="0" max="100"/>
 
     <Plug fx:id="in"
           layoutX="15.0" layoutY="345.0"

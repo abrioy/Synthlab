@@ -1,4 +1,4 @@
-package fr.synthlab.model.module.vca;
+package fr.synthlab.model.module.vcflp;
 
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterAttenuator;
@@ -12,37 +12,41 @@ import fr.synthlab.model.module.port.Port;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ModuleVCA implements Module {
+public class ModuleVCFLP implements Module {
 
     private Collection<Port> ports = new ArrayList<>();
 
-    private InputPort inputPort, inputPortAm;
+    private InputPort inputPort, inputPortFm;
     private OutputPort outputPort;
 
     private FilterAttenuator filterAttenuator = new FilterAttenuator();
     private VcaAM vcaAM;
 
-    private double attenuation = 0.0;
+    private double threshold = 0.0;
 
-    public ModuleVCA(Synthesizer synthesizer) {
+    public ModuleVCFLP(Synthesizer synthesizer) {
         vcaAM = new VcaAM(filterAttenuator.output);
 
         synthesizer.add(filterAttenuator);
         synthesizer.add(vcaAM);
 
         inputPort = new InputPort("in", this, filterAttenuator.input);
-        inputPortAm = new InputPort("am", this, vcaAM.input);
+        inputPortFm = new InputPort("fm", this, vcaAM.input);
         outputPort = new OutputPort("out", this, vcaAM.output);
 
         ports.add(inputPort);
-        ports.add(inputPortAm);
+        ports.add(inputPortFm);
         ports.add(outputPort);
     }
 
-    public void setAttenuation(double attenuation) {
-        this.attenuation = attenuation;
-        filterAttenuator.setAttenuation(attenuation);
+    public void setThreshold(double threshold) {
+        this.threshold = threshold;
+        filterAttenuator.setAttenuation(threshold);
     }
+
+	public void setResonance(double resonnace) {
+
+	}
 
     @Override
     public Collection<Port> getPorts() {
@@ -67,6 +71,6 @@ public class ModuleVCA implements Module {
 
     @Override
     public ModuleEnum getType() {
-        return ModuleEnum.VCA;
+        return ModuleEnum.VCFLP;
     }
 }

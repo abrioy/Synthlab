@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import fr.synthlab.view.component.Knob?>
+<?import fr.synthlab.view.component.Plug?>
+<?import javafx.scene.layout.Pane?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+      prefHeight="198" prefWidth="250" minHeight="198" minWidth="250" maxHeight="198" maxWidth="250">
+    <Knob fx:id="threshold" label="Threshold"
+          diameter="75.0" layoutX="125.0" layoutY="90.0"
+          min="0" max="22000" scaleType="log" value="440" />
+
+    <Knob fx:id="resonance" label="Resonance"
+          diameter="40.0" layoutX="125.0" layoutY="165.0"
+          min="0" max="100" value="0" />
+
+    <Plug fx:id="fm"
+          layoutX="15.0" layoutY="70.0"
+          name="fm" type="modulation" />
+    <Plug fx:id="in"
+          layoutX="15.0" layoutY="145.0"
+          name="in" type="input" />
+    <Plug fx:id="out"
+          layoutX="195.0" layoutY="145.0"
+          name="out" type="output" />
+</Pane>
+
