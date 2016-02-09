@@ -1,17 +1,13 @@
 package fr.synthlab.view.component;
 
 import fr.synthlab.view.Workbench;
-import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.CubicCurve;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -57,10 +53,8 @@ public class Cable extends CubicCurve {
     }
 
     public void update(){
-        Bounds inBounds = in.getBoundsInLocal();
-        Bounds outBounds = out.getBoundsInLocal();
-        Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(in.localToScene(inBounds)));
-        Point2D outPosition = workbench.getBoundsCenter(workbench.sceneToLocal(out.localToScene(outBounds)));
+        Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
+        Point2D outPosition = workbench.sceneToLocal(out.localToScene(out.getCenter()));
 
         this.setStartX(inPosition.getX());
         this.setStartY(inPosition.getY());
@@ -75,8 +69,9 @@ public class Cable extends CubicCurve {
     }
 
     public void update(Point2D mouse){
-        Bounds inBounds = getPlug().getBoundsInLocal();
-        Point2D inPosition = workbench.getBoundsCenter(workbench.sceneToLocal(getPlug().localToScene(inBounds)));
+        in=getPlug();
+        out=null;
+        Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
 
         this.setStartX(inPosition.getX());
         this.setStartY(inPosition.getY());

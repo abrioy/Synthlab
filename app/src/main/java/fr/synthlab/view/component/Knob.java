@@ -403,6 +403,8 @@ public class Knob extends Pane {
      */
     public final void setDiameter(double v) {
         diameter.set(v);
+        knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        scaleSize = (int) (diameter.get() / 5);
     }
 
     /**

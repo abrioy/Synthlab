@@ -4,6 +4,7 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -73,7 +74,7 @@ public class Plug extends StackPane {
 		this.getStyleClass().add("plug");
 
 		this.setAlignment(Pos.CENTER);
-		this.setPrefSize(25.0d, 25.0d);
+        this.setPrefSize(25.0d, 25.0d);
 
 		colorCircle = new Circle();
         colorCircle.setFill(Color.TRANSPARENT);
@@ -90,6 +91,10 @@ public class Plug extends StackPane {
 			nameLabel.setText(this.label.get());
 		});
 	}
+
+	public Point2D getCenter(){
+		return colorCircle.localToParent(colorCircle.getCenterX(), colorCircle.getCenterY());
+    }
 
 	public Port getPort() {
 		if(getPortCommand != null){

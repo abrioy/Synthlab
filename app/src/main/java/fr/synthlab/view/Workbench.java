@@ -235,16 +235,17 @@ public class Workbench extends Pane {
 
 	/**
 	 * Computes the 2D center of a Bounds object
+	 * @param plug
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
-	public Point2D getBoundsCenter(Bounds bounds) {
+	private Point2D getBoundsCenter(Bounds bounds) {
 		double x, y;
 		x = bounds.getMinX() + (bounds.getWidth() / 2.0d);
 		y = bounds.getMinY() + (bounds.getHeight() / 2.0d);
-
 		return new Point2D(x, y);
 	}
+
 
 	/**
 	 * Try and moves a module to the expected position.
@@ -320,7 +321,7 @@ public class Workbench extends Pane {
 		return null;
 	}
 
-    /** Function that call a connection between two port
+	/** Function that call a connection between two port
      * This function first retrieve the port of the two plug in parameter
      *
      * @param in the name is mandatory, we dont care if its in or out
@@ -357,20 +358,22 @@ public class Workbench extends Pane {
     }
 
     private Cable getConnectedCable(Plug plug){
-        Plug test;
         for(Cable c : getCables()){
-            test = c.getOppositePlug(plug);
-            if(test!=null)return c;
+			Plug test = c.getOppositePlug(plug);
+            if(test != null){
+				return c;
+			}
         }
         return null;
     }
 	private Plug getConnectedPlug(Plug plug){
-        Plug opposite = null;
         for(Cable c : getCables()){
-            opposite = c.getOppositePlug(plug);
-            if(opposite!=null)return opposite;
+			Plug opposite = c.getOppositePlug(plug);
+            if(opposite != null){
+				return opposite;
+			}
         }
-		return opposite;
+		return null;
 	}
 
     private void dragCable(Cable cable,Plug plug){

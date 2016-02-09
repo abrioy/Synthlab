@@ -5,7 +5,7 @@ import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.TriangleOscillator;
-import fr.synthlab.model.filter.VcoFm;
+import fr.synthlab.model.filter.FmFilter;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
@@ -37,7 +37,7 @@ public class ModuleVCOA implements Module {
     /**
      * Filter modulator
      */
-    private VcoFm fmFilter = new VcoFm(frequency);
+    private FmFilter fmFilter = new FmFilter(frequency);
 
     /**
      * Square oscillator
