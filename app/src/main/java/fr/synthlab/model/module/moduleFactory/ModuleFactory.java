@@ -9,7 +9,7 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.replicator.ModuleREP;
 import fr.synthlab.model.module.vca.ModuleVCA;
-import fr.synthlab.model.module.vcflp.ModuleVCFLP;
+import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 
 import java.util.logging.Logger;

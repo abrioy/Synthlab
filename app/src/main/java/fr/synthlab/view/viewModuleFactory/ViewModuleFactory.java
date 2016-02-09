@@ -8,7 +8,7 @@ import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.vca.ModuleVCA;
-import fr.synthlab.model.module.vcflp.ModuleVCFLP;
+import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.module.*;
