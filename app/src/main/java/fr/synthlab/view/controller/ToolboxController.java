@@ -11,6 +11,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -20,85 +21,83 @@ import java.util.logging.Logger;
 
 public class ToolboxController implements Initializable {
     private static final Logger logger = Logger.getLogger(ToolboxController.class.getName());
-
-    private TreeItem<String> input = new TreeItem<>("Input");
-    private TreeItem<String> output = new TreeItem<>("output");
-    private TreeItem<String> filter = new TreeItem<>("Filter");
+    @FXML
+    private TreeView<String> input;
+    @FXML
+    private TreeView<String> output;
+    @FXML
+    private TreeView<String> filter;
 
     @FXML
-    private TreeItem<String> root;
+    private TreeItem<String> rootInput;
+    @FXML
+    private TreeItem<String> rootOutput;
+    @FXML
+    private TreeItem<String> rootFilter;
 
-    @FXML private TreeView<String> toolbox;
+    @FXML
+    private Pane pane;
 
     private ObservableList<String> items1;
     private ObservableList<String> items2;
     private ObservableList<String> items3;
 
-	private Consumer<String> onDragDone = null;
-	public void setOnDragDone(Consumer<String> onDragDone) {
-		this.onDragDone = onDragDone;
-	}
+    private Consumer<String> onDragDone = null;
+
+    public void setOnDragDone(Consumer<String> onDragDone) {
+        this.onDragDone = onDragDone;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        input.expandedProperty().addListener(listener -> drag(input));
-        output.expandedProperty().addListener(listener -> drag(output));
-        filter.expandedProperty().addListener(listener -> drag(filter));
+        rootInput.expandedProperty().addListener(listener -> drag(rootInput, input));
+        rootOutput.expandedProperty().addListener(listener -> drag(rootOutput, output));
+        rootFilter.expandedProperty().addListener(listener -> drag(rootFilter, filter));
 
         items1 = FXCollections.observableArrayList(
-				ModuleEnum.VCOA.toString(),
+                ModuleEnum.VCOA.toString(),
                 ModuleEnum.VCA.toString()
-		);
-        loadTreeItems(input,items1);
+        );
+        loadTreeItems(rootInput, items1, input);
 
         items2 = FXCollections.observableArrayList(
-				ModuleEnum.OUT.toString(),
-				ModuleEnum.SCOP.toString()
-		);
-        loadTreeItems(output,items2);
+                ModuleEnum.OUT.toString(),
+                ModuleEnum.SCOP.toString()
+        );
+        loadTreeItems(rootOutput, items2, output);
 
         items3 = FXCollections.observableArrayList(
-				ModuleEnum.REP.toString(),
-				ModuleEnum.EG.toString(),
-				ModuleEnum.VCFLP.toString()
-		);
-        loadTreeItems(filter,items3);
-        
-        root.setExpanded(true);
-        toolbox.setRoot(root);
+                ModuleEnum.REP.toString(),
+                ModuleEnum.EG.toString(),
+                ModuleEnum.VCFLP.toString()
+        );
+        loadTreeItems(rootFilter, items3, filter);
+
+        rootInput.setExpanded(true);
+        input.setRoot(rootInput);
+        rootOutput.setExpanded(true);
+        output.setRoot(rootOutput);
+        rootInput.setExpanded(true);
+        filter.setRoot(rootFilter);
     }
 
-    public void loadTreeItems(TreeItem<String> item, ObservableList<String> rootItems) {
+    public void loadTreeItems(TreeItem<String> item, ObservableList<String> rootItems, TreeView<String> root) {
         item.setExpanded(true);
         for (String itemString : rootItems) {
             item.getChildren().add(new TreeItem<>(itemString));
-            //makeListDraggable(itemString, item);
         }
-        root.getChildren().add(item);
     }
 
-    private void makeListDraggable(){
-        init();
-        toolbox.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
+    private void makeListDraggable(TreeView<String> item) {
+        item.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
             public TreeCell<String> call(TreeView<String> stringTreeView) {
                 TreeCell<String> cell = new TreeCell<String>() {
                     protected void updateItem(String item, boolean empty) {
                         if (item != null) {
                             super.updateItem(item, empty);
-                            if (input.isExpanded()){
-                                super.updateItem(item, empty);
-                                setText(item);
-                            }
-                            else if  (output.isExpanded()){
-                                super.updateItem(item, empty);
-                                setText(item);
-                            }
-                            else if  (filter.isExpanded()){
-                                super.updateItem(item, empty);
-                                setText(item);
-                            }
+                            setText(item);
                         }
                     }
                 };
@@ -121,19 +120,30 @@ public class ToolboxController implements Initializable {
         });
     }
 
-    private void init() {
-        toolbox = new TreeView<>();
-        toolbox.setRoot(root);
-    }
-
-    private void drag(TreeItem<String> item){
-        System.out.println("echo");
-        //if (item.isExpanded()) {
-            makeListDraggable();
-        /*}
-        else {
-            //toolbox.getCellFactory(
-        }*/
+    private void drag(TreeItem<String> item, TreeView<String> draggable) {
+        if (item.isExpanded()) {
+            makeListDraggable(draggable);
+        } else {
+            makeListDraggable(draggable);
+        }
+        input.relocate(0, 0);
+        if (rootInput.isExpanded()) {
+            input.setPrefHeight((rootInput.getChildren().size() + 1) * 25);
+        } else {
+            input.setPrefHeight(25);
+        }
+        output.relocate(0, input.getPrefHeight());
+        if (rootOutput.isExpanded()) {
+            output.setPrefHeight((rootOutput.getChildren().size() + 1) * 25);
+        } else {
+            output.setPrefHeight(25);
+        }
+        filter.relocate(0, input.getPrefHeight() + output.getPrefHeight());
+        if (rootFilter.isExpanded()) {
+            filter.setPrefHeight((rootFilter.getChildren().size() + 1) * 25);
+        } else {
+            filter.setPrefHeight(25);
+        }
     }
 
 }
