@@ -24,7 +24,7 @@ public abstract class ModuleVCF implements Module {
     /**
      * Fréquence de coupure f0
      */
-    protected double f0 = 450;
+    protected double f0 = 440;
     /**
      * Filter modulator
      */
@@ -61,13 +61,6 @@ public abstract class ModuleVCF implements Module {
 
     @Override
     public abstract ModuleEnum getType();
-
-
-
-
-    public String getName() {
-        return "VCF";
-    }
 
     public double getF0() {
         return f0;

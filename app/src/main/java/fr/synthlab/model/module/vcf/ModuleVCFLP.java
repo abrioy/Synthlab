@@ -21,6 +21,7 @@ public class ModuleVCFLP extends ModuleVCF {
         ports.add(output);
 
         setF0(f0);
+        setResonance(1);
     }
 
     @Override
@@ -33,11 +34,6 @@ public class ModuleVCFLP extends ModuleVCF {
     public void stop() {
         super.stop();
         lpFilter.stop();
-    }
-
-    @Override
-    public String getName() {
-        return "VCFLP";
     }
 
     @Override
@@ -54,7 +50,7 @@ public class ModuleVCFLP extends ModuleVCF {
             fmFilter.output.disconnectAll();
             lpFilter.frequency.set(f0);
         } else {
-            fmFilter.output.connect(lpFilter.input);
+            fmFilter.output.connect(lpFilter.frequency);
         }
     }
 
