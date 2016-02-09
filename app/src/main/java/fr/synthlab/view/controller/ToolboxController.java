@@ -38,10 +38,6 @@ public class ToolboxController implements Initializable {
     @FXML
     private Pane pane;
 
-    private ObservableList<String> items1;
-    private ObservableList<String> items2;
-    private ObservableList<String> items3;
-
     private Consumer<String> onDragDone = null;
 
     public void setOnDragDone(Consumer<String> onDragDone) {
@@ -55,24 +51,23 @@ public class ToolboxController implements Initializable {
         rootOutput.expandedProperty().addListener(listener -> drag(rootOutput, output));
         rootFilter.expandedProperty().addListener(listener -> drag(rootFilter, filter));
 
-        items1 = FXCollections.observableArrayList(
+        ObservableList<String> items = FXCollections.observableArrayList(
                 ModuleEnum.VCOA.toString(),
                 ModuleEnum.VCA.toString()
         );
-        loadTreeItems(rootInput, items1, input);
-
-        items2 = FXCollections.observableArrayList(
+        loadTreeItems(rootInput, items, input);
+        items = FXCollections.observableArrayList(
                 ModuleEnum.OUT.toString(),
                 ModuleEnum.SCOP.toString()
         );
-        loadTreeItems(rootOutput, items2, output);
+        loadTreeItems(rootOutput, items, output);
 
-        items3 = FXCollections.observableArrayList(
+        items = FXCollections.observableArrayList(
                 ModuleEnum.REP.toString(),
                 ModuleEnum.EG.toString(),
                 ModuleEnum.VCFLP.toString()
         );
-        loadTreeItems(rootFilter, items3, filter);
+        loadTreeItems(rootFilter, items, filter);
 
         rootInput.setExpanded(true);
         input.setRoot(rootInput);
