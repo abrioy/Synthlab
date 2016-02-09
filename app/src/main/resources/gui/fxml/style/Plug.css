@@ -3,3 +3,6 @@
     -fx-background-image: url("../../texture/plug.png");
     -fx-background-size: stretch;
 }
+.label {
+    -fx-translate-y: -30;
+}

@@ -84,8 +84,8 @@ public class ModuleOut implements Module{
         synthesizer.add(lineOutRight);
         synthesizer.add(lineOut);
         InputPort in = new InputPort("in", this, attenuator.input);
-        InputPort inLeft = new InputPort("inLeft", this, attenuatorLeft.input);
-        InputPort inRight = new InputPort("inRight", this, attenuatorRight.input);
+        InputPort inLeft = new InputPort("Left", this, attenuatorLeft.input);
+        InputPort inRight = new InputPort("Right", this, attenuatorRight.input);
         OutputPort interOut = new OutputPort("out",this, attenuator.output);
         OutputPort interOutLeft = new OutputPort("outLeft",this, attenuatorLeft.output);
         OutputPort interOutRight = new OutputPort("outRight",this, attenuatorRight.output);

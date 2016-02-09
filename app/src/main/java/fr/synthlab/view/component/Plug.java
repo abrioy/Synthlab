@@ -81,8 +81,6 @@ public class Plug extends StackPane {
 		colorCircle.setOnMouseClicked(event -> workbench.plugClicked(this));
 
         nameLabel = new Label();
-		nameLabel.setLayoutX(-25/2-25);
-		nameLabel.setLayoutY(-25/2-25);
 		getChildren().add(nameLabel);
     }
 
@@ -122,6 +120,7 @@ public class Plug extends StackPane {
 	public void setName(String name) {
 		this.name.set(name);
         nameLabel.setText(this.name.get());
-        System.out.println(name);
+		nameLabel.setLayoutX(200);//-25/2-25);
+		nameLabel.setLayoutY(-25/2-25);
 	}
 }
