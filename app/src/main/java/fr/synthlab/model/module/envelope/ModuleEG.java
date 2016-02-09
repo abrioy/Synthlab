@@ -34,15 +34,10 @@ public class ModuleEG implements Module {
         envelope.hold.set(0.0);
         envelope.delay.set(0.0);
 
-        envelope.attack.set(0.0);
-        envelope.decay.set(0.0);
+        envelope.attack.set(1.0);
+        envelope.decay.set(1.0);
         envelope.sustain.set(0.0);
-        envelope.release.set(0.0);
-
-        /*envelope.attack.setup(0,1,10.0);
-        envelope.decay.setup(0,1,10.0);
-        envelope.sustain.setup(0,0,12.0);
-        envelope.release.setup(0,1,10.0);*/
+        envelope.release.set(1.0);
 
     }
 
@@ -72,23 +67,18 @@ public class ModuleEG implements Module {
     }
 
     public void setAttack(double attack){
-
         envelope.attack.set(attack);
-        logger.info("Attack : " + envelope.attack.get());
     }
 
     public void setDecay(double decay){
         envelope.decay.set(decay);
-        logger.info("Decay : " + envelope.decay.get());
     }
 
     public void setSustain(double sustain){
         envelope.sustain.set(sustain);
-        logger.info("Sustain : " + envelope.sustain.get());
     }
 
     public void setRelease(double release){
         envelope.release.set(release);
-        logger.info("Release : " + envelope.release.get());
     }
 }
