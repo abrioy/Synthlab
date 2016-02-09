@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 public class Cable extends CubicCurve {
     private static final Logger logger = Logger.getLogger(Cable.class.getName());
     private Color color;
+    private List<Color> colors;
     private Plug in;
     private Plug out;
 
@@ -145,7 +146,7 @@ public class Cable extends CubicCurve {
         this.setControlX1(start.getX() - diffX / 3);
         this.setControlY1(start.getY()+100+diffY/2);
         this.setControlX2(end.getX() + diffX / 3);
-        this.setControlY2(end.getY()+100+diffY/2);
+        this.setControlY2(end.getY() + 100 + diffY / 2);
         this.setFill(null);
         this.setStroke(color);
     }
@@ -153,5 +154,8 @@ public class Cable extends CubicCurve {
         Random rnd = new Random();
         int i = rnd.nextInt(colors.size());
         return (Color) colors.toArray()[i];
+    }
+    public void changeRandColor(){
+        color=getRandomColor(colors);
     }
 }
