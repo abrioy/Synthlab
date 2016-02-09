@@ -41,11 +41,15 @@ public class MainWindowController implements Initializable {
 		// Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
             Dragboard db = event.getDragboard();
-			ModuleEnum moduleType = ModuleEnum.valueOf(ModuleEnum.getNameFromLong(db.getString()));
-			if(moduleType == null) {
-				logger.warning("Unknown incoming drag: \""+db.getString()+"\" is not a valid module.");
+			ModuleEnum moduleType = null;
+			try{
+				moduleType = ModuleEnum.valueOf(ModuleEnum.getNameFromLong(db.getString()));
 			}
-			else {
+			catch(IllegalArgumentException e){
+				logger.severe("Unable to drag in module, there is no module called \""+db.getString()+"\".");
+			}
+
+			if(moduleType != null) {
 				// We create a new module to add to the workbench
 				if(draggedNewViewModule == null){
 					logger.fine("Creating a new module \""+db.getString()+"\" by dragging it into the workspace.");
@@ -88,10 +92,12 @@ public class MainWindowController implements Initializable {
 
 		// Cleaning up if the module get out of the workbench
 		workbench.setOnDragExited(event -> {
-			logger.fine("Hiding module \""+draggedNewViewModule.getModule().getType()+
-					"\" because it got out of the workspace.");
-			workbench.hideGhost();
-			workbench.removeModule(draggedNewViewModule);
+			if(draggedNewViewModule != null) {
+				logger.fine("Hiding module \"" + draggedNewViewModule.getModule().getType() +
+						"\" because it got out of the workspace.");
+				workbench.hideGhost();
+				workbench.removeModule(draggedNewViewModule);
+			}
 		});
 
 		toolboxController.setOnDragDone(type -> {
