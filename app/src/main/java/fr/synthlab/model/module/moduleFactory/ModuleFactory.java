@@ -90,7 +90,7 @@ public class ModuleFactory {
      * @return a new ModuleEG
      */
     private static Module createEG() {
-        return new ModuleEG();
+        return new ModuleEG(syn);
     }
 
 	/**
