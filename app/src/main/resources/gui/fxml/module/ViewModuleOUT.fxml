@@ -18,19 +18,19 @@
     </Button>
 
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00"
-               height="60.0" width="115.0" layoutX="5" layoutY="70.0"
+               height="65.0" width="115.0" layoutX="5" layoutY="60.0"
                stroke="BLACK" strokeType="INSIDE"  mouseTransparent="true"/>
     <Plug fx:id="inStereoL"
-          layoutX="15.0" layoutY="80.0"
-          name="inLeft" type="input" />
+          layoutX="15.0" layoutY="75.0"
+          name="Left" type="input" />
 
     <Plug fx:id="inStereoR"
-          layoutX="65.0" layoutY="80.0"
-          name="inRight" type="input" />
+          layoutX="65.0" layoutY="75.0"
+          name="Right" type="input" />
 
 
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2197ff00"
-               height="60.0" width="65.0" layoutX="5.0" layoutY="135.0"
+               height="65.0" width="65.0" layoutX="5.0" layoutY="130.0"
                stroke="BLACK" strokeType="INSIDE" mouseTransparent="true"/>
     <Plug fx:id="inMono"
           layoutX="15.0" layoutY="145.0"

@@ -5,6 +5,7 @@ import fr.synthlab.view.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -28,6 +29,8 @@ public class Plug extends StackPane {
 		this.getPortCommand = getPortCommand;
 	}
 
+
+	private Label nameLabel;
 	public enum Type {
         input(Color.LIGHTBLUE),
         output(Color.ORANGE),
@@ -61,7 +64,6 @@ public class Plug extends StackPane {
 	public Plug() {
 		super();
         init();
-
 	}
 
     private void init() {
@@ -79,9 +81,10 @@ public class Plug extends StackPane {
         colorCircle.setStrokeType(StrokeType.INSIDE);
 		this.getChildren().add(colorCircle);
 
-		colorCircle.setOnMouseClicked(event -> {
-			workbench.plugClicked(this);
-        });
+		colorCircle.setOnMouseClicked(event -> workbench.plugClicked(this));
+
+        nameLabel = new Label();
+		getChildren().add(nameLabel);
     }
 
 	public Port getPort() {
@@ -110,7 +113,7 @@ public class Plug extends StackPane {
 
 
 	public String getName() {
-		return name.get();
+        return name.get();
 	}
 
 	public StringProperty nameProperty() {
@@ -119,5 +122,8 @@ public class Plug extends StackPane {
 
 	public void setName(String name) {
 		this.name.set(name);
+        nameLabel.setText(this.name.get());
+		nameLabel.setLayoutX(200);//-25/2-25);
+		nameLabel.setLayoutY(-25/2-25);
 	}
 }

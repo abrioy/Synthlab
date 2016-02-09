@@ -4,7 +4,6 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,13 +72,11 @@ public abstract class ViewModule extends Pane {
 			throw new RuntimeException(exception);
 		}
 
-		for(Node child : this.lookupAll("Plug")){
-			if(child instanceof Plug){
-				Plug plug = (Plug)child;
-				plug.setWorkbench(workbench);
-				plug.setGetPortCommand(() ->  module.getPort(plug.nameProperty().getValue()));
-			}
-		}
+		this.lookupAll("Plug").stream().filter(child -> child instanceof Plug).forEach(child -> {
+			Plug plug = (Plug) child;
+			plug.setWorkbench(workbench);
+			plug.setGetPortCommand(() -> module.getPort(plug.nameProperty().getValue()));
+		});
 		topPane.toFront();
 	}
 
