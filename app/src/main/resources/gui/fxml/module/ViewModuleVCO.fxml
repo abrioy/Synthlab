@@ -3,14 +3,26 @@
 <?import fr.synthlab.view.component.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
-      minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0"
-      xmlns="http://javafx.com/javafx/8">
-    <Knob fx:id="freq" diameter="84.0" layoutX="89.0" layoutY="252.0" max="22000"
-          min="0" scaleType="log" value="450"/>
-    <Knob fx:id="freqLine" diameter="52.0" layoutX="172.0" layoutY="252.0" max="100" min="-10"/>
-    <Knob fx:id="picker" diameter="100.0" layoutX="128.0" layoutY="125.0" max="2" min="0" step="3" />
-    <Plug fx:id="in" layoutX="20.0" layoutY="322.0" name="fm" type="input" />
-    <Plug fx:id="out" layoutX="198.0" layoutY="322.0" name="out" type="output" />
-    <Label fx:id="frequencyLabel" styleClass="display" layoutX="94.0" layoutY="312.0" prefHeight="44.0" prefWidth="75.0" text="" />
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+      prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
+    <Knob fx:id="picker" label="picker"
+          diameter="100.0" layoutX="125.0" layoutY="125.0"
+          max="2" min="0" step="3" />
+
+    <Knob fx:id="freq" label="Frequency"
+          diameter="85.0" layoutX="85.0" layoutY="250.0"
+          max="22000" min="0" scaleType="log" value="450"/>
+    <Knob fx:id="freqLine" label="Fine Frequency"
+          diameter="52.0" layoutX="165.0" layoutY="250.0"
+          max="-50" min="50" />
+    <Label fx:id="frequencyLabel" layoutX="45.0" layoutY="300.0"
+           styleClass="display"
+           prefHeight="44.0" prefWidth="80.0" text="" />
+
+    <Plug fx:id="fm"
+          layoutX="15.0" layoutY="345.0"
+          name="fm" type="modulation" />
+    <Plug fx:id="out"
+          layoutX="195.0" layoutY="345.0"
+          name="out" type="output" />
 </Pane>

@@ -207,16 +207,17 @@ public class Workbench extends Pane {
 	 * @return A suggested location to move the module to
 	 */
 	public Point2D computeNewModulePosition(ViewModule node, double expectedX, double expectedY) {
+		final double margin = 2;
 		double newX = expectedX;
 		double newY = expectedY;
 
 		// We will try 3 times to find a place for the node
 		for (int i = 0; i < 3; i++) {
-			if(newX < 0){
-				newX = 0;
+			if(newX < margin){
+				newX = margin;
 			}
-			if(newY < 0){
-				newY = 0;
+			if(newY < margin){
+				newY = margin;
 			}
 
 			Bounds oldBounds = node.getBoundsInParent();
@@ -246,19 +247,19 @@ public class Workbench extends Pane {
 					// We need to push it along the X axis
 					if (newCenter.getX() > collidingNodeCenter.getX()) {
 						// Right
-						newX = collidingBounds.getMaxX() + 1;
+						newX = collidingBounds.getMaxX() + margin;
 					} else {
 						// Left
-						newX = collidingBounds.getMinX() - newBounds.getWidth() - 1;
+						newX = collidingBounds.getMinX() - newBounds.getWidth() - margin;
 					}
 				} else {
 					// We need to push it along the Y axis
 					if (newCenter.getY() > collidingNodeCenter.getY()) {
 						// Bottom
-						newY = collidingBounds.getMaxY() + 1;
+						newY = collidingBounds.getMaxY() + margin;
 					} else {
 						// Top
-						newY = collidingBounds.getMinY() - newBounds.getHeight() - 1;
+						newY = collidingBounds.getMinY() - newBounds.getHeight() - margin;
 					}
 				}
 

@@ -34,6 +34,7 @@ public abstract class ViewModule extends Pane {
 		this.getStylesheets().add("/gui/fxml/style/Module.css");
 
 		topPane = new AnchorPane();
+		topPane.setMaxHeight(30.0d);
 		topPane.relocate(10, 5);
 		this.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
 			// Making sure the pane is always the right size
