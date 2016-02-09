@@ -18,6 +18,8 @@ public class ModuleVCFLP extends ModuleVCF {
 
         ports.add(input);
         ports.add(output);
+
+        setF0(getF0());
     }
 
     @Override
