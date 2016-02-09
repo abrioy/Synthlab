@@ -2,6 +2,7 @@ package fr.synthlab.view.component;
 
 import javafx.beans.property.*;
 import javafx.event.Event;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -90,6 +91,8 @@ public class Knob extends Pane {
     private double scale= (maxExp - minExp) / max.get() - min.get();
     private double coef = scale * 0 - minExp ;
 
+    private Label name;
+
     /**
      * constructor.
      */
@@ -116,6 +119,12 @@ public class Knob extends Pane {
         getChildren().addAll(minLine, maxLine);
         getChildren().add(knob);
         setPrefSize(diameter.doubleValue() / 5, diameter.doubleValue() / 5);
+
+        name = new Label(getLabel());
+        name.setLayoutX(getDiameter()/2);
+        name.setLayoutY(getDiameter()/2);
+        getChildren().add(name);
+
         valueProperty().addListener((arg0, arg1, arg2) -> {
             requestLayout();
         });
@@ -333,6 +342,8 @@ public class Knob extends Pane {
         diameter.set(v);
         knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
         scaleSize = (int) (diameter.get() / 5);
+        name.setLayoutX(-5*getLabel().length()/2);
+        name.setLayoutY(-getDiameter()/2-25);
     }
 
     /**
@@ -376,6 +387,7 @@ public class Knob extends Pane {
      */
     public final void setLabel(String v) {
         label.set(v);
+        name.setText(v);
     }
 
     /**
@@ -384,7 +396,7 @@ public class Knob extends Pane {
      */
     public final String getLabel() {
         if (label.get().equals("")){
-            return scaleType.get().toString();
+            return scaleType.get();
         }
         return label.get();
     }

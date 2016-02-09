@@ -7,9 +7,9 @@ import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
-import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.*;
 
 import java.util.logging.Logger;
@@ -24,6 +24,9 @@ public class ViewModuleFactory {
             case VCOA:
 				module = createViewModuleVCO(workbench);
 				break;
+            case VCA:
+                module = createViewModuleVCA(workbench);
+                break;
             case OUT:
                 module = createViewModuleOut(workbench);
 				break;
@@ -39,6 +42,15 @@ public class ViewModuleFactory {
         }
 		logger.finer("ViewModule created: "+m.toString());
         return module;
+    }
+
+    private static ViewModule createViewModuleVCA(Workbench workbench) {
+        Module vca = ModuleFactory.createModule(ModuleEnum.VCA);
+        ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
+        viewVca.setModule(vca);
+        viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca).setAttenuation(viewVca.getAmpli()));
+
+        return viewVca;
     }
 
     /**
@@ -79,7 +91,7 @@ public class ViewModuleFactory {
             ((ModuleOscilloscope) scop).setScale(viewScop.getScale());
         });
 
-		((OscilloscopeDrawing) viewScop.getOscilloscopeDrawing()).setModuleOscilloscope((ModuleOscilloscope) scop);
+        viewScop.getOscilloscopeDrawing().setModuleOscilloscope((ModuleOscilloscope) scop);
 
 		return viewScop;
     }

@@ -26,10 +26,6 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
     private boolean mute;
 
-    public Knob getPicker() {
-        return picker;
-    }
-
     public ViewModuleOUT(Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
@@ -37,8 +33,15 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         //todo add listener on mute
     }
 
+    public Knob getPicker() {
+        return picker;
+    }
+
     public void setVolumeCommand(Command volume) {
         this.volume = volume;
+
+        // Init volume to the correct value
+        volume.execute();
     }
 
     public void setMuteCommand(Command mute) {
@@ -47,6 +50,10 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
     public boolean isMute() {
         return mute;
+    }
+
+    public void setMute(Command mute) {
+        this.muteCommand = mute;
     }
 
     @Override
