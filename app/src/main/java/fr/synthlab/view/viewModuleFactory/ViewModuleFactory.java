@@ -6,14 +6,10 @@ import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
-import fr.synthlab.view.component.OscilloscopeDrawing;
-import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.module.ViewModuleOUT;
-import fr.synthlab.view.module.ViewModuleOscilloscope;
-import fr.synthlab.view.module.ViewModuleVCO;
-import javafx.scene.layout.AnchorPane;
+import fr.synthlab.view.module.*;
 
 import java.util.logging.Logger;
 
@@ -27,15 +23,30 @@ public class ViewModuleFactory {
             case VCOA:
 				module = createViewModuleVCO(workbench);
 				break;
+            case VCA:
+                module = createViewModuleVCA(workbench);
+                break;
             case OUT:
                 module = createViewModuleOut(workbench);
 				break;
             case SCOP:
                 module = createViewModuleOscilloscope(workbench);
 				break;
+            case REP:
+                module = createViewModuleREP(workbench);
+                break;
         }
 		logger.finer("ViewModule created: "+m.toString());
         return module;
+    }
+
+    private static ViewModule createViewModuleVCA(Workbench workbench) {
+        Module vca = ModuleFactory.createModule(ModuleEnum.VCA);
+        ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
+        viewVca.setModule(vca);
+        viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca).setAttenuation(viewVca.getAmpli()));
+
+        return viewVca;
     }
 
     /**
@@ -62,8 +73,8 @@ public class ViewModuleFactory {
         Module out = ModuleFactory.createModule(ModuleEnum.OUT);
         ViewModuleOUT viewOut = new ViewModuleOUT(workbench);
         viewOut.setModule(out);
-        viewOut.setVolume(() -> ((ModuleOut) out).setAttenuation(viewOut.getPicker().getValue()));
-        viewOut.setMute(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
+        viewOut.setVolumeCommand(() -> ((ModuleOut) out).setAttenuation(viewOut.getPicker().getValue()));
+        viewOut.setMuteCommand(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
 
         return viewOut;
     }
@@ -72,15 +83,21 @@ public class ViewModuleFactory {
         Module scop = ModuleFactory.createModule(ModuleEnum.SCOP);
         ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope(workbench);
         viewScop.setModule(scop);
-        viewScop.setPickerCmd(() -> {
+        viewScop.setPickerCommand(() -> {
             ((ModuleOscilloscope) scop).setScale(viewScop.getScale());
         });
 
-		// FIXME: Code à Corentin
-        ((OscilloscopeDrawing) viewScop.getOscilloscopeDrawing()).setModuleOscillo((ModuleOscilloscope) scop);
+        viewScop.getOscilloscopeDrawing().setModuleOscilloscope((ModuleOscilloscope) scop);
 
+		return viewScop;
+    }
 
-        return viewScop;
+    private static ViewModule createViewModuleREP(Workbench workbench) {
+        Module rep = ModuleFactory.createModule(ModuleEnum.REP);
+        ViewModuleREP viewREP = new ViewModuleREP(workbench);
+        viewREP.setModule(rep);
+
+        return viewREP;
     }
 
 

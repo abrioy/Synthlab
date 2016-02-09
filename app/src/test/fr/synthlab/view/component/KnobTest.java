@@ -1,6 +1,8 @@
 package fr.synthlab.view.component;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.StringProperty;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +15,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class KnobTest {
 
+    /**
+     * knob tested
+     */
     private Knob knob;
 
     @Before
@@ -22,148 +27,198 @@ public class KnobTest {
 
     /**
      * test on init value
-     * @throws Exception
      */
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         assertEquals(0,knob.getValue(),0.00000001);
     }
 
     /**
      * test on value 5
-     * @throws Exception
      */
     @Test
-    public void testSetValue() throws Exception {
+    public void testSetValue() {
         knob.setValue(5);
         assertEquals(5,knob.getValue(),0.00000001);
     }
 
     /**
      * test init value
-     * @throws Exception
      */
     @Test
-    public void testValueProperty() throws Exception {
+    public void testValueProperty() {
         DoubleProperty v = knob.valueProperty();
         assertEquals(0,v.get(),0.00000001);
     }
 
     /**
      * test after change value
-     * @throws Exception
      */
     @Test
-    public void testValueProperty2() throws Exception {
+    public void testValueProperty2()  {
         knob.setValue(5);
         DoubleProperty v = knob.valueProperty();
         assertEquals(5,v.get(),0.00000001);
     }
+
     /**
      * test init min
-     * @throws Exception
      */
     @Test
-    public void testGetMin() throws Exception {
+    public void testGetMin() {
         assertEquals(0,knob.getMin(),0.00000001);
     }
 
     /**
      * test change min by 5.
-     * @throws Exception
      */
     @Test
-    public void testSetMin() throws Exception {
+    public void testSetMin() {
         knob.setMin(5);
         assertEquals(5,knob.getMin(),0.00000001);
     }
 
     /**
      * test init min property
-     * @throws Exception
      */
     @Test
-    public void testMinProperty() throws Exception {
+    public void testMinProperty() {
         DoubleProperty property = knob.minProperty();
         assertEquals(0,property.get(),0.00000001);
     }
 
     /**
      * test init
-     * @throws Exception
      */
     @Test
-    public void testGetMax() throws Exception {
-
+    public void testGetMax(){
+        assertEquals(100,knob.getMax(),0.00000001);
     }
 
+    /**
+     * test max set to 5.
+     */
     @Test
-    public void testSetMax() throws Exception {
-
+    public void testSetMax(){
+        knob.setMax(5);
+        assertEquals(5,knob.getMax(),0.00000001);
     }
 
-    @Test
-    public void testMaxProperty() throws Exception {
 
+    /**
+     * test max init property.
+     */
+    @Test
+    public void testMaxProperty() {
+        DoubleProperty property = knob.maxProperty();
+        assertEquals(100,property.get(),0.00000001);
     }
 
-    @Test
-    public void testGetDiameter() throws Exception {
 
+    /**
+     * test Diameter init.
+     */
+    @Test
+    public void testGetDiameter() {
+        assertEquals(200,knob.getDiameter(),0.00000001);
     }
 
-    @Test
-    public void testSetDiameter() throws Exception {
 
+    /**
+     * test diameter set to 5.
+     */
+    @Test
+    public void testSetDiameter() {
+        knob.setDiameter(5);
+        assertEquals(5,knob.getDiameter(),0.00000001);
     }
 
+    /**
+     * test diameter init property.
+     */
     @Test
-    public void testDiameterProperty() throws Exception {
-
+    public void testDiameterProperty() {
+        DoubleProperty property = knob.diameterProperty();
+        assertEquals(200,property.get(),0.00000001);
     }
 
-    @Test
-    public void testSetScaleType() throws Exception {
 
+    /**
+     * test scaleType set to log.
+     */
+    @Test
+    public void testSetScaleType() {
+        knob.setScaleType("log");
+        assertEquals("log",knob.getScaleType());
     }
 
+    /**
+     * test scaleType set to log.
+     */
     @Test
-    public void testGetScaleType() throws Exception {
-
+    public void testGetScaleType() {
+        assertEquals("linear",knob.getScaleType());
     }
 
+    /**
+     * test scaleType init property.
+     */
     @Test
-    public void testScaleTypeProperty() throws Exception {
-
+    public void testScaleTypeProperty() {
+        StringProperty property = knob.scaleTypeProperty();
+        assertEquals("linear",property.get());
     }
 
+    /**
+     * test label set to name.
+     */
     @Test
-    public void testSetLabel() throws Exception {
-
+    public void testSetLabel() {
+        knob.setLabel("name");
+        assertEquals("name",knob.getLabel());
     }
 
+    /**
+     * test label init.
+     */
     @Test
-    public void testGetLabel() throws Exception {
-
+    public void testGetLabel() {
+        assertEquals("linear",knob.getLabel());
     }
 
+    /**
+     * test label set to log.
+     */
     @Test
-    public void testLabelProperty() throws Exception {
+    public void testLabelProperty() {
 
+        DoubleProperty property = knob.minProperty();
+        assertEquals(0,property.get(),0.00000001);
     }
 
+    /**
+     * test step set to 5.
+     */
     @Test
-    public void testSetStep() throws Exception {
-
+    public void testSetStep() {
+        knob.setStep(5);
+        assertEquals(5,knob.getStep());
     }
 
+    /**
+     * test step init.
+     */
     @Test
-    public void testGetStep() throws Exception {
-
+    public void testGetStep() {
+        assertEquals(0,knob.getStep());
     }
 
+    /**
+     * test step set to 5.
+     */
     @Test
-    public void testStepProperty() throws Exception {
-
+    public void testStepProperty() {
+        IntegerProperty property = knob.stepProperty();
+        assertEquals(0,property.get());
     }
 }

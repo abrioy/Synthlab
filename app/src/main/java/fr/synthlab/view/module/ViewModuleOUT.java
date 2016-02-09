@@ -6,7 +6,6 @@ import fr.synthlab.view.component.Knob;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,10 +26,6 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
     private boolean mute;
 
-    public Knob getPicker() {
-        return picker;
-    }
-
     public ViewModuleOUT(Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
@@ -38,11 +33,18 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         //todo add listener on mute
     }
 
-    public void setVolume(Command volume) {
-        this.volume = volume;
+    public Knob getPicker() {
+        return picker;
     }
 
-    public void setMute(Command mute) {
+    public void setVolumeCommand(Command volume) {
+        this.volume = volume;
+
+        // Init volume to the correct value
+        volume.execute();
+    }
+
+    public void setMuteCommand(Command mute) {
         this.muteCommand = mute;
     }
 
@@ -50,12 +52,16 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         return mute;
     }
 
+    public void setMute(Command mute) {
+        this.muteCommand = mute;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         picker.valueProperty().addListener(event -> {
             volume.execute();
         });
-        muteButton.addEventHandler(MouseEvent.MOUSE_CLICKED,e -> {
+        muteButton.setOnAction(event -> {
             mute = !mute;
             muteCommand.execute();
         });

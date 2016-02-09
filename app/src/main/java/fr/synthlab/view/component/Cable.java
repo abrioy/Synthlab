@@ -142,7 +142,6 @@ public class Cable extends CubicCurve {
     private void drawCable(Point2D start, Point2D end){
         double diffX=start.getX() - end.getX();
         double diffY=Math.abs(start.getY() - end.getY());
-        logger.info("DIFFERENCE : " + diffY);
         this.setControlX1(start.getX() - diffX / 3);
         this.setControlY1(start.getY()+100+diffY/2);
         this.setControlX2(end.getX() + diffX / 3);
