@@ -150,7 +150,7 @@ public class ViewModuleFactory {
 
 
     private static ViewModule createViewModuleKEYB(Workbench workbench) {
-        Module keyb = ModuleFactory.createModule(Module.KEYB);
+        Module keyb = ModuleFactory.createModule(ModuleEnum.KEYB);
         ViewModuleKEYB viewKEYB = new ViewModuleKEYB(workbench);
         viewKEYB.setModule(keyb);
 

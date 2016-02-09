@@ -25,6 +25,15 @@ public enum ModuleEnum {
 		return this.moduleLongName;
 	}
 
+    public static String getNameFromLong(String longName) {
+        for (ModuleEnum m : values()) {
+            if (m.getLongName().equals(longName)) {
+                return m.moduleName;
+            }
+        }
+        return "";
+    }
+
     @Override
     public String toString() {
         return moduleName;

@@ -41,7 +41,7 @@ public class MainWindowController implements Initializable {
 		// Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
             Dragboard db = event.getDragboard();
-			ModuleEnum moduleType = ModuleEnum.valueOf(db.getString());
+			ModuleEnum moduleType = ModuleEnum.valueOf(ModuleEnum.getNameFromLong(db.getString()));
 			if(moduleType == null) {
 				logger.warning("Unknown incoming drag: \""+db.getString()+"\" is not a valid module.");
 			}
