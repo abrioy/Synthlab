@@ -23,11 +23,11 @@ public class ModuleVCF implements Module {
     /**
      * Fréquence de coupure f0
      */
-    private double f0 = 450;
+    protected double f0 = 450;
     /**
      * Filter modulator
      */
-    private VcoFm fmFilter;
+    protected VcoFm fmFilter;
 
     public ModuleVCF(Synthesizer synthesizer) {
         fmFilter = new VcoFm(f0);

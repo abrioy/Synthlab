@@ -17,6 +17,7 @@ public class ModuleVCFHP extends ModuleVCF {
 
         ports.add(input);
         ports.add(output);
+        setF0(f0);
     }
 
     @Override
@@ -41,6 +42,16 @@ public class ModuleVCFHP extends ModuleVCF {
         super.setF0(f0);
         if (fmInput.getConnected() == null) {
             hpFilter.frequency.set(f0);
+        }
+    }
+
+    @Override
+    public void update() {
+        if (fmInput.getConnected() == null) {
+            fmFilter.output.disconnectAll();
+            hpFilter.frequency.set(f0);
+        } else {
+            fmFilter.output.connect(hpFilter.frequency);
         }
     }
 }
