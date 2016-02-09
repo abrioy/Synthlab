@@ -149,4 +149,13 @@ public class ViewModuleFactory {
 	}
 
 
+    private static ViewModule createViewModuleKEYB(Workbench workbench) {
+        Module keyb = ModuleFactory.createModule(Module.KEYB);
+        ViewModuleKEYB viewKEYB = new ViewModuleKEYB(workbench);
+        viewKEYB.setModule(keyb);
+
+        return viewKEYB;
+    }
+
+
 }
