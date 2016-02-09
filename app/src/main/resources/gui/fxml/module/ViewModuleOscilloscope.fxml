@@ -11,7 +11,7 @@
 
     <Knob fx:id="picker" label="picker"
           diameter="40.0" layoutX="250.0" layoutY="365.0"
-          max="-12" min="12"/>
+          max="12" min="-12"/>
 
     <Plug fx:id="in"
           layoutX="15.0" layoutY="345.0"
