@@ -25,6 +25,8 @@ public class Workbench extends Pane {
 	private ImageView dragGhost = new ImageView();
     private Cable draggedCable;
 
+	private final double moduleMargin = 2.0d;
+
 	public Workbench() {
 
 		// Making the ghost a bit spookier
@@ -36,28 +38,21 @@ public class Workbench extends Pane {
                 draggedCable.update(localPoint);
             }
         });
+
+
 		ModuleFactory.startSyn();
 
-		/*
-		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
-		ViewModule osc = ViewModuleFactory.createViewModule(ModuleEnum.SCOP, this);
-
-		vco.getModule().getPort("out").connect(osc.getModule().getPort("in"));
-
-		this.addModule(vco);
-		this.addModule(osc);
-		*/
 	}
 
 	public void onRightClick() {
 		dropCable();
 	}
 
-    /**
-     * Handling event when plug is clicked
-     * @param plug
-     */
-    public void plugClicked(Plug plug){
+	/**
+	 * Handling event when plug is clicked
+	 * @param plug
+	 */
+	public void plugClicked(Plug plug){
         String str;
         if (draggedCable==null){str="null";}
         else str="full";
@@ -172,8 +167,6 @@ public class Workbench extends Pane {
 
 			double expectedX = localPoint.getX() - mouseDelta.x;
 			double expectedY = localPoint.getY() - mouseDelta.y;
-			// Moving the ghost to where the module should be
-			workbench.moveGhost(expectedX, expectedY);
 
 			Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
 			if (newLocation != null) {
@@ -208,7 +201,10 @@ public class Workbench extends Pane {
 		this.getChildren().remove(dragGhost);
 	}
 	public void moveGhost(double x, double y){
-		dragGhost.relocate(x, y);
+		dragGhost.relocate(
+				Math.max(moduleMargin, x),
+				Math.max(moduleMargin, y)
+		);
 	}
 
 	/**
@@ -257,18 +253,17 @@ public class Workbench extends Pane {
 	 * @return A suggested location to move the module to
 	 */
 	public Point2D computeNewModulePosition(ViewModule node, double expectedX, double expectedY) {
-		final double margin = 2;
+
+		// Moving the ghost to where the module should be
+		this.moveGhost(expectedX, expectedY);
+
 		double newX = expectedX;
 		double newY = expectedY;
 
-		// We will try 3 times to find a place for the node
-		for (int i = 0; i < 3; i++) {
-			if(newX < margin){
-				newX = margin;
-			}
-			if(newY < margin){
-				newY = margin;
-			}
+		// We will try 4 times to find a place for the node
+		for (int i = 0; i < 4; i++) {
+			newX = Math.max(moduleMargin, newX);
+			newY = Math.max(moduleMargin, newY);
 
 			Bounds oldBounds = node.getBoundsInParent();
 			Bounds newBounds = new BoundingBox(
@@ -293,29 +288,47 @@ public class Workbench extends Pane {
 				double distanceX = Math.abs(newCenter.getX() - collidingNodeCenter.getX());
 				double distanceY = Math.abs(newCenter.getY() - collidingNodeCenter.getY());
 
-				if (distanceX > distanceY) {
+				if ((distanceX / distanceY) > (collidingBounds.getWidth() / collidingBounds.getHeight())) {
 					// We need to push it along the X axis
 					if (newCenter.getX() > collidingNodeCenter.getX()) {
 						// Right
-						newX = collidingBounds.getMaxX() + margin;
+						newX = collidingBounds.getMaxX() + moduleMargin;
 					} else {
 						// Left
-						newX = collidingBounds.getMinX() - newBounds.getWidth() - margin;
+						newX = collidingBounds.getMinX() - newBounds.getWidth() - moduleMargin;
 					}
+
+					// We also snap it in place vertically
+					if(Math.abs(collidingBounds.getMinY() - newBounds.getMinY()) < 20) {
+						newY = collidingBounds.getMinY();
+					}
+					else if(Math.abs(collidingBounds.getMaxY() - newBounds.getMaxY()) < 20) {
+						newY = collidingBounds.getMaxY() - newBounds.getHeight();
+					}
+
 				} else {
 					// We need to push it along the Y axis
 					if (newCenter.getY() > collidingNodeCenter.getY()) {
 						// Bottom
-						newY = collidingBounds.getMaxY() + margin;
+						newY = collidingBounds.getMaxY() + moduleMargin;
 					} else {
 						// Top
-						newY = collidingBounds.getMinY() - newBounds.getHeight() - margin;
+						newY = collidingBounds.getMinY() - newBounds.getHeight() - moduleMargin;
+					}
+
+					// We also snap it in place horizontally
+					if(Math.abs(collidingBounds.getMinX() - newBounds.getMinX()) < 20) {
+						newX = collidingBounds.getMinX();
+					}
+					else if(Math.abs(collidingBounds.getMaxX() - newBounds.getMaxX()) < 20) {
+						newX = collidingBounds.getMaxX() - newBounds.getWidth();
 					}
 				}
 
 			}
 
 		}
+
 		// The loop didn't succeed in finding a non-colliding location, we don't move the node
 		return null;
 	}

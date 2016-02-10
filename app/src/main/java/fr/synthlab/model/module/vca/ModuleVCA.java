@@ -60,6 +60,7 @@ public class ModuleVCA implements Module {
     @Override
     public void stop() {
         filterAttenuator.stop();
+        vcaAM.stop();
     }
 
     @Override
