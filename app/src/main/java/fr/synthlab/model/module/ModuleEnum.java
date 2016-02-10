@@ -12,7 +12,8 @@ public enum ModuleEnum {
     EG("EG", "Envelope Generator"),
 	VCFLP("VCFLP", "VCF (LP)"),
     VCFHP("VCFHP", "VCF (HP)"),
-    KEYB("KEYB", "Keyboard");
+    KEYB("KEYB", "Keyboard"),
+    MIX("MIX", "MIX");
 
 
     private String moduleName;

@@ -110,7 +110,6 @@ public class MainWindowController implements Initializable {
 			event.acceptTransferModes(TransferMode.ANY);
 			if (draggedNewViewModule != null) {
 				Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
-				workbench.moveGhost(localPoint.getX(), localPoint.getY());
 
 				Point2D newLocation = workbench.computeNewModulePosition(draggedNewViewModule, localPoint.getX(), localPoint.getY());
 				if(newLocation != null) {

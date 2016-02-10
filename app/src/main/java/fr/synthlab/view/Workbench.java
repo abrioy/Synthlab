@@ -167,8 +167,6 @@ public class Workbench extends Pane {
 
 			double expectedX = localPoint.getX() - mouseDelta.x;
 			double expectedY = localPoint.getY() - mouseDelta.y;
-			// Moving the ghost to where the module should be
-			workbench.moveGhost(expectedX, expectedY);
 
 			Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
 			if (newLocation != null) {
@@ -251,17 +249,17 @@ public class Workbench extends Pane {
 	 * @return A suggested location to move the module to
 	 */
 	public Point2D computeNewModulePosition(ViewModule node, double expectedX, double expectedY) {
+
+		// Moving the ghost to where the module should be
+		this.moveGhost(expectedX, expectedY);
+
 		double newX = expectedX;
 		double newY = expectedY;
 
 		// We will try 4 times to find a place for the node
 		for (int i = 0; i < 4; i++) {
-			if(newX < moduleMargin){
-				newX = moduleMargin;
-			}
-			if(newY < moduleMargin){
-				newY = moduleMargin;
-			}
+			newX = Math.max(moduleMargin, newX);
+			newY = Math.max(moduleMargin, newY);
 
 			Bounds oldBounds = node.getBoundsInParent();
 			Bounds newBounds = new BoundingBox(
@@ -293,7 +291,7 @@ public class Workbench extends Pane {
 				double distanceX = Math.abs(newCenter.getX() - collidingNodeCenter.getX());
 				double distanceY = Math.abs(newCenter.getY() - collidingNodeCenter.getY());
 
-				if (distanceX > distanceY) {
+				if ((distanceX / distanceY) > (collidingBounds.getWidth() / collidingBounds.getHeight())) {
 					// We need to push it along the X axis
 					if (newCenter.getX() > collidingNodeCenter.getX()) {
 						// Right
@@ -304,10 +302,10 @@ public class Workbench extends Pane {
 					}
 
 					// We also snap it in place vertically
-					if(Math.abs(collidingBounds.getMinY() - newBounds.getMinY()) < 25){
+					if(Math.abs(collidingBounds.getMinY() - newBounds.getMinY()) < 20) {
 						newY = collidingBounds.getMinY();
 					}
-					else if(Math.abs(collidingBounds.getMaxY() - newBounds.getMaxY()) < 25){
+					else if(Math.abs(collidingBounds.getMaxY() - newBounds.getMaxY()) < 20) {
 						newY = collidingBounds.getMaxY() - newBounds.getHeight();
 					}
 
@@ -322,10 +320,10 @@ public class Workbench extends Pane {
 					}
 
 					// We also snap it in place horizontally
-					if(Math.abs(collidingBounds.getMinX() - newBounds.getMinX()) < 25){
+					if(Math.abs(collidingBounds.getMinX() - newBounds.getMinX()) < 20) {
 						newX = collidingBounds.getMinX();
 					}
-					else if(Math.abs(collidingBounds.getMaxX() - newBounds.getMaxX()) < 25){
+					else if(Math.abs(collidingBounds.getMaxX() - newBounds.getMaxX()) < 20) {
 						newX = collidingBounds.getMaxX() - newBounds.getWidth();
 					}
 				}
@@ -333,6 +331,7 @@ public class Workbench extends Pane {
 			}
 
 		}
+
 		// The loop didn't succeed in finding a non-colliding location, we don't move the node
 		return null;
 	}
