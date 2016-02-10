@@ -1,6 +1,5 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.Command;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.OscilloscopeDrawing;
@@ -20,19 +19,18 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 	@FXML
 	private Knob picker;
 
-	private Command pickerCmd;
-
+	private Runnable pickerCmd;
+	private Workbench w;
 	public ViewModuleOscilloscope(Workbench workbench) {
 		super(workbench);
 		this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
 		w=workbench;
 	}
-	private Workbench w;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		picker.valueProperty().addListener(event -> {
-			pickerCmd.execute();
+			pickerCmd.run();
 		});
 
 		/*
@@ -50,8 +48,9 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 
 	}
 
-	public void setPickerCommand(Command pickerCmd) {
+	public void setPickerCommand(Runnable pickerCmd) {
 		this.pickerCmd = pickerCmd;
+		pickerCmd.run();
 	}
 
 	public int getScale() {

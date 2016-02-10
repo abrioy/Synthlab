@@ -7,7 +7,7 @@
       prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
     <Knob fx:id="picker"
           diameter="100.0" layoutX="125.0" layoutY="125.0"
-          min="0" max="2" step="3" />
+          min="0" max="3" step="4"/>
 
     <Knob fx:id="freq" label="Frequency"
           diameter="85.0" layoutX="85.0" layoutY="250.0"

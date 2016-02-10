@@ -3,46 +3,38 @@ package fr.synthlab.model.filter;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
-import fr.synthlab.model.module.mixer.ModuleMixer;
 
 public class MixFilter extends UnitGenerator{
 
-    @Override
-    public void start(){
-        super.start();
-      //  passThrough.start();
-    }
-
-    //private final PassThrough passThrough;
-    //ModuleMixer mixer;
-
-    public UnitInputPort getInput1() {
-        return input1;
-    }
-
-    public UnitInputPort getInput4() {
-        return input4;
-    }
-
-    public UnitInputPort getInput3() {
-        return input3;
-    }
-
-    public UnitInputPort getInput2() {
-        return input2;
-    }
-
+    /**
+     * input 1.
+     */
     private UnitInputPort input1;
+
+    /**
+     * input 2.
+     */
     private UnitInputPort input2;
+
+    /**
+     * input 3.
+     */
     private UnitInputPort input3;
+
+    /**
+     * input 4.
+     */
     private UnitInputPort input4;
+
+    /**
+     * output.
+     */
     private UnitOutputPort output;
 
-    public MixFilter(ModuleMixer mixer) {
-        //passThrough = new PassThrough();
-        //this.mixer = mixer;
-
-        //mixer.getSyn().add(passThrough);
+    /**
+     * constructor.
+     */
+    public MixFilter() {
 
         input1 = new UnitInputPort("intern1");
         input2 = new UnitInputPort("intern2");
@@ -56,6 +48,48 @@ public class MixFilter extends UnitGenerator{
         addPort(output);
     }
 
+    /**
+     * getter on input1.
+     *
+     * @return input 1
+     */
+    public UnitInputPort getInput1() {
+        return input1;
+    }
+
+    /**
+     * getter on input2.
+     *
+     * @return input 2
+     */
+    public UnitInputPort getInput2() {
+        return input2;
+    }
+
+    /**
+     * getter on input3.
+     *
+     * @return input 3
+     */
+    public UnitInputPort getInput3() {
+        return input3;
+    }
+
+    /**
+     * getter on input4.
+     *
+     * @return input 4
+     */
+    public UnitInputPort getInput4() {
+        return input4;
+    }
+
+    /**
+     * generate new value for output.
+     *
+     * @param start debut
+     * @param limit fin
+     */
     @Override
     public void generate(int start, int limit) {
         double[] inputs1 = input1.getValues();
@@ -63,11 +97,29 @@ public class MixFilter extends UnitGenerator{
         double[] inputs3 = input3.getValues();
         double[] inputs4 = input4.getValues();
         double[] outputs = output.getValues();
+        int div;
         for (int i = start; i < limit; i++) {
-            outputs[i] = inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i];
+            div = 0;
+            if (input1.isConnected()) {
+                div++;
+            }
+            if (input2.isConnected()) {
+                div++;
+            }
+            if (input3.isConnected()) {
+                div++;
+            }
+            if (input4.isConnected()) {
+                div++;
+            }
+            outputs[i] = (inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i]) / div;
         }
     }
 
+    /**
+     * getter on output.
+     * @return output
+     */
     public UnitOutputPort getOutput() {
         return output;
     }

@@ -1,6 +1,6 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.Command;
+
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
@@ -28,7 +28,7 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
     @FXML
     private Label frequencyLabel;
 
-    private Command changeThresholdCommand;
+    private Runnable changeThresholdCommand;
 
     public ViewModuleVCFHP(Workbench workbench) {
         super(workbench);
@@ -44,14 +44,14 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
     }
 
     private void updateThreshold() {
-        changeThresholdCommand.execute();
+        changeThresholdCommand.run();
         frequencyLabel.setText(((int)getThreshold())+" Hz");
     }
 
-    public void setChangeThresholdCommand(Command changeThresholdCommand) {
+    public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
         this.changeThresholdCommand = changeThresholdCommand;
 
-        changeThresholdCommand.execute();
+        changeThresholdCommand.run();
     }
 
     public double getThreshold() {

@@ -20,29 +20,49 @@ import java.util.logging.Logger;
  */
 public class ModuleMixer implements Module{
     private static final Logger logger = Logger.getLogger(ModuleMixer.class.getName());
+
+    /**
+     * attenuator on input 1.
+     */
     private final FilterAttenuator attenuator1;
+
+    /**
+     * attenuator on input 2.
+     */
     private final FilterAttenuator attenuator2;
+
+    /**
+     * attenuator on input 3.
+     */
     private final FilterAttenuator attenuator3;
+
+    /**
+     * attenuator on input 4.
+     */
     private final FilterAttenuator attenuator4;
 
-    public Synthesizer getSyn() {
-        return syn;
-    }
-
-    private final Synthesizer syn;
-
+    /**
+     * filter who unit the 4 inputs.
+     */
     private MixFilter mix;
 
+    /**
+     * return list ports.
+     */
     private Collection<Port> ports;
 
+    /**
+     * constructor.
+     *
+     * @param syn synthesizer
+     */
     public ModuleMixer(Synthesizer syn){
-        this.syn = syn;
         attenuator1 = new FilterAttenuator();
         attenuator2 = new FilterAttenuator();
         attenuator3 = new FilterAttenuator();
         attenuator4 = new FilterAttenuator();
 
-        mix = new MixFilter(this);
+        mix = new MixFilter();
 
         ports = new ArrayList<>();
         ports.add(new InputPort("in1", this, attenuator1.input));
@@ -64,11 +84,18 @@ public class ModuleMixer implements Module{
 
     }
 
+    /**
+     * getter on lists port.
+     * @return ports can connect to other module
+     */
     @Override
     public Collection<Port> getPorts() {
         return ports;
     }
 
+    /**
+     * start module.
+     */
     @Override
     public void start() {
         attenuator1.start();
@@ -78,6 +105,9 @@ public class ModuleMixer implements Module{
         mix.start();
     }
 
+    /**
+     * stop module.
+     */
     @Override
     public void stop() {
         attenuator1.stop();
@@ -87,44 +117,51 @@ public class ModuleMixer implements Module{
         mix.stop();
     }
 
+    /**
+     * not use in this module
+     */
     @Override
-    public void update() {}
+    public void update() {
+    }
 
+    /**
+     * module type.
+     * @return ModuleEnum.MIX
+     */
     @Override
     public ModuleEnum getType() {
         return ModuleEnum.MIX;
     }
 
-    public double getAttenuation1(){
-        return attenuator1.getAttenuation();
-    }
-
+    /**
+     * setter on attenuation of input 1.
+     * @param attenuation to set
+     */
     public void setAttenuation1(double attenuation) {
         attenuator1.setAttenuation(attenuation);
     }
 
-    public double getAttenuation2(){
-        return attenuator2.getAttenuation();
-    }
-
+    /**
+     * setter on attenuation of input 2.
+     * @param attenuation to set
+     */
     public void setAttenuation2(double attenuation){
         attenuator2.setAttenuation(attenuation);
     }
 
-    public double getAttenuation3(){
-        return attenuator3.getAttenuation();
-    }
-
+    /**
+     * setter on attenuation of input 3.
+     * @param attenuation to set
+     */
     public void setAttenuation3(double attenuation) {
         attenuator3.setAttenuation(attenuation);
     }
 
-    public double getAttenuation4(){
-        return attenuator4.getAttenuation();
-    }
-
+    /**
+     * setter on attenuation of input 4.
+     * @param attenuation to set
+     */
     public void setAttenuation4(double attenuation){
         attenuator4.setAttenuation(attenuation);
     }
-
 }

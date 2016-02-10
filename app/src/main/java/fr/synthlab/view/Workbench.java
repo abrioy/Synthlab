@@ -21,11 +21,9 @@ import java.util.logging.Logger;
 
 public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
-
+	private final double moduleMargin = 2.0d;
 	private ImageView dragGhost = new ImageView();
     private Cable draggedCable;
-
-	private final double moduleMargin = 2.0d;
 
 	public Workbench() {
 
@@ -172,13 +170,9 @@ public class Workbench extends Pane {
 			if (newLocation != null) {
 				module.relocate(newLocation.getX(), newLocation.getY());
 			}
-			//workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
-			for (Cable c : getCables()) {
-				if (draggedCable != c) {
-					c.update();
-				} else {
-					c.update(localPoint);
-				}
+
+			if (draggedCable != null) {
+				draggedCable.update(localPoint);
 			}
 		});
 
@@ -275,6 +269,13 @@ public class Workbench extends Pane {
 
 			Bounds collidingBounds = checkCollisions(node, newBounds);
 			if (collidingBounds == null) {
+				// Updating the cable positions, just in case
+				for (Cable c : getCables()) {
+					if (draggedCable != c) {
+						c.update();
+					}
+				}
+
 				// The new position is not colliding with something
 				// We move the node
 				return new Point2D(newX, newY);

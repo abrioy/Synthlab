@@ -32,17 +32,6 @@ public class ModuleVCOATest {
     }
 
     /**
-     * test setOctave method
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testSetOctave() throws Exception {
-        moduleVCOA.setOctave(1);
-        assertEquals(1, moduleVCOA.getOctave(), 0.001);
-    }
-
-    /**
      * test getPorts method
      *
      * @throws Exception
