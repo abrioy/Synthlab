@@ -47,6 +47,9 @@ public class ViewModuleFactory {
             case VCFHP:
                 module = createViewModuleVCFHP(workbench);
                 break;
+            case MIX:
+                module = createViewModuleMixer(workbench);
+                break;
         }
 		if (module != null) {
 			logger.finer("ViewModule created: " + type.toString());
@@ -55,6 +58,22 @@ public class ViewModuleFactory {
 			logger.severe("Unrecognised module type \""+type.toString()+"\".");
 		}
         return module;
+    }
+
+    private static ViewModule createViewModuleMixer(Workbench workbench) {
+        Module vco = ModuleFactory.createModule(ModuleEnum.MIX);
+        ViewModuleMixer viewVco = new ViewModuleMixer(workbench);
+        viewVco.setModule(vco);
+
+        /*viewVco.setChangeFreqCommand(() -> {
+            ((ModuleVCOA) vco).setFrequency(viewVco.getFreq());
+        });
+
+        viewVco.setChangeShapeCommand(() -> {
+            ((ModuleVCOA) vco).setShape(viewVco.getSelectedShape());
+        });*/
+
+        return viewVco;
     }
 
     /**

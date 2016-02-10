@@ -65,6 +65,10 @@ public class ModuleVCA implements Module {
         ports.add(outputPort);
     }
 
+    public double getAttenuation() {
+        return attenuation;
+    }
+
     /**
      * set the attenuation in DB
      * @param attenuation

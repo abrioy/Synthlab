@@ -76,6 +76,10 @@ public class ModuleVCFLP extends ModuleVCF {
         return ModuleEnum.VCFLP;
     }
 
+    public double getResonance() {
+        return lpFilter.Q.get();
+    }
+
     public void setResonance(double value) {
         lpFilter.Q.set(value);
     }

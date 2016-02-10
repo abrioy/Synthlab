@@ -62,7 +62,8 @@ public class ToolboxController implements Initializable {
                 ModuleEnum.REP.getLongName(),
                 ModuleEnum.EG.getLongName(),
                 ModuleEnum.VCFLP.getLongName(),
-                ModuleEnum.VCFHP.getLongName()
+                ModuleEnum.VCFHP.getLongName(),
+                ModuleEnum.MIX.getLongName()
         );
         loadTreeItems(rootFilter, items);
 
