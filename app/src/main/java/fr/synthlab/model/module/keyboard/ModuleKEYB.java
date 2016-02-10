@@ -24,12 +24,12 @@ public class ModuleKEYB implements Module {
 
     private List<Port> ports = new ArrayList<>();
 
-    private OutputPort out;
+    private Note lastNotePressed;
 
+    private OutputPort out;
     private OutputPort gate;
 
     private SineOscillator sineOscillator;
-
     private KeyboardFilter keyboardFilter;
 
     public ModuleKEYB(Synthesizer synth) {
@@ -73,10 +73,13 @@ public class ModuleKEYB implements Module {
         newOctave = Math.max(newOctave, OCTAVE_MIN);
         newOctave = Math.min(newOctave, OCTAVE_MAX);
         this.octave = newOctave;
+        if (lastNotePressed != null) {
+            pressKey(lastNotePressed);
+        }
     }
 
     public void pressKey(Note n) {
-        keyboardFilter.pressKey();
+        lastNotePressed = n;
         double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
         sineOscillator.frequency.setValueInternal(freq);
     }
@@ -84,5 +87,5 @@ public class ModuleKEYB implements Module {
     public void releaseKey() {
         keyboardFilter.releaseKey();
     }
-}
 
+}
