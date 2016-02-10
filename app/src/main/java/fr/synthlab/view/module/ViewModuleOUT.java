@@ -27,15 +27,19 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
     private Runnable muteCommand;
 
+    private Runnable recordCommand;
+
+
     private boolean mute;
 
-
+    private boolean record;
 
     public ViewModuleOUT(Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
         this.setId("pane");
         muteButton.setPrefSize(30,30);
+        recordButton.setPrefSize(30,30);
     }
 
     public Knob getPicker() {
@@ -70,6 +74,11 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
             mute = !mute;
             muteButton.setToggle(mute);
             muteCommand.run();
+        });
+        recordButton.setOnAction(event -> {
+            record = !record;
+            recordButton.setToggle(record);
+            //recordCommand.run(); Command to add
         });
     }
 }

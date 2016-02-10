@@ -53,8 +53,8 @@
         -fx-text-fill: transparent !important;
         }
 
-.rec-release {
-    -fx-background-image: url("../../texture/button.png") ;
+.record-release {
+    -fx-background-image: url("../../texture/rec.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-color: transparent !important;
@@ -63,8 +63,8 @@
         -fx-text-fill: transparent !important;
     }
 
-.rec-pressed {
-        -fx-background-image: url("../../texture/button-pressed.png") ;
+.record-pressed {
+        -fx-background-image: url("../../texture/stop.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-size: contain !important;

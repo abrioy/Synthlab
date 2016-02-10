@@ -14,7 +14,7 @@
             layoutX="175.0" layoutY="155.0">
     </MuteButton>
 
-    <RecordButton fx:id="recButton"
+    <RecordButton fx:id="recordButton"
                 layoutX="125.0" layoutY="155.0">
     </RecordButton>
 
