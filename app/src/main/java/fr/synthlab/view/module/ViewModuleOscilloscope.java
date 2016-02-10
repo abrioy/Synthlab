@@ -51,6 +51,7 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 
 	public void setPickerCommand(Runnable pickerCmd) {
 		this.pickerCmd = pickerCmd;
+		pickerCmd.run();
 	}
 
 	public int getScale() {

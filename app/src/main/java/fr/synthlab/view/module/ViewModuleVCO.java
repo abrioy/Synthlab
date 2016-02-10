@@ -62,14 +62,12 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 
 	public void setChangeShapeCommand(Runnable changeShape) {
 		this.changeShapeCommand = changeShape;
-
 		changeShapeCommand.run();
 	}
 
 
 	public void setChangeFreqCommand(Runnable changeFreq) {
 		this.changeFreqCommand = changeFreq;
-
 		changeFreqCommand.run();
 	}
 
