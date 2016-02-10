@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-public class Recorder implements Module {
+public class ModuleRecorder implements Module {
 
     protected Collection<Port> ports = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class Recorder implements Module {
 
     private WaveRecorder waveRecorder;
 
-    public Recorder(Synthesizer synthesizer) {
+    public ModuleRecorder(Synthesizer synthesizer) {
         this.synthesizer = synthesizer;
         synthesizer.add(passThrough);
 
