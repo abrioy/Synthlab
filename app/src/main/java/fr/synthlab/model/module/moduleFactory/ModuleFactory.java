@@ -9,7 +9,6 @@ import fr.synthlab.model.module.keyboard.ModuleKEYB;
 import fr.synthlab.model.module.mixer.ModuleMixer;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
-import fr.synthlab.model.module.recorder.ModuleRecorder;
 import fr.synthlab.model.module.replicator.ModuleREP;
 import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcf.ModuleVCFHP;
@@ -50,9 +49,6 @@ public class ModuleFactory {
             case KEYB : module = createKEYB();
                 break;
             case MIX : module = createMix();
-                break;
-            case REC:
-                module = createREC();
                 break;
         }
 		if(module != null){
@@ -131,10 +127,6 @@ public class ModuleFactory {
      */
     private static ModuleKEYB createKEYB() {
         return new ModuleKEYB(syn);
-    }
-
-    private static ModuleRecorder createREC() {
-        return new ModuleRecorder(syn);
     }
 
     public static Synthesizer getSyn() {

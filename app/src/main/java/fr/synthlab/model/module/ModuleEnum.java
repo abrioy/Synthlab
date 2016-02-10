@@ -13,8 +13,7 @@ public enum ModuleEnum {
 	VCFLP("VCFLP", "VCF (LP)"),
     VCFHP("VCFHP", "VCF (HP)"),
     KEYB("KEYB", "Keyboard"),
-    MIX("MIX", "MIX"),
-    REC("REC", "ModuleRecorder");
+    MIX("MIX", "MIX");
 
     private String moduleName;
     private String moduleLongName;
