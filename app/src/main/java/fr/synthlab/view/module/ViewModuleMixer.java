@@ -1,6 +1,5 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.Command;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import javafx.fxml.FXML;
@@ -73,7 +72,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
      * setter command on change attenuation input 1.
      * @param attenuator1Cmd command
      */
-    public void setAttenuator1Cmd(Command attenuator1Cmd) {
+    public void setAttenuator1Cmd(Runnable attenuator1Cmd) {
         this.attenuator1Cmd = attenuator1Cmd;
     }
 
@@ -81,7 +80,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
      * setter command on change attenuation input 2.
      * @param attenuator2Cmd command
      */
-    public void setAttenuator2Cmd(Command attenuator2Cmd) {
+    public void setAttenuator2Cmd(Runnable attenuator2Cmd) {
         this.attenuator2Cmd = attenuator2Cmd;
     }
 
@@ -89,7 +88,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
      * setter command on change attenuation input 3.
      * @param attenuator3Cmd command
      */
-    public void setAttenuator3Cmd(Command attenuator3Cmd) {
+    public void setAttenuator3Cmd(Runnable attenuator3Cmd) {
         this.attenuator3Cmd = attenuator3Cmd;
     }
 
@@ -97,29 +96,29 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
      * setter command on change attenuation input 4.
      * @param attenuator4Cmd command
      */
-    public void setAttenuator4Cmd(Command attenuator4Cmd) {
+    public void setAttenuator4Cmd(Runnable attenuator4Cmd) {
         this.attenuator4Cmd = attenuator4Cmd;
     }
 
     /**
      * command execute on change attenuation input 1.
      */
-    private Command attenuator1Cmd;
+    private Runnable attenuator1Cmd;
 
     /**
      * command execute on change attenuation input 2.
      */
-    private Command attenuator2Cmd;
+    private Runnable attenuator2Cmd;
 
     /**
      * command execute on change attenuation input 3.
      */
-    private Command attenuator3Cmd;
+    private Runnable attenuator3Cmd;
 
     /**
      * command execute on change attenuation input 4.
      */
-    private Command attenuator4Cmd;
+    private Runnable attenuator4Cmd;
 
     /**
      * constructor.
@@ -139,16 +138,16 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         attenuator1.valueProperty().addListener(event -> {
-            attenuator1Cmd.execute();
+            attenuator1Cmd.run();
         });
         attenuator2.valueProperty().addListener(event -> {
-            attenuator2Cmd.execute();
+            attenuator2Cmd.run();
         });
         attenuator3.valueProperty().addListener(event -> {
-            attenuator3Cmd.execute();
+            attenuator3Cmd.run();
         });
         attenuator4.valueProperty().addListener(event -> {
-            attenuator4Cmd.execute();
+            attenuator4Cmd.run();
         });
     }
 }
