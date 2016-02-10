@@ -1,4 +1,4 @@
-package fr.synthlab.model.module.keyboard;
+package fr.synthlab.model.filter;
 
 import com.jsyn.unitgen.UnitFilter;
 

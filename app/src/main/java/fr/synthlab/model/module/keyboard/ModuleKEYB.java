@@ -2,6 +2,7 @@ package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.SineOscillator;
+import fr.synthlab.model.filter.KeyboardFilter;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.OutputPort;
@@ -79,6 +80,7 @@ public class ModuleKEYB implements Module {
     }
 
     public void pressKey(Note n) {
+        keyboardFilter.pressKey();
         lastNotePressed = n;
         double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
         sineOscillator.frequency.setValueInternal(freq);
