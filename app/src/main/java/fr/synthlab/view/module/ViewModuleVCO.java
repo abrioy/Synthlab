@@ -92,8 +92,10 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 				return ShapeEnum.TRIANGLE;
 			case 1:
 				return ShapeEnum.SQUARE;
-			default:
+			case 2 :
 				return ShapeEnum.SAWTOOTH;
+			default:
+				return ShapeEnum.SINE;
 		}
 	}
 }
