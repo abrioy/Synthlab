@@ -26,7 +26,7 @@ public class Knob extends Pane {
 	private static final Logger logger = Logger.getLogger(Knob.class.getName());
 
 
-	private static final Color stepColor = Color.WHITE;//new Color(0.4d, 0.4d, 0.4d, 0.5d);
+	private static final Color stepColor = Color.WHITE;
 
     /**
      * draw zone.
@@ -108,7 +108,7 @@ public class Knob extends Pane {
      * nb of step in button.
      * if = 0 it is a button continue.
      */
-    private final IntegerProperty step = new SimpleIntegerProperty(this, "step", 0);
+    private final IntegerProperty step = new SimpleIntegerProperty(this, "step", 20);
 
     /**
      * min with exponential
@@ -243,17 +243,16 @@ public class Knob extends Pane {
      */
     @Override
     protected void layoutChildren() {
-        double stepStart =0;
+        double stepStart = 0;
         double stepEnd = 0;
         double smallScaleSize = scaleSize * 3.0d / 4.0d;
-        double arcDistance = scaleSize/3;
+        double arcDistance = scaleSize*0.4d;
         double arcRadius=(diameter.doubleValue() / 2.0) + arcDistance;
-        //try to improve from here
+
         double minStartX = (diameter.doubleValue() / 2.0 +arcDistance) * Math.cos(Math.toRadians(-getMinAngle()));
         double minStartY = (diameter.doubleValue() / 2.0 +arcDistance) * Math.sin(Math.toRadians(-getMinAngle()));
         double maxStartX = (diameter.doubleValue() / 2.0 +arcDistance) * Math.cos(Math.toRadians(-getMaxAngle()));
         double maxStartY = (diameter.doubleValue() / 2.0 +arcDistance) * Math.sin(Math.toRadians(-getMaxAngle()));
-        //to here
 
         super.layoutChildren();
         double centerX = 0;
@@ -278,7 +277,6 @@ public class Knob extends Pane {
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
-
         if (step.get()!=0) {//draw scale
             getChildren().removeAll(lines);
             Color interColor=stepColor;
@@ -308,7 +306,6 @@ public class Knob extends Pane {
 				getChildren().add(line);
             }
         }
-        //another added stuff
         arc.setCenterX(centerX);
         arc.setCenterY(centerY);
         arc.setRadiusX(arcRadius);
