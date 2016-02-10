@@ -5,6 +5,9 @@ import fr.synthlab.view.component.Knob;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -73,6 +76,20 @@ public class ViewModuleEG extends ViewModule implements Initializable{
         this.changeReleaseCommand = command;
     }
 
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		o.writeDouble(attack.getValue());
+		o.writeDouble(decay.getValue());
+		o.writeDouble(sustain.getValue());
+		o.writeDouble(release.getValue());
+	}
 
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		attack.setValue(o.readDouble());
+		decay.setValue(o.readDouble());
+		sustain.setValue(o.readDouble());
+		release.setValue(o.readDouble());
+	}
 
 }

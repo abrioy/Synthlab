@@ -6,6 +6,9 @@ import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -50,4 +53,15 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
     public double getAmpli() {
         return ampli.getValue();
     }
+
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		o.writeDouble(ampli.getValue());
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		ampli.setValue(o.readDouble());
+	}
 }

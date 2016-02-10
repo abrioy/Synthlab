@@ -88,14 +88,4 @@ public class ModuleRecorder implements Module {
     }
 
 
-
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-
-	}
-
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
-	}
 }

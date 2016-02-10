@@ -505,14 +505,4 @@ public class ModuleOscilloscope implements Module {
 
     }
 
-
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeObject(this.getScale());
-	}
-
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		this.setScale((int) o.readObject());
-	}
 }

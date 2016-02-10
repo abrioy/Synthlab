@@ -5,6 +5,9 @@ import fr.synthlab.view.component.Knob;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -155,4 +158,20 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
             attenuator4Cmd.run();
         });
     }
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		o.writeDouble(attenuator1.getValue());
+		o.writeDouble(attenuator2.getValue());
+		o.writeDouble(attenuator3.getValue());
+		o.writeDouble(attenuator4.getValue());
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		attenuator1.setValue(o.readDouble());
+		attenuator2.setValue(o.readDouble());
+		attenuator3.setValue(o.readDouble());
+		attenuator4.setValue(o.readDouble());
+	}
 }

@@ -103,20 +103,4 @@ public class ModuleEG implements Module {
 		return envelope.release.get();
 	}
 
-
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeObject(getAttack());
-		o.writeObject(getDecay());
-		o.writeObject(getSustain());
-		o.writeObject(getRelease());
-	}
-
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		setAttack((double) o.readObject());
-		setDecay((double) o.readObject());
-		setSustain((double) o.readObject());
-		setRelease((double) o.readObject());
-	}
 }

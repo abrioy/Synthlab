@@ -40,13 +40,5 @@ public class ModuleKEYB implements Module {
         return null;
     }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
 
-	}
-
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
-	}
 }

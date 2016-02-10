@@ -6,6 +6,9 @@ import fr.synthlab.view.component.OscilloscopeDrawing;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -59,5 +62,15 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 
 	public OscilloscopeDrawing getOscilloscopeDrawing() {
 		return oscilloscopeDrawing;
+	}
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		o.writeDouble(picker.getValue());
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		picker.setValue(o.readDouble());
 	}
 }

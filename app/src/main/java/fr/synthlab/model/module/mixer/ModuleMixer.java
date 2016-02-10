@@ -182,20 +182,4 @@ public class ModuleMixer implements Module{
 		return attenuator4.getAttenuation();
 	}
 
-
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeObject(getAttenuation1());
-		o.writeObject(getAttenuation2());
-		o.writeObject(getAttenuation3());
-		o.writeObject(getAttenuation4());
-	}
-
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		setAttenuation1((double) o.readObject());
-		setAttenuation2((double) o.readObject());
-		setAttenuation3((double) o.readObject());
-		setAttenuation4((double) o.readObject());
-	}
 }

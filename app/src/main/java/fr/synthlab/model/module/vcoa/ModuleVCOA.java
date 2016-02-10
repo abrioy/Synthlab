@@ -211,15 +211,4 @@ public class ModuleVCOA implements Module {
     }
 
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeObject(this.getFrequency());
-		o.writeObject(this.getShape());
-	}
-
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		this.setFrequency((double) o.readObject());
-		this.setShape((ShapeEnum) o.readObject());
-	}
 }

@@ -6,6 +6,9 @@ import fr.synthlab.view.component.MuteButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -51,10 +54,6 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         return mute;
     }
 
-    public void setMute(Runnable mute) {
-        this.muteCommand = mute;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         picker.valueProperty().addListener(event -> {
@@ -66,4 +65,16 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
             muteCommand.run();
         });
     }
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		o.writeDouble(picker.getValue());
+		o.writeBoolean(mute);
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		picker.setValue(o.readDouble());
+		mute = o.readBoolean(); // FIXME: not updating the button (use a property ?)
+	}
 }

@@ -78,15 +78,4 @@ public class ModuleREP implements Module {
         return ModuleEnum.REP;
     }
 
-
-
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-
-	}
-
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
-	}
 }

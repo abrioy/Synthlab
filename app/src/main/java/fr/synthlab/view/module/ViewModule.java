@@ -12,9 +12,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.logging.Logger;
 
-public abstract class ViewModule extends Pane {
+public abstract class ViewModule extends Pane implements Serializable {
 	private static final Logger logger = Logger.getLogger(ViewModule.class.getName());
 
 	private Workbench workbench;
@@ -88,4 +91,8 @@ public abstract class ViewModule extends Pane {
 		this.module = module;
 		moduleName.setText(module.getType().getLongName());
 	}
+
+	public abstract void writeObject(ObjectOutputStream o) throws IOException;
+	public abstract void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException;
+
 }

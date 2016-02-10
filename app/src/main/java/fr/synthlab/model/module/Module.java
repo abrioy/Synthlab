@@ -2,14 +2,10 @@ package fr.synthlab.model.module;
 
 import fr.synthlab.model.module.port.Port;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.Collection;
 
 
-public interface Module extends Serializable {
+public interface Module {
     Collection<Port> getPorts();
 
     default Port getPort(String name) {
@@ -26,7 +22,4 @@ public interface Module extends Serializable {
     void update();
     ModuleEnum getType();
 
-	void writeObject(ObjectOutputStream o) throws IOException;
-
-	void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException;
 }

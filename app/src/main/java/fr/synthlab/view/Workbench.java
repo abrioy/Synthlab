@@ -1,12 +1,14 @@
 package fr.synthlab.view;
 
 
-import fr.synthlab.model.module.envelope.ModuleEG;
+import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
+import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -45,44 +47,84 @@ public class Workbench extends Pane {
 
 	}
 
-	private void serializeViewModules() {
-		FileOutputStream fis = null;
+	private void serializeViewModules() throws IOException {
+
+		FileOutputStream file = null;
 		try {
-			fis = new FileOutputStream("testfile");
+			file = new FileOutputStream("testfile");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		ObjectOutputStream ois = null;
-		try {
-			ois = new ObjectOutputStream(fis);
-			for(ViewModule viewModule : getViewModules()){
-				viewModule.getModule().writeObject(ois);
-			}
-			ois.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+
+		ObjectOutputStream outputStream = new ObjectOutputStream(file);
+
+		Collection<ViewModule> modules = getViewModules();
+
+		// Writing the total number of modules
+		outputStream.writeInt(modules.size());
+
+		for(ViewModule viewModule : modules){
+			Module module = viewModule.getModule();
+
+			// Writing module type
+			outputStream.writeObject(module.getType());
+
+			// Writing viewModule position
+			Bounds viewModuleBounds = viewModule.getBoundsInParent();
+			outputStream.writeDouble(viewModuleBounds.getMinX());
+			outputStream.writeDouble(viewModuleBounds.getMinY());
+
+			// Writing Module connections
+			// TODO
+
+			// Writing Module data
+			viewModule.writeObject(outputStream);
 		}
+		outputStream.close();
+
 	}
 
-	private void deSerializeViewModules() {
-		FileInputStream fis = null;
+	private void deSerializeViewModules() throws IOException {
+		removeAllModules();
+
+		FileInputStream file = null;
 		try {
-			fis = new FileInputStream("testfile");
+			file = new FileInputStream("testfile");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		ObjectInputStream ois = null;
-		try {
-			ois = new ObjectInputStream(fis);
-			for(ViewModule viewModule : getViewModules()){
-				logger.info(String.valueOf(((ModuleEG)viewModule.getModule()).getAttack()));
-				viewModule.getModule().readObject(ois);
-				logger.info(String.valueOf(((ModuleEG)viewModule.getModule()).getAttack()));
+
+		ObjectInputStream inputStream = new ObjectInputStream(file);
+
+		// Reading the number of modules
+		int nbModules = inputStream.readInt();
+
+		for(int i = 0; i < nbModules; i++) {
+			try {
+				// Reading type
+				ModuleEnum type = (ModuleEnum) inputStream.readObject();
+
+				// Reading position
+				double xPos = inputStream.readDouble();
+				double yPos = inputStream.readDouble();
+
+				// Reading connections
+				// TODO
+
+				// Creating new ViewModule and feeding it the gathered data
+				ViewModule viewModule = ViewModuleFactory.createViewModule(type, this);
+				viewModule.relocate(xPos, yPos);
+
+				// Feeding data to the Module
+				viewModule.readObject(inputStream);
+
+				this.addModule(viewModule);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			}
-			ois.close();
-		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
 		}
+
+		inputStream.close();
 	}
 
 
@@ -99,19 +141,24 @@ public class Workbench extends Pane {
 		while (true) {
 			String question = scanner.nextLine();
 			if(question.equals("a")){
-				this.serializeViewModules();
+				try {
+					this.serializeViewModules();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			}
 			if(question.equals("z")){
-				this.deSerializeViewModules();
+				try {
+					this.deSerializeViewModules();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			}
 		}
 
-
-        String str;
-        if (draggedCable==null){str="null";}
-        else str="full";
+		
         if(draggedCable == null){
 			Plug opposite = getConnectedPlug(plug);
 			if (opposite!=null){
@@ -138,6 +185,10 @@ public class Workbench extends Pane {
 
         }
     }
+
+	private void removeAllModules() {
+		getViewModules().forEach(this::removeModule);
+	}
 
 	/**
 	 * Removes a module and all its connections for the workbench

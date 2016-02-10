@@ -88,16 +88,4 @@ public class ModuleVCFLP extends ModuleVCF {
         lpFilter.Q.set(value);
     }
 
-
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeObject(this.getF0());
-		o.writeObject(this.getResonance());
-	}
-
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		this.setF0((double) o.readObject());
-		this.setResonance((double) o.readObject());
-	}
 }
