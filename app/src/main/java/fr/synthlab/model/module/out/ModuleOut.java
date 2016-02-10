@@ -2,6 +2,7 @@ package fr.synthlab.model.module.out;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.LineOut;
+import com.jsyn.util.WaveRecorder;
 import fr.synthlab.model.filter.FilterAttenuator;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
@@ -9,8 +10,14 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.logging.Logger;
 
 /**
@@ -30,6 +37,12 @@ public class ModuleOut implements Module{
      * audio stereo right exit.
      */
     private final LineOut lineOutRight;
+
+    private final OutputPort interOut;
+
+    private final OutputPort interOutLeft;
+
+    private final OutputPort interOutRight;
 
     /**
      * left attenuator stereo.
@@ -60,12 +73,16 @@ public class ModuleOut implements Module{
      * list of ports.
      * contain in, inLeft, inRight.
      */
-    private final ArrayList<Port> ports;
+    private final ArrayList<Port> ports = new ArrayList<>();
 
     /**
      * if audio is mute.
      */
     private boolean mute = false;
+
+    private boolean recording = false;
+
+    private WaveRecorder waveRecorder;
 
     /**
      * constructor.
@@ -87,16 +104,15 @@ public class ModuleOut implements Module{
         InputPort in = new InputPort("in", this, attenuator.input);
         InputPort inLeft = new InputPort("Left", this, attenuatorLeft.input);
         InputPort inRight = new InputPort("Right", this, attenuatorRight.input);
-        OutputPort interOut = new OutputPort("out",this, attenuator.output);
-        OutputPort interOutLeft = new OutputPort("outLeft",this, attenuatorLeft.output);
-        OutputPort interOutRight = new OutputPort("outRight",this, attenuatorRight.output);
+        interOut = new OutputPort("out", this, attenuator.output);
+        interOutLeft = new OutputPort("outLeft", this, attenuatorLeft.output);
+        interOutRight = new OutputPort("outRight", this, attenuatorRight.output);
         new InputPort("inLeft", this, lineOutLeft.input.getConnectablePart(0)).connect(interOutLeft);
         new InputPort("inRight", this, lineOutRight.input.getConnectablePart(1)).connect(interOutRight);
         new InputPort("in0", this, lineOut.input.getConnectablePart(0)).connect(interOut);
         new InputPort("in1", this, lineOut.input.getConnectablePart(1)).connect(interOut);
         syn = synthesizer;
 
-        ports = new ArrayList<>();
         ports.add(in);
         ports.add(inLeft);
         ports.add(inRight);
@@ -120,6 +136,38 @@ public class ModuleOut implements Module{
             stop();
         } else {
             start();
+        }
+    }
+
+    public void setRecording(boolean recording) {
+        this.recording = recording;
+
+        try {
+            if (recording) {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss");
+                File file = new File(dateFormat.format(new Date()) + ".wav");
+                file.createNewFile();
+                waveRecorder = new WaveRecorder(syn, file);
+                interOut.getOutput().connect(waveRecorder.getInput());
+                interOutLeft.getOutput().connect(waveRecorder.getInput());
+                interOutRight.getOutput().connect(waveRecorder.getInput());
+
+                waveRecorder.start();
+            } else if (waveRecorder != null) {
+                waveRecorder.stop();
+
+                interOut.getOutput().disconnect(waveRecorder.getInput());
+                interOutLeft.getOutput().disconnect(waveRecorder.getInput());
+                interOutRight.getOutput().disconnect(waveRecorder.getInput());
+
+                waveRecorder.close();
+
+                waveRecorder = null;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -173,7 +221,8 @@ public class ModuleOut implements Module{
      * nothing to do in the disconnect of port.
      */
     @Override
-    public void update() {}
+    public void update() {
+    }
 
     @Override
     public ModuleEnum getType() {

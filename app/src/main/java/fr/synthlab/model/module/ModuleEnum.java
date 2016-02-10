@@ -14,7 +14,7 @@ public enum ModuleEnum {
     VCFHP("VCFHP", "VCF (HP)"),
     KEYB("KEYB", "Keyboard"),
     MIX("MIX", "MIX"),
-    REC("REC", "ModuleRecorder");
+    BRUI("BRUI","White Noise" );
 
     private String moduleName;
     private String moduleLongName;
