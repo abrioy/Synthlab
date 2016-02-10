@@ -33,15 +33,6 @@ public class Knob extends Pane {
      */
     private final Region knob;
 
-    /**
-     * angle where is the min.
-     */
-    private final double minAngle = 200;
-
-    /**
-     * angle where is the max.
-     */
-    private final double maxAngle = -20;
 
     /**
      * size of scale.
@@ -67,6 +58,17 @@ public class Knob extends Pane {
      * arc for graduation
      */
     private final Arc arc= new Arc();
+
+    /**
+     * angle where is the min.
+     */
+    private final DoubleProperty minAngle = new SimpleDoubleProperty(this, "minAngle",240);
+
+    /**
+     * angle where is the max.
+     */
+    private final DoubleProperty maxAngle = new SimpleDoubleProperty(this, "maxAngle",-60);
+
     /**
      * current value of button position.
      */
@@ -216,12 +218,12 @@ public class Knob extends Pane {
 			angle = angle - 360;
 		}
 		double angleLocal;
-		double angleInterval = ((minAngle - maxAngle ) / (step.get()-1));
+		double angleInterval = ((getMinAngle() - getMaxAngle() ) / (step.get()-1));
 		if (getStepType()){//go to step if there are
-			double angleLocalNext = maxAngle;
+			double angleLocalNext = getMaxAngle();
 			for (int t = 0; t < step.get()-1; t++) {
 				angleLocal = angleLocalNext;
-				angleLocalNext = (angleInterval*(t+1) + maxAngle);
+				angleLocalNext = (angleInterval*(t+1) + getMaxAngle());
 				if (angleLocal<angle && angle<((angleLocalNext-angleLocal)/2)+angleLocal) {
 					rotate.setAngle(-angleLocal);
 					angle=angleLocal;
@@ -247,10 +249,10 @@ public class Knob extends Pane {
         double arcDistance = scaleSize/3;
         double arcRadius=(diameter.doubleValue() / 2.0) + arcDistance;
         //try to improve from here
-        double minStartX = (diameter.doubleValue() / 2.0 +arcDistance) * Math.cos(Math.toRadians(-minAngle));
-        double minStartY = (diameter.doubleValue() / 2.0 +arcDistance) * Math.sin(Math.toRadians(-minAngle));
-        double maxStartX = (diameter.doubleValue() / 2.0 +arcDistance) * Math.cos(Math.toRadians(-maxAngle));
-        double maxStartY = (diameter.doubleValue() / 2.0 +arcDistance) * Math.sin(Math.toRadians(-maxAngle));
+        double minStartX = (diameter.doubleValue() / 2.0 +arcDistance) * Math.cos(Math.toRadians(-getMinAngle()));
+        double minStartY = (diameter.doubleValue() / 2.0 +arcDistance) * Math.sin(Math.toRadians(-getMinAngle()));
+        double maxStartX = (diameter.doubleValue() / 2.0 +arcDistance) * Math.cos(Math.toRadians(-getMaxAngle()));
+        double maxStartY = (diameter.doubleValue() / 2.0 +arcDistance) * Math.sin(Math.toRadians(-getMaxAngle()));
         //to here
 
         super.layoutChildren();
@@ -258,24 +260,25 @@ public class Knob extends Pane {
         double centerY = 0;
         minLine.setStartX(minStartX);
         minLine.setStartY(minStartY);
-        minLine.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(-minAngle)));
-        minLine.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(-minAngle)));
+        minLine.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(-getMinAngle())));
+        minLine.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(-getMinAngle())));
         maxLine.setStartX(maxStartX);
         maxLine.setStartY(maxStartY);
-        maxLine.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(-maxAngle)));
-        maxLine.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(-maxAngle)));
+        maxLine.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(-getMaxAngle())));
+        maxLine.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(-getMaxAngle())));
         double knobX = 0 - getDiameter() / 2.0;
         double knobY = 0 - getDiameter() / 2.0;
         knob.setLayoutX(knobX);
         knob.setLayoutY(knobY);
         double angle = valueToAngle(getValue());
         double angleLocal;
-        double angleInterval = ((maxAngle - minAngle) / (step.get()-1));
-        if (minAngle >= angle && angle >= maxAngle) {
+        double angleInterval = ((getMaxAngle() - getMinAngle()) / (step.get()-1));
+        if (getMinAngle() >= angle && angle >= getMaxAngle()) {
             rotate.setPivotX(knob.getWidth() / 2.0);
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
+        //TODO un truc je sais plus (checkpoint)
         if (step.get()!=0) {//draw scale
             getChildren().removeAll(lines);
             Color interColor=stepColor;
@@ -292,7 +295,7 @@ public class Knob extends Pane {
                 stepEnd=smallScaleSize;
             }
             for (int x = 1; x < step.get()-1; x++) {
-                angleLocal = -(angleInterval*x + minAngle);
+                angleLocal = -(angleInterval*x + getMinAngle());
                 Line line = new Line();
                 line.setStroke(interColor);
                 line.setStartX(centerX + (diameter.doubleValue() / 2.0 +stepStart) * Math.cos(Math.toRadians(angleLocal)));
@@ -308,8 +311,8 @@ public class Knob extends Pane {
         arc.setCenterY(centerY);
         arc.setRadiusX(arcRadius);
         arc.setRadiusY(arcRadius);
-        arc.setStartAngle(minAngle);
-        arc.setLength((maxAngle - minAngle));
+        arc.setStartAngle(getMinAngle());
+        arc.setLength((getMaxAngle() - getMinAngle()));
         arc.setType(ArcType.OPEN);
         arc.setMouseTransparent(true);
         if(getScaleType().equals("enum"))arc.setStroke(Color.TRANSPARENT);
@@ -325,9 +328,9 @@ public class Knob extends Pane {
         double maxValue = getMax();
         double minValue = getMin();
         if (scaleType.get().equals("log")){
-            return minAngle + (maxAngle - minAngle) * (((Math.log(value) + coef) / scale) - minValue) / (maxValue - minValue);
+            return getMinAngle()+ (getMaxAngle() - getMinAngle()) * (((Math.log(value) + coef) / scale) - minValue) / (maxValue - minValue);
         }
-        return minAngle + (maxAngle - minAngle) * (value - minValue) / (maxValue - minValue);
+        return getMinAngle() + (getMaxAngle() - getMinAngle()) * (value - minValue) / (maxValue - minValue);
     }
 
     /**
@@ -340,11 +343,11 @@ public class Knob extends Pane {
         double minValue = getMin();
         double value;
         if (scaleType.get().equals("log")) {
-            value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+            value = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
             value = Math.exp(minExp + scale*(value-minValue));
             value = Math.max((minValue <= 10.0 ? 10 : minValue),value);
         } else {
-            value = minValue + (maxValue - minValue) * (angle - minAngle) / (maxAngle - minAngle);
+            value = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
         }
         value = Math.max(minValue, value);
         return Math.min(maxValue, value);
@@ -563,5 +566,52 @@ public class Knob extends Pane {
      */
     public final BooleanProperty stepTypeProperty() {
         return stepType;
+    }
+
+    /**
+     * getter on diameter.
+     * @return diameter
+     */
+    public final double getMinAngle() {
+        return minAngle.get();
+    }
+
+    /**
+     * setter minAngle
+     * @param v new minAngle
+     */
+    public final void setMinAngle(double v) {
+        minAngle.set(v);
+    }
+
+    /**
+     * getter minAngle property
+     * @return minAngle property
+     */
+    public final DoubleProperty minAngleProperty() {
+        return minAngle;
+    }
+    /**
+     * getter on diameter.
+     * @return diameter
+     */
+    public final double getMaxAngle() {
+        return maxAngle.get();
+    }
+
+    /**
+     * setter maxAngle
+     * @param v new maxAngle
+     */
+    public final void setMaxAngle(double v) {
+        maxAngle.set(v);
+    }
+
+    /**
+     * getter maxAngle property
+     * @return maxAngle property
+     */
+    public final DoubleProperty maxAngleProperty() {
+        return maxAngle;
     }
 }
