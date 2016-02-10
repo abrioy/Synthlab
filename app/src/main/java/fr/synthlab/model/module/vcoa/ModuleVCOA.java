@@ -24,7 +24,7 @@ public class ModuleVCOA implements Module {
 	private static final Logger logger = Logger.getLogger(ModuleVCOA.class.getName());
 
     /**
-     * list of port of the VCO module
+     * The list of port of the VCO module
      */
     private Collection<Port> ports = new ArrayList<>();
 
