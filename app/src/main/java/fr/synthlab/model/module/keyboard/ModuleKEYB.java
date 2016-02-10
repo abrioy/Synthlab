@@ -88,11 +88,6 @@ public class ModuleKEYB implements Module {
 
     public void pressKey(Note n) {
         switch(n) {
-            case C2 :
-                incrementOctave();
-                computeFrequency(Note.C); // C on octave sup
-                decrementOctave();
-            break;
             case INCOCT :
                 incrementOctave(); // increase octave
             break;

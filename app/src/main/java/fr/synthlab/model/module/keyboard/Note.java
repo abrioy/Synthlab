@@ -1,20 +1,20 @@
 package fr.synthlab.model.module.keyboard;
 
 public enum Note {
-    C(3),
-    CSharp(4),
-    D(5),
-    DSharp(6),
-    E(7),
-    F(8),
-    FSharp(9),
-    G(10),
-    GSharp(11),
+    C(-9),
+    CSharp(-8),
+    D(-7),
+    DSharp(-6),
+    E(-5),
+    F(-4),
+    FSharp(-3),
+    G(-2),
+    GSharp(-1),
     A(0),
     ASharp(1),
     B(2),
+    C2(3),
 
-    C2(12),
     INCOCT(13),
     DECOCT(14);
 
