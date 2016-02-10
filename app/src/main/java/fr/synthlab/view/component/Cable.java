@@ -25,6 +25,7 @@ public class Cable extends CubicCurve {
 
     private Circle circleIn;
     private Circle circleOut;
+	private final double CIRCLE_RADIUS = 12.0d;
 
     private Workbench workbench;
 
@@ -69,18 +70,21 @@ public class Cable extends CubicCurve {
     }
 
     public void update(Point2D mouse){
+		Point2D correctedMouse = new Point2D(Math.max(CIRCLE_RADIUS, mouse.getX()),
+				Math.max(CIRCLE_RADIUS, mouse.getY()));
+
         in=getPlug();
         out=null;
         Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
 
         this.setStartX(inPosition.getX());
         this.setStartY(inPosition.getY());
-        this.setEndX(mouse.getX());
-        this.setEndY(mouse.getY());
+        this.setEndX(correctedMouse.getX());
+        this.setEndY(correctedMouse.getY());
 
         drawCable(inPosition,mouse);
         addCircle(circleIn, inPosition.getX(), inPosition.getY());
-        addCircle(circleOut,mouse.getX(),mouse.getY());
+        addCircle(circleOut,correctedMouse.getX(),correctedMouse.getY());
 
 
         this.toFront();
@@ -116,7 +120,7 @@ public class Cable extends CubicCurve {
     private void addCircle(Circle c, double x, double y){
         c.setCenterX(x);
         c.setCenterY(y);
-        c.setRadius(12);
+        c.setRadius(CIRCLE_RADIUS);
         c.toFront();
     }
 
