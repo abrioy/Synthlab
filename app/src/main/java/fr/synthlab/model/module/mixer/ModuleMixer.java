@@ -25,12 +25,18 @@ public class ModuleMixer implements Module{
     private final FilterAttenuator attenuator3;
     private final FilterAttenuator attenuator4;
 
+    public Synthesizer getSyn() {
+        return syn;
+    }
+
+    private final Synthesizer syn;
+
     private MixFilter mix;
 
     private Collection<Port> ports;
 
     public ModuleMixer(Synthesizer syn){
-
+        this.syn = syn;
         attenuator1 = new FilterAttenuator();
         attenuator2 = new FilterAttenuator();
         attenuator3 = new FilterAttenuator();
@@ -43,7 +49,7 @@ public class ModuleMixer implements Module{
         ports.add(new InputPort("in2", this, attenuator2.input));
         ports.add(new InputPort("in3", this, attenuator3.input));
         ports.add(new InputPort("in4", this, attenuator4.input));
-        ports.add(new OutputPort("out", this, mix.getOutput()));
+        ports.add(new OutputPort("out", this, mix.getOutput()));//.getOutput()));
 
         syn.add(attenuator1);
         syn.add(attenuator2);
@@ -51,10 +57,10 @@ public class ModuleMixer implements Module{
         syn.add(attenuator4);
         syn.add(mix);
 
-        attenuator1.getOutput().connect(mix.getInput1().getInput());
-        attenuator2.getOutput().connect(mix.getInput2().getInput());
-        attenuator3.getOutput().connect(mix.getInput3().getInput());
-        attenuator4.getOutput().connect(mix.getInput4().getInput());
+        attenuator1.getOutput().connect(mix.getInput1());
+        attenuator2.getOutput().connect(mix.getInput2());
+        attenuator3.getOutput().connect(mix.getInput3());
+        attenuator4.getOutput().connect(mix.getInput4());
 
     }
 
@@ -82,8 +88,7 @@ public class ModuleMixer implements Module{
     }
 
     @Override
-    public void update() {
-    }
+    public void update() {}
 
     @Override
     public ModuleEnum getType() {
