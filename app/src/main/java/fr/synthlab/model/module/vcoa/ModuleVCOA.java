@@ -121,6 +121,7 @@ public class ModuleVCOA implements Module {
         squareOscillator.stop();
         sawtoothOscillator.stop();
         triangleOscillator.stop();
+        passThrough.stop();
     }
 
     /**
