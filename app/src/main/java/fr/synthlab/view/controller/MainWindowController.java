@@ -4,6 +4,9 @@ import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
+import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
@@ -12,6 +15,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -29,13 +33,40 @@ public class MainWindowController implements Initializable {
 
 	private ViewModule draggedNewViewModule = null;
 
+	private DoubleProperty zoomLevel = new SimpleDoubleProperty(this, null, 1.0d);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 		// Setting the workspace to at least be as big as the scrollpane
 		workbenchScrollPane.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
-			workbench.setMinSize(newValue.getWidth(), newValue.getHeight());
+			Platform.runLater(()-> {
+				workbench.setMinSize(newValue.getWidth() * zoomLevel.doubleValue(),
+						newValue.getHeight() * zoomLevel.doubleValue());
+
+
+				// Hack to force a layout refreshgit
+				Rectangle tempChild = new Rectangle();
+				workbench.getChildren().add(tempChild);
+				workbench.getChildren().remove(tempChild);
+			});
 		});
+
+		zoomLevel.addListener((observable, oldValue, newValue) -> {
+			workbench.setScaleX(1.0d / newValue.doubleValue());
+			workbench.setScaleY(1.0d / newValue.doubleValue());
+
+			Platform.runLater(()-> {
+				workbench.setMinSize(workbenchScrollPane.getViewportBounds().getWidth() * newValue.doubleValue(),
+						workbenchScrollPane.getViewportBounds().getHeight() * newValue.doubleValue());
+
+				// Hack to force a layout refresh
+				Rectangle tempChild = new Rectangle();
+				workbench.getChildren().add(tempChild);
+				workbench.getChildren().remove(tempChild);
+			});
+		});
+
 
 
 		// Handling incoming drags from the toolbox
@@ -118,7 +149,23 @@ public class MainWindowController implements Initializable {
 			workbench.hideGhost();
 		});
 
+		workbench.setOnScroll(event -> {
+			if(event.isControlDown()) {
+				double newZoomLevel = zoomLevel.getValue();
+				if (event.getDeltaY() < 0) {
+					newZoomLevel += 0.1;
+				} else {
+					newZoomLevel -= 0.1;
+				}
+				newZoomLevel = Math.max(0.5, newZoomLevel);
+				newZoomLevel = Math.min(2, newZoomLevel);
+
+				zoomLevel.set(newZoomLevel);
+				event.consume();
+			}
+		});
     }
+
 
 	public void setStageAndSetupListeners(Stage stage) {
 		stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
