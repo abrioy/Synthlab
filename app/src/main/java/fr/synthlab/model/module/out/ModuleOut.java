@@ -184,14 +184,6 @@ public class ModuleOut implements Module{
     }
 
     /**
-     * getter on attenuation.
-     * @return attenuation
-     */
-    public double getAttenuation(){
-        return attenuatorLeft.getAttenuation();
-    }
-
-    /**
      * setter on attenuation.
      * @param attenuation new attenuation
      */
@@ -201,14 +193,17 @@ public class ModuleOut implements Module{
         attenuator.setAttenuation(attenuation);
     }
 
+	public double getAttenuation(){
+		return attenuatorLeft.getAttenuation(); // FIXME: We only get one attenuation
+	}
 
 	@Override
 	public void writeObject(ObjectOutputStream o) throws IOException {
-
+		o.writeObject(this.getAttenuation());
 	}
 
 	@Override
 	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
+		this.setAttenuation((double) o.readObject());
 	}
 }

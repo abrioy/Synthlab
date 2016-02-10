@@ -85,11 +85,11 @@ public class ModuleVCFHP extends ModuleVCF {
 
 	@Override
 	public void writeObject(ObjectOutputStream o) throws IOException {
-
+		o.writeObject(this.getF0());
 	}
 
 	@Override
 	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
+		this.setF0((double) o.readObject());
 	}
 }

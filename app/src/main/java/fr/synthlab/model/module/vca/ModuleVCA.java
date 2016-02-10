@@ -132,11 +132,11 @@ public class ModuleVCA implements Module {
 
 	@Override
 	public void writeObject(ObjectOutputStream o) throws IOException {
-
+		o.writeObject(this.getAttenuation());
 	}
 
 	@Override
 	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
+		this.setAttenuation((double) o.readObject());
 	}
 }

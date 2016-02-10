@@ -168,13 +168,34 @@ public class ModuleMixer implements Module{
         attenuator4.setAttenuation(attenuation);
     }
 
+
+	public double getAttenuation1() {
+		return attenuator1.getAttenuation();
+	}
+	public double getAttenuation2(){
+		return attenuator2.getAttenuation();
+	}
+	public double getAttenuation3() {
+		return attenuator3.getAttenuation();
+	}
+	public double getAttenuation4(){
+		return attenuator4.getAttenuation();
+	}
+
+
 	@Override
 	public void writeObject(ObjectOutputStream o) throws IOException {
-
+		o.writeObject(getAttenuation1());
+		o.writeObject(getAttenuation2());
+		o.writeObject(getAttenuation3());
+		o.writeObject(getAttenuation4());
 	}
 
 	@Override
 	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
+		setAttenuation1((double) o.readObject());
+		setAttenuation2((double) o.readObject());
+		setAttenuation3((double) o.readObject());
+		setAttenuation4((double) o.readObject());
 	}
 }

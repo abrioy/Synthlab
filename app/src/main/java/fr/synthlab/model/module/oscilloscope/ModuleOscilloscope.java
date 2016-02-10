@@ -122,6 +122,10 @@ public class ModuleOscilloscope implements Module {
         jOscillatorComponent.setScale(scale);
     }
 
+	public int getScale() {
+		return jOscillatorComponent.getScale();
+	}
+
     @Override
     public ModuleEnum getType() {
         return ModuleEnum.SCOP;
@@ -165,6 +169,9 @@ public class ModuleOscilloscope implements Module {
         public void setScale(int scale) {
             scope.getView().setScale(scale);
         }
+		public int getScale() {
+			return scope.getView().getScale();
+		}
     }
 
     /** **********************************************************
@@ -321,6 +328,9 @@ public class ModuleOscilloscope implements Module {
             multipleWaveDisplay.setScale(scale);
         }
 
+		public int getScale () {
+			return multipleWaveDisplay.getScale();
+		}
     }
 
     private class CustomMultipleWaveDisplay extends JPanel {
@@ -348,6 +358,9 @@ public class ModuleOscilloscope implements Module {
                 wave.setScale(scale);
             }
         }
+		public int getScale() {
+			return waveTraceViews.get(0).getScale(); // FIXME: Corentin
+		}
 
         @Override
         public void paintComponent(Graphics g) {
@@ -465,6 +478,9 @@ public class ModuleOscilloscope implements Module {
         public void setScale(int scale) {
             this.scale = scale;
         }
+		public int getScale() {
+			return this.scale;
+		}
 
     }
 
@@ -492,11 +508,11 @@ public class ModuleOscilloscope implements Module {
 
 	@Override
 	public void writeObject(ObjectOutputStream o) throws IOException {
-
+		o.writeObject(this.getScale());
 	}
 
 	@Override
 	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
+		this.setScale((int) o.readObject());
 	}
 }
