@@ -235,7 +235,6 @@ public class Workbench extends Pane {
 
 	/**
 	 * Computes the 2D center of a Bounds object
-	 * @param plug
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
