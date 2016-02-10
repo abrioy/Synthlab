@@ -27,9 +27,6 @@ public class ModuleKEYB implements Module {
 
     private Note lastNotePressed;
 
-    private OutputPort out;
-    private OutputPort gate;
-
     private SineOscillator sineOscillator;
     private KeyboardFilter keyboardFilter;
 
@@ -39,9 +36,9 @@ public class ModuleKEYB implements Module {
         keyboardFilter = new KeyboardFilter();
         synth.add(sineOscillator);
         synth.add(keyboardFilter);
-        out = new OutputPort("out", this, sineOscillator.output);
+        OutputPort out = new OutputPort("out", this, sineOscillator.output);
         ports.add(out);
-        gate = new OutputPort("gate", this, keyboardFilter.output);
+        OutputPort gate = new OutputPort("gate", this, keyboardFilter.output);
         ports.add(gate);
     }
 
@@ -75,13 +72,17 @@ public class ModuleKEYB implements Module {
         newOctave = Math.min(newOctave, OCTAVE_MAX);
         this.octave = newOctave;
         if (lastNotePressed != null) {
-            pressKey(lastNotePressed);
+            computeFrequency(lastNotePressed);
         }
     }
 
     public void pressKey(Note n) {
         keyboardFilter.pressKey();
         lastNotePressed = n;
+        computeFrequency(n);
+    }
+
+    private void computeFrequency(Note n){
         double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
         sineOscillator.frequency.setValueInternal(freq);
     }
