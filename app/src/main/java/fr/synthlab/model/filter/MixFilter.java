@@ -63,8 +63,22 @@ public class MixFilter extends UnitGenerator{
         double[] inputs3 = input3.getValues();
         double[] inputs4 = input4.getValues();
         double[] outputs = output.getValues();
+        int div;
         for (int i = start; i < limit; i++) {
-            outputs[i] = inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i];
+            div = 0;
+            if (input1.isConnected()){
+                div++;
+            }
+            if (input2.isConnected()){
+                div++;
+            }
+            if (input3.isConnected()){
+                div++;
+            }
+            if (input4.isConnected()){
+                div++;
+            }
+            outputs[i] = (inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i])/div;
         }
     }
 

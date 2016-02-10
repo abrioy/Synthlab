@@ -68,11 +68,11 @@ public class ViewModuleFactory {
 
         viewMixer.setAttenuator1Cmd(() -> ((ModuleMixer) vco).setAttenuation1(viewMixer.getAttenuator1()));
 
-        viewMixer.setAttenuator2Cmd(() -> ((ModuleMixer) vco).setAttenuation1(viewMixer.getAttenuator2()));
+        viewMixer.setAttenuator2Cmd(() -> ((ModuleMixer) vco).setAttenuation2(viewMixer.getAttenuator2()));
 
-        viewMixer.setAttenuator3Cmd(() -> ((ModuleMixer) vco).setAttenuation1(viewMixer.getAttenuator3()));
+        viewMixer.setAttenuator3Cmd(() -> ((ModuleMixer) vco).setAttenuation3(viewMixer.getAttenuator3()));
 
-        viewMixer.setAttenuator4Cmd(() -> ((ModuleMixer) vco).setAttenuation1(viewMixer.getAttenuator4()));
+        viewMixer.setAttenuator4Cmd(() -> ((ModuleMixer) vco).setAttenuation4(viewMixer.getAttenuator4()));
 
 
         return viewMixer;
