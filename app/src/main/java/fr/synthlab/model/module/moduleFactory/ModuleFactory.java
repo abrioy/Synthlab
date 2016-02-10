@@ -6,6 +6,7 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.keyboard.ModuleKEYB;
+import fr.synthlab.model.module.mixer.ModuleMixer;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.replicator.ModuleREP;
@@ -47,6 +48,8 @@ public class ModuleFactory {
                 break;
             case KEYB : module = createKEYB();
                 break;
+            case MIX : module = createMix();
+                break;
         }
 		if(module != null){
 			logger.finer("Module created: "+module.toString());
@@ -56,6 +59,10 @@ public class ModuleFactory {
 			logger.severe("Unrecognised module type \""+type.toString()+"\".");
 		}
         return module;
+    }
+
+    private static Module createMix() {
+        return new ModuleMixer(syn);
     }
 
     /**

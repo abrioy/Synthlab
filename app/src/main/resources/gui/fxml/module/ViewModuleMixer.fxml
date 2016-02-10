@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import fr.synthlab.view.component.*?>
+<?import javafx.scene.layout.Pane?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+      prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
+
+    <Knob fx:id="attenuator1" label="Gain"
+          diameter="80.0" layoutX="150.0" layoutY="100.0"
+          min="-12" max="12"/>
+
+    <Plug fx:id="in1"
+          layoutX="15.0" layoutY="60.0"
+          label="in1" name="in" type="input" />
+
+    <Knob fx:id="attenuator2" label="Gain"
+          diameter="80.0" layoutX="150.0" layoutY="160.0"
+          min="-12" max="12"/>
+
+    <Plug fx:id="in2"
+          layoutX="15.0" layoutY="120.0"
+          label="in2" name="in" type="input" />
+
+    <Knob fx:id="attenuator3" label="Gain"
+          diameter="80.0" layoutX="190.0" layoutY="100.0"
+          min="-12" max="12"/>
+    <Plug fx:id="in3"
+          layoutX="15.0" layoutY="145.0"
+          label="in3" name="in" type="input" />
+
+
+    <Knob fx:id="attenuator4" label="Gain"
+          diameter="80.0" layoutX="190.0" layoutY="100.0"
+          min="-12" max="12"/>
+    <Plug fx:id="in4"
+          layoutX="15.0" layoutY="145.0"
+          label="in4" name="in" type="input" />
+
+    <Plug fx:id="out"
+          layoutX="15.0" layoutY="145.0"
+          label="output" name="in" type="output" />
+</Pane>
