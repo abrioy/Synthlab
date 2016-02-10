@@ -55,6 +55,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
     public void setMuteCommand(Runnable mute) {
         this.muteCommand = mute;
+        muteCommand.run();
     }
 
     public boolean isMute() {
@@ -63,6 +64,15 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
     public void setMute(Runnable mute) {
         this.muteCommand = mute;
+    }
+
+    public void setRecordCommand(Runnable record) {
+        this.recordCommand = record;
+        recordCommand.run();
+    }
+
+    public boolean isRecording() {
+        return record;
     }
 
     @Override
@@ -78,7 +88,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         recordButton.setOnAction(event -> {
             record = !record;
             recordButton.setToggle(record);
-            //recordCommand.run(); Command to add
+            recordCommand.run();
         });
     }
 }

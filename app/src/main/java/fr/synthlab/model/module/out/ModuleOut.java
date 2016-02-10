@@ -1,7 +1,6 @@
 package fr.synthlab.model.module.out;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.ports.UnitInputPort;
 import com.jsyn.unitgen.LineOut;
 import com.jsyn.util.WaveRecorder;
 import fr.synthlab.model.filter.FilterAttenuator;
@@ -74,7 +73,7 @@ public class ModuleOut implements Module{
      * list of ports.
      * contain in, inLeft, inRight.
      */
-    private final ArrayList<Port> ports;
+    private final ArrayList<Port> ports = new ArrayList<>();
 
     /**
      * if audio is mute.
@@ -114,7 +113,6 @@ public class ModuleOut implements Module{
         new InputPort("in1", this, lineOut.input.getConnectablePart(1)).connect(interOut);
         syn = synthesizer;
 
-        ports = new ArrayList<>();
         ports.add(in);
         ports.add(inLeft);
         ports.add(inRight);
@@ -146,22 +144,25 @@ public class ModuleOut implements Module{
 
         try {
             if (recording) {
-                DateFormat dateFormat = new SimpleDateFormat("recordings/yyyy-MM-dd_HH_mm_ss");
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss");
                 File file = new File(dateFormat.format(new Date()) + ".wav");
+                file.createNewFile();
                 waveRecorder = new WaveRecorder(syn, file);
                 interOut.getOutput().connect(waveRecorder.getInput());
                 interOutLeft.getOutput().connect(waveRecorder.getInput());
                 interOutRight.getOutput().connect(waveRecorder.getInput());
 
                 waveRecorder.start();
-            } else {
+            } else if (waveRecorder != null) {
                 waveRecorder.stop();
 
-                ((UnitInputPort) interOut.getOutput()).disconnectAll();
-                ((UnitInputPort) interOutLeft.getOutput()).disconnectAll();
-                ((UnitInputPort) interOutRight.getOutput()).disconnectAll();
+                interOut.getOutput().disconnect(waveRecorder.getInput());
+                interOutLeft.getOutput().disconnect(waveRecorder.getInput());
+                interOutRight.getOutput().disconnect(waveRecorder.getInput());
 
                 waveRecorder.close();
+
+                waveRecorder = null;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -221,17 +222,6 @@ public class ModuleOut implements Module{
      */
     @Override
     public void update() {
-        boolean foundConnected = false;
-
-        for (Port p : ports) {
-            if (p.getConnected() != null) {
-                foundConnected = true;
-                break;
-            }
-        }
-
-        if (!foundConnected)
-            setRecording(false);
     }
 
     @Override

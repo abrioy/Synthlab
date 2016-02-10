@@ -110,6 +110,7 @@ public class ViewModuleFactory {
         viewOut.setModule(out);
         viewOut.setVolumeCommand(() -> ((ModuleOut) out).setAttenuation(viewOut.getPicker().getValue()));
         viewOut.setMuteCommand(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
+        viewOut.setRecordCommand(() -> ((ModuleOut) out).setRecording(viewOut.isRecording()));
 
         return viewOut;
     }
@@ -177,6 +178,4 @@ public class ViewModuleFactory {
 
         return viewKEYB;
     }
-
-
 }
