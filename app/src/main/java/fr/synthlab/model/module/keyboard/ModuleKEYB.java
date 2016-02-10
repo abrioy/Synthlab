@@ -30,9 +30,10 @@ public class ModuleKEYB implements Module {
 
     private OutputPort gate;
 
-    private SineOscillator sineOscillator = new SineOscillator();
+    private SineOscillator sineOscillator;
 
     public ModuleKEYB(Synthesizer synth) {
+        sineOscillator = new SineOscillator();
         synth.add(sineOscillator);
         out = new OutputPort("out", this, sineOscillator.output);
         ports.add(out);

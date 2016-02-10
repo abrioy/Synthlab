@@ -19,17 +19,18 @@ public class KEYBKey extends Rectangle {
         super();
 
         this.setFill(Color.WHITE);
-        this.setWidth(50);
-        this.setHeight(140);
+        this.setWidth(40);
+        this.setHeight(150);
     }
 
     public final void setIsWhiteKey(boolean whiteKey) {
         this.isWhiteKey.setValue(whiteKey);
         if (whiteKey) {
-            this.setHeight(140);
+            this.setHeight(150);
             this.setFill(Color.WHITE);
         } else {
-            this.setHeight(100);
+            this.setWidth(30);
+            this.setHeight(110);
             this.setFill(Color.BLACK);
         }
     }
