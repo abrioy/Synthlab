@@ -1,7 +1,6 @@
 package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.SineOscillator;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
@@ -31,17 +30,17 @@ public class ModuleKEYB implements Module {
 
     private SineOscillator sineOscillator;
 
-    private PassThrough passThrough;
+    private KeyboardFilter keyboardFilter;
 
     public ModuleKEYB(Synthesizer synth) {
         octave = REFERENCE_OCTAVE;
         sineOscillator = new SineOscillator();
-        passThrough = new PassThrough();
+        keyboardFilter = new KeyboardFilter();
         synth.add(sineOscillator);
-        synth.add(passThrough);
+        synth.add(keyboardFilter);
         out = new OutputPort("out", this, sineOscillator.output);
         ports.add(out);
-        gate = new OutputPort("gate", this, passThrough.output);
+        gate = new OutputPort("gate", this, keyboardFilter.output);
         ports.add(gate);
     }
 
@@ -77,13 +76,13 @@ public class ModuleKEYB implements Module {
     }
 
     public void pressKey(Note n) {
-        passThrough.getOutput().setValueInternal(5);
+        keyboardFilter.pressKey();
         double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
         sineOscillator.frequency.setValueInternal(freq);
     }
 
     public void releaseKey() {
-        passThrough.getOutput().setValueInternal(-5);
+        keyboardFilter.releaseKey();
     }
 }
 
