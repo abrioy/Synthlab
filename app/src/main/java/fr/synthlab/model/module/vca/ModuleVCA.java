@@ -41,6 +41,10 @@ public class ModuleVCA implements Module {
         ports.add(outputPort);
     }
 
+    public double getAttenuation() {
+        return attenuation;
+    }
+
     public void setAttenuation(double attenuation) {
         this.attenuation = attenuation;
         filterAttenuator.setAttenuation(attenuation);
