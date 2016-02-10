@@ -10,17 +10,17 @@ public class RecordButton extends Button {
     public RecordButton(){
         this.getStylesheets().add(
                 getClass().getResource("/gui/fxml/style/Module.css").toExternalForm());
-        this.getStyleClass().add("rec-release");
+        this.getStyleClass().add("record-release");
     }
     public void setToggle(boolean toggle) {
         if (toggle){
-            this.getStyleClass().remove("rec-release");
-            this.getStyleClass().add("rec-pressed");
+            this.getStyleClass().remove("record-release");
+            this.getStyleClass().add("record-pressed");
 
         }
         else {
-            this.getStyleClass().remove("rec-pressed");
-            this.getStyleClass().add("rec-release");
+            this.getStyleClass().remove("record-pressed");
+            this.getStyleClass().add("record-release");
         }
     }
 
