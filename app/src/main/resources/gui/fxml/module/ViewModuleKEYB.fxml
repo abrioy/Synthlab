@@ -12,11 +12,11 @@
 
     <Plug fx:id="out"
           layoutX="440.0" layoutY="125.0"
-          name="out" type="output" />
+          label="out" name="out" type="output" />
 
     <Plug fx:id="gate"
           layoutX="440.0" layoutY="55.0"
-          name="gate" type="output" />
+          label="gate" name="gate" type="output" />
 
     <FlowPane layoutX="25.0" layoutY="35.0" hgap="2">
         <KEYBKey fx:id="CKey" />
@@ -29,7 +29,7 @@
         <KEYBKey fx:id="CNextOctKey" />
     </FlowPane>
 
-    <FlowPane layoutX="51.0" layoutY="35.0" hgap="12">
+    <FlowPane layoutX="51.0" layoutY="35.0" hgap="12" pickOnBounds="false">
         <KEYBKey fx:id="CSharpKey" isWhiteKey="false" />
         <KEYBKey fx:id="DSharpKey" isWhiteKey="false" />
         <Rectangle height="0" width ="30" />
