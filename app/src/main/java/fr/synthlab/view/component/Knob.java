@@ -93,6 +93,11 @@ public class Knob extends Pane {
     private final StringProperty scaleType = new SimpleStringProperty(this, "scaleType", "linear");
 
     /**
+     * Snapping to step of not
+     */
+    private final BooleanProperty stepType = new SimpleBooleanProperty(this, "stepType",false);
+
+    /**
      * name of button
      */
     private final StringProperty label = new SimpleStringProperty(this, "label", "");
@@ -195,8 +200,6 @@ public class Knob extends Pane {
 		heightProperty().addListener((observable, oldValue, newValue) -> {
 			updatePositions();
 		});
-
-        //Todo draw arc from first pos to last if right type
     }
 
 	private void moveKnob(double x, double y) {
@@ -214,7 +217,7 @@ public class Knob extends Pane {
 		}
 		double angleLocal;
 		double angleInterval = ((minAngle - maxAngle ) / (step.get()-1));
-		if (step.get()!=0){//go to step if there are
+		if (getStepType()){//go to step if there are
 			double angleLocalNext = maxAngle;
 			for (int t = 0; t < step.get()-1; t++) {
 				angleLocal = angleLocalNext;
@@ -238,12 +241,16 @@ public class Knob extends Pane {
      */
     @Override
     protected void layoutChildren() {
+        double stepStart =0;
+        double stepEnd = 0;
+        double smallScaleSize = scaleSize * 3.0d / 4.0d;
+        double arcDistance = scaleSize/3;
+        double arcRadius=(diameter.doubleValue() / 2.0) + arcDistance;
         //try to improve from here
-        double minStartX = (diameter.doubleValue() / 2.0 +5) * Math.cos(Math.toRadians(-minAngle));
-        double minStartY = (diameter.doubleValue() / 2.0 +5) * Math.sin(Math.toRadians(-minAngle));
-
-        double maxStartX = (diameter.doubleValue() / 2.0 +5) * Math.cos(Math.toRadians(-maxAngle));
-        double maxStartY = (diameter.doubleValue() / 2.0 +5) * Math.sin(Math.toRadians(-maxAngle));
+        double minStartX = (diameter.doubleValue() / 2.0 +arcDistance) * Math.cos(Math.toRadians(-minAngle));
+        double minStartY = (diameter.doubleValue() / 2.0 +arcDistance) * Math.sin(Math.toRadians(-minAngle));
+        double maxStartX = (diameter.doubleValue() / 2.0 +arcDistance) * Math.cos(Math.toRadians(-maxAngle));
+        double maxStartY = (diameter.doubleValue() / 2.0 +arcDistance) * Math.sin(Math.toRadians(-maxAngle));
         //to here
 
         super.layoutChildren();
@@ -270,19 +277,28 @@ public class Knob extends Pane {
             rotate.setAngle(-angle);
         }
         if (step.get()!=0) {//draw scale
-			getChildren().removeAll(lines);
+            getChildren().removeAll(lines);
+            Color interColor=stepColor;
 			lines.clear();
-
-			double smallScaleSize = scaleSize * 3.0d / 4.0d;
+            //draw different line depending on the scaleType
+            if (getScaleType().equals("enum")){
+                stepStart=arcDistance;
+                stepEnd=scaleSize;
+                interColor=stepColor;
+            }
+            else{
+                interColor=interColor.darker();
+                stepStart=smallScaleSize/3;
+                stepEnd=smallScaleSize;
+            }
             for (int x = 1; x < step.get()-1; x++) {
-                //Todo handle the scaletype Enum and linear
                 angleLocal = -(angleInterval*x + minAngle);
                 Line line = new Line();
-                line.setStroke(stepColor.darker());
-                line.setStartX(centerX + (diameter.doubleValue() / 2.0 +3) * Math.cos(Math.toRadians(angleLocal)));
-                line.setStartY(centerY + (diameter.doubleValue() / 2.0 +3) * Math.sin(Math.toRadians(angleLocal)));
-                line.setEndX(centerX + (diameter.doubleValue() / 2.0 + smallScaleSize) * Math.cos(Math.toRadians(angleLocal)));
-                line.setEndY(centerY + (diameter.doubleValue() / 2.0 + smallScaleSize) * Math.sin(Math.toRadians(angleLocal)));
+                line.setStroke(interColor);
+                line.setStartX(centerX + (diameter.doubleValue() / 2.0 +stepStart) * Math.cos(Math.toRadians(angleLocal)));
+                line.setStartY(centerY + (diameter.doubleValue() / 2.0 +stepStart) * Math.sin(Math.toRadians(angleLocal)));
+                line.setEndX(centerX + (diameter.doubleValue() / 2.0 + stepEnd) * Math.cos(Math.toRadians(angleLocal)));
+                line.setEndY(centerY + (diameter.doubleValue() / 2.0 + stepEnd) * Math.sin(Math.toRadians(angleLocal)));
                 lines.add(line);
 				getChildren().add(line);
             }
@@ -290,14 +306,13 @@ public class Knob extends Pane {
         //another added stuff
         arc.setCenterX(centerX);
         arc.setCenterY(centerY);
-        arc.setRadiusX(diameter.doubleValue() / 2 + 5);
-        arc.setRadiusY(diameter.doubleValue() / 2 + 5);
+        arc.setRadiusX(arcRadius);
+        arc.setRadiusY(arcRadius);
         arc.setStartAngle(minAngle);
         arc.setLength((maxAngle - minAngle));
         arc.setType(ArcType.OPEN);
         arc.setMouseTransparent(true);
-        logger.info("TEST" +getScaleType());
-        if (getScaleType().equals("enum"))arc.setStroke(Color.TRANSPARENT);
+        if(getScaleType().equals("enum"))arc.setStroke(Color.TRANSPARENT);
         updatePositions();
     }
 
@@ -524,5 +539,29 @@ public class Knob extends Pane {
      */
     public final IntegerProperty stepProperty() {
         return step;
+    }
+
+    /**
+     * setter on scale type
+     * @param v type
+     */
+    public final void setStepType(boolean v) {
+        stepType.set(v);
+    }
+
+    /**
+     * getter on step type.
+     * @return type
+     */
+    public final boolean getStepType() {
+        return stepType.get();
+    }
+
+    /**
+     * getter on step type property
+     * @return type property
+     */
+    public final BooleanProperty stepTypeProperty() {
+        return stepType;
     }
 }
