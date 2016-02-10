@@ -11,7 +11,6 @@ import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -35,9 +34,6 @@ public class ToolboxController implements Initializable {
     @FXML
     private TreeItem<String> rootFilter;
 
-    @FXML
-    private Pane pane;
-
     private Consumer<String> onDragDone = null;
 
     public void setOnDragDone(Consumer<String> onDragDone) {
@@ -47,28 +43,28 @@ public class ToolboxController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        rootInput.expandedProperty().addListener(listener -> drag(rootInput, input));
-        rootOutput.expandedProperty().addListener(listener -> drag(rootOutput, output));
-        rootFilter.expandedProperty().addListener(listener -> drag(rootFilter, filter));
+        rootInput.expandedProperty().addListener(listener -> drag(input));
+        rootOutput.expandedProperty().addListener(listener -> drag(output));
+        rootFilter.expandedProperty().addListener(listener -> drag(filter));
 
         ObservableList<String> items = FXCollections.observableArrayList(
-                ModuleEnum.VCOA.getLongName(),
-                ModuleEnum.VCA.getLongName()
+                ModuleEnum.VCOA.getLongName()
         );
-        loadTreeItems(rootInput, items, input);
+        loadTreeItems(rootInput, items);
         items = FXCollections.observableArrayList(
                 ModuleEnum.OUT.getLongName(),
                 ModuleEnum.SCOP.getLongName()
         );
-        loadTreeItems(rootOutput, items, output);
+        loadTreeItems(rootOutput, items);
 
         items = FXCollections.observableArrayList(
+                ModuleEnum.VCA.getLongName(),
                 ModuleEnum.REP.getLongName(),
                 ModuleEnum.EG.getLongName(),
                 ModuleEnum.VCFLP.getLongName(),
                 ModuleEnum.VCFHP.getLongName()
         );
-        loadTreeItems(rootFilter, items, filter);
+        loadTreeItems(rootFilter, items);
 
         rootInput.setExpanded(true);
         input.setRoot(rootInput);
@@ -77,10 +73,28 @@ public class ToolboxController implements Initializable {
         rootInput.setExpanded(true);
         filter.setRoot(rootFilter);
 
-        drag(rootFilter, filter);
+        input.focusedProperty().addListener(listener -> {
+            if(!input.focusedProperty().get()) {
+                input.getSelectionModel().clearSelection();
+            }
+        });
+
+        output.focusedProperty().addListener(listener -> {
+            if(!output.focusedProperty().get()) {
+                output.getSelectionModel().clearSelection();
+            }
+        });
+
+        filter.focusedProperty().addListener(listener -> {
+            if(!filter.focusedProperty().get()) {
+                filter.getSelectionModel().clearSelection();
+            }
+        });
+
+        drag(filter);
     }
 
-    public void loadTreeItems(TreeItem<String> item, ObservableList<String> rootItems, TreeView<String> root) {
+    public void loadTreeItems(TreeItem<String> item, ObservableList<String> rootItems) {
         item.setExpanded(true);
         for (String itemString : rootItems) {
             item.getChildren().add(new TreeItem<>(itemString));
@@ -101,7 +115,7 @@ public class ToolboxController implements Initializable {
                 };
 
                 cell.setOnDragDetected(event -> {
-                    if (!cell.isEmpty()) {
+                    if (!cell.isEmpty() && !ModuleEnum.getNameFromLong(cell.getItem()).equals("")) {
                         Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
                         ClipboardContent cc = new ClipboardContent();
                         cc.putString(cell.getItem());
@@ -118,12 +132,8 @@ public class ToolboxController implements Initializable {
         });
     }
 
-    private void drag(TreeItem<String> item, TreeView<String> draggable) {
-        if (item.isExpanded()) {
-            makeListDraggable(draggable);
-        } else {
-            makeListDraggable(draggable);
-        }
+    private void drag(TreeView<String> draggable) {
+        makeListDraggable(draggable);
         input.relocate(0, 0);
         if (rootInput.isExpanded()) {
             input.setPrefHeight((rootInput.getChildren().size() + 1) * 25);

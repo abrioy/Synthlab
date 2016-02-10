@@ -3,14 +3,15 @@
 <?import javafx.scene.control.TreeItem?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.*?>
-<Pane fx:id="pane" stylesheets="/gui/fxml/style/Toolbox.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.synthlab.view.controller.ToolboxController">
-   <children >
-       <TreeView fx:id="input">
-       <TreeItem fx:id="rootInput" value="Input"/>
-       </TreeView>
-       <TreeView fx:id="output">
-           <TreeItem fx:id="rootOutput" value="Output"/></TreeView>
-       <TreeView fx:id="filter">
-           <TreeItem fx:id="rootFilter" value="Filter"/></TreeView>
-    </children>
+<Pane stylesheets="/gui/fxml/style/Toolbox.css" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.synthlab.view.controller.ToolboxController">
+    <TreeView fx:id="input">
+        <TreeItem fx:id="rootInput" value="Inputs"/>
+    </TreeView>
+    <TreeView fx:id="output">
+        <TreeItem fx:id="rootOutput" value="Outputs"/>
+    </TreeView>
+    <TreeView fx:id="filter">
+        <TreeItem fx:id="rootFilter" value="Filters"/>
+    </TreeView>
 </Pane>
