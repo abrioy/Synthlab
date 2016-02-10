@@ -5,6 +5,7 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.mixer.ModuleMixer;
+import fr.synthlab.model.module.keyboard.ModuleKEYB;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
@@ -14,6 +15,7 @@ import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.module.*;
+import javafx.scene.input.KeyCode;
 
 import java.util.logging.Logger;
 
@@ -54,6 +56,8 @@ public class ViewModuleFactory {
             case BRUI:
                 module = createViewModuleWhiteNoise(workbench);
                 break;
+            case KEYB:
+                module = createViewModuleKEYB(workbench);
         }
 		if (module != null) {
 			logger.finer("ViewModule created: " + type.toString());
@@ -182,11 +186,18 @@ public class ViewModuleFactory {
         return viewVcfhp;
     }
 
-
     private static ViewModule createViewModuleKEYB(Workbench workbench) {
         Module keyb = ModuleFactory.createModule(ModuleEnum.KEYB);
         ViewModuleKEYB viewKEYB = new ViewModuleKEYB(workbench);
         viewKEYB.setModule(keyb);
+
+        viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb).pressKey(viewKEYB.getNotePressed()));
+        viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb).releaseKey());
+        viewKEYB.setOctaveChangeCommand(() -> ((ModuleKEYB) keyb).changeOctave(viewKEYB.getOctave()));
+
+        viewKEYB.setOnMouseClicked(event -> {
+            viewKEYB.requestFocus();
+        });
 
         return viewKEYB;
     }
