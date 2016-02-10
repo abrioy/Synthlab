@@ -61,20 +61,20 @@ public class ViewModuleFactory {
         return module;
     }
 
+    /**
+     * create a new module mixer in modele and in view.
+     * @param workbench the workbench
+     * @return viewModuleMixer
+     */
     private static ViewModule createViewModuleMixer(Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleEnum.MIX);
         ViewModuleMixer viewMixer = new ViewModuleMixer(workbench);
         viewMixer.setModule(vco);
 
         viewMixer.setAttenuator1Cmd(() -> ((ModuleMixer) vco).setAttenuation1(viewMixer.getAttenuator1()));
-
         viewMixer.setAttenuator2Cmd(() -> ((ModuleMixer) vco).setAttenuation2(viewMixer.getAttenuator2()));
-
         viewMixer.setAttenuator3Cmd(() -> ((ModuleMixer) vco).setAttenuation3(viewMixer.getAttenuator3()));
-
         viewMixer.setAttenuator4Cmd(() -> ((ModuleMixer) vco).setAttenuation4(viewMixer.getAttenuator4()));
-
-
         return viewMixer;
     }
 
