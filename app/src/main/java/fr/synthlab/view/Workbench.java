@@ -258,8 +258,8 @@ public class Workbench extends Pane {
 		double newX = expectedX;
 		double newY = expectedY;
 
-		// We will try 3 times to find a place for the node
-		for (int i = 0; i < 3; i++) {
+		// We will try 4 times to find a place for the node
+		for (int i = 0; i < 4; i++) {
 			if(newX < moduleMargin){
 				newX = moduleMargin;
 			}
@@ -299,6 +299,15 @@ public class Workbench extends Pane {
 						// Left
 						newX = collidingBounds.getMinX() - newBounds.getWidth() - moduleMargin;
 					}
+
+					// We also snap it in place vertically
+					if(Math.abs(collidingBounds.getMinY() - newBounds.getMinY()) < 25){
+						newY = collidingBounds.getMinY();
+					}
+					else if(Math.abs(collidingBounds.getMaxY() - newBounds.getMaxY()) < 25){
+						newY = collidingBounds.getMaxY() - newBounds.getHeight();
+					}
+
 				} else {
 					// We need to push it along the Y axis
 					if (newCenter.getY() > collidingNodeCenter.getY()) {
@@ -307,6 +316,14 @@ public class Workbench extends Pane {
 					} else {
 						// Top
 						newY = collidingBounds.getMinY() - newBounds.getHeight() - moduleMargin;
+					}
+
+					// We also snap it in place horizontally
+					if(Math.abs(collidingBounds.getMinX() - newBounds.getMinX()) < 25){
+						newX = collidingBounds.getMinX();
+					}
+					else if(Math.abs(collidingBounds.getMaxX() - newBounds.getMaxX()) < 25){
+						newX = collidingBounds.getMaxX() - newBounds.getWidth();
 					}
 				}
 
