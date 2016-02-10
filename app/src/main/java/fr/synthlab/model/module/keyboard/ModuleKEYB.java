@@ -11,14 +11,15 @@ import fr.synthlab.model.module.port.Port;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ModuleKEYB implements Module {
     private static final Logger logger = Logger.getLogger(ModuleKEYB.class.getName());
 
-    private final int REFERENCE_FREQUENCY = 440;
+    private final double REFERENCE_FREQUENCY = 440.0;
 
-    private int octave = 4;
+    private int octave = 3;
 
     private int gateValue = 0;
 
@@ -50,13 +51,11 @@ public class ModuleKEYB implements Module {
     @Override
     public void start() {
         sineOscillator.start();
-        //keyboard.start();
     }
 
     @Override
     public void stop() {
         sineOscillator.stop();
-        //keyboard.stop();
     }
 
     @Override
@@ -80,38 +79,28 @@ public class ModuleKEYB implements Module {
         }
     }
 
+    private void computeFrequency(Note note){
+        logger.log(Level.INFO, "ref : " + REFERENCE_FREQUENCY + " note :" + note.getValue() + " octave :" + (3 - octave));
+        double freq = REFERENCE_FREQUENCY * Math.pow(2, (note.getValue()/12.0))*Math.pow(2, (3 - octave));
+        logger.log(Level.INFO, "frequency : " + freq);
+        sineOscillator.frequency.setValueInternal(freq);
+    }
+
     public void pressKey(Note n) {
         switch(n) {
-            case C : sineOscillator.output.setValueInternal(440); // C
+            case C2 :
+                incrementOctave();
+                computeFrequency(Note.C); // C on octave sup
+                decrementOctave();
             break;
-            case CSharp : sineOscillator.output.setValueInternal(440); // C#
+            case INCOCT :
+                incrementOctave(); // increase octave
             break;
-            case D : sineOscillator.output.setValueInternal(440); // D
+            case DECOCT :
+                decrementOctave(); // decrease octave
             break;
-            case DSharp : sineOscillator.output.setValueInternal(440); // D#
-            break;
-            case E : sineOscillator.output.setValueInternal(440); // E
-            break;
-            case F : sineOscillator.output.setValueInternal(440); // F
-            break;
-            case FSharp : sineOscillator.output.setValueInternal(440); // F#
-            break;
-            case G : sineOscillator.output.setValueInternal(440); // G
-            break;
-            case GSharp : sineOscillator.output.setValueInternal(440); // G#
-            break;
-            case A : sineOscillator.output.setValueInternal(440); // A
-            break;
-            case ASharp : sineOscillator.output.setValueInternal(440); // A#
-            break;
-            case B : sineOscillator.output.setValueInternal(440); // B
-            break;
-            case C2 : sineOscillator.output.setValueInternal(440); // C on octave sup
-            break;
-            case INCOCT : incrementOctave(); // increase octave
-            break;
-            case DECOCT : decrementOctave(); // decrease octave
-            break;
+            default:
+                computeFrequency(n);
         }
     }
 
