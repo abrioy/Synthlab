@@ -14,6 +14,7 @@ import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
+import fr.synthlab.model.module.whiteNoise.ModuleWhiteNoise;
 
 import java.util.logging.Logger;
 
@@ -50,6 +51,8 @@ public class ModuleFactory {
                 break;
             case MIX : module = createMix();
                 break;
+            case BRUI: module = createNoise();
+                break;
         }
 		if(module != null){
 			logger.finer("Module created: "+module.toString());
@@ -63,6 +66,10 @@ public class ModuleFactory {
 
     private static Module createMix() {
         return new ModuleMixer(syn);
+    }
+
+    private static Module createNoise() {
+        return new ModuleWhiteNoise(syn);
     }
 
     /**
