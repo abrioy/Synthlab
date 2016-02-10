@@ -97,7 +97,6 @@ public class Workbench extends Pane {
                         if (c!=null) {
                             disconnect((Plug) plug);
                             c.deleteCircles();
-                            getCables().remove(c);
                             this.getChildren().remove(c);
                         }
 
@@ -146,17 +145,13 @@ public class Workbench extends Pane {
 			mouseDelta.x = localPoint.getX();
 			mouseDelta.y = localPoint.getY();
 
-			displayGhost(module);
-			//workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::front);
-			for(Cable c: getCables()){
-				if (draggedCable!=c){
-					c.update();
-				}
-				else{
-					c.update(mousePoint);
-				}
+			workbench.updateCables();
+			if (draggedCable != null) {
+				draggedCable.update(mousePoint);
 			}
-        });
+
+			workbench.displayGhost(module);
+		});
 
         module.setOnMouseReleased(mouseEvent -> {
             hideGhost();
@@ -173,15 +168,16 @@ public class Workbench extends Pane {
 				module.relocate(newLocation.getX(), newLocation.getY());
 			}
 
+			updateCables();
 			if (draggedCable != null) {
 				draggedCable.update(localPoint);
 			}
+			dragGhost.toFront();
 		});
 
 	}
 
 	public void displayGhost(ViewModule module){
-		module.toFront();
 		// Creating a ghost image
 		WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
 		dragGhost.setImage(snapshot);
@@ -201,6 +197,17 @@ public class Workbench extends Pane {
 				Math.max(moduleMargin, x),
 				Math.max(moduleMargin, y)
 		);
+		dragGhost.toFront();
+	}
+
+	private Collection<ViewModule> getViewModules() {
+		Collection<ViewModule> modules = new ArrayList<>();
+		for (Node child : this.getChildren()) {
+			if (child instanceof ViewModule) {
+				modules.add((ViewModule) child);
+			}
+		}
+		return modules;
 	}
 
 	/**
@@ -211,15 +218,13 @@ public class Workbench extends Pane {
 	 * @return The Bounds of the first colliding module if there any
 	 */
 	private Bounds checkCollisions(Node node, Bounds bounds) {
-		for (Node child : this.getChildren()) {
-			if (child != dragGhost && node != child) {
-				if(child instanceof ViewModule) {
-                    Bounds childBounds = child.getBoundsInParent();
+		for (ViewModule child : this.getViewModules()) {
+			if (node != child) {
+				Bounds childBounds = child.getBoundsInParent();
 
-                    if (bounds.intersects(childBounds)) {
-                        return childBounds;
-                    }
-                }
+				if (bounds.intersects(childBounds)) {
+					return childBounds;
+				}
 			}
 		}
 		return null;
@@ -372,6 +377,16 @@ public class Workbench extends Pane {
         return cables;
     }
 
+	private void updateCables() {
+		getCables().forEach(Cable::updateCircles);
+
+		for(Cable c : getCables()){
+			if (draggedCable!=c){
+				c.update();
+			}
+		}
+	}
+
     private Cable getConnectedCable(Plug plug){
         for(Cable c : getCables()){
 			Plug test = c.getOppositePlug(plug);
@@ -402,7 +417,6 @@ public class Workbench extends Pane {
     private void dropCable(){
 		if(draggedCable!=null) {
 			draggedCable.deleteCircles();
-			getCables().remove(draggedCable);
 			this.getChildren().remove(draggedCable);
 			draggedCable = null;
 		}
