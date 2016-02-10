@@ -162,7 +162,6 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         });
 
         octaveLabel.setText(getOctave() + "");
-
     }
 
     private void updateOctave() {

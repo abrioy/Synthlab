@@ -82,6 +82,8 @@ public class ModuleKEYB implements Module {
         //Gate port
         OutputPort gate = new OutputPort("gate", this, keyboardFilter.output);
         ports.add(gate);
+
+        this.pressKey(Note.A);
     }
 
     /**
