@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import fr.synthlab.view.component.Plug?>
+<?import javafx.scene.layout.Pane?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+      prefHeight="99" prefWidth="250" minHeight="99" minWidth="250" maxHeight="99" maxWidth="250">
+
+    <Plug fx:id="out"
+          layoutX="195.0" layoutY="45.0"
+          label="out" name="out" type="output" />
+</Pane>

@@ -51,6 +51,9 @@ public class ViewModuleFactory {
             case MIX:
                 module = createViewModuleMixer(workbench);
                 break;
+            case BRUI:
+                module = createViewModuleWhiteNoise(workbench);
+                break;
         }
 		if (module != null) {
 			logger.finer("ViewModule created: " + type.toString());
@@ -112,6 +115,15 @@ public class ViewModuleFactory {
         viewOut.setMuteCommand(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
 
         return viewOut;
+    }
+    private static ViewModule createViewModuleWhiteNoise(Workbench workbench) {
+        Module brui = ModuleFactory.createModule(ModuleEnum.BRUI);
+        ViewModuleWhiteNoise viewNoise = new ViewModuleWhiteNoise(workbench);
+        viewNoise.setModule(brui);
+        //viewNoise.setVolumeCommand(() -> ((ModuleOut) out).setAttenuation(viewNoise.getPicker().getValue()));
+        //viewNoise.setMuteCommand(() -> ((ModuleOut) out).setMute(viewNoise.isMute()));
+
+        return viewNoise;
     }
 
     private static ViewModule createViewModuleOscilloscope(Workbench workbench) {
