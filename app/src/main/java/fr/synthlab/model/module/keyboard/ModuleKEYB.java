@@ -1,7 +1,7 @@
 package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.ports.UnitOutputPort;
+import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.SineOscillator;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
@@ -11,7 +11,6 @@ import fr.synthlab.model.module.port.Port;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ModuleKEYB implements Module {
@@ -21,10 +20,6 @@ public class ModuleKEYB implements Module {
 
     private int octave = 3;
 
-    private int gateValue = 0;
-
-    private int lastKeyPressed;
-
     private List<Port> ports = new ArrayList<>();
 
     private OutputPort out;
@@ -33,13 +28,16 @@ public class ModuleKEYB implements Module {
 
     private SineOscillator sineOscillator;
 
+    private PassThrough passThrough;
+
     public ModuleKEYB(Synthesizer synth) {
         sineOscillator = new SineOscillator();
+        passThrough = new PassThrough();
         synth.add(sineOscillator);
+        synth.add(passThrough);
         out = new OutputPort("out", this, sineOscillator.output);
         ports.add(out);
-        UnitOutputPort g = new UnitOutputPort();
-        gate = new OutputPort("gate", this, g);
+        gate = new OutputPort("gate", this, passThrough.output);
         ports.add(gate);
     }
 
@@ -69,8 +67,9 @@ public class ModuleKEYB implements Module {
     }
 
     private void incrementOctave(){
-        //TODO limit?
-        octave++;
+        if(octave<7) {
+            octave++;
+        }
     }
 
     private void decrementOctave(){
@@ -80,13 +79,12 @@ public class ModuleKEYB implements Module {
     }
 
     private void computeFrequency(Note note){
-        logger.log(Level.INFO, "ref : " + REFERENCE_FREQUENCY + " note :" + note.getValue() + " octave :" + (3 - octave));
         double freq = REFERENCE_FREQUENCY * Math.pow(2, (note.getValue()/12.0))*Math.pow(2, (3 - octave));
-        logger.log(Level.INFO, "frequency : " + freq);
         sineOscillator.frequency.setValueInternal(freq);
     }
 
     public void pressKey(Note n) {
+        passThrough.getOutput().setValueInternal(5);
         switch(n) {
             case INCOCT :
                 incrementOctave(); // increase octave
@@ -100,7 +98,7 @@ public class ModuleKEYB implements Module {
     }
 
     public void releaseKey() {
-
+        passThrough.getOutput().setValueInternal(-5);
     }
 }
 
