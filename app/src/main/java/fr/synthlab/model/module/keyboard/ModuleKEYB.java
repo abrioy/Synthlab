@@ -76,14 +76,10 @@ public class ModuleKEYB implements Module {
         this.octave = newOctave;
     }
 
-    private void computeFrequency(Note note){
-        double freq = REFERENCE_FREQUENCY * Math.pow(2, (note.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
-        sineOscillator.frequency.setValueInternal(freq);
-    }
-
     public void pressKey(Note n) {
         passThrough.getOutput().setValueInternal(5);
-        computeFrequency(n);
+        double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
+        sineOscillator.frequency.setValueInternal(freq);
     }
 
     public void releaseKey() {
