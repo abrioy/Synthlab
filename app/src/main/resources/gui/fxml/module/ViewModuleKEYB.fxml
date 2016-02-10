@@ -8,11 +8,11 @@
       prefHeight="198" prefWidth="504" minHeight="198" minWidth="504" maxHeight="198" maxWidth="504">
 
     <Plug fx:id="out"
-          layoutX="15.0" layoutY="75.0"
+          layoutX="440.0" layoutY="55.0"
           name="Out" type="output" />
 
     <Plug fx:id="gate"
-          layoutX="65.0" layoutY="75.0"
+          layoutX="440.0" layoutY="125.0"
           name="Gate" type="output" />
 
     <FlowPane layoutX="15.0" layoutY="35.0">

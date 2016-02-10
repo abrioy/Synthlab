@@ -53,6 +53,9 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        /*
+            Mouse pressed events
+         */
         CKey.setOnMousePressed(event -> {
             lastKeyPressed = Note.C;
             keyPressedCommand.execute();
@@ -106,7 +109,9 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
             keyPressedCommand.execute();
         });
 
-
+        /*
+            Mouse released events
+         */
         CKey.setOnMouseReleased(event -> {
             keyReleasedCommand.execute();
         });
@@ -146,6 +151,10 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         CNextOctKey.setOnMouseReleased(event -> {
             keyReleasedCommand.execute();
         });
+
+        /*
+            Mouse exiting events
+         */
 
     }
 
