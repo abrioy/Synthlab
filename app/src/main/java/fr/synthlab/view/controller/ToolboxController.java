@@ -9,6 +9,7 @@ import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.util.Callback;
@@ -34,9 +35,9 @@ public class ToolboxController implements Initializable {
     @FXML
     private TreeItem<String> rootFilter;
 
-    private Consumer<String> onDragDone = null;
+    private Consumer<DragEvent> onDragDone = null;
 
-    public void setOnDragDone(Consumer<String> onDragDone) {
+    public void setOnDragDone(Consumer<DragEvent> onDragDone) {
         this.onDragDone = onDragDone;
     }
 
@@ -62,7 +63,8 @@ public class ToolboxController implements Initializable {
                 ModuleEnum.REP.getLongName(),
                 ModuleEnum.EG.getLongName(),
                 ModuleEnum.VCFLP.getLongName(),
-                ModuleEnum.VCFHP.getLongName()
+                ModuleEnum.VCFHP.getLongName(),
+                ModuleEnum.MIX.getLongName()
         );
         loadTreeItems(rootFilter, items);
 
@@ -116,7 +118,7 @@ public class ToolboxController implements Initializable {
 
                 cell.setOnDragDetected(event -> {
                     if (!cell.isEmpty() && !ModuleEnum.getNameFromLong(cell.getItem()).equals("")) {
-                        Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
+                        Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
                         ClipboardContent cc = new ClipboardContent();
                         cc.putString(cell.getItem());
                         db.setContent(cc);
@@ -124,7 +126,7 @@ public class ToolboxController implements Initializable {
                 });
                 cell.setOnDragDone(event -> {
                     if (onDragDone != null) {
-                        onDragDone.accept(cell.getItem());
+                        onDragDone.accept(event);
                     }
                 });
                 return cell;

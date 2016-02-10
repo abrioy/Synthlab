@@ -4,6 +4,7 @@ package fr.synthlab.view.viewModuleFactory;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.envelope.ModuleEG;
+import fr.synthlab.model.module.mixer.ModuleMixer;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
@@ -47,6 +48,9 @@ public class ViewModuleFactory {
             case VCFHP:
                 module = createViewModuleVCFHP(workbench);
                 break;
+            case MIX:
+                module = createViewModuleMixer(workbench);
+                break;
         }
 		if (module != null) {
 			logger.finer("ViewModule created: " + type.toString());
@@ -58,21 +62,35 @@ public class ViewModuleFactory {
     }
 
     /**
+     * create a new module mixer in modele and in view.
+     *
+     * @param workbench the workbench
+     * @return viewModuleMixer
+     */
+    private static ViewModule createViewModuleMixer(Workbench workbench) {
+        Module vco = ModuleFactory.createModule(ModuleEnum.MIX);
+        ViewModuleMixer viewMixer = new ViewModuleMixer(workbench);
+        viewMixer.setModule(vco);
+
+        viewMixer.setAttenuator1Cmd(() -> ((ModuleMixer) vco).setAttenuation1(viewMixer.getAttenuator1()));
+        viewMixer.setAttenuator2Cmd(() -> ((ModuleMixer) vco).setAttenuation2(viewMixer.getAttenuator2()));
+        viewMixer.setAttenuator3Cmd(() -> ((ModuleMixer) vco).setAttenuation3(viewMixer.getAttenuator3()));
+        viewMixer.setAttenuator4Cmd(() -> ((ModuleMixer) vco).setAttenuation4(viewMixer.getAttenuator4()));
+        return viewMixer;
+    }
+
+    /**
      * @return a viewModuleVCO attached to its module
-     * @param workbench
+     * @param workbench workbench
      */
     private static ViewModule createViewModuleVCO(Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleEnum.VCOA);
         ViewModuleVCO viewVco = new ViewModuleVCO(workbench);
         viewVco.setModule(vco);
 
-        viewVco.setChangeFreqCommand(() -> {
-            ((ModuleVCOA) vco).setFrequency(viewVco.getFreq());
-        });
+        viewVco.setChangeFreqCommand(() -> ((ModuleVCOA) vco).setFrequency(viewVco.getFreq()));
 
-        viewVco.setChangeShapeCommand(() -> {
-            ((ModuleVCOA) vco).setShape(viewVco.getSelectedShape());
-        });
+        viewVco.setChangeShapeCommand(() -> ((ModuleVCOA) vco).setShape(viewVco.getSelectedShape()));
 
         return viewVco;
     }
@@ -100,9 +118,7 @@ public class ViewModuleFactory {
         Module scop = ModuleFactory.createModule(ModuleEnum.SCOP);
         ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope(workbench);
         viewScop.setModule(scop);
-        viewScop.setPickerCommand(() -> {
-            ((ModuleOscilloscope) scop).setScale(viewScop.getScale());
-        });
+        viewScop.setPickerCommand(() -> ((ModuleOscilloscope) scop).setScale(viewScop.getScale()));
 
         viewScop.getOscilloscopeDrawing().setModuleOscilloscope((ModuleOscilloscope) scop);
 
@@ -122,21 +138,13 @@ public class ViewModuleFactory {
         ViewModuleEG viewEG = new ViewModuleEG(workbench);
         viewEG.setModule(eg);
 
-        viewEG.setChangeAttackCommand(() -> {
-            ((ModuleEG) eg).setAttack(viewEG.getAttack());
-        });
+        viewEG.setChangeAttackCommand(() -> ((ModuleEG) eg).setAttack(viewEG.getAttack()));
 
-        viewEG.setChangeDecayCommand(() -> {
-            ((ModuleEG) eg).setDecay(viewEG.getDecay());
-        });
+        viewEG.setChangeDecayCommand(() -> ((ModuleEG) eg).setDecay(viewEG.getDecay()));
 
-        viewEG.setChangeSustainCommand(() -> {
-            ((ModuleEG) eg).setSustain(viewEG.getSustain());
-        });
+        viewEG.setChangeSustainCommand(() -> ((ModuleEG) eg).setSustain(viewEG.getSustain()));
 
-        viewEG.setChangeReleaseCommand(() -> {
-            ((ModuleEG) eg).setRelease(viewEG.getRelease());
-        });
+        viewEG.setChangeReleaseCommand(() -> ((ModuleEG) eg).setRelease(viewEG.getRelease()));
 
         return viewEG;
     }

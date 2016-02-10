@@ -12,8 +12,9 @@ public enum ModuleEnum {
     EG("EG", "Envelope Generator"),
 	VCFLP("VCFLP", "VCF (LP)"),
     VCFHP("VCFHP", "VCF (HP)"),
-    KEYB("KEYB", "Keyboard");
-
+    KEYB("KEYB", "Keyboard"),
+    MIX("MIX", "MIX"),
+    REC("REC", "ModuleRecorder");
 
     private String moduleName;
     private String moduleLongName;
@@ -23,10 +24,6 @@ public enum ModuleEnum {
 		this.moduleLongName = longName;
     }
 
-	public String getLongName() {
-		return this.moduleLongName;
-	}
-
     public static String getNameFromLong(String longName) {
         for (ModuleEnum m : values()) {
             if (m.getLongName().equals(longName)) {
@@ -35,6 +32,10 @@ public enum ModuleEnum {
         }
         return "";
     }
+
+	public String getLongName() {
+		return this.moduleLongName;
+	}
 
     @Override
     public String toString() {

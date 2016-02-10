@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
-
+	private final double moduleMargin = 2.0d;
 	private ImageView dragGhost = new ImageView();
     private Cable draggedCable;
 
@@ -36,28 +36,21 @@ public class Workbench extends Pane {
                 draggedCable.update(localPoint);
             }
         });
+
+
 		ModuleFactory.startSyn();
 
-		/*
-		ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, this);
-		ViewModule osc = ViewModuleFactory.createViewModule(ModuleEnum.SCOP, this);
-
-		vco.getModule().getPort("out").connect(osc.getModule().getPort("in"));
-
-		this.addModule(vco);
-		this.addModule(osc);
-		*/
 	}
 
 	public void onRightClick() {
 		dropCable();
 	}
 
-    /**
-     * Handling event when plug is clicked
-     * @param plug
-     */
-    public void plugClicked(Plug plug){
+	/**
+	 * Handling event when plug is clicked
+	 * @param plug
+	 */
+	public void plugClicked(Plug plug){
         String str;
         if (draggedCable==null){str="null";}
         else str="full";
@@ -102,7 +95,6 @@ public class Workbench extends Pane {
                         if (c!=null) {
                             disconnect((Plug) plug);
                             c.deleteCircles();
-                            getCables().remove(c);
                             this.getChildren().remove(c);
                         }
 
@@ -151,17 +143,13 @@ public class Workbench extends Pane {
 			mouseDelta.x = localPoint.getX();
 			mouseDelta.y = localPoint.getY();
 
-			displayGhost(module);
-			//workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::front);
-			for(Cable c: getCables()){
-				if (draggedCable!=c){
-					c.update();
-				}
-				else{
-					c.update(mousePoint);
-				}
+			workbench.updateCables();
+			if (draggedCable != null) {
+				draggedCable.update(mousePoint);
 			}
-        });
+
+			workbench.displayGhost(module);
+		});
 
         module.setOnMouseReleased(mouseEvent -> {
             hideGhost();
@@ -172,27 +160,22 @@ public class Workbench extends Pane {
 
 			double expectedX = localPoint.getX() - mouseDelta.x;
 			double expectedY = localPoint.getY() - mouseDelta.y;
-			// Moving the ghost to where the module should be
-			workbench.moveGhost(expectedX, expectedY);
 
 			Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
 			if (newLocation != null) {
 				module.relocate(newLocation.getX(), newLocation.getY());
 			}
-			//workbench.getCables().stream().filter(cable -> draggedCable == null).forEach(fr.synthlab.view.component.Cable::update);
-			for (Cable c : getCables()) {
-				if (draggedCable != c) {
-					c.update();
-				} else {
-					c.update(localPoint);
-				}
+
+			updateCables();
+			if (draggedCable != null) {
+				draggedCable.update(localPoint);
 			}
+			dragGhost.toFront();
 		});
 
 	}
 
 	public void displayGhost(ViewModule module){
-		module.toFront();
 		// Creating a ghost image
 		WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
 		dragGhost.setImage(snapshot);
@@ -208,7 +191,21 @@ public class Workbench extends Pane {
 		this.getChildren().remove(dragGhost);
 	}
 	public void moveGhost(double x, double y){
-		dragGhost.relocate(x, y);
+		dragGhost.relocate(
+				Math.max(moduleMargin, x),
+				Math.max(moduleMargin, y)
+		);
+		dragGhost.toFront();
+	}
+
+	private Collection<ViewModule> getViewModules() {
+		Collection<ViewModule> modules = new ArrayList<>();
+		for (Node child : this.getChildren()) {
+			if (child instanceof ViewModule) {
+				modules.add((ViewModule) child);
+			}
+		}
+		return modules;
 	}
 
 	/**
@@ -219,15 +216,13 @@ public class Workbench extends Pane {
 	 * @return The Bounds of the first colliding module if there any
 	 */
 	private Bounds checkCollisions(Node node, Bounds bounds) {
-		for (Node child : this.getChildren()) {
-			if (child != dragGhost && node != child) {
-				if(child instanceof ViewModule) {
-                    Bounds childBounds = child.getBoundsInParent();
+		for (ViewModule child : this.getViewModules()) {
+			if (node != child) {
+				Bounds childBounds = child.getBoundsInParent();
 
-                    if (bounds.intersects(childBounds)) {
-                        return childBounds;
-                    }
-                }
+				if (bounds.intersects(childBounds)) {
+					return childBounds;
+				}
 			}
 		}
 		return null;
@@ -235,7 +230,6 @@ public class Workbench extends Pane {
 
 	/**
 	 * Computes the 2D center of a Bounds object
-	 * @param plug
 	 * @param bounds
 	 * @return The center of the rectangle
 	 */
@@ -258,18 +252,17 @@ public class Workbench extends Pane {
 	 * @return A suggested location to move the module to
 	 */
 	public Point2D computeNewModulePosition(ViewModule node, double expectedX, double expectedY) {
-		final double margin = 2;
+
+		// Moving the ghost to where the module should be
+		this.moveGhost(expectedX, expectedY);
+
 		double newX = expectedX;
 		double newY = expectedY;
 
-		// We will try 3 times to find a place for the node
-		for (int i = 0; i < 3; i++) {
-			if(newX < margin){
-				newX = margin;
-			}
-			if(newY < margin){
-				newY = margin;
-			}
+		// We will try 4 times to find a place for the node
+		for (int i = 0; i < 4; i++) {
+			newX = Math.max(moduleMargin, newX);
+			newY = Math.max(moduleMargin, newY);
 
 			Bounds oldBounds = node.getBoundsInParent();
 			Bounds newBounds = new BoundingBox(
@@ -281,6 +274,13 @@ public class Workbench extends Pane {
 
 			Bounds collidingBounds = checkCollisions(node, newBounds);
 			if (collidingBounds == null) {
+				// Updating the cable positions, just in case
+				for (Cable c : getCables()) {
+					if (draggedCable != c) {
+						c.update();
+					}
+				}
+
 				// The new position is not colliding with something
 				// We move the node
 				return new Point2D(newX, newY);
@@ -294,29 +294,47 @@ public class Workbench extends Pane {
 				double distanceX = Math.abs(newCenter.getX() - collidingNodeCenter.getX());
 				double distanceY = Math.abs(newCenter.getY() - collidingNodeCenter.getY());
 
-				if (distanceX > distanceY) {
+				if ((distanceX / distanceY) > (collidingBounds.getWidth() / collidingBounds.getHeight())) {
 					// We need to push it along the X axis
 					if (newCenter.getX() > collidingNodeCenter.getX()) {
 						// Right
-						newX = collidingBounds.getMaxX() + margin;
+						newX = collidingBounds.getMaxX() + moduleMargin;
 					} else {
 						// Left
-						newX = collidingBounds.getMinX() - newBounds.getWidth() - margin;
+						newX = collidingBounds.getMinX() - newBounds.getWidth() - moduleMargin;
 					}
+
+					// We also snap it in place vertically
+					if(Math.abs(collidingBounds.getMinY() - newBounds.getMinY()) < 20) {
+						newY = collidingBounds.getMinY();
+					}
+					else if(Math.abs(collidingBounds.getMaxY() - newBounds.getMaxY()) < 20) {
+						newY = collidingBounds.getMaxY() - newBounds.getHeight();
+					}
+
 				} else {
 					// We need to push it along the Y axis
 					if (newCenter.getY() > collidingNodeCenter.getY()) {
 						// Bottom
-						newY = collidingBounds.getMaxY() + margin;
+						newY = collidingBounds.getMaxY() + moduleMargin;
 					} else {
 						// Top
-						newY = collidingBounds.getMinY() - newBounds.getHeight() - margin;
+						newY = collidingBounds.getMinY() - newBounds.getHeight() - moduleMargin;
+					}
+
+					// We also snap it in place horizontally
+					if(Math.abs(collidingBounds.getMinX() - newBounds.getMinX()) < 20) {
+						newX = collidingBounds.getMinX();
+					}
+					else if(Math.abs(collidingBounds.getMaxX() - newBounds.getMaxX()) < 20) {
+						newX = collidingBounds.getMaxX() - newBounds.getWidth();
 					}
 				}
 
 			}
 
 		}
+
 		// The loop didn't succeed in finding a non-colliding location, we don't move the node
 		return null;
 	}
@@ -357,6 +375,16 @@ public class Workbench extends Pane {
         return cables;
     }
 
+	private void updateCables() {
+		getCables().forEach(Cable::updateCircles);
+
+		for(Cable c : getCables()){
+			if (draggedCable!=c){
+				c.update();
+			}
+		}
+	}
+
     private Cable getConnectedCable(Plug plug){
         for(Cable c : getCables()){
 			Plug test = c.getOppositePlug(plug);
@@ -387,7 +415,6 @@ public class Workbench extends Pane {
     private void dropCable(){
 		if(draggedCable!=null) {
 			draggedCable.deleteCircles();
-			getCables().remove(draggedCable);
 			this.getChildren().remove(draggedCable);
 			draggedCable = null;
 		}

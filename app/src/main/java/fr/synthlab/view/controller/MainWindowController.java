@@ -4,6 +4,9 @@ import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
+import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
@@ -11,7 +14,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -28,14 +33,40 @@ public class MainWindowController implements Initializable {
 	@FXML private ScrollPane workbenchScrollPane;
 
 	private ViewModule draggedNewViewModule = null;
+	private DoubleProperty zoomLevel = new SimpleDoubleProperty(this, null, 1.0d);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 		// Setting the workspace to at least be as big as the scrollpane
 		workbenchScrollPane.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
-			workbench.setMinSize(newValue.getWidth(), newValue.getHeight());
+			Platform.runLater(()-> {
+				workbench.setMinSize(newValue.getWidth() * zoomLevel.doubleValue(),
+						newValue.getHeight() * zoomLevel.doubleValue());
+
+
+				// Hack to force a layout refresh
+				Rectangle tempChild = new Rectangle();
+				workbench.getChildren().add(tempChild);
+				workbench.getChildren().remove(tempChild);
+			});
 		});
+
+		zoomLevel.addListener((observable, oldValue, newValue) -> {
+			workbench.setScaleX(1.0d / newValue.doubleValue());
+			workbench.setScaleY(1.0d / newValue.doubleValue());
+
+			Platform.runLater(()-> {
+				workbench.setMinSize(workbenchScrollPane.getViewportBounds().getWidth() * newValue.doubleValue(),
+						workbenchScrollPane.getViewportBounds().getHeight() * newValue.doubleValue());
+
+				// Hack to force a layout refresh
+				Rectangle tempChild = new Rectangle();
+				workbench.getChildren().add(tempChild);
+				workbench.getChildren().remove(tempChild);
+			});
+		});
+
 
 
 		// Handling incoming drags from the toolbox
@@ -71,19 +102,17 @@ public class MainWindowController implements Initializable {
 				// We make it visible only to create a ghost
 				draggedNewViewModule.setVisible(true);
 				workbench.displayGhost(draggedNewViewModule);
-
 				draggedNewViewModule.setVisible(false);
-
 			}
         });
 
 		workbench.setOnDragOver(event -> {
+			event.acceptTransferModes(TransferMode.ANY);
 			if (draggedNewViewModule != null) {
 				Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
-				workbench.moveGhost(localPoint.getX(), localPoint.getY());
 
 				Point2D newLocation = workbench.computeNewModulePosition(draggedNewViewModule, localPoint.getX(), localPoint.getY());
-				if(newLocation != null){
+				if (newLocation != null) {
 					draggedNewViewModule.setVisible(true);
 					draggedNewViewModule.relocate(newLocation.getX(), newLocation.getY());
 				}
@@ -100,25 +129,48 @@ public class MainWindowController implements Initializable {
 			}
 		});
 
-		toolboxController.setOnDragDone(type -> {
+		// The module has been dropped on the workbench
+		workbench.setOnDragDropped(event -> {
 			if (draggedNewViewModule != null) {
-				if (!draggedNewViewModule.isVisible()) {
-					// We never found a good position for the module
-					logger.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
-							"\" because we failed to find a place for it in the workspace.");
-					workbench.removeModule(draggedNewViewModule); // FIXME: Does not delete the module
-				} else {
-					logger.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
-							"\" to the workspace.");
-					workbench.addModule(draggedNewViewModule);
-				}
-			}
+				logger.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
+						"\" to the workspace.");
 
-			draggedNewViewModule = null;
-			workbench.hideGhost();
+				draggedNewViewModule = null;
+				workbench.hideGhost();
+			}
 		});
 
+
+		toolboxController.setOnDragDone(event -> {
+			if (draggedNewViewModule != null) {
+				// We never found a good position for the module
+				logger.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
+						"\" because we failed to find a place for it in the workspace.");
+				workbench.removeModule(draggedNewViewModule);
+
+				draggedNewViewModule = null;
+				workbench.hideGhost();
+			}
+		});
+
+
+		workbench.setOnScroll(event -> {
+			if(event.isControlDown()) {
+				double newZoomLevel = zoomLevel.getValue();
+				if (event.getDeltaY() < 0) {
+					newZoomLevel += 0.1;
+				} else {
+					newZoomLevel -= 0.1;
+				}
+				newZoomLevel = Math.max(0.5, newZoomLevel);
+				newZoomLevel = Math.min(2, newZoomLevel);
+
+				zoomLevel.set(newZoomLevel);
+				event.consume();
+			}
+		});
     }
+
 
 	public void setStageAndSetupListeners(Stage stage) {
 		stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {

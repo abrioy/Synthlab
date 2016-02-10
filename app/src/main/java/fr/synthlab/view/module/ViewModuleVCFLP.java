@@ -1,6 +1,5 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.Command;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
@@ -31,8 +30,8 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 	@FXML
 	private Label frequencyLabel;
 
-    private Command changeThresholdCommand;
-	private Command changeResonanceCommand;
+	private Runnable changeThresholdCommand;
+	private Runnable changeResonanceCommand;
 
     public ViewModuleVCFLP(Workbench workbench) {
 		super(workbench);
@@ -53,14 +52,14 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
     }
 
     private void updateThreshold() {
-        changeThresholdCommand.execute();
+		changeThresholdCommand.run();
 		frequencyLabel.setText(((int)getThreshold())+" Hz");
     }
 
-    public void setChangeThresholdCommand(Command changeThresholdCommand) {
-        this.changeThresholdCommand = changeThresholdCommand;
+	public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
+		this.changeThresholdCommand = changeThresholdCommand;
 
-		changeThresholdCommand.execute();
+		changeThresholdCommand.run();
 	}
 
     public double getThreshold() {
@@ -69,13 +68,13 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 
 
 	private void updateResonance() {
-		changeResonanceCommand.execute();
+		changeResonanceCommand.run();
 	}
 
-	public void setChangeResonanceCommand(Command changeResonanceCommand) {
+	public void setChangeResonanceCommand(Runnable changeResonanceCommand) {
 		this.changeResonanceCommand = changeResonanceCommand;
 
-		changeResonanceCommand.execute();
+		changeResonanceCommand.run();
 	}
 
 	public double getResonance() {

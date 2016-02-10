@@ -1,11 +1,10 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.Command;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
+import fr.synthlab.view.component.MuteButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,11 +17,11 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     private Knob picker;
 
     @FXML
-    private Button muteButton;
+    private MuteButton muteButton;
 
-    private Command volume;
+    private Runnable volume;
 
-    private Command muteCommand;
+    private Runnable muteCommand;
 
     private boolean mute;
 
@@ -30,21 +29,21 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
         this.setId("pane");
-        //todo add listener on mute
+        muteButton.setPrefSize(30,30);
     }
 
     public Knob getPicker() {
         return picker;
     }
 
-    public void setVolumeCommand(Command volume) {
+    public void setVolumeCommand(Runnable volume) {
         this.volume = volume;
 
         // Init volume to the correct value
-        volume.execute();
+        volume.run();
     }
 
-    public void setMuteCommand(Command mute) {
+    public void setMuteCommand(Runnable mute) {
         this.muteCommand = mute;
     }
 
@@ -52,18 +51,19 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         return mute;
     }
 
-    public void setMute(Command mute) {
+    public void setMute(Runnable mute) {
         this.muteCommand = mute;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         picker.valueProperty().addListener(event -> {
-            volume.execute();
+            volume.run();
         });
         muteButton.setOnAction(event -> {
             mute = !mute;
-            muteCommand.execute();
+            muteButton.setToggle(mute);
+            muteCommand.run();
         });
     }
 }

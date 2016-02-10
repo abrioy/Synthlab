@@ -1,6 +1,5 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.Command;
 import fr.synthlab.model.module.vcoa.ShapeEnum;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
@@ -30,8 +29,8 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 	private Label frequencyLabel;
 
 	// Commands
-	private Command changeShapeCommand;
-	private Command changeFreqCommand;
+	private Runnable changeShapeCommand;
+	private Runnable changeFreqCommand;
 
 	public ViewModuleVCO(Workbench workbench) {
 		super(workbench);
@@ -50,28 +49,26 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 		});
 
 		picker.valueProperty().addListener(event -> {
-			changeShapeCommand.execute();
+			changeShapeCommand.run();
 		});
 
 		frequencyLabel.setText(((int)getFreq())+" Hz");
 	}
 
 	private void updateFrequency() {
-		changeFreqCommand.execute();
+		changeFreqCommand.run();
 		frequencyLabel.setText(((int)getFreq())+" Hz");
 	}
 
-	public void setChangeShapeCommand(Command changeShape) {
+	public void setChangeShapeCommand(Runnable changeShape) {
 		this.changeShapeCommand = changeShape;
-
-		changeShapeCommand.execute();
+		changeShapeCommand.run();
 	}
 
 
-	public void setChangeFreqCommand(Command changeFreq) {
+	public void setChangeFreqCommand(Runnable changeFreq) {
 		this.changeFreqCommand = changeFreq;
-
-		changeFreqCommand.execute();
+		changeFreqCommand.run();
 	}
 
 
@@ -93,8 +90,10 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 				return ShapeEnum.TRIANGLE;
 			case 1:
 				return ShapeEnum.SQUARE;
-			default:
+			case 2:
 				return ShapeEnum.SAWTOOTH;
+			default:
+				return ShapeEnum.SINE;
 		}
 	}
 }

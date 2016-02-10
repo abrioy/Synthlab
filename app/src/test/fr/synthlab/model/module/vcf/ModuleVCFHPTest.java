@@ -1,4 +1,4 @@
-package fr.synthlab.model.module.vcoa;
+package fr.synthlab.model.module.vcf;
 
 import com.jsyn.JSyn;
 import fr.synthlab.model.module.port.Port;
@@ -10,14 +10,14 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
-public class ModuleVCOATest {
+public class ModuleVCFHPTest {
 
-    private ModuleVCOA moduleVCOA;
+    private ModuleVCFHP moduleVCFHP;
 
     @Before
     public void setUp() {
-        moduleVCOA = new ModuleVCOA(JSyn.createSynthesizer());
-        moduleVCOA.start();
+        moduleVCFHP = new ModuleVCFHP(JSyn.createSynthesizer());
+        moduleVCFHP.start();
     }
 
     /**
@@ -27,8 +27,8 @@ public class ModuleVCOATest {
      */
     @Test
     public void testSetFrequency() throws Exception {
-        moduleVCOA.setFrequency(5);
-        assertEquals(5, moduleVCOA.getFrequency(), 0.001);
+        moduleVCFHP.setF0(5);
+        assertEquals(5, moduleVCFHP.getF0(), 0.001);
     }
 
     /**
@@ -38,15 +38,15 @@ public class ModuleVCOATest {
      */
     @Test
     public void testGetPorts() throws Exception {
-        Collection<Port> ports = moduleVCOA.getPorts();
+        Collection<Port> ports = moduleVCFHP.getPorts();
         for (Port p : ports) {
-            assertEquals(true, p.getName().equals("fm") || p.getName().equals("out"));
+            assertEquals(true, p.getName().equals("fm") || p.getName().equals("in") || p.getName().equals("out"));
         }
     }
 
     @After
     public void tearDown() {
-        moduleVCOA.stop();
-        moduleVCOA = null;
+        moduleVCFHP.stop();
+        moduleVCFHP = null;
     }
 }
