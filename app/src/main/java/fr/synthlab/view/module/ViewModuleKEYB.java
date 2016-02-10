@@ -4,10 +4,13 @@ import fr.synthlab.model.Command;
 import fr.synthlab.model.module.keyboard.Note;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.KEYBKey;
+import fr.synthlab.view.component.Knob;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -40,6 +43,9 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     KEYBKey BKey;
     @FXML
     KEYBKey CNextOctKey;
+
+    @FXML
+    Knob octave;
 
     Command keyPressedCommand;
     Command keyReleasedCommand;
@@ -109,53 +115,30 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
             keyPressedCommand.execute();
         });
 
-        /*
-            Mouse released events
-         */
-        CKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        CSharpKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        DKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        DSharpKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        EKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        FKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        FSharpKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        GKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        GSharpKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        AKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        ASharpKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        BKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
-        CNextOctKey.setOnMouseReleased(event -> {
-            keyReleasedCommand.execute();
-        });
+        Collection<KEYBKey> keysColl = new ArrayList<KEYBKey>();
+        keysColl.add(CKey);
+        keysColl.add(CSharpKey);
+        keysColl.add(DKey);
+        keysColl.add(DSharpKey);
+        keysColl.add(EKey);
+        keysColl.add(FKey);
+        keysColl.add(FSharpKey);
+        keysColl.add(GKey);
+        keysColl.add(GSharpKey);
+        keysColl.add(AKey);
+        keysColl.add(ASharpKey);
+        keysColl.add(BKey);
+        keysColl.add(CNextOctKey);
 
-        /*
-            Mouse exiting events
-         */
+        for (KEYBKey key : keysColl) {
+            key.setOnMouseReleased(event -> {
+                keyReleasedCommand.execute();
+            });
 
+            key.setOnMouseExited(event -> {
+                keyReleasedCommand.execute();
+            });
+        }
     }
 
     public void setKeyPressedCommand(Command command) {

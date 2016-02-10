@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import fr.synthlab.view.component.Knob?>
 <?import fr.synthlab.view.component.Plug?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import fr.synthlab.view.component.KEYBKey?>
 <?import javafx.scene.layout.FlowPane?>
@@ -16,7 +18,7 @@
           layoutX="440.0" layoutY="55.0"
           name="gate" type="output" />
 
-    <FlowPane layoutX="35.0" layoutY="35.0" hgap="2">
+    <FlowPane layoutX="25.0" layoutY="35.0" hgap="2">
         <KEYBKey fx:id="CKey" />
         <KEYBKey fx:id="DKey" />
         <KEYBKey fx:id="EKey" />
@@ -27,7 +29,7 @@
         <KEYBKey fx:id="CNextOctKey" />
     </FlowPane>
 
-    <FlowPane layoutX="61.0" layoutY="35.0" hgap="12">
+    <FlowPane layoutX="51.0" layoutY="35.0" hgap="12">
         <KEYBKey fx:id="CSharpKey" isWhiteKey="false" />
         <KEYBKey fx:id="DSharpKey" isWhiteKey="false" />
         <Rectangle height="0" width ="30" />
@@ -35,5 +37,13 @@
         <KEYBKey fx:id="GSharpKey" isWhiteKey="false" />
         <KEYBKey fx:id="ASharpKey" isWhiteKey="false" />
     </FlowPane>
+
+    <Label fx:id="frequencyLabel" layoutX="380.0" layoutY="55.0"
+           styleClass="display"
+           prefHeight="44.0" prefWidth="40.0" text="" />
+
+    <Knob fx:id="octave" label="octave"
+          diameter="40.0" layoutX="400.0" layoutY="135.0"
+          min="0" max="7" step="8" />
 
 </Pane>
