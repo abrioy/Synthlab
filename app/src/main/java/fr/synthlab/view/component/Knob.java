@@ -1,5 +1,6 @@
 package fr.synthlab.view.component;
 
+
 import javafx.beans.property.*;
 import javafx.event.Event;
 import javafx.scene.Node;
@@ -7,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 
@@ -23,7 +26,7 @@ public class Knob extends Pane {
 	private static final Logger logger = Logger.getLogger(Knob.class.getName());
 
 
-	private static final Color stepColor = new Color(0.4d, 0.4d, 0.4d, 0.5d);
+	private static final Color stepColor = Color.WHITE;//new Color(0.4d, 0.4d, 0.4d, 0.5d);
 
     /**
      * draw zone.
@@ -60,6 +63,10 @@ public class Knob extends Pane {
      */
     private final Line maxLine = new Line();
 
+    /**
+     * arc for graduation
+     */
+    private final Arc arc= new Arc();
     /**
      * current value of button position.
      */
@@ -143,14 +150,17 @@ public class Knob extends Pane {
 		setOnMouseDragged(Event::consume);
 		setOnMouseDragReleased(Event::consume);
         setOnMouseDragged(event -> {
-			moveKnob(event.getX(), event.getY());
-			event.consume();
+            moveKnob(event.getX(), event.getY());
+            event.consume();
         });
 
-        minLine.setStroke(Color.DARKGRAY);
-        maxLine.setStroke(Color.DARKRED);
+        minLine.setStroke(Color.WHITE);
+        maxLine.setStroke(Color.WHITE);
         getChildren().addAll(minLine, maxLine);
         getChildren().add(knob);
+        arc.setFill(Color.TRANSPARENT);
+        arc.setStroke(Color.WHITE);
+        getChildren().add(arc);
 
         name = new Label(getLabel());
         getChildren().add(name);
@@ -185,6 +195,8 @@ public class Knob extends Pane {
 		heightProperty().addListener((observable, oldValue, newValue) -> {
 			updatePositions();
 		});
+
+        //Todo draw arc from first pos to last if right type
     }
 
 	private void moveKnob(double x, double y) {
@@ -226,15 +238,23 @@ public class Knob extends Pane {
      */
     @Override
     protected void layoutChildren() {
+        //try to improve from here
+        double minStartX = (diameter.doubleValue() / 2.0 +5) * Math.cos(Math.toRadians(-minAngle));
+        double minStartY = (diameter.doubleValue() / 2.0 +5) * Math.sin(Math.toRadians(-minAngle));
+
+        double maxStartX = (diameter.doubleValue() / 2.0 +5) * Math.cos(Math.toRadians(-maxAngle));
+        double maxStartY = (diameter.doubleValue() / 2.0 +5) * Math.sin(Math.toRadians(-maxAngle));
+        //to here
+
         super.layoutChildren();
         double centerX = 0;
         double centerY = 0;
-        minLine.setStartX(centerX);
-        minLine.setStartY(centerY);
+        minLine.setStartX(minStartX);
+        minLine.setStartY(minStartY);
         minLine.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(-minAngle)));
         minLine.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(-minAngle)));
-        maxLine.setStartX(centerX);
-        maxLine.setStartY(centerY);
+        maxLine.setStartX(maxStartX);
+        maxLine.setStartY(maxStartY);
         maxLine.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(-maxAngle)));
         maxLine.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(-maxAngle)));
         double knobX = 0 - getDiameter() / 2.0;
@@ -255,18 +275,30 @@ public class Knob extends Pane {
 
 			double smallScaleSize = scaleSize * 3.0d / 4.0d;
             for (int x = 1; x < step.get()-1; x++) {
+                //Todo handle the scaletype Enum and linear
                 angleLocal = -(angleInterval*x + minAngle);
                 Line line = new Line();
-                line.setStroke(stepColor);
-                line.setStartX(centerX + (diameter.doubleValue() / 2.0) * Math.cos(Math.toRadians(angleLocal)));
-                line.setStartY(centerY + (diameter.doubleValue() / 2.0) * Math.sin(Math.toRadians(angleLocal)));
+                line.setStroke(stepColor.darker());
+                line.setStartX(centerX + (diameter.doubleValue() / 2.0 +3) * Math.cos(Math.toRadians(angleLocal)));
+                line.setStartY(centerY + (diameter.doubleValue() / 2.0 +3) * Math.sin(Math.toRadians(angleLocal)));
                 line.setEndX(centerX + (diameter.doubleValue() / 2.0 + smallScaleSize) * Math.cos(Math.toRadians(angleLocal)));
                 line.setEndY(centerY + (diameter.doubleValue() / 2.0 + smallScaleSize) * Math.sin(Math.toRadians(angleLocal)));
                 lines.add(line);
 				getChildren().add(line);
             }
         }
-		updatePositions();
+        //another added stuff
+        arc.setCenterX(centerX);
+        arc.setCenterY(centerY);
+        arc.setRadiusX(diameter.doubleValue() / 2 + 5);
+        arc.setRadiusY(diameter.doubleValue() / 2 + 5);
+        arc.setStartAngle(minAngle);
+        arc.setLength((maxAngle - minAngle));
+        arc.setType(ArcType.OPEN);
+        arc.setMouseTransparent(true);
+        logger.info("TEST" +getScaleType());
+        if (getScaleType().equals("enum"))arc.setStroke(Color.TRANSPARENT);
+        updatePositions();
     }
 
     /**
@@ -420,7 +452,7 @@ public class Knob extends Pane {
      * @param v type
      */
     public final void setScaleType(String v) {
-        if (!v.equals("log")){
+        if (!v.equals("log")&&!v.equals("enum")){
             v="linear";
         }
         scaleType.set(v);
