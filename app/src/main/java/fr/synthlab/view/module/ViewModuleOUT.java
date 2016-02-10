@@ -3,6 +3,7 @@ package fr.synthlab.view.module;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.MuteButton;
+import fr.synthlab.view.component.RecordButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -19,11 +20,16 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     @FXML
     private MuteButton muteButton;
 
+    @FXML
+    private RecordButton recordButton;
+
     private Runnable volume;
 
     private Runnable muteCommand;
 
     private boolean mute;
+
+
 
     public ViewModuleOUT(Workbench workbench) {
         super(workbench);

@@ -5,22 +5,22 @@ import javafx.scene.control.Button;
 /**
  * Created by pollt on 2/9/16.
  */
-public class MuteButton extends Button {
+public class RecordButton extends Button {
 
-    public MuteButton(){
+    public RecordButton(){
         this.getStylesheets().add(
                 getClass().getResource("/gui/fxml/style/Module.css").toExternalForm());
-        this.getStyleClass().add("mute-release");
+        this.getStyleClass().add("rec-release");
     }
     public void setToggle(boolean toggle) {
         if (toggle){
-            this.getStyleClass().remove("mute-release");
-            this.getStyleClass().add("mute-pressed");
+            this.getStyleClass().remove("rec-release");
+            this.getStyleClass().add("rec-pressed");
 
         }
         else {
-            this.getStyleClass().remove("mute-pressed");
-            this.getStyleClass().add("mute-release");
+            this.getStyleClass().remove("rec-pressed");
+            this.getStyleClass().add("rec-release");
         }
     }
 
