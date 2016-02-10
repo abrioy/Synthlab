@@ -278,13 +278,15 @@ public class Knob extends Pane {
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
-        //TODO un truc je sais plus (checkpoint)
+
         if (step.get()!=0) {//draw scale
             getChildren().removeAll(lines);
             Color interColor=stepColor;
 			lines.clear();
             //draw different line depending on the scaleType
             if (getScaleType().equals("enum")){
+                setMaxAngle(100);
+                setMinAngle(-20);
                 stepStart=arcDistance;
                 stepEnd=scaleSize;
                 interColor=stepColor;
@@ -581,7 +583,8 @@ public class Knob extends Pane {
      * @param v new minAngle
      */
     public final void setMinAngle(double v) {
-        minAngle.set(v);
+        if (getScaleType().equals("enum")) minAngle.set(225);
+        else minAngle.set(v);
     }
 
     /**
@@ -604,7 +607,8 @@ public class Knob extends Pane {
      * @param v new maxAngle
      */
     public final void setMaxAngle(double v) {
-        maxAngle.set(v);
+        if (getScaleType().equals("enum")) maxAngle.set(-45);
+        else maxAngle.set(v);
     }
 
     /**
