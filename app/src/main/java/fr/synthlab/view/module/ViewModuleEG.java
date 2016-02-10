@@ -1,6 +1,5 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.Command;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import javafx.fxml.FXML;
@@ -22,10 +21,10 @@ public class ViewModuleEG extends ViewModule implements Initializable{
     @FXML
     private Knob release;
 
-    private Command changeAttackCommand;
-    private Command changeDecayCommand;
-    private Command changeSustainCommand;
-    private Command changeReleaseCommand;
+    private Runnable changeAttackCommand;
+    private Runnable changeDecayCommand;
+    private Runnable changeSustainCommand;
+    private Runnable changeReleaseCommand;
 
 
     public ViewModuleEG(Workbench workbench) {
@@ -37,19 +36,19 @@ public class ViewModuleEG extends ViewModule implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         attack.valueProperty().addListener(event -> {
-            changeAttackCommand.execute();
+            changeAttackCommand.run();
         });
 
         decay.valueProperty().addListener(event -> {
-            changeDecayCommand.execute();
+            changeDecayCommand.run();
         });
 
         sustain.valueProperty().addListener(event -> {
-            changeSustainCommand.execute();
+            changeSustainCommand.run();
         });
 
         release.valueProperty().addListener(event -> {
-            changeReleaseCommand.execute();
+            changeReleaseCommand.run();
         });
     }
 
@@ -58,16 +57,16 @@ public class ViewModuleEG extends ViewModule implements Initializable{
     public double getSustain() { return sustain.getValue(); }
     public double getRelease() { return release.getValue(); }
 
-    public void setChangeAttackCommand(Command command) {
+    public void setChangeAttackCommand(Runnable command) {
         this.changeAttackCommand = command;
     }
-    public void setChangeDecayCommand(Command command) {
+    public void setChangeDecayCommand(Runnable command) {
         this.changeDecayCommand = command;
     }
-    public void setChangeSustainCommand(Command command) {
+    public void setChangeSustainCommand(Runnable command) {
         this.changeSustainCommand = command;
     }
-    public void setChangeReleaseCommand(Command command) {
+    public void setChangeReleaseCommand(Runnable command) {
         this.changeReleaseCommand = command;
     }
 

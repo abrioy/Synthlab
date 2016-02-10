@@ -1,10 +1,7 @@
 package fr.synthlab.model.module.vcoa;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.PassThrough;
-import com.jsyn.unitgen.SawtoothOscillator;
-import com.jsyn.unitgen.SquareOscillator;
-import com.jsyn.unitgen.TriangleOscillator;
+import com.jsyn.unitgen.*;
 import fr.synthlab.model.filter.FmFilter;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
@@ -24,7 +21,7 @@ public class ModuleVCOA implements Module {
 	private static final Logger logger = Logger.getLogger(ModuleVCOA.class.getName());
 
     /**
-     * list of port of the VCO module
+     * The list of port of the VCO module
      */
     private Collection<Port> ports = new ArrayList<>();
 
@@ -32,7 +29,6 @@ public class ModuleVCOA implements Module {
      * The frequency f0 of the VCO
      */
     private double frequency = 450;
-    private double octave = 0;
 
     /**
      * Filter modulator
@@ -53,6 +49,11 @@ public class ModuleVCOA implements Module {
      * Sawtooth Oscillator
      */
     private SawtoothOscillator sawtoothOscillator = new SawtoothOscillator();
+
+    /**
+     * Sin Oscillator
+     */
+    private SineOscillator sineOscillator = new SineOscillator();
 
     /**
      * Filter modulator input port
@@ -76,6 +77,7 @@ public class ModuleVCOA implements Module {
         synthesizer.add(squareOscillator);
         synthesizer.add(triangleOscillator);
         synthesizer.add(sawtoothOscillator);
+        synthesizer.add(sineOscillator);
         synthesizer.add(fmFilter);
         synthesizer.add(passThrough);
 
@@ -85,7 +87,7 @@ public class ModuleVCOA implements Module {
         ports.add(fmInput);
         ports.add(outputPort);
 
-        squareOscillator.output.connect(passThrough.input);
+        triangleOscillator.output.connect(passThrough.input);
 
         // Initialize the frequency of the fm filter and the 3 oscillators
         setFrequency(frequency);
@@ -121,6 +123,7 @@ public class ModuleVCOA implements Module {
         squareOscillator.stop();
         sawtoothOscillator.stop();
         triangleOscillator.stop();
+        sineOscillator.stop();
     }
 
     /**
@@ -137,33 +140,15 @@ public class ModuleVCOA implements Module {
      */
     public void setFrequency(double frequency) {
         this.frequency = frequency;
-        fmFilter.setf0(frequency * Math.pow(2, octave));
+        fmFilter.setf0(frequency);
 
         if (fmInput.getConnected() == null) {
-            squareOscillator.frequency.set(frequency * Math.pow(2, octave));
-            triangleOscillator.frequency.set(frequency * Math.pow(2, octave));
-            sawtoothOscillator.frequency.set(frequency * Math.pow(2, octave));
+            squareOscillator.frequency.set(frequency);
+            triangleOscillator.frequency.set(frequency);
+            sawtoothOscillator.frequency.set(frequency);
+            sineOscillator.frequency.set(frequency);
         }
     }
-
-    /**
-     *
-     * @return the octave of VCO
-     */
-    public double getOctave() {
-        return octave;
-    }
-
-    /**
-     * set octave of VCO
-     * @param octave
-     */
-    public void setOctave(double octave) {
-        this.octave = octave;
-        setFrequency(frequency);
-    }
-
-
 
     /**
      * This method is called by the input port fm of the VCO when its state has changed
@@ -176,13 +161,15 @@ public class ModuleVCOA implements Module {
     public void update() {
         if (fmInput.getConnected() == null) {
             fmFilter.output.disconnectAll();
-            squareOscillator.frequency.set(frequency * Math.pow(2, octave));
-            triangleOscillator.frequency.set(frequency * Math.pow(2, octave));
-            sawtoothOscillator.frequency.set(frequency * Math.pow(2, octave));
+            squareOscillator.frequency.set(frequency);
+            triangleOscillator.frequency.set(frequency);
+            sawtoothOscillator.frequency.set(frequency);
+            sineOscillator.frequency.set(frequency);
         } else {
             fmFilter.output.connect(squareOscillator.frequency);
             fmFilter.output.connect(triangleOscillator.frequency);
             fmFilter.output.connect(sawtoothOscillator.frequency);
+            fmFilter.output.connect(sineOscillator.frequency);
         }
     }
 
@@ -211,6 +198,10 @@ public class ModuleVCOA implements Module {
             case SAWTOOTH:
                 passThrough.input.disconnectAll();
                 sawtoothOscillator.output.connect(passThrough.input);
+                break;
+            case SINE:
+                passThrough.input.disconnectAll();
+                sineOscillator.output.connect(passThrough.input);
                 break;
         }
     }

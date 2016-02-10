@@ -1,6 +1,5 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.Command;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
@@ -24,7 +23,7 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
     @FXML
     private Knob ampli;
 
-    private Command changeAmpliCommand;
+    private Runnable changeAmpliCommand;
 
     public ViewModuleVCA(Workbench workbench) {
 		super(workbench);
@@ -40,12 +39,12 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
     }
 
     private void updateAmply() {
-        changeAmpliCommand.execute();
+        changeAmpliCommand.run();
     }
 
-    public void setChangeAmpliCommand(Command changeAmpliCommand) {
+    public void setChangeAmpliCommand(Runnable changeAmpliCommand) {
         this.changeAmpliCommand = changeAmpliCommand;
-        changeAmpliCommand.execute();
+        changeAmpliCommand.run();
     }
 
     public double getAmpli() {

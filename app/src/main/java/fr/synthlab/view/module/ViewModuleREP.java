@@ -1,11 +1,7 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.Command;
 import fr.synthlab.view.Workbench;
-import fr.synthlab.view.component.Knob;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
