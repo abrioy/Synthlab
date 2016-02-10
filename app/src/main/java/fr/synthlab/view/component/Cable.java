@@ -51,6 +51,11 @@ public class Cable extends CubicCurve {
         this.setMouseTransparent(true);
     }
 
+	public void updateCircles(){
+		circleIn.toFront();
+		circleOut.toFront();
+	}
+
     public void update(){
         Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
         Point2D outPosition = workbench.sceneToLocal(out.localToScene(out.getCenter()));
@@ -119,7 +124,6 @@ public class Cable extends CubicCurve {
         c.setCenterX(x);
         c.setCenterY(y);
         c.setRadius(CIRCLE_RADIUS);
-        c.toFront();
     }
 
     public void front(){
