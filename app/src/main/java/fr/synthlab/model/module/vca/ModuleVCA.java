@@ -11,8 +11,10 @@ import fr.synthlab.model.module.port.Port;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 public class ModuleVCA implements Module {
+    private static final Logger logger = Logger.getLogger(ModuleVCA.class.getName());
 
     private Collection<Port> ports = new ArrayList<>();
 

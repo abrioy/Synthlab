@@ -2,6 +2,7 @@ package fr.synthlab.view.component;
 
 import javafx.beans.property.*;
 import javafx.event.Event;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -9,12 +10,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.logging.Logger;
+
 /**
  * Knob view.
  * @author johan
  * @see Region
  */
 public class Knob extends Pane {
+	private static final Logger logger = Logger.getLogger(Knob.class.getName());
+
+
+	private static final Color stepColor = new Color(0.4d, 0.4d, 0.4d, 0.5d);
 
     /**
      * draw zone.
@@ -102,6 +111,8 @@ public class Knob extends Pane {
      */
     private double scale= (maxExp - minExp) / max.get() - min.get();
 
+	private Collection<Line> lines = new ArrayList<>();
+
     /**
      * coef to exponential
      */
@@ -124,6 +135,9 @@ public class Knob extends Pane {
         knob.getStyleClass().add("knob");
         knob.getTransforms().add(rotate);
 
+		setMaxHeight(Double.MIN_VALUE);
+		setMaxWidth(Double.MIN_VALUE);
+
 		setOnMousePressed(Event::consume);
 		setOnMouseReleased(Event::consume);
 		setOnMouseDragged(Event::consume);
@@ -137,11 +151,8 @@ public class Knob extends Pane {
         maxLine.setStroke(Color.DARKRED);
         getChildren().addAll(minLine, maxLine);
         getChildren().add(knob);
-        setPrefSize(diameter.doubleValue() / 5, diameter.doubleValue() / 5);
 
         name = new Label(getLabel());
-        name.setLayoutX(getDiameter()/2);
-        name.setLayoutY(getDiameter()/2);
         getChildren().add(name);
 
         valueProperty().addListener((arg0, arg1, arg2) -> {
@@ -153,11 +164,32 @@ public class Knob extends Pane {
         maxProperty().addListener((arg0, arg1, arg2) -> {
             requestLayout();
         });
+
+		diameter.addListener((observable, oldValue, newValue) -> {
+			knob.setPrefSize(newValue.doubleValue(), newValue.doubleValue());
+			scaleSize = (int) (diameter.get() / 5);
+		});
+
+		// The label has a width and a height of 0 before it is initialized
+		// We use these listener to place is in its correct place
+		name.widthProperty().addListener((observable, oldValue, newValue) -> {
+			name.setLayoutX(-newValue.doubleValue() / 2.0d);
+		});
+		name.heightProperty().addListener((observable, oldValue, newValue) -> {
+			name.setLayoutY(-getDiameter() / 2.0d - newValue.doubleValue() - scaleSize);
+		});
+
+		widthProperty().addListener((observable, oldValue, newValue) -> {
+			updatePositions();
+		});
+		heightProperty().addListener((observable, oldValue, newValue) -> {
+			updatePositions();
+		});
     }
 
 	private void moveKnob(double x, double y) {
-		double centerX = 0;
-		double centerY = 0;
+		double centerX = getWidth() / 2.0d;
+		double centerY = getHeight() / 2.0d;
 		double theta = Math.atan2((y - centerY), (x - centerX));
 		double angle = Math.toDegrees(theta);
 		if (angle > 0.0) {
@@ -218,18 +250,23 @@ public class Knob extends Pane {
             rotate.setAngle(-angle);
         }
         if (step.get()!=0) {//draw scale
-            Line line;
+			getChildren().removeAll(lines);
+			lines.clear();
+
+			double smallScaleSize = scaleSize * 3.0d / 4.0d;
             for (int x = 1; x < step.get()-1; x++) {
                 angleLocal = -(angleInterval*x + minAngle);
-                line = new Line();
-                line.setStroke(Color.ANTIQUEWHITE);
+                Line line = new Line();
+                line.setStroke(stepColor);
                 line.setStartX(centerX + (diameter.doubleValue() / 2.0) * Math.cos(Math.toRadians(angleLocal)));
                 line.setStartY(centerY + (diameter.doubleValue() / 2.0) * Math.sin(Math.toRadians(angleLocal)));
-                line.setEndX(centerX + (diameter.doubleValue() / 2.0 + scaleSize) * Math.cos(Math.toRadians(angleLocal)));
-                line.setEndY(centerY + (diameter.doubleValue() / 2.0 + scaleSize) * Math.sin(Math.toRadians(angleLocal)));
-                getChildren().add(line);
+                line.setEndX(centerX + (diameter.doubleValue() / 2.0 + smallScaleSize) * Math.cos(Math.toRadians(angleLocal)));
+                line.setEndY(centerY + (diameter.doubleValue() / 2.0 + smallScaleSize) * Math.sin(Math.toRadians(angleLocal)));
+                lines.add(line);
+				getChildren().add(line);
             }
         }
+		updatePositions();
     }
 
     /**
@@ -265,6 +302,13 @@ public class Knob extends Pane {
         value = Math.max(minValue, value);
         return Math.min(maxValue, value);
     }
+
+	private void updatePositions() {
+		for(Node node : getChildren()){
+			node.translateXProperty().set(getWidth() / 2.0d);
+			node.translateYProperty().set(getHeight() / 2.0d);
+		}
+	}
 
     /**
      * getter on current value
@@ -361,8 +405,6 @@ public class Knob extends Pane {
         diameter.set(v);
         knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
         scaleSize = (int) (diameter.get() / 5);
-        name.setLayoutX(-8*getLabel().length()/2);
-        name.setLayoutY(-getDiameter()/2-25);
     }
 
     /**
@@ -407,8 +449,6 @@ public class Knob extends Pane {
     public final void setLabel(String v) {
         label.set(v);
         name.setText(v);
-        name.setLayoutX(-8*getLabel().length()/2);
-        name.setLayoutY(-getDiameter()/2-25);
     }
 
     /**
@@ -416,9 +456,6 @@ public class Knob extends Pane {
      * @return label
      */
     public final String getLabel() {
-        if (label.get().equals("")){
-            return scaleType.get();
-        }
         return label.get();
     }
 

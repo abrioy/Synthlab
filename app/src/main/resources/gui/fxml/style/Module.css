@@ -49,6 +49,19 @@
         -fx-background-position: center center !important;
         -fx-background-size: contain !important;
         -fx-background-color: transparent !important;
-
-        -fx-border-color: transparent !important;
+-fx-border-color: transparent !important;
         -fx-text-fill: transparent !important;}
+
+
+
+#rectStereo {
+    -fx-fill: rgba(136, 221, 153, 0.1);
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
+}
+
+#rectMono {
+    -fx-fill: rgba(238, 118, 0, 0.1);
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
+}        

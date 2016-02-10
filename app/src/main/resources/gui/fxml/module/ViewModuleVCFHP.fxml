@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import fr.synthlab.view.component.Knob?>
 <?import fr.synthlab.view.component.Plug?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="198" prefWidth="250" minHeight="198" minWidth="250" maxHeight="198" maxWidth="250">
-    <Knob fx:id="ampli" label="Ampli"
+    <Knob fx:id="threshold" label="Threshold"
           diameter="75.0" layoutX="125.0" layoutY="90.0"
-          min="-30" max="30" />
+          min="0" max="22000" scaleType="log" value="10" />
 
-    <Plug fx:id="am"
+    <Label fx:id="frequencyLabel" layoutX="85.0" layoutY="145.0"
+           styleClass="display"
+           prefHeight="44.0" prefWidth="80.0" text="" />
+
+    <Plug fx:id="fm"
           layoutX="15.0" layoutY="70.0"
-          label="am" name="am" type="modulation" />
+          name="fm" type="modulation" />
     <Plug fx:id="in"
           layoutX="15.0" layoutY="145.0"
-          label="in" name="in" type="input" />
+          name="in" type="input" />
     <Plug fx:id="out"
           layoutX="195.0" layoutY="145.0"
-          label="out" name="out" type="output" />
+          name="out" type="output" />
 </Pane>
 

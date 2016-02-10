@@ -59,6 +59,7 @@ public class Plug extends StackPane {
 
 
 
+	private final StringProperty label = new SimpleStringProperty(this, "label", "");
 	private final StringProperty name = new SimpleStringProperty(this, "name", "");
 	private final StringProperty type = new SimpleStringProperty(this, "type", "other");
 
@@ -86,12 +87,13 @@ public class Plug extends StackPane {
 
         nameLabel = new Label();
 		getChildren().add(nameLabel);
-    }
+		label.addListener((observable, oldValue, newValue) -> {
+			nameLabel.setText(this.label.get());
+		});
+	}
 
 	public Point2D getCenter(){
-        double x = colorCircle.getCenterX()+colorCircle.getRadius();
-        double y = colorCircle.getCenterY()+colorCircle.getRadius()+30/2;
-        return new Point2D(x, y);
+		return colorCircle.localToParent(colorCircle.getCenterX(), colorCircle.getCenterY());
     }
 
 	public Port getPort() {
@@ -129,6 +131,17 @@ public class Plug extends StackPane {
 
 	public void setName(String name) {
 		this.name.set(name);
-        nameLabel.setText(this.name.get());
+	}
+
+	public String getLabel() {
+		return label.get();
+	}
+
+	public StringProperty labelProperty() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label.set(label);
 	}
 }
