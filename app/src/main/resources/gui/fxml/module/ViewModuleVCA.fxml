@@ -6,7 +6,7 @@
       prefHeight="198" prefWidth="250" minHeight="198" minWidth="250" maxHeight="198" maxWidth="250">
     <Knob fx:id="ampli" label="Ampli"
           diameter="75.0" layoutX="125.0" layoutY="90.0"
-          min="-30" max="30" />
+          min="-30" max="30" value="0" />
 
     <Plug fx:id="am"
           layoutX="15.0" layoutY="70.0"

@@ -45,6 +45,7 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
 
     public void setChangeAmpliCommand(Command changeAmpliCommand) {
         this.changeAmpliCommand = changeAmpliCommand;
+        changeAmpliCommand.execute();
     }
 
     public double getAmpli() {
