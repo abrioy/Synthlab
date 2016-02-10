@@ -73,7 +73,6 @@ public class MainWindowController implements Initializable {
 				workbench.displayGhost(draggedNewViewModule);
 
 				draggedNewViewModule.setVisible(false);
-
 			}
         });
 

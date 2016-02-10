@@ -6,9 +6,12 @@ import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.KEYBKey;
 import fr.synthlab.view.component.Knob;
 import javafx.beans.property.IntegerProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -65,6 +68,13 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.SPACE) {
+                System.out.println("SPACE PRESSED");
+            }
+            event.consume();
+        });
+
         /*
             Mouse pressed events
          */
