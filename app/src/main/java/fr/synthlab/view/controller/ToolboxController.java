@@ -73,6 +73,24 @@ public class ToolboxController implements Initializable {
         rootInput.setExpanded(true);
         filter.setRoot(rootFilter);
 
+        input.focusedProperty().addListener(listener -> {
+            if(!input.focusedProperty().get()) {
+                input.getSelectionModel().clearSelection();
+            }
+        });
+
+        output.focusedProperty().addListener(listener -> {
+            if(!output.focusedProperty().get()) {
+                output.getSelectionModel().clearSelection();
+            }
+        });
+
+        filter.focusedProperty().addListener(listener -> {
+            if(!filter.focusedProperty().get()) {
+                filter.getSelectionModel().clearSelection();
+            }
+        });
+
         drag(filter);
     }
 
