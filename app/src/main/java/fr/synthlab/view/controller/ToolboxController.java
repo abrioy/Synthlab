@@ -48,14 +48,14 @@ public class ToolboxController implements Initializable {
         rootFilter.expandedProperty().addListener(listener -> drag(filter));
 
         ObservableList<String> items = FXCollections.observableArrayList(
-                ModuleEnum.VCOA.getLongName()
-        );
+                ModuleEnum.VCOA.getLongName(),
+                ModuleEnum.KEYB.getLongName()
+                );
         loadTreeItems(rootInput, items);
         items = FXCollections.observableArrayList(
                 ModuleEnum.OUT.getLongName(),
-                ModuleEnum.SCOP.getLongName(),
-                ModuleEnum.KEYB.getLongName()
-                );
+                ModuleEnum.SCOP.getLongName()
+        );
         loadTreeItems(rootOutput, items);
 
         items = FXCollections.observableArrayList(
