@@ -1,6 +1,7 @@
 package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.Synthesizer;
+import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.SineOscillator;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
@@ -35,8 +36,9 @@ public class ModuleKEYB implements Module {
         synth.add(sineOscillator);
         out = new OutputPort("out", this, sineOscillator.output);
         ports.add(out);
-        //gate = new OutputPort("gate", this, keyboard.getGate());
-        //ports.add(gate);
+        UnitOutputPort g = new UnitOutputPort();
+        gate = new OutputPort("gate", this, g);
+        ports.add(gate);
     }
 
     @Override
