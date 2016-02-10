@@ -27,6 +27,13 @@ public class ModuleKEYB implements Module {
     private final int REFERENCE_OCTAVE = 3;
 
     /**
+     * Note corresponding to the reference frequency
+     * (changing it will only change the initial note being played on the oscillo,
+     * to generalize that a bit, we'd need to modify the formula in computeFrequency())
+     */
+    private final Note REFERENCE_NOTE = Note.A;
+
+    /**
      * Minimum octave.
      */
     private final int OCTAVE_MIN = 0;
@@ -83,7 +90,7 @@ public class ModuleKEYB implements Module {
         OutputPort gate = new OutputPort("gate", this, keyboardFilter.output);
         ports.add(gate);
 
-        this.pressKey(Note.A);
+        this.pressKey(REFERENCE_NOTE);
     }
 
     /**
