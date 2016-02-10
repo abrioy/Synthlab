@@ -68,13 +68,6 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.SPACE) {
-                System.out.println("SPACE PRESSED");
-            }
-            event.consume();
-        });
-
         /*
             Mouse pressed events
          */
@@ -162,6 +155,132 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         });
 
         octaveLabel.setText(getOctave() + "");
+
+        this.setFocusTraversable(true);
+        this.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case Q:
+                    lastKeyPressed = Note.C;
+                    keyPressedCommand.execute();
+                    break;
+                case S:
+                    lastKeyPressed = Note.D;
+                    keyPressedCommand.execute();
+                    break;
+                case D:
+                    lastKeyPressed = Note.E;
+                    keyPressedCommand.execute();
+                    break;
+                case F:
+                    lastKeyPressed = Note.F;
+                    keyPressedCommand.execute();
+                    break;
+                case G:
+                    lastKeyPressed = Note.G;
+                    keyPressedCommand.execute();
+                    break;
+                case H:
+                    lastKeyPressed = Note.A;
+                    keyPressedCommand.execute();
+                    break;
+                case J:
+                    lastKeyPressed = Note.B;
+                    keyPressedCommand.execute();
+                    break;
+                case K:
+                    lastKeyPressed = Note.C2;
+                    keyPressedCommand.execute();
+                    break;
+                case Z:
+                    lastKeyPressed = Note.CSharp;
+                    keyPressedCommand.execute();
+                    break;
+                case E:
+                    lastKeyPressed = Note.DSharp;
+                    keyPressedCommand.execute();
+                    break;
+                case T:
+                    lastKeyPressed = Note.FSharp;
+                    keyPressedCommand.execute();
+                    break;
+                case Y:
+                    lastKeyPressed = Note.GSharp;
+                    keyPressedCommand.execute();
+                    break;
+                case U:
+                    lastKeyPressed = Note.ASharp;
+                    keyPressedCommand.execute();
+                    break;
+                case X:
+                    octavePicker.setValue(octavePicker.getValue() + 1);
+                    break;
+                case W:
+                    octavePicker.setValue(octavePicker.getValue() - 1);
+                    break;
+                default:
+                    break;
+            }
+            event.consume();
+        });
+
+        this.setOnKeyReleased(event -> {
+            switch (event.getCode()) {
+                case Q:
+                    keyReleasedCommand.execute();
+                    break;
+                case S:
+                    keyReleasedCommand.execute();
+                    break;
+                case D:
+                    keyReleasedCommand.execute();
+                    break;
+                case F:
+                    keyReleasedCommand.execute();
+                    break;
+                case G:
+                    keyReleasedCommand.execute();
+                    break;
+                case H:
+                    keyReleasedCommand.execute();
+                    break;
+                case J:
+                    keyReleasedCommand.execute();
+                    break;
+                case K:
+                    keyReleasedCommand.execute();
+                    break;
+                case Z:
+                    keyReleasedCommand.execute();
+                    break;
+                case E:
+                    keyReleasedCommand.execute();
+                    break;
+                case T:
+                    keyReleasedCommand.execute();
+                    break;
+                case Y:
+                    keyReleasedCommand.execute();
+                    break;
+                case U:
+                    keyReleasedCommand.execute();
+                    break;
+                default:
+                    break;
+            }
+            event.consume();
+        });
+
+        this.setOnKeyReleased(event -> {
+            switch (event.getCode()) {
+                case Q:
+                    keyReleasedCommand.execute();
+                    break;
+                default:
+                    break;
+            }
+            event.consume();
+        });
+        this.requestFocus();
     }
 
     private void updateOctave() {

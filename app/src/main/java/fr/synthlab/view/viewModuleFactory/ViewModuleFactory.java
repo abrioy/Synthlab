@@ -14,6 +14,7 @@ import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.module.*;
+import javafx.scene.input.KeyCode;
 
 import java.util.logging.Logger;
 
@@ -172,6 +173,10 @@ public class ViewModuleFactory {
         viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb).pressKey(viewKEYB.getNotePressed()));
         viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb).releaseKey());
         viewKEYB.setOctaveChangeCommand(() -> ((ModuleKEYB) keyb).changeOctave(viewKEYB.getOctave()));
+
+        viewKEYB.setOnMouseClicked(event -> {
+            viewKEYB.requestFocus();
+        });
 
         return viewKEYB;
     }
