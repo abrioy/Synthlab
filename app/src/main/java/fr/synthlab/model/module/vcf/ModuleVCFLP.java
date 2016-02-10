@@ -6,6 +6,10 @@ import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class ModuleVCFLP extends ModuleVCF {
     /**
      * JSyn lowPass Filter
@@ -83,4 +87,15 @@ public class ModuleVCFLP extends ModuleVCF {
     public void setResonance(double value) {
         lpFilter.Q.set(value);
     }
+
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+
+	}
 }

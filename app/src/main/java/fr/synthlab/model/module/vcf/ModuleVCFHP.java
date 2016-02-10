@@ -6,6 +6,10 @@ import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class ModuleVCFHP extends ModuleVCF {
 
     /**
@@ -77,4 +81,15 @@ public class ModuleVCFHP extends ModuleVCF {
     public ModuleEnum getType() {
         return ModuleEnum.VCFHP;
     }
+
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+
+	}
 }

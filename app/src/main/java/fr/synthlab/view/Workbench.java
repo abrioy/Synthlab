@@ -1,6 +1,7 @@
 package fr.synthlab.view;
 
 
+import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
@@ -15,8 +16,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Workbench extends Pane {
@@ -37,10 +40,51 @@ public class Workbench extends Pane {
             }
         });
 
-
 		ModuleFactory.startSyn();
 
+
 	}
+
+	private void serializeViewModules() {
+		FileOutputStream fis = null;
+		try {
+			fis = new FileOutputStream("testfile");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		ObjectOutputStream ois = null;
+		try {
+			ois = new ObjectOutputStream(fis);
+			for(ViewModule viewModule : getViewModules()){
+				viewModule.getModule().writeObject(ois);
+			}
+			ois.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void deSerializeViewModules() {
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("testfile");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(fis);
+			for(ViewModule viewModule : getViewModules()){
+				logger.info(String.valueOf(((ModuleEG)viewModule.getModule()).getAttack()));
+				viewModule.getModule().readObject(ois);
+				logger.info(String.valueOf(((ModuleEG)viewModule.getModule()).getAttack()));
+			}
+			ois.close();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	public void onRightClick() {
 		dropCable();
@@ -51,6 +95,20 @@ public class Workbench extends Pane {
 	 * @param plug
 	 */
 	public void plugClicked(Plug plug){
+		Scanner scanner=new Scanner(System.in);
+		while (true) {
+			String question = scanner.nextLine();
+			if(question.equals("a")){
+				this.serializeViewModules();
+				break;
+			}
+			if(question.equals("z")){
+				this.deSerializeViewModules();
+				break;
+			}
+		}
+
+
         String str;
         if (draggedCable==null){str="null";}
         else str="full";

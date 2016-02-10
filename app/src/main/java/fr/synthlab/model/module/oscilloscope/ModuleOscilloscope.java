@@ -20,6 +20,9 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -485,4 +488,15 @@ public class ModuleOscilloscope implements Module {
         }
 
     }
+
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+
+	}
 }

@@ -9,6 +9,9 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -125,4 +128,15 @@ public class ModuleVCA implements Module {
     public ModuleEnum getType() {
         return ModuleEnum.VCA;
     }
+
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+
+	}
 }

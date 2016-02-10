@@ -5,6 +5,9 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.port.Port;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Collection;
 
 public class ModuleKEYB implements Module {
@@ -36,4 +39,14 @@ public class ModuleKEYB implements Module {
     public ModuleEnum getType() {
         return null;
     }
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+
+	}
 }

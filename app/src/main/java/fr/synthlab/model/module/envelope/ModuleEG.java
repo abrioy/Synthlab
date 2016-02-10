@@ -9,6 +9,9 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -82,4 +85,38 @@ public class ModuleEG implements Module {
     public void setRelease(double release){
         envelope.release.set(release);
     }
+
+
+	public double getAttack(){
+		return envelope.attack.get();
+	}
+
+	public double getDecay(){
+		return envelope.decay.get();
+	}
+
+	public double getSustain(){
+		return envelope.sustain.get();
+	}
+
+	public double getRelease(){
+		return envelope.release.get();
+	}
+
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		o.writeObject(getAttack());
+		o.writeObject(getDecay());
+		o.writeObject(getSustain());
+		o.writeObject(getRelease());
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		setAttack((double) o.readObject());
+		setDecay((double) o.readObject());
+		setSustain((double) o.readObject());
+		setRelease((double) o.readObject());
+	}
 }
