@@ -35,9 +35,37 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
      */
     @FXML
     private Knob attenuator4;
+    /**
+     * command execute on change attenuation input 1.
+     */
+    private Runnable attenuator1Cmd;
+    /**
+     * command execute on change attenuation input 2.
+     */
+    private Runnable attenuator2Cmd;
+    /**
+     * command execute on change attenuation input 3.
+     */
+    private Runnable attenuator3Cmd;
+    /**
+     * command execute on change attenuation input 4.
+     */
+    private Runnable attenuator4Cmd;
+
+    /**
+     * constructor.
+     *
+     * @param workbench the workbench
+     */
+    public ViewModuleMixer(Workbench workbench) {
+        super(workbench);
+        this.loadFXML("/gui/fxml/module/ViewModuleMixer.fxml");
+        this.setId("pane");
+    }
 
     /**
      * getter on value attenution of input 1.
+     *
      * @return value
      */
     public double getAttenuator1() {
@@ -46,6 +74,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
 
     /**
      * getter on value attenution of input 2.
+     *
      * @return value
      */
     public double getAttenuator2() {
@@ -54,6 +83,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
 
     /**
      * getter on value attenution of input 3.
+     *
      * @return value
      */
     public double getAttenuator3() {
@@ -62,6 +92,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
 
     /**
      * getter on value attenution of input 4.
+     *
      * @return value
      */
     public double getAttenuator4() {
@@ -70,6 +101,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
 
     /**
      * setter command on change attenuation input 1.
+     *
      * @param attenuator1Cmd command
      */
     public void setAttenuator1Cmd(Runnable attenuator1Cmd) {
@@ -78,6 +110,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
 
     /**
      * setter command on change attenuation input 2.
+     *
      * @param attenuator2Cmd command
      */
     public void setAttenuator2Cmd(Runnable attenuator2Cmd) {
@@ -86,6 +119,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
 
     /**
      * setter command on change attenuation input 3.
+     *
      * @param attenuator3Cmd command
      */
     public void setAttenuator3Cmd(Runnable attenuator3Cmd) {
@@ -94,40 +128,11 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
 
     /**
      * setter command on change attenuation input 4.
+     *
      * @param attenuator4Cmd command
      */
     public void setAttenuator4Cmd(Runnable attenuator4Cmd) {
         this.attenuator4Cmd = attenuator4Cmd;
-    }
-
-    /**
-     * command execute on change attenuation input 1.
-     */
-    private Runnable attenuator1Cmd;
-
-    /**
-     * command execute on change attenuation input 2.
-     */
-    private Runnable attenuator2Cmd;
-
-    /**
-     * command execute on change attenuation input 3.
-     */
-    private Runnable attenuator3Cmd;
-
-    /**
-     * command execute on change attenuation input 4.
-     */
-    private Runnable attenuator4Cmd;
-
-    /**
-     * constructor.
-     * @param workbench the workbench
-     */
-    public ViewModuleMixer(Workbench workbench) {
-        super(workbench);
-        this.loadFXML("/gui/fxml/module/ViewModuleMixer.fxml");
-        this.setId("pane");
     }
 
     /**

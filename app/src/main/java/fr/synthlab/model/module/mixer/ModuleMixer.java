@@ -53,6 +53,7 @@ public class ModuleMixer implements Module{
 
     /**
      * constructor.
+     *
      * @param syn synthesizer
      */
     public ModuleMixer(Synthesizer syn){
@@ -120,7 +121,8 @@ public class ModuleMixer implements Module{
      * not use in this module
      */
     @Override
-    public void update() {}
+    public void update() {
+    }
 
     /**
      * module type.

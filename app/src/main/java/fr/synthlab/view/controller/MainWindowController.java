@@ -112,7 +112,7 @@ public class MainWindowController implements Initializable {
 				Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
 				Point2D newLocation = workbench.computeNewModulePosition(draggedNewViewModule, localPoint.getX(), localPoint.getY());
-				if(newLocation != null) {
+				if (newLocation != null) {
 					draggedNewViewModule.setVisible(true);
 					draggedNewViewModule.relocate(newLocation.getX(), newLocation.getY());
 				}
@@ -131,7 +131,7 @@ public class MainWindowController implements Initializable {
 
 		// The module has been dropped on the workbench
 		workbench.setOnDragDropped(event -> {
-			if(draggedNewViewModule != null) {
+			if (draggedNewViewModule != null) {
 				logger.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
 						"\" to the workspace.");
 
@@ -152,7 +152,6 @@ public class MainWindowController implements Initializable {
 				workbench.hideGhost();
 			}
 		});
-
 
 
 		workbench.setOnScroll(event -> {

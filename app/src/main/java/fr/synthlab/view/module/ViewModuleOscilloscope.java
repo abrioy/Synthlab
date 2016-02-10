@@ -20,13 +20,12 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 	private Knob picker;
 
 	private Runnable pickerCmd;
-
+	private Workbench w;
 	public ViewModuleOscilloscope(Workbench workbench) {
 		super(workbench);
 		this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
 		w=workbench;
 	}
-	private Workbench w;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {

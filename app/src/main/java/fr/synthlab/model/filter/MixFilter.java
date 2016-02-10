@@ -32,38 +32,6 @@ public class MixFilter extends UnitGenerator{
     private UnitOutputPort output;
 
     /**
-     * getter on input1.
-     * @return input 1
-     */
-    public UnitInputPort getInput1() {
-        return input1;
-    }
-
-    /**
-     * getter on input2.
-     * @return input 2
-     */
-    public UnitInputPort getInput2() {
-        return input2;
-    }
-
-    /**
-     * getter on input3.
-     * @return input 3
-     */
-    public UnitInputPort getInput3() {
-        return input3;
-    }
-
-    /**
-     * getter on input4.
-     * @return input 4
-     */
-    public UnitInputPort getInput4() {
-        return input4;
-    }
-
-    /**
      * constructor.
      */
     public MixFilter() {
@@ -81,7 +49,44 @@ public class MixFilter extends UnitGenerator{
     }
 
     /**
+     * getter on input1.
+     *
+     * @return input 1
+     */
+    public UnitInputPort getInput1() {
+        return input1;
+    }
+
+    /**
+     * getter on input2.
+     *
+     * @return input 2
+     */
+    public UnitInputPort getInput2() {
+        return input2;
+    }
+
+    /**
+     * getter on input3.
+     *
+     * @return input 3
+     */
+    public UnitInputPort getInput3() {
+        return input3;
+    }
+
+    /**
+     * getter on input4.
+     *
+     * @return input 4
+     */
+    public UnitInputPort getInput4() {
+        return input4;
+    }
+
+    /**
      * generate new value for output.
+     *
      * @param start debut
      * @param limit fin
      */
@@ -95,19 +100,19 @@ public class MixFilter extends UnitGenerator{
         int div;
         for (int i = start; i < limit; i++) {
             div = 0;
-            if (input1.isConnected()){
+            if (input1.isConnected()) {
                 div++;
             }
-            if (input2.isConnected()){
+            if (input2.isConnected()) {
                 div++;
             }
-            if (input3.isConnected()){
+            if (input3.isConnected()) {
                 div++;
             }
-            if (input4.isConnected()){
+            if (input4.isConnected()) {
                 div++;
             }
-            outputs[i] = (inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i])/div;
+            outputs[i] = (inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i]) / div;
         }
     }
 

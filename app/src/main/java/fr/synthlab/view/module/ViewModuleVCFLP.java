@@ -30,7 +30,7 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 	@FXML
 	private Label frequencyLabel;
 
-    private Runnable changeThresholdCommand;
+	private Runnable changeThresholdCommand;
 	private Runnable changeResonanceCommand;
 
     public ViewModuleVCFLP(Workbench workbench) {
@@ -52,12 +52,12 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
     }
 
     private void updateThreshold() {
-        changeThresholdCommand.run();
+		changeThresholdCommand.run();
 		frequencyLabel.setText(((int)getThreshold())+" Hz");
     }
 
-    public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
-        this.changeThresholdCommand = changeThresholdCommand;
+	public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
+		this.changeThresholdCommand = changeThresholdCommand;
 
 		changeThresholdCommand.run();
 	}

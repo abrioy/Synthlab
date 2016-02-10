@@ -21,11 +21,9 @@ import java.util.logging.Logger;
 
 public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
-
+	private final double moduleMargin = 2.0d;
 	private ImageView dragGhost = new ImageView();
     private Cable draggedCable;
-
-	private final double moduleMargin = 2.0d;
 
 	public Workbench() {
 

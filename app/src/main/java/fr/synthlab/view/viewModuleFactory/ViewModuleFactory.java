@@ -63,6 +63,7 @@ public class ViewModuleFactory {
 
     /**
      * create a new module mixer in modele and in view.
+     *
      * @param workbench the workbench
      * @return viewModuleMixer
      */
