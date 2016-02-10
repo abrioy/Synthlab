@@ -171,6 +171,7 @@ public class ViewModuleFactory {
 
         viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb).pressKey(viewKEYB.getNotePressed()));
         viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb).releaseKey());
+        viewKEYB.setOctaveChangeCommand(() -> ((ModuleKEYB) keyb).changeOctave(viewKEYB.getOctave()));
 
         return viewKEYB;
     }

@@ -38,12 +38,12 @@
         <KEYBKey fx:id="ASharpKey" isWhiteKey="false" />
     </FlowPane>
 
-    <Label fx:id="frequencyLabel" layoutX="380.0" layoutY="55.0"
+    <Label fx:id="octaveLabel" layoutX="380.0" layoutY="55.0"
            styleClass="display"
            prefHeight="44.0" prefWidth="40.0" text="" />
 
-    <Knob fx:id="octave" label="octave"
+    <Knob fx:id="octavePicker" label="octave"
           diameter="40.0" layoutX="400.0" layoutY="135.0"
-          min="0" max="7" step="8" />
+          min="0" max="7" step="8" value="3" />
 
 </Pane>

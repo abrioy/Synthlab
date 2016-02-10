@@ -17,8 +17,11 @@ public class ModuleKEYB implements Module {
     private static final Logger logger = Logger.getLogger(ModuleKEYB.class.getName());
 
     private final double REFERENCE_FREQUENCY = 440.0;
+    private final int REFERENCE_OCTAVE = 3;
+    private final int OCTAVE_MIN = 0;
+    private final int OCTAVE_MAX = 7;
 
-    private int octave = 3;
+    private int octave;
 
     private List<Port> ports = new ArrayList<>();
 
@@ -31,6 +34,7 @@ public class ModuleKEYB implements Module {
     private PassThrough passThrough;
 
     public ModuleKEYB(Synthesizer synth) {
+        octave = REFERENCE_OCTAVE;
         sineOscillator = new SineOscillator();
         passThrough = new PassThrough();
         synth.add(sineOscillator);
@@ -66,35 +70,20 @@ public class ModuleKEYB implements Module {
         return ModuleEnum.KEYB;
     }
 
-    private void incrementOctave(){
-        if(octave<7) {
-            octave++;
-        }
-    }
-
-    private void decrementOctave(){
-        if(octave>0) {
-            octave--;
-        }
+    public void changeOctave(int newOctave) {
+        newOctave = Math.max(newOctave, OCTAVE_MIN);
+        newOctave = Math.min(newOctave, OCTAVE_MAX);
+        this.octave = newOctave;
     }
 
     private void computeFrequency(Note note){
-        double freq = REFERENCE_FREQUENCY * Math.pow(2, (note.getValue()/12.0))*Math.pow(2, (3 - octave));
+        double freq = REFERENCE_FREQUENCY * Math.pow(2, (note.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
         sineOscillator.frequency.setValueInternal(freq);
     }
 
     public void pressKey(Note n) {
         passThrough.getOutput().setValueInternal(5);
-        switch(n) {
-            case INCOCT :
-                incrementOctave(); // increase octave
-            break;
-            case DECOCT :
-                decrementOctave(); // decrease octave
-            break;
-            default:
-                computeFrequency(n);
-        }
+        computeFrequency(n);
     }
 
     public void releaseKey() {

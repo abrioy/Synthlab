@@ -13,10 +13,7 @@ public enum Note {
     A(0),
     ASharp(1),
     B(2),
-    C2(3),
-
-    INCOCT(13),
-    DECOCT(14);
+    C2(3);
 
     private final int value;
 

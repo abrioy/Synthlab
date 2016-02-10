@@ -5,8 +5,10 @@ import fr.synthlab.model.module.keyboard.Note;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.KEYBKey;
 import fr.synthlab.view.component.Knob;
+import javafx.beans.property.IntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -45,10 +47,14 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     KEYBKey CNextOctKey;
 
     @FXML
-    Knob octave;
+    Knob octavePicker;
+
+    @FXML
+    Label octaveLabel;
 
     Command keyPressedCommand;
     Command keyReleasedCommand;
+    Command octaveChangeCommand;
     Note lastKeyPressed;
 
     public ViewModuleKEYB(Workbench workbench) {
@@ -139,6 +145,22 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
                 keyReleasedCommand.execute();
             });
         }
+
+        octavePicker.valueProperty().addListener(event -> {
+            octaveChangeCommand.execute();
+            updateOctave();
+        });
+
+        octaveLabel.setText(getOctave() + "");
+
+    }
+
+    private void updateOctave() {
+        octaveLabel.setText(getOctave() + "");
+    }
+
+    public int getOctave() {
+        return (int) octavePicker.getValue();
     }
 
     public void setKeyPressedCommand(Command command) {
@@ -147,6 +169,10 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 
     public void setKeyReleasedCommand(Command command) {
         this.keyReleasedCommand = command;
+    }
+
+    public void setOctaveChangeCommand(Command command) {
+        this.octaveChangeCommand = command;
     }
 
     public Note getNotePressed() {
