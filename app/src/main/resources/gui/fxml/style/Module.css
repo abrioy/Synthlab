@@ -33,20 +33,22 @@
 
 
 
-.button {
-    -fx-background-image: url("../../texture/brushed-aluminum.jpg");
-    -fx-background-repeat: repeat;
-    -fx-background-position: top left;
+.button-release {
+    -fx-background-image: url("../../texture/button.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-color: transparent !important;
+        -fx-background-size: contain !important;
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;
+    }
 
-    -fx-background-color: #000;
-    -fx-border-color: #333;
-    -fx-text-fill: #000;
-}
+.button-pressed {
+-fx-background-image: url("../../texture/button-pressed.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-size: contain !important;
+        -fx-background-color: transparent !important;
 
-.button:hover{
-    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,.2), 50, 0.01, 0, 0);
-}
-
-.button:armed {
-    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,.4), 50, .1, 0, 0);
-}
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;}

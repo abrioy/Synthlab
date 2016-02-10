@@ -3,6 +3,7 @@ package fr.synthlab.view.module;
 import fr.synthlab.model.Command;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
+import fr.synthlab.view.component.MuteButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,7 +19,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     private Knob picker;
 
     @FXML
-    private Button muteButton;
+    private MuteButton muteButton;
 
     private Command volume;
 
@@ -30,7 +31,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
         this.setId("pane");
-        //todo add listener on mute
+        muteButton.setPrefSize(30,30);
     }
 
     public Knob getPicker() {
@@ -63,6 +64,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         });
         muteButton.setOnAction(event -> {
             mute = !mute;
+            muteButton.setToggle(mute);
             muteCommand.execute();
         });
     }
