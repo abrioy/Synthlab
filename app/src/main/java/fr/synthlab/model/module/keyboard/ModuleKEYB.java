@@ -1,8 +1,10 @@
 package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.Synthesizer;
+import com.jsyn.unitgen.SineOscillator;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
 import java.util.ArrayList;
@@ -23,7 +25,18 @@ public class ModuleKEYB implements Module {
 
     private List<Port> ports = new ArrayList<>();
 
+    private OutputPort out;
+
+    private OutputPort gate;
+
+    private SineOscillator sineOscillator = new SineOscillator();
+
     public ModuleKEYB(Synthesizer synth) {
+        synth.add(sineOscillator);
+        out = new OutputPort("out", this, sineOscillator.output);
+        ports.add(out);
+        //gate = new OutputPort("gate", this, keyboard.getGate());
+        //ports.add(gate);
     }
 
     @Override
@@ -33,12 +46,14 @@ public class ModuleKEYB implements Module {
 
     @Override
     public void start() {
-
+        sineOscillator.start();
+        //keyboard.start();
     }
 
     @Override
     public void stop() {
-
+        sineOscillator.stop();
+        //keyboard.stop();
     }
 
     @Override
@@ -64,31 +79,31 @@ public class ModuleKEYB implements Module {
 
     public void pressKey(Note n) {
         switch(n) {
-            case C : ; // C
+            case C : sineOscillator.output.setValueInternal(440); // C
             break;
-            case CSharp : ; // C#
+            case CSharp : sineOscillator.output.setValueInternal(440); // C#
             break;
-            case D : ; // D
+            case D : sineOscillator.output.setValueInternal(440); // D
             break;
-            case DSharp : ; // D#
+            case DSharp : sineOscillator.output.setValueInternal(440); // D#
             break;
-            case E : ; // E
+            case E : sineOscillator.output.setValueInternal(440); // E
             break;
-            case F : ; // F
+            case F : sineOscillator.output.setValueInternal(440); // F
             break;
-            case FSharp : ; // F#
+            case FSharp : sineOscillator.output.setValueInternal(440); // F#
             break;
-            case G : ; // G
+            case G : sineOscillator.output.setValueInternal(440); // G
             break;
-            case GSharp : ; // G#
+            case GSharp : sineOscillator.output.setValueInternal(440); // G#
             break;
-            case A : ; // A
+            case A : sineOscillator.output.setValueInternal(440); // A
             break;
-            case ASharp : ; // A#
+            case ASharp : sineOscillator.output.setValueInternal(440); // A#
             break;
-            case B : ; // B
+            case B : sineOscillator.output.setValueInternal(440); // B
             break;
-            case C2 : ; // C on octave sup
+            case C2 : sineOscillator.output.setValueInternal(440); // C on octave sup
             break;
             case INCOCT : incrementOctave(); // increase octave
             break;
