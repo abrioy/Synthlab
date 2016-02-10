@@ -3,6 +3,7 @@ package fr.synthlab.model.module;
 public enum ModuleEnum {
 
 
+
     VCOA("VCOA", "VCO Type A"),
     VCA("VCA", "VCA"),
     OUT("OUT", "Output"),
@@ -10,6 +11,7 @@ public enum ModuleEnum {
     REP("REP", "Repeater"),
     EG("EG", "Envelope Generator"),
 	VCFLP("VCFLP", "VCF (LP)"),
+    VCFHP("VCFHP", "VCF (HP)"),
     KEYB("KEYB", "Keyboard");
 
 

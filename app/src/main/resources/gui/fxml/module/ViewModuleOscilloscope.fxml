@@ -8,14 +8,14 @@
       prefHeight="400" prefWidth="504" minHeight="400" minWidth="504" maxHeight="400" maxWidth="504">
     <OscilloscopeDrawing fx:id="oscilloscopeDrawing" layoutX="15.0" layoutY="40.0" />
 
-    <Knob fx:id="picker" label="picker"
+    <Knob fx:id="picker"
           diameter="40.0" layoutX="250.0" layoutY="365.0"
-          min="0" max="100"/>
+          min="0" max="100" step="10"/>
 
     <Plug fx:id="in"
           layoutX="15.0" layoutY="345.0"
-          name="in" type="input" />
+          label="in" name="in" type="input" />
     <Plug fx:id="out"
           layoutX="445.0" layoutY="345.0"
-          name="out" type="output" />
+          label="out" name="out" type="output" />
 </Pane>

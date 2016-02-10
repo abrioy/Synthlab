@@ -50,3 +50,16 @@
 .button:armed {
     -fx-effect: innershadow(three-pass-box, rgba(0,0,0,.4), 50, .1, 0, 0);
 }
+
+
+#rectStereo {
+    -fx-fill: rgba(136, 221, 153, 0.1);
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
+}
+
+#rectMono {
+    -fx-fill: rgba(238, 118, 0, 0.1);
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
+}

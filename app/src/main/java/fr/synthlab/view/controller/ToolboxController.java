@@ -20,66 +20,94 @@ import java.util.logging.Logger;
 
 public class ToolboxController implements Initializable {
     private static final Logger logger = Logger.getLogger(ToolboxController.class.getName());
+    @FXML
+    private TreeView<String> input;
+    @FXML
+    private TreeView<String> output;
+    @FXML
+    private TreeView<String> filter;
 
     @FXML
-    private TreeItem<String> input;
+    private TreeItem<String> rootInput;
     @FXML
-    private TreeItem<String> output;
+    private TreeItem<String> rootOutput;
     @FXML
-    private TreeItem<String> filter;
+    private TreeItem<String> rootFilter;
 
-    private TreeItem<String> root = new TreeItem<>("Modules");
+    private Consumer<String> onDragDone = null;
 
-    @FXML private TreeView<String> toolbox;
-
-
-	private Consumer<String> onDragDone = null;
-	public void setOnDragDone(Consumer<String> onDragDone) {
-		this.onDragDone = onDragDone;
-	}
+    public void setOnDragDone(Consumer<String> onDragDone) {
+        this.onDragDone = onDragDone;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        rootInput.expandedProperty().addListener(listener -> drag(input));
+        rootOutput.expandedProperty().addListener(listener -> drag(output));
+        rootFilter.expandedProperty().addListener(listener -> drag(filter));
+
         ObservableList<String> items = FXCollections.observableArrayList(
-				ModuleEnum.VCOA.getLongName(),
-                ModuleEnum.VCA.getLongName(),
+                ModuleEnum.VCOA.getLongName()
+        );
+        loadTreeItems(rootInput, items);
+        items = FXCollections.observableArrayList(
+                ModuleEnum.OUT.getLongName(),
+                ModuleEnum.SCOP.getLongName(),
                 ModuleEnum.KEYB.getLongName()
-		);
-        loadTreeItems(input,items);
+                );
+        loadTreeItems(rootOutput, items);
 
         items = FXCollections.observableArrayList(
-				ModuleEnum.OUT.getLongName(),
-				ModuleEnum.SCOP.getLongName()
-		);
-        loadTreeItems(output,items);
+                ModuleEnum.VCA.getLongName(),
+                ModuleEnum.REP.getLongName(),
+                ModuleEnum.EG.getLongName(),
+                ModuleEnum.VCFLP.getLongName(),
+                ModuleEnum.VCFHP.getLongName()
+        );
+        loadTreeItems(rootFilter, items);
 
-        items = FXCollections.observableArrayList(
-				ModuleEnum.REP.getLongName(),
-				ModuleEnum.EG.getLongName(),
-				ModuleEnum.VCFLP.getLongName()
-		);
-        loadTreeItems(filter,items);
-        
-        root.setExpanded(true);
-        toolbox.setRoot(root);
+        rootInput.setExpanded(true);
+        input.setRoot(rootInput);
+        rootOutput.setExpanded(true);
+        output.setRoot(rootOutput);
+        rootInput.setExpanded(true);
+        filter.setRoot(rootFilter);
+
+        input.focusedProperty().addListener(listener -> {
+            if(!input.focusedProperty().get()) {
+                input.getSelectionModel().clearSelection();
+            }
+        });
+
+        output.focusedProperty().addListener(listener -> {
+            if(!output.focusedProperty().get()) {
+                output.getSelectionModel().clearSelection();
+            }
+        });
+
+        filter.focusedProperty().addListener(listener -> {
+            if(!filter.focusedProperty().get()) {
+                filter.getSelectionModel().clearSelection();
+            }
+        });
+
+        drag(filter);
     }
 
     public void loadTreeItems(TreeItem<String> item, ObservableList<String> rootItems) {
         item.setExpanded(true);
         for (String itemString : rootItems) {
             item.getChildren().add(new TreeItem<>(itemString));
-            makeListDraggable();
         }
-        root.getChildren().add(item);
     }
 
-    private void makeListDraggable(){
-        toolbox.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
+    private void makeListDraggable(TreeView<String> item) {
+        item.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
             public TreeCell<String> call(TreeView<String> stringTreeView) {
                 TreeCell<String> cell = new TreeCell<String>() {
                     protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
                         if (item != null) {
                             super.updateItem(item, empty);
                             setText(item);
@@ -88,14 +116,13 @@ public class ToolboxController implements Initializable {
                 };
 
                 cell.setOnDragDetected(event -> {
-                    if (!cell.isEmpty()) {
+                    if (!cell.isEmpty() && !ModuleEnum.getNameFromLong(cell.getItem()).equals("")) {
                         Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
                         ClipboardContent cc = new ClipboardContent();
                         cc.putString(cell.getItem());
                         db.setContent(cc);
                     }
                 });
-
                 cell.setOnDragDone(event -> {
                     if (onDragDone != null) {
                         onDragDone.accept(cell.getItem());
@@ -103,8 +130,29 @@ public class ToolboxController implements Initializable {
                 });
                 return cell;
             }
-
         });
+    }
+
+    private void drag(TreeView<String> draggable) {
+        makeListDraggable(draggable);
+        input.relocate(0, 0);
+        if (rootInput.isExpanded()) {
+            input.setPrefHeight((rootInput.getChildren().size() + 1) * 25);
+        } else {
+            input.setPrefHeight(25);
+        }
+        output.relocate(0, input.getPrefHeight());
+        if (rootOutput.isExpanded()) {
+            output.setPrefHeight((rootOutput.getChildren().size() + 1) * 25);
+        } else {
+            output.setPrefHeight(25);
+        }
+        filter.relocate(0, input.getPrefHeight() + output.getPrefHeight());
+        if (rootFilter.isExpanded()) {
+            filter.setPrefHeight((rootFilter.getChildren().size() + 1) * 25);
+        } else {
+            filter.setPrefHeight(25);
+        }
     }
 
 }

@@ -10,7 +10,8 @@ import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.replicator.ModuleREP;
 import fr.synthlab.model.module.vca.ModuleVCA;
-import fr.synthlab.model.module.vcflp.ModuleVCFLP;
+import fr.synthlab.model.module.vcf.ModuleVCFHP;
+import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 
 import java.util.logging.Logger;
@@ -41,6 +42,9 @@ public class ModuleFactory {
                 break;
 			case VCFLP : module = createVCFLP();
 				break;
+
+            case VCFHP : module = createVCFHP();
+                break;
             case KEYB : module = createKEYB();
                 break;
         }
@@ -102,6 +106,14 @@ public class ModuleFactory {
 	private static ModuleVCFLP createVCFLP() {
 		return new ModuleVCFLP(syn);
 	}
+
+    /**
+     * @return a new ModuleVCHP
+     */
+    private static Module createVCFHP() {
+        return new ModuleVCFHP(syn);
+    }
+
 
     /**
      * @return a new ModuleKEYB

@@ -6,6 +6,7 @@ import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +28,9 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 	@FXML
 	private Knob resonance;
 
+	@FXML
+	private Label frequencyLabel;
+
     private Command changeThresholdCommand;
 	private Command changeResonanceCommand;
 
@@ -44,15 +48,20 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 		resonance.valueProperty().addListener(event -> {
 			updateResonance();
 		});
+
+		frequencyLabel.setText(((int)getThreshold())+" Hz");
     }
 
     private void updateThreshold() {
         changeThresholdCommand.execute();
+		frequencyLabel.setText(((int)getThreshold())+" Hz");
     }
 
     public void setChangeThresholdCommand(Command changeThresholdCommand) {
         this.changeThresholdCommand = changeThresholdCommand;
-    }
+
+		changeThresholdCommand.execute();
+	}
 
     public double getThreshold() {
         return threshold.getValue();
@@ -65,6 +74,8 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 
 	public void setChangeResonanceCommand(Command changeResonanceCommand) {
 		this.changeResonanceCommand = changeResonanceCommand;
+
+		changeResonanceCommand.execute();
 	}
 
 	public double getResonance() {

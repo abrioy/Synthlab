@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.Pane?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
-    <Knob fx:id="picker" label="picker"
+    <Knob fx:id="picker"
           diameter="100.0" layoutX="125.0" layoutY="125.0"
           min="0" max="2" step="3" />
 
     <Knob fx:id="freq" label="Frequency"
           diameter="85.0" layoutX="85.0" layoutY="250.0"
           min="0" max="22000" scaleType="log" value="440"/>
-    <Knob fx:id="freqLine" label="Fine Frequency"
+    <Knob fx:id="freqLine"
           diameter="52.0" layoutX="165.0" layoutY="250.0"
           min="-50" max="50" />
 
@@ -22,8 +22,8 @@
 
     <Plug fx:id="fm"
           layoutX="15.0" layoutY="345.0"
-          name="fm" type="modulation" />
+          label="fm" name="fm" type="modulation" />
     <Plug fx:id="out"
           layoutX="195.0" layoutY="345.0"
-          name="out" type="output" />
+          label="out" name="out" type="output" />
 </Pane>
