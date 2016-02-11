@@ -6,7 +6,7 @@ import com.jsyn.unitgen.UnitGenerator;
 public class SEQFilter extends UnitGenerator {
 
     /**
-     * Output voltage to the gate output of the keyboard.
+     * Output voltage to the output of the sequencer.
      */
     private double tension;
 

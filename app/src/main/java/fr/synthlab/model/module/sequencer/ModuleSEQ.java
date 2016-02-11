@@ -9,12 +9,10 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
-public class ModuleSEQ implements Module {
+public class ModuleSEQ extends Observable implements Module {
     private static final Logger logger = Logger.getLogger(ModuleSEQ.class.getName());
 
     /**
@@ -25,6 +23,7 @@ public class ModuleSEQ implements Module {
     private int step;
     private SEQFilter seqFilter;
     private List<Double> stepValues;
+    private List<Observer> observers;
 
     /**
      * Constructor
@@ -34,6 +33,7 @@ public class ModuleSEQ implements Module {
 
         seqFilter = new SEQFilter();
         stepValues = new ArrayList<Double>();
+        observers = new ArrayList<Observer>();
 
         stepValues.add(0.0);
         stepValues.add(0.0);
@@ -90,9 +90,22 @@ public class ModuleSEQ implements Module {
         return ModuleType.SEQ;
     }
 
-    private void nextStep() {
+    @Override
+    public synchronized void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public synchronized void deleteObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void nextStep() {
         step = (step + 1) % 8;
         seqFilter.setTension(stepValues.get(step));
+        for (Observer o : observers) {
+            o.update(this, step);
+        }
     }
 
     public void setStepValue(int step, double value) {

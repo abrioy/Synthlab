@@ -12,12 +12,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Logger;
 
-public class ViewModuleSEQ extends ViewModule implements Initializable{
+public class ViewModuleSEQ extends ViewModule implements Initializable, Observer{
     private static final Logger logger = Logger.getLogger(ViewModuleSEQ.class.getName());
 
     @FXML
@@ -154,5 +152,10 @@ public class ViewModuleSEQ extends ViewModule implements Initializable{
     @Override
     public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        stepLabel.setText(arg + "");
     }
 }

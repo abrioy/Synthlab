@@ -231,7 +231,10 @@ public class ViewModuleFactory {
         viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(6, viewSEQ.getStepValue(6)));
         viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(7, viewSEQ.getStepValue(7)));
 
+        ((ModuleSEQ) seq).addObserver(viewSEQ);
 
+        ((ModuleSEQ) seq).nextStep();
+        ((ModuleSEQ) seq).nextStep();
 
         return viewSEQ;
 
