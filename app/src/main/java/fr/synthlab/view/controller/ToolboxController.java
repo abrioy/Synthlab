@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -12,6 +13,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -34,6 +36,11 @@ public class ToolboxController implements Initializable {
     private TreeItem<String> rootOutput;
     @FXML
     private TreeItem<String> rootFilter;
+
+    @FXML
+    private ColorPicker colorPicker;
+
+    private static Color color;
 
     private Consumer<DragEvent> onDragDone = null;
 
@@ -97,6 +104,19 @@ public class ToolboxController implements Initializable {
         });
 
         drag(filter);
+
+        colorPicker.valueProperty().addListener(listener -> colorChange());
+
+        colorPicker.setValue(Color.DARKRED);
+
+        color = colorPicker.getValue();
+    }
+
+    private void colorChange() {
+        color = colorPicker.getValue();
+        if (!colorPicker.getCustomColors().contains(color)){
+            colorPicker.getCustomColors().add(color);
+        }
     }
 
     public void loadTreeItems(TreeItem<String> item, ObservableList<String> rootItems) {
@@ -139,24 +159,28 @@ public class ToolboxController implements Initializable {
 
     private void drag(TreeView<String> draggable) {
         makeListDraggable(draggable);
-        input.relocate(0, 0);
+        input.relocate(0, colorPicker.getPrefHeight());
         if (rootInput.isExpanded()) {
             input.setPrefHeight((rootInput.getChildren().size() + 1) * 25);
         } else {
             input.setPrefHeight(25);
         }
-        output.relocate(0, input.getPrefHeight());
+        output.relocate(0, colorPicker.getPrefHeight()+input.getPrefHeight());
         if (rootOutput.isExpanded()) {
             output.setPrefHeight((rootOutput.getChildren().size() + 1) * 25);
         } else {
             output.setPrefHeight(25);
         }
-        filter.relocate(0, input.getPrefHeight() + output.getPrefHeight());
+        filter.relocate(0, colorPicker.getPrefHeight()+input.getPrefHeight() + output.getPrefHeight());
         if (rootFilter.isExpanded()) {
             filter.setPrefHeight((rootFilter.getChildren().size() + 1) * 25);
         } else {
             filter.setPrefHeight(25);
         }
+    }
+
+    public static Color getColor(){
+        return color;
     }
 
 }

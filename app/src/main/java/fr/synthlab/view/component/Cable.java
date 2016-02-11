@@ -1,15 +1,13 @@
 package fr.synthlab.view.component;
 
 import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.ToolboxController;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.StrokeLineCap;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.logging.Logger;
 
 /**
@@ -20,7 +18,6 @@ public class Cable extends CubicCurve {
     private static final Logger logger = Logger.getLogger(Cable.class.getName());
     private final double CIRCLE_RADIUS = 12.0d;
     private Color color;
-    private List<Color> colors;
     private Plug in;
     private Plug out;
     private Circle circleIn;
@@ -28,12 +25,6 @@ public class Cable extends CubicCurve {
     private Workbench workbench;
 
     public Cable(Workbench workbench, Plug in) {
-        List<Color> colors= new ArrayList<>();
-        colors.add(Color.DARKBLUE);
-        colors.add(Color.DARKGREEN);
-        colors.add(Color.DARKGOLDENROD);
-        colors.add(Color.DARKRED);
-        colors.add(Color.DARKTURQUOISE);
 
         this.in = in;
         this.workbench = workbench;
@@ -45,7 +36,8 @@ public class Cable extends CubicCurve {
         circleOut.setFill(Color.DARKGRAY);
         workbench.getChildren().add(circleIn);
         workbench.getChildren().add(circleOut);
-        color=getRandomColor(colors);
+        color= ToolboxController.getColor();
+
         this.setStrokeWidth(10);
         this.setStrokeLineCap(StrokeLineCap.ROUND);
         this.setMouseTransparent(true);
@@ -88,7 +80,6 @@ public class Cable extends CubicCurve {
         drawCable(inPosition,mouse);
         addCircle(circleIn, inPosition.getX(), inPosition.getY());
         addCircle(circleOut, correctedMouse.getX(), correctedMouse.getY());
-
 
         this.toFront();
     }
@@ -136,11 +127,12 @@ public class Cable extends CubicCurve {
         if(in==plug)in=null;
         else out=null;
     }
+
     public void deleteCircles(){
         workbench.getChildren().remove(circleIn);
         workbench.getChildren().remove(circleOut);
-
     }
+
     private void drawCable(Point2D start, Point2D end){
         double diffX=start.getX() - end.getX();
         double diffY=Math.abs(start.getY() - end.getY());
@@ -150,13 +142,5 @@ public class Cable extends CubicCurve {
         this.setControlY2(end.getY() + 100 + diffY / 2);
         this.setFill(null);
         this.setStroke(color);
-    }
-    private Color getRandomColor(List<Color> colors){
-        Random rnd = new Random();
-        int i = rnd.nextInt(colors.size());
-        return (Color) colors.toArray()[i];
-    }
-    public void changeRandColor(){
-        color=getRandomColor(colors);
     }
 }
