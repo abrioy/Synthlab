@@ -1,13 +1,17 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.input;
 
-import fr.synthlab.model.module.keyboard.Note;
-import fr.synthlab.view.Workbench;
-import fr.synthlab.view.component.KEYBKey;
+import fr.synthlab.model.module.keyboard.NoteKEYB;
+import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.component.KeyboardKey;
 import fr.synthlab.view.component.Knob;
+import fr.synthlab.view.module.ViewModule;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,31 +22,31 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     private static final Logger logger = Logger.getLogger(ViewModuleKEYB.class.getName());
 
     @FXML
-    KEYBKey CKey;
+	KeyboardKey CKey;
     @FXML
-    KEYBKey CSharpKey;
+	KeyboardKey CSharpKey;
     @FXML
-    KEYBKey DKey;
+	KeyboardKey DKey;
     @FXML
-    KEYBKey DSharpKey;
+	KeyboardKey DSharpKey;
     @FXML
-    KEYBKey EKey;
+	KeyboardKey EKey;
     @FXML
-    KEYBKey FKey;
+	KeyboardKey FKey;
     @FXML
-    KEYBKey FSharpKey;
+	KeyboardKey FSharpKey;
     @FXML
-    KEYBKey GKey;
+	KeyboardKey GKey;
     @FXML
-    KEYBKey GSharpKey;
+	KeyboardKey GSharpKey;
     @FXML
-    KEYBKey AKey;
+	KeyboardKey AKey;
     @FXML
-    KEYBKey ASharpKey;
+	KeyboardKey ASharpKey;
     @FXML
-    KEYBKey BKey;
+	KeyboardKey BKey;
     @FXML
-    KEYBKey CNextOctKey;
+	KeyboardKey CNextOctKey;
 
     @FXML
     Knob octavePicker;
@@ -53,7 +57,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     Runnable keyPressedCommand;
     Runnable keyReleasedCommand;
     Runnable octaveChangeCommand;
-    Note lastKeyPressed;
+    NoteKEYB lastKeyPressed;
 
     public ViewModuleKEYB(Workbench workbench) {
         super(workbench);
@@ -67,59 +71,59 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
             Mouse pressed events
          */
         CKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.C;
+            lastKeyPressed = NoteKEYB.C;
             keyPressedCommand.run();
         });
         CSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.CSharp;
+            lastKeyPressed = NoteKEYB.CSharp;
             keyPressedCommand.run();
         });
         DKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.D;
+            lastKeyPressed = NoteKEYB.D;
             keyPressedCommand.run();
         });
         DSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.DSharp;
+            lastKeyPressed = NoteKEYB.DSharp;
             keyPressedCommand.run();
         });
         EKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.E;
+            lastKeyPressed = NoteKEYB.E;
             keyPressedCommand.run();
         });
         FKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.F;
+            lastKeyPressed = NoteKEYB.F;
             keyPressedCommand.run();
         });
         FSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.FSharp;
+            lastKeyPressed = NoteKEYB.FSharp;
             keyPressedCommand.run();
         });
         GKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.G;
+            lastKeyPressed = NoteKEYB.G;
             keyPressedCommand.run();
         });
         GSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.GSharp;
+            lastKeyPressed = NoteKEYB.GSharp;
             keyPressedCommand.run();
         });
         AKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.A;
+            lastKeyPressed = NoteKEYB.A;
             keyPressedCommand.run();
         });
         ASharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.ASharp;
+            lastKeyPressed = NoteKEYB.ASharp;
             keyPressedCommand.run();
         });
         BKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.B;
+            lastKeyPressed = NoteKEYB.B;
             keyPressedCommand.run();
         });
         CNextOctKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.C2;
+            lastKeyPressed = NoteKEYB.C2;
             keyPressedCommand.run();
         });
 
-        Collection<KEYBKey> keysColl = new ArrayList<KEYBKey>();
+        Collection<KeyboardKey> keysColl = new ArrayList<KeyboardKey>();
         keysColl.add(CKey);
         keysColl.add(CSharpKey);
         keysColl.add(DKey);
@@ -134,7 +138,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         keysColl.add(BKey);
         keysColl.add(CNextOctKey);
 
-        for (KEYBKey key : keysColl) {
+        for (KeyboardKey key : keysColl) {
             key.setOnMouseReleased(event -> {
                 keyReleasedCommand.run();
             });
@@ -155,55 +159,55 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         this.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case Q:
-                    lastKeyPressed = Note.C;
+                    lastKeyPressed = NoteKEYB.C;
                     keyPressedCommand.run();
                     break;
                 case S:
-                    lastKeyPressed = Note.D;
+                    lastKeyPressed = NoteKEYB.D;
                     keyPressedCommand.run();
                     break;
                 case D:
-                    lastKeyPressed = Note.E;
+                    lastKeyPressed = NoteKEYB.E;
                     keyPressedCommand.run();
                     break;
                 case F:
-                    lastKeyPressed = Note.F;
+                    lastKeyPressed = NoteKEYB.F;
                     keyPressedCommand.run();
                     break;
                 case G:
-                    lastKeyPressed = Note.G;
+                    lastKeyPressed = NoteKEYB.G;
                     keyPressedCommand.run();
                     break;
                 case H:
-                    lastKeyPressed = Note.A;
+                    lastKeyPressed = NoteKEYB.A;
                     keyPressedCommand.run();
                     break;
                 case J:
-                    lastKeyPressed = Note.B;
+                    lastKeyPressed = NoteKEYB.B;
                     keyPressedCommand.run();
                     break;
                 case K:
-                    lastKeyPressed = Note.C2;
+                    lastKeyPressed = NoteKEYB.C2;
                     keyPressedCommand.run();
                     break;
                 case Z:
-                    lastKeyPressed = Note.CSharp;
+                    lastKeyPressed = NoteKEYB.CSharp;
                     keyPressedCommand.run();
                     break;
                 case E:
-                    lastKeyPressed = Note.DSharp;
+                    lastKeyPressed = NoteKEYB.DSharp;
                     keyPressedCommand.run();
                     break;
                 case T:
-                    lastKeyPressed = Note.FSharp;
+                    lastKeyPressed = NoteKEYB.FSharp;
                     keyPressedCommand.run();
                     break;
                 case Y:
-                    lastKeyPressed = Note.GSharp;
+                    lastKeyPressed = NoteKEYB.GSharp;
                     keyPressedCommand.run();
                     break;
                 case U:
-                    lastKeyPressed = Note.ASharp;
+                    lastKeyPressed = NoteKEYB.ASharp;
                     keyPressedCommand.run();
                     break;
                 case X:
@@ -263,7 +267,17 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         this.octaveChangeCommand = command;
     }
 
-    public Note getNotePressed() {
+    public NoteKEYB getNotePressed() {
         return lastKeyPressed;
     }
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+
+	}
 }

@@ -2,9 +2,9 @@ package fr.synthlab.model.module.vcoa;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.*;
-import fr.synthlab.model.filter.FmFilter;
+import fr.synthlab.model.filter.FilterFm;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -33,7 +33,7 @@ public class ModuleVCOA implements Module {
     /**
      * Filter modulator
      */
-    private FmFilter fmFilter = new FmFilter(frequency);
+    private FilterFm filterFm = new FilterFm(frequency);
 
     /**
      * Square oscillator
@@ -65,7 +65,7 @@ public class ModuleVCOA implements Module {
 
     private PassThrough passThrough = new PassThrough();
 
-    private ShapeEnum shape;
+    private ShapeVCOA shape;
 
 
     /**
@@ -78,10 +78,10 @@ public class ModuleVCOA implements Module {
         synthesizer.add(triangleOscillator);
         synthesizer.add(sawtoothOscillator);
         synthesizer.add(sineOscillator);
-        synthesizer.add(fmFilter);
+        synthesizer.add(filterFm);
         synthesizer.add(passThrough);
 
-        fmInput = new InputPort("fm", this, fmFilter.input);
+        fmInput = new InputPort("fm", this, filterFm.input);
         outputPort = new OutputPort("out", this, passThrough.output);
 
         ports.add(fmInput);
@@ -107,7 +107,7 @@ public class ModuleVCOA implements Module {
      */
     @Override
     public void start() {
-        fmFilter.start();
+        filterFm.start();
         squareOscillator.start();
         sawtoothOscillator.start();
         triangleOscillator.start();
@@ -119,7 +119,7 @@ public class ModuleVCOA implements Module {
      */
     @Override
     public void stop() {
-        fmFilter.stop();
+        filterFm.stop();
         squareOscillator.stop();
         sawtoothOscillator.stop();
         triangleOscillator.stop();
@@ -141,7 +141,7 @@ public class ModuleVCOA implements Module {
      */
     public void setFrequency(double frequency) {
         this.frequency = frequency;
-        fmFilter.setf0(frequency);
+        filterFm.setf0(frequency);
 
         if (fmInput.getConnected() == null) {
             squareOscillator.frequency.set(frequency);
@@ -161,30 +161,30 @@ public class ModuleVCOA implements Module {
     @Override
     public void update() {
         if (fmInput.getConnected() == null) {
-            fmFilter.output.disconnectAll();
+            filterFm.output.disconnectAll();
             squareOscillator.frequency.set(frequency);
             triangleOscillator.frequency.set(frequency);
             sawtoothOscillator.frequency.set(frequency);
             sineOscillator.frequency.set(frequency);
         } else {
-            fmFilter.output.connect(squareOscillator.frequency);
-            fmFilter.output.connect(triangleOscillator.frequency);
-            fmFilter.output.connect(sawtoothOscillator.frequency);
-            fmFilter.output.connect(sineOscillator.frequency);
+            filterFm.output.connect(squareOscillator.frequency);
+            filterFm.output.connect(triangleOscillator.frequency);
+            filterFm.output.connect(sawtoothOscillator.frequency);
+            filterFm.output.connect(sineOscillator.frequency);
         }
     }
 
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.VCOA;
+    public ModuleTypes getType() {
+        return ModuleTypes.VCOA;
     }
 
 
-    public ShapeEnum getShape() {
+    public ShapeVCOA getShape() {
         return shape;
     }
 
-    public void setShape(ShapeEnum shape) {
+    public void setShape(ShapeVCOA shape) {
         this.shape = shape;
 
         switch (shape) {
@@ -206,4 +206,6 @@ public class ModuleVCOA implements Module {
                 break;
         }
     }
+
+
 }

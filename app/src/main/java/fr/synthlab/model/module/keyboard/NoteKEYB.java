@@ -1,6 +1,6 @@
 package fr.synthlab.model.module.keyboard;
 
-public enum Note {
+public enum NoteKEYB {
     C(-9),
     CSharp(-8),
     D(-7),
@@ -17,7 +17,7 @@ public enum Note {
 
     private final int value;
 
-    private Note(int value) {
+    private NoteKEYB(int value) {
         this.value = value;
     }
 

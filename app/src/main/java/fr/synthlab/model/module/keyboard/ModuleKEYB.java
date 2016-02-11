@@ -2,9 +2,8 @@ package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.SineOscillator;
-import fr.synthlab.model.filter.KeyboardFilter;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
@@ -31,7 +30,7 @@ public class ModuleKEYB implements Module {
      * (changing it will only change the initial note being played on the oscillo,
      * to generalize that a bit, we'd need to modify the formula in computeFrequency())
      */
-    private final Note REFERENCE_NOTE = Note.A;
+    private final NoteKEYB REFERENCE_NOTE = NoteKEYB.A;
 
     /**
      * Minimum octave.
@@ -57,7 +56,7 @@ public class ModuleKEYB implements Module {
     /**
      * Save the last note pressed. Useful during octave changing.
      */
-    private Note lastNotePressed;
+    private NoteKEYB lastNotePressed;
 
     /**
      * Oscillator to generate frequency.
@@ -67,7 +66,7 @@ public class ModuleKEYB implements Module {
     /**
      * Filter to manage the gate port.
      */
-    private KeyboardFilter keyboardFilter;
+    private FilterKEYB keyboardFilter;
 
     /**
      * Constructor
@@ -78,7 +77,7 @@ public class ModuleKEYB implements Module {
 
         //Initialize
         sineOscillator = new SineOscillator();
-        keyboardFilter = new KeyboardFilter();
+        keyboardFilter = new FilterKEYB();
         synth.add(sineOscillator);
         synth.add(keyboardFilter);
 
@@ -131,8 +130,8 @@ public class ModuleKEYB implements Module {
      * @return Type of this module
      */
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.KEYB;
+    public ModuleTypes getType() {
+        return ModuleTypes.KEYB;
     }
 
     /**
@@ -152,7 +151,7 @@ public class ModuleKEYB implements Module {
      * Method to compute and send the new frequency in the oscilloscope.
      * @param n New note pressed
      */
-    public void pressKey(Note n) {
+    public void pressKey(NoteKEYB n) {
         keyboardFilter.pressKey();
         lastNotePressed = n;
         computeFrequency(n);
@@ -162,7 +161,7 @@ public class ModuleKEYB implements Module {
      * Compute the new frequency.
      * @param n New note
      */
-    private void computeFrequency(Note n){
+    private void computeFrequency(NoteKEYB n){
         double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
         sineOscillator.frequency.setValueInternal(freq);
     }
@@ -174,4 +173,7 @@ public class ModuleKEYB implements Module {
         keyboardFilter.releaseKey();
     }
 
+    public int getOctave() {
+        return octave;
+    }
 }

@@ -2,7 +2,7 @@ package fr.synthlab.model.module.vcf;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.FilterHighPass;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 
@@ -62,10 +62,10 @@ public class ModuleVCFHP extends ModuleVCF {
     @Override
     public void update() {
         if (fmInput.getConnected() == null) {
-            fmFilter.output.disconnectAll();
+            filterFm.output.disconnectAll();
             hpFilter.frequency.set(f0);
         } else {
-            fmFilter.output.connect(hpFilter.frequency);
+            filterFm.output.connect(hpFilter.frequency);
         }
     }
 
@@ -74,7 +74,8 @@ public class ModuleVCFHP extends ModuleVCF {
      * @return the type of the module
      */
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.VCFHP;
+    public ModuleTypes getType() {
+        return ModuleTypes.VCFHP;
     }
+
 }

@@ -11,7 +11,7 @@ import com.jsyn.scope.swing.ScopeControlPanel;
 import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -29,8 +29,8 @@ import java.util.logging.Logger;
  * @author Anthony Cobac & Corentin Beauce
  * @see Module
  */
-public class ModuleOscilloscope implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class.getName());
+public class ModuleSCOP implements Module {
+    private static final Logger logger = Logger.getLogger(ModuleSCOP.class.getName());
 
     /**
      * Audio Scope
@@ -66,7 +66,7 @@ public class ModuleOscilloscope implements Module {
      * Constructor
      * @param synth Synthesizer
      */
-    public ModuleOscilloscope(Synthesizer synth) {
+    public ModuleSCOP(Synthesizer synth) {
         scope = new CustomAudioScope(synth);
         pt = new PassThrough();
         in = new InputPort("in", this, pt.input);
@@ -119,9 +119,13 @@ public class ModuleOscilloscope implements Module {
         jOscillatorComponent.setScale(scale);
     }
 
+	public int getScale() {
+		return jOscillatorComponent.getScale();
+	}
+
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.SCOP;
+    public ModuleTypes getType() {
+        return ModuleTypes.SCOP;
     }
 
     /**
@@ -162,6 +166,9 @@ public class ModuleOscilloscope implements Module {
         public void setScale(int scale) {
             scope.getView().setScale(scale);
         }
+		public int getScale() {
+			return scope.getView().getScale();
+		}
     }
 
     /** **********************************************************
@@ -318,6 +325,9 @@ public class ModuleOscilloscope implements Module {
             multipleWaveDisplay.setScale(scale);
         }
 
+		public int getScale () {
+			return multipleWaveDisplay.getScale();
+		}
     }
 
     private class CustomMultipleWaveDisplay extends JPanel {
@@ -345,6 +355,9 @@ public class ModuleOscilloscope implements Module {
                 wave.setScale(scale);
             }
         }
+		public int getScale() {
+			return waveTraceViews.get(0).getScale(); // FIXME: Corentin
+		}
 
         @Override
         public void paintComponent(Graphics g) {
@@ -462,6 +475,9 @@ public class ModuleOscilloscope implements Module {
         public void setScale(int scale) {
             this.scale = scale;
         }
+		public int getScale() {
+			return this.scale;
+		}
 
     }
 
@@ -485,4 +501,5 @@ public class ModuleOscilloscope implements Module {
         }
 
     }
+
 }

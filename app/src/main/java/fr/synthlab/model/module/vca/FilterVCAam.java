@@ -1,14 +1,14 @@
-package fr.synthlab.model.filter;
+package fr.synthlab.model.module.vca;
 
 
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitFilter;
 import com.softsynth.math.AudioMath;
 
-public class VcaAM extends UnitFilter {
+public class FilterVCAam extends UnitFilter {
     public UnitOutputPort inputVca;
 
-    public VcaAM(UnitOutputPort in) {
+    public FilterVCAam(UnitOutputPort in) {
         inputVca = in;
     }
 

@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TreeItem?>
-<?import javafx.scene.control.TreeView?>
-<?import javafx.scene.layout.*?>
-<Pane stylesheets="/gui/fxml/style/Toolbox.css" xmlns="http://javafx.com/javafx/8"
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+<ScrollPane stylesheets="/gui/fxml/style/Toolbox.css" xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.synthlab.view.controller.ToolboxController"
       focusTraversable="false">
-    <TreeView fx:id="input" focusTraversable="false">
-        <TreeItem fx:id="rootInput" value="Inputs"/>
-    </TreeView>
-    <TreeView fx:id="output" focusTraversable="false">
-        <TreeItem fx:id="rootOutput" value="Outputs"/>
-    </TreeView>
-    <TreeView fx:id="filter" focusTraversable="false">
-        <TreeItem fx:id="rootFilter" value="Filters"/>
-    </TreeView>
-</Pane>
+    <Pane>
+        <TreeView fx:id="input" focusTraversable="false" prefWidth="190">
+            <TreeItem fx:id="rootInput" value="Inputs"/>
+        </TreeView>
+        <TreeView fx:id="output" focusTraversable="false" prefWidth="190">
+            <TreeItem fx:id="rootOutput" value="Outputs"/>
+        </TreeView>
+        <TreeView fx:id="filter" focusTraversable="false" prefWidth="190">
+            <TreeItem fx:id="rootFilter" value="Filters"/>
+        </TreeView>
+
+        <ColorPicker fx:id="colorPicker" prefHeight="26" prefWidth="190">
+        </ColorPicker>
+    </Pane>
+
+</ScrollPane>

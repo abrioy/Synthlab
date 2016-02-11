@@ -1,16 +1,20 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.filter;
 
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.Knob;
+import fr.synthlab.view.module.ViewModule;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ViewModuleMixer extends ViewModule implements Initializable{
-    private static final Logger logger = Logger.getLogger(ViewModuleMixer.class.getName());
+public class ViewModuleMIX extends ViewModule implements Initializable{
+    private static final Logger logger = Logger.getLogger(ViewModuleMIX.class.getName());
 
     /**
      * attenuator input 1.
@@ -57,7 +61,7 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
      *
      * @param workbench the workbench
      */
-    public ViewModuleMixer(Workbench workbench) {
+    public ViewModuleMIX(Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleMixer.fxml");
         this.setId("pane");
@@ -155,4 +159,20 @@ public class ViewModuleMixer extends ViewModule implements Initializable{
             attenuator4Cmd.run();
         });
     }
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		o.writeDouble(attenuator1.getValue());
+		o.writeDouble(attenuator2.getValue());
+		o.writeDouble(attenuator3.getValue());
+		o.writeDouble(attenuator4.getValue());
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		attenuator1.setValue(o.readDouble());
+		attenuator2.setValue(o.readDouble());
+		attenuator3.setValue(o.readDouble());
+		attenuator4.setValue(o.readDouble());
+	}
 }

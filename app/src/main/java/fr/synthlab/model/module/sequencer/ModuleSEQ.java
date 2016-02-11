@@ -4,8 +4,7 @@ import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.filter.SEQFilter;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
-import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -15,7 +14,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 public class ModuleSEQ implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class.getName());
+    private static final Logger logger = Logger.getLogger(ModuleSEQ.class.getName());
 
     /**
      * All ports
@@ -74,8 +73,8 @@ public class ModuleSEQ implements Module {
     }
 
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.SEQ;
+    public ModuleTypes getType() {
+        return ModuleTypes.SEQ;
     }
 
     public void resetStep() {

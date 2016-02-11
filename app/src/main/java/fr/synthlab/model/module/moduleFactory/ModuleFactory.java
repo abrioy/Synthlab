@@ -3,19 +3,19 @@ package fr.synthlab.model.module.moduleFactory;
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.keyboard.ModuleKEYB;
-import fr.synthlab.model.module.mixer.ModuleMixer;
-import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
-import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.mixer.ModuleMIX;
+import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
+import fr.synthlab.model.module.out.ModuleOUT;
 import fr.synthlab.model.module.replicator.ModuleREP;
 import fr.synthlab.model.module.sequencer.ModuleSEQ;
 import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
-import fr.synthlab.model.module.whiteNoise.ModuleWhiteNoise;
+import fr.synthlab.model.module.whiteNoise.ModuleBRUI;
 
 import java.util.logging.Logger;
 
@@ -28,7 +28,7 @@ public class ModuleFactory {
      */
     private static Synthesizer syn = JSyn.createSynthesizer();
 
-    public static Module createModule(ModuleEnum type){
+    public static Module createModule(ModuleTypes type){
         Module module = null;
         switch(type){
             case VCOA: module = createVCO();
@@ -68,11 +68,11 @@ public class ModuleFactory {
     }
 
     private static Module createMix() {
-        return new ModuleMixer(syn);
+        return new ModuleMIX(syn);
     }
 
     private static Module createNoise() {
-        return new ModuleWhiteNoise(syn);
+        return new ModuleBRUI(syn);
     }
 
     /**
@@ -85,15 +85,15 @@ public class ModuleFactory {
     /**
      * @return a new Oscilloscope
      */
-    private static ModuleOscilloscope createOscilloscope() {
-        return new ModuleOscilloscope(syn);
+    private static ModuleSCOP createOscilloscope() {
+        return new ModuleSCOP(syn);
     }
 
     /**
-     * @return a new ModuleOut
+     * @return a new ModuleOUT
      */
-    private static ModuleOut createOut() {
-        return new ModuleOut(syn);
+    private static ModuleOUT createOut() {
+        return new ModuleOUT(syn);
     }
 
     /**
@@ -153,5 +153,6 @@ public class ModuleFactory {
 	public static void startSyn() {
 		syn.start();
 	}
+
 }
 

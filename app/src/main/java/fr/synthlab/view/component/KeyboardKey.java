@@ -1,6 +1,6 @@
 package fr.synthlab.view.component;
 
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.paint.Color;
@@ -8,14 +8,14 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.logging.Logger;
 
-public class KEYBKey extends Rectangle {
-    private static final Logger logger = Logger.getLogger(KEYBKey.class.getName());
+public class KeyboardKey extends Rectangle {
+    private static final Logger logger = Logger.getLogger(KeyboardKey.class.getName());
 
     private Workbench workbench;
 
     private BooleanProperty isWhiteKey = new SimpleBooleanProperty(this, "isWhiteKey", true);
 
-    public KEYBKey() {
+    public KeyboardKey() {
         super();
 
         this.setFill(Color.WHITE);

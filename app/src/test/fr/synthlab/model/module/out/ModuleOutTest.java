@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test on ModuleOut
+ * Test on ModuleOUT
  * @see ModuleOut
  * @author johan
  */

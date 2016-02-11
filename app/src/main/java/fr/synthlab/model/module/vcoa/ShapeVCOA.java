@@ -1,7 +1,7 @@
 package fr.synthlab.model.module.vcoa;
 
 
-public enum ShapeEnum {
+public enum ShapeVCOA {
     TRIANGLE,
     SQUARE,
     SAWTOOTH,
