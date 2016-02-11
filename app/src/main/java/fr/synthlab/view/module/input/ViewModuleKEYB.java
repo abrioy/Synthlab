@@ -1,10 +1,11 @@
 package fr.synthlab.view.module.input;
 
 import fr.synthlab.model.module.keyboard.NoteKEYB;
-import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.KeyboardKey;
 import fr.synthlab.view.component.Knob;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.module.ViewModule;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -70,57 +71,83 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         /*
             Mouse pressed events
          */
-        CKey.setOnMousePressed(event -> {
+        CKey.setOnMouseDragged(Event::consume);
+		CKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.C;
             keyPressedCommand.run();
+			event.consume();
         });
-        CSharpKey.setOnMousePressed(event -> {
+        CSharpKey.setOnMouseDragged(Event::consume);
+		CSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.CSharp;
             keyPressedCommand.run();
+			event.consume();
         });
-        DKey.setOnMousePressed(event -> {
+        DKey.setOnMouseDragged(Event::consume);
+		DKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.D;
             keyPressedCommand.run();
+			event.consume();
         });
-        DSharpKey.setOnMousePressed(event -> {
+        DSharpKey.setOnMouseDragged(Event::consume);
+		DSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.DSharp;
             keyPressedCommand.run();
+			event.consume();
         });
-        EKey.setOnMousePressed(event -> {
+        EKey.setOnMouseDragged(Event::consume);
+		EKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.E;
             keyPressedCommand.run();
+			event.consume();
         });
-        FKey.setOnMousePressed(event -> {
+        FKey.setOnMouseDragged(Event::consume);
+		FKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.F;
             keyPressedCommand.run();
+			event.consume();
         });
-        FSharpKey.setOnMousePressed(event -> {
+        FSharpKey.setOnMouseDragged(Event::consume);
+		FSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.FSharp;
             keyPressedCommand.run();
+			event.consume();
         });
-        GKey.setOnMousePressed(event -> {
+        GKey.setOnMouseDragged(Event::consume);
+		GKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.G;
             keyPressedCommand.run();
+			event.consume();
         });
-        GSharpKey.setOnMousePressed(event -> {
+        GSharpKey.setOnMouseDragged(Event::consume);
+		GSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.GSharp;
             keyPressedCommand.run();
+			event.consume();
         });
-        AKey.setOnMousePressed(event -> {
+        AKey.setOnMouseDragged(Event::consume);
+		AKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.A;
             keyPressedCommand.run();
+			event.consume();
         });
-        ASharpKey.setOnMousePressed(event -> {
+        ASharpKey.setOnMouseDragged(Event::consume);
+		ASharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.ASharp;
             keyPressedCommand.run();
+			event.consume();
         });
-        BKey.setOnMousePressed(event -> {
+        BKey.setOnMouseDragged(Event::consume);
+		BKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.B;
             keyPressedCommand.run();
+			event.consume();
         });
-        CNextOctKey.setOnMousePressed(event -> {
+        CNextOctKey.setOnMouseDragged(Event::consume);
+		CNextOctKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.C2;
             keyPressedCommand.run();
+			event.consume();
         });
 
         Collection<KeyboardKey> keysColl = new ArrayList<KeyboardKey>();
