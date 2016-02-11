@@ -18,27 +18,36 @@
           layoutX="440.0" layoutY="55.0"
           label="gate" name="gate" type="output" />
 
-    <FlowPane layoutX="25.0" layoutY="35.0" hgap="2">
-        <KEYBKey fx:id="CKey" />
-        <KEYBKey fx:id="DKey" />
-        <KEYBKey fx:id="EKey" />
-        <KEYBKey fx:id="FKey" />
-        <KEYBKey fx:id="GKey" />
-        <KEYBKey fx:id="AKey" />
-        <KEYBKey fx:id="BKey" />
-        <KEYBKey fx:id="CNextOctKey" />
+    <FlowPane layoutX="55.0" layoutY="75.0" hgap="80">
+        <Knob fx:id="step1Picker" label="1"
+              diameter="40.0"
+              min="-1" max="1" value="0" />
+        <Knob fx:id="step2Picker" label="2"
+              diameter="40.0"
+              min="-1" max="1" value="0" />
+        <Knob fx:id="step3Picker" label="3"
+              diameter="40.0"
+              min="-1" max="1" value="0" />
+        <Knob fx:id="step4Picker" label="4"
+              diameter="40.0"
+              min="-1" max="1" value="0" />
+    </FlowPane>
+    <FlowPane layoutX="55.0" layoutY="155.0" hgap="80">
+        <Knob fx:id="step5Picker" label="5"
+              diameter="40.0"
+              min="-1" max="1" value="0" />
+        <Knob fx:id="step6Picker" label="6"
+              diameter="40.0"
+              min="-1" max="1" value="0" />
+        <Knob fx:id="step7Picker" label="7"
+              diameter="40.0"
+              min="-1" max="1" value="0" />
+        <Knob fx:id="step8Picker" label="8"
+              diameter="40.0"
+              min="-1" max="1" value="0" />
     </FlowPane>
 
-    <FlowPane layoutX="51.0" layoutY="35.0" hgap="12" pickOnBounds="false">
-        <KEYBKey fx:id="CSharpKey" isWhiteKey="false" />
-        <KEYBKey fx:id="DSharpKey" isWhiteKey="false" />
-        <Rectangle height="0" width ="30" />
-        <KEYBKey fx:id="FSharpKey" isWhiteKey="false" />
-        <KEYBKey fx:id="GSharpKey" isWhiteKey="false" />
-        <KEYBKey fx:id="ASharpKey" isWhiteKey="false" />
-    </FlowPane>
-
-    <Label fx:id="octaveLabel" layoutX="380.0" layoutY="55.0"
+    <Label fx:id="stepLabel" layoutX="380.0" layoutY="55.0"
            styleClass="display"
            prefHeight="44.0" prefWidth="40.0" text="" />
 
