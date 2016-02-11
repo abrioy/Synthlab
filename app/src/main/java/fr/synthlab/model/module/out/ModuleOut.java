@@ -1,6 +1,7 @@
 package fr.synthlab.model.module.out;
 
 import com.jsyn.Synthesizer;
+import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.LineOut;
 import com.jsyn.util.WaveRecorder;
 import fr.synthlab.model.filter.FilterAttenuator;
@@ -143,9 +144,10 @@ public class ModuleOut implements Module{
             if (recording) {
                 pickedFile.createNewFile();
                 waveRecorder = new WaveRecorder(syn, pickedFile);
-                interOut.getOutput().connect(waveRecorder.getInput());
-                interOutLeft.getOutput().connect(waveRecorder.getInput());
-                interOutRight.getOutput().connect(waveRecorder.getInput());
+                ((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).connect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).connect(0, waveRecorder.getInput(), 1);
 
                 waveRecorder.start();
             } else if (waveRecorder != null) {
