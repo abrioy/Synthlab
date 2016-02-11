@@ -537,11 +537,11 @@ public class Workbench extends Pane {
 	private void updateCables() {
 		getCables().forEach(Cable::updateCircles);
 
-		for(Cable c : getCables()){
-			if (draggedCable!=c){
-				c.update();
+		getCables().forEach(cable -> {
+			if (draggedCable!=cable){
+				((Cable)cable).update();
 			}
-		}
+		});
 	}
 
     private Cable getConnectedCable(Plug plug){

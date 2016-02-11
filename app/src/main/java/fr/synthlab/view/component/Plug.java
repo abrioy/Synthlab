@@ -4,6 +4,7 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.Event;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -83,7 +84,14 @@ public class Plug extends StackPane {
         colorCircle.setStrokeType(StrokeType.INSIDE);
 		this.getChildren().add(colorCircle);
 
-		colorCircle.setOnMouseClicked(event -> workbench.plugClicked(this));
+		colorCircle.setOnMouseClicked(event -> {
+			workbench.plugClicked(this);
+			event.consume();
+		});
+
+		colorCircle.setOnMousePressed(Event::consume);
+		colorCircle.setOnMouseDragged(Event::consume);
+
 
         nameLabel = new Label();
 		getChildren().add(nameLabel);
