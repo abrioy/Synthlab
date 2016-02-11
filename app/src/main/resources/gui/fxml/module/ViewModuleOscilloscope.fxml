@@ -10,7 +10,7 @@
 
     <Knob fx:id="picker"
           diameter="40.0" layoutX="250.0" layoutY="365.0"
-          min="0" max="100" step="10" stepType="true"/>
+          min="0" max="100" step="10" stepType="true" value="100"/>
 
     <Plug fx:id="in"
           layoutX="15.0" layoutY="345.0"
