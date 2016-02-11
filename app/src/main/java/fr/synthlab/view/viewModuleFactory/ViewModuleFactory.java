@@ -13,8 +13,14 @@ import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.module.*;
+import fr.synthlab.view.module.filter.*;
+import fr.synthlab.view.module.input.ViewModuleBRUI;
+import fr.synthlab.view.module.input.ViewModuleKEYB;
+import fr.synthlab.view.module.output.ViewModuleOUT;
+import fr.synthlab.view.module.output.ViewModuleSCOP;
+import fr.synthlab.view.module.input.ViewModuleVCOA;
 
 import java.util.logging.Logger;
 
@@ -74,7 +80,7 @@ public class ViewModuleFactory {
      */
     private static ViewModule createViewModuleMixer(Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleTypes.MIX);
-        ViewModuleMixer viewMixer = new ViewModuleMixer(workbench);
+        ViewModuleMIX viewMixer = new ViewModuleMIX(workbench);
         viewMixer.setModule(vco);
 
         viewMixer.setAttenuator1Cmd(() -> ((ModuleMIX) vco).setAttenuation1(viewMixer.getAttenuator1()));
@@ -90,7 +96,7 @@ public class ViewModuleFactory {
      */
     private static ViewModule createViewModuleVCO(Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleTypes.VCOA);
-        ViewModuleVCO viewVco = new ViewModuleVCO(workbench);
+        ViewModuleVCOA viewVco = new ViewModuleVCOA(workbench);
         viewVco.setModule(vco);
 
         viewVco.setChangeFreqCommand(() -> ((ModuleVCOA) vco).setFrequency(viewVco.getFreq()));
@@ -126,7 +132,7 @@ public class ViewModuleFactory {
     }
     private static ViewModule createViewModuleWhiteNoise(Workbench workbench) {
         Module brui = ModuleFactory.createModule(ModuleTypes.BRUI);
-        ViewModuleWhiteNoise viewNoise = new ViewModuleWhiteNoise(workbench);
+        ViewModuleBRUI viewNoise = new ViewModuleBRUI(workbench);
         viewNoise.setModule(brui);
         //viewNoise.setVolumeCommand(() -> ((ModuleOUT) out).setAttenuation(viewNoise.getPicker().getValue()));
         //viewNoise.setMuteCommand(() -> ((ModuleOUT) out).setMute(viewNoise.isMute()));
@@ -136,7 +142,7 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleOscilloscope(Workbench workbench) {
         Module scop = ModuleFactory.createModule(ModuleTypes.SCOP);
-        ViewModuleOscilloscope viewScop = new ViewModuleOscilloscope(workbench);
+        ViewModuleSCOP viewScop = new ViewModuleSCOP(workbench);
         viewScop.setModule(scop);
         viewScop.setPickerCommand(() -> ((ModuleSCOP) scop).setScale(viewScop.getScale()));
 

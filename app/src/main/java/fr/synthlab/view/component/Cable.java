@@ -1,6 +1,6 @@
 package fr.synthlab.view.component;
 
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.controller.ToolboxController;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
@@ -8,7 +8,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.StrokeLineCap;
 
-import java.util.Random;
 import java.util.logging.Logger;
 
 /**

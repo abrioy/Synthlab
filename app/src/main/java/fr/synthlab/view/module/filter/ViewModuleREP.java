@@ -1,6 +1,7 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.filter;
 
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.module.ViewModule;
 import javafx.fxml.Initializable;
 
 import java.io.IOException;

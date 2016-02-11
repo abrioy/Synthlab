@@ -1,8 +1,9 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.filter;
 
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
+import fr.synthlab.view.module.ViewModule;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 

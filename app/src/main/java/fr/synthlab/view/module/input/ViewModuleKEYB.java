@@ -1,9 +1,10 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.input;
 
 import fr.synthlab.model.module.keyboard.NoteKEYB;
-import fr.synthlab.view.Workbench;
-import fr.synthlab.view.component.KEYBKey;
+import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.component.KeyboardKey;
 import fr.synthlab.view.component.Knob;
+import fr.synthlab.view.module.ViewModule;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,31 +22,31 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     private static final Logger logger = Logger.getLogger(ViewModuleKEYB.class.getName());
 
     @FXML
-    KEYBKey CKey;
+	KeyboardKey CKey;
     @FXML
-    KEYBKey CSharpKey;
+	KeyboardKey CSharpKey;
     @FXML
-    KEYBKey DKey;
+	KeyboardKey DKey;
     @FXML
-    KEYBKey DSharpKey;
+	KeyboardKey DSharpKey;
     @FXML
-    KEYBKey EKey;
+	KeyboardKey EKey;
     @FXML
-    KEYBKey FKey;
+	KeyboardKey FKey;
     @FXML
-    KEYBKey FSharpKey;
+	KeyboardKey FSharpKey;
     @FXML
-    KEYBKey GKey;
+	KeyboardKey GKey;
     @FXML
-    KEYBKey GSharpKey;
+	KeyboardKey GSharpKey;
     @FXML
-    KEYBKey AKey;
+	KeyboardKey AKey;
     @FXML
-    KEYBKey ASharpKey;
+	KeyboardKey ASharpKey;
     @FXML
-    KEYBKey BKey;
+	KeyboardKey BKey;
     @FXML
-    KEYBKey CNextOctKey;
+	KeyboardKey CNextOctKey;
 
     @FXML
     Knob octavePicker;
@@ -122,7 +123,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
             keyPressedCommand.run();
         });
 
-        Collection<KEYBKey> keysColl = new ArrayList<KEYBKey>();
+        Collection<KeyboardKey> keysColl = new ArrayList<KeyboardKey>();
         keysColl.add(CKey);
         keysColl.add(CSharpKey);
         keysColl.add(DKey);
@@ -137,7 +138,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         keysColl.add(BKey);
         keysColl.add(CNextOctKey);
 
-        for (KEYBKey key : keysColl) {
+        for (KeyboardKey key : keysColl) {
             key.setOnMouseReleased(event -> {
                 keyReleasedCommand.run();
             });

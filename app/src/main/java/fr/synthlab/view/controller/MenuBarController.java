@@ -1,7 +1,6 @@
 package fr.synthlab.view.controller;
 
 
-import fr.synthlab.view.Workbench;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;

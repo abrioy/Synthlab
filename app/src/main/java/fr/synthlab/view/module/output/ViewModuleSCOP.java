@@ -1,8 +1,9 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.output;
 
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.OscilloscopeDrawing;
+import fr.synthlab.view.module.ViewModule;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -13,8 +14,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ViewModuleOscilloscope extends ViewModule implements Initializable {
-	private static final Logger logger = Logger.getLogger(ViewModuleOscilloscope.class.getName());
+public class ViewModuleSCOP extends ViewModule implements Initializable {
+	private static final Logger logger = Logger.getLogger(ViewModuleSCOP.class.getName());
 
 	@FXML
 	OscilloscopeDrawing oscilloscopeDrawing;
@@ -24,7 +25,7 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 
 	private Runnable pickerCmd;
 	private Workbench w;
-	public ViewModuleOscilloscope(Workbench workbench) {
+	public ViewModuleSCOP(Workbench workbench) {
 		super(workbench);
 		this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
 		w=workbench;

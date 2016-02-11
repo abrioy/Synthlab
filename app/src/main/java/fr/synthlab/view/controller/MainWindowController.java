@@ -1,7 +1,6 @@
 package fr.synthlab.view.controller;
 
 import fr.synthlab.model.module.ModuleTypes;
-import fr.synthlab.view.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
 import javafx.application.Platform;

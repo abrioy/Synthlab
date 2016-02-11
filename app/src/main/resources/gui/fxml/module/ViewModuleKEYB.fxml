@@ -4,7 +4,7 @@
 <?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
-<?import fr.synthlab.view.component.KEYBKey?>
+<?import fr.synthlab.view.component.KeyboardKey?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.shape.Rectangle?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
@@ -19,23 +19,23 @@
           label="gate" name="gate" type="output" />
 
     <FlowPane layoutX="25.0" layoutY="35.0" hgap="2">
-        <KEYBKey fx:id="CKey" />
-        <KEYBKey fx:id="DKey" />
-        <KEYBKey fx:id="EKey" />
-        <KEYBKey fx:id="FKey" />
-        <KEYBKey fx:id="GKey" />
-        <KEYBKey fx:id="AKey" />
-        <KEYBKey fx:id="BKey" />
-        <KEYBKey fx:id="CNextOctKey" />
+        <KeyboardKey fx:id="CKey" />
+        <KeyboardKey fx:id="DKey" />
+        <KeyboardKey fx:id="EKey" />
+        <KeyboardKey fx:id="FKey" />
+        <KeyboardKey fx:id="GKey" />
+        <KeyboardKey fx:id="AKey" />
+        <KeyboardKey fx:id="BKey" />
+        <KeyboardKey fx:id="CNextOctKey" />
     </FlowPane>
 
     <FlowPane layoutX="51.0" layoutY="35.0" hgap="12" pickOnBounds="false">
-        <KEYBKey fx:id="CSharpKey" isWhiteKey="false" />
-        <KEYBKey fx:id="DSharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="CSharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="DSharpKey" isWhiteKey="false" />
         <Rectangle height="0" width ="30" />
-        <KEYBKey fx:id="FSharpKey" isWhiteKey="false" />
-        <KEYBKey fx:id="GSharpKey" isWhiteKey="false" />
-        <KEYBKey fx:id="ASharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="FSharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="GSharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="ASharpKey" isWhiteKey="false" />
     </FlowPane>
 
     <Label fx:id="octaveLabel" layoutX="380.0" layoutY="55.0"

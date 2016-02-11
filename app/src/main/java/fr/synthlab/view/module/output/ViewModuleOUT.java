@@ -1,8 +1,9 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.output;
 
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.MuteButton;
+import fr.synthlab.view.module.ViewModule;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import fr.synthlab.view.component.RecordButton;
