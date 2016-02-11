@@ -3,7 +3,7 @@ package fr.synthlab.model.module.vca;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterAttenuator;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -121,8 +121,8 @@ public class ModuleVCA implements Module {
      * @return the type of the module
      */
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.VCA;
+    public ModuleType getType() {
+        return ModuleType.VCA;
     }
 
 }

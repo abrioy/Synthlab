@@ -3,7 +3,7 @@ package fr.synthlab.model.module.keyboard;
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.SineOscillator;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
@@ -130,8 +130,8 @@ public class ModuleKEYB implements Module {
      * @return Type of this module
      */
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.KEYB;
+    public ModuleType getType() {
+        return ModuleType.KEYB;
     }
 
     /**

@@ -1,6 +1,6 @@
 package fr.synthlab.view.controller;
 
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -56,25 +56,25 @@ public class ToolboxController implements Initializable {
         rootFilter.expandedProperty().addListener(listener -> drag(filter));
 
         ObservableList<String> items = FXCollections.observableArrayList(
-                ModuleTypes.VCOA.getLongName(),
-                ModuleTypes.BRUI.getLongName(),
-                ModuleTypes.KEYB.getLongName()
+                ModuleType.VCOA.getLongName(),
+                ModuleType.BRUI.getLongName(),
+                ModuleType.KEYB.getLongName()
                 );
 
         loadTreeItems(rootInput, items);
         items = FXCollections.observableArrayList(
-                ModuleTypes.OUT.getLongName(),
-                ModuleTypes.SCOP.getLongName()
+                ModuleType.OUT.getLongName(),
+                ModuleType.SCOP.getLongName()
         );
         loadTreeItems(rootOutput, items);
 
         items = FXCollections.observableArrayList(
-                ModuleTypes.VCA.getLongName(),
-                ModuleTypes.REP.getLongName(),
-                ModuleTypes.EG.getLongName(),
-                ModuleTypes.VCFLP.getLongName(),
-                ModuleTypes.VCFHP.getLongName(),
-                ModuleTypes.MIX.getLongName()
+                ModuleType.VCA.getLongName(),
+                ModuleType.REP.getLongName(),
+                ModuleType.EG.getLongName(),
+                ModuleType.VCFLP.getLongName(),
+                ModuleType.VCFHP.getLongName(),
+                ModuleType.MIX.getLongName()
         );
         loadTreeItems(rootFilter, items);
 
@@ -140,7 +140,7 @@ public class ToolboxController implements Initializable {
                 };
 
                 cell.setOnDragDetected(event -> {
-                    if (!cell.isEmpty() && !ModuleTypes.getNameFromLong(cell.getItem()).equals("")) {
+                    if (!cell.isEmpty() && !ModuleType.getNameFromLong(cell.getItem()).equals("")) {
                         Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
                         ClipboardContent cc = new ClipboardContent();
                         cc.putString(cell.getItem());

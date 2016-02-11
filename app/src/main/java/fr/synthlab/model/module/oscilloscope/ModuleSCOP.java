@@ -11,7 +11,7 @@ import com.jsyn.scope.swing.ScopeControlPanel;
 import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -124,8 +124,8 @@ public class ModuleSCOP implements Module {
 	}
 
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.SCOP;
+    public ModuleType getType() {
+        return ModuleType.SCOP;
     }
 
     /**

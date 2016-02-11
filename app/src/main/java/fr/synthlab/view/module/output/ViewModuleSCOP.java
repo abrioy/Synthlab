@@ -41,7 +41,7 @@ public class ViewModuleSCOP extends ViewModule implements Initializable {
 
 		this.setOnMouseClicked(event -> {
 			logger.info("CLICKED");
-			ViewModule vco = ViewModuleFactory.createViewModule(ModuleTypes.VCOA, w);
+			ViewModule vco = ViewModuleFactory.createViewModule(ModuleType.VCOA, w);
 
 			vco.getModule().getPort("out").connect(this.getModule().getPort("in"));
 
