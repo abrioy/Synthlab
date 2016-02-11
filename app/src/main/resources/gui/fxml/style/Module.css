@@ -72,6 +72,23 @@
         -fx-border-color: transparent !important;
         -fx-text-fill: transparent !important;
         }
+.reset-button{
+        -fx-background-image: url("../../texture/raz.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-color: transparent !important;
+        -fx-background-size: contain !important;
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;
+}
+.reset-button:armed{
+        -fx-background-image: url("../../texture/raz-pressed.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-color: transparent !important;
+        -fx-background-size: contain !important;
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;}
 
 #rectStereo {
     -fx-fill: rgba(136, 221, 153, 0.1);

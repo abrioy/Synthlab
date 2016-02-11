@@ -7,6 +7,7 @@
 <?import fr.synthlab.view.component.KEYBKey?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import fr.synthlab.view.component.ResetButton?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="198" prefWidth="504" minHeight="198" minWidth="504" maxHeight="198" maxWidth="504">
 
@@ -51,8 +52,7 @@
            styleClass="display"
            prefHeight="44.0" prefWidth="40.0" text="" />
 
-    <Knob fx:id="octavePicker" label="octave"
-          diameter="40.0" layoutX="400.0" layoutY="135.0"
-          min="0" max="7" step="8" value="3" />
+    <ResetButton fx:id="resetButton"
+          layoutX="400.0" layoutY="135.0"/>
 
 </Pane>
