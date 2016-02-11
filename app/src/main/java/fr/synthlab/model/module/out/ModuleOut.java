@@ -153,9 +153,10 @@ public class ModuleOut implements Module{
             } else if (waveRecorder != null) {
                 waveRecorder.stop();
 
-                interOut.getOutput().disconnect(waveRecorder.getInput());
-                interOutLeft.getOutput().disconnect(waveRecorder.getInput());
-                interOutRight.getOutput().disconnect(waveRecorder.getInput());
+                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
 
                 waveRecorder.close();
 
