@@ -1,7 +1,7 @@
 
 .module-frame {
     -fx-border-color: #333 ;
-    -fx-background-image: url("../../texture/carbon.jpeg");
+    -fx-background-image: url("../../texture/black2.jpg");
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
 }
@@ -74,13 +74,24 @@
         }
 
 #rectStereo {
-    -fx-fill: rgba(136, 221, 153, 0.1);
+    -fx-stroke: rgba(136, 221, 153, 0.5);
     -fx-arc-height: 5;
     -fx-arc-width: 5;
 }
 
 #rectMono {
-    -fx-fill: rgba(238, 118, 0, 0.1);
+    -fx-stroke: rgba(238, 118, 0, 0.5);
     -fx-arc-height: 5;
     -fx-arc-width: 5;
-}        
+}
+#rectOut {
+    -fx-fill:transparent;
+
+    -fx-stroke: rgba(238, 118, 0, 0.5);
+    -fx-stroke-width:2;
+    -fx-arc-height: 20;
+    -fx-arc-width: 20;
+         -fx-stroke-line-cap: butt;
+
+
+}
