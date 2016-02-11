@@ -18,6 +18,7 @@ import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.module.filter.*;
 import fr.synthlab.view.module.input.ViewModuleBRUI;
 import fr.synthlab.view.module.input.ViewModuleKEYB;
+import fr.synthlab.view.module.input.ViewModuleSEQ;
 import fr.synthlab.view.module.output.ViewModuleOUT;
 import fr.synthlab.view.module.output.ViewModuleSCOP;
 import fr.synthlab.view.module.input.ViewModuleVCOA;
@@ -221,6 +222,16 @@ public class ViewModuleFactory {
         viewSEQ.setModule(seq);
 
         viewSEQ.setResetCommand(() -> ((ModuleSEQ) seq).resetStep());
+        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(0, viewSEQ.getStepValue(0)));
+        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(1, viewSEQ.getStepValue(1)));
+        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(2, viewSEQ.getStepValue(2)));
+        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(3, viewSEQ.getStepValue(3)));
+        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(4, viewSEQ.getStepValue(4)));
+        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(5, viewSEQ.getStepValue(5)));
+        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(6, viewSEQ.getStepValue(6)));
+        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(7, viewSEQ.getStepValue(7)));
+
+
 
         return viewSEQ;
 
