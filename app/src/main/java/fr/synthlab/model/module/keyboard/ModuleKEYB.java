@@ -174,4 +174,7 @@ public class ModuleKEYB implements Module {
         keyboardFilter.releaseKey();
     }
 
+    public int getOctave() {
+        return octave;
+    }
 }

@@ -51,4 +51,8 @@ public class KeyboardFilter extends UnitGenerator {
     public UnitOutputPort getGate() {
         return gate;
     }
+
+    public int getTension() {
+        return tension;
+    }
 }
