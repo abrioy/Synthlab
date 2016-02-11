@@ -47,6 +47,19 @@ public class MenuBarController implements Initializable {
 		}
 	}
 
+	public void onClickFileReload(){
+		if(currentSaveFilePath != null){
+			try {
+				openSavedFile(currentSaveFilePath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else{
+			onClickFileSaveAs();
+		}
+	}
+
 	public void onClickFileSave(){
 		if(currentSaveFilePath != null){
 			try {
