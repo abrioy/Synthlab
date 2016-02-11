@@ -6,10 +6,10 @@
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="198" prefWidth="250" minHeight="198" minWidth="250" maxHeight="198" maxWidth="250">
     <Knob fx:id="threshold" label="Threshold"
-          diameter="75.0" layoutX="125.0" layoutY="90.0"
+          diameter="75.0" layoutX="125.0" layoutY="105.0"
           min="0" max="22000" scaleType="log" value="10" />
 
-    <Label fx:id="frequencyLabel" layoutX="85.0" layoutY="145.0"
+    <Label fx:id="frequencyLabel" layoutX="85.0" layoutY="160.0"
            styleClass="display"
            prefHeight="44.0" prefWidth="80.0" text="" />
 

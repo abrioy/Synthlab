@@ -3,10 +3,11 @@
 <?import fr.synthlab.view.component.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
     <Knob fx:id="picker"
-          diameter="100.0" layoutX="125.0" layoutY="125.0"
+          diameter="90.0" layoutX="130.0" layoutY="105.0"
           min="0" max="3" step="4"  maxAngle="-45" minAngle="225" scaleType="enum" stepType="true"/>
 
     <Knob fx:id="freq" label="Frequency"
@@ -24,4 +25,5 @@
     <Plug fx:id="out"
           layoutX="195.0" layoutY="345.0"
           label="out" name="out" type="output" />
+
 </Pane>
