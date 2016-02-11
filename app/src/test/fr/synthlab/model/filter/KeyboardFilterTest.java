@@ -1,16 +1,17 @@
 package fr.synthlab.model.filter;
 
 import com.jsyn.ports.UnitOutputPort;
+import fr.synthlab.model.module.keyboard.FilterKEYB;
 import junit.framework.TestCase;
 import org.junit.Before;
 
 public class KeyboardFilterTest extends TestCase {
 
-    private KeyboardFilter keyboardFilter;
+    private FilterKEYB keyboardFilter;
 
     @Before
     public void setUp() throws Exception {
-        keyboardFilter = new KeyboardFilter();
+        keyboardFilter = new FilterKEYB();
     }
 
     public void testInitializeTension() throws Exception {
