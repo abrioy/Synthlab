@@ -105,11 +105,18 @@ public class ToolboxController implements Initializable {
 
         drag(filter);
 
-        colorPicker.valueProperty().addListener(listener -> color = colorPicker.getValue());
+        colorPicker.valueProperty().addListener(listener -> colorChange());
 
         colorPicker.setValue(Color.DARKRED);
 
         color = colorPicker.getValue();
+    }
+
+    private void colorChange() {
+        color = colorPicker.getValue();
+        if (!colorPicker.getCustomColors().contains(color)){
+            colorPicker.getCustomColors().add(color);
+        }
     }
 
     public void loadTreeItems(TreeItem<String> item, ObservableList<String> rootItems) {
