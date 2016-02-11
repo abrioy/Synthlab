@@ -1,23 +1,23 @@
 package fr.synthlab.model.module;
 
 public enum ModuleEnum {
-
-
-
     VCOA("VCOA", "VCO Type A"),
-    VCA("VCA", "VCA"),
-    OUT("OUT", "Output"),
-    SCOP("SCOP", "Oscilloscope"),
-    REP("REP", "Repeater"),
-    EG("EG", "Envelope Generator"),
+
+	VCA("VCA", "VCA"),
+	OUT("OUT", "Output"),
+	SCOP("SCOP", "Oscilloscope"),
+	REP("REP", "Repeater"),
+	EG("EG", "Envelope Generator"),
 	VCFLP("VCFLP", "VCF (LP)"),
-    VCFHP("VCFHP", "VCF (HP)"),
-    KEYB("KEYB", "Keyboard"),
-    MIX("MIX", "MIX"),
-    REC("REC", "ModuleRecorder");
+	VCFHP("VCFHP", "VCF (HP)"),
+	KEYB("KEYB", "Keyboard"),
+	MIX("MIX", "MIX"),
+	REC("REC", "ModuleRecorder");
+
+	private static final long serialVersionUID = 1L;
 
     private String moduleName;
-    private String moduleLongName;
+	private String moduleLongName;
 
     ModuleEnum(String name, String longName) {
         this.moduleName = name;

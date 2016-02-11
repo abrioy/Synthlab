@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public abstract class ViewModule extends Pane implements Serializable {
 	private static final Logger logger = Logger.getLogger(ViewModule.class.getName());
@@ -75,7 +78,7 @@ public abstract class ViewModule extends Pane implements Serializable {
 			throw new RuntimeException(exception);
 		}
 
-		this.lookupAll("Plug").stream().filter(child -> child instanceof Plug).forEach(child -> {
+		getPlugs().forEach(child -> {
 			Plug plug = (Plug) child;
 			plug.setWorkbench(workbench);
 			plug.setGetPortCommand(() -> module.getPort(plug.nameProperty().getValue()));
@@ -90,6 +93,23 @@ public abstract class ViewModule extends Pane implements Serializable {
 	public void setModule(Module module) {
 		this.module = module;
 		moduleName.setText(module.getType().getLongName());
+	}
+
+	public Collection<Plug> getPlugs(){
+		return this.lookupAll("Plug").stream()
+				.filter(child -> child instanceof Plug)
+				.map(child -> (Plug) child)
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public Plug getPlugByName(String name){
+		Collection<Plug> plugs = getPlugs();
+		for(Plug plug : plugs) {
+			if(plug.getName().equals(name)){
+				return plug;
+			}
+		}
+		return null;
 	}
 
 	public abstract void writeObject(ObjectOutputStream o) throws IOException;

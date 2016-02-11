@@ -16,19 +16,21 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class Workbench extends Pane {
 	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
+
 	private final double moduleMargin = 2.0d;
 	private ImageView dragGhost = new ImageView();
-    private Cable draggedCable;
+
+	private Cable draggedCable;
 
 	public Workbench() {
 
@@ -45,18 +47,55 @@ public class Workbench extends Pane {
 		ModuleFactory.startSyn();
 
 
+		this.setOnMouseClicked(event -> {
+			if(event.getButton() == MouseButton.SECONDARY) {
+				Scanner scanner = new Scanner(System.in);
+				while (true) {
+					String question = scanner.nextLine();
+					if (question.equals("a")) {
+						try {
+
+							FileOutputStream file = null;
+							try {
+								file = new FileOutputStream("testfile");
+							} catch (FileNotFoundException e) {
+								e.printStackTrace();
+							}
+
+							this.serializeViewModules(file);
+							file.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					}
+					if (question.equals("z")) {
+						try {
+							FileInputStream file = null;
+							try {
+								file = new FileInputStream("testfile");
+							} catch (FileNotFoundException e) {
+								e.printStackTrace();
+							}
+							this.deSerializeViewModules(file);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					}
+				}
+			}
+		});
+
 	}
 
-	private void serializeViewModules() throws IOException {
+	private int serializeModuleToUID(Module module){
+		return System.identityHashCode(module);
+	}
 
-		FileOutputStream file = null;
-		try {
-			file = new FileOutputStream("testfile");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+	private void serializeViewModules(OutputStream out) throws IOException {
 
-		ObjectOutputStream outputStream = new ObjectOutputStream(file);
+		ObjectOutputStream outputStream = new ObjectOutputStream(out);
 
 		Collection<ViewModule> modules = getViewModules();
 
@@ -67,34 +106,79 @@ public class Workbench extends Pane {
 			Module module = viewModule.getModule();
 
 			// Writing module type
-			outputStream.writeObject(module.getType());
+			ModuleEnum type = module.getType();
+			logger.fine("Saving module of type \""+type+"\".");
+			outputStream.writeObject(type);
 
 			// Writing viewModule position
 			Bounds viewModuleBounds = viewModule.getBoundsInParent();
+			logger.fine("\tPosition: ("+viewModuleBounds.getMinX()+", "+viewModuleBounds.getMinY()+").");
 			outputStream.writeDouble(viewModuleBounds.getMinX());
 			outputStream.writeDouble(viewModuleBounds.getMinY());
 
-			// Writing Module connections
-			// TODO
-
-			// Writing Module data
+			// Writing ViewModule data
+			logger.fine("\tData.");
 			viewModule.writeObject(outputStream);
+
+			// Writing ViewModule connections
+			// Writing the UID of this module
+			int uid = serializeModuleToUID(viewModule.getModule());
+			logger.fine("\tId: "+uid);
+			outputStream.writeInt(uid);
+
+			// Writing all the ports
+			Collection<Plug> plugs = viewModule.getPlugs();
+			// Filtering connected ports
+			Collection<Plug> connectedPlugs = plugs.stream()
+					.filter(plug -> plug.getPort().isConnected())
+					.collect(Collectors.toList());
+
+			int nbPlugs = connectedPlugs.size();
+			outputStream.writeInt(nbPlugs);
+			logger.fine("\tConnections ("+nbPlugs+")");
+			for (Plug plug : connectedPlugs) {
+				outputStream.writeObject(plug.getName());
+				// Storing the ID of the connected module
+				Port connectedPort = plug.getPort().getConnected();
+				int targetUID = serializeModuleToUID(connectedPort.getModule());
+				outputStream.writeInt(targetUID);
+				outputStream.writeObject(connectedPort.getName());
+				logger.fine("\t\t"+plug.getName()+"\t-> "+targetUID+"."+connectedPort.getName());
+			}
 		}
 		outputStream.close();
-
+		out.flush();
 	}
 
-	private void deSerializeViewModules() throws IOException {
+	private void deSerializeViewModules(InputStream in) throws IOException {
 		removeAllModules();
 
+		/*
 		FileInputStream file = null;
 		try {
 			file = new FileInputStream("testfile");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		*/
 
-		ObjectInputStream inputStream = new ObjectInputStream(file);
+		ObjectInputStream inputStream = new ObjectInputStream(in);
+
+		Map<Integer, ViewModule> moduleList = new HashMap<>();
+		class PortReference {
+			public int parentUID;
+			public String name;
+			public int connectedUID;
+			public String connectedPortName;
+
+			public PortReference(int parentUID, String name, int connectedUID, String connectedPortName) {
+				this.parentUID = parentUID;
+				this.name = name;
+				this.connectedUID = connectedUID;
+				this.connectedPortName = connectedPortName;
+			}
+		}
+		Collection<PortReference> portList = new ArrayList<>();
 
 		// Reading the number of modules
 		int nbModules = inputStream.readInt();
@@ -103,24 +187,61 @@ public class Workbench extends Pane {
 			try {
 				// Reading type
 				ModuleEnum type = (ModuleEnum) inputStream.readObject();
+				logger.fine("Restoring a module of type \""+type+"\".");
 
 				// Reading position
 				double xPos = inputStream.readDouble();
 				double yPos = inputStream.readDouble();
-
-				// Reading connections
-				// TODO
+				logger.fine("\tPosition: ("+xPos+", "+yPos+").");
 
 				// Creating new ViewModule and feeding it the gathered data
 				ViewModule viewModule = ViewModuleFactory.createViewModule(type, this);
 				viewModule.relocate(xPos, yPos);
 
 				// Feeding data to the Module
+				logger.fine("\tData.");
 				viewModule.readObject(inputStream);
+
+				// Reading connections
+				// Adding this module to the global list
+				int moduleUID = inputStream.readInt();
+				logger.fine("\tId: "+moduleUID);
+				moduleList.put(moduleUID, viewModule);
+
+				// Adding this module's port to the list
+				int nbPlugs = inputStream.readInt();
+				logger.fine("\tRestoring "+nbPlugs+" connections");
+				for (int j = 0; j < nbPlugs; j++) {
+					String plugName = (String)inputStream.readObject();
+					int connectedModuleId = inputStream.readInt();
+					String connectedPortName = (String)inputStream.readObject();
+					portList.add(new PortReference(moduleUID, plugName, connectedModuleId, connectedPortName));
+					logger.fine("\t\t"+plugName+"\t-> "+connectedModuleId+"."+connectedPortName);
+				}
 
 				this.addModule(viewModule);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
+			}
+		}
+
+		// Resolving connections
+		logger.info("Restoring connections");
+		for(PortReference portReference : portList) {
+			ViewModule viewModule = moduleList.get(portReference.parentUID);
+			Plug plug = viewModule.getPlugByName(portReference.name);
+			ViewModule connectedViewModule = moduleList.get(portReference.connectedUID);
+			Plug connectedPlug = connectedViewModule.getPlugByName(portReference.connectedPortName);
+
+			// Checking this port is not already connected
+			if(!plug.getPort().isConnected()) {
+				logger.info("\t"+portReference.parentUID+"."+portReference.name+" -> "
+						+portReference.connectedUID+"."+portReference.connectedPortName);
+				this.connectPlugs(plug, connectedPlug);
+				Cable cable = new Cable(this, plug, connectedPlug);
+				this.getChildren().add(cable);
+				cable.updateCircles();
+				cable.update();
 			}
 		}
 
@@ -132,59 +253,6 @@ public class Workbench extends Pane {
 		dropCable();
 	}
 
-	/**
-	 * Handling event when plug is clicked
-	 * @param plug
-	 */
-	public void plugClicked(Plug plug){
-		Scanner scanner=new Scanner(System.in);
-		while (true) {
-			String question = scanner.nextLine();
-			if(question.equals("a")){
-				try {
-					this.serializeViewModules();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-			if(question.equals("z")){
-				try {
-					this.deSerializeViewModules();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
-
-		
-        if(draggedCable == null){
-			Plug opposite = getConnectedPlug(plug);
-			if (opposite!=null){
-                disconnect(plug);
-                draggedCable=getConnectedCable(plug);
-                dragCable(draggedCable,plug);
-
-            }else {
-                draggedCable = new Cable(this, plug);
-                this.getChildren().add(draggedCable);
-            }
-        }else{
-            if(getConnectedCable(plug)==null) {
-                Plug fixedPlug = draggedCable.getPlug();
-                if (fixedPlug != plug) {
-                    draggedCable.setPlug(plug);
-                    connect(plug, fixedPlug);
-                    draggedCable.update();
-                    draggedCable = null;
-                } else {
-                    dropCable();
-                }
-            }
-
-        }
-    }
 
 	private void removeAllModules() {
 		getViewModules().forEach(this::removeModule);
@@ -202,7 +270,7 @@ public class Workbench extends Pane {
                     if (plug instanceof Plug) {
                         Cable c =getConnectedCable((Plug)plug);
                         if (c!=null) {
-                            disconnect((Plug) plug);
+                            disconnectPlug((Plug) plug);
                             c.deleteCircles();
                             this.getChildren().remove(c);
                         }
@@ -285,6 +353,11 @@ public class Workbench extends Pane {
 	}
 
 	public void displayGhost(ViewModule module){
+		if(this.getChildren().contains(dragGhost)){
+			this.getChildren().remove(dragGhost);
+			logger.warning("The ghost was added again before it was properly removed.");
+		}
+
 		// Creating a ghost image
 		WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
 		dragGhost.setImage(snapshot);
@@ -448,24 +521,56 @@ public class Workbench extends Pane {
 		return null;
 	}
 
+	/**
+	 * Handling event when plug is clicked
+	 * @param plug
+	 */
+	public void plugClicked(Plug plug){
+		if(draggedCable == null){
+			Plug opposite = getConnectedPlug(plug);
+			if (opposite!=null){
+				disconnectPlug(plug);
+				draggedCable=getConnectedCable(plug);
+				dragCable(draggedCable,plug);
+
+			}else {
+				draggedCable = new Cable(this, plug);
+				this.getChildren().add(draggedCable);
+			}
+		}else{
+			if(getConnectedCable(plug)==null) {
+				Plug fixedPlug = draggedCable.getPluggedPlug();
+				if (fixedPlug != plug) {
+					draggedCable.setUnpluggedPlug(plug);
+					connectPlugs(plug, fixedPlug);
+					draggedCable.update();
+					draggedCable = null;
+				} else {
+					dropCable();
+				}
+			}
+
+		}
+	}
+
 	/** Function that call a connection between two port
      * This function first retrieve the port of the two plug in parameter
      *
      * @param in the name is mandatory, we dont care if its in or out
      * @param out the name is mandatory, we dont care if its in or out
      */
-    private void connect(Plug in, Plug out){
+    private void connectPlugs(Plug in, Plug out){
         Port n1 = in.getPort();
         Port n2 = out.getPort();
         n1.connect(n2);
     }
 
     /** Function that call a connection between two port
-     * This function disconnect a plug from all its relation
+     * This function disconnects a plug from all its relation
      *
      * @param plug the name is mandatory, we dont care if its in or out
      */
-    private void disconnect(Plug plug){
+    private void disconnectPlug(Plug plug){
         Port p = plug.getPort();
         p.disconnect();
     }
