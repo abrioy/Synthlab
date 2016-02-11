@@ -14,8 +14,8 @@ public enum ModuleEnum {
     VCFHP("VCFHP", "VCF (HP)"),
     KEYB("KEYB", "Keyboard"),
     MIX("MIX", "MIX"),
-    BRUI("BRUI","White Noise" ),
-    SEQ("SEQ","Sequencer" );
+    BRUI("BRUI","White Noise"),
+    SEQ("SEQ","Sequencer");
 
     private String moduleName;
     private String moduleLongName;

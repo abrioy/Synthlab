@@ -57,8 +57,10 @@ public class ViewModuleFactory {
                 break;
             case KEYB:
                 module = createViewModuleKEYB(workbench);
+                break;
             case SEQ:
                 module = createViewModuleSEQ(workbench);
+                break;
         }
         if (module != null) {
             logger.finer("ViewModule created: " + type.toString());
