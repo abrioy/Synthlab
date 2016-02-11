@@ -1,19 +1,23 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.input;
 
-import fr.synthlab.model.module.vcoa.ShapeEnum;
-import fr.synthlab.view.Workbench;
+import fr.synthlab.model.module.vcoa.ShapeVCOA;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
+import fr.synthlab.view.module.ViewModule;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ViewModuleVCO extends ViewModule implements Initializable {
-	private static final Logger logger = Logger.getLogger(ViewModuleVCO.class.getName());
+public class ViewModuleVCOA extends ViewModule implements Initializable {
+	private static final Logger logger = Logger.getLogger(ViewModuleVCOA.class.getName());
 
 	@FXML
 	private Knob freq;
@@ -32,7 +36,7 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 	private Runnable changeShapeCommand;
 	private Runnable changeFreqCommand;
 
-	public ViewModuleVCO(Workbench workbench) {
+	public ViewModuleVCOA(Workbench workbench) {
 		super(workbench);
 		this.loadFXML("/gui/fxml/module/ViewModuleVCO.fxml");
 		this.setId("pane");
@@ -52,12 +56,14 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 			changeShapeCommand.run();
 		});
 
-		frequencyLabel.setText(((int)getFreq())+" Hz");
+		double f = (double) Math.round((getFreq()*10))/10;
+		frequencyLabel.setText(f+" Hz");
 	}
 
 	private void updateFrequency() {
 		changeFreqCommand.run();
-		frequencyLabel.setText(((int)getFreq())+" Hz");
+		double f = (double) Math.round((getFreq()*10))/10;
+		frequencyLabel.setText(f+" Hz");
 	}
 
 	public void setChangeShapeCommand(Runnable changeShape) {
@@ -84,16 +90,31 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 	}
 
 
-	public ShapeEnum getSelectedShape() {
+	public ShapeVCOA getSelectedShape() {
 		switch((int)picker.getValue()) {
 			case 0:
-				return ShapeEnum.TRIANGLE;
+				return ShapeVCOA.TRIANGLE;
 			case 1:
-				return ShapeEnum.SQUARE;
+				return ShapeVCOA.SQUARE;
 			case 2:
-				return ShapeEnum.SAWTOOTH;
+				return ShapeVCOA.SAWTOOTH;
 			default:
-				return ShapeEnum.SINE;
+				return ShapeVCOA.SINE;
 		}
+	}
+
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		o.writeDouble(freq.getValue());
+		o.writeDouble(freqLine.getValue());
+		o.writeDouble(picker.getValue());
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		freq.setValue(o.readDouble());
+		freqLine.setValue(o.readDouble());
+		picker.setValue(o.readDouble());
 	}
 }

@@ -1,9 +1,8 @@
 package fr.synthlab.view.controller;
 
-import fr.synthlab.model.module.ModuleEnum;
-import fr.synthlab.view.Workbench;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
+import fr.synthlab.view.module.ViewModuleFactory;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -28,6 +27,7 @@ public class MainWindowController implements Initializable {
     private static final Logger logger = Logger.getLogger(MainWindowController.class.getName());
 
     @FXML private Workbench workbench;
+	@FXML private MenuBarController menuBarController;
 	@FXML private ToolboxController toolboxController;
 	@FXML private BorderPane mainPane;
 	@FXML private ScrollPane workbenchScrollPane;
@@ -37,6 +37,7 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+		menuBarController.setWorkbench(workbench);
 
 		// Setting the workspace to at least be as big as the scrollpane
 		workbenchScrollPane.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
@@ -72,9 +73,9 @@ public class MainWindowController implements Initializable {
 		// Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
             Dragboard db = event.getDragboard();
-			ModuleEnum moduleType = null;
+			ModuleType moduleType = null;
 			try{
-				moduleType = ModuleEnum.valueOf(ModuleEnum.getNameFromLong(db.getString()));
+				moduleType = ModuleType.valueOf(ModuleType.getNameFromLong(db.getString()));
 			}
 			catch(IllegalArgumentException e){
 				logger.severe("Unable to drag in module, there is no module called \""+db.getString()+"\".");
@@ -179,5 +180,7 @@ public class MainWindowController implements Initializable {
                 workbench.onRightClick();
             }
         });
+
+		menuBarController.setStage(stage);
 	}
 }

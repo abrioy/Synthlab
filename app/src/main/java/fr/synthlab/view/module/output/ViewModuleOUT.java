@@ -1,13 +1,19 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.output;
 
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.MuteButton;
+import fr.synthlab.view.module.ViewModule;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import fr.synthlab.view.component.RecordButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.FileChooser;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,25 +22,16 @@ import java.util.logging.Logger;
 public class ViewModuleOUT extends ViewModule implements Initializable{
     private static final Logger logger = Logger.getLogger(ViewModuleOUT.class.getName());
 
-    @FXML
-    private Knob picker;
-
-    @FXML
-    private MuteButton muteButton;
-
-    @FXML
-    private RecordButton recordButton;
+    @FXML private Knob picker;
+    @FXML private MuteButton muteButton;
+    @FXML private RecordButton recordButton;
 
     private Runnable volume;
-
     private Runnable muteCommand;
+	private Runnable recordCommand;
 
-    private Runnable recordCommand;
-
-    private boolean mute;
-
-    private boolean record;
-
+	private BooleanProperty mute = new SimpleBooleanProperty();
+    private boolean isRecording;
     private File pickedFile;
 
     public ViewModuleOUT(Workbench workbench) {
@@ -62,7 +59,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     }
 
     public boolean isMute() {
-        return mute;
+		return mute.getValue();
     }
 
     public void setRecordCommand(Runnable record) {
@@ -71,7 +68,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     }
 
     public boolean isRecording() {
-        return record;
+        return isRecording;
     }
 
     public File getPickedFile() {
@@ -84,12 +81,17 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
             volume.run();
         });
         muteButton.setOnAction(event -> {
-            mute = !mute;
-            muteButton.setToggle(mute);
+            mute.setValue(!mute.getValue());
             muteCommand.run();
         });
+
+		mute.addListener((observable, oldValue, newValue) -> {
+			muteButton.setToggle(newValue);
+		});
+
+
         recordButton.setOnAction(event -> {
-            if (!record) {
+            if (!isRecording) {
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Save file");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("WAV files (.wav)", "*.WAV"));
@@ -99,15 +101,28 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
                     if (!pickedFile.getAbsolutePath().endsWith(".wav"))
                         pickedFile = new File(pickedFile.getAbsolutePath() + ".wav");
 
-                    record = !record;
-                    recordButton.setToggle(record);
+                    isRecording = !isRecording;
+                    recordButton.setToggle(isRecording);
                     recordCommand.run();
                 }
             } else {
-                record = !record;
-                recordButton.setToggle(record);
+                isRecording = !isRecording;
+                recordButton.setToggle(isRecording);
                 recordCommand.run();
             }
         });
+
     }
+
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		o.writeDouble(picker.getValue());
+		o.writeBoolean(mute.getValue());
+	}
+
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		picker.setValue(o.readDouble());
+		mute.setValue(o.readBoolean());
+	}
 }

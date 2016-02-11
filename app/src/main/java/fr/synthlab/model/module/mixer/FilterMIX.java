@@ -1,10 +1,10 @@
-package fr.synthlab.model.filter;
+package fr.synthlab.model.module.mixer;
 
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
-public class MixFilter extends UnitGenerator{
+public class FilterMIX extends UnitGenerator{
 
     /**
      * input 1.
@@ -34,7 +34,7 @@ public class MixFilter extends UnitGenerator{
     /**
      * constructor.
      */
-    public MixFilter() {
+    public FilterMIX() {
 
         input1 = new UnitInputPort("intern1");
         input2 = new UnitInputPort("intern2");

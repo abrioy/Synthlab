@@ -18,7 +18,7 @@ public class Port {
     /**
      * the port connected to this one
      */
-    private Port port;
+    private Port port = null;
 
     /**
      * the module which contains this port
@@ -44,6 +44,8 @@ public class Port {
         return name;
     }
 
+	public boolean isConnected() { return port != null; }
+
     /**
      * connect this port to another port
      * @param port
@@ -59,11 +61,16 @@ public class Port {
      * disconnect this port
      */
     public void disconnect(){
-        port.setPort(null);
-        port.getModule().update();
-        port = null;
-        module.update();
-    }
+        if(port != null){
+			port.setPort(null);
+			port.getModule().update();
+			port = null;
+			module.update();
+		}
+		else{
+			logger.warning("Trying to disconnect a port that is not connected to anything.");
+		}
+	}
 
     /**
      *

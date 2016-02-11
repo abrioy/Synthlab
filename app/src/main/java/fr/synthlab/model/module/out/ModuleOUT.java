@@ -1,18 +1,19 @@
 package fr.synthlab.model.module.out;
 
 import com.jsyn.Synthesizer;
+import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.LineOut;
 import com.jsyn.util.WaveRecorder;
 import fr.synthlab.model.filter.FilterAttenuator;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
+import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -22,8 +23,8 @@ import java.util.logging.Logger;
  * @author johan
  * @see Module
  */
-public class ModuleOut implements Module{
-    private static final Logger logger = Logger.getLogger(ModuleOut.class.getName());
+public class ModuleOUT implements Module{
+    private static final Logger logger = Logger.getLogger(ModuleOUT.class.getName());
 
     /**
      * audio stereo left exit.
@@ -85,7 +86,7 @@ public class ModuleOut implements Module{
      * constructor.
      * @param synthesizer where we get sound
      */
-    public ModuleOut(Synthesizer synthesizer){
+    public ModuleOUT(Synthesizer synthesizer){
         lineOutLeft = new LineOut();
         lineOutRight = new LineOut();
         lineOut = new LineOut();
@@ -143,17 +144,19 @@ public class ModuleOut implements Module{
             if (recording) {
                 pickedFile.createNewFile();
                 waveRecorder = new WaveRecorder(syn, pickedFile);
-                interOut.getOutput().connect(waveRecorder.getInput());
-                interOutLeft.getOutput().connect(waveRecorder.getInput());
-                interOutRight.getOutput().connect(waveRecorder.getInput());
+                ((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).connect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).connect(0, waveRecorder.getInput(), 1);
 
                 waveRecorder.start();
             } else if (waveRecorder != null) {
                 waveRecorder.stop();
 
-                interOut.getOutput().disconnect(waveRecorder.getInput());
-                interOutLeft.getOutput().disconnect(waveRecorder.getInput());
-                interOutRight.getOutput().disconnect(waveRecorder.getInput());
+                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
 
                 waveRecorder.close();
 
@@ -220,8 +223,8 @@ public class ModuleOut implements Module{
     }
 
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.OUT;
+    public ModuleType getType() {
+        return ModuleType.OUT;
     }
 
     /**

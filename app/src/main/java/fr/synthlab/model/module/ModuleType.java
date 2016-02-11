@@ -1,9 +1,6 @@
 package fr.synthlab.model.module;
 
-public enum ModuleEnum {
-
-
-
+public enum ModuleType {
     VCOA("VCOA", "VCO Type A"),
     VCA("VCA", "VCA"),
     OUT("OUT", "Output"),
@@ -13,19 +10,21 @@ public enum ModuleEnum {
 	VCFLP("VCFLP", "VCF (LP)"),
     VCFHP("VCFHP", "VCF (HP)"),
     KEYB("KEYB", "Keyboard"),
-    MIX("MIX", "MIX"),
+    MIX("MIX", "Mixer"),
     BRUI("BRUI","White Noise" );
 
-    private String moduleName;
-    private String moduleLongName;
+	private static final long serialVersionUID = 1L;
 
-    ModuleEnum(String name, String longName) {
+    private String moduleName;
+	private String moduleLongName;
+
+    ModuleType(String name, String longName) {
         this.moduleName = name;
 		this.moduleLongName = longName;
     }
 
     public static String getNameFromLong(String longName) {
-        for (ModuleEnum m : values()) {
+        for (ModuleType m : values()) {
             if (m.getLongName().equals(longName)) {
                 return m.moduleName;
             }
