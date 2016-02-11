@@ -4,13 +4,9 @@ import fr.synthlab.model.module.keyboard.Note;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.KEYBKey;
 import fr.synthlab.view.component.Knob;
-import javafx.beans.property.IntegerProperty;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -211,10 +207,12 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
                     keyPressedCommand.run();
                     break;
                 case X:
-                    octavePicker.setValue(octavePicker.getValue() + 1);
+                    if(octavePicker.getValue() < 7)
+                        octavePicker.setValue(octavePicker.getValue() + 1);
                     break;
                 case W:
-                    octavePicker.setValue(octavePicker.getValue() - 1);
+                    if(octavePicker.getValue() > 0)
+                        octavePicker.setValue(octavePicker.getValue() - 1);
                     break;
                 default:
                     break;
@@ -225,61 +223,24 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         this.setOnKeyReleased(event -> {
             switch (event.getCode()) {
                 case Q:
-                    keyReleasedCommand.run();
-                    break;
                 case S:
-                    keyReleasedCommand.run();
-                    break;
                 case D:
-                    keyReleasedCommand.run();
-                    break;
                 case F:
-                    keyReleasedCommand.run();
-                    break;
                 case G:
-                    keyReleasedCommand.run();
-                    break;
                 case H:
-                    keyReleasedCommand.run();
-                    break;
                 case J:
-                    keyReleasedCommand.run();
-                    break;
                 case K:
-                    keyReleasedCommand.run();
-                    break;
                 case Z:
-                    keyReleasedCommand.run();
-                    break;
                 case E:
-                    keyReleasedCommand.run();
-                    break;
                 case T:
-                    keyReleasedCommand.run();
-                    break;
                 case Y:
-                    keyReleasedCommand.run();
-                    break;
                 case U:
                     keyReleasedCommand.run();
-                    break;
                 default:
                     break;
             }
             event.consume();
         });
-
-        this.setOnKeyReleased(event -> {
-            switch (event.getCode()) {
-                case Q:
-                    keyReleasedCommand.run();
-                    break;
-                default:
-                    break;
-            }
-            event.consume();
-        });
-        this.requestFocus();
     }
 
     private void updateOctave() {

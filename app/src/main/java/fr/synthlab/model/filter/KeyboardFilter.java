@@ -1,19 +1,24 @@
 package fr.synthlab.model.filter;
 
-import com.jsyn.unitgen.UnitFilter;
+import com.jsyn.ports.UnitOutputPort;
+import com.jsyn.unitgen.UnitGenerator;
 
-public class KeyboardFilter extends UnitFilter {
+public class KeyboardFilter extends UnitGenerator {
 
     /**
      * Output voltage to the gate output of the keyboard.
      */
     private int tension;
 
+    private UnitOutputPort gate;
+
     /**
      * Constructor
      */
     public KeyboardFilter() {
         tension = 0;
+        gate = new UnitOutputPort();
+        this.addPort(gate);
     }
 
     /**
@@ -37,9 +42,13 @@ public class KeyboardFilter extends UnitFilter {
      */
     @Override
     public void generate(int start, int limit) {
-        double[] outputs = output.getValues();
+        double[] gates = gate.getValues();
         for (int i = start; i < limit; i += 1) {
-            outputs[i] = tension;
+            gates[i] = tension;
         }
+    }
+
+    public UnitOutputPort getGate() {
+        return gate;
     }
 }

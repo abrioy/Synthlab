@@ -13,11 +13,8 @@ import fr.synthlab.model.module.port.Port;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.logging.Logger;
 
 /**
@@ -139,15 +136,13 @@ public class ModuleOut implements Module{
         }
     }
 
-    public void setRecording(boolean recording) {
+    public void setRecording(boolean recording, File pickedFile) {
         this.recording = recording;
 
         try {
             if (recording) {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss");
-                File file = new File(dateFormat.format(new Date()) + ".wav");
-                file.createNewFile();
-                waveRecorder = new WaveRecorder(syn, file);
+                pickedFile.createNewFile();
+                waveRecorder = new WaveRecorder(syn, pickedFile);
                 interOut.getOutput().connect(waveRecorder.getInput());
                 interOutLeft.getOutput().connect(waveRecorder.getInput());
                 interOutRight.getOutput().connect(waveRecorder.getInput());
