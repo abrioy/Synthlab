@@ -163,19 +163,19 @@ public class ToolboxController implements Initializable {
         if (rootInput.isExpanded()) {
             input.setPrefHeight((rootInput.getChildren().size() + 1) * 25);
         } else {
-            input.setPrefHeight(25);
+            input.setPrefHeight(26);
         }
         output.relocate(0, colorPicker.getPrefHeight()+input.getPrefHeight());
         if (rootOutput.isExpanded()) {
             output.setPrefHeight((rootOutput.getChildren().size() + 1) * 25);
         } else {
-            output.setPrefHeight(25);
+            output.setPrefHeight(26);
         }
         filter.relocate(0, colorPicker.getPrefHeight()+input.getPrefHeight() + output.getPrefHeight());
         if (rootFilter.isExpanded()) {
             filter.setPrefHeight((rootFilter.getChildren().size() + 1) * 25);
         } else {
-            filter.setPrefHeight(25);
+            filter.setPrefHeight(26);
         }
     }
 
