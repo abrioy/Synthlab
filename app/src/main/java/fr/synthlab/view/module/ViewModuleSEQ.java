@@ -23,20 +23,17 @@ public class ViewModuleSEQ extends ViewModule implements Initializable{
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleSEQ.fxml");
         this.setId("pane");
-        resetButton.setPrefSize(30,30);
+        //resetButton.setPrefSize(30,30);
 
     }
 
-    public void setRecordCommand(Runnable reset) {
+    public void setResetCommand(Runnable reset) {
         this.resetCommand = reset;
-        resetCommand.run();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         resetButton.setOnAction(event -> {
-
-            //resetCommand.run();
-
+            resetCommand.run();
         });
 
 

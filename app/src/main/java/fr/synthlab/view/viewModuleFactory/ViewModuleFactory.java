@@ -9,6 +9,7 @@ import fr.synthlab.model.module.mixer.ModuleMixer;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
+import fr.synthlab.model.module.sequencer.ModuleSEQ;
 import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
@@ -211,9 +212,10 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleSEQ(Workbench workbench) {
         Module seq = ModuleFactory.createModule(ModuleEnum.SEQ);
-
         ViewModuleSEQ viewSEQ = new ViewModuleSEQ(workbench);
         viewSEQ.setModule(seq);
+
+        viewSEQ.setResetCommand(() -> ((ModuleSEQ) seq).resetStep());
 
         return viewSEQ;
 
