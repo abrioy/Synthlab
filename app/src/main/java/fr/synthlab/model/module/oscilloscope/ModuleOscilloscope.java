@@ -74,7 +74,7 @@ public class ModuleOscilloscope implements Module {
 
         ports.add(in);
         ports.add(out);
-        scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
+        scope.setTriggerMode(AudioScope.TriggerMode.AUTO);
         scope.addProbe(pt.output);
         jOscillatorComponent = new JOscillatorComponent(scope);
     }
@@ -351,7 +351,7 @@ public class ModuleOscilloscope implements Module {
             super.paintComponent(g);
             int width = getWidth();
             int height = getHeight();
-            for (CustomWaveTraceView waveTraceView : waveTraceViews.toArray(new CustomWaveTraceView[0])) {
+            for (CustomWaveTraceView waveTraceView : waveTraceViews) {
                 waveTraceView.drawWave(g, width, height);
             }
         }
