@@ -44,6 +44,6 @@
 
     <Knob fx:id="octavePicker" label="octave"
           diameter="40.0" layoutX="400.0" layoutY="135.0"
-          min="0" max="7" step="8" value="3" />
+          min="0" max="7" step="8" value="3" stepType="true"/>
 
 </Pane>

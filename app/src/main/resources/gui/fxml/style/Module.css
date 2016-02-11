@@ -34,7 +34,7 @@
 
 
 .mute-release {
-    -fx-background-image: url("../../texture/button.png") ;
+    -fx-background-image: url("../../texture/mute.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-color: transparent !important;
@@ -44,7 +44,7 @@
     }
 
 .mute-pressed {
-        -fx-background-image: url("../../texture/button-pressed.png") ;
+        -fx-background-image: url("../../texture/mute-pressed.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-size: contain !important;
@@ -54,7 +54,7 @@
         }
 
 .record-release {
-    -fx-background-image: url("../../texture/rec.png") ;
+    -fx-background-image: url("../../texture/record.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-color: transparent !important;
@@ -64,7 +64,7 @@
     }
 
 .record-pressed {
-        -fx-background-image: url("../../texture/stop.png") ;
+        -fx-background-image: url("../../texture/record-pressed.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-size: contain !important;
