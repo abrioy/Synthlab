@@ -2,6 +2,7 @@ package fr.synthlab.model.module.envelope;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.EnvelopeDAHDSR;
+import com.softsynth.math.AudioMath;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
@@ -76,7 +77,7 @@ public class ModuleEG implements Module {
     }
 
     public void setSustain(double sustain){
-        envelope.sustain.set(sustain);
+        envelope.sustain.set(AudioMath.decibelsToAmplitude(sustain));
     }
 
     public void setRelease(double release){
