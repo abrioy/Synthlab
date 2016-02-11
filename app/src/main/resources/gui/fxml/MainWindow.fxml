@@ -9,7 +9,7 @@
             stylesheets="/gui/fxml/style/MainWindow.css">
 
     <top>
-        <fx:include fx:id="menubar" source="MenuBar.fxml"/>
+        <fx:include fx:id="menuBar" source="MenuBar.fxml"/>
     </top>
     <center >
         <SplitPane dividerPositions="0.15">

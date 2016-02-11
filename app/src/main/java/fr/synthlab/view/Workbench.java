@@ -16,11 +16,15 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -46,57 +50,13 @@ public class Workbench extends Pane {
 
 		ModuleFactory.startSyn();
 
-
-		this.setOnMouseClicked(event -> {
-			if(event.getButton() == MouseButton.SECONDARY) {
-				Scanner scanner = new Scanner(System.in);
-				while (true) {
-					String question = scanner.nextLine();
-					if (question.equals("a")) {
-						try {
-
-							FileOutputStream file = null;
-							try {
-								file = new FileOutputStream("testfile");
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							}
-
-							this.serializeViewModules(file);
-							file.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						break;
-					}
-					if (question.equals("z")) {
-						try {
-							FileInputStream file = null;
-							try {
-								file = new FileInputStream("testfile");
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							}
-							this.deSerializeViewModules(file);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						break;
-					}
-				}
-			}
-		});
-
 	}
 
 	private int serializeModuleToUID(Module module){
 		return System.identityHashCode(module);
 	}
 
-	private void serializeViewModules(OutputStream out) throws IOException {
-
-		ObjectOutputStream outputStream = new ObjectOutputStream(out);
-
+	public void serializeViewModules(ObjectOutputStream outputStream) throws IOException {
 		Collection<ViewModule> modules = getViewModules();
 
 		// Writing the total number of modules
@@ -146,23 +106,10 @@ public class Workbench extends Pane {
 				logger.fine("\t\t"+plug.getName()+"\t-> "+targetUID+"."+connectedPort.getName());
 			}
 		}
-		outputStream.close();
-		out.flush();
 	}
 
-	private void deSerializeViewModules(InputStream in) throws IOException {
+	public void deSerializeViewModules(ObjectInputStream inputStream) throws IOException {
 		removeAllModules();
-
-		/*
-		FileInputStream file = null;
-		try {
-			file = new FileInputStream("testfile");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		*/
-
-		ObjectInputStream inputStream = new ObjectInputStream(in);
 
 		Map<Integer, ViewModule> moduleList = new HashMap<>();
 		class PortReference {
