@@ -1,7 +1,7 @@
 
 .module-frame {
     -fx-border-color: #333 ;
-    -fx-background-image: url("../../texture/carbon.jpeg");
+    -fx-background-image: url("../../texture/black2.jpg");
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
 }
@@ -34,7 +34,7 @@
 
 
 .mute-release {
-    -fx-background-image: url("../../texture/button.png") ;
+    -fx-background-image: url("../../texture/mute.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-color: transparent !important;
@@ -44,7 +44,7 @@
     }
 
 .mute-pressed {
-        -fx-background-image: url("../../texture/button-pressed.png") ;
+        -fx-background-image: url("../../texture/mute-pressed.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-size: contain !important;
@@ -54,7 +54,7 @@
         }
 
 .record-release {
-    -fx-background-image: url("../../texture/rec.png") ;
+    -fx-background-image: url("../../texture/record.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-color: transparent !important;
@@ -64,7 +64,7 @@
     }
 
 .record-pressed {
-        -fx-background-image: url("../../texture/stop.png") ;
+        -fx-background-image: url("../../texture/record-pressed.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-size: contain !important;
@@ -72,15 +72,55 @@
         -fx-border-color: transparent !important;
         -fx-text-fill: transparent !important;
         }
+.rect{
+    -fx-background-image: url("../../texture/black1.jpg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+    }
+.reset-button{
+        -fx-background-image: url("../../texture/reset.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-color: transparent !important;
+        -fx-background-size: contain !important;
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;
+}
+.reset-button:armed{
+        -fx-background-image: url("../../texture/reset-pressed.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-color: transparent !important;
+        -fx-background-size: contain !important;
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;}
 
 #rectStereo {
-    -fx-fill: rgba(136, 221, 153, 0.1);
+    -fx-stroke: rgba(136, 221, 153, 0.5);
     -fx-arc-height: 5;
     -fx-arc-width: 5;
 }
 
 #rectMono {
-    -fx-fill: rgba(238, 118, 0, 0.1);
+    -fx-stroke: rgba(238, 118, 0, 0.5);
     -fx-arc-height: 5;
     -fx-arc-width: 5;
-}        
+}
+
+#rectOut {
+    -fx-fill:transparent;
+    -fx-stroke: rgba(238, 118, 0, 0.5);
+    -fx-stroke-width:2;
+    -fx-arc-height: 20;
+    -fx-arc-width: 20;
+    -fx-stroke-line-cap: butt;
+}
+
+#rectIn {
+    -fx-fill:transparent;
+    -fx-stroke: rgba(136, 221, 153, 0.5);
+    -fx-stroke-width:2;
+    -fx-arc-height: 20;
+    -fx-arc-width: 20;
+    -fx-stroke-line-cap: butt;
+}

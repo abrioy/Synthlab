@@ -10,8 +10,9 @@ public enum ModuleType {
 	VCFLP("VCFLP", "VCF (LP)"),
     VCFHP("VCFHP", "VCF (HP)"),
     KEYB("KEYB", "Keyboard"),
-    MIX("MIX", "Mixer"),
-    BRUI("BRUI","White Noise" );
+    MIX("MIX", "MIX"),
+    BRUI("BRUI","White Noise"),
+    SEQ("SEQ","Sequencer");
 
 	private static final long serialVersionUID = 1L;
 

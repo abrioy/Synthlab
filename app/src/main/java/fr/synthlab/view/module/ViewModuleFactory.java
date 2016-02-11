@@ -7,6 +7,8 @@ import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.keyboard.ModuleKEYB;
 import fr.synthlab.model.module.mixer.ModuleMIX;
+import fr.synthlab.model.module.sequencer.ModuleSEQ;
+import fr.synthlab.model.module.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
 import fr.synthlab.model.module.out.ModuleOUT;
 import fr.synthlab.model.module.vca.ModuleVCA;
@@ -63,6 +65,10 @@ public class ViewModuleFactory {
                 break;
             case KEYB:
                 module = createViewModuleKEYB(workbench);
+                break;
+            case SEQ:
+                module = createViewModuleSEQ(workbench);
+                break;
         }
         if (module != null) {
             logger.finer("ViewModule created: " + type.toString());
@@ -210,5 +216,16 @@ public class ViewModuleFactory {
         });
 
         return viewKEYB;
+    }
+
+    private static ViewModule createViewModuleSEQ(Workbench workbench) {
+        Module seq = ModuleFactory.createModule(ModuleType.SEQ);
+        ViewModuleSEQ viewSEQ = new ViewModuleSEQ(workbench);
+        viewSEQ.setModule(seq);
+
+        viewSEQ.setResetCommand(() -> ((ModuleSEQ) seq).resetStep());
+
+        return viewSEQ;
+
     }
 }
