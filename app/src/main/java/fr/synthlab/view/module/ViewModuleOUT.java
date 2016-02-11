@@ -6,7 +6,9 @@ import fr.synthlab.view.component.MuteButton;
 import fr.synthlab.view.component.RecordButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -29,10 +31,11 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
     private Runnable recordCommand;
 
-
     private boolean mute;
 
     private boolean record;
+
+    private File pickedFile;
 
     public ViewModuleOUT(Workbench workbench) {
         super(workbench);
@@ -62,10 +65,6 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         return mute;
     }
 
-    public void setMute(Runnable mute) {
-        this.muteCommand = mute;
-    }
-
     public void setRecordCommand(Runnable record) {
         this.recordCommand = record;
         recordCommand.run();
@@ -73,6 +72,10 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
     public boolean isRecording() {
         return record;
+    }
+
+    public File getPickedFile() {
+        return pickedFile;
     }
 
     @Override
@@ -86,9 +89,25 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
             muteCommand.run();
         });
         recordButton.setOnAction(event -> {
-            record = !record;
-            recordButton.setToggle(record);
-            recordCommand.run();
+            if (!record) {
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Save file");
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("WAV files (.wav)", "*.WAV"));
+                pickedFile = fileChooser.showSaveDialog(getScene().getWindow());
+
+                if (pickedFile != null) {
+                    if (!pickedFile.getAbsolutePath().endsWith(".wav"))
+                        pickedFile = new File(pickedFile.getAbsolutePath() + ".wav");
+
+                    record = !record;
+                    recordButton.setToggle(record);
+                    recordCommand.run();
+                }
+            } else {
+                record = !record;
+                recordButton.setToggle(record);
+                recordCommand.run();
+            }
         });
     }
 }

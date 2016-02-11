@@ -87,7 +87,7 @@ public class ModuleKEYB implements Module {
         ports.add(out);
 
         //Gate port
-        OutputPort gate = new OutputPort("gate", this, keyboardFilter.output);
+        OutputPort gate = new OutputPort("gate", this, keyboardFilter.getGate());
         ports.add(gate);
 
         this.pressKey(REFERENCE_NOTE);
@@ -174,4 +174,7 @@ public class ModuleKEYB implements Module {
         keyboardFilter.releaseKey();
     }
 
+    public int getOctave() {
+        return octave;
+    }
 }

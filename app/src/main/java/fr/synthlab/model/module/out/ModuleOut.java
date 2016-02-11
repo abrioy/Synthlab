@@ -1,6 +1,7 @@
 package fr.synthlab.model.module.out;
 
 import com.jsyn.Synthesizer;
+import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.LineOut;
 import com.jsyn.util.WaveRecorder;
 import fr.synthlab.model.filter.FilterAttenuator;
@@ -13,11 +14,8 @@ import fr.synthlab.model.module.port.Port;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.logging.Logger;
 
 /**
@@ -139,26 +137,26 @@ public class ModuleOut implements Module{
         }
     }
 
-    public void setRecording(boolean recording) {
+    public void setRecording(boolean recording, File pickedFile) {
         this.recording = recording;
 
         try {
             if (recording) {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss");
-                File file = new File(dateFormat.format(new Date()) + ".wav");
-                file.createNewFile();
-                waveRecorder = new WaveRecorder(syn, file);
-                interOut.getOutput().connect(waveRecorder.getInput());
-                interOutLeft.getOutput().connect(waveRecorder.getInput());
-                interOutRight.getOutput().connect(waveRecorder.getInput());
+                pickedFile.createNewFile();
+                waveRecorder = new WaveRecorder(syn, pickedFile);
+                ((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).connect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).connect(0, waveRecorder.getInput(), 1);
 
                 waveRecorder.start();
             } else if (waveRecorder != null) {
                 waveRecorder.stop();
 
-                interOut.getOutput().disconnect(waveRecorder.getInput());
-                interOutLeft.getOutput().disconnect(waveRecorder.getInput());
-                interOutRight.getOutput().disconnect(waveRecorder.getInput());
+                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
 
                 waveRecorder.close();
 
