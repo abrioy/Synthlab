@@ -4,9 +4,7 @@
 <?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
-<?import fr.synthlab.view.component.KEYBKey?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.shape.Rectangle?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="198" prefWidth="504" minHeight="198" minWidth="504" maxHeight="198" maxWidth="504">
 
