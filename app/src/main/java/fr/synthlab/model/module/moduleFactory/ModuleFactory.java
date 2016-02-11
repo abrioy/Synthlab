@@ -10,6 +10,7 @@ import fr.synthlab.model.module.mixer.ModuleMixer;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
 import fr.synthlab.model.module.out.ModuleOut;
 import fr.synthlab.model.module.replicator.ModuleREP;
+import fr.synthlab.model.module.sequencer.ModuleSEQ;
 import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
@@ -52,6 +53,8 @@ public class ModuleFactory {
             case MIX : module = createMix();
                 break;
             case BRUI: module = createNoise();
+                break;
+            case SEQ: module = createSEQ();
                 break;
         }
 		if(module != null){
@@ -134,6 +137,13 @@ public class ModuleFactory {
      */
     private static ModuleKEYB createKEYB() {
         return new ModuleKEYB(syn);
+    }
+
+    /**
+     * @return a new ModuleSEQ
+     */
+    private static ModuleSEQ createSEQ() {
+        return new ModuleSEQ(syn);
     }
 
     public static Synthesizer getSyn() {

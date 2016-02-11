@@ -57,6 +57,8 @@ public class ViewModuleFactory {
                 break;
             case KEYB:
                 module = createViewModuleKEYB(workbench);
+            case SEQ:
+                module = createViewModuleSEQ(workbench);
         }
         if (module != null) {
             logger.finer("ViewModule created: " + type.toString());
@@ -203,5 +205,15 @@ public class ViewModuleFactory {
         });
 
         return viewKEYB;
+    }
+
+    private static ViewModule createViewModuleSEQ(Workbench workbench) {
+        Module seq = ModuleFactory.createModule(ModuleEnum.SEQ);
+
+        ViewModuleSEQ viewSEQ = new ViewModuleSEQ(workbench);
+        viewSEQ.setModule(seq);
+
+        return viewSEQ;
+
     }
 }

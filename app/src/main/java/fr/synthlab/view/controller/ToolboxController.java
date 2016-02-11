@@ -51,7 +51,8 @@ public class ToolboxController implements Initializable {
         ObservableList<String> items = FXCollections.observableArrayList(
                 ModuleEnum.VCOA.getLongName(),
                 ModuleEnum.BRUI.getLongName(),
-                ModuleEnum.KEYB.getLongName()
+                ModuleEnum.KEYB.getLongName(),
+                ModuleEnum.SEQ.getLongName()
                 );
 
         loadTreeItems(rootInput, items);
