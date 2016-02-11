@@ -20,6 +20,6 @@ public interface Module {
     void start();
     void stop();
     void update();
-    ModuleEnum getType();
+    ModuleTypes getType();
 
 }

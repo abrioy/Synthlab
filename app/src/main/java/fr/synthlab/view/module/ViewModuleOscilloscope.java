@@ -40,7 +40,7 @@ public class ViewModuleOscilloscope extends ViewModule implements Initializable 
 
 		this.setOnMouseClicked(event -> {
 			logger.info("CLICKED");
-			ViewModule vco = ViewModuleFactory.createViewModule(ModuleEnum.VCOA, w);
+			ViewModule vco = ViewModuleFactory.createViewModule(ModuleTypes.VCOA, w);
 
 			vco.getModule().getPort("out").connect(this.getModule().getPort("in"));
 

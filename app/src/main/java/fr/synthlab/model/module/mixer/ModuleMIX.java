@@ -2,16 +2,12 @@ package fr.synthlab.model.module.mixer;
 
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterAttenuator;
-import fr.synthlab.model.filter.MixFilter;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -21,8 +17,8 @@ import java.util.logging.Logger;
  * @author johan
  * @see Module
  */
-public class ModuleMixer implements Module{
-    private static final Logger logger = Logger.getLogger(ModuleMixer.class.getName());
+public class ModuleMIX implements Module{
+    private static final Logger logger = Logger.getLogger(ModuleMIX.class.getName());
 
     /**
      * attenuator on input 1.
@@ -47,7 +43,7 @@ public class ModuleMixer implements Module{
     /**
      * filter who unit the 4 inputs.
      */
-    private MixFilter mix;
+    private FilterMIX mix;
 
     /**
      * return list ports.
@@ -59,13 +55,13 @@ public class ModuleMixer implements Module{
      *
      * @param syn synthesizer
      */
-    public ModuleMixer(Synthesizer syn){
+    public ModuleMIX(Synthesizer syn){
         attenuator1 = new FilterAttenuator();
         attenuator2 = new FilterAttenuator();
         attenuator3 = new FilterAttenuator();
         attenuator4 = new FilterAttenuator();
 
-        mix = new MixFilter();
+        mix = new FilterMIX();
 
         ports = new ArrayList<>();
         ports.add(new InputPort("in1", this, attenuator1.input));
@@ -129,11 +125,11 @@ public class ModuleMixer implements Module{
 
     /**
      * module type.
-     * @return ModuleEnum.MIX
+     * @return ModuleTypes.MIX
      */
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.MIX;
+    public ModuleTypes getType() {
+        return ModuleTypes.MIX;
     }
 
     /**

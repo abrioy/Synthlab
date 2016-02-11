@@ -2,13 +2,9 @@ package fr.synthlab.model.module.vcf;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.FilterLowPass;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 public class ModuleVCFLP extends ModuleVCF {
     /**
@@ -68,16 +64,16 @@ public class ModuleVCFLP extends ModuleVCF {
     @Override
     public void update() {
         if (fmInput.getConnected() == null) {
-            fmFilter.output.disconnectAll();
+            filterFm.output.disconnectAll();
             lpFilter.frequency.set(f0);
         } else {
-            fmFilter.output.connect(lpFilter.frequency);
+            filterFm.output.connect(lpFilter.frequency);
         }
     }
 
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.VCFLP;
+    public ModuleTypes getType() {
+        return ModuleTypes.VCFLP;
     }
 
     public double getResonance() {

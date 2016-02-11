@@ -6,17 +6,14 @@ import com.jsyn.unitgen.LineOut;
 import com.jsyn.util.WaveRecorder;
 import fr.synthlab.model.filter.FilterAttenuator;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -26,8 +23,8 @@ import java.util.logging.Logger;
  * @author johan
  * @see Module
  */
-public class ModuleOut implements Module{
-    private static final Logger logger = Logger.getLogger(ModuleOut.class.getName());
+public class ModuleOUT implements Module{
+    private static final Logger logger = Logger.getLogger(ModuleOUT.class.getName());
 
     /**
      * audio stereo left exit.
@@ -89,7 +86,7 @@ public class ModuleOut implements Module{
      * constructor.
      * @param synthesizer where we get sound
      */
-    public ModuleOut(Synthesizer synthesizer){
+    public ModuleOUT(Synthesizer synthesizer){
         lineOutLeft = new LineOut();
         lineOutRight = new LineOut();
         lineOut = new LineOut();
@@ -226,8 +223,8 @@ public class ModuleOut implements Module{
     }
 
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.OUT;
+    public ModuleTypes getType() {
+        return ModuleTypes.OUT;
     }
 
     /**

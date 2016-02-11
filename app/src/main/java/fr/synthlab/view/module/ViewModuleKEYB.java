@@ -1,6 +1,6 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.module.keyboard.Note;
+import fr.synthlab.model.module.keyboard.NoteKEYB;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.KEYBKey;
 import fr.synthlab.view.component.Knob;
@@ -56,7 +56,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     Runnable keyPressedCommand;
     Runnable keyReleasedCommand;
     Runnable octaveChangeCommand;
-    Note lastKeyPressed;
+    NoteKEYB lastKeyPressed;
 
     public ViewModuleKEYB(Workbench workbench) {
         super(workbench);
@@ -70,55 +70,55 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
             Mouse pressed events
          */
         CKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.C;
+            lastKeyPressed = NoteKEYB.C;
             keyPressedCommand.run();
         });
         CSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.CSharp;
+            lastKeyPressed = NoteKEYB.CSharp;
             keyPressedCommand.run();
         });
         DKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.D;
+            lastKeyPressed = NoteKEYB.D;
             keyPressedCommand.run();
         });
         DSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.DSharp;
+            lastKeyPressed = NoteKEYB.DSharp;
             keyPressedCommand.run();
         });
         EKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.E;
+            lastKeyPressed = NoteKEYB.E;
             keyPressedCommand.run();
         });
         FKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.F;
+            lastKeyPressed = NoteKEYB.F;
             keyPressedCommand.run();
         });
         FSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.FSharp;
+            lastKeyPressed = NoteKEYB.FSharp;
             keyPressedCommand.run();
         });
         GKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.G;
+            lastKeyPressed = NoteKEYB.G;
             keyPressedCommand.run();
         });
         GSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.GSharp;
+            lastKeyPressed = NoteKEYB.GSharp;
             keyPressedCommand.run();
         });
         AKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.A;
+            lastKeyPressed = NoteKEYB.A;
             keyPressedCommand.run();
         });
         ASharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.ASharp;
+            lastKeyPressed = NoteKEYB.ASharp;
             keyPressedCommand.run();
         });
         BKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.B;
+            lastKeyPressed = NoteKEYB.B;
             keyPressedCommand.run();
         });
         CNextOctKey.setOnMousePressed(event -> {
-            lastKeyPressed = Note.C2;
+            lastKeyPressed = NoteKEYB.C2;
             keyPressedCommand.run();
         });
 
@@ -158,55 +158,55 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         this.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case Q:
-                    lastKeyPressed = Note.C;
+                    lastKeyPressed = NoteKEYB.C;
                     keyPressedCommand.run();
                     break;
                 case S:
-                    lastKeyPressed = Note.D;
+                    lastKeyPressed = NoteKEYB.D;
                     keyPressedCommand.run();
                     break;
                 case D:
-                    lastKeyPressed = Note.E;
+                    lastKeyPressed = NoteKEYB.E;
                     keyPressedCommand.run();
                     break;
                 case F:
-                    lastKeyPressed = Note.F;
+                    lastKeyPressed = NoteKEYB.F;
                     keyPressedCommand.run();
                     break;
                 case G:
-                    lastKeyPressed = Note.G;
+                    lastKeyPressed = NoteKEYB.G;
                     keyPressedCommand.run();
                     break;
                 case H:
-                    lastKeyPressed = Note.A;
+                    lastKeyPressed = NoteKEYB.A;
                     keyPressedCommand.run();
                     break;
                 case J:
-                    lastKeyPressed = Note.B;
+                    lastKeyPressed = NoteKEYB.B;
                     keyPressedCommand.run();
                     break;
                 case K:
-                    lastKeyPressed = Note.C2;
+                    lastKeyPressed = NoteKEYB.C2;
                     keyPressedCommand.run();
                     break;
                 case Z:
-                    lastKeyPressed = Note.CSharp;
+                    lastKeyPressed = NoteKEYB.CSharp;
                     keyPressedCommand.run();
                     break;
                 case E:
-                    lastKeyPressed = Note.DSharp;
+                    lastKeyPressed = NoteKEYB.DSharp;
                     keyPressedCommand.run();
                     break;
                 case T:
-                    lastKeyPressed = Note.FSharp;
+                    lastKeyPressed = NoteKEYB.FSharp;
                     keyPressedCommand.run();
                     break;
                 case Y:
-                    lastKeyPressed = Note.GSharp;
+                    lastKeyPressed = NoteKEYB.GSharp;
                     keyPressedCommand.run();
                     break;
                 case U:
-                    lastKeyPressed = Note.ASharp;
+                    lastKeyPressed = NoteKEYB.ASharp;
                     keyPressedCommand.run();
                     break;
                 case X:
@@ -266,7 +266,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         this.octaveChangeCommand = command;
     }
 
-    public Note getNotePressed() {
+    public NoteKEYB getNotePressed() {
         return lastKeyPressed;
     }
 

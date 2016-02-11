@@ -2,7 +2,7 @@ package fr.synthlab.view;
 
 
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
@@ -66,7 +66,7 @@ public class Workbench extends Pane {
 			Module module = viewModule.getModule();
 
 			// Writing module type
-			ModuleEnum type = module.getType();
+			ModuleTypes type = module.getType();
 			logger.fine("Saving module of type \""+type+"\".");
 			outputStream.writeObject(type);
 
@@ -133,7 +133,7 @@ public class Workbench extends Pane {
 		for(int i = 0; i < nbModules; i++) {
 			try {
 				// Reading type
-				ModuleEnum type = (ModuleEnum) inputStream.readObject();
+				ModuleTypes type = (ModuleTypes) inputStream.readObject();
 				logger.fine("Restoring a module of type \""+type+"\".");
 
 				// Reading position

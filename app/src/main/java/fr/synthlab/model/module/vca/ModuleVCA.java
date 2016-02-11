@@ -2,16 +2,12 @@ package fr.synthlab.model.module.vca;
 
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterAttenuator;
-import fr.synthlab.model.filter.VcaAM;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -45,7 +41,7 @@ public class ModuleVCA implements Module {
     /**
      * Attenuation modulator
      */
-    private VcaAM vcaAM;
+    private FilterVCAam filterVCAam;
 
     private double attenuation = 0.0;
 
@@ -54,14 +50,14 @@ public class ModuleVCA implements Module {
      * @param synthesizer
      */
     public ModuleVCA(Synthesizer synthesizer) {
-        vcaAM = new VcaAM(filterAttenuator.output);
+        filterVCAam = new FilterVCAam(filterAttenuator.output);
 
         synthesizer.add(filterAttenuator);
-        synthesizer.add(vcaAM);
+        synthesizer.add(filterVCAam);
 
         inputPort = new InputPort("in", this, filterAttenuator.input);
-        inputPortAm = new InputPort("am", this, vcaAM.input);
-        outputPort = new OutputPort("out", this, vcaAM.output);
+        inputPortAm = new InputPort("am", this, filterVCAam.input);
+        outputPort = new OutputPort("out", this, filterVCAam.output);
 
         ports.add(inputPort);
         ports.add(inputPortAm);
@@ -100,7 +96,7 @@ public class ModuleVCA implements Module {
     @Override
     public void start() {
         filterAttenuator.start();
-        vcaAM.start();
+        filterVCAam.start();
     }
 
     /**
@@ -109,7 +105,7 @@ public class ModuleVCA implements Module {
     @Override
     public void stop() {
         filterAttenuator.stop();
-        vcaAM.stop();
+        filterVCAam.stop();
     }
 
     /**
@@ -125,8 +121,8 @@ public class ModuleVCA implements Module {
      * @return the type of the module
      */
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.VCA;
+    public ModuleTypes getType() {
+        return ModuleTypes.VCA;
     }
 
 }

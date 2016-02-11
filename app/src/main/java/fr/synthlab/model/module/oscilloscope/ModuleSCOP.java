@@ -11,7 +11,7 @@ import com.jsyn.scope.swing.ScopeControlPanel;
 import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -20,9 +20,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -32,8 +29,8 @@ import java.util.logging.Logger;
  * @author Anthony Cobac & Corentin Beauce
  * @see Module
  */
-public class ModuleOscilloscope implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class.getName());
+public class ModuleSCOP implements Module {
+    private static final Logger logger = Logger.getLogger(ModuleSCOP.class.getName());
 
     /**
      * Audio Scope
@@ -69,7 +66,7 @@ public class ModuleOscilloscope implements Module {
      * Constructor
      * @param synth Synthesizer
      */
-    public ModuleOscilloscope(Synthesizer synth) {
+    public ModuleSCOP(Synthesizer synth) {
         scope = new CustomAudioScope(synth);
         pt = new PassThrough();
         in = new InputPort("in", this, pt.input);
@@ -127,8 +124,8 @@ public class ModuleOscilloscope implements Module {
 	}
 
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.SCOP;
+    public ModuleTypes getType() {
+        return ModuleTypes.SCOP;
     }
 
     /**

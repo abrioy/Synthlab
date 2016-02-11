@@ -1,9 +1,9 @@
-package fr.synthlab.model.filter;
+package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
-public class KeyboardFilter extends UnitGenerator {
+public class FilterKEYB extends UnitGenerator {
 
     /**
      * Output voltage to the gate output of the keyboard.
@@ -15,7 +15,7 @@ public class KeyboardFilter extends UnitGenerator {
     /**
      * Constructor
      */
-    public KeyboardFilter() {
+    public FilterKEYB() {
         tension = 0;
         gate = new UnitOutputPort();
         this.addPort(gate);

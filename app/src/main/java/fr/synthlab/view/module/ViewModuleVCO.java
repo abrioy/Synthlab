@@ -1,6 +1,6 @@
 package fr.synthlab.view.module;
 
-import fr.synthlab.model.module.vcoa.ShapeEnum;
+import fr.synthlab.model.module.vcoa.ShapeVCOA;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
@@ -89,16 +89,16 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 	}
 
 
-	public ShapeEnum getSelectedShape() {
+	public ShapeVCOA getSelectedShape() {
 		switch((int)picker.getValue()) {
 			case 0:
-				return ShapeEnum.TRIANGLE;
+				return ShapeVCOA.TRIANGLE;
 			case 1:
-				return ShapeEnum.SQUARE;
+				return ShapeVCOA.SQUARE;
 			case 2:
-				return ShapeEnum.SAWTOOTH;
+				return ShapeVCOA.SAWTOOTH;
 			default:
-				return ShapeEnum.SINE;
+				return ShapeVCOA.SINE;
 		}
 	}
 

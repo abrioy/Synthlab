@@ -1,6 +1,6 @@
 package fr.synthlab.view.controller;
 
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
@@ -74,9 +74,9 @@ public class MainWindowController implements Initializable {
 		// Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
             Dragboard db = event.getDragboard();
-			ModuleEnum moduleType = null;
+			ModuleTypes moduleType = null;
 			try{
-				moduleType = ModuleEnum.valueOf(ModuleEnum.getNameFromLong(db.getString()));
+				moduleType = ModuleTypes.valueOf(ModuleTypes.getNameFromLong(db.getString()));
 			}
 			catch(IllegalArgumentException e){
 				logger.severe("Unable to drag in module, there is no module called \""+db.getString()+"\".");

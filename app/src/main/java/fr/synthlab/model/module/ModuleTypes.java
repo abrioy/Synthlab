@@ -1,6 +1,6 @@
 package fr.synthlab.model.module;
 
-public enum ModuleEnum {
+public enum ModuleTypes {
     VCOA("VCOA", "VCO Type A"),
     VCA("VCA", "VCA"),
     OUT("OUT", "Output"),
@@ -18,13 +18,13 @@ public enum ModuleEnum {
     private String moduleName;
 	private String moduleLongName;
 
-    ModuleEnum(String name, String longName) {
+    ModuleTypes(String name, String longName) {
         this.moduleName = name;
 		this.moduleLongName = longName;
     }
 
     public static String getNameFromLong(String longName) {
-        for (ModuleEnum m : values()) {
+        for (ModuleTypes m : values()) {
             if (m.getLongName().equals(longName)) {
                 return m.moduleName;
             }
