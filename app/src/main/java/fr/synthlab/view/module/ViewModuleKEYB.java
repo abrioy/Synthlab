@@ -4,13 +4,9 @@ import fr.synthlab.model.module.keyboard.Note;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.KEYBKey;
 import fr.synthlab.view.component.Knob;
-import javafx.beans.property.IntegerProperty;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -211,10 +207,12 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
                     keyPressedCommand.run();
                     break;
                 case X:
-                    octavePicker.setValue(octavePicker.getValue() + 1);
+                    if(octavePicker.getValue() < 7)
+                        octavePicker.setValue(octavePicker.getValue() + 1);
                     break;
                 case W:
-                    octavePicker.setValue(octavePicker.getValue() - 1);
+                    if(octavePicker.getValue() > 0)
+                        octavePicker.setValue(octavePicker.getValue() - 1);
                     break;
                 default:
                     break;
