@@ -19,6 +19,7 @@ public class MenuBarController implements Initializable {
 	@FXML private MenuBar menuBar;
 	private Workbench workbench;
 	private Stage stage;
+	private String currentSaveFilePath = null;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -34,38 +35,37 @@ public class MenuBarController implements Initializable {
 	}
 
 	public void onClickFileNew(){
-
+		workbench.removeAllModules();
+		currentSaveFilePath = null;
 	}
 
-	public void onClickFileOpen() throws IOException {
-		FileInputStream file = null;
+	public void onClickFileOpen() {
 		try {
-			file = new FileInputStream("testfile");
-		} catch (FileNotFoundException e) {
+			openSavedFile("testfile");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ObjectInputStream inputStream = new ObjectInputStream(file);
-
-
-		workbench.deSerializeViewModules(inputStream);
-		inputStream.close();
 	}
 
 	public void onClickFileSave(){
-
+		if(currentSaveFilePath != null){
+			try {
+				saveToFile(currentSaveFilePath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else{
+			onClickFileSaveAs();
+		}
 	}
 
-	public void onClickFileSaveAs() throws IOException {
-		FileOutputStream file = null;
+	public void onClickFileSaveAs() {
 		try {
-			file = new FileOutputStream("testfile");
-		} catch (FileNotFoundException e) {
+			saveToFile("testfile");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ObjectOutputStream outputStream = new ObjectOutputStream(file);
-
-		workbench.serializeViewModules(outputStream);
-		outputStream.close();
 	}
 
 	public void onClickFileExit(){
@@ -75,5 +75,32 @@ public class MenuBarController implements Initializable {
 						WindowEvent.WINDOW_CLOSE_REQUEST
 				)
 		);
+	}
+
+
+	private void openSavedFile(String path) throws IOException {
+		logger.info("Loading configuration from file: \""+path+"\".");
+		currentSaveFilePath = path;
+
+		FileInputStream file = new FileInputStream(path);
+		ObjectInputStream inputStream = new ObjectInputStream(file);
+
+		workbench.deSerializeViewModules(inputStream);
+
+		inputStream.close();
+		file.close();
+	}
+
+	private void saveToFile(String path) throws IOException {
+		logger.info("Saving configuration to file: \""+path+"\".");
+		currentSaveFilePath = path;
+
+		FileOutputStream file = new FileOutputStream(path);
+
+		ObjectOutputStream outputStream = new ObjectOutputStream(file);
+
+		workbench.serializeViewModules(outputStream);
+		outputStream.close();
+		file.close();
 	}
 }

@@ -201,7 +201,7 @@ public class Workbench extends Pane {
 	}
 
 
-	private void removeAllModules() {
+	public void removeAllModules() {
 		getViewModules().forEach(this::removeModule);
 	}
 
