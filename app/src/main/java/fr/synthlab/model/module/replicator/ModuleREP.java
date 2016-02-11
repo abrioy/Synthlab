@@ -2,7 +2,7 @@ package fr.synthlab.model.module.replicator;
 
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -71,8 +71,8 @@ public class ModuleREP implements Module {
     }
 
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.REP;
+    public ModuleType getType() {
+        return ModuleType.REP;
     }
 
 }

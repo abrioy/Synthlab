@@ -1,8 +1,8 @@
 package fr.synthlab.view.controller;
 
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
+import fr.synthlab.view.module.ViewModuleFactory;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -73,9 +73,9 @@ public class MainWindowController implements Initializable {
 		// Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
             Dragboard db = event.getDragboard();
-			ModuleTypes moduleType = null;
+			ModuleType moduleType = null;
 			try{
-				moduleType = ModuleTypes.valueOf(ModuleTypes.getNameFromLong(db.getString()));
+				moduleType = ModuleType.valueOf(ModuleType.getNameFromLong(db.getString()));
 			}
 			catch(IllegalArgumentException e){
 				logger.severe("Unable to drag in module, there is no module called \""+db.getString()+"\".");

@@ -1,9 +1,7 @@
-package fr.synthlab.model.module.moduleFactory;
+package fr.synthlab.model.module;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
-import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
 import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.keyboard.ModuleKEYB;
 import fr.synthlab.model.module.mixer.ModuleMIX;
@@ -28,7 +26,7 @@ public class ModuleFactory {
      */
     private static Synthesizer syn = JSyn.createSynthesizer();
 
-    public static Module createModule(ModuleTypes type){
+    public static Module createModule(ModuleType type){
         Module module = null;
         switch(type){
             case VCOA: module = createVCO();

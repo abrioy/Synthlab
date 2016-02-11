@@ -2,7 +2,7 @@ package fr.synthlab.model.module.vcf;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.FilterHighPass;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 
@@ -74,8 +74,8 @@ public class ModuleVCFHP extends ModuleVCF {
      * @return the type of the module
      */
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.VCFHP;
+    public ModuleType getType() {
+        return ModuleType.VCFHP;
     }
 
 }

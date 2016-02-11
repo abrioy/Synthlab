@@ -4,7 +4,7 @@ package fr.synthlab.model.module.vcf;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterFm;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -60,7 +60,7 @@ public abstract class ModuleVCF implements Module {
     }
 
     @Override
-    public abstract ModuleTypes getType();
+    public abstract ModuleType getType();
 
     public double getF0() {
         return f0;

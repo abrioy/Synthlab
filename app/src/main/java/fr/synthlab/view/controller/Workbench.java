@@ -2,13 +2,13 @@ package fr.synthlab.view.controller;
 
 
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
-import fr.synthlab.model.module.moduleFactory.ModuleFactory;
+import fr.synthlab.model.module.ModuleType;
+import fr.synthlab.model.module.ModuleFactory;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
+import fr.synthlab.view.module.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -66,7 +66,7 @@ public class Workbench extends Pane {
 			Module module = viewModule.getModule();
 
 			// Writing module type
-			ModuleTypes type = module.getType();
+			ModuleType type = module.getType();
 			logger.fine("Saving module of type \""+type+"\".");
 			outputStream.writeObject(type);
 
@@ -133,7 +133,7 @@ public class Workbench extends Pane {
 		for(int i = 0; i < nbModules; i++) {
 			try {
 				// Reading type
-				ModuleTypes type = (ModuleTypes) inputStream.readObject();
+				ModuleType type = (ModuleType) inputStream.readObject();
 				logger.fine("Restoring a module of type \""+type+"\".");
 
 				// Reading position

@@ -4,7 +4,7 @@ import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.filter.SEQFilter;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -73,8 +73,8 @@ public class ModuleSEQ implements Module {
     }
 
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.SEQ;
+    public ModuleType getType() {
+        return ModuleType.SEQ;
     }
 
     public void resetStep() {

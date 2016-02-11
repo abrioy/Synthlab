@@ -3,7 +3,7 @@ package fr.synthlab.model.module.whiteNoise;
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.WhiteNoise;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
@@ -55,7 +55,7 @@ public class ModuleBRUI implements Module{
     public void update() {}
 
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.BRUI;
+    public ModuleType getType() {
+        return ModuleType.BRUI;
     }
 }

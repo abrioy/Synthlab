@@ -6,7 +6,7 @@ import com.jsyn.unitgen.LineOut;
 import com.jsyn.util.WaveRecorder;
 import fr.synthlab.model.filter.FilterAttenuator;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -223,8 +223,8 @@ public class ModuleOUT implements Module{
     }
 
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.OUT;
+    public ModuleType getType() {
+        return ModuleType.OUT;
     }
 
     /**

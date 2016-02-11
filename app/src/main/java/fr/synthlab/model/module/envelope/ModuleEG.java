@@ -4,7 +4,7 @@ import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.EnvelopeDAHDSR;
 import com.softsynth.math.AudioMath;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -64,8 +64,8 @@ public class ModuleEG implements Module {
     }
 
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.EG;
+    public ModuleType getType() {
+        return ModuleType.EG;
     }
 
     public void setAttack(double attack){

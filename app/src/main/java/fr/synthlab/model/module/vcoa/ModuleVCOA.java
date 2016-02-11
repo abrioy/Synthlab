@@ -4,7 +4,7 @@ import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.*;
 import fr.synthlab.model.filter.FilterFm;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleTypes;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -175,8 +175,8 @@ public class ModuleVCOA implements Module {
     }
 
     @Override
-    public ModuleTypes getType() {
-        return ModuleTypes.VCOA;
+    public ModuleType getType() {
+        return ModuleType.VCOA;
     }
 
 
