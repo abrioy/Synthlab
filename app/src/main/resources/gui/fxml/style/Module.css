@@ -72,7 +72,11 @@
         -fx-border-color: transparent !important;
         -fx-text-fill: transparent !important;
         }
-
+.rect{
+    -fx-background-image: url("../../texture/black1.jpg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+    }
 #rectStereo {
     -fx-stroke: rgba(136, 221, 153, 0.5);
     -fx-arc-height: 5;
@@ -84,14 +88,21 @@
     -fx-arc-height: 5;
     -fx-arc-width: 5;
 }
+
 #rectOut {
     -fx-fill:transparent;
-
     -fx-stroke: rgba(238, 118, 0, 0.5);
     -fx-stroke-width:2;
     -fx-arc-height: 20;
     -fx-arc-width: 20;
-         -fx-stroke-line-cap: butt;
+    -fx-stroke-line-cap: butt;
+}
 
-
+#rectIn {
+    -fx-fill:transparent;
+    -fx-stroke: rgba(136, 221, 153, 0.5);
+    -fx-stroke-width:2;
+    -fx-arc-height: 20;
+    -fx-arc-width: 20;
+    -fx-stroke-line-cap: butt;
 }

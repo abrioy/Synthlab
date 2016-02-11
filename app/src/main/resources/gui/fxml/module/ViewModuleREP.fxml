@@ -5,20 +5,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.shape.Rectangle?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
-      prefHeight="198" prefWidth="250" minHeight="198" minWidth="250" maxHeight="198" maxWidth="250">
+      prefHeight="97" prefWidth="250" minHeight="97" minWidth="250" maxHeight="97" maxWidth="250">
     <Plug fx:id="in"
-          layoutX="15.0" layoutY="145.0"
-          label="in" name="in" type="input" />
+          layoutX="15.0" layoutY="40.0"
+           name="in" type="input" />
+    <Rectangle styleClass="rect" fx:id="rectIn" mouseTransparent="true"
+               height="55.0" width="162.0" layoutX="11" layoutY="36.0"/>
     <Plug fx:id="out1"
-          layoutX="195.0" layoutY="145.0"
+          layoutX="85.0" layoutY="40.0"
           name="out1" type="output" />
     <Plug fx:id="out2"
-          layoutX="195.0" layoutY="90.0"
+          layoutX="140.0" layoutY="40.0"
           name="out2" type="output" />
     <Plug fx:id="out3"
-          layoutX="195.0" layoutY="35.0"
+          layoutX="195.0" layoutY="40.0"
           name="out3" type="output" />
-    <Label>out</Label>
-    <Rectangle fx:id="rectOut" mouseTransparent="true"
-               height="162.0" width="55.0" layoutX="190" layoutY="31.0"/>
+    <Rectangle styleClass="rect" fx:id="rectOut" mouseTransparent="true"
+               height="53.0" width="163.0" layoutX="81" layoutY="36.0"/>
 </Pane>
