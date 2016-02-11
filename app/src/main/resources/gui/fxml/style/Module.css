@@ -77,6 +77,24 @@
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
     }
+.reset-button{
+        -fx-background-image: url("../../texture/reset.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-color: transparent !important;
+        -fx-background-size: contain !important;
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;
+}
+.reset-button:armed{
+        -fx-background-image: url("../../texture/reset-pressed.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-color: transparent !important;
+        -fx-background-size: contain !important;
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;}
+
 #rectStereo {
     -fx-stroke: rgba(136, 221, 153, 0.5);
     -fx-arc-height: 5;
