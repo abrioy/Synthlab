@@ -2,7 +2,6 @@ package fr.synthlab.model.module.sequencer;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.PassThrough;
-import fr.synthlab.model.filter.SEQFilter;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;

@@ -1,4 +1,4 @@
-package fr.synthlab.model.filter;
+package fr.synthlab.model.module.sequencer;
 
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
