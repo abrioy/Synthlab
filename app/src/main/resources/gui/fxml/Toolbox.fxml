@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.TreeItem?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.layout.*?>
 <Pane stylesheets="/gui/fxml/style/Toolbox.css" xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.synthlab.view.controller.ToolboxController"
@@ -15,4 +16,7 @@
     <TreeView fx:id="filter" focusTraversable="false">
         <TreeItem fx:id="rootFilter" value="Filters"/>
     </TreeView>
+
+    <ColorPicker fx:id="colorPicker" prefHeight="26" prefWidth="180">
+    </ColorPicker>
 </Pane>
