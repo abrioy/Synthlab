@@ -25,7 +25,7 @@ public class ViewModuleSEQ extends ViewModule implements Initializable{
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleSEQ.fxml");
         this.setId("pane");
-        //resetButton.setPrefSize(30,30);
+        resetButton.setPrefSize(40,40);
 
     }
 

@@ -53,11 +53,11 @@
               min="-1" max="1" value="0" />
     </FlowPane>
 
-    <Label fx:id="stepLabel" layoutX="420.0" layoutY="55.0"
+    <Label fx:id="stepLabel" layoutX="420.0" layoutY="45.0"
            styleClass="display"
            prefHeight="44.0" prefWidth="40.0" text="" />
 
     <ResetButton fx:id="resetButton"
-          layoutX="420.0" layoutY="95.0" />
+          layoutX="420.0" layoutY="80.0" />
 
 </Pane>
