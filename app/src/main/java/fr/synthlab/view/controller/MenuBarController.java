@@ -5,6 +5,7 @@ import fr.synthlab.view.Workbench;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -19,7 +20,7 @@ public class MenuBarController implements Initializable {
 	@FXML private MenuBar menuBar;
 	private Workbench workbench;
 	private Stage stage;
-	private String currentSaveFilePath = null;
+	private File currentSaveFile = null;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -36,34 +37,36 @@ public class MenuBarController implements Initializable {
 
 	public void onClickFileNew(){
 		workbench.removeAllModules();
-		currentSaveFilePath = null;
+		currentSaveFile = null;
 	}
 
 	public void onClickFileOpen() {
 		try {
-			openSavedFile("testfile");
+			FileChooser chooser = createFileBrowser("Open a project.");
+			File target = chooser.showOpenDialog(stage);
+			openSavedFile(target);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void onClickFileReload(){
-		if(currentSaveFilePath != null){
+		if(currentSaveFile != null){
 			try {
-				openSavedFile(currentSaveFilePath);
+				openSavedFile(currentSaveFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		else{
-			onClickFileSaveAs();
+			onClickFileOpen();
 		}
 	}
 
 	public void onClickFileSave(){
-		if(currentSaveFilePath != null){
+		if(currentSaveFile != null){
 			try {
-				saveToFile(currentSaveFilePath);
+				saveToFile(currentSaveFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -75,7 +78,9 @@ public class MenuBarController implements Initializable {
 
 	public void onClickFileSaveAs() {
 		try {
-			saveToFile("testfile");
+			FileChooser chooser = createFileBrowser("Save as...");
+			File target = chooser.showSaveDialog(stage);
+			saveToFile(target);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -83,37 +88,69 @@ public class MenuBarController implements Initializable {
 
 	public void onClickFileExit(){
 		stage.fireEvent(
-				new WindowEvent(
-						stage,
-						WindowEvent.WINDOW_CLOSE_REQUEST
-				)
+			new WindowEvent(
+				stage,
+				WindowEvent.WINDOW_CLOSE_REQUEST
+			)
 		);
 	}
 
+	private FileChooser createFileBrowser(String windowName){
+		FileChooser chooser = new FileChooser();
+		chooser.setTitle(windowName);
 
-	private void openSavedFile(String path) throws IOException {
-		logger.info("Loading configuration from file: \""+path+"\".");
-		currentSaveFilePath = path;
+		// Setting the correct extension
+		FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
+				"Synthlab project", "syn"
+		);
+		chooser.setSelectedExtensionFilter(extensionFilter);
 
-		FileInputStream file = new FileInputStream(path);
-		ObjectInputStream inputStream = new ObjectInputStream(file);
+		// Setting the default path/name
+		if(currentSaveFile != null) {
+			chooser.setInitialFileName(currentSaveFile.getName());
 
-		workbench.deSerializeViewModules(inputStream);
+			File parent = new File(currentSaveFile.getParent());
+			chooser.setInitialDirectory(parent);
+		}
+		else {
+			chooser.setInitialFileName("New project.syn");
+		}
 
-		inputStream.close();
-		file.close();
+		return chooser;
 	}
 
-	private void saveToFile(String path) throws IOException {
-		logger.info("Saving configuration to file: \""+path+"\".");
-		currentSaveFilePath = path;
+	private void openSavedFile(File file) throws IOException {
+		if(file == null) {
+			logger.warning("Attempting to load a project from null file.");
+		}
+		else{
+			logger.info("Loading configuration from file: \"" + file + "\".");
+			currentSaveFile = file;
 
-		FileOutputStream file = new FileOutputStream(path);
+			FileInputStream fileStream = new FileInputStream(file);
+			ObjectInputStream inputStream = new ObjectInputStream(fileStream);
 
-		ObjectOutputStream outputStream = new ObjectOutputStream(file);
+			workbench.deSerializeViewModules(inputStream);
 
-		workbench.serializeViewModules(outputStream);
-		outputStream.close();
-		file.close();
+			inputStream.close();
+			fileStream.close();
+		}
+	}
+
+	private void saveToFile(File file) throws IOException {
+		if(file == null) {
+			logger.warning("Attempting to save a project to a null file.");
+		}
+		else {
+			logger.info("Saving configuration to file: \"" + file + "\".");
+			currentSaveFile = file;
+
+			FileOutputStream fileSteam = new FileOutputStream(file);
+			ObjectOutputStream outputStream = new ObjectOutputStream(fileSteam);
+
+			workbench.serializeViewModules(outputStream);
+			outputStream.close();
+			fileSteam.close();
+		}
 	}
 }
