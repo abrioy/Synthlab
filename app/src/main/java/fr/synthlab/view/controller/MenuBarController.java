@@ -100,16 +100,14 @@ public class MenuBarController implements Initializable {
 
 		// Setting the correct extension
 		FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
-				"Synthlab project", "syn"
+				"Synthlab project (.syn)", "syn"
 		);
 		chooser.setSelectedExtensionFilter(extensionFilter);
 
 		// Setting the default path/name
 		if(currentSaveFile != null) {
 			chooser.setInitialFileName(currentSaveFile.getName());
-
-			File parent = new File(currentSaveFile.getParent());
-			chooser.setInitialDirectory(parent);
+			chooser.setInitialDirectory(currentSaveFile.getParentFile());
 		}
 		else {
 			chooser.setInitialFileName("New project.syn");

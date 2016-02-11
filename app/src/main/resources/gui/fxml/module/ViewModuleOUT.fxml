@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import fr.synthlab.view.component.*?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
@@ -10,13 +11,17 @@
           diameter="80.0" layoutX="190.0" layoutY="100.0"
           min="-12" max="12"/>
 
+    <RecordButton fx:id="recordButton"
+                  layoutX="125.0" layoutY="155.0">
+    </RecordButton>
+
+    <Button fx:id="fileChooserButton"
+            layoutX="150.0" layoutY="155.0">
+    </Button>
+
     <MuteButton fx:id="muteButton"
             layoutX="175.0" layoutY="155.0">
     </MuteButton>
-
-    <RecordButton fx:id="recordButton"
-                layoutX="125.0" layoutY="155.0">
-    </RecordButton>
 
     <Rectangle fx:id="rectStereo" mouseTransparent="true"
                height="70.0" width="115.0" layoutX="5" layoutY="50.0"/>

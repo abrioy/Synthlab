@@ -2,11 +2,11 @@ package fr.synthlab.view.module;
 
 
 import fr.synthlab.model.module.Module;
+import fr.synthlab.model.module.ModuleFactory;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.keyboard.ModuleKEYB;
 import fr.synthlab.model.module.mixer.ModuleMIX;
-import fr.synthlab.model.module.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
 import fr.synthlab.model.module.out.ModuleOUT;
 import fr.synthlab.model.module.vca.ModuleVCA;
@@ -17,10 +17,11 @@ import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.module.filter.*;
 import fr.synthlab.view.module.input.ViewModuleBRUI;
 import fr.synthlab.view.module.input.ViewModuleKEYB;
+import fr.synthlab.view.module.input.ViewModuleVCOA;
 import fr.synthlab.view.module.output.ViewModuleOUT;
 import fr.synthlab.view.module.output.ViewModuleSCOP;
-import fr.synthlab.view.module.input.ViewModuleVCOA;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 public class ViewModuleFactory {
@@ -121,10 +122,11 @@ public class ViewModuleFactory {
         viewOut.setVolumeCommand(() -> ((ModuleOUT) out).setAttenuation(viewOut.getPicker().getValue()));
         viewOut.setMuteCommand(() -> ((ModuleOUT) out).setMute(viewOut.isMute()));
         viewOut.setRecordCommand(() -> {
-                    if (viewOut.getPickedFile() != null)
-                        ((ModuleOUT) out).setRecording(viewOut.isRecording(), viewOut.getPickedFile());
+					File recordingFile = viewOut.getRecordingFile();
+					if (recordingFile != null)
+						((ModuleOUT) out).setRecording(viewOut.isRecording(), recordingFile);
 
-                }
+				}
         );
 
         return viewOut;
