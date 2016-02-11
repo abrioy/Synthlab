@@ -3,6 +3,8 @@ package fr.synthlab.view.module;
 import fr.synthlab.view.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.MuteButton;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -26,7 +28,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
     private Runnable muteCommand;
 
-    private boolean mute;
+    private BooleanProperty mute = new SimpleBooleanProperty();
 
     public ViewModuleOUT(Workbench workbench) {
         super(workbench);
@@ -51,7 +53,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     }
 
     public boolean isMute() {
-        return mute;
+        return mute.getValue();
     }
 
     @Override
@@ -60,21 +62,23 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
             volume.run();
         });
         muteButton.setOnAction(event -> {
-            mute = !mute;
-            muteButton.setToggle(mute);
+            mute.setValue(!mute.getValue());
             muteCommand.run();
         });
+		mute.addListener((observable, oldValue, newValue) -> {
+			muteButton.setToggle(newValue);
+		});
     }
 
 	@Override
 	public void writeObject(ObjectOutputStream o) throws IOException {
 		o.writeDouble(picker.getValue());
-		o.writeBoolean(mute);
+		o.writeBoolean(mute.getValue());
 	}
 
 	@Override
 	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
 		picker.setValue(o.readDouble());
-		mute = o.readBoolean(); // FIXME: not updating the button (use a property ?)
+		mute.setValue(o.readBoolean());
 	}
 }
