@@ -33,7 +33,7 @@
 
 
 
-.button-release {
+.mute-release {
     -fx-background-image: url("../../texture/button.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
@@ -43,16 +43,35 @@
         -fx-text-fill: transparent !important;
     }
 
-.button-pressed {
--fx-background-image: url("../../texture/button-pressed.png") ;
+.mute-pressed {
+        -fx-background-image: url("../../texture/button-pressed.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-size: contain !important;
         -fx-background-color: transparent !important;
--fx-border-color: transparent !important;
-        -fx-text-fill: transparent !important;}
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;
+        }
 
+.record-release {
+    -fx-background-image: url("../../texture/rec.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-color: transparent !important;
+        -fx-background-size: contain !important;
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;
+    }
 
+.record-pressed {
+        -fx-background-image: url("../../texture/stop.png") ;
+        -fx-background-repeat: stretch !important;
+        -fx-background-position: center center !important;
+        -fx-background-size: contain !important;
+        -fx-background-color: transparent !important;
+        -fx-border-color: transparent !important;
+        -fx-text-fill: transparent !important;
+        }
 
 #rectStereo {
     -fx-fill: rgba(136, 221, 153, 0.1);

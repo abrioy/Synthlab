@@ -39,6 +39,7 @@ public abstract class ViewModule extends Pane implements Serializable {
 		this.getStylesheets().add("/gui/fxml/style/Module.css");
 
 		topPane = new AnchorPane();
+		topPane.setFocusTraversable(false);
 		topPane.setMaxHeight(30.0d);
 		topPane.relocate(10, 5);
 		this.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
@@ -48,17 +49,19 @@ public abstract class ViewModule extends Pane implements Serializable {
 		this.getChildren().add(topPane);
 
 		moduleName = new Label();
+		moduleName.setFocusTraversable(false);
 		moduleName.setFont(new Font("Arial", 20));
 		topPane.getChildren().add(moduleName);
 		AnchorPane.setLeftAnchor(moduleName, 0.0d);
 
 		closeButton = new Button();
+		closeButton.setFocusTraversable(false);
 		closeButton.getStyleClass().add("close-button");
 		closeButton.setPrefSize(5, 5);
 		topPane.getChildren().add(closeButton);
 		AnchorPane.setRightAnchor(closeButton, 0.0d);
 		closeButton.setOnMouseClicked(event -> {
-			logger.fine("Module \""+module.getType()+"\" is asking to be closed.");
+			logger.fine("Module \"" + module.getType() + "\" is asking to be closed.");
 			workbench.onModuleCloseRequest(this);
 			event.consume();
 		});

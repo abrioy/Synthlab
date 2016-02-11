@@ -4,6 +4,7 @@ package fr.synthlab.view.viewModuleFactory;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleEnum;
 import fr.synthlab.model.module.envelope.ModuleEG;
+import fr.synthlab.model.module.keyboard.ModuleKEYB;
 import fr.synthlab.model.module.mixer.ModuleMixer;
 import fr.synthlab.model.module.moduleFactory.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
@@ -18,46 +19,50 @@ import fr.synthlab.view.module.*;
 import java.util.logging.Logger;
 
 public class ViewModuleFactory {
-	private static final Logger logger = Logger.getLogger(ViewModuleFactory.class.getName());
+    private static final Logger logger = Logger.getLogger(ViewModuleFactory.class.getName());
 
 
     public static ViewModule createViewModule(ModuleEnum type, Workbench workbench) {
         ViewModule module = null;
-		switch (type) {
+        switch (type) {
             case VCOA:
-				module = createViewModuleVCO(workbench);
-				break;
+                module = createViewModuleVCO(workbench);
+                break;
             case VCA:
                 module = createViewModuleVCA(workbench);
                 break;
             case OUT:
                 module = createViewModuleOut(workbench);
-				break;
+                break;
             case SCOP:
                 module = createViewModuleOscilloscope(workbench);
-				break;
+                break;
             case REP:
                 module = createViewModuleREP(workbench);
                 break;
             case EG:
                 module = createViewModuleEG(workbench);
                 break;
-			case VCFLP:
-				module = createViewModuleVCFLP(workbench);
-				break;
+            case VCFLP:
+                module = createViewModuleVCFLP(workbench);
+                break;
             case VCFHP:
                 module = createViewModuleVCFHP(workbench);
                 break;
             case MIX:
                 module = createViewModuleMixer(workbench);
                 break;
+            case BRUI:
+                module = createViewModuleWhiteNoise(workbench);
+                break;
+            case KEYB:
+                module = createViewModuleKEYB(workbench);
         }
-		if (module != null) {
-			logger.finer("ViewModule created: " + type.toString());
-		}
-		else{
-			logger.severe("Unrecognised module type \""+type.toString()+"\".");
-		}
+        if (module != null) {
+            logger.finer("ViewModule created: " + type.toString());
+        } else {
+            logger.severe("Unrecognised module type \"" + type.toString() + "\".");
+        }
         return module;
     }
 
@@ -95,14 +100,14 @@ public class ViewModuleFactory {
         return viewVco;
     }
 
-	private static ViewModule createViewModuleVCA(Workbench workbench) {
-		Module vca = ModuleFactory.createModule(ModuleEnum.VCA);
-		ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
-		viewVca.setModule(vca);
-		viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca).setAttenuation(viewVca.getAmpli()));
+    private static ViewModule createViewModuleVCA(Workbench workbench) {
+        Module vca = ModuleFactory.createModule(ModuleEnum.VCA);
+        ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
+        viewVca.setModule(vca);
+        viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca).setAttenuation(viewVca.getAmpli()));
 
-		return viewVca;
-	}
+        return viewVca;
+    }
 
     private static ViewModule createViewModuleOut(Workbench workbench) {
         Module out = ModuleFactory.createModule(ModuleEnum.OUT);
@@ -110,8 +115,23 @@ public class ViewModuleFactory {
         viewOut.setModule(out);
         viewOut.setVolumeCommand(() -> ((ModuleOut) out).setAttenuation(viewOut.getPicker().getValue()));
         viewOut.setMuteCommand(() -> ((ModuleOut) out).setMute(viewOut.isMute()));
+        viewOut.setRecordCommand(() -> {
+                    if (viewOut.getPickedFile() != null)
+                        ((ModuleOut) out).setRecording(viewOut.isRecording(), viewOut.getPickedFile());
+
+                }
+        );
 
         return viewOut;
+    }
+    private static ViewModule createViewModuleWhiteNoise(Workbench workbench) {
+        Module brui = ModuleFactory.createModule(ModuleEnum.BRUI);
+        ViewModuleWhiteNoise viewNoise = new ViewModuleWhiteNoise(workbench);
+        viewNoise.setModule(brui);
+        //viewNoise.setVolumeCommand(() -> ((ModuleOut) out).setAttenuation(viewNoise.getPicker().getValue()));
+        //viewNoise.setMuteCommand(() -> ((ModuleOut) out).setMute(viewNoise.isMute()));
+
+        return viewNoise;
     }
 
     private static ViewModule createViewModuleOscilloscope(Workbench workbench) {
@@ -122,7 +142,7 @@ public class ViewModuleFactory {
 
         viewScop.getOscilloscopeDrawing().setModuleOscilloscope((ModuleOscilloscope) scop);
 
-		return viewScop;
+        return viewScop;
     }
 
     private static ViewModule createViewModuleREP(Workbench workbench) {
@@ -149,16 +169,16 @@ public class ViewModuleFactory {
         return viewEG;
     }
 
-	private static ViewModule createViewModuleVCFLP(Workbench workbench) {
-		Module vcflp = ModuleFactory.createModule(ModuleEnum.VCFLP);
-		ViewModuleVCFLP viewVcflp = new ViewModuleVCFLP(workbench);
-		viewVcflp.setModule(vcflp);
+    private static ViewModule createViewModuleVCFLP(Workbench workbench) {
+        Module vcflp = ModuleFactory.createModule(ModuleEnum.VCFLP);
+        ViewModuleVCFLP viewVcflp = new ViewModuleVCFLP(workbench);
+        viewVcflp.setModule(vcflp);
         viewVcflp.setChangeThresholdCommand(() -> ((ModuleVCFLP) vcflp).setF0(viewVcflp.getThreshold()));
-		viewVcflp.setChangeResonanceCommand(() -> ((ModuleVCFLP) vcflp).setResonance(viewVcflp.getResonance()));
+        viewVcflp.setChangeResonanceCommand(() -> ((ModuleVCFLP) vcflp).setResonance(viewVcflp.getResonance()));
 
 
-		return viewVcflp;
-	}
+        return viewVcflp;
+    }
 
     private static ViewModule createViewModuleVCFHP(Workbench workbench) {
         Module vcfhp = ModuleFactory.createModule(ModuleEnum.VCFHP);
@@ -169,14 +189,19 @@ public class ViewModuleFactory {
         return viewVcfhp;
     }
 
-
     private static ViewModule createViewModuleKEYB(Workbench workbench) {
         Module keyb = ModuleFactory.createModule(ModuleEnum.KEYB);
         ViewModuleKEYB viewKEYB = new ViewModuleKEYB(workbench);
         viewKEYB.setModule(keyb);
 
+        viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb).pressKey(viewKEYB.getNotePressed()));
+        viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb).releaseKey());
+        viewKEYB.setOctaveChangeCommand(() -> ((ModuleKEYB) keyb).changeOctave(viewKEYB.getOctave()));
+
+        viewKEYB.setOnMouseClicked(event -> {
+            viewKEYB.requestFocus();
+        });
+
         return viewKEYB;
     }
-
-
 }

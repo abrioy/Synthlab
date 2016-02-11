@@ -210,23 +210,19 @@ public class Workbench extends Pane {
 	 * @param module
 	 */
 	public void removeModule(ViewModule module) {
-        for (Node child : module.getChildren()) {
-            if (child instanceof Pane) {
-                Pane core = (Pane)child;
-                for (Node plug : core.getChildren()) {
-                    if (plug instanceof Plug) {
-                        Cable c =getConnectedCable((Plug)plug);
-                        if (c!=null) {
-                            disconnectPlug((Plug) plug);
-                            c.deleteCircles();
-                            this.getChildren().remove(c);
-                        }
-
-                    }
+        module.getChildren().stream().filter(child -> child instanceof Pane).forEach(child -> {
+            Pane core = (Pane) child;
+            core.getChildren().stream().filter(plug -> plug instanceof Plug).forEach(plug -> {
+                Cable c = getConnectedCable((Plug) plug);
+                if (c != null) {
+					disconnectPlug((Plug) plug);
+                    c.deleteCircles();
+                    this.getChildren().remove(c);
                 }
 
-            }
-        }
+            });
+
+        });
 		this.getChildren().remove(module);
 	}
 
@@ -519,7 +515,9 @@ public class Workbench extends Pane {
      */
     private void disconnectPlug(Plug plug){
         Port p = plug.getPort();
-        p.disconnect();
+        if (p.isConnected()) {
+            p.disconnect();
+        }
     }
 
     /**
@@ -548,8 +546,10 @@ public class Workbench extends Pane {
 
     private Cable getConnectedCable(Plug plug){
         for(Cable c : getCables()){
-			Plug test = c.getOppositePlug(plug);
-            if(test != null){
+            if (c.getPluggedPlug() == plug){
+                return c;
+            }
+            if(c.getOppositePlug(plug) != null){
 				return c;
 			}
         }

@@ -2,17 +2,16 @@ package fr.synthlab.model.module;
 
 public enum ModuleEnum {
     VCOA("VCOA", "VCO Type A"),
-
-	VCA("VCA", "VCA"),
-	OUT("OUT", "Output"),
-	SCOP("SCOP", "Oscilloscope"),
-	REP("REP", "Repeater"),
-	EG("EG", "Envelope Generator"),
+    VCA("VCA", "VCA"),
+    OUT("OUT", "Output"),
+    SCOP("SCOP", "Oscilloscope"),
+    REP("REP", "Repeater"),
+    EG("EG", "Envelope Generator"),
 	VCFLP("VCFLP", "VCF (LP)"),
-	VCFHP("VCFHP", "VCF (HP)"),
-	KEYB("KEYB", "Keyboard"),
-	MIX("MIX", "MIX"),
-	REC("REC", "ModuleRecorder");
+    VCFHP("VCFHP", "VCF (HP)"),
+    KEYB("KEYB", "Keyboard"),
+    MIX("MIX", "MIX"),
+    BRUI("BRUI","White Noise" );
 
 	private static final long serialVersionUID = 1L;
 

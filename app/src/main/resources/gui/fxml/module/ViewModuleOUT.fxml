@@ -14,6 +14,10 @@
             layoutX="175.0" layoutY="155.0">
     </MuteButton>
 
+    <RecordButton fx:id="recordButton"
+                layoutX="125.0" layoutY="155.0">
+    </RecordButton>
+
     <Rectangle fx:id="rectStereo" mouseTransparent="true"
                height="70.0" width="115.0" layoutX="5" layoutY="50.0"/>
     <Plug fx:id="inStereoL"

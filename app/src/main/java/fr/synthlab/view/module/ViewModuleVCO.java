@@ -55,12 +55,14 @@ public class ViewModuleVCO extends ViewModule implements Initializable {
 			changeShapeCommand.run();
 		});
 
-		frequencyLabel.setText(((int)getFreq())+" Hz");
+		double f = (double) Math.round((getFreq()*10))/10;
+		frequencyLabel.setText(f+" Hz");
 	}
 
 	private void updateFrequency() {
 		changeFreqCommand.run();
-		frequencyLabel.setText(((int)getFreq())+" Hz");
+		double f = (double) Math.round((getFreq()*10))/10;
+		frequencyLabel.setText(f+" Hz");
 	}
 
 	public void setChangeShapeCommand(Runnable changeShape) {
