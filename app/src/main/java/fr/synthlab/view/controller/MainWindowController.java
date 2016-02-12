@@ -59,7 +59,6 @@ public class MainWindowController implements Initializable {
 		zoomLevel.addListener((observable, oldValue, newValue) -> {
 			final double zoom = Math.min(2, Math.max(0.5, newValue.doubleValue()));
 
-			logger.info(String.valueOf(zoom));
 			workbench.setScaleX(1.0d / zoom);
 			workbench.setScaleY(1.0d / zoom);
 
