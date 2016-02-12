@@ -78,6 +78,12 @@ public class ToolboxController implements Initializable {
         rootFilter.setExpanded(true);
         treeView.setShowRoot(false);
 
+        int length = 0;
+        for(TreeItem item : treeItemRoot.getChildren()){
+            length += (1+item.getChildren().size());
+        }
+        treeView.setPrefHeight(length * 25);
+
         colorPicker.valueProperty().addListener(listener -> colorChange());
 
         colorPicker.setValue(Color.DARKRED);
