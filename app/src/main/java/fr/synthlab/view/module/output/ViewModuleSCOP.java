@@ -37,19 +37,6 @@ public class ViewModuleSCOP extends ViewModule implements Initializable {
 			pickerCmd.run();
 		});
 
-		/*
-
-		this.setOnMouseClicked(event -> {
-			logger.info("CLICKED");
-			ViewModule vco = ViewModuleFactory.createViewModule(ModuleType.VCOA, w);
-
-			vco.getModule().getPort("out").connect(this.getModule().getPort("in"));
-
-			w.addModule(vco);
-		});
-
-		*/
-
 	}
 
 	public void setPickerCommand(Runnable pickerCmd) {

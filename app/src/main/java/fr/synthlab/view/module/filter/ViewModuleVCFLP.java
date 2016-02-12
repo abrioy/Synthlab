@@ -62,7 +62,6 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 
 	public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
 		this.changeThresholdCommand = changeThresholdCommand;
-
 		changeThresholdCommand.run();
 	}
 
@@ -77,7 +76,6 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
 
 	public void setChangeResonanceCommand(Runnable changeResonanceCommand) {
 		this.changeResonanceCommand = changeResonanceCommand;
-
 		changeResonanceCommand.run();
 	}
 

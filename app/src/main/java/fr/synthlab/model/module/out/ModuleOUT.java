@@ -142,18 +142,13 @@ public class ModuleOUT implements Module{
 
         try {
             if (recording) {
-                if (pickedFile.createNewFile()){
-					waveRecorder = new WaveRecorder(syn, pickedFile);
-					((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 0);
-					((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 1);
-					((UnitOutputPort) interOutLeft.getOutput()).connect(0, waveRecorder.getInput(), 0);
-					((UnitOutputPort) interOutRight.getOutput()).connect(0, waveRecorder.getInput(), 1);
+				waveRecorder = new WaveRecorder(syn, pickedFile);
+				((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 0);
+				((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 1);
+				((UnitOutputPort) interOutLeft.getOutput()).connect(0, waveRecorder.getInput(), 0);
+				((UnitOutputPort) interOutRight.getOutput()).connect(0, waveRecorder.getInput(), 1);
 
-					waveRecorder.start();
-				}
-				else{
-					logger.warning("Unable to create a new file to record.");
-				}
+				waveRecorder.start();
             } else if (waveRecorder != null) {
                 waveRecorder.stop();
 
