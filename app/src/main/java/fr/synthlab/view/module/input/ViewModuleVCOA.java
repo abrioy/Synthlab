@@ -56,14 +56,13 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
 			changeShapeCommand.run();
 		});
 
-		double f = (double) Math.round((getFreq()*10))/10;
-		frequencyLabel.setText(f+" Hz");
+
+		frequencyLabel.setText(getFreq()+" Hz");
 	}
 
 	private void updateFrequency() {
 		changeFreqCommand.run();
-		double f = (double) Math.round((getFreq()*10))/10;
-		frequencyLabel.setText(f+" Hz");
+		frequencyLabel.setText(getFreq()+" Hz");
 	}
 
 	public void setChangeShapeCommand(Runnable changeShape) {
@@ -86,6 +85,7 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
 		else if (f > 22000) {
 			f = 22000;
 		}
+		f = Math.round((f*10.0d))/10.0d;
 		return f;
 	}
 

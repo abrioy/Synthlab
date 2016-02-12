@@ -3,14 +3,14 @@ package fr.synthlab.model.module;
 public enum ModuleType {
     VCOA("VCOA", "VCO Type A"),
     VCA("VCA", "VCA"),
-    OUT("OUT", "Output"),
+    OUT("OUT", "Audio Output"),
     SCOP("SCOP", "Oscilloscope"),
     REP("REP", "Repeater"),
     EG("EG", "Envelope Generator"),
 	VCFLP("VCFLP", "VCF (LP)"),
     VCFHP("VCFHP", "VCF (HP)"),
     KEYB("KEYB", "Keyboard"),
-    MIX("MIX", "MIX"),
+    MIX("MIX", "Mixer"),
     BRUI("BRUI","White Noise"),
     SEQ("SEQ","Sequencer");
 

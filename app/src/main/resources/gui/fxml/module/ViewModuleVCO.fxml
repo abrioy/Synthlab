@@ -16,10 +16,10 @@
           min="0" max="22000" scaleType="log" value="440"/>
     <Knob fx:id="freqLine"
           diameter="52.0" layoutX="190.0" layoutY="250.0"
-          min="-50" max="50" />
-    <Label fx:id="frequencyLabel" layoutX="85.0" layoutY="320.0"
+          min="-10" max="10" />
+    <Label fx:id="frequencyLabel" layoutX="75.0" layoutY="320.0"
            styleClass="display"
-           prefHeight="44.0" prefWidth="80.0" text="" />
+           prefHeight="44.0" prefWidth="100.0" text="" />
     <Plug fx:id="fm"
           layoutX="15.0" layoutY="345.0"
           label="fm" name="fm" type="modulation" />
