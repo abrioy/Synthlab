@@ -128,16 +128,19 @@ public class ViewModuleFactory {
         viewOut.setVolumeCommand(() -> ((ModuleOUT) out).setAttenuation(viewOut.getPicker().getValue()));
         viewOut.setMuteCommand(() -> ((ModuleOUT) out).setMute(viewOut.isMute()));
         viewOut.setRecordCommand(() -> {
-					File recordingFile = viewOut.getRecordingFile();
-					if (recordingFile == null) {
-						viewOut.setIsRecording(false);
-					}
-					else {
-						((ModuleOUT) out).setRecording(viewOut.isRecording(), recordingFile);
-					}
+            if (!((ModuleOUT) out).isRecording()) {
+                File recordingFile = viewOut.getRecordingFile();
+                if (recordingFile == null) {
+                    viewOut.setIsRecording(false);
+                } else {
+                    ((ModuleOUT) out).setRecording(viewOut.isRecording(), recordingFile);
+                }
 
-				}
-        );
+            } else {
+                viewOut.setIsRecording(false);
+                ((ModuleOUT) out).setRecording(viewOut.isRecording(), null);
+            }
+        });
 
         return viewOut;
     }

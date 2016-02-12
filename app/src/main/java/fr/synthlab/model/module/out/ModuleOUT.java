@@ -78,6 +78,7 @@ public class ModuleOUT implements Module{
     private boolean mute = false;
 
     private WaveRecorder waveRecorder;
+    private boolean recording = false;
 
     /**
      * constructor.
@@ -135,6 +136,7 @@ public class ModuleOUT implements Module{
     }
 
     public void setRecording(boolean recording, File pickedFile) {
+        this.recording= recording;
 
         try {
             if (recording) {
@@ -228,5 +230,9 @@ public class ModuleOUT implements Module{
         attenuatorLeft.setAttenuation(attenuation);
         attenuatorRight.setAttenuation(attenuation);
         attenuator.setAttenuation(attenuation);
+    }
+
+    public boolean isRecording() {
+        return recording;
     }
 }
