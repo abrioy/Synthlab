@@ -5,7 +5,12 @@ package fr.synthlab.view;
  */
 public enum Skin {
 	Default("Default"),
-	Fire("Fire");
+	Black1("Black1"),
+	Black2("Black2"),
+    Carbon("Carbon"),
+	Aluminum("Aluminum"),
+	Wood("Wood"),
+	Colorful("Colorful");
 
 
 	private static final long serialVersionUID = 1L;
