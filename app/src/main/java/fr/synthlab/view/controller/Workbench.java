@@ -199,7 +199,7 @@ public class Workbench extends Pane {
 
 			// Checking this port is not already connected
 			if(!plug.getPort().isConnected()) {
-				logger.info("\t"+portReference.parentUID+"."+portReference.name
+				logger.fine("\t"+portReference.parentUID+"."+portReference.name
 						+" -- "+portReference.cableColor+" --> "
 						+portReference.connectedUID+"."+portReference.connectedPortName);
 				this.connectPlugs(plug, connectedPlug);
