@@ -32,7 +32,7 @@ public class ToolboxController implements Initializable {
     @FXML
     private ColorPicker colorPicker;
 
-    private static Color color;
+    private static Color color = Color.BLACK;
 
     private Consumer<DragEvent> onDragDone = null;
 
