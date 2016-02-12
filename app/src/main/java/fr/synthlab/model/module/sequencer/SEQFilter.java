@@ -18,8 +18,8 @@ public class SEQFilter extends UnitFilter {
 
     /**
      * Constructor
-     * @param stepValues
-     * @param seq
+     * @param stepValues list of value
+     * @param seq sequence
      */
     public SEQFilter(List<Double> stepValues, ModuleSEQ seq) {
         tension = stepValues;

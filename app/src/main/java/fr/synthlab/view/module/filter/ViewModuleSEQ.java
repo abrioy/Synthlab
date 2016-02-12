@@ -1,9 +1,10 @@
 package fr.synthlab.view.module.filter;
 
 import fr.synthlab.view.component.Knob;
-import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.ResetButton;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.module.ViewModule;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -158,7 +159,6 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
 
     @Override
     public void update(Observable o, Object arg) {
-        stepLabel.setText(arg.toString());
-        System.out.println(stepLabel.getText());
+        Platform.runLater(() -> stepLabel.setText(arg.toString()));
     }
 }
