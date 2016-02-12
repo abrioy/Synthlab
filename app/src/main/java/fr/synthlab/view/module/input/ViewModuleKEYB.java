@@ -23,31 +23,31 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     private static final Logger logger = Logger.getLogger(ViewModuleKEYB.class.getName());
 
     @FXML
-	KeyboardKey CKey;
+    private KeyboardKey CKey;
     @FXML
-	KeyboardKey CSharpKey;
+	private KeyboardKey CSharpKey;
     @FXML
-	KeyboardKey DKey;
+	private KeyboardKey DKey;
     @FXML
-	KeyboardKey DSharpKey;
+	private KeyboardKey DSharpKey;
     @FXML
-	KeyboardKey EKey;
+	private KeyboardKey EKey;
     @FXML
-	KeyboardKey FKey;
+	private KeyboardKey FKey;
     @FXML
-	KeyboardKey FSharpKey;
+	private KeyboardKey FSharpKey;
     @FXML
-	KeyboardKey GKey;
+	private KeyboardKey GKey;
     @FXML
-	KeyboardKey GSharpKey;
+	private KeyboardKey GSharpKey;
     @FXML
-	KeyboardKey AKey;
+	private KeyboardKey AKey;
     @FXML
-	KeyboardKey ASharpKey;
+	private KeyboardKey ASharpKey;
     @FXML
-	KeyboardKey BKey;
+	private KeyboardKey BKey;
     @FXML
-	KeyboardKey CNextOctKey;
+	private KeyboardKey CNextOctKey;
 
     @FXML
     Knob octavePicker;
@@ -150,7 +150,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 			event.consume();
         });
 
-        Collection<KeyboardKey> keysColl = new ArrayList<KeyboardKey>();
+        Collection<KeyboardKey> keysColl = new ArrayList<>();
         keysColl.add(CKey);
         keysColl.add(CSharpKey);
         keysColl.add(DKey);
@@ -166,13 +166,9 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         keysColl.add(CNextOctKey);
 
         for (KeyboardKey key : keysColl) {
-            key.setOnMouseReleased(event -> {
-                keyReleasedCommand.run();
-            });
+            key.setOnMouseReleased(event -> keyReleasedCommand.run());
 
-            key.setOnMouseExited(event -> {
-                keyReleasedCommand.run();
-            });
+            key.setOnMouseExited(event -> keyReleasedCommand.run());
         }
 
         octavePicker.valueProperty().addListener(event -> {

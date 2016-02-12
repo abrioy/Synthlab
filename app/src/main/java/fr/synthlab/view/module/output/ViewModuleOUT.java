@@ -115,9 +115,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         picker.valueProperty().addListener(event -> {
             volume.run();
         });
-        muteButton.setOnAction(event -> {
-            isMuted.setValue(!isMuted.getValue());
-        });
+        muteButton.setOnAction(event -> isMuted.setValue(!isMuted.getValue()));
 
 		isMuted.addListener((observable, oldValue, newValue) -> {
 			muteButton.setToggle(newValue);
@@ -130,9 +128,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 			recordCommand.run();
 		});
 
-        recordButton.setOnAction(event -> {
-			isRecording.setValue(!isRecording.getValue());
-        });
+        recordButton.setOnAction(event -> isRecording.setValue(!isRecording.getValue()));
 
 		fileChooserButton.setOnAction(event ->{
 			DirectoryChooser directoryChooser = new DirectoryChooser();

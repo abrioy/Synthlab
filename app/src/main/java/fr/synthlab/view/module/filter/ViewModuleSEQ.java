@@ -1,9 +1,10 @@
-package fr.synthlab.view.module.input;
+package fr.synthlab.view.module.filter;
 
 import fr.synthlab.view.component.Knob;
-import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.ResetButton;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.module.ViewModule;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -41,7 +42,7 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
     @FXML
     private Label stepLabel;
 
-    private ArrayList<Knob> stepPickers;
+    private List<Knob> stepPickers;
 
     private Runnable resetCommand;
     private Runnable step1Command;
@@ -96,7 +97,7 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        stepPickers = new ArrayList<Knob>();
+        stepPickers = new ArrayList<>();
 
         stepPickers.add(step1Picker);
         stepPickers.add(step2Picker);
@@ -107,9 +108,7 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
         stepPickers.add(step7Picker);
         stepPickers.add(step8Picker);
 
-        resetButton.setOnAction(event -> {
-            resetCommand.run();
-        });
+        resetButton.setOnAction(event -> resetCommand.run());
 
         step1Picker.valueProperty().addListener(event -> {
             step1Command.run();
@@ -144,23 +143,22 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
         });
     }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		for(Knob knob : stepPickers){
-			o.writeDouble(knob.getValue());
-		}
-	}
+    @Override
+    public void writeObject(ObjectOutputStream o) throws IOException {
+        for (Knob a : stepPickers) {
+            o.writeDouble(a.getValue());
+        }
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		for(Knob knob : stepPickers){
-			knob.setValue(o.readDouble());
-		}
-	}
+    @Override
+    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		for (Knob a : stepPickers){
+            a.setValue(o.readDouble());
+        }
+    }
 
     @Override
     public void update(Observable o, Object arg) {
-        stepLabel.setText(((int) arg + 1) + "");
-        // TODO Increase the step somewhere
+        Platform.runLater(() -> stepLabel.setText(arg.toString()));
     }
 }

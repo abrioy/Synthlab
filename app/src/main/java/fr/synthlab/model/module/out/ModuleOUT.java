@@ -11,9 +11,8 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
-import java.io.IOException;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -78,8 +77,6 @@ public class ModuleOUT implements Module{
      */
     private boolean mute = false;
 
-    private boolean recording = false;
-
     private WaveRecorder waveRecorder;
 
     /**
@@ -138,7 +135,6 @@ public class ModuleOUT implements Module{
     }
 
     public void setRecording(boolean recording, File pickedFile) {
-        this.recording = recording;
 
         try {
             if (recording) {
@@ -161,19 +157,9 @@ public class ModuleOUT implements Module{
 
                 waveRecorder = null;
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * getter on synthesizer.
-     * @return synthesizer
-     */
-    public Synthesizer getSyn() {
-        return syn;
     }
 
     /**
