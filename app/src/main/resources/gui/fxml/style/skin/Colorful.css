@@ -1,0 +1,6 @@
+.module-frame {
+    -fx-border-color: #333 ;
+    -fx-background-image: url("../../texture/skins/colorful.png");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+}
