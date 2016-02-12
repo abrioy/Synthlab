@@ -3,7 +3,8 @@
 <?import fr.synthlab.view.component.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
     <Knob fx:id="picker"
@@ -25,5 +26,42 @@
     <Plug fx:id="out"
           layoutX="195.0" layoutY="345.0"
           label="out" name="out" type="output" />
+    <ImageView fitHeight="50.0"
+               fitWidth="50.0"
+               layoutX="47.0"
+               layoutY="37.0"
+               preserveRatio="true" >
+        <image>
+            <Image url="@../../texture/signal-square.png" />
+        </image>
+    </ImageView>
+    <ImageView fitHeight="50.0"
+               fitWidth="50.0"
+               layoutX="52.0"
+               layoutY="137.0"
+               preserveRatio="true" >
+        <image>
+            <Image url="@../../texture/signal-triangle.png" />
+        </image>
+    </ImageView>
+    <ImageView fitHeight="50.0"
+               fitWidth="50.0"
+               layoutX="167.0"
+               layoutY="37.0"
+               preserveRatio="true" >
+        <image>
+            <Image url="@../../texture/signal-saw.png" />
+        </image>
+    </ImageView>
+    <ImageView fitHeight="50.0"
+               fitWidth="50.0"
+               layoutX="167.0"
+               layoutY="137.0"
+               preserveRatio="true" >
+        <image>
+            <Image url="@../../texture/signal-sin.png" />
+        </image>
+    </ImageView>
+
 
 </Pane>
