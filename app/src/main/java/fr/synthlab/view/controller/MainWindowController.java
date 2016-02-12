@@ -15,7 +15,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -75,13 +74,11 @@ public class MainWindowController implements Initializable {
 
 
 		// Dirty hack to make sure we can drag everywhere on the workbench
-		final Region dummyObject = new Region();
-		workbench.getChildren().add(dummyObject);
 		workbench.widthProperty().addListener((observable, oldValue, newValue) -> {
-			dummyObject.setLayoutX(newValue.doubleValue() - dummyObject.getWidth() - 1);
+			workbench.requestLayout();
 		});
 		workbench.heightProperty().addListener((observable, oldValue, newValue) -> {
-			dummyObject.setLayoutY(newValue.doubleValue() - dummyObject.getHeight() - 1);
+			workbench.requestLayout();
 		});
 
 
@@ -149,9 +146,17 @@ public class MainWindowController implements Initializable {
 		// The module has been dropped on the workbench
 		workbench.setOnDragDropped(event -> {
 			if (draggedNewViewModule != null) {
-				logger.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
-						"\" to the workspace.");
-
+				if(draggedNewViewModule.isVisible()) {
+					logger.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
+							"\" to the workspace.");
+					event.setDropCompleted(true);
+				}
+				else{
+					logger.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
+							"\" because we failed to find a place for it in the workspace.");
+					event.setDropCompleted(false);
+					workbench.removeModule(draggedNewViewModule);
+				}
 				draggedNewViewModule = null;
 				workbench.hideGhost();
 			}

@@ -261,8 +261,8 @@ public class Knob extends Pane {
      */
     @Override
     protected void layoutChildren() {
-        double stepStart = 0;
-        double stepEnd = 0;
+        double stepStart;
+        double stepEnd;
         double smallScaleSize = scaleSize * 3.0d / 4.0d;
         double arcDistance = scaleSize*0.4d;
         double arcRadius=(diameter.doubleValue() / 2.0) + arcDistance;

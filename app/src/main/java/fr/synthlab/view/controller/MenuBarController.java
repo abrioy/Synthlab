@@ -46,9 +46,7 @@ public class MenuBarController implements Initializable {
 			RadioMenuItem skinItem = new RadioMenuItem();
 			skinItem.setToggleGroup(skinToggleGroup);
 			skinItem.setText(skin.getName());
-			skinItem.setOnAction(event -> {
-				workbench.changeSkin(skin);
-			});
+			skinItem.setOnAction(event -> workbench.changeSkin(skin));
 
 			if(skin.equals(currentSkin)){
 				skinItem.setSelected(true);

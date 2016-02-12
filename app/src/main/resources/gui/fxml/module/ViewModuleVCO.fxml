@@ -30,37 +30,29 @@
                fitWidth="50.0"
                layoutX="47.0"
                layoutY="37.0"
-               preserveRatio="true" >
-        <image>
-            <Image url="@../../texture/signal-square.png" />
-        </image>
+               preserveRatio="true">
+        <Image url="@../../texture/signal-square.png"/>
     </ImageView>
     <ImageView fitHeight="50.0"
                fitWidth="50.0"
                layoutX="52.0"
                layoutY="137.0"
-               preserveRatio="true" >
-        <image>
-            <Image url="@../../texture/signal-triangle.png" />
-        </image>
+               preserveRatio="true">
+        <Image url="@../../texture/signal-triangle.png"/>
     </ImageView>
     <ImageView fitHeight="50.0"
                fitWidth="50.0"
                layoutX="167.0"
                layoutY="37.0"
-               preserveRatio="true" >
-        <image>
-            <Image url="@../../texture/signal-saw.png" />
-        </image>
+               preserveRatio="true">
+        <Image url="@../../texture/signal-saw.png"/>
     </ImageView>
     <ImageView fitHeight="50.0"
                fitWidth="50.0"
                layoutX="167.0"
                layoutY="137.0"
-               preserveRatio="true" >
-        <image>
-            <Image url="@../../texture/signal-sin.png" />
-        </image>
+               preserveRatio="true">
+        <Image url="@../../texture/signal-sin.png"/>
     </ImageView>
 
 

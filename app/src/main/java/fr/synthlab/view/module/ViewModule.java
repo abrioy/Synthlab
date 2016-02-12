@@ -80,9 +80,8 @@ public abstract class ViewModule extends Pane implements Serializable {
 		}
 
 		getPlugs().forEach(child -> {
-			Plug plug = (Plug) child;
-			plug.setWorkbench(workbench);
-			plug.setGetPortCommand(() -> module.getPort(plug.nameProperty().getValue()));
+			child.setWorkbench(workbench);
+			child.setGetPortCommand(() -> module.getPort(child.nameProperty().getValue()));
 		});
 		topPane.toFront();
 	}

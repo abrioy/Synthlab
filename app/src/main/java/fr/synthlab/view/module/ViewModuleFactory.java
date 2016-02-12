@@ -19,7 +19,7 @@ import fr.synthlab.view.module.filter.*;
 import fr.synthlab.view.module.input.ViewModuleBRUI;
 import fr.synthlab.view.module.input.ViewModuleKEYB;
 import fr.synthlab.view.module.input.ViewModuleVCOA;
-import fr.synthlab.view.module.input.ViewModuleSEQ;
+import fr.synthlab.view.module.filter.ViewModuleSEQ;
 import fr.synthlab.view.module.output.ViewModuleOUT;
 import fr.synthlab.view.module.output.ViewModuleSCOP;
 
@@ -128,16 +128,19 @@ public class ViewModuleFactory {
         viewOut.setVolumeCommand(() -> ((ModuleOUT) out).setAttenuation(viewOut.getPicker().getValue()));
         viewOut.setMuteCommand(() -> ((ModuleOUT) out).setMute(viewOut.isMute()));
         viewOut.setRecordCommand(() -> {
-					File recordingFile = viewOut.getRecordingFile();
-					if (recordingFile == null) {
-						viewOut.setIsRecording(false);
-					}
-					else {
-						((ModuleOUT) out).setRecording(viewOut.isRecording(), recordingFile);
-					}
+            if (!((ModuleOUT) out).isRecording()) {
+                File recordingFile = viewOut.getRecordingFile();
+                if (recordingFile == null) {
+                    viewOut.setIsRecording(false);
+                } else {
+                    ((ModuleOUT) out).setRecording(viewOut.isRecording(), recordingFile);
+                }
 
-				}
-        );
+            } else {
+                viewOut.setIsRecording(false);
+                ((ModuleOUT) out).setRecording(viewOut.isRecording(), null);
+            }
+        });
 
         return viewOut;
     }
@@ -212,12 +215,10 @@ public class ViewModuleFactory {
         viewKEYB.setModule(keyb);
 
         viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb).pressKey(viewKEYB.getNotePressed()));
-        viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb).releaseKey());
+        viewKEYB.setKeyReleasedCommand(((ModuleKEYB) keyb)::releaseKey);
         viewKEYB.setOctaveChangeCommand(() -> ((ModuleKEYB) keyb).changeOctave(viewKEYB.getOctave()));
 
-        viewKEYB.setOnMouseClicked(event -> {
-            viewKEYB.requestFocus();
-        });
+        viewKEYB.setOnMouseClicked(event -> viewKEYB.requestFocus());
 
         return viewKEYB;
     }
@@ -227,7 +228,7 @@ public class ViewModuleFactory {
         ViewModuleSEQ viewSEQ = new ViewModuleSEQ(workbench);
         viewSEQ.setModule(seq);
 
-        viewSEQ.setResetCommand(() -> ((ModuleSEQ) seq).resetStep());
+        viewSEQ.setResetCommand(((ModuleSEQ) seq)::reset);
         viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(0, viewSEQ.getStepValue(0)));
         viewSEQ.setChangeStep2Command(() -> ((ModuleSEQ) seq).setStepValue(1, viewSEQ.getStepValue(1)));
         viewSEQ.setChangeStep3Command(() -> ((ModuleSEQ) seq).setStepValue(2, viewSEQ.getStepValue(2)));
@@ -238,9 +239,6 @@ public class ViewModuleFactory {
         viewSEQ.setChangeStep8Command(() -> ((ModuleSEQ) seq).setStepValue(7, viewSEQ.getStepValue(7)));
 
         ((ModuleSEQ) seq).addObserver(viewSEQ);
-
-        ((ModuleSEQ) seq).nextStep();
-        ((ModuleSEQ) seq).nextStep();
 
         return viewSEQ;
 

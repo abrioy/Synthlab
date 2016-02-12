@@ -116,8 +116,8 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
             volume.run();
         });
         muteButton.setOnAction(event -> {
-			isMuted.setValue(!isMuted.getValue());
-		});
+            isMuted.setValue(!isMuted.getValue());
+        });
 
 		isMuted.addListener((observable, oldValue, newValue) -> {
 			muteButton.setToggle(newValue);
@@ -132,8 +132,8 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
         recordButton.setOnAction(event -> {
 			isRecording.setValue(!isRecording.getValue());
-		});
-		fileChooserButton.getStyleClass().add("file-button");
+        });
+
 		fileChooserButton.setOnAction(event ->{
 			DirectoryChooser directoryChooser = new DirectoryChooser();
 			directoryChooser.setTitle("Output folder");
