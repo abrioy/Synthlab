@@ -38,7 +38,7 @@ public class ModuleEG implements Module {
 
         envelope.attack.set(1.0);
         envelope.decay.set(1.0);
-        envelope.sustain.set(0.0);
+        envelope.sustain.set(0.5);
         envelope.release.set(1.0);
 
     }
@@ -77,7 +77,7 @@ public class ModuleEG implements Module {
     }
 
     public void setSustain(double sustain){
-        envelope.sustain.set(AudioMath.decibelsToAmplitude(sustain));
+        envelope.sustain.set(sustain);
     }
 
     public void setRelease(double release){

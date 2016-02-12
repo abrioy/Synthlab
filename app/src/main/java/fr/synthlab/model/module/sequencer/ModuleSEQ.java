@@ -1,6 +1,7 @@
 package fr.synthlab.model.module.sequencer;
 
 import com.jsyn.Synthesizer;
+import com.jsyn.ports.UnitGatePort;
 import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
@@ -8,11 +9,10 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 import java.util.logging.Logger;
 
-public class ModuleSEQ implements Module {
+public class ModuleSEQ extends Observable implements Module {
     private static final Logger logger = Logger.getLogger(ModuleSEQ.class.getName());
 
     /**
@@ -22,17 +22,31 @@ public class ModuleSEQ implements Module {
 
     private int step;
     private SEQFilter seqFilter;
+    private List<Double> stepValues;
+    private List<Observer> observers;
 
     /**
      * Constructor
      */
     public ModuleSEQ(Synthesizer synth) {
-        step = 1;
+        step = 0;
 
-        PassThrough pt = new PassThrough();
+        seqFilter = new SEQFilter();
+        stepValues = new ArrayList<Double>();
+        observers = new ArrayList<Observer>();
 
-        InputPort gate = new InputPort("gate", this, pt.input);
-        OutputPort out = new OutputPort("out", this, pt.output);
+        stepValues.add(0.0);
+        stepValues.add(0.0);
+        stepValues.add(0.0);
+        stepValues.add(0.0);
+
+        stepValues.add(0.0);
+        stepValues.add(0.0);
+        stepValues.add(0.0);
+        stepValues.add(0.0);
+
+        InputPort gate = new InputPort("gate", this, new UnitGatePort("gate"));
+        OutputPort out = new OutputPort("out", this, seqFilter.getOut());
         ports.add(gate);
         ports.add(out);
 
@@ -76,7 +90,35 @@ public class ModuleSEQ implements Module {
         return ModuleType.SEQ;
     }
 
+    @Override
+    public synchronized void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public synchronized void deleteObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void nextStep() {
+        step = (step + 1) % 8;
+        seqFilter.setTension(stepValues.get(step));
+        updateObservers();
+    }
+
+    public void updateObservers() {
+        for (Observer o : observers) {
+            o.update(this, step);
+        }
+    }
+
+    public void setStepValue(int step, double value) {
+        stepValues.set(step, value);
+    }
+
     public void resetStep() {
-        step = 1;
+        step = 0;
+        updateObservers();
+
     }
 }
