@@ -1,10 +1,28 @@
 
-.module-frame {
+.module-skin1 {
     -fx-border-color: #333 ;
     -fx-background-image: url("../../texture/skins/black2.jpg");
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
 }
+.module-skin2 {
+    -fx-border-color: #333 ;
+    -fx-background-image: url("../../texture/skins/black1.jpg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
+}
+.module-skin3 {
+     -fx-border-color: #333 ;
+     -fx-background-image: url("../../texture/skins/brushed-aluminum.jpg");
+     -fx-background-repeat: repeat;
+     -fx-background-position: center center;
+ }
+ .module-skin4 {
+      -fx-border-color: #333 ;
+      -fx-background-image: url("../../texture/skins/wood.jpg");
+      -fx-background-repeat: repeat;
+      -fx-background-position: center center;
+  }
 .label{
     -fx-text-fill: #E0E0E0;
 }
