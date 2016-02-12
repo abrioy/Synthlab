@@ -18,12 +18,17 @@ public class MenuBarController implements Initializable {
 
 	@FXML private MenuBar menuBar;
 	private Workbench workbench;
+	private MainWindowController mainWindowController;
 	private Stage stage;
 	private File currentSaveFile = null;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+	}
+
+	public void setMainWindowController(MainWindowController mainWindowController) {
+		this.mainWindowController = mainWindowController;
 	}
 
 	public void setWorkbench(Workbench workbench){
@@ -33,6 +38,23 @@ public class MenuBarController implements Initializable {
 	public void setStage(Stage stage){
 		this.stage = stage;
 	}
+
+	public void onClickViewZoomReset() {
+		mainWindowController.setZoomLevel(1.0d);
+	}
+
+	public void onClickViewZoomInc() {
+		mainWindowController.setZoomLevel(mainWindowController.getZoomLevel()+0.2d);
+	}
+
+	public void onClickViewZoomDec() {
+		mainWindowController.setZoomLevel(mainWindowController.getZoomLevel()-0.2d);
+	}
+
+	public void onClickViewSkin() {
+
+	}
+
 
 	public void onClickFileNew(){
 		workbench.removeAllModules();
@@ -150,4 +172,5 @@ public class MenuBarController implements Initializable {
 			fileSteam.close();
 		}
 	}
+
 }
