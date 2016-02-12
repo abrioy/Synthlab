@@ -267,10 +267,10 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
                 case Y:
                 case U:
                     keyReleasedCommand.run();
+					event.consume();
                 default:
                     break;
             }
-            event.consume();
         });
     }
 
@@ -301,11 +301,11 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 
 	@Override
 	public void writeObject(ObjectOutputStream o) throws IOException {
-		//TODO
+		o.writeDouble(this.octavePicker.getValue());
 	}
 
 	@Override
 	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		//TODO
+		this.octavePicker.setValue(o.readDouble());
 	}
 }

@@ -27,6 +27,7 @@ public class Cable extends CubicCurve {
     public Cable(Workbench workbench, Plug in) {
 
         this.in = in;
+		this.in.setCable(this);
         this.workbench = workbench;
 
 		init();
@@ -34,7 +35,9 @@ public class Cable extends CubicCurve {
 
 	public Cable(Workbench workbench, Plug in, Plug out) {
 		this.in = in;
+		this.in.setCable(this);
 		this.out = out;
+		this.out.setCable(this);
 		this.workbench = workbench;
 
 		init();
@@ -49,7 +52,7 @@ public class Cable extends CubicCurve {
 		circleOut.setFill(Color.DARKGRAY);
 		workbench.getChildren().add(circleIn);
 		workbench.getChildren().add(circleOut);
-		color= ToolboxController.getColor();
+		color = ToolboxController.getColor();
 
 		this.setStrokeWidth(10);
 		this.setStrokeLineCap(StrokeLineCap.ROUND);
@@ -82,7 +85,10 @@ public class Cable extends CubicCurve {
                 Math.max(CIRCLE_RADIUS, mouse.getY()));
 
         in= getPluggedPlug();
-        out=null;
+		if(out != null){
+			out.setCable(null);
+			out=null;
+		}
         Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
 
         this.setStartX(inPosition.getX());
@@ -116,11 +122,13 @@ public class Cable extends CubicCurve {
         }
     }
 
-    public void setUnpluggedPlug(Plug plug) {
+    public void setEmptyPlug(Plug plug) {
         if(in == null){
             in = plug;
+			in.setCable(this);
         } else {
             out = plug;
+			out.setCable(this);
         }
     }
 
@@ -137,8 +145,16 @@ public class Cable extends CubicCurve {
     }
 
     public void unplug(Plug plug){
-        if(in==plug)in=null;
-        else out=null;
+        if(in==plug){
+			in.setCable(null);
+			in=null;
+		}
+        else {
+			if(out != null) {
+				out.setCable(null);
+				out=null;
+			}
+		}
     }
 
     public void deleteCircles(){
@@ -156,4 +172,14 @@ public class Cable extends CubicCurve {
         this.setFill(null);
         this.setStroke(color);
     }
+
+
+	public void setColor(Color color) {
+		this.color = color;
+		this.setStroke(color);
+	}
+
+	public Color getColor() {
+		return color;
+	}
 }

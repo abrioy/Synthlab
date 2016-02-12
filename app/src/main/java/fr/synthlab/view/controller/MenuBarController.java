@@ -1,9 +1,13 @@
 package fr.synthlab.view.controller;
 
 
+import fr.synthlab.view.Skin;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -18,21 +22,59 @@ public class MenuBarController implements Initializable {
 
 	@FXML private MenuBar menuBar;
 	private Workbench workbench;
+	private MainWindowController mainWindowController;
 	private Stage stage;
 	private File currentSaveFile = null;
+
+	@FXML private Menu skinMenu;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 	}
 
+	public void setMainWindowController(MainWindowController mainWindowController) {
+		this.mainWindowController = mainWindowController;
+	}
+
 	public void setWorkbench(Workbench workbench){
 		this.workbench = workbench;
+
+		ToggleGroup skinToggleGroup = new ToggleGroup();
+		Skin currentSkin = workbench.getCurrentSkin();
+		for(Skin skin : Skin.values()){
+			RadioMenuItem skinItem = new RadioMenuItem();
+			skinItem.setToggleGroup(skinToggleGroup);
+			skinItem.setText(skin.getName());
+			skinItem.setOnAction(event -> {
+				workbench.changeSkin(skin);
+			});
+
+			if(skin.equals(currentSkin)){
+				skinItem.setSelected(true);
+			}
+
+			skinMenu.getItems().add(skinItem);
+		}
 	}
 
 	public void setStage(Stage stage){
 		this.stage = stage;
 	}
+
+	public void onClickViewZoomReset() {
+		mainWindowController.setZoomLevel(1.0d);
+	}
+
+	public void onClickViewZoomInc() {
+		mainWindowController.setZoomLevel(mainWindowController.getZoomLevel()+0.2d);
+	}
+
+	public void onClickViewZoomDec() {
+		mainWindowController.setZoomLevel(mainWindowController.getZoomLevel()-0.2d);
+	}
+
+
 
 	public void onClickFileNew(){
 		workbench.removeAllModules();
@@ -150,4 +192,5 @@ public class MenuBarController implements Initializable {
 			fileSteam.close();
 		}
 	}
+
 }

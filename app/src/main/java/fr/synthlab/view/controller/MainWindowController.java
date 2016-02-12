@@ -38,6 +38,7 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 		menuBarController.setWorkbench(workbench);
+		menuBarController.setMainWindowController(this);
 
 		// Setting the workspace to at least be as big as the scrollpane
 		workbenchScrollPane.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
@@ -53,19 +54,31 @@ public class MainWindowController implements Initializable {
 			});
 		});
 
+
 		zoomLevel.addListener((observable, oldValue, newValue) -> {
-			workbench.setScaleX(1.0d / newValue.doubleValue());
-			workbench.setScaleY(1.0d / newValue.doubleValue());
+			final double zoom = Math.min(2, Math.max(0.5, newValue.doubleValue()));
+
+			workbench.setScaleX(1.0d / zoom);
+			workbench.setScaleY(1.0d / zoom);
 
 			Platform.runLater(()-> {
-				workbench.setMinSize(workbenchScrollPane.getViewportBounds().getWidth() * newValue.doubleValue(),
-						workbenchScrollPane.getViewportBounds().getHeight() * newValue.doubleValue());
+				workbench.setMinSize(workbenchScrollPane.getViewportBounds().getWidth() * zoom,
+						workbenchScrollPane.getViewportBounds().getHeight() * zoom);
 
 				// Hack to force a layout refresh
 				Rectangle tempChild = new Rectangle();
 				workbench.getChildren().add(tempChild);
 				workbench.getChildren().remove(tempChild);
 			});
+		});
+
+
+		// Dirty hack to make sure we can drag everywhere on the workbench
+		workbench.widthProperty().addListener((observable, oldValue, newValue) -> {
+			workbench.requestLayout();
+		});
+		workbench.heightProperty().addListener((observable, oldValue, newValue) -> {
+			workbench.requestLayout();
 		});
 
 
@@ -133,9 +146,17 @@ public class MainWindowController implements Initializable {
 		// The module has been dropped on the workbench
 		workbench.setOnDragDropped(event -> {
 			if (draggedNewViewModule != null) {
-				logger.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
-						"\" to the workspace.");
-
+				if(draggedNewViewModule.isVisible()) {
+					logger.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
+							"\" to the workspace.");
+					event.setDropCompleted(true);
+				}
+				else{
+					logger.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
+							"\" because we failed to find a place for it in the workspace.");
+					event.setDropCompleted(false);
+					workbench.removeModule(draggedNewViewModule);
+				}
 				draggedNewViewModule = null;
 				workbench.hideGhost();
 			}
@@ -163,15 +184,26 @@ public class MainWindowController implements Initializable {
 				} else {
 					newZoomLevel -= 0.1;
 				}
-				newZoomLevel = Math.max(0.5, newZoomLevel);
-				newZoomLevel = Math.min(2, newZoomLevel);
 
 				zoomLevel.set(newZoomLevel);
 				event.consume();
 			}
 		});
+
+
     }
 
+	public double getZoomLevel() {
+		return zoomLevel.get();
+	}
+
+	public DoubleProperty zoomLevelProperty() {
+		return zoomLevel;
+	}
+
+	public void setZoomLevel(double zoomLevel) {
+		this.zoomLevel.set(zoomLevel);
+	}
 
 	public void setStageAndSetupListeners(Stage stage) {
 		stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {

@@ -3,7 +3,7 @@ package fr.synthlab.model.module.keyboard;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
-public class FilterKEYB extends UnitGenerator {
+public class FilterOutKEYB extends UnitGenerator {
 
     /**
      * Output voltage to the gate output of the keyboard.
@@ -15,24 +15,10 @@ public class FilterKEYB extends UnitGenerator {
     /**
      * Constructor
      */
-    public FilterKEYB() {
+    public FilterOutKEYB() {
         tension = 0;
         gate = new UnitOutputPort();
         this.addPort(gate);
-    }
-
-    /**
-     * Press key, voltage change to 5V.
-     */
-    public void pressKey(){
-        tension = 5;
-    }
-
-    /**
-     * Release key, voltage change to -5V.
-     */
-    public void releaseKey(){
-        tension = -5;
     }
 
     /**
@@ -48,11 +34,11 @@ public class FilterKEYB extends UnitGenerator {
         }
     }
 
-    public UnitOutputPort getGate() {
-        return gate;
+    public void setTension(double tension) {
+        this.tension = tension;
     }
 
-    public double getTension() {
-        return tension;
+    public UnitOutputPort getGate() {
+        return gate;
     }
 }

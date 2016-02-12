@@ -1,7 +1,7 @@
 
 .module-frame {
     -fx-border-color: #333 ;
-    -fx-background-image: url("../../texture/black2.jpg");
+    -fx-background-image: url("../../texture/skins/black2.jpg");
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
 }
@@ -17,18 +17,18 @@
     -fx-alignment:center-right;
     -fx-border-color: #333;
     -fx-background-color: #000;
-    -fx-text-fill: #A0E632!important;
+    -fx-text-fill: #A0E632;
 }
 
 
 .close-button {
     -fx-background-image: url("../../texture/closemark.png");
-    -fx-background-repeat: stretch !important;
-    -fx-background-position: center center !important;
-    -fx-background-size: contain !important;
-    -fx-background-color: transparent !important;
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-background-size: contain;
+    -fx-background-color: transparent;
 
-    -fx-border-color: transparent !important;
+    -fx-border-color: transparent;
     -fx-text-fill: transparent;
 }
 
@@ -36,70 +36,70 @@
 
 .mute-release {
     -fx-background-image: url("../../texture/mute.png") ;
-        -fx-background-repeat: stretch !important;
-        -fx-background-position: center center !important;
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;
         -fx-background-color: transparent;
-        -fx-background-size: contain !important;
-        -fx-border-color: transparent !important;
+        -fx-background-size: contain;
+        -fx-border-color: transparent;
         -fx-text-fill: transparent;
     }
 
 .mute-pressed {
         -fx-background-image: url("../../texture/mute-pressed.png") ;
-        -fx-background-repeat: stretch !important;
-        -fx-background-position: center center !important;
-        -fx-background-size: contain !important;
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;
+        -fx-background-size: contain;
         -fx-background-color: transparent;
-        -fx-border-color: transparent !important;
+        -fx-border-color: transparent;
         -fx-text-fill: transparent;
         }
 
 .record-release {
     -fx-background-image: url("../../texture/record.png") ;
-        -fx-background-repeat: stretch !important;
-        -fx-background-position: center center !important;
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;
         -fx-background-color: transparent;
-        -fx-background-size: contain !important;
-        -fx-border-color: transparent !important;
+        -fx-background-size: contain;
+        -fx-border-color: transparent;
         -fx-text-fill: transparent ;
     }
 
 .record-pressed {
         -fx-background-image: url("../../texture/record-pressed.png") ;
-        -fx-background-repeat: stretch !important;
-        -fx-background-position: center center !important;
-        -fx-background-size: contain !important;
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;
+        -fx-background-size: contain;
         -fx-background-color: transparent;
-        -fx-border-color: transparent !important;
+        -fx-border-color: transparent;
         -fx-text-fill: transparent;
         }
 
 .reset-button{
         -fx-background-image: url("../../texture/reset.png") ;
-        -fx-background-repeat: stretch !important;
-        -fx-background-position: center center !important;
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;
         -fx-background-color: transparent;
-        -fx-background-size: contain !important;
-        -fx-border-color: transparent !important;
+        -fx-background-size: contain;
+        -fx-border-color: transparent;
         -fx-text-fill: transparent ;
 }
 .reset-button:armed{
         -fx-background-image: url("../../texture/reset-pressed.png") ;
-        -fx-background-repeat: stretch !important;
-        -fx-background-position: center center !important;
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;
         -fx-background-color: transparent;
-        -fx-background-size: contain !important;
-        -fx-border-color: transparent !important;
+        -fx-background-size: contain;
+        -fx-border-color: transparent;
         -fx-text-fill: transparent;}
 
 #rectStereo {
+    -fx-fill:transparent;
     -fx-stroke: rgba(136, 221, 153, 0.5);
     -fx-arc-height: 5;
     -fx-arc-width: 5;
 }
 #rectMono {
-    -fx-background-repeat: repeat;
-    -fx-background-position: center center;
+    -fx-fill:transparent;
     -fx-stroke: rgba(238, 118, 0, 0.5);
     -fx-arc-height: 5;
     -fx-arc-width: 5;
