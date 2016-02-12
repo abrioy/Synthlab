@@ -5,7 +5,9 @@
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
 }
-
+.label{
+    -fx-text-fill: #E0E0E0;
+}
 
 .display {
     -fx-padding: 0px 5px 0px 5px;
@@ -13,10 +15,9 @@
     -fx-font-size: 13px;
     -fx-pref-height: 23px;
     -fx-alignment:center-right;
-
     -fx-border-color: #333;
     -fx-background-color: #000;
-    -fx-text-fill: #A0E632;
+    -fx-text-fill: #A0E632!important;
 }
 
 
