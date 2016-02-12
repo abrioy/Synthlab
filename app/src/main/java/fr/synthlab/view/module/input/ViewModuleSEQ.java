@@ -41,7 +41,7 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
     @FXML
     private Label stepLabel;
 
-    private List<Knob> stepPickers;
+    private ArrayList<Knob> stepPickers;
 
     private Runnable resetCommand;
     private Runnable step1Command;
@@ -144,15 +144,19 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
         });
     }
 
-    @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
-		//TODO
-    }
+	@Override
+	public void writeObject(ObjectOutputStream o) throws IOException {
+		for(Knob knob : stepPickers){
+			o.writeDouble(knob.getValue());
+		}
+	}
 
-    @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		//TODO
-    }
+	@Override
+	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+		for(Knob knob : stepPickers){
+			knob.setValue(o.readDouble());
+		}
+	}
 
     @Override
     public void update(Observable o, Object arg) {
