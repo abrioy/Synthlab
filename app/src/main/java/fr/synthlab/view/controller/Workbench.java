@@ -2,11 +2,12 @@ package fr.synthlab.view.controller;
 
 
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.ModuleFactory;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
+import fr.synthlab.view.Skin;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
@@ -580,4 +581,17 @@ public class Workbench extends Pane {
 			draggedCable = null;
 		}
     }
+
+
+	private Skin currentSkin = Skin.Default;
+	public void changeSkin(Skin skin){
+
+		this.getStylesheets().remove(currentSkin.getPath());
+		this.getStylesheets().add(skin.getPath());
+
+		for(ViewModule viewModule : getViewModules()){
+			viewModule.getStylesheets().remove(currentSkin.getPath());
+			viewModule.getStylesheets().add(skin.getPath());
+		}
+	}
 }
