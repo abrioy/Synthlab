@@ -129,8 +129,12 @@ public class ViewModuleFactory {
         viewOut.setMuteCommand(() -> ((ModuleOUT) out).setMute(viewOut.isMute()));
         viewOut.setRecordCommand(() -> {
 					File recordingFile = viewOut.getRecordingFile();
-					if (recordingFile != null)
+					if (recordingFile == null) {
+						viewOut.setIsRecording(false);
+					}
+					else {
 						((ModuleOUT) out).setRecording(viewOut.isRecording(), recordingFile);
+					}
 
 				}
         );

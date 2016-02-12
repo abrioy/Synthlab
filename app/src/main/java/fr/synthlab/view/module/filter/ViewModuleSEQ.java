@@ -1,7 +1,8 @@
-package fr.synthlab.view.module;
+package fr.synthlab.view.module.filter;
 
 import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.ResetButton;
+import fr.synthlab.view.module.ViewModule;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -31,6 +32,7 @@ public class ViewModuleSEQ extends ViewModule implements Initializable{
 
     public void setResetCommand(Runnable reset) {
         this.resetCommand = reset;
+		this.resetCommand.run();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
