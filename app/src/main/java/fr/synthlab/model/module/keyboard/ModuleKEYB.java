@@ -61,7 +61,7 @@ public class ModuleKEYB implements Module {
     /**
      * Oscillator to generate frequency.
      */
-    private SineOscillator sineOscillator;
+    private FilterOutKEYB sineOscillator;
 
     /**
      * Filter to manage the gate port.
@@ -76,13 +76,13 @@ public class ModuleKEYB implements Module {
         octave = REFERENCE_OCTAVE;
 
         //Initialize
-        sineOscillator = new SineOscillator();
+        sineOscillator = new FilterOutKEYB();
         keyboardFilter = new FilterKEYB();
         synth.add(sineOscillator);
         synth.add(keyboardFilter);
 
         //Output port
-        OutputPort out = new OutputPort("out", this, sineOscillator.output);
+        OutputPort out = new OutputPort("out", this, sineOscillator.getGate());
         ports.add(out);
 
         //Gate port
@@ -163,8 +163,11 @@ public class ModuleKEYB implements Module {
      */
     private void computeFrequency(NoteKEYB n){
         double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
-        sineOscillator.frequency.setValueInternal(freq);
-
+        freq = ((freq - 110*Math.pow(2, octave - 1)) /
+                (110*Math.pow(2, octave) - 110*Math.pow(2, octave - 1)))
+        + (octave - REFERENCE_OCTAVE);
+        freq = ((double) n.getValue())/12.0 + (octave - REFERENCE_OCTAVE);
+        sineOscillator.setTension(freq);
     }
 
     /**

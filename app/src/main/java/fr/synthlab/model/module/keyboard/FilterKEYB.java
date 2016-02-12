@@ -8,7 +8,7 @@ public class FilterKEYB extends UnitGenerator {
     /**
      * Output voltage to the gate output of the keyboard.
      */
-    private int tension;
+    private double tension;
 
     private UnitOutputPort gate;
 
@@ -52,7 +52,7 @@ public class FilterKEYB extends UnitGenerator {
         return gate;
     }
 
-    public int getTension() {
+    public double getTension() {
         return tension;
     }
 }
