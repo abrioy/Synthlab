@@ -59,6 +59,9 @@ public class Knob extends Pane {
      */
     private final Arc arc= new Arc();
 
+	private double lastAngularPosition = 80.0d;
+	private DoubleProperty speed = new SimpleDoubleProperty(this, "slow", Double.MAX_VALUE);
+
     /**
      * angle where is the min.
      */
@@ -149,6 +152,9 @@ public class Knob extends Pane {
         knob.getStyleClass().add("knob");
         knob.getTransforms().add(rotate);
 
+
+
+
 		setMaxHeight(Double.MIN_VALUE);
 		setMaxWidth(Double.MIN_VALUE);
 
@@ -217,6 +223,17 @@ public class Knob extends Pane {
 		if (angle >= 270) {
 			angle = angle - 360;
 		}
+
+		double angularStep = (270 / Math.abs(min.getValue() - max.getValue())) * speed.getValue();
+		if(Math.abs(angle - lastAngularPosition) > angularStep) {
+			if (angle - lastAngularPosition > angularStep) {
+				angle = lastAngularPosition + angularStep;
+			} else {
+				angle = lastAngularPosition - angularStep;
+			}
+			lastAngularPosition = angle;
+		}
+
 		double angleLocal;
 		double angleInterval = ((getMinAngle() - getMaxAngle() ) / (step.get()-1));
 		if (getStepType()){//go to step if there are
@@ -358,6 +375,19 @@ public class Knob extends Pane {
 			node.translateYProperty().set(getHeight() / 2.0d);
 		}
 	}
+
+	public final double getSpeed() {
+		return speed.get();
+	}
+
+	public final void setSpeed(double v) {
+		speed.set(v);
+	}
+
+	public final DoubleProperty speedProperty() {
+		return speed;
+	}
+
 
     /**
      * getter on current value

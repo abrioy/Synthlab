@@ -2,9 +2,9 @@ package fr.synthlab.model.module.vcf;
 
 
 import com.jsyn.Synthesizer;
-import fr.synthlab.model.filter.FmFilter;
+import fr.synthlab.model.filter.FilterFm;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -28,14 +28,14 @@ public abstract class ModuleVCF implements Module {
     /**
      * Filter modulator
      */
-    protected FmFilter fmFilter;
+    protected FilterFm filterFm;
 
     public ModuleVCF(Synthesizer synthesizer) {
-        fmFilter = new FmFilter(f0);
+        filterFm = new FilterFm(f0);
 
-        synthesizer.add(fmFilter);
+        synthesizer.add(filterFm);
 
-        fmInput = new InputPort("fm", this, fmFilter.input);
+        fmInput = new InputPort("fm", this, filterFm.input);
         ports.add(fmInput);
     }
 
@@ -46,12 +46,12 @@ public abstract class ModuleVCF implements Module {
 
     @Override
     public void start() {
-        fmFilter.start();
+        filterFm.start();
     }
 
     @Override
     public void stop() {
-        fmFilter.stop();
+        filterFm.stop();
     }
 
     @Override
@@ -60,7 +60,7 @@ public abstract class ModuleVCF implements Module {
     }
 
     @Override
-    public abstract ModuleEnum getType();
+    public abstract ModuleType getType();
 
     public double getF0() {
         return f0;
@@ -68,6 +68,6 @@ public abstract class ModuleVCF implements Module {
 
     public void setF0(double f0) {
         this.f0 = f0;
-        fmFilter.setf0(f0);
+        filterFm.setf0(f0);
     }
 }

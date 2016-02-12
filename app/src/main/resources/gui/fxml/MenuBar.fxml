@@ -1,41 +1,79 @@
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
 <MenuBar xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-             fx:controller="fr.synthlab.view.controller.MenuBarController"
-             stylesheets="/gui/fxml/style/MenuBar.css">
-        <menus>
-            <Menu text="File">
-                <items>
-                    <MenuItem text="New"/>
-                    <MenuItem text="Open"/>
-                    <MenuItem text="Save"/>
-                    <MenuItem text="Save As"/>
-                    <SeparatorMenuItem  />
-                    <MenuItem text="Exit"/>
-                </items>
-            </Menu>
-            <Menu text="Edit">
-                <items>
-                    <MenuItem text="Copy"/>
-                    <MenuItem text="Cut"/>
-                    <MenuItem text="Paste"/>
-                </items>
-            </Menu>
-            <Menu text="Help">
-                <items>
-                    <MenuItem text="Search" disable="true"/>
-                    <MenuItem text="Online Manual" visible="false"/>
-                    <SeparatorMenuItem />
-                    <MenuItem text="About"/>
-                </items>
-            </Menu>
-        </menus>
-    </MenuBar>
+         fx:id="menuBar" fx:controller="fr.synthlab.view.controller.MenuBarController"
+         stylesheets="/gui/fxml/style/MenuBar.css">
+    <menus>
+        <Menu text="File">
+            <items>
+                <MenuItem text="New" onAction="#onClickFileNew">
+                    <accelerator>
+                        <KeyCodeCombination code="N" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <MenuItem text="Open" onAction="#onClickFileOpen">
+                    <accelerator>
+                        <KeyCodeCombination code="O" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <MenuItem text="Reload from file" onAction="#onClickFileReload">
+                    <accelerator>
+                        <KeyCodeCombination code="F5" control="UP" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <MenuItem text="Save" onAction="#onClickFileSave">
+                    <accelerator>
+                        <KeyCodeCombination code="S" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <MenuItem text="Save As" onAction="#onClickFileSaveAs">
+                    <accelerator>
+                        <KeyCodeCombination code="S" control="DOWN" alt="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <SeparatorMenuItem  />
+                <MenuItem text="Exit" onAction="#onClickFileExit">
+                    <accelerator>
+                        <KeyCodeCombination code="W" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+            </items>
+        </Menu>
+        <Menu text="Edit">
+            <items>
+                <MenuItem text="Undo">
+                    <accelerator>
+                        <KeyCodeCombination code="Z" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <MenuItem text="Redo">
+                    <accelerator>
+                        <KeyCodeCombination code="Y" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                        <KeyCodeCombination code="Z" control="DOWN" alt="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+            </items>
+        </Menu>
+        <Menu text="View">
+            <items>
+                <MenuItem text="Zoom reset" onAction="#onClickViewZoomReset">
+                    <accelerator>
+                        <KeyCodeCombination code="EQUALS" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <MenuItem text="Zoom +" onAction="#onClickViewZoomInc">
+                    <accelerator>
+                        <KeyCodeCombination code="PLUS" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <MenuItem text="Zoom -"  onAction="#onClickViewZoomDec">
+                    <accelerator>
+                        <KeyCodeCombination code="MINUS" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <SeparatorMenuItem />
+                <Menu text="Change appearance" fx:id="skinMenu"/>
+            </items>
+        </Menu>
+    </menus>
+</MenuBar>

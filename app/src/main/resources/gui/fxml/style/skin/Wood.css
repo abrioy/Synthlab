@@ -1,0 +1,6 @@
+.module-frame {
+    -fx-border-color: #333  !important;
+    -fx-background-image: url("../../../texture/skins/wood.jpg") !important;
+    -fx-background-repeat: repeat !important;
+    -fx-background-position: center center !important;
+}

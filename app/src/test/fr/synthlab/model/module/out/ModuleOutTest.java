@@ -9,18 +9,18 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test on ModuleOut
- * @see ModuleOut
+ * Test on ModuleOUT
+ * @see ModuleOUT
  * @author johan
  */
 public class ModuleOutTest {
 
-    private ModuleOut moduleOut;
+    private ModuleOUT moduleOut;
 
     @Before
     public void setUp() throws Exception {
         Synthesizer synthesizer = JSyn.createSynthesizer();
-        moduleOut = new ModuleOut(synthesizer);
+        moduleOut = new ModuleOUT(synthesizer);
     }
 
     /**

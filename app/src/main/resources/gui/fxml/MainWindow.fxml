@@ -1,4 +1,4 @@
-<?import fr.synthlab.view.Workbench?>
+<?import fr.synthlab.view.controller.Workbench?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.Group?>
@@ -9,11 +9,15 @@
             stylesheets="/gui/fxml/style/MainWindow.css">
 
     <top>
-        <fx:include fx:id="menubar" source="MenuBar.fxml"/>
+        <fx:include fx:id="menuBar" source="MenuBar.fxml"/>
     </top>
     <center >
-        <SplitPane dividerPositions="0.15">
-            <fx:include fx:id="toolbox" minWidth="180.0" maxWidth="200.0" source="Toolbox.fxml"/>
+        <SplitPane dividerPositions="0.15" >
+            <ScrollPane fx:id="toolboxScrollPane"  hbarPolicy="NEVER" minWidth="193.0" maxWidth="193.0" fitToWidth="true" fitToHeight="false">
+                <Group>
+                    <fx:include fx:id="toolbox" minWidth="190.0" maxWidth="190.0" source="Toolbox.fxml"/>
+                </Group>
+            </ScrollPane>
             <ScrollPane fx:id="workbenchScrollPane" fitToWidth="false" fitToHeight="false">
                 <Group>
                     <Workbench fx:id="workbench"/>

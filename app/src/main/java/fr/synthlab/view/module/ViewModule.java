@@ -1,7 +1,7 @@
 package fr.synthlab.view.module;
 
 import fr.synthlab.model.module.Module;
-import fr.synthlab.view.Workbench;
+import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,9 +12,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
-public abstract class ViewModule extends Pane {
+public abstract class ViewModule extends Pane implements Serializable {
 	private static final Logger logger = Logger.getLogger(ViewModule.class.getName());
 
 	private Workbench workbench;
@@ -22,15 +28,14 @@ public abstract class ViewModule extends Pane {
 	private AnchorPane topPane;
 	private Label moduleName;
 	private Button closeButton;
-
 	public ViewModule(Workbench workbench) {
 	
 		super();
 
 		this.workbench = workbench;
-
 		this.getStyleClass().add("module-frame");
 		this.getStylesheets().add("/gui/fxml/style/Module.css");
+		this.applyCss();
 
 		topPane = new AnchorPane();
 		topPane.setFocusTraversable(false);
@@ -69,13 +74,12 @@ public abstract class ViewModule extends Pane {
 		try {
 			Parent root = fxmlLoader.load();
 			this.getChildren().add(root);
-
 		} catch (IOException exception) {
 			logger.severe("Cannot load the specified FXML file: \""+fxmlPath+"\".");
 			throw new RuntimeException(exception);
 		}
 
-		this.lookupAll("Plug").stream().filter(child -> child instanceof Plug).forEach(child -> {
+		getPlugs().forEach(child -> {
 			Plug plug = (Plug) child;
 			plug.setWorkbench(workbench);
 			plug.setGetPortCommand(() -> module.getPort(plug.nameProperty().getValue()));
@@ -91,4 +95,25 @@ public abstract class ViewModule extends Pane {
 		this.module = module;
 		moduleName.setText(module.getType().getLongName());
 	}
+
+	public Collection<Plug> getPlugs(){
+		return this.lookupAll("Plug").stream()
+				.filter(child -> child instanceof Plug)
+				.map(child -> (Plug) child)
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public Plug getPlugByName(String name){
+		Collection<Plug> plugs = getPlugs();
+		for(Plug plug : plugs) {
+			if(plug.getName().equals(name)){
+				return plug;
+			}
+		}
+		return null;
+	}
+
+	public abstract void writeObject(ObjectOutputStream o) throws IOException;
+	public abstract void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException;
+
 }

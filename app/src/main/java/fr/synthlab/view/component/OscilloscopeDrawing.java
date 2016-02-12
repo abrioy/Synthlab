@@ -1,6 +1,6 @@
 package fr.synthlab.view.component;
 
-import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
+import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -13,11 +13,11 @@ import java.util.logging.Logger;
 public class OscilloscopeDrawing extends Pane {
 	private static final Logger logger = Logger.getLogger(OscilloscopeDrawing.class.getName());
 
-	ModuleOscilloscope osc;
+	ModuleSCOP osc;
 	SwingNode swingNode;
 
 	/*
-	public OscilloscopeDrawing(ModuleOscilloscope osc) {
+	public OscilloscopeDrawing(ModuleSCOP osc) {
 		super();
 		init();
 		setModuleOscilloscope(osc);
@@ -36,7 +36,7 @@ public class OscilloscopeDrawing extends Pane {
 		this.getChildren().add(pane);
 	}
 
-	public void setModuleOscilloscope(ModuleOscilloscope osc) {
+	public void setModuleOscilloscope(ModuleSCOP osc) {
 		this.osc = osc;
 		swingNode.setContent(osc.getOscillatorJComponent());
 		swingNode.setMouseTransparent(true);

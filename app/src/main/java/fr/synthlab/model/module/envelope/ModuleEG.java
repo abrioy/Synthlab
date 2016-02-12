@@ -2,9 +2,10 @@ package fr.synthlab.model.module.envelope;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.EnvelopeDAHDSR;
+import com.softsynth.math.AudioMath;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleEnum;
-import fr.synthlab.model.module.oscilloscope.ModuleOscilloscope;
+import fr.synthlab.model.module.ModuleType;
+import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -14,7 +15,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 public class ModuleEG implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleOscilloscope.class.getName());
+    private static final Logger logger = Logger.getLogger(ModuleSCOP.class.getName());
 
     /**
      * All ports
@@ -37,7 +38,7 @@ public class ModuleEG implements Module {
 
         envelope.attack.set(1.0);
         envelope.decay.set(1.0);
-        envelope.sustain.set(0.0);
+        envelope.sustain.set(0.5);
         envelope.release.set(1.0);
 
     }
@@ -63,8 +64,8 @@ public class ModuleEG implements Module {
     }
 
     @Override
-    public ModuleEnum getType() {
-        return ModuleEnum.EG;
+    public ModuleType getType() {
+        return ModuleType.EG;
     }
 
     public void setAttack(double attack){
@@ -82,4 +83,22 @@ public class ModuleEG implements Module {
     public void setRelease(double release){
         envelope.release.set(release);
     }
+
+
+	public double getAttack(){
+		return envelope.attack.get();
+	}
+
+	public double getDecay(){
+		return envelope.decay.get();
+	}
+
+	public double getSustain(){
+		return envelope.sustain.get();
+	}
+
+	public double getRelease(){
+		return envelope.release.get();
+	}
+
 }

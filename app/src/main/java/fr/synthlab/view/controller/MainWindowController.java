@@ -1,9 +1,8 @@
 package fr.synthlab.view.controller;
 
-import fr.synthlab.model.module.ModuleEnum;
-import fr.synthlab.view.Workbench;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.viewModuleFactory.ViewModuleFactory;
+import fr.synthlab.view.module.ViewModuleFactory;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -16,6 +15,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -28,6 +28,7 @@ public class MainWindowController implements Initializable {
     private static final Logger logger = Logger.getLogger(MainWindowController.class.getName());
 
     @FXML private Workbench workbench;
+	@FXML private MenuBarController menuBarController;
 	@FXML private ToolboxController toolboxController;
 	@FXML private BorderPane mainPane;
 	@FXML private ScrollPane workbenchScrollPane;
@@ -37,6 +38,8 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+		menuBarController.setWorkbench(workbench);
+		menuBarController.setMainWindowController(this);
 
 		// Setting the workspace to at least be as big as the scrollpane
 		workbenchScrollPane.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
@@ -52,13 +55,17 @@ public class MainWindowController implements Initializable {
 			});
 		});
 
+
 		zoomLevel.addListener((observable, oldValue, newValue) -> {
-			workbench.setScaleX(1.0d / newValue.doubleValue());
-			workbench.setScaleY(1.0d / newValue.doubleValue());
+			final double zoom = Math.min(2, Math.max(0.5, newValue.doubleValue()));
+
+			logger.info(String.valueOf(zoom));
+			workbench.setScaleX(1.0d / zoom);
+			workbench.setScaleY(1.0d / zoom);
 
 			Platform.runLater(()-> {
-				workbench.setMinSize(workbenchScrollPane.getViewportBounds().getWidth() * newValue.doubleValue(),
-						workbenchScrollPane.getViewportBounds().getHeight() * newValue.doubleValue());
+				workbench.setMinSize(workbenchScrollPane.getViewportBounds().getWidth() * zoom,
+						workbenchScrollPane.getViewportBounds().getHeight() * zoom);
 
 				// Hack to force a layout refresh
 				Rectangle tempChild = new Rectangle();
@@ -68,13 +75,24 @@ public class MainWindowController implements Initializable {
 		});
 
 
+		// Dirty hack to make sure we can drag everywhere on the workbench
+		final Region dummyObject = new Region();
+		workbench.getChildren().add(dummyObject);
+		workbench.widthProperty().addListener((observable, oldValue, newValue) -> {
+			dummyObject.setLayoutX(newValue.doubleValue() - dummyObject.getWidth() - 1);
+		});
+		workbench.heightProperty().addListener((observable, oldValue, newValue) -> {
+			dummyObject.setLayoutY(newValue.doubleValue() - dummyObject.getHeight() - 1);
+		});
+
+
 
 		// Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
             Dragboard db = event.getDragboard();
-			ModuleEnum moduleType = null;
+			ModuleType moduleType = null;
 			try{
-				moduleType = ModuleEnum.valueOf(ModuleEnum.getNameFromLong(db.getString()));
+				moduleType = ModuleType.valueOf(ModuleType.getNameFromLong(db.getString()));
 			}
 			catch(IllegalArgumentException e){
 				logger.severe("Unable to drag in module, there is no module called \""+db.getString()+"\".");
@@ -162,15 +180,26 @@ public class MainWindowController implements Initializable {
 				} else {
 					newZoomLevel -= 0.1;
 				}
-				newZoomLevel = Math.max(0.5, newZoomLevel);
-				newZoomLevel = Math.min(2, newZoomLevel);
 
 				zoomLevel.set(newZoomLevel);
 				event.consume();
 			}
 		});
+
+
     }
 
+	public double getZoomLevel() {
+		return zoomLevel.get();
+	}
+
+	public DoubleProperty zoomLevelProperty() {
+		return zoomLevel;
+	}
+
+	public void setZoomLevel(double zoomLevel) {
+		this.zoomLevel.set(zoomLevel);
+	}
 
 	public void setStageAndSetupListeners(Stage stage) {
 		stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
@@ -179,5 +208,7 @@ public class MainWindowController implements Initializable {
                 workbench.onRightClick();
             }
         });
+
+		menuBarController.setStage(stage);
 	}
 }
