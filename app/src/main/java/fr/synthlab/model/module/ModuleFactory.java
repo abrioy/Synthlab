@@ -43,7 +43,6 @@ public class ModuleFactory {
                 break;
 			case VCFLP : module = createVCFLP();
 				break;
-
             case VCFHP : module = createVCFHP();
                 break;
             case KEYB : module = createKEYB();
