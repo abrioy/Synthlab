@@ -35,6 +35,7 @@ public abstract class ViewModule extends Pane implements Serializable {
 		this.workbench = workbench;
 		this.getStyleClass().add("module-frame");
 		this.getStylesheets().add("/gui/fxml/style/Module.css");
+		this.applyCss();
 
 		topPane = new AnchorPane();
 		topPane.setFocusTraversable(false);

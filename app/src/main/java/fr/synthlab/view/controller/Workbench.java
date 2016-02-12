@@ -594,10 +594,12 @@ public class Workbench extends Pane {
 
 		this.getStylesheets().remove(currentSkin.getPath());
 		this.getStylesheets().add(skin.getPath());
+		this.applyCss();
 
 		for(ViewModule viewModule : getViewModules()){
 			viewModule.getStylesheets().remove(currentSkin.getPath());
 			viewModule.getStylesheets().add(skin.getPath());
+			viewModule.applyCss();
 		}
 	}
 }

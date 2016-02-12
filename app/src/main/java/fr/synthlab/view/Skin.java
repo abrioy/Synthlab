@@ -5,8 +5,7 @@ package fr.synthlab.view;
  */
 public enum Skin {
 	Default("Default"),
-	Black1("Black1"),
-	Black2("Black2"),
+	Black("Black"),
     Carbon("Carbon"),
 	Aluminum("Aluminum"),
 	Wood("Wood"),
