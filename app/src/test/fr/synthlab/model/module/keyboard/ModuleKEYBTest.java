@@ -2,7 +2,7 @@ package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
-import fr.synthlab.model.module.ModuleEnum;
+import fr.synthlab.model.module.ModuleType;
 import junit.framework.TestCase;
 import org.junit.Before;
 
@@ -21,7 +21,7 @@ public class ModuleKEYBTest extends TestCase {
     }
 
     public void testGetType() throws Exception {
-        assertEquals(ModuleEnum.KEYB, moduleKEYB.getType());
+        assertEquals(ModuleType.KEYB, moduleKEYB.getType());
     }
 
     public void testOctave() throws Exception {

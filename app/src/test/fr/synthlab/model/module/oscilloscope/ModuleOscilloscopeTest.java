@@ -8,12 +8,12 @@ import org.junit.Before;
 //TODO Javadoc
 public class ModuleOscilloscopeTest extends TestCase {
 
-    private ModuleOscilloscope moduleOsc;
+    private ModuleSCOP moduleOsc;
 
     @Before
     public void setUp() throws Exception {
         Synthesizer synth = JSyn.createSynthesizer();
-        moduleOsc = new ModuleOscilloscope(synth);
+        moduleOsc = new ModuleSCOP(synth);
     }
 
     public void testGetPorts() throws Exception {

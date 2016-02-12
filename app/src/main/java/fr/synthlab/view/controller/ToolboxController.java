@@ -1,8 +1,6 @@
 package fr.synthlab.view.controller;
 
 import fr.synthlab.model.module.ModuleType;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ColorPicker;
@@ -17,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
@@ -24,18 +24,10 @@ import java.util.logging.Logger;
 public class ToolboxController implements Initializable {
     private static final Logger logger = Logger.getLogger(ToolboxController.class.getName());
     @FXML
-    private TreeView<String> input;
-    @FXML
-    private TreeView<String> output;
-    @FXML
-    private TreeView<String> filter;
+    private TreeView<String> treeView;
 
     @FXML
-    private TreeItem<String> rootInput;
-    @FXML
-    private TreeItem<String> rootOutput;
-    @FXML
-    private TreeItem<String> rootFilter;
+    private TreeItem<String> treeItemRoot;
 
     @FXML
     private ColorPicker colorPicker;
@@ -51,60 +43,40 @@ public class ToolboxController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        rootInput.expandedProperty().addListener(listener -> drag(input));
-        rootOutput.expandedProperty().addListener(listener -> drag(output));
-        rootFilter.expandedProperty().addListener(listener -> drag(filter));
+        treeItemRoot.expandedProperty().addListener(listener -> makeListDraggable(treeView));
 
-        ObservableList<String> items = FXCollections.observableArrayList(
-                ModuleType.VCOA.getLongName(),
-                ModuleType.BRUI.getLongName(),
-                ModuleType.KEYB.getLongName(),
-                ModuleType.SEQ.getLongName()
-                );
+        TreeItem<String> rootInput = new TreeItem<>("Input");
+        TreeItem<String> rootOutput= new TreeItem<>("Output ");
+        TreeItem<String> rootFilter = new TreeItem<>("Filter");
+        treeItemRoot.getChildren().addAll(rootInput, rootOutput, rootFilter);
 
-        loadTreeItems(rootInput, items);
-        items = FXCollections.observableArrayList(
-                ModuleType.OUT.getLongName(),
-                ModuleType.SCOP.getLongName()
-        );
-        loadTreeItems(rootOutput, items);
+        List<TreeItem<String>> list = new ArrayList<>();
+        list.add(new TreeItem<>(ModuleType.VCOA.getLongName()));
+        list.add(new TreeItem<>(ModuleType.BRUI.getLongName()));
+        list.add(new TreeItem<>(ModuleType.KEYB.getLongName()));
+        rootInput.getChildren().addAll(list);
 
-        items = FXCollections.observableArrayList(
-                ModuleType.VCA.getLongName(),
-                ModuleType.REP.getLongName(),
-                ModuleType.EG.getLongName(),
-                ModuleType.VCFLP.getLongName(),
-                ModuleType.VCFHP.getLongName(),
-                ModuleType.MIX.getLongName()
-        );
-        loadTreeItems(rootFilter, items);
+        list.clear();
+        list.add(new TreeItem<>(ModuleType.OUT.getLongName()));
+        list.add(new TreeItem<>(ModuleType.SCOP.getLongName()));
+        rootOutput.getChildren().addAll(list);
 
+        list.clear();
+        list.add(new TreeItem<>(ModuleType.VCA.getLongName()));
+        list.add(new TreeItem<>(ModuleType.REP.getLongName()));
+        list.add(new TreeItem<>(ModuleType.EG.getLongName()));
+        list.add(new TreeItem<>(ModuleType.VCFLP.getLongName()));
+        list.add(new TreeItem<>(ModuleType.VCFHP.getLongName()));
+        list.add(new TreeItem<>(ModuleType.MIX.getLongName()));
+        rootFilter.getChildren().addAll(list);
+
+        treeView.setRoot(treeItemRoot);
+
+        treeItemRoot.setExpanded(true);
         rootInput.setExpanded(true);
-        input.setRoot(rootInput);
         rootOutput.setExpanded(true);
-        output.setRoot(rootOutput);
-        rootInput.setExpanded(true);
-        filter.setRoot(rootFilter);
-
-        input.focusedProperty().addListener(listener -> {
-            if(!input.focusedProperty().get()) {
-                input.getSelectionModel().clearSelection();
-            }
-        });
-
-        output.focusedProperty().addListener(listener -> {
-            if(!output.focusedProperty().get()) {
-                output.getSelectionModel().clearSelection();
-            }
-        });
-
-        filter.focusedProperty().addListener(listener -> {
-            if(!filter.focusedProperty().get()) {
-                filter.getSelectionModel().clearSelection();
-            }
-        });
-
-        drag(filter);
+        rootFilter.setExpanded(true);
+        treeView.setShowRoot(false);
 
         colorPicker.valueProperty().addListener(listener -> colorChange());
 
@@ -120,26 +92,16 @@ public class ToolboxController implements Initializable {
         }
     }
 
-    public void loadTreeItems(TreeItem<String> item, ObservableList<String> rootItems) {
-        item.setExpanded(true);
-        for (String itemString : rootItems) {
-            item.getChildren().add(new TreeItem<>(itemString));
-        }
-    }
-
     private void makeListDraggable(TreeView<String> item) {
         item.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
             public TreeCell<String> call(TreeView<String> stringTreeView) {
                 TreeCell<String> cell = new TreeCell<String>() {
                     protected void updateItem(String item, boolean empty) {
-                        if (item != null) {
-                            super.updateItem(item, empty);
-                            setText(item);
-                        }
+                        super.updateItem(item, empty);
+                        setText(item);
                     }
                 };
-
                 cell.setOnDragDetected(event -> {
                     if (!cell.isEmpty() && !ModuleType.getNameFromLong(cell.getItem()).equals("")) {
                         Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
@@ -156,28 +118,6 @@ public class ToolboxController implements Initializable {
                 return cell;
             }
         });
-    }
-
-    private void drag(TreeView<String> draggable) {
-        makeListDraggable(draggable);
-        input.relocate(0, colorPicker.getPrefHeight());
-        if (rootInput.isExpanded()) {
-            input.setPrefHeight((rootInput.getChildren().size() + 1) * 25);
-        } else {
-            input.setPrefHeight(26);
-        }
-        output.relocate(0, colorPicker.getPrefHeight()+input.getPrefHeight());
-        if (rootOutput.isExpanded()) {
-            output.setPrefHeight((rootOutput.getChildren().size() + 1) * 25);
-        } else {
-            output.setPrefHeight(26);
-        }
-        filter.relocate(0, colorPicker.getPrefHeight()+input.getPrefHeight() + output.getPrefHeight());
-        if (rootFilter.isExpanded()) {
-            filter.setPrefHeight((rootFilter.getChildren().size() + 1) * 25);
-        } else {
-            filter.setPrefHeight(26);
-        }
     }
 
     public static Color getColor(){
