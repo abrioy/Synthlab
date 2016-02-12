@@ -75,19 +75,40 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     public boolean isRecording() {
         return isRecording.getValue();
     }
+    public void setIsRecording(boolean value) {
+        isRecording.setValue(value);
+    }
 
     public File getRecordingFile() {
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 		String date = formatter.format(new Date());
 		String filename = "Synthlab_recording_"+date+".wav";
 
+		File file;
 		if(pickedDirectory == null){
-			return new File(filename);
+			file = new File(filename);
 		}
 		else {
-			return new File(pickedDirectory.getPath() + File.separator + filename);
+			file = new File(pickedDirectory.getPath() + File.separator + filename);
 		}
-    }
+
+		try {
+			if (!file.createNewFile()){
+				file = null;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			file = null;
+		}
+
+		if(file != null){
+			return file;
+		}
+		else{
+			logger.warning("Unable to create a new file to record.");
+			return null;
+		}
+	}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -7,10 +7,9 @@ import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.envelope.ModuleEG;
 import fr.synthlab.model.module.keyboard.ModuleKEYB;
 import fr.synthlab.model.module.mixer.ModuleMIX;
-import fr.synthlab.model.module.sequencer.ModuleSEQ;
-import fr.synthlab.model.module.ModuleFactory;
 import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
 import fr.synthlab.model.module.out.ModuleOUT;
+import fr.synthlab.model.module.sequencer.ModuleSEQ;
 import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
@@ -129,8 +128,12 @@ public class ViewModuleFactory {
         viewOut.setMuteCommand(() -> ((ModuleOUT) out).setMute(viewOut.isMute()));
         viewOut.setRecordCommand(() -> {
 					File recordingFile = viewOut.getRecordingFile();
-					if (recordingFile != null)
+					if (recordingFile == null) {
+						viewOut.setIsRecording(false);
+					}
+					else {
 						((ModuleOUT) out).setRecording(viewOut.isRecording(), recordingFile);
+					}
 
 				}
         );
