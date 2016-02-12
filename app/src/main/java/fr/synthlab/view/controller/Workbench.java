@@ -206,10 +206,11 @@ public class Workbench extends Pane {
 				Cable cable = new Cable(this, plug, connectedPlug);
 				cable.setColor(portReference.cableColor);
 				this.getChildren().add(cable);
-				cable.updateCircles();
-				cable.update();
 			}
 		}
+		// Updating cable positions
+		getCables().forEach(Cable::updateCircles);
+		getCables().forEach(Cable::update);
 
 		inputStream.close();
 	}
@@ -418,6 +419,7 @@ public class Workbench extends Pane {
 
 			Bounds collidingBounds = checkCollisions(node, newBounds);
 			if (collidingBounds == null) {
+				getCables().forEach(Cable::updateCircles);
 				// Updating the cable positions, just in case
 				for (Cable c : getCables()) {
 					if (draggedCable != c) {
