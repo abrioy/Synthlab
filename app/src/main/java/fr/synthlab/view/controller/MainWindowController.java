@@ -15,6 +15,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -71,6 +72,17 @@ public class MainWindowController implements Initializable {
 				workbench.getChildren().add(tempChild);
 				workbench.getChildren().remove(tempChild);
 			});
+		});
+
+
+		// Dirty hack to make sure we can drag everywhere on the workbench
+		final Region dummyObject = new Region();
+		workbench.getChildren().add(dummyObject);
+		workbench.widthProperty().addListener((observable, oldValue, newValue) -> {
+			dummyObject.setLayoutX(newValue.doubleValue() - dummyObject.getWidth() - 1);
+		});
+		workbench.heightProperty().addListener((observable, oldValue, newValue) -> {
+			dummyObject.setLayoutY(newValue.doubleValue() - dummyObject.getHeight() - 1);
 		});
 
 
