@@ -5,7 +5,9 @@
     -fx-background-repeat: repeat;
     -fx-background-position: center center;
 }
-
+.label{
+    -fx-text-fill: #E0E0E0;
+}
 
 .display {
     -fx-padding: 0px 5px 0px 5px;
@@ -13,22 +15,21 @@
     -fx-font-size: 13px;
     -fx-pref-height: 23px;
     -fx-alignment:center-right;
-
     -fx-border-color: #333;
     -fx-background-color: #000;
-    -fx-text-fill: #A0E632;
+    -fx-text-fill: #A0E632!important;
 }
 
 
 .close-button {
-    -fx-background-image: url("../../texture/closemark.png") !important;
+    -fx-background-image: url("../../texture/closemark.png");
     -fx-background-repeat: stretch !important;
     -fx-background-position: center center !important;
     -fx-background-size: contain !important;
     -fx-background-color: transparent !important;
 
     -fx-border-color: transparent !important;
-    -fx-text-fill: transparent !important;
+    -fx-text-fill: transparent;
 }
 
 
@@ -37,10 +38,10 @@
     -fx-background-image: url("../../texture/mute.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
-        -fx-background-color: transparent !important;
+        -fx-background-color: transparent;
         -fx-background-size: contain !important;
         -fx-border-color: transparent !important;
-        -fx-text-fill: transparent !important;
+        -fx-text-fill: transparent;
     }
 
 .mute-pressed {
@@ -48,19 +49,19 @@
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-size: contain !important;
-        -fx-background-color: transparent !important;
+        -fx-background-color: transparent;
         -fx-border-color: transparent !important;
-        -fx-text-fill: transparent !important;
+        -fx-text-fill: transparent;
         }
 
 .record-release {
     -fx-background-image: url("../../texture/record.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
-        -fx-background-color: transparent !important;
+        -fx-background-color: transparent;
         -fx-background-size: contain !important;
         -fx-border-color: transparent !important;
-        -fx-text-fill: transparent !important;
+        -fx-text-fill: transparent ;
     }
 
 .record-pressed {
@@ -68,40 +69,37 @@
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
         -fx-background-size: contain !important;
-        -fx-background-color: transparent !important;
+        -fx-background-color: transparent;
         -fx-border-color: transparent !important;
-        -fx-text-fill: transparent !important;
+        -fx-text-fill: transparent;
         }
-.rect{
-    -fx-background-image: url("../../texture/black1.jpg");
-    -fx-background-repeat: repeat;
-    -fx-background-position: center center;
-    }
+
 .reset-button{
         -fx-background-image: url("../../texture/reset.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
-        -fx-background-color: transparent !important;
+        -fx-background-color: transparent;
         -fx-background-size: contain !important;
         -fx-border-color: transparent !important;
-        -fx-text-fill: transparent !important;
+        -fx-text-fill: transparent ;
 }
 .reset-button:armed{
         -fx-background-image: url("../../texture/reset-pressed.png") ;
         -fx-background-repeat: stretch !important;
         -fx-background-position: center center !important;
-        -fx-background-color: transparent !important;
+        -fx-background-color: transparent;
         -fx-background-size: contain !important;
         -fx-border-color: transparent !important;
-        -fx-text-fill: transparent !important;}
+        -fx-text-fill: transparent;}
 
 #rectStereo {
     -fx-stroke: rgba(136, 221, 153, 0.5);
     -fx-arc-height: 5;
     -fx-arc-width: 5;
 }
-
 #rectMono {
+    -fx-background-repeat: repeat;
+    -fx-background-position: center center;
     -fx-stroke: rgba(238, 118, 0, 0.5);
     -fx-arc-height: 5;
     -fx-arc-width: 5;

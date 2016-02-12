@@ -75,7 +75,6 @@ public abstract class ViewModule extends Pane implements Serializable {
 		try {
 			Parent root = fxmlLoader.load();
 			this.getChildren().add(root);
-
 		} catch (IOException exception) {
 			logger.severe("Cannot load the specified FXML file: \""+fxmlPath+"\".");
 			throw new RuntimeException(exception);
