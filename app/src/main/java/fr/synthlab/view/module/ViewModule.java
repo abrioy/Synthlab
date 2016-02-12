@@ -28,13 +28,13 @@ public abstract class ViewModule extends Pane implements Serializable {
 	private AnchorPane topPane;
 	private Label moduleName;
 	private Button closeButton;
-
-	public ViewModule(Workbench workbench) {
+	private String skin;
+	public ViewModule(Workbench workbench,String skin) {
 	
 		super();
 
 		this.workbench = workbench;
-
+		this.skin=skin;
 		this.getStyleClass().add("module-skin1");
 		this.getStylesheets().add("/gui/fxml/style/Module.css");
 
