@@ -38,6 +38,7 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 		menuBarController.setWorkbench(workbench);
+		menuBarController.setMainWindowController(this);
 
 		// Setting the workspace to at least be as big as the scrollpane
 		workbenchScrollPane.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
@@ -53,13 +54,17 @@ public class MainWindowController implements Initializable {
 			});
 		});
 
+
 		zoomLevel.addListener((observable, oldValue, newValue) -> {
-			workbench.setScaleX(1.0d / newValue.doubleValue());
-			workbench.setScaleY(1.0d / newValue.doubleValue());
+			final double zoom = Math.min(2, Math.max(0.5, newValue.doubleValue()));
+
+			logger.info(String.valueOf(zoom));
+			workbench.setScaleX(1.0d / zoom);
+			workbench.setScaleY(1.0d / zoom);
 
 			Platform.runLater(()-> {
-				workbench.setMinSize(workbenchScrollPane.getViewportBounds().getWidth() * newValue.doubleValue(),
-						workbenchScrollPane.getViewportBounds().getHeight() * newValue.doubleValue());
+				workbench.setMinSize(workbenchScrollPane.getViewportBounds().getWidth() * zoom,
+						workbenchScrollPane.getViewportBounds().getHeight() * zoom);
 
 				// Hack to force a layout refresh
 				Rectangle tempChild = new Rectangle();
@@ -163,15 +168,26 @@ public class MainWindowController implements Initializable {
 				} else {
 					newZoomLevel -= 0.1;
 				}
-				newZoomLevel = Math.max(0.5, newZoomLevel);
-				newZoomLevel = Math.min(2, newZoomLevel);
 
 				zoomLevel.set(newZoomLevel);
 				event.consume();
 			}
 		});
+
+
     }
 
+	public double getZoomLevel() {
+		return zoomLevel.get();
+	}
+
+	public DoubleProperty zoomLevelProperty() {
+		return zoomLevel;
+	}
+
+	public void setZoomLevel(double zoomLevel) {
+		this.zoomLevel.set(zoomLevel);
+	}
 
 	public void setStageAndSetupListeners(Stage stage) {
 		stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {

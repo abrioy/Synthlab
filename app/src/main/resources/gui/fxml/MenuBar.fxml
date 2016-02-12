@@ -54,5 +54,26 @@
                 </MenuItem>
             </items>
         </Menu>
+        <Menu text="View">
+            <items>
+                <MenuItem text="Zoom reset" onAction="#onClickViewZoomReset">
+                    <accelerator>
+                        <KeyCodeCombination code="EQUALS" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <MenuItem text="Zoom +" onAction="#onClickViewZoomInc">
+                    <accelerator>
+                        <KeyCodeCombination code="PLUS" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <MenuItem text="Zoom -"  onAction="#onClickViewZoomDec">
+                    <accelerator>
+                        <KeyCodeCombination code="MINUS" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
+                    </accelerator>
+                </MenuItem>
+                <SeparatorMenuItem />
+                <Menu text="Change appearance" fx:id="skinMenu"/>
+            </items>
+        </Menu>
     </menus>
 </MenuBar>
