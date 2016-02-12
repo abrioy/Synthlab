@@ -32,7 +32,6 @@ public class ViewModuleSEQ extends ViewModule implements Initializable{
 
     public void setResetCommand(Runnable reset) {
         this.resetCommand = reset;
-		this.resetCommand.run();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
