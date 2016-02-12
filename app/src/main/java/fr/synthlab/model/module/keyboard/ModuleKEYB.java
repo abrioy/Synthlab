@@ -164,6 +164,7 @@ public class ModuleKEYB implements Module {
     private void computeFrequency(NoteKEYB n){
         double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
         sineOscillator.frequency.setValueInternal(freq);
+
     }
 
     /**
