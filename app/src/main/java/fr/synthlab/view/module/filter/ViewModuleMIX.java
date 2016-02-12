@@ -110,6 +110,7 @@ public class ViewModuleMIX extends ViewModule implements Initializable{
      */
     public void setAttenuator1Cmd(Runnable attenuator1Cmd) {
         this.attenuator1Cmd = attenuator1Cmd;
+		attenuator1Cmd.run();
     }
 
     /**
@@ -119,6 +120,7 @@ public class ViewModuleMIX extends ViewModule implements Initializable{
      */
     public void setAttenuator2Cmd(Runnable attenuator2Cmd) {
         this.attenuator2Cmd = attenuator2Cmd;
+		attenuator2Cmd.run();
     }
 
     /**
@@ -128,6 +130,7 @@ public class ViewModuleMIX extends ViewModule implements Initializable{
      */
     public void setAttenuator3Cmd(Runnable attenuator3Cmd) {
         this.attenuator3Cmd = attenuator3Cmd;
+		attenuator3Cmd.run();
     }
 
     /**
@@ -137,6 +140,7 @@ public class ViewModuleMIX extends ViewModule implements Initializable{
      */
     public void setAttenuator4Cmd(Runnable attenuator4Cmd) {
         this.attenuator4Cmd = attenuator4Cmd;
+		attenuator4Cmd.run();
     }
 
     /**

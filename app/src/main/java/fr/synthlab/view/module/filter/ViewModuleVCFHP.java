@@ -54,7 +54,6 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
 
     public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
         this.changeThresholdCommand = changeThresholdCommand;
-
         changeThresholdCommand.run();
     }
 

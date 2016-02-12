@@ -63,18 +63,22 @@ public class ViewModuleEG extends ViewModule implements Initializable{
 
     public void setChangeAttackCommand(Runnable command) {
         this.changeAttackCommand = command;
+		this.changeAttackCommand.run();
     }
 
     public void setChangeDecayCommand(Runnable command) {
         this.changeDecayCommand = command;
+		this.changeDecayCommand.run();
     }
 
     public void setChangeSustainCommand(Runnable command) {
         this.changeSustainCommand = command;
+		this.changeSustainCommand.run();
     }
 
     public void setChangeReleaseCommand(Runnable command) {
         this.changeReleaseCommand = command;
+		this.changeReleaseCommand.run();
     }
 
 	@Override
