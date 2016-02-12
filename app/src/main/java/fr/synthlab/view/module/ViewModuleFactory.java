@@ -223,13 +223,13 @@ public class ViewModuleFactory {
 
         viewSEQ.setResetCommand(() -> ((ModuleSEQ) seq).resetStep());
         viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(0, viewSEQ.getStepValue(0)));
-        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(1, viewSEQ.getStepValue(1)));
-        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(2, viewSEQ.getStepValue(2)));
-        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(3, viewSEQ.getStepValue(3)));
-        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(4, viewSEQ.getStepValue(4)));
-        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(5, viewSEQ.getStepValue(5)));
-        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(6, viewSEQ.getStepValue(6)));
-        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(7, viewSEQ.getStepValue(7)));
+        viewSEQ.setChangeStep2Command(() -> ((ModuleSEQ) seq).setStepValue(1, viewSEQ.getStepValue(1)));
+        viewSEQ.setChangeStep3Command(() -> ((ModuleSEQ) seq).setStepValue(2, viewSEQ.getStepValue(2)));
+        viewSEQ.setChangeStep4Command(() -> ((ModuleSEQ) seq).setStepValue(3, viewSEQ.getStepValue(3)));
+        viewSEQ.setChangeStep5Command(() -> ((ModuleSEQ) seq).setStepValue(4, viewSEQ.getStepValue(4)));
+        viewSEQ.setChangeStep6Command(() -> ((ModuleSEQ) seq).setStepValue(5, viewSEQ.getStepValue(5)));
+        viewSEQ.setChangeStep7Command(() -> ((ModuleSEQ) seq).setStepValue(6, viewSEQ.getStepValue(6)));
+        viewSEQ.setChangeStep8Command(() -> ((ModuleSEQ) seq).setStepValue(7, viewSEQ.getStepValue(7)));
 
         ((ModuleSEQ) seq).addObserver(viewSEQ);
 

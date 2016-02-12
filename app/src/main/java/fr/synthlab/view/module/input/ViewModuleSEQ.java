@@ -116,31 +116,31 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
         });
 
         step2Picker.valueProperty().addListener(event -> {
-            step1Command.run();
+            step2Command.run();
         });
 
         step3Picker.valueProperty().addListener(event -> {
-            step1Command.run();
+            step3Command.run();
         });
 
         step4Picker.valueProperty().addListener(event -> {
-            step1Command.run();
+            step4Command.run();
         });
 
         step5Picker.valueProperty().addListener(event -> {
-            step1Command.run();
+            step5Command.run();
         });
 
         step6Picker.valueProperty().addListener(event -> {
-            step1Command.run();
+            step6Command.run();
         });
 
         step7Picker.valueProperty().addListener(event -> {
-            step1Command.run();
+            step7Command.run();
         });
 
         step8Picker.valueProperty().addListener(event -> {
-            step1Command.run();
+            step8Command.run();
         });
     }
 
@@ -156,6 +156,7 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
 
     @Override
     public void update(Observable o, Object arg) {
-        stepLabel.setText(arg + "");
+        stepLabel.setText(((int) arg + 1) + "");
+        // TODO Increase the step somewhere
     }
 }

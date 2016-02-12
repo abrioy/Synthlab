@@ -103,6 +103,10 @@ public class ModuleSEQ extends Observable implements Module {
     public void nextStep() {
         step = (step + 1) % 8;
         seqFilter.setTension(stepValues.get(step));
+        updateObservers();
+    }
+
+    public void updateObservers() {
         for (Observer o : observers) {
             o.update(this, step);
         }
@@ -114,5 +118,7 @@ public class ModuleSEQ extends Observable implements Module {
 
     public void resetStep() {
         step = 0;
+        updateObservers();
+
     }
 }
