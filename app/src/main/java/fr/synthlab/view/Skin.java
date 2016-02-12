@@ -4,8 +4,8 @@ package fr.synthlab.view;
  * Created by miow on 2/12/16.
  */
 public enum Skin {
-	Default("default"),
-	Fire("fire");
+	Default("Default"),
+	Fire("Fire");
 
 
 	private static final long serialVersionUID = 1L;

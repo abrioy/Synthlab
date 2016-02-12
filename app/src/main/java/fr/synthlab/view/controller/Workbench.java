@@ -37,6 +37,8 @@ public class Workbench extends Pane {
 
 	private Cable draggedCable;
 
+	private Skin currentSkin = Skin.Default;
+
 	public Workbench() {
 
 		// Making the ghost a bit spookier
@@ -583,8 +585,12 @@ public class Workbench extends Pane {
     }
 
 
-	private Skin currentSkin = Skin.Default;
+	public Skin getCurrentSkin(){
+		return currentSkin;
+	}
+
 	public void changeSkin(Skin skin){
+		logger.fine("Skin changed from \""+currentSkin+"\" to \""+skin+"\".");
 
 		this.getStylesheets().remove(currentSkin.getPath());
 		this.getStylesheets().add(skin.getPath());

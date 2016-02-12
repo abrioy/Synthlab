@@ -71,9 +71,8 @@
                         <KeyCodeCombination code="MINUS" control="DOWN" alt="UP" meta="UP" shift="UP" shortcut="UP" />
                     </accelerator>
                 </MenuItem>
-                <MenuItem text="Change appearance"  onAction="#onClickViewSkin">
-
-                </MenuItem>
+                <SeparatorMenuItem />
+                <Menu text="Change appearance" fx:id="skinMenu"/>
             </items>
         </Menu>
     </menus>
