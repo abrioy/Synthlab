@@ -117,11 +117,11 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         });
         muteButton.setOnAction(event -> {
             isMuted.setValue(!isMuted.getValue());
-            muteCommand.run();
         });
 
 		isMuted.addListener((observable, oldValue, newValue) -> {
 			muteButton.setToggle(newValue);
+			muteCommand.run();
 		});
 
 
