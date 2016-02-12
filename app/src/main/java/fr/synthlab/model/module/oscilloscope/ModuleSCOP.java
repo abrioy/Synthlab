@@ -17,8 +17,6 @@ import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -259,7 +257,7 @@ public class ModuleSCOP implements Module {
     private class CustomAudioScopeView extends JPanel {
         private static final long serialVersionUID = -7507986850757860853L;
         private AudioScopeModel audioScopeModel;
-        private ArrayList<CustomAudioScopeProbeView> probeViews = new ArrayList<CustomAudioScopeProbeView>();
+        private ArrayList<CustomAudioScopeProbeView> probeViews = new ArrayList<>();
         private CustomMultipleWaveDisplay multipleWaveDisplay;
         private boolean showControls = false;
         private ScopeControlPanel controlPanel = null;
@@ -307,18 +305,15 @@ public class ModuleSCOP implements Module {
             setupGUI();
 
             // Listener for signal change events.
-            audioScopeModel.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent e) {
-                    multipleWaveDisplay.revalidate();
-                    multipleWaveDisplay.repaint();
-                }
+            audioScopeModel.addChangeListener(e -> {
+                multipleWaveDisplay.revalidate();
+                multipleWaveDisplay.repaint();
             });
 
         }
 
         public AudioScopeProbeView[] getProbeViews() {
-            return probeViews.toArray(new AudioScopeProbeView[0]);
+            return probeViews.toArray(new AudioScopeProbeView[probeViews.size()]);
         }
 
         public void setScale (int scale) {
@@ -333,7 +328,7 @@ public class ModuleSCOP implements Module {
     private class CustomMultipleWaveDisplay extends JPanel {
         private static final long serialVersionUID = -5157397030540800373L;
 
-        private ArrayList<CustomWaveTraceView> waveTraceViews = new ArrayList<CustomWaveTraceView>();
+        private ArrayList<CustomWaveTraceView> waveTraceViews = new ArrayList<>();
         private Color[] defaultColors = {
                 new Color(160, 230, 50), Color.BLUE, Color.RED, Color.BLACK, Color.MAGENTA, Color.GREEN, Color.ORANGE
         };

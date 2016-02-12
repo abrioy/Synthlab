@@ -150,7 +150,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 			event.consume();
         });
 
-        Collection<KeyboardKey> keysColl = new ArrayList<KeyboardKey>();
+        Collection<KeyboardKey> keysColl = new ArrayList<>();
         keysColl.add(CKey);
         keysColl.add(CSharpKey);
         keysColl.add(DKey);
@@ -166,13 +166,9 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         keysColl.add(CNextOctKey);
 
         for (KeyboardKey key : keysColl) {
-            key.setOnMouseReleased(event -> {
-                keyReleasedCommand.run();
-            });
+            key.setOnMouseReleased(event -> keyReleasedCommand.run());
 
-            key.setOnMouseExited(event -> {
-                keyReleasedCommand.run();
-            });
+            key.setOnMouseExited(event -> keyReleasedCommand.run());
         }
 
         octavePicker.valueProperty().addListener(event -> {
