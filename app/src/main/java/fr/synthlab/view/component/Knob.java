@@ -149,6 +149,9 @@ public class Knob extends Pane {
         knob.getStyleClass().add("knob");
         knob.getTransforms().add(rotate);
 
+
+
+
 		setMaxHeight(Double.MIN_VALUE);
 		setMaxWidth(Double.MIN_VALUE);
 

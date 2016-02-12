@@ -57,13 +57,13 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
 		});
 
 		double f = (double) Math.round((getFreq()*10))/10;
-		frequencyLabel.setText(f+" Hz");
+		frequencyLabel.setText((int)f+" Hz");
 	}
 
 	private void updateFrequency() {
 		changeFreqCommand.run();
 		double f = (double) Math.round((getFreq()*10))/10;
-		frequencyLabel.setText(f+" Hz");
+		frequencyLabel.setText((int)f+" Hz");
 	}
 
 	public void setChangeShapeCommand(Runnable changeShape) {
