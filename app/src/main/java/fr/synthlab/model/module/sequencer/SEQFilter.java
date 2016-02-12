@@ -1,47 +1,65 @@
 package fr.synthlab.model.module.sequencer;
 
-import com.jsyn.ports.UnitOutputPort;
-import com.jsyn.unitgen.UnitGenerator;
+import com.jsyn.unitgen.UnitFilter;
 
-public class SEQFilter extends UnitGenerator {
+import java.util.List;
+
+public class SEQFilter extends UnitFilter {
 
     /**
      * Output voltage to the output of the sequencer.
      */
-    private double tension;
-
-    private UnitOutputPort out;
+    private final List<Double> tension;
+    private ModuleSEQ seq;
+    private int current;
+    private double signalFront;
+    private boolean attend;
+    private double sigFrontStop;
 
     /**
      * Constructor
+     * @param stepValues
+     * @param seq
      */
-    public SEQFilter() {
-        tension = 0.0;
-        out = new UnitOutputPort();
-        this.addPort(out);
+    public SEQFilter(List<Double> stepValues, ModuleSEQ seq) {
+        tension = stepValues;
+        this.seq = seq;
+        current = 0;
+
+        signalFront = 0.1/2;
+        sigFrontStop = -0.000001/2;
     }
 
     /**
-     * Change the output tension of the generator
-     */
-    public void setTension(double tension){
-        this.tension = tension;
-    }
-
-    /**
-     * Generate new values.
+     * Generate new values.Oscilloscope
      * @param start param managed by Jsyn
      * @param limit param managed by Jsyn
      */
     @Override
     public void generate(int start, int limit) {
-        double[] gates = out.getValues();
+        double[] gates = output.getValues();
+        double[] inputs = input.getValues();
         for (int i = start; i < limit; i += 1) {
-            gates[i] = tension;
+            if (attend) {
+                if ( inputs[i] <= sigFrontStop ) {
+                    attend = false;
+                }
+            }
+            else if (inputs[i] >= signalFront ){
+                attend = true;
+                current++;
+                current= current % tension.size();
+                seq.updateObs();
+            }
+            gates[i] = tension.get(current);
         }
     }
 
-    public UnitOutputPort getOut() {
-        return out;
+    public int getCurrent() {
+        return current;
+    }
+
+    public void reset() {
+        current=0;
     }
 }
