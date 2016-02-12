@@ -292,6 +292,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 
     public void setOctaveChangeCommand(Runnable command) {
         this.octaveChangeCommand = command;
+		this.octaveChangeCommand.run();
     }
 
     public NoteKEYB getNotePressed() {
@@ -300,11 +301,11 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 
 	@Override
 	public void writeObject(ObjectOutputStream o) throws IOException {
-
+		//TODO
 	}
 
 	@Override
 	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
+		//TODO
 	}
 }

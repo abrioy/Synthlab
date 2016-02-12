@@ -146,12 +146,12 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
 
     @Override
     public void writeObject(ObjectOutputStream o) throws IOException {
-
+		//TODO
     }
 
     @Override
     public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
+		//TODO
     }
 
     @Override
