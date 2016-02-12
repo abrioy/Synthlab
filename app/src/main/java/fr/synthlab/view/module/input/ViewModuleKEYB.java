@@ -23,31 +23,31 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     private static final Logger logger = Logger.getLogger(ViewModuleKEYB.class.getName());
 
     @FXML
-	KeyboardKey CKey;
+    private KeyboardKey CKey;
     @FXML
-	KeyboardKey CSharpKey;
+	private KeyboardKey CSharpKey;
     @FXML
-	KeyboardKey DKey;
+	private KeyboardKey DKey;
     @FXML
-	KeyboardKey DSharpKey;
+	private KeyboardKey DSharpKey;
     @FXML
-	KeyboardKey EKey;
+	private KeyboardKey EKey;
     @FXML
-	KeyboardKey FKey;
+	private KeyboardKey FKey;
     @FXML
-	KeyboardKey FSharpKey;
+	private KeyboardKey FSharpKey;
     @FXML
-	KeyboardKey GKey;
+	private KeyboardKey GKey;
     @FXML
-	KeyboardKey GSharpKey;
+	private KeyboardKey GSharpKey;
     @FXML
-	KeyboardKey AKey;
+	private KeyboardKey AKey;
     @FXML
-	KeyboardKey ASharpKey;
+	private KeyboardKey ASharpKey;
     @FXML
-	KeyboardKey BKey;
+	private KeyboardKey BKey;
     @FXML
-	KeyboardKey CNextOctKey;
+	private KeyboardKey CNextOctKey;
 
     @FXML
     Knob octavePicker;

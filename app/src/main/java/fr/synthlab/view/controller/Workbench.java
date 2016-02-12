@@ -560,7 +560,7 @@ public class Workbench extends Pane {
 
 		getCables().forEach(cable -> {
 			if (draggedCable!=cable){
-				((Cable)cable).update();
+				cable.update();
 			}
 		});
 	}

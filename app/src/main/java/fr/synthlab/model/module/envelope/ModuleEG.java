@@ -2,7 +2,6 @@ package fr.synthlab.model.module.envelope;
 
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.EnvelopeDAHDSR;
-import com.softsynth.math.AudioMath;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
@@ -22,7 +21,7 @@ public class ModuleEG implements Module {
      */
     private ArrayList<Port> ports = new ArrayList<>();
 
-    EnvelopeDAHDSR envelope;
+    private EnvelopeDAHDSR envelope;
 
     public ModuleEG(Synthesizer synth) {
         envelope = new EnvelopeDAHDSR();
