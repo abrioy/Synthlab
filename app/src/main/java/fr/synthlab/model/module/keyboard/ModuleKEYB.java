@@ -163,13 +163,10 @@ public class ModuleKEYB implements Module {
      */
     private void computeFrequency(NoteKEYB n){
         double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
-        System.out.println("FREQUENCY: " + freq);
         freq = ((freq - 110*Math.pow(2, octave - 1)) /
                 (110*Math.pow(2, octave) - 110*Math.pow(2, octave - 1)))
         + (octave - REFERENCE_OCTAVE);
-        System.out.println("TENSION: " + freq);
         freq = ((double) n.getValue())/12.0 + (octave - REFERENCE_OCTAVE);
-        System.out.println("NEW FREQ: " + freq);
         sineOscillator.setTension(freq);
     }
 

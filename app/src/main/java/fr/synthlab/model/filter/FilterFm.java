@@ -18,9 +18,6 @@ public class FilterFm extends UnitFilter {
 
         for (int i = start; i < limit; i++) {
             outputs[i] = f0 * Math.pow(2, inputs[i]);
-            if (i == start) {
-                //System.out.println("OUTPUT:" + outputs[i]);
-            }
         }
     }
 
