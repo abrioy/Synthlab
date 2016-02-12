@@ -68,6 +68,7 @@ public class ToolboxController implements Initializable {
         list.add(new TreeItem<>(ModuleType.VCFLP.getLongName()));
         list.add(new TreeItem<>(ModuleType.VCFHP.getLongName()));
         list.add(new TreeItem<>(ModuleType.MIX.getLongName()));
+        list.add(new TreeItem<>(ModuleType.SEQ.getLongName()));
         rootFilter.getChildren().addAll(list);
 
         treeView.setRoot(treeItemRoot);
