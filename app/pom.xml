@@ -20,8 +20,6 @@
             <groupId>com.jsyn</groupId>
             <artifactId>jsyn</artifactId>
             <version>16.7.3</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/jsyn_16_7_3.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -29,11 +27,54 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.ant</artifactId>
+            <version>0.7.5.201505241946</version>
+        </dependency>
     </dependencies>
 
     <build>
         <defaultGoal>exec:exec</defaultGoal>
+        <testSourceDirectory>src/test</testSourceDirectory>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>fr.synthlab.Main</mainClass>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>install-external</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${basedir}/lib/jsyn_16_7_3.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>com.jsyn</groupId>
+                            <artifactId>jsyn</artifactId>
+                            <version>16.7.3</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -94,9 +135,13 @@
     <reporting>
         <plugins>
             <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.16</version>
+                <version>2.17</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
