@@ -291,9 +291,7 @@ public class Workbench extends Pane {
 			workbench.displayGhost(module);
 		});
 
-        module.setOnMouseReleased(mouseEvent -> {
-            hideGhost();
-        });
+        module.setOnMouseReleased(mouseEvent -> hideGhost());
 
         module.setOnMouseDragged(event -> {
 			Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
@@ -344,13 +342,8 @@ public class Workbench extends Pane {
 	}
 
 	private Collection<ViewModule> getViewModules() {
-		Collection<ViewModule> modules = new ArrayList<>();
-		for (Node child : this.getChildren()) {
-			if (child instanceof ViewModule) {
-				modules.add((ViewModule) child);
-			}
-		}
-		return modules;
+		return this.getChildren().stream().filter(child -> child instanceof ViewModule)
+				.map(child -> (ViewModule) child).collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	/**
@@ -421,11 +414,7 @@ public class Workbench extends Pane {
 			if (collidingBounds == null) {
 				getCables().forEach(Cable::updateCircles);
 				// Updating the cable positions, just in case
-				for (Cable c : getCables()) {
-					if (draggedCable != c) {
-						c.update();
-					}
-				}
+                getCables().stream().filter(c -> draggedCable != c).forEach(Cable::update);
 
 				// The new position is not colliding with something
 				// We move the node
@@ -546,13 +535,8 @@ public class Workbench extends Pane {
      * @return
      */
     private Collection<Cable> getCables() {
-        Collection<Cable> cables = new ArrayList<>();
-        for (Node child : this.getChildren()) {
-            if (child instanceof Cable) {
-                cables.add((Cable) child);
-            }
-        }
-        return cables;
+        return this.getChildren().stream().filter(child -> child instanceof Cable)
+                .map(child -> (Cable) child).collect(Collectors.toCollection(ArrayList::new));
     }
 
 	private void updateCables() {
@@ -560,7 +544,7 @@ public class Workbench extends Pane {
 
 		getCables().forEach(cable -> {
 			if (draggedCable!=cable){
-				((Cable)cable).update();
+				cable.update();
 			}
 		});
 	}

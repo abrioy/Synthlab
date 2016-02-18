@@ -56,6 +56,7 @@ public class Main extends Application {
 
 		MainWindowController controller = loader.getController();
 		controller.setStageAndSetupListeners(stage);
+		stage.setMaximized(true);
 		stage.show();
 	}
 

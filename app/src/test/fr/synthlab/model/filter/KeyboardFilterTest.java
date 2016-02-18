@@ -1,6 +1,5 @@
 package fr.synthlab.model.filter;
 
-import com.jsyn.ports.UnitOutputPort;
 import fr.synthlab.model.module.keyboard.FilterKEYB;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -42,6 +41,6 @@ public class KeyboardFilterTest extends TestCase {
     }
 
     public void testGetGate() throws Exception {
-        assertTrue(keyboardFilter.getGate() instanceof UnitOutputPort);
+        assertTrue(keyboardFilter.getGate() != null);
     }
 }

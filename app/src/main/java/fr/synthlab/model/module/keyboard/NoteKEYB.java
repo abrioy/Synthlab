@@ -17,7 +17,7 @@ public enum NoteKEYB {
 
     private final int value;
 
-    private NoteKEYB(int value) {
+    NoteKEYB(int value) {
         this.value = value;
     }
 

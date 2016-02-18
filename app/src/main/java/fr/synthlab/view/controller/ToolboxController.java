@@ -32,7 +32,7 @@ public class ToolboxController implements Initializable {
     @FXML
     private ColorPicker colorPicker;
 
-    private static Color color;
+    private static Color color = Color.BLACK;
 
     private Consumer<DragEvent> onDragDone = null;
 
@@ -68,6 +68,7 @@ public class ToolboxController implements Initializable {
         list.add(new TreeItem<>(ModuleType.VCFLP.getLongName()));
         list.add(new TreeItem<>(ModuleType.VCFHP.getLongName()));
         list.add(new TreeItem<>(ModuleType.MIX.getLongName()));
+        list.add(new TreeItem<>(ModuleType.SEQ.getLongName()));
         rootFilter.getChildren().addAll(list);
 
         treeView.setRoot(treeItemRoot);

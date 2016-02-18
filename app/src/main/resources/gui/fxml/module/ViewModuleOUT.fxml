@@ -4,39 +4,58 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
-      prefHeight="198" prefWidth="250" minHeight="198" minWidth="250" maxHeight="198" maxWidth="250">
+      prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
+
+    <ImageView fitHeight="160.0"
+               fitWidth="160.0"
+               layoutX="45.0"
+               layoutY="45.0"
+               preserveRatio="true" >
+        <image>
+            <Image url="@../../texture/woofer.png" />
+        </image>
+    </ImageView>
 
     <Knob fx:id="picker" label="Gain"
-          diameter="80.0" layoutX="190.0" layoutY="100.0"
+          diameter="70.0" layoutX="55.0" layoutY="270.0"
           min="-12" max="12"/>
 
     <RecordButton fx:id="recordButton"
-                  layoutX="125.0" layoutY="155.0">
+                  layoutX="195.0" layoutY="230.0">
     </RecordButton>
 
     <Button fx:id="fileChooserButton"
-            layoutX="150.0" layoutY="155.0">
+            layoutX="197.5" layoutY="270.0">
     </Button>
 
+    <Label layoutX="190.0" layoutY="212.0">Record</Label>
+
+    <Rectangle fx:id="rectRecord" mouseTransparent="true"
+               height="100.0" width="55" layoutX="185" layoutY="210.0"/>
+
     <MuteButton fx:id="muteButton"
-            layoutX="175.0" layoutY="155.0">
+            layoutX="120.0" layoutY="250.0">
     </MuteButton>
 
+
     <Rectangle fx:id="rectStereo" mouseTransparent="true"
-               height="70.0" width="115.0" layoutX="5" layoutY="50.0"/>
+               height="70.0" width="115.0" layoutX="75" layoutY="325.0"/>
     <Plug fx:id="inStereoL"
-          layoutX="15.0" layoutY="70.0"
+          layoutX="85.0" layoutY="345.0"
           label="Left" name="Left" type="input" />
 
     <Plug fx:id="inStereoR"
-          layoutX="65.0" layoutY="70.0"
+          layoutX="135.0" layoutY="345.0"
           label="Right" name="Right" type="input" />
 
 
     <Rectangle fx:id="rectMono" mouseTransparent="true"
-               height="70.0" width="65.0" layoutX="5.0" layoutY="125.0"/>
+               height="70.0" width="65.0" layoutX="5.0" layoutY="325.0"/>
     <Plug fx:id="inMono"
-          layoutX="15.0" layoutY="145.0"
+          layoutX="15.0" layoutY="345.0"
           label="Mono" name="in" type="input" />
 </Pane>
