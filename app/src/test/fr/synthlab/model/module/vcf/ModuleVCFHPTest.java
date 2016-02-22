@@ -10,10 +10,20 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests on the Voltage Control Filter High Pass
+ */
 public class ModuleVCFHPTest {
 
+    /**
+     * Module tested
+     */
     private ModuleVCFHP moduleVCFHP;
 
+    /**
+     * Initialize.
+     * @throws Exception
+     */
     @Before
     public void setUp() {
         moduleVCFHP = new ModuleVCFHP(JSyn.createSynthesizer());
@@ -44,6 +54,9 @@ public class ModuleVCFHPTest {
         }
     }
 
+    /**
+     * After execution
+     */
     @After
     public void tearDown() {
         moduleVCFHP.stop();

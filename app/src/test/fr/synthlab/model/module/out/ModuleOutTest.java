@@ -15,8 +15,15 @@ import static org.junit.Assert.*;
  */
 public class ModuleOutTest {
 
+    /**
+     * Module tested
+     */
     private ModuleOUT moduleOut;
 
+    /**
+     * Initialize.
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         Synthesizer synthesizer = JSyn.createSynthesizer();
@@ -71,8 +78,11 @@ public class ModuleOutTest {
         assertEquals(AudioMath.decibelsToAmplitude(2), moduleOut.getAttenuation(), 0.000000001);
     }
 
+    /**
+     * test on get ports.
+     */
     @Test
-    public void testLenthGetPort(){
+    public void testLengthGetPort(){
         assertEquals(3,moduleOut.getPorts().size());
     }
 }

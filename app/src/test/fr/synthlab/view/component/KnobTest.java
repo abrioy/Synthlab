@@ -17,6 +17,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class KnobTest {
 
+    /**
+     * Rule to test JavaFX Thread.
+     */
     @Rule
     public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
