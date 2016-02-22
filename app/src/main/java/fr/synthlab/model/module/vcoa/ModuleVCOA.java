@@ -71,7 +71,7 @@ public class ModuleVCOA implements Module {
     /**
      * Constructor
      *
-     * @param synthesizer
+     * @param synthesizer Synthesizer
      */
     public ModuleVCOA(Synthesizer synthesizer) {
         synthesizer.add(squareOscillator);
@@ -137,7 +137,7 @@ public class ModuleVCOA implements Module {
 
     /**
      * set the frequency of the VCO
-     * @param frequency
+     * @param frequency new frequency
      */
     public void setFrequency(double frequency) {
         this.frequency = frequency;

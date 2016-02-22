@@ -31,22 +31,18 @@ public class ModuleVCATest {
 
     /**
      * test setFrequency method
-     *
-     * @throws Exception
      */
     @Test
-    public void testSetAttenuation() throws Exception {
+    public void testSetAttenuation() {
         moduleVCA.setAttenuation(12);
         assertEquals(12, moduleVCA.getAttenuation(), 0.001);
     }
 
     /**
      * test getPorts method
-     *
-     * @throws Exception
      */
     @Test
-    public void testGetPorts() throws Exception {
+    public void testGetPorts() {
         Collection<Port> ports = moduleVCA.getPorts();
         for (Port p : ports) {
             assertEquals(true, p.getName().equals("am") || p.getName().equals("in") || p.getName().equals("out"));

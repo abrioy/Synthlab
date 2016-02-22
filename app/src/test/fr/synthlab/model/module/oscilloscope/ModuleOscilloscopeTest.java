@@ -5,20 +5,17 @@ import com.jsyn.Synthesizer;
 import junit.framework.TestCase;
 import org.junit.Before;
 
-//TODO Javadoc
 public class ModuleOscilloscopeTest extends TestCase {
 
     private ModuleSCOP moduleOsc;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Synthesizer synth = JSyn.createSynthesizer();
         moduleOsc = new ModuleSCOP(synth);
     }
 
-    public void testGetPorts() throws Exception {
+    public void testGetPorts() {
         assertEquals(2, moduleOsc.getPorts().size());
     }
-
-    //TODO more test ?
 }

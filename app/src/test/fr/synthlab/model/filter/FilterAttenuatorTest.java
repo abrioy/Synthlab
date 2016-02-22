@@ -27,10 +27,9 @@ public class FilterAttenuatorTest {
 
     /**
      * test on setter
-     * @throws Exception
      */
     @Test
-    public void testSetAttenuation() throws Exception {
+    public void testSetAttenuation() {
         filter.setAttenuation(10);
         assertEquals(AudioMath.decibelsToAmplitude(10), filter.getAttenuation(), 0.00000000000001);
         filter.setAttenuation(13);
@@ -39,10 +38,9 @@ public class FilterAttenuatorTest {
 
     /**
      * test on getter
-     * @throws Exception
      */
     @Test
-    public void testGetAttenuation() throws Exception {
+    public void testGetAttenuation() {
         assertEquals(1, filter.getAttenuation(), 0.00000000000001);
     }
 }

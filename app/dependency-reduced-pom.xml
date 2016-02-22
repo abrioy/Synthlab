@@ -3,7 +3,48 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>fr.synthlab</groupId>
   <artifactId>synthlab</artifactId>
+  <name>Synthlab</name>
   <version>1.0-SNAPSHOT</version>
+  <description>This project is an audio synthesizer with javaFx.</description>
+  <url>https://github.com/abrioy/Synthlab</url>
+  <inceptionYear>2016</inceptionYear>
+  <developers>
+    <developer>
+      <id>cb</id>
+      <name>Corentin BEAUCE</name>
+      <email>corentin.beauce@etudiant.univ-rennes1.fr</email>
+    </developer>
+    <developer>
+      <id>ab</id>
+      <name>Antoine BRIOY</name>
+      <email>anthoine.brioy@etudiant.univ-rennes1.fr</email>
+    </developer>
+    <developer>
+      <id>jc</id>
+      <name>Johan CHAMPION</name>
+      <email>johan.champion@etudiant.univ-rennes1.fr</email>
+    </developer>
+    <developer>
+      <id>ac</id>
+      <name>Anthony COBAC</name>
+      <email>anthony.cobac@etudiant.univ-rennes1.fr</email>
+    </developer>
+    <developer>
+      <id>pl</id>
+      <name>Pol LE TUE</name>
+      <email>pol.letue@etudiant.univ-rennes1.fr</email>
+    </developer>
+    <developer>
+      <id>sn</id>
+      <name>Salim NADOUR</name>
+      <email>salim.nadour@etudiant.univ-rennes1.fr</email>
+    </developer>
+    <developer>
+      <id>jy</id>
+      <name>Jérémy YZIQUEL</name>
+      <email>jeremy.yziquel@etudiant.univ-rennes1.fr</email>
+    </developer>
+  </developers>
   <build>
     <testSourceDirectory>src/test</testSourceDirectory>
     <defaultGoal>exec:exec</defaultGoal>
@@ -90,6 +131,26 @@
         </configuration>
       </plugin>
       <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.7.5.201505241946</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>site</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.18.1</version>
         <configuration>
@@ -123,6 +184,18 @@
       <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <version>2.7</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>index</report>
+              <report>dependencies</report>
+              <report>project-team</report>
+              <report>summary</report>
+              <report>plugins</report>
+              <report>help</report>
+            </reports>
+          </reportSet>
+        </reportSets>
       </plugin>
       <plugin>
         <artifactId>maven-jxr-plugin</artifactId>

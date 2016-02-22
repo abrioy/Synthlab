@@ -37,8 +37,8 @@ public class InputPort extends Port {
     }
 
     /**
-     * Connect another port to this port
-     * @param port
+     * Connect another port to this port.
+     * @param port Port to connect
      */
     @Override
     public void connect(Port port) {
@@ -54,7 +54,7 @@ public class InputPort extends Port {
     }
 
     /**
-     * Disconnect a connected port from this port
+     * Disconnect a connected port from this port.
      */
     public void disconnect() {
         if(getConnected() instanceof OutputPort)

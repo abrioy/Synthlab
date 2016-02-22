@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 
 /**
  * Module oscilloscope to display the transmitted signal.
- * @author Anthony Cobac & Corentin Beauce
  * @see Module
  */
 public class ModuleSCOP implements Module {
@@ -112,6 +111,7 @@ public class ModuleSCOP implements Module {
 
     /**
      * Changes the scale (i.e. the zoom) of the graphical output of the module.
+     * @param scale new scale to display the oscilloscope
      */
     public void setScale(int scale) {
         jOscillatorComponent.setScale(scale);

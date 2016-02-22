@@ -27,6 +27,7 @@ public class ModuleREP implements Module {
 
     /**
      * Constructor.
+     * @param synthesizer Synthesizer
      */
     public ModuleREP(Synthesizer synthesizer) {
         filterREP = new FilterREP();

@@ -17,26 +17,23 @@ public class ModuleBRUITest extends TestCase {
 
     /**
      * Initialize.
-     * @throws Exception
      */
-    public void setUp() throws Exception {
+    public void setUp() {
         Synthesizer synth = JSyn.createSynthesizer();
         moduleBRUI = new ModuleBRUI(synth);
     }
 
     /**
      * test on get ports.
-     * @throws Exception
      */
-    public void testGetPorts() throws Exception {
+    public void testGetPorts() {
         assertEquals(1, moduleBRUI.getPorts().size());
     }
 
     /**
      * test on get type.
-     * @throws Exception
      */
-    public void testGetType() throws Exception {
+    public void testGetType() {
         assertEquals(ModuleType.BRUI, moduleBRUI.getType());
     }
 }

@@ -69,7 +69,7 @@ public class ModuleKEYB implements Module {
 
     /**
      * Constructor
-     * @param synth
+     * @param synth Synthesizer
      */
     public ModuleKEYB(Synthesizer synth) {
         octave = REFERENCE_OCTAVE;
