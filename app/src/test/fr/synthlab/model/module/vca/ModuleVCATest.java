@@ -10,9 +10,19 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests on the Voltage Control Amplifier.
+ */
 public class ModuleVCATest {
+
+    /**
+     * Module tested
+     */
     private ModuleVCA moduleVCA;
 
+    /**
+     * Initialize.
+     */
     @Before
     public void setUp() {
         moduleVCA = new ModuleVCA(JSyn.createSynthesizer());
@@ -43,6 +53,9 @@ public class ModuleVCATest {
         }
     }
 
+    /**
+     * After execution
+     */
     @After
     public void tearDown() {
         moduleVCA.stop();

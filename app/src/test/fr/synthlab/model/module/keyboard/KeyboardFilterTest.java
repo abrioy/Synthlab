@@ -1,6 +1,5 @@
-package fr.synthlab.model.filter;
+package fr.synthlab.model.module.keyboard;
 
-import fr.synthlab.model.module.keyboard.FilterKEYB;
 import junit.framework.TestCase;
 import org.junit.Before;
 

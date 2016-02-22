@@ -10,10 +10,20 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests on the Voltage Control Oscillator Type A module.
+ */
 public class ModuleVCOATest {
 
+    /**
+     * Module tested
+     */
     private ModuleVCOA moduleVCOA;
 
+    /**
+     * Initialize.
+     * @throws Exception
+     */
     @Before
     public void setUp() {
         moduleVCOA = new ModuleVCOA(JSyn.createSynthesizer());
@@ -44,6 +54,9 @@ public class ModuleVCOATest {
         }
     }
 
+    /**
+     * After execution.
+     */
     @After
     public void tearDown() {
         moduleVCOA.stop();

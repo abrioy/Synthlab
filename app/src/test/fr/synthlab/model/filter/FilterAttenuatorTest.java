@@ -26,7 +26,7 @@ public class FilterAttenuatorTest {
     }
 
     /**
-     * test on getter
+     * test on setter
      * @throws Exception
      */
     @Test
@@ -37,6 +37,10 @@ public class FilterAttenuatorTest {
         assertEquals(AudioMath.decibelsToAmplitude(13), filter.getAttenuation(), 0.00000000000001);
     }
 
+    /**
+     * test on getter
+     * @throws Exception
+     */
     @Test
     public void testGetAttenuation() throws Exception {
         assertEquals(1, filter.getAttenuation(), 0.00000000000001);
