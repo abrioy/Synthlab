@@ -105,7 +105,7 @@ public class ModuleFactory {
      * @return a new ModuleREP
      */
     private static Module createREP() {
-        return new ModuleREP();
+        return new ModuleREP(syn);
     }
 
     /**

@@ -43,8 +43,8 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
         this.setId("pane");
-        muteButton.setPrefSize(30, 30);
-        recordButton.setPrefSize(30, 30);
+        muteButton.setPrefSize(40, 40);
+        recordButton.setPrefSize(35, 35);
 		fileChooserButton.setPrefSize(30, 30);
     }
 
@@ -115,7 +115,9 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         picker.valueProperty().addListener(event -> {
             volume.run();
         });
-        muteButton.setOnAction(event -> isMuted.setValue(!isMuted.getValue()));
+        muteButton.setOnAction(event -> {
+			isMuted.setValue(!isMuted.getValue());
+		});
 
 		isMuted.addListener((observable, oldValue, newValue) -> {
 			muteButton.setToggle(newValue);
@@ -128,8 +130,10 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 			recordCommand.run();
 		});
 
-        recordButton.setOnAction(event -> isRecording.setValue(!isRecording.getValue()));
-
+        recordButton.setOnAction(event -> {
+			isRecording.setValue(!isRecording.getValue());
+		});
+		fileChooserButton.getStyleClass().add("file-button");
 		fileChooserButton.setOnAction(event ->{
 			DirectoryChooser directoryChooser = new DirectoryChooser();
 			directoryChooser.setTitle("Output folder");
