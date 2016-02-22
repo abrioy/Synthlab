@@ -47,7 +47,7 @@ public class ModuleVCA implements Module {
 
     /**
      * Constructor
-     * @param synthesizer
+     * @param synthesizer Synthesizer
      */
     public ModuleVCA(Synthesizer synthesizer) {
         filterVCAam = new FilterVCAam(filterAttenuator.output);
@@ -74,7 +74,7 @@ public class ModuleVCA implements Module {
 
     /**
      * set the attenuation in DB
-     * @param attenuation
+     * @param attenuation new attenuation
      */
     public void setAttenuation(double attenuation) {
         this.attenuation = attenuation;
@@ -83,7 +83,7 @@ public class ModuleVCA implements Module {
 
     /**
      * get the list of ports of the VCA module
-     * @return
+     * @return VCA ports
      */
     @Override
     public Collection<Port> getPorts() {

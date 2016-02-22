@@ -8,38 +8,38 @@ public class KeyboardFilterTest extends TestCase {
     private FilterKEYB keyboardFilter;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         keyboardFilter = new FilterKEYB();
     }
 
-    public void testInitializeTension() throws Exception {
+    public void testInitializeTension() {
         assertEquals(0.0, keyboardFilter.getTension());
     }
 
-    public void testPressKey() throws Exception {
+    public void testPressKey() {
         keyboardFilter.pressKey();
         assertEquals(5.0, keyboardFilter.getTension());
     }
 
-    public void testPressKey2() throws Exception {
+    public void testPressKey2() {
         keyboardFilter.pressKey();
         keyboardFilter.releaseKey();
         keyboardFilter.pressKey();
         assertEquals(5.0, keyboardFilter.getTension());
     }
 
-    public void testReleaseKey() throws Exception {
+    public void testReleaseKey() {
         keyboardFilter.releaseKey();
         assertEquals(-5.0, keyboardFilter.getTension());
     }
 
-    public void testReleaseKey2() throws Exception {
+    public void testReleaseKey2() {
         keyboardFilter.pressKey();
         keyboardFilter.releaseKey();
         assertEquals(-5.0, keyboardFilter.getTension());
     }
 
-    public void testGetGate() throws Exception {
+    public void testGetGate() {
         assertTrue(keyboardFilter.getGate() != null);
     }
 }

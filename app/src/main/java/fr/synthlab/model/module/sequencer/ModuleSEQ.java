@@ -25,6 +25,7 @@ public class ModuleSEQ extends Observable implements Module {
 
     /**
      * Constructor
+     * @param synth Synthesizer
      */
     public ModuleSEQ(Synthesizer synth) {
 

@@ -22,7 +22,6 @@ public class ModuleVCFHPTest {
 
     /**
      * Initialize.
-     * @throws Exception
      */
     @Before
     public void setUp() {
@@ -32,22 +31,18 @@ public class ModuleVCFHPTest {
 
     /**
      * test setFrequency method
-     *
-     * @throws Exception
      */
     @Test
-    public void testSetFrequency() throws Exception {
+    public void testSetFrequency() {
         moduleVCFHP.setF0(5);
         assertEquals(5, moduleVCFHP.getF0(), 0.001);
     }
 
     /**
      * test getPorts method
-     *
-     * @throws Exception
      */
     @Test
-    public void testGetPorts() throws Exception {
+    public void testGetPorts() {
         Collection<Port> ports = moduleVCFHP.getPorts();
         for (Port p : ports) {
             assertEquals(true, p.getName().equals("fm") || p.getName().equals("in") || p.getName().equals("out"));

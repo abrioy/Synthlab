@@ -227,7 +227,7 @@ public class Workbench extends Pane {
 
 	/**
 	 * Removes a module and all its connections for the workbench
-	 * @param module
+	 * @param module Module to be deleted
 	 */
 	public void removeModule(ViewModule module) {
         module.getChildren().stream().filter(child -> child instanceof Pane).forEach(child -> {
@@ -249,7 +249,7 @@ public class Workbench extends Pane {
 
 	/**
 	 * Called when a module wants to be closed
-	 * @param module
+	 * @param module Module to be closed
 	 */
 	public void onModuleCloseRequest(ViewModule module){
 		removeModule(module);
@@ -258,7 +258,7 @@ public class Workbench extends Pane {
 
 	/**
 	 * Adds a module to the workbench at the position (0,0)
-	 * @param module
+	 * @param module Module to be added
      */
 	public void addModule(ViewModule module) {
 		this.getChildren().add(module);
@@ -267,7 +267,7 @@ public class Workbench extends Pane {
 
 	/**
 	 * Ads listeners to a module to make it draggable across the workbench
-	 * @param module
+	 * @param module Module to be dragged
 	 */
 	private void makeDraggable(ViewModule module) {
 		final Workbench workbench = this;
@@ -476,7 +476,7 @@ public class Workbench extends Pane {
 
 	/**
 	 * Handling event when plug is clicked
-	 * @param plug
+	 * @param plug Plug clicked
 	 */
 	public void plugClicked(Plug plug){
 		if(draggedCable == null){

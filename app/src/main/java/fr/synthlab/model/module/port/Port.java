@@ -47,8 +47,8 @@ public class Port {
 	public boolean isConnected() { return port != null; }
 
     /**
-     * connect this port to another port
-     * @param port
+     * connect this port to another port.
+     * @param port Port to connect
      */
     public void connect(Port port){
         this.port = port;
@@ -58,7 +58,7 @@ public class Port {
     }
 
     /**
-     * disconnect this port
+     * disconnect this port.
      */
     public void disconnect(){
         if(port != null){

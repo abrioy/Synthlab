@@ -24,9 +24,9 @@ public class SEQFilterTest extends TestCase {
 
     /**
      * Initialize.
-     * @throws Exception
      */
-    public void setUp() throws Exception {
+    public void setUp()
+    {
         List<Double> stepValues = new ArrayList<>();
         stepValues.add(0.0);
         stepValues.add(0.0);
@@ -42,17 +42,17 @@ public class SEQFilterTest extends TestCase {
 
     /**
      * test on get current
-     * @throws Exception
      */
-    public void testGetCurrent() throws Exception {
+    public void testGetCurrent()
+    {
         assertEquals(0, seqFilter.getCurrent());
     }
 
     /**
      * Test on reset
-     * @throws Exception
      */
-    public void testReset() throws Exception {
+    public void testReset()
+    {
         seqFilter.reset();
         assertEquals(0, seqFilter.getCurrent());
     }

@@ -21,97 +21,97 @@ public class ModuleFactoryTest extends TestCase {
 
     /**
      * create a VCOA module.
-     * @throws Exception
+     *
      */
-    public void testCreateModuleVCOA() throws Exception {
+    public void testCreateModuleVCOA() {
         assertTrue(ModuleFactory.createModule(ModuleType.VCOA) instanceof ModuleVCOA);
     }
 
     /**
      * create a SCOP module.
-     * @throws Exception
+     *
      */
-    public void testCreateModuleSCOP() throws Exception {
+    public void testCreateModuleSCOP() {
         assertTrue(ModuleFactory.createModule(ModuleType.SCOP) instanceof ModuleSCOP);
     }
 
     /**
      * create a OUT module.
-     * @throws Exception
+     *
      */
-    public void testCreateModuleOUT() throws Exception {
+    public void testCreateModuleOUT() {
         assertTrue(ModuleFactory.createModule(ModuleType.OUT) instanceof ModuleOUT);
     }
 
     /**
      * create a VCA module.
-     * @throws Exception
+     *
      */
-    public void testCreateModuleVCA() throws Exception {
+    public void testCreateModuleVCA() {
         assertTrue(ModuleFactory.createModule(ModuleType.VCA) instanceof ModuleVCA);
     }
 
     /**
      * create a REP module.
-     * @throws Exception
+     *
      */
-    public void testCreateModuleREP() throws Exception {
+    public void testCreateModuleREP() {
         assertTrue(ModuleFactory.createModule(ModuleType.REP) instanceof ModuleREP);
     }
 
     /**
      * create a EG module
-     * @throws Exception
+     *
      */
-    public void testCreateModuleEG() throws Exception {
+    public void testCreateModuleEG() {
         assertTrue(ModuleFactory.createModule(ModuleType.EG) instanceof ModuleEG);
     }
 
     /**
      * create a VCFLP module.
-     * @throws Exception
+     *
      */
-    public void testCreateModuleVCFLP() throws Exception {
+    public void testCreateModuleVCFLP() {
         assertTrue(ModuleFactory.createModule(ModuleType.VCFLP) instanceof ModuleVCFLP);
     }
 
     /**
      * create a VCFHP module
-     * @throws Exception
+     *
      */
-    public void testCreateModuleVCFHP() throws Exception {
+    public void testCreateModuleVCFHP() {
         assertTrue(ModuleFactory.createModule(ModuleType.VCFHP) instanceof ModuleVCFHP);
     }
 
     /**
      * create a KEYB module
-     * @throws Exception
+     *
      */
-    public void testCreateModuleKEYB() throws Exception {
+    public void testCreateModuleKEYB() {
         assertTrue(ModuleFactory.createModule(ModuleType.KEYB) instanceof ModuleKEYB);
     }
 
     /**
      * create a MIX module
-     * @throws Exception
+     *
      */
-    public void testCreateModuleMIX() throws Exception {
+    public void testCreateModuleMIX() {
         assertTrue(ModuleFactory.createModule(ModuleType.MIX) instanceof ModuleMIX);
     }
 
     /**
      * create a BRUI module
-     * @throws Exception
+     *
      */
-    public void testCreateModuleBRUI() throws Exception {
+    public void testCreateModuleBRUI() {
         assertTrue(ModuleFactory.createModule(ModuleType.BRUI) instanceof ModuleBRUI);
     }
 
     /**
      * create a SEQ module.
-     * @throws Exception
+     *
      */
-    public void testCreateModuleSEQ() throws Exception {
+    public void testCreateModuleSEQ() {
         assertTrue(ModuleFactory.createModule(ModuleType.SEQ) instanceof ModuleSEQ);
     }
 }

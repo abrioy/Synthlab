@@ -32,7 +32,7 @@ public class OutputPort extends Port {
 
     /**
      * Connect another port to this port
-     * @param port
+     * @param port Port to connect
      */
     @Override
     public void connect(Port port) {

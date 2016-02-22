@@ -17,7 +17,6 @@ public class ModuleSEQTest extends TestCase {
 
     /**
      * Initialize.
-     * @throws Exception
      */
     @Before
     public void setUp() {
@@ -26,33 +25,29 @@ public class ModuleSEQTest extends TestCase {
 
     /**
      * test on get ports
-     * @throws Exception
      */
-    public void testGetPorts() throws Exception {
+    public void testGetPorts() {
         assertEquals(2, moduleSEQ.getPorts().size());
     }
 
     /**
      * test on get type
-     * @throws Exception
      */
-    public void testGetType() throws Exception {
+    public void testGetType() {
         assertEquals(ModuleType.SEQ, moduleSEQ.getType());
     }
 
     /**
      * test on get current
-     * @throws Exception
      */
-    public void testGetCurrent() throws Exception {
+    public void testGetCurrent() {
         assertEquals(0, moduleSEQ.getCurrent());
     }
 
     /**
      * test on reset
-     * @throws Exception
      */
-    public void testReset() throws Exception {
+    public void testReset() {
         moduleSEQ.reset();
         assertEquals(0, moduleSEQ.getCurrent());
     }

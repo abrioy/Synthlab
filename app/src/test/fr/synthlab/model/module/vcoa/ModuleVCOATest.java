@@ -22,7 +22,6 @@ public class ModuleVCOATest {
 
     /**
      * Initialize.
-     * @throws Exception
      */
     @Before
     public void setUp() {
@@ -33,10 +32,9 @@ public class ModuleVCOATest {
     /**
      * test setFrequency method
      *
-     * @throws Exception
      */
     @Test
-    public void testSetFrequency() throws Exception {
+    public void testSetFrequency() {
         moduleVCOA.setFrequency(5);
         assertEquals(5, moduleVCOA.getFrequency(), 0.001);
     }
@@ -44,10 +42,9 @@ public class ModuleVCOATest {
     /**
      * test getPorts method
      *
-     * @throws Exception
      */
     @Test
-    public void testGetPorts() throws Exception {
+    public void testGetPorts() {
         Collection<Port> ports = moduleVCOA.getPorts();
         for (Port p : ports) {
             assertEquals(true, p.getName().equals("fm") || p.getName().equals("out"));
