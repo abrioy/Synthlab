@@ -8,6 +8,50 @@
     <artifactId>synthlab</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <description>
+        This project is a synthesizer with javaFx.
+    </description>
+    <inceptionYear>2016</inceptionYear>
+    <developers>
+        <developer>
+            <name>Corentin BEAUCE</name>
+            <id>cb</id>
+            <email>corentin.beauce@etudiant.univ-rennes1.fr</email>
+        </developer>
+        <developer>
+            <name>Antoine BRIOY</name>
+            <id>ab</id>
+            <email>anthoine.brioy@etudiant.univ-rennes1.fr</email>
+        </developer>
+        <developer>
+            <name>Johan CHAMPION</name>
+            <id>jc</id>
+            <email>johan.champion@etudiant.univ-rennes1.fr</email>
+        </developer>
+        <developer>
+            <name>Anthony COBAC</name>
+            <id>ac</id>
+            <email>anthony.cobac@etudiant.univ-rennes1.fr</email>
+        </developer>
+        <developer>
+            <name>Pol LE TUE</name>
+            <id>pl</id>
+            <email>pol.letue@etudiant.univ-rennes1.fr</email>
+        </developer>
+        <developer>
+            <name>Salim NADOUR</name>
+            <id>sn</id>
+            <email>salim.nadour@etudiant.univ-rennes1.fr</email>
+        </developer>
+        <developer>
+            <name>Jérémy YZIQUEL</name>
+            <id>jy</id>
+            <email>jeremy.yziquel@etudiant.univ-rennes1.fr</email>
+        </developer>
+    </developers>
+
+    <name>Synthlab</name>
+    <url>https://github.com/abrioy/Synthlab</url>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
