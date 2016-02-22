@@ -43,5 +43,4 @@ public class OscilloscopeDrawing extends Pane {
 		//swingNode.getContent().revalidate();
 		//swingNode.getContent().repaint();
 	}
-
 }

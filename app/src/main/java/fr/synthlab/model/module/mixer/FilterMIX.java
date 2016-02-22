@@ -123,5 +123,4 @@ public class FilterMIX extends UnitGenerator{
     public UnitOutputPort getOutput() {
         return output;
     }
-
 }
