@@ -205,8 +205,21 @@
     <reporting>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>2.7</version>
+        <reportSets>
+            <reportSet>
+            <reports>
+                <report>index</report>
+                <report>dependencies</report>
+                <report>project-team</report>
+                <report>summary</report>
+                <report>plugins</report>
+                <report>help</report>
+                </reports>
+            </reportSet>
+            </reportSets>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
