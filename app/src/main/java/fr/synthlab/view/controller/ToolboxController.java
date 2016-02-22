@@ -46,7 +46,7 @@ public class ToolboxController implements Initializable {
         treeItemRoot.expandedProperty().addListener(listener -> makeListDraggable(treeView));
 
         TreeItem<String> rootInput = new TreeItem<>("Input");
-        TreeItem<String> rootOutput= new TreeItem<>("Output ");
+        TreeItem<String> rootOutput= new TreeItem<>("Output");
         TreeItem<String> rootFilter = new TreeItem<>("Filter");
         treeItemRoot.getChildren().addAll(rootInput, rootOutput, rootFilter);
 

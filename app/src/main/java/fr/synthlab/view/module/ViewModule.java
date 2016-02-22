@@ -29,7 +29,6 @@ public abstract class ViewModule extends Pane implements Serializable {
 	private Label moduleName;
 	private Button closeButton;
 	public ViewModule(Workbench workbench) {
-	
 		super();
 
 		this.workbench = workbench;
