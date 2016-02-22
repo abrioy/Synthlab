@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 
 
 public class MainWindowController implements Initializable {
-    private static final Logger logger = Logger.getLogger(MainWindowController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(MainWindowController.class.getName());
 
     @FXML private Workbench workbench;
 	@FXML private MenuBarController menuBarController;
@@ -91,23 +91,23 @@ public class MainWindowController implements Initializable {
 				moduleType = ModuleType.valueOf(ModuleType.getNameFromLong(db.getString()));
 			}
 			catch(IllegalArgumentException e){
-				logger.severe("Unable to drag in module, there is no module called \""+db.getString()+"\".");
+				LOGGER.severe("Unable to drag in module, there is no module called \""+db.getString()+"\".");
 			}
 
 			if(moduleType != null) {
 				// We create a new module to add to the workbench
 				if(draggedNewViewModule == null){
-					logger.fine("Creating a new module \""+db.getString()+"\" by dragging it into the workspace.");
+					LOGGER.fine("Creating a new module \""+db.getString()+"\" by dragging it into the workspace.");
 					ViewModule viewModule = ViewModuleFactory.createViewModule(moduleType, workbench);
 					if(viewModule == null) {
-						logger.warning("Error while creating a ViewModule of type "+moduleType+".");
+						LOGGER.warning("Error while creating a ViewModule of type "+moduleType+".");
 					}
 					else{
 						draggedNewViewModule = viewModule;
 					}
 				}
 				else{
-					logger.fine("Showing back module \""+db.getString()+"\" because it came back into the workspace.");
+					LOGGER.fine("Showing back module \""+db.getString()+"\" because it came back into the workspace.");
 				}
 
 				// We add the module to the workbench
@@ -136,7 +136,7 @@ public class MainWindowController implements Initializable {
 		// Cleaning up if the module get out of the workbench
 		workbench.setOnDragExited(event -> {
 			if(draggedNewViewModule != null) {
-				logger.fine("Hiding module \"" + draggedNewViewModule.getModule().getType() +
+				LOGGER.fine("Hiding module \"" + draggedNewViewModule.getModule().getType() +
 						"\" because it got out of the workspace.");
 				workbench.hideGhost();
 				workbench.removeModule(draggedNewViewModule);
@@ -147,12 +147,12 @@ public class MainWindowController implements Initializable {
 		workbench.setOnDragDropped(event -> {
 			if (draggedNewViewModule != null) {
 				if(draggedNewViewModule.isVisible()) {
-					logger.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
+					LOGGER.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
 							"\" to the workspace.");
 					event.setDropCompleted(true);
 				}
 				else{
-					logger.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
+					LOGGER.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
 							"\" because we failed to find a place for it in the workspace.");
 					event.setDropCompleted(false);
 					workbench.removeModule(draggedNewViewModule);
@@ -166,7 +166,7 @@ public class MainWindowController implements Initializable {
 		toolboxController.setOnDragDone(event -> {
 			if (draggedNewViewModule != null) {
 				// We never found a good position for the module
-				logger.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
+				LOGGER.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
 						"\" because we failed to find a place for it in the workspace.");
 				workbench.removeModule(draggedNewViewModule);
 

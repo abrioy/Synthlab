@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * with an other modular signal.
  */
 public class ModuleVCA implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleVCA.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ModuleVCA.class.getName());
 
     /**
      * The list of port of the VCA Module

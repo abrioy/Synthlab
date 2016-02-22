@@ -27,7 +27,7 @@ import java.io.File;
 import java.util.logging.Logger;
 
 public class ViewModuleFactory {
-    private static final Logger logger = Logger.getLogger(ViewModuleFactory.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleFactory.class.getName());
 
 
     public static ViewModule createViewModule(ModuleType type, Workbench workbench) {
@@ -71,9 +71,9 @@ public class ViewModuleFactory {
                 break;
         }
         if (module != null) {
-            logger.finer("ViewModule created: " + type.toString());
+            LOGGER.finer("ViewModule created: " + type.toString());
         } else {
-            logger.severe("Unrecognised module type \"" + type.toString() + "\".");
+            LOGGER.severe("Unrecognised module type \"" + type.toString() + "\".");
         }
         return module;
     }

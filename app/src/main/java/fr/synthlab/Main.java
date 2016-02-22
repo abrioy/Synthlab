@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class Main extends Application {
 	private static final Logger APP_ROOT_LOGGER = Logger.getLogger("fr.synthlab");
-	private static final Logger logger = Logger.getLogger(Main.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
 	public static void main(String[] args) {
 
@@ -44,10 +44,10 @@ public class Main extends Application {
 
 		stage.setTitle("Synthlab");
 		stage.setScene(scene);
-		stage.setOnShown(we -> logger.fine("Main window opened."));
+		stage.setOnShown(we -> LOGGER.fine("Main window opened."));
 		stage.setOnCloseRequest(we -> {
 			stage.close();
-			logger.fine("Main window closed.");
+			LOGGER.fine("Main window closed.");
 		});
 		stage.setOnCloseRequest(t -> {
 			Platform.exit();

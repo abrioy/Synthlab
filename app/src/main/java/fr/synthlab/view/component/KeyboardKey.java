@@ -9,7 +9,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.logging.Logger;
 
 public class KeyboardKey extends Rectangle {
-    private static final Logger logger = Logger.getLogger(KeyboardKey.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(KeyboardKey.class.getName());
 
     private Workbench workbench;
 

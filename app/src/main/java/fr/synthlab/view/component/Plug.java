@@ -17,7 +17,7 @@ import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
 public class Plug extends StackPane {
-	private static final Logger logger = Logger.getLogger(Plug.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Plug.class.getName());
 
 	private Circle colorCircle;
 	private Cable cable;

@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class ViewModuleSEQ extends ViewModule implements Initializable, Observer{
-    private static final Logger logger = Logger.getLogger(ViewModuleSEQ.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleSEQ.class.getName());
 
     @FXML
     private ResetButton resetButton;

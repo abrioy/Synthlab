@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class MenuBarController implements Initializable {
-	private static final Logger logger = Logger.getLogger(MenuBarController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(MenuBarController.class.getName());
 
 	@FXML private MenuBar menuBar;
 	private Workbench workbench;
@@ -158,10 +158,10 @@ public class MenuBarController implements Initializable {
 
 	private void openSavedFile(File file) throws IOException {
 		if(file == null) {
-			logger.warning("Attempting to load a project from null file.");
+			LOGGER.warning("Attempting to load a project from null file.");
 		}
 		else{
-			logger.info("Loading configuration from file: \"" + file + "\".");
+			LOGGER.info("Loading configuration from file: \"" + file + "\".");
 			currentSaveFile = file;
 
 			FileInputStream fileStream = new FileInputStream(file);
@@ -176,10 +176,10 @@ public class MenuBarController implements Initializable {
 
 	private void saveToFile(File file) throws IOException {
 		if(file == null) {
-			logger.warning("Attempting to save a project to a null file.");
+			LOGGER.warning("Attempting to save a project to a null file.");
 		}
 		else {
-			logger.info("Saving configuration to file: \"" + file + "\".");
+			LOGGER.info("Saving configuration to file: \"" + file + "\".");
 			currentSaveFile = file;
 
 			FileOutputStream fileSteam = new FileOutputStream(file);

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @see Module
  */
 public class ModuleBRUI implements Module{
-    private static final Logger logger = Logger.getLogger(ModuleBRUI.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ModuleBRUI.class.getName());
 
     /**
      * list of ports.

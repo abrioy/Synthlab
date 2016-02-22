@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleOUT extends ViewModule implements Initializable{
-    private static final Logger logger = Logger.getLogger(ViewModuleOUT.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleOUT.class.getName());
 
     @FXML private Knob picker;
     @FXML private MuteButton muteButton;
@@ -105,7 +105,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 			return file;
 		}
 		else{
-			logger.warning("Unable to create a new file to record.");
+			LOGGER.warning("Unable to create a new file to record.");
 			return null;
 		}
 	}
@@ -145,7 +145,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 			File selectedDirectory = directoryChooser.showDialog(getScene().getWindow());
 
 			if(selectedDirectory != null){
-				logger.info("New recording output directory selected: \""+selectedDirectory.getPath()+"\".");
+				LOGGER.info("New recording output directory selected: \""+selectedDirectory.getPath()+"\".");
 				pickedDirectory = selectedDirectory;
 			}
 		});

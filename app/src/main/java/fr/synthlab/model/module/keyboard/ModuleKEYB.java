@@ -1,7 +1,6 @@
 package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.SineOscillator;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.OutputPort;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class ModuleKEYB implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleKEYB.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ModuleKEYB.class.getName());
 
     /**
      * Reference frequency A3.

@@ -11,9 +11,9 @@ import java.util.logging.Logger;
  */
 public class FilterAttenuator extends UnitFilter {
     /**
-     * logger
+     * LOGGER
      */
-    private static final Logger logger = Logger.getLogger(FilterAttenuator.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(FilterAttenuator.class.getName());
 
     /**
      * attenuation amplitude

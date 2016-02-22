@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  *
  */
 public class InputPort extends Port {
-	private static final Logger logger = Logger.getLogger(InputPort.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(InputPort.class.getName());
 
     /**
      * The matching port in JSyn
@@ -43,7 +43,7 @@ public class InputPort extends Port {
     @Override
     public void connect(Port port) {
         if (getConnected() != null){
-			logger.warning("Unable to connect \""+port.getName()
+			LOGGER.warning("Unable to connect \""+port.getName()
 					+"\" to this port ("+this.getName()+") because it is already connected to \""
 					+getConnected().getName()+"\".");
 		}

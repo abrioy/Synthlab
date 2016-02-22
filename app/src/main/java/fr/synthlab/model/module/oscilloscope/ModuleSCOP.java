@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  * @see Module
  */
 public class ModuleSCOP implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleSCOP.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ModuleSCOP.class.getName());
 
     /**
      * Audio Scope

@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 public class ModuleEG implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleSCOP.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ModuleSCOP.class.getName());
 
     /**
      * All ports

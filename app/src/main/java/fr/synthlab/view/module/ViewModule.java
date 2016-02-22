@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public abstract class ViewModule extends Pane implements Serializable {
-	private static final Logger logger = Logger.getLogger(ViewModule.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ViewModule.class.getName());
 
 	private Workbench workbench;
 	private Module module;
@@ -60,7 +60,7 @@ public abstract class ViewModule extends Pane implements Serializable {
 		topPane.getChildren().add(closeButton);
 		AnchorPane.setRightAnchor(closeButton, 0.0d);
 		closeButton.setOnMouseClicked(event -> {
-			logger.fine("Module \"" + module.getType() + "\" is asking to be closed.");
+			LOGGER.fine("Module \"" + module.getType() + "\" is asking to be closed.");
 			workbench.onModuleCloseRequest(this);
 			event.consume();
 		});
@@ -75,7 +75,7 @@ public abstract class ViewModule extends Pane implements Serializable {
 			Parent root = fxmlLoader.load();
 			this.getChildren().add(root);
 		} catch (IOException exception) {
-			logger.severe("Cannot load the specified FXML file: \""+fxmlPath+"\".");
+			LOGGER.severe("Cannot load the specified FXML file: \""+fxmlPath+"\".");
 			throw new RuntimeException(exception);
 		}
 

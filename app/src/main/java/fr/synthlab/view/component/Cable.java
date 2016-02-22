@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 
 public class Cable extends CubicCurve {
-    private static final Logger logger = Logger.getLogger(Cable.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Cable.class.getName());
     private final double CIRCLE_RADIUS = 12.0d;
     private Color color;
     private Plug in;

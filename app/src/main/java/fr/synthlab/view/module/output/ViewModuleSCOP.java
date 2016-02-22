@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleSCOP extends ViewModule implements Initializable {
-	private static final Logger logger = Logger.getLogger(ViewModuleSCOP.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ViewModuleSCOP.class.getName());
 
 	@FXML
 	OscilloscopeDrawing oscilloscopeDrawing;

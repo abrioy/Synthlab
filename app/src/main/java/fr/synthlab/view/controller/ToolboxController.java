@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 public class ToolboxController implements Initializable {
-    private static final Logger logger = Logger.getLogger(ToolboxController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ToolboxController.class.getName());
     @FXML
     private TreeView<String> treeView;
 

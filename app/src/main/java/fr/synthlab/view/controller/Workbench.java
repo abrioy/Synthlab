@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class Workbench extends Pane {
-	private static final Logger logger = Logger.getLogger(Workbench.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Workbench.class.getName());
 
 	private final double moduleMargin = 2.0d;
 	private ImageView dragGhost = new ImageView();
@@ -72,23 +72,23 @@ public class Workbench extends Pane {
 
 			// Writing module type
 			ModuleType type = module.getType();
-			logger.fine("Saving module of type \""+type+"\".");
+			LOGGER.fine("Saving module of type \""+type+"\".");
 			outputStream.writeObject(type);
 
 			// Writing viewModule position
 			Bounds viewModuleBounds = viewModule.getBoundsInParent();
-			logger.fine("\tPosition: ("+viewModuleBounds.getMinX()+", "+viewModuleBounds.getMinY()+").");
+			LOGGER.fine("\tPosition: ("+viewModuleBounds.getMinX()+", "+viewModuleBounds.getMinY()+").");
 			outputStream.writeDouble(viewModuleBounds.getMinX());
 			outputStream.writeDouble(viewModuleBounds.getMinY());
 
 			// Writing ViewModule data
-			logger.fine("\tData.");
+			LOGGER.fine("\tData.");
 			viewModule.writeObject(outputStream);
 
 			// Writing ViewModule connections
 			// Writing the UID of this module
 			int uid = serializeModuleToUID(viewModule.getModule());
-			logger.fine("\tId: "+uid);
+			LOGGER.fine("\tId: "+uid);
 			outputStream.writeInt(uid);
 
 			// Writing all the ports
@@ -100,7 +100,7 @@ public class Workbench extends Pane {
 
 			int nbPlugs = connectedPlugs.size();
 			outputStream.writeInt(nbPlugs);
-			logger.fine("\tConnections ("+nbPlugs+")");
+			LOGGER.fine("\tConnections ("+nbPlugs+")");
 			for (Plug plug : connectedPlugs) {
 				outputStream.writeObject(plug.getName());
 				// Storing the ID of the connected module
@@ -113,7 +113,7 @@ public class Workbench extends Pane {
 				outputStream.writeDouble(cableColor.getRed());
 				outputStream.writeDouble(cableColor.getGreen());
 				outputStream.writeDouble(cableColor.getBlue());
-				logger.fine("\t\t"+plug.getName()+"\t-- "+cableColor+"\t--> "+targetUID+"."+connectedPort.getName());
+				LOGGER.fine("\t\t"+plug.getName()+"\t-- "+cableColor+"\t--> "+targetUID+"."+connectedPort.getName());
 			}
 		}
 	}
@@ -146,30 +146,30 @@ public class Workbench extends Pane {
 			try {
 				// Reading type
 				ModuleType type = (ModuleType) inputStream.readObject();
-				logger.fine("Restoring a module of type \""+type+"\".");
+				LOGGER.fine("Restoring a module of type \""+type+"\".");
 
 				// Reading position
 				double xPos = inputStream.readDouble();
 				double yPos = inputStream.readDouble();
-				logger.fine("\tPosition: ("+xPos+", "+yPos+").");
+				LOGGER.fine("\tPosition: ("+xPos+", "+yPos+").");
 
 				// Creating new ViewModule and feeding it the gathered data
 				ViewModule viewModule = ViewModuleFactory.createViewModule(type, this);
 				viewModule.relocate(xPos, yPos);
 
 				// Feeding data to the Module
-				logger.fine("\tData.");
+				LOGGER.fine("\tData.");
 				viewModule.readObject(inputStream);
 
 				// Reading connections
 				// Adding this module to the global list
 				int moduleUID = inputStream.readInt();
-				logger.fine("\tId: "+moduleUID);
+				LOGGER.fine("\tId: "+moduleUID);
 				moduleList.put(moduleUID, viewModule);
 
 				// Adding this module's port to the list
 				int nbPlugs = inputStream.readInt();
-				logger.fine("\tFound "+nbPlugs+" connections");
+				LOGGER.fine("\tFound "+nbPlugs+" connections");
 				for (int j = 0; j < nbPlugs; j++) {
 					String plugName = (String)inputStream.readObject();
 					int connectedModuleId = inputStream.readInt();
@@ -180,7 +180,7 @@ public class Workbench extends Pane {
 					Color cableColor = new Color(r, g, b, 1.0d);
 					portList.add(new PortReference(
 							moduleUID, plugName, connectedModuleId, connectedPortName, cableColor));
-					logger.fine("\t\t"+plugName+"\t-- "+cableColor+"\t--> "+connectedModuleId+"."+connectedPortName);
+					LOGGER.fine("\t\t"+plugName+"\t-- "+cableColor+"\t--> "+connectedModuleId+"."+connectedPortName);
 				}
 
 				this.addModule(viewModule);
@@ -190,7 +190,7 @@ public class Workbench extends Pane {
 		}
 
 		// Resolving connections
-		logger.fine("Restoring "+portList.size()+" connections");
+		LOGGER.fine("Restoring "+portList.size()+" connections");
 		for(PortReference portReference : portList) {
 			ViewModule viewModule = moduleList.get(portReference.parentUID);
 			Plug plug = viewModule.getPlugByName(portReference.name);
@@ -199,7 +199,7 @@ public class Workbench extends Pane {
 
 			// Checking this port is not already connected
 			if(!plug.getPort().isConnected()) {
-				logger.fine("\t"+portReference.parentUID+"."+portReference.name
+				LOGGER.fine("\t"+portReference.parentUID+"."+portReference.name
 						+" -- "+portReference.cableColor+" --> "
 						+portReference.connectedUID+"."+portReference.connectedPortName);
 				this.connectPlugs(plug, connectedPlug);
@@ -316,7 +316,7 @@ public class Workbench extends Pane {
 	public void displayGhost(ViewModule module){
 		if(this.getChildren().contains(dragGhost)){
 			this.getChildren().remove(dragGhost);
-			logger.warning("The ghost was added again before it was properly removed.");
+			LOGGER.warning("The ghost was added again before it was properly removed.");
 		}
 
 		// Creating a ghost image
@@ -592,7 +592,7 @@ public class Workbench extends Pane {
 	}
 
 	public void changeSkin(Skin skin){
-		logger.fine("Skin changed from \""+currentSkin+"\" to \""+skin+"\".");
+		LOGGER.fine("Skin changed from \""+currentSkin+"\" to \""+skin+"\".");
 
 		this.getStylesheets().remove(currentSkin.getPath());
 		this.getStylesheets().add(skin.getPath());

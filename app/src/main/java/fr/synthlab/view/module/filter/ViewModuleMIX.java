@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleMIX extends ViewModule implements Initializable{
-    private static final Logger logger = Logger.getLogger(ViewModuleMIX.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleMIX.class.getName());
 
     /**
      * attenuator input 1.

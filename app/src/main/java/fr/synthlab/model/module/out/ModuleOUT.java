@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * @see Module
  */
 public class ModuleOUT implements Module{
-    private static final Logger logger = Logger.getLogger(ModuleOUT.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ModuleOUT.class.getName());
 
     /**
      * audio stereo left exit.

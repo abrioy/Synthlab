@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleVCFHP extends ViewModule implements Initializable {
-    private static final Logger logger = Logger.getLogger(ViewModuleVCFLP.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleVCFLP.class.getName());
 
     @FXML
     private Plug in;

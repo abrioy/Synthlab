@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * signal whose shape can be selected and the frequency can be controlled by another signal
  */
 public class ModuleVCOA implements Module {
-	private static final Logger logger = Logger.getLogger(ModuleVCOA.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ModuleVCOA.class.getName());
 
     /**
      * The list of port of the VCO module

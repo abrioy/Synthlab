@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleBRUI extends ViewModule implements Initializable{
-    private static final Logger logger = Logger.getLogger(ViewModuleBRUI.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleBRUI.class.getName());
 
 
     public ViewModuleBRUI(Workbench workbench) {

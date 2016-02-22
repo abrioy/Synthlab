@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleEG extends ViewModule implements Initializable{
-    private static final Logger logger = Logger.getLogger(ViewModuleEG.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleEG.class.getName());
 
     @FXML
     private Knob attack;

@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 
 public class ModuleFactory {
-	private static final Logger logger = Logger.getLogger(ModuleFactory.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ModuleFactory.class.getName());
 
 	/**
      * JSyn Synthesizer
@@ -55,11 +55,11 @@ public class ModuleFactory {
                 break;
         }
 		if(module != null){
-			logger.finer("Module created: "+module.toString());
+			LOGGER.finer("Module created: "+module.toString());
 			module.start();
 		}
 		else{
-			logger.severe("Unrecognised module type \""+type.toString()+"\".");
+			LOGGER.severe("Unrecognised module type \""+type.toString()+"\".");
 		}
         return module;
     }

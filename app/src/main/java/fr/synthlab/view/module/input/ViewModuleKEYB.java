@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleKEYB extends ViewModule implements Initializable{
-    private static final Logger logger = Logger.getLogger(ViewModuleKEYB.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleKEYB.class.getName());
 
     @FXML
     private KeyboardKey CKey;

@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  *
  */
 public class Port {
-	private static final Logger logger = Logger.getLogger(Port.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Port.class.getName());
 
     /**
      * the name of the port
@@ -68,7 +68,7 @@ public class Port {
 			module.update();
 		}
 		else{
-			logger.warning("Trying to disconnect a port that is not connected to anything.");
+			LOGGER.warning("Trying to disconnect a port that is not connected to anything.");
 		}
 	}
 

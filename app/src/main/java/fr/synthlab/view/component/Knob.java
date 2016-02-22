@@ -23,10 +23,10 @@ import java.util.logging.Logger;
  * @see Region
  */
 public class Knob extends Pane {
-	private static final Logger logger = Logger.getLogger(Knob.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Knob.class.getName());
 
 
-	private static final Color stepColor = Color.WHITE;
+	private static final Color STEP_COLOR = Color.WHITE;
 
     /**
      * draw zone.
@@ -297,7 +297,7 @@ public class Knob extends Pane {
         }
         if (step.get()!=0) {//draw scale
             getChildren().removeAll(lines);
-            Color interColor=stepColor;
+            Color interColor= STEP_COLOR;
 			lines.clear();
             //draw different line depending on the scaleType
             if (getScaleType().equals("enum")){
@@ -305,7 +305,7 @@ public class Knob extends Pane {
                 setMinAngle(-20);
                 stepStart=arcDistance;
                 stepEnd=scaleSize;
-                interColor=stepColor;
+                interColor= STEP_COLOR;
             }
             else{
                 interColor=interColor.darker();
