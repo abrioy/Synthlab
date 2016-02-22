@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>
-        This project is a synthesizer with javaFx.
+        This project is an audio synthesizer with javaFx.
     </description>
     <inceptionYear>2016</inceptionYear>
     <developers>
@@ -243,5 +243,4 @@
             </plugin>
         </plugins>
     </reporting>
-
 </project>
