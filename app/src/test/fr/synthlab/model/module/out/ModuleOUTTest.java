@@ -3,6 +3,7 @@ package fr.synthlab.model.module.out;
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import com.softsynth.math.AudioMath;
+import fr.synthlab.model.module.ModuleType;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
  * @see ModuleOUT
  * @author johan
  */
-public class ModuleOutTest {
+public class ModuleOUTTest {
 
     /**
      * Module tested
@@ -78,5 +79,13 @@ public class ModuleOutTest {
     @Test
     public void testLengthGetPort(){
         assertEquals(3,moduleOut.getPorts().size());
+    }
+
+    /**
+     * test on get type.
+     */
+    @Test
+    public void testGetType() {
+        assertEquals(ModuleType.OUT, moduleOut.getType());
     }
 }
