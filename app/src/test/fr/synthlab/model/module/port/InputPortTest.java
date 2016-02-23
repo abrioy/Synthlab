@@ -71,8 +71,8 @@ public class InputPortTest extends TestCase {
 
     public void testGetConnected4() {
         connectInput();
-        assertNull(inputPort.getConnected());
-        //assertTrue(inputPort.getConnected() instanceof InputPort);
+        //assertNull(inputPort.getConnected());
+        assertTrue(inputPort.getConnected() instanceof InputPort);
     }
 
     public void testGetModule() {
@@ -95,7 +95,7 @@ public class InputPortTest extends TestCase {
     private void connectInput(){
         UnitInputPort unitInputPort = new UnitInputPort("in");
         Module mockModule2 = mock(Module.class);
-        InputPort inputPort = new InputPort("in", mockModule2, unitInputPort);
-        inputPort.connect(inputPort);
+        InputPort input = new InputPort("in", mockModule2, unitInputPort);
+        inputPort.connect(input);
     }
 }
