@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ViewModuleBRUI extends ViewModule implements Initializable{
+public class ViewModuleBRUI extends ViewModule implements Initializable {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleBRUI.class.getName());
 
 
@@ -21,19 +21,17 @@ public class ViewModuleBRUI extends ViewModule implements Initializable{
         this.setId("pane");
     }
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-	}
+    }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
+    @Override
+    public void writeObject(ObjectOutputStream o) throws IOException {
 
-	}
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-
-	}
-
+    @Override
+    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+    }
 }

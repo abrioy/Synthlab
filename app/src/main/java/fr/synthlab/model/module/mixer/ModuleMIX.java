@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author johan
  * @see Module
  */
-public class ModuleMIX implements Module{
+public class ModuleMIX implements Module {
     private static final Logger LOGGER = Logger.getLogger(ModuleMIX.class.getName());
 
     /**
@@ -55,7 +55,7 @@ public class ModuleMIX implements Module{
      *
      * @param syn synthesizer
      */
-    public ModuleMIX(Synthesizer syn){
+    public ModuleMIX(Synthesizer syn) {
         attenuator1 = new FilterAttenuator();
         attenuator2 = new FilterAttenuator();
         attenuator3 = new FilterAttenuator();
@@ -85,6 +85,7 @@ public class ModuleMIX implements Module{
 
     /**
      * getter on lists port.
+     *
      * @return ports can connect to other module
      */
     @Override
@@ -125,6 +126,7 @@ public class ModuleMIX implements Module{
 
     /**
      * module type.
+     *
      * @return ModuleType.MIX
      */
     @Override
@@ -134,6 +136,7 @@ public class ModuleMIX implements Module{
 
     /**
      * setter on attenuation of input 1.
+     *
      * @param attenuation to set
      */
     public void setAttenuation1(double attenuation) {
@@ -142,14 +145,16 @@ public class ModuleMIX implements Module{
 
     /**
      * setter on attenuation of input 2.
+     *
      * @param attenuation to set
      */
-    public void setAttenuation2(double attenuation){
+    public void setAttenuation2(double attenuation) {
         attenuator2.setAttenuation(attenuation);
     }
 
     /**
      * setter on attenuation of input 3.
+     *
      * @param attenuation to set
      */
     public void setAttenuation3(double attenuation) {
@@ -158,24 +163,26 @@ public class ModuleMIX implements Module{
 
     /**
      * setter on attenuation of input 4.
+     *
      * @param attenuation to set
      */
-    public void setAttenuation4(double attenuation){
+    public void setAttenuation4(double attenuation) {
         attenuator4.setAttenuation(attenuation);
     }
 
+    public double getAttenuation1() {
+        return attenuator1.getAttenuation();
+    }
 
-	public double getAttenuation1() {
-		return attenuator1.getAttenuation();
-	}
-	public double getAttenuation2(){
-		return attenuator2.getAttenuation();
-	}
-	public double getAttenuation3() {
-		return attenuator3.getAttenuation();
-	}
-	public double getAttenuation4(){
-		return attenuator4.getAttenuation();
-	}
+    public double getAttenuation2() {
+        return attenuator2.getAttenuation();
+    }
 
+    public double getAttenuation3() {
+        return attenuator3.getAttenuation();
+    }
+
+    public double getAttenuation4() {
+        return attenuator4.getAttenuation();
+    }
 }

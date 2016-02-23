@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.logging.Logger;
 
-public class ViewModuleSEQ extends ViewModule implements Initializable, Observer{
+public class ViewModuleSEQ extends ViewModule implements Initializable, Observer {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleSEQ.class.getName());
 
     @FXML
@@ -69,24 +69,31 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
     public void setChangeStep1Command(Runnable command) {
         this.step1Command = command;
     }
+
     public void setChangeStep2Command(Runnable command) {
         this.step2Command = command;
     }
+
     public void setChangeStep3Command(Runnable command) {
         this.step3Command = command;
     }
+
     public void setChangeStep4Command(Runnable command) {
         this.step4Command = command;
     }
+
     public void setChangeStep5Command(Runnable command) {
         this.step5Command = command;
     }
+
     public void setChangeStep6Command(Runnable command) {
         this.step6Command = command;
     }
+
     public void setChangeStep7Command(Runnable command) {
         this.step7Command = command;
     }
+
     public void setChangeStep8Command(Runnable command) {
         this.step8Command = command;
     }
@@ -152,7 +159,7 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
 
     @Override
     public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		for (Knob a : stepPickers){
+        for (Knob a : stepPickers) {
             a.setValue(o.readDouble());
         }
     }

@@ -44,12 +44,12 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
         threshold.valueProperty().addListener(event -> {
             updateThreshold();
         });
-        frequencyLabel.setText(((int)getThreshold())+" Hz");
+        frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
     private void updateThreshold() {
         changeThresholdCommand.run();
-        frequencyLabel.setText(((int)getThreshold())+" Hz");
+        frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
     public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
@@ -62,13 +62,13 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
     }
 
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(threshold.getValue());
-	}
+    @Override
+    public void writeObject(ObjectOutputStream o) throws IOException {
+        o.writeDouble(threshold.getValue());
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		threshold.setValue(o.readDouble());
-	}
+    @Override
+    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+        threshold.setValue(o.readDouble());
+    }
 }

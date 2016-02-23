@@ -16,82 +16,82 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleVCFLP extends ViewModule implements Initializable {
-	private static final Logger LOGGER = Logger.getLogger(ViewModuleVCFLP.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleVCFLP.class.getName());
 
-	@FXML
-	private Plug in;
-	@FXML
-	private Plug out;
-	@FXML
+    @FXML
+    private Plug in;
+    @FXML
+    private Plug out;
+    @FXML
     private Plug am;
 
     @FXML
     private Knob threshold;
 
-	@FXML
-	private Knob resonance;
+    @FXML
+    private Knob resonance;
 
-	@FXML
-	private Label frequencyLabel;
+    @FXML
+    private Label frequencyLabel;
 
-	private Runnable changeThresholdCommand;
-	private Runnable changeResonanceCommand;
+    private Runnable changeThresholdCommand;
+    private Runnable changeResonanceCommand;
 
     public ViewModuleVCFLP(Workbench workbench) {
-		super(workbench);
-		this.loadFXML("/gui/fxml/module/ViewModuleVCFLP.fxml");
-	}
+        super(workbench);
+        this.loadFXML("/gui/fxml/module/ViewModuleVCFLP.fxml");
+    }
 
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-		threshold.valueProperty().addListener(event -> {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        threshold.valueProperty().addListener(event -> {
             updateThreshold();
         });
 
-		resonance.valueProperty().addListener(event -> {
-			updateResonance();
-		});
+        resonance.valueProperty().addListener(event -> {
+            updateResonance();
+        });
 
-		frequencyLabel.setText(((int)getThreshold())+" Hz");
+        frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
     private void updateThreshold() {
-		changeThresholdCommand.run();
-		frequencyLabel.setText(((int)getThreshold())+" Hz");
+        changeThresholdCommand.run();
+        frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
-	public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
-		this.changeThresholdCommand = changeThresholdCommand;
-		this.changeThresholdCommand.run();
-	}
+    public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
+        this.changeThresholdCommand = changeThresholdCommand;
+        this.changeThresholdCommand.run();
+    }
 
     public double getThreshold() {
         return threshold.getValue();
     }
 
 
-	private void updateResonance() {
-		changeResonanceCommand.run();
-	}
+    private void updateResonance() {
+        changeResonanceCommand.run();
+    }
 
-	public void setChangeResonanceCommand(Runnable changeResonanceCommand) {
-		this.changeResonanceCommand = changeResonanceCommand;
-		this.changeResonanceCommand.run();
-	}
+    public void setChangeResonanceCommand(Runnable changeResonanceCommand) {
+        this.changeResonanceCommand = changeResonanceCommand;
+        this.changeResonanceCommand.run();
+    }
 
-	public double getResonance() {
-		return resonance.getValue();
-	}
+    public double getResonance() {
+        return resonance.getValue();
+    }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(threshold.getValue());
-		o.writeDouble(resonance.getValue());
-	}
+    @Override
+    public void writeObject(ObjectOutputStream o) throws IOException {
+        o.writeDouble(threshold.getValue());
+        o.writeDouble(resonance.getValue());
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		threshold.setValue(o.readDouble());
-		resonance.setValue(o.readDouble());
-	}
+    @Override
+    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+        threshold.setValue(o.readDouble());
+        resonance.setValue(o.readDouble());
+    }
 }

@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  *
  */
 public class InputPort extends Port {
-	private static final Logger LOGGER = Logger.getLogger(InputPort.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(InputPort.class.getName());
 
     /**
      * The matching port in JSyn
@@ -29,7 +29,6 @@ public class InputPort extends Port {
     }
 
     /**
-     *
      * @return The JSyn port
      */
     public ConnectableInput getInput() {
@@ -38,15 +37,16 @@ public class InputPort extends Port {
 
     /**
      * Connect another port to this port.
+     *
      * @param port Port to connect
      */
     @Override
     public void connect(Port port) {
-        if (getConnected() != null){
+        if (getConnected() != null) {
             throw new RuntimeException("Unable to connect \"" + port.getName()
-					+ "\" to this port (" + this.getName() + ") because it is already connected to \""
-					+ getConnected().getName() + "\".");
-		}
+                    + "\" to this port (" + this.getName() + ") because it is already connected to \""
+                    + getConnected().getName() + "\".");
+        }
 
         if (port instanceof OutputPort) {
             input.connect(((OutputPort) port).getOutput());
@@ -58,7 +58,7 @@ public class InputPort extends Port {
      * Disconnect a connected port from this port.
      */
     public void disconnect() {
-        if(getConnected() instanceof OutputPort) {
+        if (getConnected() instanceof OutputPort) {
             input.disconnect(((OutputPort) getConnected()).getOutput());
         }
         super.disconnect();

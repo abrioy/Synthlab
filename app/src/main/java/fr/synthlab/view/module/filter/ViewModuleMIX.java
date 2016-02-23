@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ViewModuleMIX extends ViewModule implements Initializable{
+public class ViewModuleMIX extends ViewModule implements Initializable {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleMIX.class.getName());
 
     /**
@@ -110,7 +110,7 @@ public class ViewModuleMIX extends ViewModule implements Initializable{
      */
     public void setAttenuator1Cmd(Runnable attenuator1Cmd) {
         this.attenuator1Cmd = attenuator1Cmd;
-		attenuator1Cmd.run();
+        attenuator1Cmd.run();
     }
 
     /**
@@ -120,7 +120,7 @@ public class ViewModuleMIX extends ViewModule implements Initializable{
      */
     public void setAttenuator2Cmd(Runnable attenuator2Cmd) {
         this.attenuator2Cmd = attenuator2Cmd;
-		attenuator2Cmd.run();
+        attenuator2Cmd.run();
     }
 
     /**
@@ -130,7 +130,7 @@ public class ViewModuleMIX extends ViewModule implements Initializable{
      */
     public void setAttenuator3Cmd(Runnable attenuator3Cmd) {
         this.attenuator3Cmd = attenuator3Cmd;
-		attenuator3Cmd.run();
+        attenuator3Cmd.run();
     }
 
     /**
@@ -140,12 +140,13 @@ public class ViewModuleMIX extends ViewModule implements Initializable{
      */
     public void setAttenuator4Cmd(Runnable attenuator4Cmd) {
         this.attenuator4Cmd = attenuator4Cmd;
-		attenuator4Cmd.run();
+        attenuator4Cmd.run();
     }
 
     /**
      * initialise command
-     * @param location URL
+     *
+     * @param location  URL
      * @param resources ResourceBundle
      */
     @Override
@@ -164,19 +165,19 @@ public class ViewModuleMIX extends ViewModule implements Initializable{
         });
     }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(attenuator1.getValue());
-		o.writeDouble(attenuator2.getValue());
-		o.writeDouble(attenuator3.getValue());
-		o.writeDouble(attenuator4.getValue());
-	}
+    @Override
+    public void writeObject(ObjectOutputStream o) throws IOException {
+        o.writeDouble(attenuator1.getValue());
+        o.writeDouble(attenuator2.getValue());
+        o.writeDouble(attenuator3.getValue());
+        o.writeDouble(attenuator4.getValue());
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		attenuator1.setValue(o.readDouble());
-		attenuator2.setValue(o.readDouble());
-		attenuator3.setValue(o.readDouble());
-		attenuator4.setValue(o.readDouble());
-	}
+    @Override
+    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+        attenuator1.setValue(o.readDouble());
+        attenuator2.setValue(o.readDouble());
+        attenuator3.setValue(o.readDouble());
+        attenuator4.setValue(o.readDouble());
+    }
 }

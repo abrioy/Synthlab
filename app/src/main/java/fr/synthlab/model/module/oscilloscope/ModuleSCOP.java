@@ -61,6 +61,7 @@ public class ModuleSCOP implements Module {
 
     /**
      * Constructor
+     *
      * @param synth Synthesizer
      */
     public ModuleSCOP(Synthesizer synth) {
@@ -78,6 +79,7 @@ public class ModuleSCOP implements Module {
 
     /**
      * Getter on ports input and output.
+     *
      * @return Scope port
      */
     @Override
@@ -111,17 +113,18 @@ public class ModuleSCOP implements Module {
 
     /**
      * Changes the scale (i.e. the zoom) of the graphical output of the module.
+     *
      * @param scale new scale to display the oscilloscope
      */
     public void setScale(int scale) {
         int s = Math.max(scale, 0);
-        s = Math.min(s,100);
+        s = Math.min(s, 100);
         jOscillatorComponent.setScale(s);
     }
 
-	public int getScale() {
-		return jOscillatorComponent.getScale();
-	}
+    public int getScale() {
+        return jOscillatorComponent.getScale();
+    }
 
     @Override
     public ModuleType getType() {
@@ -130,6 +133,7 @@ public class ModuleSCOP implements Module {
 
     /**
      * Getter on the Scope panel.
+     *
      * @return JComponent that displays the scope
      */
     public JComponent getOscillatorJComponent() {
@@ -160,41 +164,43 @@ public class ModuleSCOP implements Module {
 
         /**
          * Sets the horizontal scale of the oscilloscope
+         *
          * @param scale An integer between 0 and 100
          */
         public void setScale(int scale) {
             scope.getView().setScale(scale);
         }
-		public int getScale() {
-			return scope.getView().getScale();
-		}
+
+        public int getScale() {
+            return scope.getView().getScale();
+        }
     }
 
-    /** **********************************************************
+    /**
+     * *********************************************************
      * Below: Custom classes made from JSyn scope classes in order to
      * get a decent-looking oscillator.
-     *
+     * <p>
      * These classes, slightly modified by us, are under the
      * following licence:
-     *
+     * <p>
      * ***********************************************************
-     *
+     * <p>
      * Copyright 2009 Phil Burk, Mobileer Inc
-     *
+     * <p>
      * Licensed under the Apache License, Version 2.0 (the "License");
      * you may not use this file except in compliance with the License.
      * You may obtain a copy of the License at
-     *
-     *     http://www.apache.org/licenses/LICENSE-2.0
-     *
+     * <p>
+     * http://www.apache.org/licenses/LICENSE-2.0
+     * <p>
      * Unless required by applicable law or agreed to in writing, software
      * distributed under the License is distributed on an "AS IS" BASIS,
      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      * See the License for the specific language governing permissions and
      * limitations under the License.
-     *
+     * <p>
      * ***********************************************************
-     *
      */
 
     private class CustomAudioScope {
@@ -300,7 +306,7 @@ public class ModuleSCOP implements Module {
             // Create a view for each probe.
             probeViews.clear();
             for (AudioScopeProbe probeModel : audioScopeModel.getProbes()) {
-				CustomAudioScopeProbeView audioScopeProbeView = new CustomAudioScopeProbeView(probeModel);
+                CustomAudioScopeProbeView audioScopeProbeView = new CustomAudioScopeProbeView(probeModel);
                 probeViews.add(audioScopeProbeView);
             }
             setupGUI();
@@ -317,13 +323,13 @@ public class ModuleSCOP implements Module {
             return probeViews.toArray(new AudioScopeProbeView[probeViews.size()]);
         }
 
-        public void setScale (int scale) {
+        public void setScale(int scale) {
             multipleWaveDisplay.setScale(scale);
         }
 
-		public int getScale () {
-			return multipleWaveDisplay.getScale();
-		}
+        public int getScale() {
+            return multipleWaveDisplay.getScale();
+        }
     }
 
     private class CustomMultipleWaveDisplay extends JPanel {
@@ -351,9 +357,10 @@ public class ModuleSCOP implements Module {
                 wave.setScale(scale);
             }
         }
-		public int getScale() {
-			return waveTraceViews.get(0).getScale(); // FIXME: Corentin
-		}
+
+        public int getScale() {
+            return waveTraceViews.get(0).getScale(); // FIXME: Corentin
+        }
 
         @Override
         public void paintComponent(Graphics g) {
@@ -471,9 +478,10 @@ public class ModuleSCOP implements Module {
         public void setScale(int scale) {
             this.scale = scale;
         }
-		public int getScale() {
-			return this.scale;
-		}
+
+        public int getScale() {
+            return this.scale;
+        }
 
     }
 
@@ -495,7 +503,5 @@ public class ModuleSCOP implements Module {
         public AudioScopeProbe getModel() {
             return probeModel;
         }
-
     }
-
 }
