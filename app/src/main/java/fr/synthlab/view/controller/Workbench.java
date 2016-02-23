@@ -123,11 +123,11 @@ public class Workbench extends Pane {
 
         Map<Integer, ViewModule> moduleList = new HashMap<>();
         class PortReference {
-            public int parentUID;
-            public String name;
-            public int connectedUID;
-            public String connectedPortName;
-            public Color cableColor;
+            private int parentUID;
+            private String name;
+            private int connectedUID;
+            private String connectedPortName;
+            private Color cableColor;
 
             public PortReference(int parentUID, String name, int connectedUID, String connectedPortName, Color cableColor) {
                 this.parentUID = parentUID;
@@ -277,7 +277,7 @@ public class Workbench extends Pane {
         final Workbench workbench = this;
 
         class Delta {
-            double x, y;
+            private double x, y;
         }
         final Delta mouseDelta = new Delta();
 

@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 public class OscilloscopeDrawing extends Pane {
     private static final Logger LOGGER = Logger.getLogger(OscilloscopeDrawing.class.getName());
 
-    ModuleSCOP osc;
-    SwingNode swingNode;
+    private ModuleSCOP osc;
+    private SwingNode swingNode;
 
     /*
     public OscilloscopeDrawing(ModuleSCOP osc) {

@@ -18,7 +18,7 @@ public class ViewModuleSCOP extends ViewModule implements Initializable {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleSCOP.class.getName());
 
     @FXML
-    OscilloscopeDrawing oscilloscopeDrawing;
+    private OscilloscopeDrawing oscilloscopeDrawing;
 
     @FXML
     private Knob picker;

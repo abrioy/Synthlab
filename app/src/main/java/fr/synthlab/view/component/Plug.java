@@ -43,7 +43,7 @@ public class Plug extends StackPane {
         modulation(Color.HOTPINK),
         other(Color.WHITE);
 
-        public Color color;
+        private Color color;
 
         Type(Color color) {
             this.color = color;
