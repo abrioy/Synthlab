@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author johan
  * @see Module
  */
-public class ModuleBRUI implements Module{
+public class ModuleBRUI implements Module {
     private static final Logger LOGGER = Logger.getLogger(ModuleBRUI.class.getName());
 
     /**
@@ -25,7 +25,7 @@ public class ModuleBRUI implements Module{
     private final ArrayList<Port> ports;
     private final WhiteNoise noise;
 
-    public ModuleBRUI(Synthesizer synthesizer){
+    public ModuleBRUI(Synthesizer synthesizer) {
         ports = new ArrayList<>();
         noise = new WhiteNoise();
         ports.add(new OutputPort("out", this, noise.output));
@@ -52,7 +52,8 @@ public class ModuleBRUI implements Module{
      * nothing to do in the disconnect of port.
      */
     @Override
-    public void update() {}
+    public void update() {
+    }
 
     @Override
     public ModuleType getType() {

@@ -147,7 +147,7 @@ public class Knob extends Pane {
         super();
         knob = new Region();
         knob.getStylesheets().add(
-                getClass().getResource("/gui/fxml/style/Knob.css").toExternalForm());//add css
+                getClass().getResource("/gui/fxml/style/Knob.css").toExternalForm()); //add css
         knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
         knob.getStyleClass().add("knob");
         knob.getTransforms().add(rotate);
@@ -234,7 +234,7 @@ public class Knob extends Pane {
 
         double angleLocal;
         double angleInterval = ((getMinAngle() - getMaxAngle()) / (step.get() - 1));
-        if (getStepType()) {//go to step if there are
+        if (getStepType()) { //go to step if there are
             double angleLocalNext = getMaxAngle();
             for (int t = 0; t < step.get() - 1; t++) {
                 angleLocal = angleLocalNext;
@@ -291,7 +291,7 @@ public class Knob extends Pane {
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
-        if (step.get() != 0) {//draw scale
+        if (step.get() != 0) { //draw scale
             getChildren().removeAll(lines);
             Color interColor = STEP_COLOR;
             lines.clear();

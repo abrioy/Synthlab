@@ -4,7 +4,7 @@ import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
-public class FilterMIX extends UnitGenerator{
+public class FilterMIX extends UnitGenerator {
 
     /**
      * input 1.
@@ -40,7 +40,7 @@ public class FilterMIX extends UnitGenerator{
         input2 = new UnitInputPort("intern2");
         input3 = new UnitInputPort("intern3");
         input4 = new UnitInputPort("intern4");
-        output =  new UnitOutputPort("out");
+        output = new UnitOutputPort("out");
         addPort(input1);
         addPort(input2);
         addPort(input3);
@@ -118,6 +118,7 @@ public class FilterMIX extends UnitGenerator{
 
     /**
      * getter on output.
+     *
      * @return output
      */
     public UnitOutputPort getOutput() {

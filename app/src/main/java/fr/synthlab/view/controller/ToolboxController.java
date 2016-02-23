@@ -46,7 +46,7 @@ public class ToolboxController implements Initializable {
         treeItemRoot.expandedProperty().addListener(listener -> makeListDraggable(treeView));
 
         TreeItem<String> rootInput = new TreeItem<>("Input");
-        TreeItem<String> rootOutput= new TreeItem<>("Output");
+        TreeItem<String> rootOutput = new TreeItem<>("Output");
         TreeItem<String> rootFilter = new TreeItem<>("Filter");
         treeItemRoot.getChildren().addAll(rootInput, rootOutput, rootFilter);
 
@@ -80,8 +80,8 @@ public class ToolboxController implements Initializable {
         treeView.setShowRoot(false);
 
         int length = 0;
-        for(TreeItem item : treeItemRoot.getChildren()){
-            length += (1+item.getChildren().size());
+        for (TreeItem item : treeItemRoot.getChildren()) {
+            length += (1 + item.getChildren().size());
         }
         treeView.setPrefHeight(length * 25);
 
@@ -94,7 +94,7 @@ public class ToolboxController implements Initializable {
 
     private void colorChange() {
         color = colorPicker.getValue();
-        if (!colorPicker.getCustomColors().contains(color)){
+        if (!colorPicker.getCustomColors().contains(color)) {
             colorPicker.getCustomColors().add(color);
         }
     }
@@ -127,8 +127,7 @@ public class ToolboxController implements Initializable {
         });
     }
 
-    public static Color getColor(){
+    public static Color getColor() {
         return color;
     }
-
 }
