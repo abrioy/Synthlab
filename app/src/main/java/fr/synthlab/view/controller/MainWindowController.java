@@ -201,8 +201,8 @@ public class MainWindowController implements Initializable {
         return zoomLevel;
     }
 
-    public void setZoomLevel(double zoomLevel) {
-        this.zoomLevel.set(zoomLevel);
+    public void setZoomLevel(double newZoomLevel) {
+        zoomLevel.set(newZoomLevel);
     }
 
     public void setStageAndSetupListeners(Stage stage) {

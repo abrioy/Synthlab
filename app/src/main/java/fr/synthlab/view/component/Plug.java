@@ -24,14 +24,14 @@ public class Plug extends StackPane {
 
     private Workbench workbench;
 
-    public void setWorkbench(Workbench workbench) {
-        this.workbench = workbench;
+    public void setWorkbench(Workbench newWorkbench) {
+        workbench = newWorkbench;
     }
 
     private Callable<Port> getPortCommand = null;
 
-    public void setGetPortCommand(Callable<Port> getPortCommand) {
-        this.getPortCommand = getPortCommand;
+    public void setGetPortCommand(Callable<Port> newGetPortCommand) {
+        getPortCommand = newGetPortCommand;
     }
 
 
@@ -45,8 +45,8 @@ public class Plug extends StackPane {
 
         private Color color;
 
-        Type(Color color) {
-            this.color = color;
+        Type(Color aColor) {
+            color = aColor;
         }
 
         public static Type getType(String name) {
@@ -140,8 +140,8 @@ public class Plug extends StackPane {
         return name;
     }
 
-    public void setName(String name) {
-        this.name.set(name);
+    public void setName(String newName) {
+        name.set(newName);
     }
 
     public String getLabel() {
@@ -152,15 +152,15 @@ public class Plug extends StackPane {
         return label;
     }
 
-    public void setLabel(String label) {
-        this.label.set(label);
+    public void setLabel(String newLabel) {
+        label.set(newLabel);
     }
 
     public Cable getCable() {
         return cable;
     }
 
-    public void setCable(Cable cable) {
-        this.cable = cable;
+    public void setCable(Cable newCable) {
+        cable = newCable;
     }
 }

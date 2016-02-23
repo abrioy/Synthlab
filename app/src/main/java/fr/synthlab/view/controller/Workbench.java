@@ -129,12 +129,13 @@ public class Workbench extends Pane {
             private String connectedPortName;
             private Color cableColor;
 
-            public PortReference(int parentUID, String name, int connectedUID, String connectedPortName, Color cableColor) {
-                this.parentUID = parentUID;
-                this.name = name;
-                this.connectedUID = connectedUID;
-                this.connectedPortName = connectedPortName;
-                this.cableColor = cableColor;
+            public PortReference(int parentUIDInit, String nameInit,
+                                 int connectedUIDInit, String connectedPortNameInit, Color cableColorInit) {
+                parentUID = parentUIDInit;
+                name = nameInit;
+                connectedUID = connectedUIDInit;
+                connectedPortName = connectedPortNameInit;
+                cableColor = cableColorInit;
             }
         }
         Collection<PortReference> portList = new ArrayList<>();

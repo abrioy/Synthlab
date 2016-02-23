@@ -34,8 +34,8 @@ public class FilterOutKEYB extends UnitGenerator {
         }
     }
 
-    public void setTension(double tension) {
-        this.tension = tension;
+    public void setTension(double newTension) {
+        tension = newTension;
     }
 
     public UnitOutputPort getGate() {

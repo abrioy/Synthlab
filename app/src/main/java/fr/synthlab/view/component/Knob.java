@@ -341,18 +341,18 @@ public class Knob extends Pane {
     }
 
     /**
-     * return angle for value
+     * return angle for valueOfAngle
      *
-     * @param value value to transform in angle
+     * @param valueOfAngle valueOfAngle to transform in angle
      * @return angle in degree
      */
-    private double valueToAngle(double value) {
+    private double valueToAngle(double valueOfAngle) {
         double maxValue = getMax();
         double minValue = getMin();
         if (scaleType.get().equals("log")) {
-            return getMinAngle() + (getMaxAngle() - getMinAngle()) * (((Math.log(value) + coef) / scale) - minValue) / (maxValue - minValue);
+            return getMinAngle() + (getMaxAngle() - getMinAngle()) * (((Math.log(valueOfAngle) + coef) / scale) - minValue) / (maxValue - minValue);
         }
-        return getMinAngle() + (getMaxAngle() - getMinAngle()) * (value - minValue) / (maxValue - minValue);
+        return getMinAngle() + (getMaxAngle() - getMinAngle()) * (valueOfAngle - minValue) / (maxValue - minValue);
     }
 
     /**
@@ -364,16 +364,16 @@ public class Knob extends Pane {
     private double angleToValue(double angle) {
         double maxValue = getMax();
         double minValue = getMin();
-        double value;
+        double valueOfAngle;
         if (scaleType.get().equals("log")) {
-            value = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
-            value = Math.exp(minExp + scale * (value - minValue));
-            value = Math.max((minValue <= 10.0 ? 10 : minValue), value);
+            valueOfAngle = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
+            valueOfAngle = Math.exp(minExp + scale * (valueOfAngle - minValue));
+            valueOfAngle = Math.max((minValue <= 10.0 ? 10 : minValue), valueOfAngle);
         } else {
-            value = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
+            valueOfAngle = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
         }
-        value = Math.max(minValue, value);
-        return Math.min(maxValue, value);
+        valueOfAngle = Math.max(minValue, valueOfAngle);
+        return Math.min(maxValue, valueOfAngle);
     }
 
     private void updatePositions() {

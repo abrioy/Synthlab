@@ -52,8 +52,8 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
         frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
-    public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
-        this.changeThresholdCommand = changeThresholdCommand;
+    public void setChangeThresholdCommand(Runnable newChangeThresholdCommand) {
+        changeThresholdCommand = newChangeThresholdCommand;
         changeThresholdCommand.run();
     }
 

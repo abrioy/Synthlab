@@ -20,11 +20,11 @@ public class SEQFilter extends UnitFilter {
      * Constructor
      *
      * @param stepValues list of value
-     * @param seq        sequence
+     * @param seqInit        sequence
      */
-    public SEQFilter(List<Double> stepValues, ModuleSEQ seq) {
+    public SEQFilter(List<Double> stepValues, ModuleSEQ seqInit) {
         tension = stepValues;
-        this.seq = seq;
+        seq = seqInit;
         current = 0;
 
         signalFront = 0.1 / 2;

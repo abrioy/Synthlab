@@ -66,8 +66,8 @@ public abstract class ModuleVCF implements Module {
         return f0;
     }
 
-    public void setF0(double f0) {
-        this.f0 = f0;
-        filterFm.setf0(f0);
+    public void setF0(double newF0) {
+        f0 = newF0;
+        filterFm.setF0(f0);
     }
 }

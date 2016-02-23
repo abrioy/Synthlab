@@ -56,8 +56,8 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
         return picker;
     }
 
-    public void setVolumeCommand(Runnable volume) {
-        this.volume = volume;
+    public void setVolumeCommand(Runnable newVolume) {
+        volume = newVolume;
 
         // Init volume to the correct value
         volume.run();

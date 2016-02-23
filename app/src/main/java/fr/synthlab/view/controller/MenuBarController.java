@@ -40,12 +40,12 @@ public class MenuBarController implements Initializable {
 
     }
 
-    public void setMainWindowController(MainWindowController mainWindowController) {
-        this.mainWindowController = mainWindowController;
+    public void setMainWindowController(MainWindowController newMainWindowController) {
+        mainWindowController = newMainWindowController;
     }
 
-    public void setWorkbench(Workbench workbench) {
-        this.workbench = workbench;
+    public void setWorkbench(Workbench newWorkbench) {
+        workbench = newWorkbench;
 
         ToggleGroup skinToggleGroup = new ToggleGroup();
         Skin currentSkin = workbench.getCurrentSkin();
@@ -63,8 +63,8 @@ public class MenuBarController implements Initializable {
         }
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    public void setStage(Stage newStage) {
+        stage = newStage;
     }
 
     public void onClickViewZoomReset() {

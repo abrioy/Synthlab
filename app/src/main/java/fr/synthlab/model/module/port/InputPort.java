@@ -21,11 +21,11 @@ public class InputPort extends Port {
      *
      * @param name  The name of this port
      * @param m     The module containing this port
-     * @param input The JSyn port to assign
+     * @param inputInit The JSyn port to assign
      */
-    public InputPort(String name, Module m, ConnectableInput input) {
+    public InputPort(String name, Module m, ConnectableInput inputInit) {
         super(name, m);
-        this.input = input;
+        input = inputInit;
     }
 
     /**

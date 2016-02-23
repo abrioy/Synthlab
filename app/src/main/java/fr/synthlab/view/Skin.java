@@ -16,8 +16,8 @@ public enum Skin {
 
     private String name;
 
-    Skin(String name) {
-        this.name = name;
+    Skin(String newName) {
+        name = newName;
     }
 
     public String getName() {

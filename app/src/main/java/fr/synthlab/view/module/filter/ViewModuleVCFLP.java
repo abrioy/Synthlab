@@ -60,9 +60,9 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
         frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
-    public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
-        this.changeThresholdCommand = changeThresholdCommand;
-        this.changeThresholdCommand.run();
+    public void setChangeThresholdCommand(Runnable newChangeThresholdCommand) {
+        changeThresholdCommand = newChangeThresholdCommand;
+        changeThresholdCommand.run();
     }
 
     public double getThreshold() {
@@ -74,8 +74,8 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
         changeResonanceCommand.run();
     }
 
-    public void setChangeResonanceCommand(Runnable changeResonanceCommand) {
-        this.changeResonanceCommand = changeResonanceCommand;
+    public void setChangeResonanceCommand(Runnable newChangeResonanceCommand) {
+        changeResonanceCommand = newChangeResonanceCommand;
         this.changeResonanceCommand.run();
     }
 

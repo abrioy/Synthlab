@@ -29,10 +29,10 @@ public abstract class ViewModule extends Pane implements Serializable {
     private Label moduleName;
     private Button closeButton;
 
-    public ViewModule(Workbench workbench) {
+    public ViewModule(Workbench workbenchInit) {
         super();
 
-        this.workbench = workbench;
+        workbench = workbenchInit;
         this.getStyleClass().add("module-frame");
         this.getStylesheets().add("/gui/fxml/style/Module.css");
         this.applyCss();
@@ -90,8 +90,8 @@ public abstract class ViewModule extends Pane implements Serializable {
         return module;
     }
 
-    public void setModule(Module module) {
-        this.module = module;
+    public void setModule(Module newModule) {
+        module = newModule;
         moduleName.setText(module.getType().getLongName());
     }
 

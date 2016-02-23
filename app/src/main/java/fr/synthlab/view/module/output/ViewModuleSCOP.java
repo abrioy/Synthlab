@@ -40,8 +40,8 @@ public class ViewModuleSCOP extends ViewModule implements Initializable {
 
     }
 
-    public void setPickerCommand(Runnable pickerCmd) {
-        this.pickerCmd = pickerCmd;
+    public void setPickerCommand(Runnable newPickerCmd) {
+        pickerCmd = newPickerCmd;
         pickerCmd.run();
     }
 

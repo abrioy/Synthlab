@@ -36,8 +36,8 @@ public class ToolboxController implements Initializable {
 
     private Consumer<DragEvent> onDragDone = null;
 
-    public void setOnDragDone(Consumer<DragEvent> onDragDone) {
-        this.onDragDone = onDragDone;
+    public void setOnDragDone(Consumer<DragEvent> newOnDragDone) {
+        onDragDone = newOnDragDone;
     }
 
     @Override
