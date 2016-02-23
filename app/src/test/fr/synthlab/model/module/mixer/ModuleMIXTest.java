@@ -4,14 +4,15 @@ import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import com.softsynth.math.AudioMath;
 import fr.synthlab.model.module.ModuleType;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests on the mixer module.
  */
-public class ModuleMIXTest extends TestCase {
+public class ModuleMIXTest {
 
     /**
      * Module tested.
@@ -48,7 +49,7 @@ public class ModuleMIXTest extends TestCase {
      */
     @Test
     public void testGetAttenuation1() {
-        assertEquals(1.0, moduleMIX.getAttenuation1());
+        assertEquals(1.0, moduleMIX.getAttenuation1(), 0.0000);
     }
 
     /**
@@ -56,7 +57,7 @@ public class ModuleMIXTest extends TestCase {
      */
     @Test
     public void testGetAttenuation2() {
-        assertEquals(1.0, moduleMIX.getAttenuation2());
+        assertEquals(1.0, moduleMIX.getAttenuation2(), 0.000000001);
     }
 
     /**
@@ -64,7 +65,7 @@ public class ModuleMIXTest extends TestCase {
      */
     @Test
     public void testGetAttenuation3() {
-        assertEquals(1.0, moduleMIX.getAttenuation3());
+        assertEquals(1.0, moduleMIX.getAttenuation3(), 0.000000001);
     }
 
     /**
@@ -72,7 +73,7 @@ public class ModuleMIXTest extends TestCase {
      */
     @Test
     public void testGetAttenuation4() {
-        assertEquals(1.0, moduleMIX.getAttenuation4());
+        assertEquals(1.0, moduleMIX.getAttenuation4(), 0.000000001);
     }
 
     /**

@@ -12,17 +12,19 @@ import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 import fr.synthlab.model.module.whiteNoise.ModuleBRUI;
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests on the ModuleFactory
  */
-public class ModuleFactoryTest extends TestCase {
+public class ModuleFactoryTest {
 
     /**
      * create a VCOA module.
-     *
      */
+    @Test
     public void testCreateModuleVCOA() {
         assertTrue(ModuleFactory.createModule(ModuleType.VCOA) instanceof ModuleVCOA);
     }
@@ -31,6 +33,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a SCOP module.
      *
      */
+    @Test
     public void testCreateModuleSCOP() {
         assertTrue(ModuleFactory.createModule(ModuleType.SCOP) instanceof ModuleSCOP);
     }
@@ -39,6 +42,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a OUT module.
      *
      */
+    @Test
     public void testCreateModuleOUT() {
         assertTrue(ModuleFactory.createModule(ModuleType.OUT) instanceof ModuleOUT);
     }
@@ -47,6 +51,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a VCA module.
      *
      */
+    @Test
     public void testCreateModuleVCA() {
         assertTrue(ModuleFactory.createModule(ModuleType.VCA) instanceof ModuleVCA);
     }
@@ -55,6 +60,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a REP module.
      *
      */
+    @Test
     public void testCreateModuleREP() {
         assertTrue(ModuleFactory.createModule(ModuleType.REP) instanceof ModuleREP);
     }
@@ -63,6 +69,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a EG module
      *
      */
+    @Test
     public void testCreateModuleEG() {
         assertTrue(ModuleFactory.createModule(ModuleType.EG) instanceof ModuleEG);
     }
@@ -71,6 +78,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a VCFLP module.
      *
      */
+    @Test
     public void testCreateModuleVCFLP() {
         assertTrue(ModuleFactory.createModule(ModuleType.VCFLP) instanceof ModuleVCFLP);
     }
@@ -79,6 +87,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a VCFHP module
      *
      */
+    @Test
     public void testCreateModuleVCFHP() {
         assertTrue(ModuleFactory.createModule(ModuleType.VCFHP) instanceof ModuleVCFHP);
     }
@@ -87,6 +96,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a KEYB module
      *
      */
+    @Test
     public void testCreateModuleKEYB() {
         assertTrue(ModuleFactory.createModule(ModuleType.KEYB) instanceof ModuleKEYB);
     }
@@ -95,6 +105,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a MIX module
      *
      */
+    @Test
     public void testCreateModuleMIX() {
         assertTrue(ModuleFactory.createModule(ModuleType.MIX) instanceof ModuleMIX);
     }
@@ -103,6 +114,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a BRUI module
      *
      */
+    @Test
     public void testCreateModuleBRUI() {
         assertTrue(ModuleFactory.createModule(ModuleType.BRUI) instanceof ModuleBRUI);
     }
@@ -111,6 +123,7 @@ public class ModuleFactoryTest extends TestCase {
      * create a SEQ module.
      *
      */
+    @Test
     public void testCreateModuleSEQ() {
         assertTrue(ModuleFactory.createModule(ModuleType.SEQ) instanceof ModuleSEQ);
     }
