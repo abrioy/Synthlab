@@ -1,13 +1,14 @@
 package fr.synthlab.model.module.replicator;
 
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Test on the replicator filter.
  */
-public class FilterREPTest extends TestCase {
+public class FilterREPTest {
 
     /**
      * Filter tested.

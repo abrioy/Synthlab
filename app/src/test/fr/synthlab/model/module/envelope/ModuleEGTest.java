@@ -2,14 +2,15 @@ package fr.synthlab.model.module.envelope;
 
 import com.jsyn.JSyn;
 import fr.synthlab.model.module.ModuleType;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests on the envelope generator module.
  */
-public class ModuleEGTest extends TestCase {
+public class ModuleEGTest {
 
     /**
      * Module tested.
@@ -45,7 +46,7 @@ public class ModuleEGTest extends TestCase {
      */
     @Test
     public void testGetAttack() {
-        assertEquals(1.0, moduleEG.getAttack());
+        assertEquals(1.0, moduleEG.getAttack(), 0.000000001);
     }
 
     /**
@@ -53,7 +54,7 @@ public class ModuleEGTest extends TestCase {
      */
     @Test
     public void testGetDecay() {
-        assertEquals(1.0, moduleEG.getDecay());
+        assertEquals(1.0, moduleEG.getDecay(), 0.000000001);
     }
 
     /**
@@ -61,7 +62,7 @@ public class ModuleEGTest extends TestCase {
      */
     @Test
     public void testGetSustain() {
-        assertEquals(0.5, moduleEG.getSustain());
+        assertEquals(0.5, moduleEG.getSustain(), 0.000000001);
     }
 
     /**
@@ -69,7 +70,7 @@ public class ModuleEGTest extends TestCase {
      */
     @Test
     public void testGetRelease() {
-        assertEquals(1.0, moduleEG.getRelease());
+        assertEquals(1.0, moduleEG.getRelease(), 0.000000001);
     }
 
     /**
@@ -78,7 +79,7 @@ public class ModuleEGTest extends TestCase {
     @Test
     public void testSetAttack() {
         moduleEG.setAttack(10.0);
-        assertEquals(10.0, moduleEG.getAttack());
+        assertEquals(10.0, moduleEG.getAttack(), 0.000000001);
     }
 
     /**
@@ -87,7 +88,7 @@ public class ModuleEGTest extends TestCase {
     @Test
     public void testSetDecay() {
         moduleEG.setDecay(10.0);
-        assertEquals(10.0, moduleEG.getDecay());
+        assertEquals(10.0, moduleEG.getDecay(), 0.000000001);
     }
 
     /**
@@ -96,7 +97,7 @@ public class ModuleEGTest extends TestCase {
     @Test
     public void testSetSustain() {
         moduleEG.setSustain(10.0);
-        assertEquals(10.0, moduleEG.getSustain());
+        assertEquals(10.0, moduleEG.getSustain(), 0.000000001);
     }
 
     /**
@@ -105,6 +106,6 @@ public class ModuleEGTest extends TestCase {
     @Test
     public void testSetRelease() {
         moduleEG.setRelease(10.0);
-        assertEquals(10.0, moduleEG.getRelease());
+        assertEquals(10.0, moduleEG.getRelease(), 0.000000001);
     }
 }

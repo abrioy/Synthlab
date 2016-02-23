@@ -1,15 +1,18 @@
 package fr.synthlab.model.module.sequencer;
 
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Tests on the sequencer filter
  */
-public class SEQFilterTest extends TestCase {
+public class SEQFilterTest {
 
     /**
      * Filter tested.
@@ -25,6 +28,7 @@ public class SEQFilterTest extends TestCase {
     /**
      * Initialize.
      */
+    @Before
     public void setUp()
     {
         List<Double> stepValues = new ArrayList<>();
@@ -43,6 +47,7 @@ public class SEQFilterTest extends TestCase {
     /**
      * test on get current
      */
+    @Test
     public void testGetCurrent()
     {
         assertEquals(0, seqFilter.getCurrent());
@@ -51,6 +56,7 @@ public class SEQFilterTest extends TestCase {
     /**
      * Test on reset
      */
+    @Test
     public void testReset()
     {
         seqFilter.reset();

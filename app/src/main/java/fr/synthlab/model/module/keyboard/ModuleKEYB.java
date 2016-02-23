@@ -166,6 +166,7 @@ public class ModuleKEYB implements Module {
 
     /**
      * Release the currently pressed key.
+     * @param noteKEYB note release
      */
     public void releaseKey(NoteKEYB noteKEYB) {
         if (noteKEYB==lastNotePressed) {
