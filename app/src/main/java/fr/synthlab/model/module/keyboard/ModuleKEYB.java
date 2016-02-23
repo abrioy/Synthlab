@@ -151,6 +151,7 @@ public class ModuleKEYB implements Module {
      * @param n New note pressed
      */
     public void pressKey(NoteKEYB n) {
+        keyboardFilter.releaseKey();
         keyboardFilter.pressKey();
         lastNotePressed = n;
         computeFrequency(n);
@@ -168,7 +169,7 @@ public class ModuleKEYB implements Module {
      * Release the currently pressed key.
      */
     public void releaseKey(NoteKEYB noteKEYB) {
-        if (noteKEYB==lastNotePressed) {
+        if (noteKEYB == lastNotePressed) {
             keyboardFilter.releaseKey();
         }
     }

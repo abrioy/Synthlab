@@ -25,4 +25,13 @@ public enum NoteKEYB {
         return this.value;
     }
 
+    public static NoteKEYB fromValue(int val) {
+        for (NoteKEYB k : NoteKEYB.values()) {
+            if (k.getValue() == val) {
+                return k;
+            }
+        }
+        return null;
+    }
+
 }
