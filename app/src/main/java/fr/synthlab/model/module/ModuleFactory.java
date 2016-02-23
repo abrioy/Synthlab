@@ -19,47 +19,59 @@ import java.util.logging.Logger;
 
 
 public class ModuleFactory {
-	private static final Logger LOGGER = Logger.getLogger(ModuleFactory.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ModuleFactory.class.getName());
 
-	/**
+    /**
      * JSyn Synthesizer
      */
     private static Synthesizer syn = JSyn.createSynthesizer();
 
     public static Module createModule(ModuleType type) {
         Module module = null;
-        switch(type){
-            case VCOA: module = createVCO();
+        switch (type) {
+            case VCOA:
+                module = createVCO();
                 break;
-            case SCOP: module = createOscilloscope();
+            case SCOP:
+                module = createOscilloscope();
                 break;
-			case OUT: module = createOut();
-				break;
-            case VCA: module = createVCA();
+            case OUT:
+                module = createOut();
                 break;
-            case REP : module = createREP();
+            case VCA:
+                module = createVCA();
                 break;
-            case EG : module = createEG();
+            case REP:
+                module = createREP();
                 break;
-			case VCFLP : module = createVCFLP();
-				break;
-            case VCFHP : module = createVCFHP();
+            case EG:
+                module = createEG();
                 break;
-            case KEYB : module = createKEYB();
+            case VCFLP:
+                module = createVCFLP();
                 break;
-            case MIX : module = createMix();
+            case VCFHP:
+                module = createVCFHP();
                 break;
-            case BRUI: module = createNoise();
+            case KEYB:
+                module = createKEYB();
                 break;
-            case SEQ: module = createSEQ();
+            case MIX:
+                module = createMix();
+                break;
+            case BRUI:
+                module = createNoise();
+                break;
+            case SEQ:
+                module = createSEQ();
                 break;
         }
-		if(module != null) {
-			LOGGER.finer("Module created: "+module.toString());
-			module.start();
-		} else {
-			LOGGER.severe("Unrecognised module type \""+type.toString()+"\".");
-		}
+        if (module != null) {
+            LOGGER.finer("Module created: " + module.toString());
+            module.start();
+        } else {
+            LOGGER.severe("Unrecognised module type \"" + type.toString() + "\".");
+        }
         return module;
     }
 
@@ -113,12 +125,12 @@ public class ModuleFactory {
         return new ModuleEG(syn);
     }
 
-	/**
-	 * @return a new ModuleVCFLP
-	 */
-	private static ModuleVCFLP createVCFLP() {
-		return new ModuleVCFLP(syn);
-	}
+    /**
+     * @return a new ModuleVCFLP
+     */
+    private static ModuleVCFLP createVCFLP() {
+        return new ModuleVCFLP(syn);
+    }
 
     /**
      * @return a new ModuleVCHP
@@ -146,9 +158,7 @@ public class ModuleFactory {
         return syn;
     }
 
-	public static void startSyn() {
-		syn.start();
-	}
-
+    public static void startSyn() {
+        syn.start();
+    }
 }
-

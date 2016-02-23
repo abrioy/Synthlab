@@ -6,7 +6,7 @@ import fr.synthlab.model.module.Module;
 import java.util.logging.Logger;
 
 public class OutputPort extends Port {
-	private static final Logger LOGGER = Logger.getLogger(OutputPort.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(OutputPort.class.getName());
 
     private ConnectableOutput output;
 
@@ -23,7 +23,6 @@ public class OutputPort extends Port {
     }
 
     /**
-     *
      * @return The JSyn output port
      */
     public ConnectableOutput getOutput() {
@@ -32,6 +31,7 @@ public class OutputPort extends Port {
 
     /**
      * Connect another port to this port
+     *
      * @param port Port to connect
      */
     @Override
@@ -51,7 +51,7 @@ public class OutputPort extends Port {
      * Disconnect the current connected port
      */
     public void disconnect() {
-        if(getConnected() instanceof InputPort) {
+        if (getConnected() instanceof InputPort) {
             output.disconnect(((InputPort) getConnected()).getInput());
         }
         super.disconnect();

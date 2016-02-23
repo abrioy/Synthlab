@@ -23,19 +23,23 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ViewModuleOUT extends ViewModule implements Initializable{
+public class ViewModuleOUT extends ViewModule implements Initializable {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleOUT.class.getName());
 
-    @FXML private Knob picker;
-    @FXML private MuteButton muteButton;
-    @FXML private RecordButton recordButton;
-    @FXML private Button fileChooserButton;
+    @FXML
+    private Knob picker;
+    @FXML
+    private MuteButton muteButton;
+    @FXML
+    private RecordButton recordButton;
+    @FXML
+    private Button fileChooserButton;
 
     private Runnable volume;
     private Runnable muteCommand;
-	private Runnable recordCommand;
+    private Runnable recordCommand;
 
-	private BooleanProperty isMuted = new SimpleBooleanProperty();
+    private BooleanProperty isMuted = new SimpleBooleanProperty();
     private BooleanProperty isRecording = new SimpleBooleanProperty();
     private File pickedDirectory;
 
@@ -45,7 +49,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
         this.setId("pane");
         muteButton.setPrefSize(40, 40);
         recordButton.setPrefSize(35, 35);
-		fileChooserButton.setPrefSize(30, 30);
+        fileChooserButton.setPrefSize(30, 30);
     }
 
     public Knob getPicker() {
@@ -65,7 +69,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     }
 
     public boolean isMute() {
-		return isMuted.getValue();
+        return isMuted.getValue();
     }
 
     public void setRecordCommand(Runnable record) {
@@ -81,33 +85,33 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     }
 
     public File getRecordingFile() {
-		Format formatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-		String date = formatter.format(new Date());
-		String filename = "Synthlab_recording_"+date+".wav";
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String date = formatter.format(new Date());
+        String filename = "Synthlab_recording_" + date + ".wav";
 
-		File file;
-		if(pickedDirectory == null){
-			file = new File(filename);
-		} else {
-			file = new File(pickedDirectory.getPath() + File.separator + filename);
-		}
+        File file;
+        if (pickedDirectory == null) {
+            file = new File(filename);
+        } else {
+            file = new File(pickedDirectory.getPath() + File.separator + filename);
+        }
 
-		try {
-			if (!file.createNewFile()) {
-				file = null;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			file = null;
-		}
+        try {
+            if (!file.createNewFile()) {
+                file = null;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            file = null;
+        }
 
-		if(file != null) {
-			return file;
-		} else {
-			LOGGER.warning("Unable to create a new file to record.");
-			return null;
-		}
-	}
+        if (file != null) {
+            return file;
+        } else {
+            LOGGER.warning("Unable to create a new file to record.");
+            return null;
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -115,51 +119,51 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
             volume.run();
         });
         muteButton.setOnAction(event -> {
-			isMuted.setValue(!isMuted.getValue());
-		});
+            isMuted.setValue(!isMuted.getValue());
+        });
 
-		isMuted.addListener((observable, oldValue, newValue) -> {
-			muteButton.setToggle(newValue);
-			muteCommand.run();
-		});
+        isMuted.addListener((observable, oldValue, newValue) -> {
+            muteButton.setToggle(newValue);
+            muteCommand.run();
+        });
 
 
-		isRecording.addListener((observable, oldValue, newValue) -> {
-			recordButton.setToggle(newValue);
-			recordCommand.run();
-		});
+        isRecording.addListener((observable, oldValue, newValue) -> {
+            recordButton.setToggle(newValue);
+            recordCommand.run();
+        });
 
         recordButton.setOnAction(event -> {
-			isRecording.setValue(!isRecording.getValue());
-		});
-		fileChooserButton.getStyleClass().add("file-button");
-		fileChooserButton.setOnAction(event ->{
-			DirectoryChooser directoryChooser = new DirectoryChooser();
-			directoryChooser.setTitle("Output folder");
+            isRecording.setValue(!isRecording.getValue());
+        });
+        fileChooserButton.getStyleClass().add("file-button");
+        fileChooserButton.setOnAction(event -> {
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            directoryChooser.setTitle("Output folder");
 
-			if(pickedDirectory != null) {
-				directoryChooser.setInitialDirectory(pickedDirectory.getParentFile());
-			}
+            if (pickedDirectory != null) {
+                directoryChooser.setInitialDirectory(pickedDirectory.getParentFile());
+            }
 
-			File selectedDirectory = directoryChooser.showDialog(getScene().getWindow());
+            File selectedDirectory = directoryChooser.showDialog(getScene().getWindow());
 
-			if(selectedDirectory != null) {
-				LOGGER.info("New recording output directory selected: \""+selectedDirectory.getPath()+"\".");
-				pickedDirectory = selectedDirectory;
-			}
-		});
+            if (selectedDirectory != null) {
+                LOGGER.info("New recording output directory selected: \"" + selectedDirectory.getPath() + "\".");
+                pickedDirectory = selectedDirectory;
+            }
+        });
 
     }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(picker.getValue());
-		o.writeBoolean(isMuted.getValue());
-	}
+    @Override
+    public void writeObject(ObjectOutputStream o) throws IOException {
+        o.writeDouble(picker.getValue());
+        o.writeBoolean(isMuted.getValue());
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		picker.setValue(o.readDouble());
-		isMuted.setValue(o.readBoolean());
-	}
+    @Override
+    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+        picker.setValue(o.readDouble());
+        isMuted.setValue(o.readBoolean());
+    }
 }

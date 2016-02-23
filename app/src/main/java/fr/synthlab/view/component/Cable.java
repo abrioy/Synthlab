@@ -25,44 +25,43 @@ public class Cable extends CubicCurve {
     private Workbench workbench;
 
     public Cable(Workbench workbench, Plug in) {
-
         this.in = in;
-		this.in.setCable(this);
+        this.in.setCable(this);
         this.workbench = workbench;
 
-		init();
+        init();
     }
 
-	public Cable(Workbench workbench, Plug in, Plug out) {
-		this.in = in;
-		this.in.setCable(this);
-		this.out = out;
-		this.out.setCable(this);
-		this.workbench = workbench;
+    public Cable(Workbench workbench, Plug in, Plug out) {
+        this.in = in;
+        this.in.setCable(this);
+        this.out = out;
+        this.out.setCable(this);
+        this.workbench = workbench;
 
-		init();
-	}
+        init();
+    }
 
-	private void init() {
-		circleIn = new Circle();
-		circleOut = new Circle();
-		circleIn.setMouseTransparent(true);
-		circleOut.setMouseTransparent(true);
-		circleIn.setFill(Color.DARKGRAY);
-		circleOut.setFill(Color.DARKGRAY);
-		workbench.getChildren().add(circleIn);
-		workbench.getChildren().add(circleOut);
-		color = ToolboxController.getColor();
+    private void init() {
+        circleIn = new Circle();
+        circleOut = new Circle();
+        circleIn.setMouseTransparent(true);
+        circleOut.setMouseTransparent(true);
+        circleIn.setFill(Color.DARKGRAY);
+        circleOut.setFill(Color.DARKGRAY);
+        workbench.getChildren().add(circleIn);
+        workbench.getChildren().add(circleOut);
+        color = ToolboxController.getColor();
 
-		this.setStrokeWidth(10);
-		this.setStrokeLineCap(StrokeLineCap.ROUND);
-		this.setMouseTransparent(true);
-	}
+        this.setStrokeWidth(10);
+        this.setStrokeLineCap(StrokeLineCap.ROUND);
+        this.setMouseTransparent(true);
+    }
 
-	public void updateCircles() {
-		circleIn.toFront();
-		circleOut.toFront();
-	}
+    public void updateCircles() {
+        circleIn.toFront();
+        circleOut.toFront();
+    }
 
     public void update() {
         Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
@@ -84,11 +83,11 @@ public class Cable extends CubicCurve {
         Point2D correctedMouse = new Point2D(Math.max(CIRCLE_RADIUS, mouse.getX()),
                 Math.max(CIRCLE_RADIUS, mouse.getY()));
 
-        in= getPluggedPlug();
-		if(out != null){
-			out.setCable(null);
-			out=null;
-		}
+        in = getPluggedPlug();
+        if (out != null) {
+            out.setCable(null);
+            out = null;
+        }
         Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
 
         this.setStartX(inPosition.getX());
@@ -96,7 +95,7 @@ public class Cable extends CubicCurve {
         this.setEndX(correctedMouse.getX());
         this.setEndY(correctedMouse.getY());
 
-        drawCable(inPosition,mouse);
+        drawCable(inPosition, mouse);
         addCircle(circleIn, inPosition.getX(), inPosition.getY());
         addCircle(circleOut, correctedMouse.getX(), correctedMouse.getY());
 
@@ -104,12 +103,12 @@ public class Cable extends CubicCurve {
     }
 
     public Plug getOppositePlug(Plug plug) {
-        if(in==null || out==null){
+        if (in == null || out == null) {
             return null;
         }
-        if(in.equals(plug)) {
+        if (in.equals(plug)) {
             return out;
-        } else if (out.equals(plug)){
+        } else if (out.equals(plug)) {
             return in;
         } else {
             return null;
@@ -117,7 +116,7 @@ public class Cable extends CubicCurve {
     }
 
     public Plug getPluggedPlug() {
-        if(in == null){
+        if (in == null) {
             return out;
         } else {
             return in;
@@ -125,12 +124,12 @@ public class Cable extends CubicCurve {
     }
 
     public void setEmptyPlug(Plug plug) {
-        if(in == null){
+        if (in == null) {
             in = plug;
-			in.setCable(this);
+            in.setCable(this);
         } else {
             out = plug;
-			out.setCable(this);
+            out.setCable(this);
         }
     }
 
@@ -147,15 +146,15 @@ public class Cable extends CubicCurve {
     }
 
     public void unplug(Plug plug) {
-        if(in==plug){
-			in.setCable(null);
-			in=null;
-		} else {
-			if(out != null) {
-				out.setCable(null);
-				out=null;
-			}
-		}
+        if (in == plug) {
+            in.setCable(null);
+            in = null;
+        } else {
+            if (out != null) {
+                out.setCable(null);
+                out = null;
+            }
+        }
     }
 
     public void deleteCircles() {
@@ -164,10 +163,10 @@ public class Cable extends CubicCurve {
     }
 
     private void drawCable(Point2D start, Point2D end) {
-        double diffX=start.getX() - end.getX();
-        double diffY=Math.abs(start.getY() - end.getY());
+        double diffX = start.getX() - end.getX();
+        double diffY = Math.abs(start.getY() - end.getY());
         this.setControlX1(start.getX() - diffX / 3);
-        this.setControlY1(start.getY()+100+diffY/2);
+        this.setControlY1(start.getY() + 100 + diffY / 2);
         this.setControlX2(end.getX() + diffX / 3);
         this.setControlY2(end.getY() + 100 + diffY / 2);
         this.setFill(null);
@@ -175,12 +174,12 @@ public class Cable extends CubicCurve {
     }
 
 
-	public void setColor(Color color) {
-		this.color = color;
-		this.setStroke(color);
-	}
+    public void setColor(Color color) {
+        this.color = color;
+        this.setStroke(color);
+    }
 
-	public Color getColor() {
-		return color;
-	}
+    public Color getColor() {
+        return color;
+    }
 }

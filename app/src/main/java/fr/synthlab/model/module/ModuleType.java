@@ -7,21 +7,21 @@ public enum ModuleType {
     SCOP("SCOP", "Oscilloscope"),
     REP("REP", "Repeater"),
     EG("EG", "Envelope Generator"),
-	VCFLP("VCFLP", "VCF (LP)"),
+    VCFLP("VCFLP", "VCF (LP)"),
     VCFHP("VCFHP", "VCF (HP)"),
     KEYB("KEYB", "Keyboard"),
     MIX("MIX", "Mixer"),
-    BRUI("BRUI","White Noise"),
-    SEQ("SEQ","Sequencer");
+    BRUI("BRUI", "White Noise"),
+    SEQ("SEQ", "Sequencer");
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private String moduleName;
-	private String moduleLongName;
+    private String moduleLongName;
 
     ModuleType(String name, String longName) {
         this.moduleName = name;
-		this.moduleLongName = longName;
+        this.moduleLongName = longName;
     }
 
     public static String getNameFromLong(String longName) {
@@ -33,9 +33,9 @@ public enum ModuleType {
         return "";
     }
 
-	public String getLongName() {
-		return this.moduleLongName;
-	}
+    public String getLongName() {
+        return this.moduleLongName;
+    }
 
     @Override
     public String toString() {

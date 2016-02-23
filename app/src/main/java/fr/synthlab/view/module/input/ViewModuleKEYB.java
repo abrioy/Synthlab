@@ -19,35 +19,35 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ViewModuleKEYB extends ViewModule implements Initializable{
+public class ViewModuleKEYB extends ViewModule implements Initializable {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleKEYB.class.getName());
 
     @FXML
     private KeyboardKey CKey;
     @FXML
-	private KeyboardKey CSharpKey;
+    private KeyboardKey CSharpKey;
     @FXML
-	private KeyboardKey DKey;
+    private KeyboardKey DKey;
     @FXML
-	private KeyboardKey DSharpKey;
+    private KeyboardKey DSharpKey;
     @FXML
-	private KeyboardKey EKey;
+    private KeyboardKey EKey;
     @FXML
-	private KeyboardKey FKey;
+    private KeyboardKey FKey;
     @FXML
-	private KeyboardKey FSharpKey;
+    private KeyboardKey FSharpKey;
     @FXML
-	private KeyboardKey GKey;
+    private KeyboardKey GKey;
     @FXML
-	private KeyboardKey GSharpKey;
+    private KeyboardKey GSharpKey;
     @FXML
-	private KeyboardKey AKey;
+    private KeyboardKey AKey;
     @FXML
-	private KeyboardKey ASharpKey;
+    private KeyboardKey ASharpKey;
     @FXML
-	private KeyboardKey BKey;
+    private KeyboardKey BKey;
     @FXML
-	private KeyboardKey CNextOctKey;
+    private KeyboardKey CNextOctKey;
 
     @FXML
     Knob octavePicker;
@@ -72,82 +72,82 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
             Mouse pressed events
          */
         CKey.setOnMouseDragged(Event::consume);
-		CKey.setOnMousePressed(event -> {
+        CKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.C;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         CSharpKey.setOnMouseDragged(Event::consume);
-		CSharpKey.setOnMousePressed(event -> {
+        CSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.CSharp;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         DKey.setOnMouseDragged(Event::consume);
-		DKey.setOnMousePressed(event -> {
+        DKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.D;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         DSharpKey.setOnMouseDragged(Event::consume);
-		DSharpKey.setOnMousePressed(event -> {
+        DSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.DSharp;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         EKey.setOnMouseDragged(Event::consume);
-		EKey.setOnMousePressed(event -> {
+        EKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.E;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         FKey.setOnMouseDragged(Event::consume);
-		FKey.setOnMousePressed(event -> {
+        FKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.F;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         FSharpKey.setOnMouseDragged(Event::consume);
-		FSharpKey.setOnMousePressed(event -> {
+        FSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.FSharp;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         GKey.setOnMouseDragged(Event::consume);
-		GKey.setOnMousePressed(event -> {
+        GKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.G;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         GSharpKey.setOnMouseDragged(Event::consume);
-		GSharpKey.setOnMousePressed(event -> {
+        GSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.GSharp;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         AKey.setOnMouseDragged(Event::consume);
-		AKey.setOnMousePressed(event -> {
+        AKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.A;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         ASharpKey.setOnMouseDragged(Event::consume);
-		ASharpKey.setOnMousePressed(event -> {
+        ASharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.ASharp;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         BKey.setOnMouseDragged(Event::consume);
-		BKey.setOnMousePressed(event -> {
+        BKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.B;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
         CNextOctKey.setOnMouseDragged(Event::consume);
-		CNextOctKey.setOnMousePressed(event -> {
+        CNextOctKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.C2;
             keyPressedCommand.run();
-			event.consume();
+            event.consume();
         });
 
         Collection<KeyboardKey> keysColl = new ArrayList<>();
@@ -234,12 +234,12 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
                     keyPressedCommand.run();
                     break;
                 case X:
-                    if(octavePicker.getValue() < 7) {
+                    if (octavePicker.getValue() < 7) {
                         octavePicker.setValue(octavePicker.getValue() + 1);
                     }
                     break;
                 case W:
-                    if(octavePicker.getValue() > 0) {
+                    if (octavePicker.getValue() > 0) {
                         octavePicker.setValue(octavePicker.getValue() - 1);
                     }
                     break;
@@ -265,7 +265,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
                 case Y:
                 case U:
                     keyReleasedCommand.run();
-					event.consume();
+                    event.consume();
                 default:
                     break;
             }
@@ -290,20 +290,20 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 
     public void setOctaveChangeCommand(Runnable command) {
         this.octaveChangeCommand = command;
-		this.octaveChangeCommand.run();
+        this.octaveChangeCommand.run();
     }
 
     public NoteKEYB getNotePressed() {
         return lastKeyPressed;
     }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(this.octavePicker.getValue());
-	}
+    @Override
+    public void writeObject(ObjectOutputStream o) throws IOException {
+        o.writeDouble(this.octavePicker.getValue());
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		this.octavePicker.setValue(o.readDouble());
-	}
+    @Override
+    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+        this.octavePicker.setValue(o.readDouble());
+    }
 }

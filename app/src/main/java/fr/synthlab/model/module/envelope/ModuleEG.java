@@ -67,37 +67,35 @@ public class ModuleEG implements Module {
         return ModuleType.EG;
     }
 
-    public void setAttack(double attack){
+    public void setAttack(double attack) {
         envelope.attack.set(attack);
     }
 
-    public void setDecay(double decay){
+    public void setDecay(double decay) {
         envelope.decay.set(decay);
     }
 
-    public void setSustain(double sustain){
+    public void setSustain(double sustain) {
         envelope.sustain.set(sustain);
     }
 
-    public void setRelease(double release){
+    public void setRelease(double release) {
         envelope.release.set(release);
     }
 
+    public double getAttack() {
+        return envelope.attack.get();
+    }
 
-	public double getAttack(){
-		return envelope.attack.get();
-	}
+    public double getDecay() {
+        return envelope.decay.get();
+    }
 
-	public double getDecay(){
-		return envelope.decay.get();
-	}
+    public double getSustain() {
+        return envelope.sustain.get();
+    }
 
-	public double getSustain(){
-		return envelope.sustain.get();
-	}
-
-	public double getRelease(){
-		return envelope.release.get();
-	}
-
+    public double getRelease() {
+        return envelope.release.get();
+    }
 }

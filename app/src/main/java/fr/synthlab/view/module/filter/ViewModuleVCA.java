@@ -15,13 +15,13 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleVCA extends ViewModule implements Initializable {
-	private static final Logger LOGGER = Logger.getLogger(ViewModuleVCA.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ViewModuleVCA.class.getName());
 
-	@FXML
-	private Plug in;
-	@FXML
-	private Plug out;
-	@FXML
+    @FXML
+    private Plug in;
+    @FXML
+    private Plug out;
+    @FXML
     private Plug am;
 
     @FXML
@@ -30,13 +30,13 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
     private Runnable changeAmpliCommand;
 
     public ViewModuleVCA(Workbench workbench) {
-		super(workbench);
-		this.loadFXML("/gui/fxml/module/ViewModuleVCA.fxml");
-		this.setId("pane");
-	}
+        super(workbench);
+        this.loadFXML("/gui/fxml/module/ViewModuleVCA.fxml");
+        this.setId("pane");
+    }
 
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         ampli.valueProperty().addListener(event -> {
             updateAmply();
         });
@@ -56,13 +56,13 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
     }
 
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(ampli.getValue());
-	}
+    @Override
+    public void writeObject(ObjectOutputStream o) throws IOException {
+        o.writeDouble(ampli.getValue());
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		ampli.setValue(o.readDouble());
-	}
+    @Override
+    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+        ampli.setValue(o.readDouble());
+    }
 }
