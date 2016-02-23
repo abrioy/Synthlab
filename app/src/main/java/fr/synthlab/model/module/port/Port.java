@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  *
  */
 public class Port {
-	private static final Logger LOGGER = Logger.getLogger(Port.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Port.class.getName());
 
     /**
      * the name of the port
@@ -37,20 +37,22 @@ public class Port {
     }
 
     /**
-     *
      * @return the name of the port
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-	public boolean isConnected() { return port != null; }
+    public boolean isConnected() {
+        return port != null;
+    }
 
     /**
      * connect this port to another port.
+     *
      * @param port Port to connect
      */
-    public void connect(Port port){
+    public void connect(Port port) {
         this.port = port;
         module.update();
         port.setPort(this);
@@ -60,28 +62,25 @@ public class Port {
     /**
      * disconnect this port.
      */
-    public void disconnect(){
-        if(port != null){
-			port.setPort(null);
-			port.getModule().update();
-			port = null;
-			module.update();
-		}
-		else{
-			LOGGER.warning("Trying to disconnect a port that is not connected to anything.");
-		}
-	}
+    public void disconnect() {
+        if (port != null) {
+            port.setPort(null);
+            port.getModule().update();
+            port = null;
+            module.update();
+        } else {
+            LOGGER.warning("Trying to disconnect a port that is not connected to anything.");
+        }
+    }
 
     /**
-     *
      * @return the port which is connected to this one
      */
-    public Port getConnected(){
+    public Port getConnected() {
         return port;
     }
 
     /**
-     *
      * @return the module which contains this port
      */
     public Module getModule() {
@@ -90,6 +89,7 @@ public class Port {
 
     /**
      * set the connected port
+     *
      * @param port the connected port
      */
     public void setPort(Port port) {

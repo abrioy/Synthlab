@@ -142,12 +142,11 @@ public class ModuleSCOP implements Module {
      * A JOscillatorComponent is a JComponent which shows the
      * wave happening inside scope.
      */
-    class JOscillatorComponent extends JComponent
-    {
+    class JOscillatorComponent extends JComponent {
         private JPanel oscPanel;
         private CustomAudioScope scope;
 
-        public JOscillatorComponent(CustomAudioScope scope){
+        public JOscillatorComponent(CustomAudioScope scope) {
             this.scope = scope;
             setLayout(new BorderLayout());
             add(BorderLayout.CENTER, this.scope.getView());

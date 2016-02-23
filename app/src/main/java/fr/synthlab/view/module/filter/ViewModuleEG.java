@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ViewModuleEG extends ViewModule implements Initializable{
+public class ViewModuleEG extends ViewModule implements Initializable {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleEG.class.getName());
 
     @FXML
@@ -56,45 +56,55 @@ public class ViewModuleEG extends ViewModule implements Initializable{
         });
     }
 
-    public double getAttack() { return attack.getValue(); }
-    public double getDecay() { return decay.getValue(); }
-    public double getSustain() { return sustain.getValue(); }
-    public double getRelease() { return release.getValue(); }
+    public double getAttack() {
+        return attack.getValue();
+    }
+
+    public double getDecay() {
+        return decay.getValue();
+    }
+
+    public double getSustain() {
+        return sustain.getValue();
+    }
+
+    public double getRelease() {
+        return release.getValue();
+    }
 
     public void setChangeAttackCommand(Runnable command) {
         this.changeAttackCommand = command;
-		this.changeAttackCommand.run();
+        this.changeAttackCommand.run();
     }
 
     public void setChangeDecayCommand(Runnable command) {
         this.changeDecayCommand = command;
-		this.changeDecayCommand.run();
+        this.changeDecayCommand.run();
     }
 
     public void setChangeSustainCommand(Runnable command) {
         this.changeSustainCommand = command;
-		this.changeSustainCommand.run();
+        this.changeSustainCommand.run();
     }
 
     public void setChangeReleaseCommand(Runnable command) {
         this.changeReleaseCommand = command;
-		this.changeReleaseCommand.run();
+        this.changeReleaseCommand.run();
     }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(attack.getValue());
-		o.writeDouble(decay.getValue());
-		o.writeDouble(sustain.getValue());
-		o.writeDouble(release.getValue());
-	}
+    @Override
+    public void writeObject(ObjectOutputStream o) throws IOException {
+        o.writeDouble(attack.getValue());
+        o.writeDouble(decay.getValue());
+        o.writeDouble(sustain.getValue());
+        o.writeDouble(release.getValue());
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		attack.setValue(o.readDouble());
-		decay.setValue(o.readDouble());
-		sustain.setValue(o.readDouble());
-		release.setValue(o.readDouble());
-	}
-
+    @Override
+    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+        attack.setValue(o.readDouble());
+        decay.setValue(o.readDouble());
+        sustain.setValue(o.readDouble());
+        release.setValue(o.readDouble());
+    }
 }

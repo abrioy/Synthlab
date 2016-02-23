@@ -81,14 +81,12 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
 		double f = freq.getValue() + freqLine.getValue();
 		if (f < 0) {
 			f = 0;
-		}
-		else if (f > 22000) {
+		} else if (f > 22000) {
 			f = 22000;
 		}
 		f = Math.round((f*10.0d))/10.0d;
 		return f;
 	}
-
 
 	public ShapeVCOA getSelectedShape() {
 		switch((int)picker.getValue()) {

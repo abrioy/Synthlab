@@ -75,6 +75,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
     public boolean isRecording() {
         return isRecording.getValue();
     }
+
     public void setIsRecording(boolean value) {
         isRecording.setValue(value);
     }
@@ -87,13 +88,12 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 		File file;
 		if(pickedDirectory == null){
 			file = new File(filename);
-		}
-		else {
+		} else {
 			file = new File(pickedDirectory.getPath() + File.separator + filename);
 		}
 
 		try {
-			if (!file.createNewFile()){
+			if (!file.createNewFile()) {
 				file = null;
 			}
 		} catch (IOException e) {
@@ -101,10 +101,9 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 			file = null;
 		}
 
-		if(file != null){
+		if(file != null) {
 			return file;
-		}
-		else{
+		} else {
 			LOGGER.warning("Unable to create a new file to record.");
 			return null;
 		}
@@ -144,7 +143,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable{
 
 			File selectedDirectory = directoryChooser.showDialog(getScene().getWindow());
 
-			if(selectedDirectory != null){
+			if(selectedDirectory != null) {
 				LOGGER.info("New recording output directory selected: \""+selectedDirectory.getPath()+"\".");
 				pickedDirectory = selectedDirectory;
 			}

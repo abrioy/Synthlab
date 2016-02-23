@@ -20,13 +20,15 @@ import java.util.logging.Logger;
 public class MenuBarController implements Initializable {
 	private static final Logger LOGGER = Logger.getLogger(MenuBarController.class.getName());
 
-	@FXML private MenuBar menuBar;
+	@FXML
+	private MenuBar menuBar;
 	private Workbench workbench;
 	private MainWindowController mainWindowController;
 	private Stage stage;
 	private File currentSaveFile = null;
 
-	@FXML private Menu skinMenu;
+	@FXML
+	private Menu skinMenu;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -37,18 +39,18 @@ public class MenuBarController implements Initializable {
 		this.mainWindowController = mainWindowController;
 	}
 
-	public void setWorkbench(Workbench workbench){
+	public void setWorkbench(Workbench workbench) {
 		this.workbench = workbench;
 
 		ToggleGroup skinToggleGroup = new ToggleGroup();
 		Skin currentSkin = workbench.getCurrentSkin();
-		for(Skin skin : Skin.values()){
+		for (Skin skin : Skin.values()) {
 			RadioMenuItem skinItem = new RadioMenuItem();
 			skinItem.setToggleGroup(skinToggleGroup);
 			skinItem.setText(skin.getName());
 			skinItem.setOnAction(event -> workbench.changeSkin(skin));
 
-			if(skin.equals(currentSkin)){
+			if (skin.equals(currentSkin)) {
 				skinItem.setSelected(true);
 			}
 
@@ -56,7 +58,7 @@ public class MenuBarController implements Initializable {
 		}
 	}
 
-	public void setStage(Stage stage){
+	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
 
@@ -65,16 +67,15 @@ public class MenuBarController implements Initializable {
 	}
 
 	public void onClickViewZoomInc() {
-		mainWindowController.setZoomLevel(mainWindowController.getZoomLevel()+0.2d);
+		mainWindowController.setZoomLevel(mainWindowController.getZoomLevel() + 0.2d);
 	}
 
 	public void onClickViewZoomDec() {
-		mainWindowController.setZoomLevel(mainWindowController.getZoomLevel()-0.2d);
+		mainWindowController.setZoomLevel(mainWindowController.getZoomLevel() - 0.2d);
 	}
 
 
-
-	public void onClickFileNew(){
+	public void onClickFileNew() {
 		workbench.removeAllModules();
 		currentSaveFile = null;
 	}
@@ -89,28 +90,26 @@ public class MenuBarController implements Initializable {
 		}
 	}
 
-	public void onClickFileReload(){
-		if(currentSaveFile != null){
+	public void onClickFileReload() {
+		if (currentSaveFile != null) {
 			try {
 				openSavedFile(currentSaveFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		else{
+		} else {
 			onClickFileOpen();
 		}
 	}
 
-	public void onClickFileSave(){
-		if(currentSaveFile != null){
+	public void onClickFileSave() {
+		if (currentSaveFile != null) {
 			try {
 				saveToFile(currentSaveFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		else{
+		} else {
 			onClickFileSaveAs();
 		}
 	}
@@ -125,16 +124,16 @@ public class MenuBarController implements Initializable {
 		}
 	}
 
-	public void onClickFileExit(){
+	public void onClickFileExit() {
 		stage.fireEvent(
-			new WindowEvent(
-				stage,
-				WindowEvent.WINDOW_CLOSE_REQUEST
-			)
+				new WindowEvent(
+						stage,
+						WindowEvent.WINDOW_CLOSE_REQUEST
+				)
 		);
 	}
 
-	private FileChooser createFileBrowser(String windowName){
+	private FileChooser createFileBrowser(String windowName) {
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle(windowName);
 
@@ -145,11 +144,10 @@ public class MenuBarController implements Initializable {
 		chooser.setSelectedExtensionFilter(extensionFilter);
 
 		// Setting the default path/name
-		if(currentSaveFile != null) {
+		if (currentSaveFile != null) {
 			chooser.setInitialFileName(currentSaveFile.getName());
 			chooser.setInitialDirectory(currentSaveFile.getParentFile());
-		}
-		else {
+		} else {
 			chooser.setInitialFileName("New project.syn");
 		}
 
@@ -157,10 +155,9 @@ public class MenuBarController implements Initializable {
 	}
 
 	private void openSavedFile(File file) throws IOException {
-		if(file == null) {
+		if (file == null) {
 			LOGGER.warning("Attempting to load a project from null file.");
-		}
-		else{
+		} else {
 			LOGGER.info("Loading configuration from file: \"" + file + "\".");
 			currentSaveFile = file;
 
@@ -175,10 +172,9 @@ public class MenuBarController implements Initializable {
 	}
 
 	private void saveToFile(File file) throws IOException {
-		if(file == null) {
+		if (file == null) {
 			LOGGER.warning("Attempting to save a project to a null file.");
-		}
-		else {
+		} else {
 			LOGGER.info("Saving configuration to file: \"" + file + "\".");
 			currentSaveFile = file;
 
@@ -190,5 +186,4 @@ public class MenuBarController implements Initializable {
 			fileSteam.close();
 		}
 	}
-
 }
