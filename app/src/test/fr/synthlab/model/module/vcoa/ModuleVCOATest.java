@@ -1,6 +1,7 @@
 package fr.synthlab.model.module.vcoa;
 
 import com.jsyn.JSyn;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.Port;
 import org.junit.After;
 import org.junit.Before;
@@ -49,6 +50,14 @@ public class ModuleVCOATest {
         for (Port p : ports) {
             assertEquals(true, p.getName().equals("fm") || p.getName().equals("out"));
         }
+    }
+
+    /**
+     * test on get type.
+     */
+    @Test
+    public void testGetType() {
+        assertEquals(ModuleType.VCOA, moduleVCOA.getType());
     }
 
     /**

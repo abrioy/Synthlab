@@ -114,7 +114,9 @@ public class ModuleSCOP implements Module {
      * @param scale new scale to display the oscilloscope
      */
     public void setScale(int scale) {
-        jOscillatorComponent.setScale(scale);
+        int s = Math.max(scale, 0);
+        s = Math.min(s,100);
+        jOscillatorComponent.setScale(s);
     }
 
 	public int getScale() {

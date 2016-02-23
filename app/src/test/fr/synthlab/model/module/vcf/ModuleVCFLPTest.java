@@ -1,6 +1,7 @@
 package fr.synthlab.model.module.vcf;
 
 import com.jsyn.JSyn;
+import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.Port;
 import org.junit.After;
 import org.junit.Before;
@@ -59,6 +60,14 @@ public class ModuleVCFLPTest {
         for (Port p : ports) {
             assertEquals(true, p.getName().equals("fm") || p.getName().equals("in") || p.getName().equals("out"));
         }
+    }
+
+    /**
+     * test on get type.
+     */
+    @Test
+    public void testGetType() {
+        assertEquals(ModuleType.VCFLP, moduleVCFLP.getType());
     }
 
     /**
