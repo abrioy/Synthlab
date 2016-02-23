@@ -60,7 +60,7 @@ public class ModuleKEYB implements Module {
     /**
      * Oscillator to generate frequency.
      */
-    private FilterOutKEYB sineOscillator;
+    private FilterOutKEYB filterOutKEYB;
 
     /**
      * Filter to manage the gate port.
@@ -75,13 +75,13 @@ public class ModuleKEYB implements Module {
         octave = REFERENCE_OCTAVE;
 
         //Initialize
-        sineOscillator = new FilterOutKEYB();
+        filterOutKEYB = new FilterOutKEYB();
         keyboardFilter = new FilterKEYB();
-        synth.add(sineOscillator);
+        synth.add(filterOutKEYB);
         synth.add(keyboardFilter);
 
         //Output port
-        OutputPort out = new OutputPort("out", this, sineOscillator.getGate());
+        OutputPort out = new OutputPort("out", this, filterOutKEYB.getGate());
         ports.add(out);
 
         //Gate port
@@ -105,7 +105,7 @@ public class ModuleKEYB implements Module {
      */
     @Override
     public void start() {
-        sineOscillator.start();
+        filterOutKEYB.start();
     }
 
     /**
@@ -113,7 +113,7 @@ public class ModuleKEYB implements Module {
      */
     @Override
     public void stop() {
-        sineOscillator.stop();
+        filterOutKEYB.stop();
     }
 
     /**
@@ -161,19 +161,16 @@ public class ModuleKEYB implements Module {
      * @param n New note
      */
     private void computeFrequency(NoteKEYB n){
-        double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
-        freq = ((freq - 110*Math.pow(2, octave - 1)) /
-                (110*Math.pow(2, octave) - 110*Math.pow(2, octave - 1)))
-        + (octave - REFERENCE_OCTAVE);
-        freq = ((double) n.getValue())/12.0 + (octave - REFERENCE_OCTAVE);
-        sineOscillator.setTension(freq);
+        filterOutKEYB.setTension(n.getValue()/12.0 + (octave - REFERENCE_OCTAVE));
     }
 
     /**
      * Release the currently pressed key.
      */
-    public void releaseKey() {
-        keyboardFilter.releaseKey();
+    public void releaseKey(NoteKEYB noteKEYB) {
+        if (noteKEYB==lastNotePressed) {
+            keyboardFilter.releaseKey();
+        }
     }
 
     public int getOctave() {
