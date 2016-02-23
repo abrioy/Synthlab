@@ -234,12 +234,14 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
                     keyPressedCommand.run();
                     break;
                 case X:
-                    if(octavePicker.getValue() < 7)
+                    if(octavePicker.getValue() < 7) {
                         octavePicker.setValue(octavePicker.getValue() + 1);
+                    }
                     break;
                 case W:
-                    if(octavePicker.getValue() > 0)
+                    if(octavePicker.getValue() > 0) {
                         octavePicker.setValue(octavePicker.getValue() - 1);
+                    }
                     break;
                 default:
                     break;

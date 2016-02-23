@@ -23,10 +23,12 @@ public class FilterVCAam extends UnitFilter {
             double am = inputs[i];
             double inVca = inputsVca[i];
 
-            if (am > 0.0 || am < 0.0)
+            if (am > 0.0 || am < 0.0) {
                 outputs[i] = inVca * AudioMath.decibelsToAmplitude(am * 12);
-            else
+            }
+            else {
                 outputs[i] = 0.0;
+            }
         }
     }
 }

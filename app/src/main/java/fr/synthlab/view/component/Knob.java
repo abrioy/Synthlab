@@ -241,14 +241,14 @@ public class Knob extends Pane {
 			for (int t = 0; t < step.get()-1; t++) {
 				angleLocal = angleLocalNext;
 				angleLocalNext = (angleInterval*(t+1) + getMaxAngle());
-				if (angleLocal<angle && angle<=((angleLocalNext-angleLocal)/2)+angleLocal) {
-					rotate.setAngle(-angleLocal);
-					angle=angleLocal;
+				if (angleLocal < angle && angle <= ((angleLocalNext - angleLocal)/2) + angleLocal) {
+					rotate.setAngle( -angleLocal);
+					angle = angleLocal;
 
                 }
-				else if (((angleLocalNext-angleLocal)/2)+angleLocal<angle && angle<angleLocalNext){
-					rotate.setAngle(-angleLocalNext);
-					angle=angleLocalNext;
+				else if (((angleLocalNext - angleLocal) / 2) + angleLocal < angle && angle < angleLocalNext){
+					rotate.setAngle( -angleLocalNext);
+					angle = angleLocalNext;
 				}
 			}
 		}
@@ -295,7 +295,7 @@ public class Knob extends Pane {
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
-        if (step.get()!=0) {//draw scale
+        if (step.get() != 0) {//draw scale
             getChildren().removeAll(lines);
             Color interColor= STEP_COLOR;
 			lines.clear();
@@ -313,7 +313,7 @@ public class Knob extends Pane {
                 stepEnd=smallScaleSize;
             }
             for (int x = 1; x < step.get()-1; x++) {
-                angleLocal = -(angleInterval*x + getMinAngle());
+                angleLocal = -(angleInterval * x + getMinAngle());
                 Line line = new Line();
                 line.setStroke(interColor);
                 line.setStartX(centerX + (diameter.doubleValue() / 2.0 +stepStart) * Math.cos(Math.toRadians(angleLocal)));
@@ -332,7 +332,9 @@ public class Knob extends Pane {
         arc.setLength((getMaxAngle() - getMinAngle()));
         arc.setType(ArcType.OPEN);
         arc.setMouseTransparent(true);
-        if(getScaleType().equals("enum"))arc.setStroke(Color.TRANSPARENT);
+        if(getScaleType().equals("enum")) {
+            arc.setStroke(Color.TRANSPARENT);
+        }
         updatePositions();
     }
 
@@ -611,8 +613,12 @@ public class Knob extends Pane {
      * @param v new minAngle
      */
     public final void setMinAngle(double v) {
-        if (getScaleType().equals("enum")) minAngle.set(225);
-        else minAngle.set(v);
+        if (getScaleType().equals("enum")) {
+            minAngle.set(225);
+        }
+        else {
+            minAngle.set(v);
+        }
     }
 
     /**
@@ -635,8 +641,12 @@ public class Knob extends Pane {
      * @param v new maxAngle
      */
     public final void setMaxAngle(double v) {
-        if (getScaleType().equals("enum")) maxAngle.set(-45);
-        else maxAngle.set(v);
+        if (getScaleType().equals("enum")) {
+            maxAngle.set(-45);
+        }
+        else {
+            maxAngle.set(v);
+        }
     }
 
     /**

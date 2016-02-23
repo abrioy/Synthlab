@@ -59,12 +59,12 @@ public class Cable extends CubicCurve {
 		this.setMouseTransparent(true);
 	}
 
-	public void updateCircles(){
+	public void updateCircles() {
 		circleIn.toFront();
 		circleOut.toFront();
 	}
 
-    public void update(){
+    public void update() {
         Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
         Point2D outPosition = workbench.sceneToLocal(out.localToScene(out.getCenter()));
 
@@ -80,7 +80,7 @@ public class Cable extends CubicCurve {
         this.toFront();
     }
 
-    public void update(Point2D mouse){
+    public void update(Point2D mouse) {
         Point2D correctedMouse = new Point2D(Math.max(CIRCLE_RADIUS, mouse.getX()),
                 Math.max(CIRCLE_RADIUS, mouse.getY()));
 
@@ -103,8 +103,8 @@ public class Cable extends CubicCurve {
         this.toFront();
     }
 
-    public Plug getOppositePlug(Plug plug){
-        if(in==null || out==null)return null;
+    public Plug getOppositePlug(Plug plug) {
+        if(in==null || out==null){return null;}
         if(in.equals(plug)){
             return out;
         } else if (out.equals(plug)){
@@ -132,19 +132,19 @@ public class Cable extends CubicCurve {
         }
     }
 
-    private void addCircle(Circle c, double x, double y){
+    private void addCircle(Circle c, double x, double y) {
         c.setCenterX(x);
         c.setCenterY(y);
         c.setRadius(CIRCLE_RADIUS);
     }
 
-    public void allToFront(){
+    public void allToFront() {
         circleIn.toFront();
         circleOut.toFront();
         this.toFront();
     }
 
-    public void unplug(Plug plug){
+    public void unplug(Plug plug) {
         if(in==plug){
 			in.setCable(null);
 			in=null;
@@ -157,12 +157,12 @@ public class Cable extends CubicCurve {
 		}
     }
 
-    public void deleteCircles(){
+    public void deleteCircles() {
         workbench.getChildren().remove(circleIn);
         workbench.getChildren().remove(circleOut);
     }
 
-    private void drawCable(Point2D start, Point2D end){
+    private void drawCable(Point2D start, Point2D end) {
         double diffX=start.getX() - end.getX();
         double diffY=Math.abs(start.getY() - end.getY());
         this.setControlX1(start.getX() - diffX / 3);

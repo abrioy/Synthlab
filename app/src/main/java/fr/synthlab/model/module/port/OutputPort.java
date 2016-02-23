@@ -36,13 +36,14 @@ public class OutputPort extends Port {
      */
     @Override
     public void connect(Port port) {
-        if (getConnected() != null)
-            throw new RuntimeException("Unable to connect \"" + port.getName()
+        if (getConnected() != null) {
+            LOGGER.warning("Unable to connect \"" + port.getName()
                     + "\" to this port (" + this.getName() + ") because it is already connected to \""
                     + getConnected().getName() + "\".");
-
-        if (port instanceof InputPort)
+        }
+        if (port instanceof InputPort) {
             output.connect(((InputPort) port).getInput());
+        }
         super.connect(port);
     }
 
@@ -50,8 +51,9 @@ public class OutputPort extends Port {
      * Disconnect the current connected port
      */
     public void disconnect() {
-        if(getConnected() instanceof InputPort)
+        if(getConnected() instanceof InputPort) {
             output.disconnect(((InputPort) getConnected()).getInput());
+        }
         super.disconnect();
     }
 }
