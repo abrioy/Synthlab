@@ -1,7 +1,11 @@
 package fr.synthlab.model.module.vcoa;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.*;
+import com.jsyn.unitgen.SquareOscillator;
+import com.jsyn.unitgen.TriangleOscillator;
+import com.jsyn.unitgen.SawtoothOscillator;
+import com.jsyn.unitgen.SineOscillator;
+import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.filter.FilterFm;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;

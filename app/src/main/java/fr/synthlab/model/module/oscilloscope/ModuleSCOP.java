@@ -16,8 +16,19 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JToggleButton;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.BasicStroke;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;

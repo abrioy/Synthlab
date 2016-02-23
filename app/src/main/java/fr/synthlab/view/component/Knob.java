@@ -1,7 +1,5 @@
 package fr.synthlab.view.component;
 
-
-import javafx.beans.property.*;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -12,6 +10,15 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
+
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
 import java.util.Collection;

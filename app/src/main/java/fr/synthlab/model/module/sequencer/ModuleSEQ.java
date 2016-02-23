@@ -7,7 +7,11 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
-import java.util.*;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class ModuleSEQ extends Observable implements Module {
