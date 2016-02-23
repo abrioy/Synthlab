@@ -37,7 +37,9 @@ public class OutputPort extends Port {
     @Override
     public void connect(Port port) {
         if (getConnected() != null)
-            throw new RuntimeException("A port was already connected");
+            throw new RuntimeException("Unable to connect \"" + port.getName()
+                    + "\" to this port (" + this.getName() + ") because it is already connected to \""
+                    + getConnected().getName() + "\".");
 
         if (port instanceof InputPort)
             output.connect(((InputPort) port).getInput());
