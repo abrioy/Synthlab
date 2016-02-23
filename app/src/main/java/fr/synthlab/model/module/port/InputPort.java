@@ -43,7 +43,7 @@ public class InputPort extends Port {
     @Override
     public void connect(Port port) {
         if (getConnected() != null){
-			LOGGER.warning("Unable to connect \"" + port.getName()
+            throw new RuntimeException("Unable to connect \"" + port.getName()
 					+ "\" to this port (" + this.getName() + ") because it is already connected to \""
 					+ getConnected().getName() + "\".");
 		}
