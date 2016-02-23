@@ -1,6 +1,6 @@
 package fr.synthlab.model.module.port;
 
-import com.jsyn.ports.ConnectableInput;
+import com.jsyn.ports.ConnectableOutput;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 import fr.synthlab.model.module.Module;
@@ -10,141 +10,144 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class InputPortTest {
+/**
+ * Test on Output port.
+ */
+public class OutputPortTest {
 
-    private InputPort inputPort;
+    private OutputPort outputPort;
 
     private Module mockModule;
 
-    private ConnectableInput connectableInput;
+    private ConnectableOutput connectableOutput;
 
     @Before
     public void setUp() {
         mockModule = mock(Module.class);
-        connectableInput = new UnitInputPort("in");
-        inputPort = new InputPort("in", mockModule, connectableInput);
+        connectableOutput = new UnitOutputPort("out");
+        outputPort = new OutputPort("out", mockModule, connectableOutput);
     }
 
     @Test
-    public void testGetInput() {
-        assertSame(connectableInput, inputPort.getInput());
+    public void testGetOutput() {
+        assertSame(connectableOutput, outputPort.getOutput());
     }
 
     @Test
     public void testDisconnect() {
-        connectOutput();
-        inputPort.disconnect();
-        assertFalse(inputPort.isConnected());
+        connectInput();
+        outputPort.disconnect();
+        assertFalse(outputPort.isConnected());
     }
 
     @Test
     public void testDisconnect2() {
-        inputPort.disconnect();
-        assertFalse(inputPort.isConnected());
+        outputPort.disconnect();
+        assertFalse(outputPort.isConnected());
     }
 
     @Test
     public void testDisconnect3() {
-        connectInput();
-        inputPort.disconnect();
-        assertFalse(inputPort.isConnected());
+        connectOutput();
+        outputPort.disconnect();
+        assertFalse(outputPort.isConnected());
     }
 
     @Test
     public void testGetName() {
-        assertEquals("in", inputPort.getName());
+        assertEquals("out", outputPort.getName());
     }
 
     @Test
     public void testIsConnected() {
-        assertFalse(inputPort.isConnected());
+        assertFalse(outputPort.isConnected());
     }
 
     @Test
     public void testIsConnected2() {
         connectOutput();
-        assertTrue(inputPort.isConnected());
+        assertTrue(outputPort.isConnected());
     }
 
     @Test
     public void testIsConnected3() {
         connectInput();
-        assertTrue(inputPort.isConnected());
+        assertTrue(outputPort.isConnected());
     }
 
     @Test
     public void testIsConnected4() {
-        connectOutput();
-        inputPort.disconnect();
-        connectOutput();
-        assertTrue(inputPort.isConnected());
+        connectInput();
+        outputPort.disconnect();
+        connectInput();
+        assertTrue(outputPort.isConnected());
     }
 
     @Test
     public void testGetConnected() {
-        assertNull(inputPort.getConnected());
+        assertNull(outputPort.getConnected());
     }
 
     @Test
     public void testGetConnected2() {
-        connectOutput();
-        assertNotNull(inputPort.getConnected());
-        assertTrue(inputPort.getConnected() instanceof OutputPort);
+        connectInput();
+        assertNotNull(outputPort.getConnected());
+        assertTrue(outputPort.getConnected() instanceof InputPort);
     }
 
     @Test(expected=RuntimeException.class)
     public void testGetConnected3() {
-        connectOutput();
-        connectOutput();
+        connectInput();
+        connectInput();
     }
 
     @Test
     public void testGetConnected4() {
-        connectInput();
-        assertTrue(inputPort.getConnected() instanceof InputPort);
+        connectOutput();
+        assertTrue(outputPort.getConnected() instanceof OutputPort);
     }
 
     @Test(expected=RuntimeException.class)
     public void testGetConnected5() {
-        connectInput();
         connectOutput();
+        connectInput();
     }
 
     @Test(expected=RuntimeException.class)
     public void testGetConnected6() {
-        connectOutput();
         connectInput();
+        connectOutput();
     }
 
     @Test(expected=RuntimeException.class)
     public void testGetConnected7() {
-        connectInput();
-        connectInput();
+        connectOutput();
+        connectOutput();
     }
 
     @Test
     public void testGetModule() {
-        assertSame(mockModule, inputPort.getModule());
+        assertSame(mockModule, outputPort.getModule());
     }
 
     @Test
     public void testSetPort() {
-        OutputPort mockPort = mock(OutputPort.class);
-        inputPort.setPort(mockPort);
-        assertSame(mockPort, inputPort.getConnected());
+        InputPort mockPort = mock(InputPort.class);
+        outputPort.setPort(mockPort);
+        assertSame(mockPort, outputPort.getConnected());
     }
 
     private void connectOutput(){
         UnitOutputPort unitOutputPort = new UnitOutputPort();
         Module mockModule2 = mock(Module.class);
         OutputPort outputPort = new OutputPort("out", mockModule2, unitOutputPort);
-        inputPort.connect(outputPort);
+        this.outputPort.connect(outputPort);
     }
 
     private void connectInput(){
         UnitInputPort unitInputPort = new UnitInputPort("in");
         Module mockModule2 = mock(Module.class);
         InputPort input = new InputPort("in", mockModule2, unitInputPort);
-        inputPort.connect(input);
+        outputPort.connect(input);
     }
 }
