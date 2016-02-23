@@ -440,10 +440,9 @@ public class Workbench extends Pane {
 					}
 
 					// We also snap it in place vertically
-					if(Math.abs(collidingBounds.getMinY() - newBounds.getMinY()) < 20) {
+					if (Math.abs(collidingBounds.getMinY() - newBounds.getMinY()) < 20) {
 						newY = collidingBounds.getMinY();
-					}
-					else if(Math.abs(collidingBounds.getMaxY() - newBounds.getMaxY()) < 20) {
+					} else if (Math.abs(collidingBounds.getMaxY() - newBounds.getMaxY()) < 20) {
 						newY = collidingBounds.getMaxY() - newBounds.getHeight();
 					}
 
@@ -456,18 +455,14 @@ public class Workbench extends Pane {
 						// Top
 						newY = collidingBounds.getMinY() - newBounds.getHeight() - moduleMargin;
 					}
-
 					// We also snap it in place horizontally
-					if(Math.abs(collidingBounds.getMinX() - newBounds.getMinX()) < 20) {
+					if (Math.abs(collidingBounds.getMinX() - newBounds.getMinX()) < 20) {
 						newX = collidingBounds.getMinX();
-					}
-					else if(Math.abs(collidingBounds.getMaxX() - newBounds.getMaxX()) < 20) {
+					} else if (Math.abs(collidingBounds.getMaxX() - newBounds.getMaxX()) < 20) {
 						newX = collidingBounds.getMaxX() - newBounds.getWidth();
 					}
 				}
-
 			}
-
 		}
 
 		// The loop didn't succeed in finding a non-colliding location, we don't move the node
@@ -478,19 +473,18 @@ public class Workbench extends Pane {
 	 * Handling event when plug is clicked
 	 * @param plug Plug clicked
 	 */
-	public void plugClicked(Plug plug){
+	public void plugClicked(Plug plug) {
 		if(draggedCable == null){
 			Plug opposite = getConnectedPlug(plug);
 			if (opposite!=null){
 				disconnectPlug(plug);
 				draggedCable=getConnectedCable(plug);
 				dragCable(draggedCable,plug);
-
-			}else {
+			} else {
 				draggedCable = new Cable(this, plug);
 				this.getChildren().add(draggedCable);
 			}
-		}else{
+		} else {
 			if(getConnectedCable(plug)==null) {
 				Plug fixedPlug = draggedCable.getPluggedPlug();
 				if (fixedPlug != plug) {
@@ -512,7 +506,7 @@ public class Workbench extends Pane {
      * @param in the name is mandatory, we dont care if its in or out
      * @param out the name is mandatory, we dont care if its in or out
      */
-    private void connectPlugs(Plug in, Plug out){
+    private void connectPlugs(Plug in, Plug out) {
         Port n1 = in.getPort();
         Port n2 = out.getPort();
         n1.connect(n2);
@@ -523,7 +517,7 @@ public class Workbench extends Pane {
      *
      * @param plug the name is mandatory, we dont care if its in or out
      */
-    private void disconnectPlug(Plug plug){
+    private void disconnectPlug(Plug plug) {
         Port p = plug.getPort();
         if (p.isConnected()) {
             p.disconnect();
@@ -549,7 +543,7 @@ public class Workbench extends Pane {
 		});
 	}
 
-    private Cable getConnectedCable(Plug plug){
+    private Cable getConnectedCable(Plug plug) {
         for(Cable c : getCables()){
             if (c.getPluggedPlug() == plug){
                 return c;
@@ -560,6 +554,7 @@ public class Workbench extends Pane {
         }
         return null;
     }
+
 	private Plug getConnectedPlug(Plug plug){
         for(Cable c : getCables()){
 			Plug opposite = c.getOppositePlug(plug);
@@ -591,7 +586,7 @@ public class Workbench extends Pane {
 		return currentSkin;
 	}
 
-	public void changeSkin(Skin skin){
+	public void changeSkin(Skin skin) {
 		LOGGER.fine("Skin changed from \""+currentSkin+"\" to \""+skin+"\".");
 
 		this.getStylesheets().remove(currentSkin.getPath());

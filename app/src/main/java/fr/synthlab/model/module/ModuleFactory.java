@@ -26,7 +26,7 @@ public class ModuleFactory {
      */
     private static Synthesizer syn = JSyn.createSynthesizer();
 
-    public static Module createModule(ModuleType type){
+    public static Module createModule(ModuleType type) {
         Module module = null;
         switch(type){
             case VCOA: module = createVCO();
@@ -54,11 +54,10 @@ public class ModuleFactory {
             case SEQ: module = createSEQ();
                 break;
         }
-		if(module != null){
+		if(module != null) {
 			LOGGER.finer("Module created: "+module.toString());
 			module.start();
-		}
-		else{
+		} else {
 			LOGGER.severe("Unrecognised module type \""+type.toString()+"\".");
 		}
         return module;

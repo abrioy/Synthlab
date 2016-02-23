@@ -12,16 +12,14 @@ public class MuteButton extends Button {
                 getClass().getResource("/gui/fxml/style/Module.css").toExternalForm());
         this.getStyleClass().add("mute-release");
     }
+
     public void setToggle(boolean toggle) {
         if (toggle){
             this.getStyleClass().remove("mute-release");
             this.getStyleClass().add("mute-pressed");
-
-        }
-        else {
+        } else {
             this.getStyleClass().remove("mute-pressed");
             this.getStyleClass().add("mute-release");
         }
     }
-
 }

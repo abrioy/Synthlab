@@ -104,8 +104,10 @@ public class Cable extends CubicCurve {
     }
 
     public Plug getOppositePlug(Plug plug) {
-        if(in==null || out==null){return null;}
-        if(in.equals(plug)){
+        if(in==null || out==null){
+            return null;
+        }
+        if(in.equals(plug)) {
             return out;
         } else if (out.equals(plug)){
             return in;
@@ -148,8 +150,7 @@ public class Cable extends CubicCurve {
         if(in==plug){
 			in.setCable(null);
 			in=null;
-		}
-        else {
+		} else {
 			if(out != null) {
 				out.setCable(null);
 				out=null;

@@ -26,8 +26,8 @@ public class SEQFilter extends UnitFilter {
         this.seq = seq;
         current = 0;
 
-        signalFront = 0.1/2;
-        sigFrontStop = -0.000001/2;
+        signalFront = 0.1 / 2;
+        sigFrontStop = -0.000001 / 2;
     }
 
     /**
@@ -44,8 +44,7 @@ public class SEQFilter extends UnitFilter {
                 if ( inputs[i] <= sigFrontStop ) {
                     attend = false;
                 }
-            }
-            else if (inputs[i] >= signalFront ){
+            } else if (inputs[i] >= signalFront ) {
                 attend = true;
                 current++;
                 current= current % tension.size();
