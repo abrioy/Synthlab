@@ -15,10 +15,10 @@ public class RecordButton extends Button {
 
     public void setToggle(boolean toggle) {
         if (toggle) {
-            this.getStyleClass().remove("record-release");
+            this.getStyleClass().clear();
             this.getStyleClass().add("record-pressed");
         } else {
-            this.getStyleClass().remove("record-pressed");
+            this.getStyleClass().clear();
             this.getStyleClass().add("record-release");
         }
     }
