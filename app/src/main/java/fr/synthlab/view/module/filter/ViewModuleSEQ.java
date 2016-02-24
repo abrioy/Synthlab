@@ -13,7 +13,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
-import java.util.*;
+import java.util.Observer;
+import java.util.ResourceBundle;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Observable;
 import java.util.logging.Logger;
 
 public class ViewModuleSEQ extends ViewModule implements Initializable, Observer {

@@ -12,7 +12,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -35,12 +40,12 @@ public class MenuBarController implements Initializable {
 
     }
 
-    public void setMainWindowController(MainWindowController mainWindowController) {
-        this.mainWindowController = mainWindowController;
+    public void setMainWindowController(MainWindowController newMainWindowController) {
+        mainWindowController = newMainWindowController;
     }
 
-    public void setWorkbench(Workbench workbench) {
-        this.workbench = workbench;
+    public void setWorkbench(Workbench newWorkbench) {
+        workbench = newWorkbench;
 
         ToggleGroup skinToggleGroup = new ToggleGroup();
         Skin currentSkin = workbench.getCurrentSkin();
@@ -58,8 +63,8 @@ public class MenuBarController implements Initializable {
         }
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    public void setStage(Stage newStage) {
+        stage = newStage;
     }
 
     public void onClickViewZoomReset() {

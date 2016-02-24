@@ -28,12 +28,12 @@ public class Port {
     /**
      * constructor
      *
-     * @param name name of the port
-     * @param m    the module which contains this port
+     * @param nameInit name of the port
+     * @param moduleInit    the module which contains this port
      */
-    public Port(String name, Module m) {
-        this.name = name;
-        this.module = m;
+    public Port(String nameInit, Module moduleInit) {
+        name = nameInit;
+        module = moduleInit;
     }
 
     /**
@@ -50,10 +50,10 @@ public class Port {
     /**
      * connect this port to another port.
      *
-     * @param port Port to connect
+     * @param portConnected Port to connect
      */
-    public void connect(Port port) {
-        this.port = port;
+    public void connect(Port portConnected) {
+        port = portConnected;
         module.update();
         port.setPort(this);
         port.getModule().update();
@@ -90,9 +90,9 @@ public class Port {
     /**
      * set the connected port
      *
-     * @param port the connected port
+     * @param newPort the connected port
      */
-    public void setPort(Port port) {
-        this.port = port;
+    public void setPort(Port newPort) {
+        port = newPort;
     }
 }

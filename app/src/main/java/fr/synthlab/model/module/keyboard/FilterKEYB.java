@@ -24,19 +24,20 @@ public class FilterKEYB extends UnitGenerator {
     /**
      * Press key, voltage change to 5V.
      */
-    public void pressKey(){
+    public void pressKey() {
         tension = 5;
     }
 
     /**
      * Release key, voltage change to -5V.
      */
-    public void releaseKey(){
+    public void releaseKey() {
         tension = -5;
     }
 
     /**
      * Generate new values.
+     *
      * @param start param manage by Jsyn
      * @param limit param manage by Jsyn
      */

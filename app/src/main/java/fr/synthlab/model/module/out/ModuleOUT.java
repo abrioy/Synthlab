@@ -127,10 +127,10 @@ public class ModuleOUT implements Module {
     /**
      * setter on mute start or stop play audio.
      *
-     * @param mute true if play sound
+     * @param newMute true if play sound
      */
-    public void setMute(boolean mute) {
-        this.mute = mute;
+    public void setMute(boolean newMute) {
+        mute = newMute;
         if (isMute()) {
             stop();
         } else {
@@ -138,8 +138,8 @@ public class ModuleOUT implements Module {
         }
     }
 
-    public void setRecording(boolean recording, File pickedFile) {
-        this.recording = recording;
+    public void setRecording(boolean newRecording, File pickedFile) {
+        recording = newRecording;
 
         try {
             if (recording) {

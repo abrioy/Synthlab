@@ -7,7 +7,11 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
-import java.util.*;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class ModuleSEQ extends Observable implements Module {
@@ -25,6 +29,7 @@ public class ModuleSEQ extends Observable implements Module {
 
     /**
      * Constructor
+     *
      * @param synth Synthesizer
      */
     public ModuleSEQ(Synthesizer synth) {
@@ -54,6 +59,7 @@ public class ModuleSEQ extends Observable implements Module {
 
     /**
      * Getter on ports input and output.
+     *
      * @return Scope port
      */
     @Override
@@ -95,21 +101,21 @@ public class ModuleSEQ extends Observable implements Module {
         stepValues.set(step, value);
     }
 
-    public void addObserver(Observer obs){
+    public void addObserver(Observer obs) {
         observers.add(obs);
     }
 
-    public void removeObserver(Observer obs){
+    public void removeObserver(Observer obs) {
         observers.remove(obs);
     }
 
-    public void updateObs(){
+    public void updateObs() {
         for (Observer o : observers) {
             o.update(this, getCurrent());
         }
     }
 
-    public int getCurrent(){
+    public int getCurrent() {
         return seqFilter.getCurrent();
     }
 

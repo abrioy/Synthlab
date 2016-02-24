@@ -50,15 +50,15 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
     private KeyboardKey CNextOctKey;
 
     @FXML
-    Knob octavePicker;
+    private Knob octavePicker;
 
     @FXML
-    Label octaveLabel;
+    private Label octaveLabel;
 
-    Runnable keyPressedCommand;
-    Runnable keyReleasedCommand;
-    Runnable octaveChangeCommand;
-    NoteKEYB lastKeyPressed;
+    private Runnable keyPressedCommand;
+    private Runnable keyReleasedCommand;
+    private Runnable octaveChangeCommand;
+    private NoteKEYB lastKeyPressed;
 
     public ViewModuleKEYB(Workbench workbench) {
         super(workbench);

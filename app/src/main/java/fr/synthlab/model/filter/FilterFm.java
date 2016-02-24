@@ -7,8 +7,8 @@ public class FilterFm extends UnitFilter {
 
     private double f0;
 
-    public FilterFm(double f0) {
-        this.f0 = f0;
+    public FilterFm(final double f0Init) {
+        f0 = f0Init;
     }
 
     @Override
@@ -21,7 +21,7 @@ public class FilterFm extends UnitFilter {
         }
     }
 
-    public void setf0(double v) {
+    public void setF0(double v) {
         f0 = v;
     }
 }

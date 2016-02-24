@@ -24,20 +24,20 @@ public class Cable extends CubicCurve {
     private Circle circleOut;
     private Workbench workbench;
 
-    public Cable(Workbench workbench, Plug in) {
-        this.in = in;
-        this.in.setCable(this);
-        this.workbench = workbench;
+    public Cable(Workbench workbenchInit, Plug inInit) {
+        in = inInit;
+        in.setCable(this);
+        workbench = workbenchInit;
 
         init();
     }
 
-    public Cable(Workbench workbench, Plug in, Plug out) {
-        this.in = in;
-        this.in.setCable(this);
-        this.out = out;
-        this.out.setCable(this);
-        this.workbench = workbench;
+    public Cable(Workbench workbenchInit, Plug inInit, Plug outInit) {
+        in = inInit;
+        in.setCable(this);
+        out = outInit;
+        out.setCable(this);
+        workbench = workbenchInit;
 
         init();
     }
@@ -173,10 +173,9 @@ public class Cable extends CubicCurve {
         this.setStroke(color);
     }
 
-
-    public void setColor(Color color) {
-        this.color = color;
-        this.setStroke(color);
+    public void setColor(Color newColor) {
+        color = newColor;
+        setStroke(color);
     }
 
     public Color getColor() {

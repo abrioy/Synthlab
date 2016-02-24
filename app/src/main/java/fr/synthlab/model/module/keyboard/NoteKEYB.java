@@ -17,8 +17,8 @@ public enum NoteKEYB {
 
     private final int value;
 
-    NoteKEYB(int value) {
-        this.value = value;
+    NoteKEYB(final int newValue) {
+        value = newValue;
     }
 
     public int getValue() {

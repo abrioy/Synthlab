@@ -74,10 +74,10 @@ public class ModuleVCA implements Module {
 
     /**
      * set the attenuation in DB
-     * @param attenuation new attenuation
+     * @param newAttenuation attenuation new attenuation
      */
-    public void setAttenuation(double attenuation) {
-        this.attenuation = attenuation;
+    public void setAttenuation(double newAttenuation) {
+        attenuation = newAttenuation;
         filterAttenuator.setAttenuation(attenuation);
     }
 

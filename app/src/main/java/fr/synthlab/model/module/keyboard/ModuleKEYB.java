@@ -69,6 +69,7 @@ public class ModuleKEYB implements Module {
 
     /**
      * Constructor
+     *
      * @param synth Synthesizer
      */
     public ModuleKEYB(Synthesizer synth) {
@@ -93,6 +94,7 @@ public class ModuleKEYB implements Module {
 
     /**
      * Getter on ports output.
+     *
      * @return Keyboard port
      */
     @Override
@@ -125,7 +127,6 @@ public class ModuleKEYB implements Module {
     }
 
     /**
-     *
      * @return Type of this module
      */
     @Override
@@ -135,6 +136,7 @@ public class ModuleKEYB implements Module {
 
     /**
      * Change keyboard's octave
+     *
      * @param newOctave New octave value
      */
     public void changeOctave(int newOctave) {
@@ -148,6 +150,7 @@ public class ModuleKEYB implements Module {
 
     /**
      * Method to compute and send the new frequency in the oscilloscope.
+     *
      * @param n New note pressed
      */
     public void pressKey(NoteKEYB n) {
@@ -158,18 +161,20 @@ public class ModuleKEYB implements Module {
 
     /**
      * Compute the new frequency.
+     *
      * @param n New note
      */
-    private void computeFrequency(NoteKEYB n){
-        filterOutKEYB.setTension(n.getValue()/12.0 + (octave - REFERENCE_OCTAVE));
+    private void computeFrequency(NoteKEYB n) {
+        filterOutKEYB.setTension(n.getValue() / 12.0 + (octave - REFERENCE_OCTAVE));
     }
 
     /**
      * Release the currently pressed key.
+     *
      * @param noteKEYB note release
      */
     public void releaseKey(NoteKEYB noteKEYB) {
-        if (noteKEYB==lastNotePressed) {
+        if (noteKEYB == lastNotePressed) {
             keyboardFilter.releaseKey();
         }
     }

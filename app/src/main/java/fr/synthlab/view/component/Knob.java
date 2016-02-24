@@ -1,7 +1,5 @@
 package fr.synthlab.view.component;
 
-
-import javafx.beans.property.*;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -12,6 +10,15 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
+
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -147,7 +154,7 @@ public class Knob extends Pane {
         super();
         knob = new Region();
         knob.getStylesheets().add(
-                getClass().getResource("/gui/fxml/style/Knob.css").toExternalForm());//add css
+                getClass().getResource("/gui/fxml/style/Knob.css").toExternalForm()); //add css
         knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
         knob.getStyleClass().add("knob");
         knob.getTransforms().add(rotate);
@@ -234,7 +241,7 @@ public class Knob extends Pane {
 
         double angleLocal;
         double angleInterval = ((getMinAngle() - getMaxAngle()) / (step.get() - 1));
-        if (getStepType()) {//go to step if there are
+        if (getStepType()) { //go to step if there are
             double angleLocalNext = getMaxAngle();
             for (int t = 0; t < step.get() - 1; t++) {
                 angleLocal = angleLocalNext;
@@ -291,7 +298,7 @@ public class Knob extends Pane {
             rotate.setPivotY(knob.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
-        if (step.get() != 0) {//draw scale
+        if (step.get() != 0) { //draw scale
             getChildren().removeAll(lines);
             Color interColor = STEP_COLOR;
             lines.clear();
@@ -334,18 +341,18 @@ public class Knob extends Pane {
     }
 
     /**
-     * return angle for value
+     * return angle for valueOfAngle
      *
-     * @param value value to transform in angle
+     * @param valueOfAngle valueOfAngle to transform in angle
      * @return angle in degree
      */
-    private double valueToAngle(double value) {
+    private double valueToAngle(double valueOfAngle) {
         double maxValue = getMax();
         double minValue = getMin();
         if (scaleType.get().equals("log")) {
-            return getMinAngle() + (getMaxAngle() - getMinAngle()) * (((Math.log(value) + coef) / scale) - minValue) / (maxValue - minValue);
+            return getMinAngle() + (getMaxAngle() - getMinAngle()) * (((Math.log(valueOfAngle) + coef) / scale) - minValue) / (maxValue - minValue);
         }
-        return getMinAngle() + (getMaxAngle() - getMinAngle()) * (value - minValue) / (maxValue - minValue);
+        return getMinAngle() + (getMaxAngle() - getMinAngle()) * (valueOfAngle - minValue) / (maxValue - minValue);
     }
 
     /**
@@ -357,16 +364,16 @@ public class Knob extends Pane {
     private double angleToValue(double angle) {
         double maxValue = getMax();
         double minValue = getMin();
-        double value;
+        double valueOfAngle;
         if (scaleType.get().equals("log")) {
-            value = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
-            value = Math.exp(minExp + scale * (value - minValue));
-            value = Math.max((minValue <= 10.0 ? 10 : minValue), value);
+            valueOfAngle = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
+            valueOfAngle = Math.exp(minExp + scale * (valueOfAngle - minValue));
+            valueOfAngle = Math.max((minValue <= 10.0 ? 10 : minValue), valueOfAngle);
         } else {
-            value = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
+            valueOfAngle = minValue + (maxValue - minValue) * (angle - getMinAngle()) / (getMaxAngle() - getMinAngle());
         }
-        value = Math.max(minValue, value);
-        return Math.min(maxValue, value);
+        valueOfAngle = Math.max(minValue, valueOfAngle);
+        return Math.min(maxValue, valueOfAngle);
     }
 
     private void updatePositions() {

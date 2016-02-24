@@ -1,6 +1,5 @@
 package fr.synthlab.view.module;
 
-
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleFactory;
 import fr.synthlab.model.module.ModuleType;
@@ -14,12 +13,18 @@ import fr.synthlab.model.module.vca.ModuleVCA;
 import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
+
 import fr.synthlab.view.controller.Workbench;
-import fr.synthlab.view.module.filter.*;
+import fr.synthlab.view.module.filter.ViewModuleSEQ;
+import fr.synthlab.view.module.filter.ViewModuleEG;
+import fr.synthlab.view.module.filter.ViewModuleMIX;
+import fr.synthlab.view.module.filter.ViewModuleREP;
+import fr.synthlab.view.module.filter.ViewModuleVCA;
+import fr.synthlab.view.module.filter.ViewModuleVCFHP;
+import fr.synthlab.view.module.filter.ViewModuleVCFLP;
 import fr.synthlab.view.module.input.ViewModuleBRUI;
 import fr.synthlab.view.module.input.ViewModuleKEYB;
 import fr.synthlab.view.module.input.ViewModuleVCOA;
-import fr.synthlab.view.module.filter.ViewModuleSEQ;
 import fr.synthlab.view.module.output.ViewModuleOUT;
 import fr.synthlab.view.module.output.ViewModuleSCOP;
 

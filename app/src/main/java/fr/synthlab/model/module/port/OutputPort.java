@@ -15,11 +15,11 @@ public class OutputPort extends Port {
      *
      * @param name   The name of this port
      * @param m      The module containing this port
-     * @param output The JSyn port to assign
+     * @param outputInit The JSyn port to assign
      */
-    public OutputPort(String name, Module m, ConnectableOutput output) {
+    public OutputPort(String name, Module m, ConnectableOutput outputInit) {
         super(name, m);
-        this.output = output;
+        output = outputInit;
     }
 
     /**

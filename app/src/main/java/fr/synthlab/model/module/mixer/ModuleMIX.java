@@ -68,7 +68,7 @@ public class ModuleMIX implements Module {
         ports.add(new InputPort("in2", this, attenuator2.input));
         ports.add(new InputPort("in3", this, attenuator3.input));
         ports.add(new InputPort("in4", this, attenuator4.input));
-        ports.add(new OutputPort("out", this, mix.getOutput()));//.getOutput()));
+        ports.add(new OutputPort("out", this, mix.getOutput()));
 
         syn.add(attenuator1);
         syn.add(attenuator2);

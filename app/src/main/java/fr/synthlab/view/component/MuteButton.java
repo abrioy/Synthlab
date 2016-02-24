@@ -7,14 +7,14 @@ import javafx.scene.control.Button;
  */
 public class MuteButton extends Button {
 
-    public MuteButton(){
+    public MuteButton() {
         this.getStylesheets().add(
                 getClass().getResource("/gui/fxml/style/Module.css").toExternalForm());
         this.getStyleClass().add("mute-release");
     }
 
     public void setToggle(boolean toggle) {
-        if (toggle){
+        if (toggle) {
             this.getStyleClass().remove("mute-release");
             this.getStyleClass().add("mute-pressed");
         } else {

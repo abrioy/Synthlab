@@ -18,12 +18,13 @@ public class SEQFilter extends UnitFilter {
 
     /**
      * Constructor
+     *
      * @param stepValues list of value
-     * @param seq sequence
+     * @param seqInit        sequence
      */
-    public SEQFilter(List<Double> stepValues, ModuleSEQ seq) {
+    public SEQFilter(List<Double> stepValues, ModuleSEQ seqInit) {
         tension = stepValues;
-        this.seq = seq;
+        seq = seqInit;
         current = 0;
 
         signalFront = 0.1 / 2;
@@ -32,6 +33,7 @@ public class SEQFilter extends UnitFilter {
 
     /**
      * Generate new values.Oscilloscope
+     *
      * @param start param managed by Jsyn
      * @param limit param managed by Jsyn
      */
@@ -41,13 +43,13 @@ public class SEQFilter extends UnitFilter {
         double[] inputs = input.getValues();
         for (int i = start; i < limit; i += 1) {
             if (attend) {
-                if ( inputs[i] <= sigFrontStop ) {
+                if (inputs[i] <= sigFrontStop) {
                     attend = false;
                 }
-            } else if (inputs[i] >= signalFront ) {
+            } else if (inputs[i] >= signalFront) {
                 attend = true;
                 current++;
-                current= current % tension.size();
+                current = current % tension.size();
                 seq.updateObs();
             }
             gates[i] = tension.get(current);
@@ -59,6 +61,6 @@ public class SEQFilter extends UnitFilter {
     }
 
     public void reset() {
-        current=0;
+        current = 0;
     }
 }

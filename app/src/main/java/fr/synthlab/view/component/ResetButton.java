@@ -7,10 +7,9 @@ import javafx.scene.control.Button;
  */
 public class ResetButton extends Button {
 
-    public ResetButton(){
+    public ResetButton() {
         this.getStylesheets().add(
                 getClass().getResource("/gui/fxml/style/Module.css").toExternalForm());
         this.getStyleClass().add("reset-button");
     }
-
 }

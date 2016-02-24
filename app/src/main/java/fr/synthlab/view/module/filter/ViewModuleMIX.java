@@ -106,40 +106,40 @@ public class ViewModuleMIX extends ViewModule implements Initializable {
     /**
      * setter command on change attenuation input 1.
      *
-     * @param attenuator1Cmd command
+     * @param newAttenuator1Cmd command
      */
-    public void setAttenuator1Cmd(Runnable attenuator1Cmd) {
-        this.attenuator1Cmd = attenuator1Cmd;
+    public void setAttenuator1Cmd(Runnable newAttenuator1Cmd) {
+        attenuator1Cmd = newAttenuator1Cmd;
         attenuator1Cmd.run();
     }
 
     /**
      * setter command on change attenuation input 2.
      *
-     * @param attenuator2Cmd command
+     * @param newAttenuator2Cmd command
      */
-    public void setAttenuator2Cmd(Runnable attenuator2Cmd) {
-        this.attenuator2Cmd = attenuator2Cmd;
+    public void setAttenuator2Cmd(Runnable newAttenuator2Cmd) {
+        attenuator2Cmd = newAttenuator2Cmd;
         attenuator2Cmd.run();
     }
 
     /**
      * setter command on change attenuation input 3.
      *
-     * @param attenuator3Cmd command
+     * @param newAttenuator3Cmd command
      */
-    public void setAttenuator3Cmd(Runnable attenuator3Cmd) {
-        this.attenuator3Cmd = attenuator3Cmd;
+    public void setAttenuator3Cmd(Runnable newAttenuator3Cmd) {
+        attenuator3Cmd = newAttenuator3Cmd;
         attenuator3Cmd.run();
     }
 
     /**
      * setter command on change attenuation input 4.
      *
-     * @param attenuator4Cmd command
+     * @param newAttenuator4Cmd command
      */
-    public void setAttenuator4Cmd(Runnable attenuator4Cmd) {
-        this.attenuator4Cmd = attenuator4Cmd;
+    public void setAttenuator4Cmd(Runnable newAttenuator4Cmd) {
+        attenuator4Cmd = newAttenuator4Cmd;
         attenuator4Cmd.run();
     }
 

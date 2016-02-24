@@ -137,8 +137,8 @@ public class MainWindowController implements Initializable {
         // Cleaning up if the module get out of the workbench
         workbench.setOnDragExited(event -> {
             if (draggedNewViewModule != null) {
-                LOGGER.fine("Hiding module \"" + draggedNewViewModule.getModule().getType() +
-                        "\" because it got out of the workspace.");
+                LOGGER.fine("Hiding module \"" + draggedNewViewModule.getModule().getType()
+                        + "\" because it got out of the workspace.");
                 workbench.hideGhost();
                 workbench.removeModule(draggedNewViewModule);
             }
@@ -148,12 +148,12 @@ public class MainWindowController implements Initializable {
         workbench.setOnDragDropped(event -> {
             if (draggedNewViewModule != null) {
                 if (draggedNewViewModule.isVisible()) {
-                    LOGGER.fine("Adding module \"" + draggedNewViewModule.getModule().getType() +
-                            "\" to the workspace.");
+                    LOGGER.fine("Adding module \"" + draggedNewViewModule.getModule().getType()
+                            + "\" to the workspace.");
                     event.setDropCompleted(true);
                 } else {
-                    LOGGER.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
-                            "\" because we failed to find a place for it in the workspace.");
+                    LOGGER.fine("Deleting module \"" + draggedNewViewModule.getModule().getType()
+                            + "\" because we failed to find a place for it in the workspace.");
                     event.setDropCompleted(false);
                     workbench.removeModule(draggedNewViewModule);
                 }
@@ -166,8 +166,8 @@ public class MainWindowController implements Initializable {
         toolboxController.setOnDragDone(event -> {
             if (draggedNewViewModule != null) {
                 // We never found a good position for the module
-                LOGGER.fine("Deleting module \"" + draggedNewViewModule.getModule().getType() +
-                        "\" because we failed to find a place for it in the workspace.");
+                LOGGER.fine("Deleting module \"" + draggedNewViewModule.getModule().getType()
+                        + "\" because we failed to find a place for it in the workspace.");
                 workbench.removeModule(draggedNewViewModule);
 
                 draggedNewViewModule = null;
@@ -201,8 +201,8 @@ public class MainWindowController implements Initializable {
         return zoomLevel;
     }
 
-    public void setZoomLevel(double zoomLevel) {
-        this.zoomLevel.set(zoomLevel);
+    public void setZoomLevel(double newZoomLevel) {
+        zoomLevel.set(newZoomLevel);
     }
 
     public void setStageAndSetupListeners(Stage stage) {

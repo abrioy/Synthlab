@@ -16,8 +16,19 @@ import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JToggleButton;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.BasicStroke;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -150,10 +161,10 @@ public class ModuleSCOP implements Module {
         private JPanel oscPanel;
         private CustomAudioScope scope;
 
-        public JOscillatorComponent(CustomAudioScope scope) {
-            this.scope = scope;
+        public JOscillatorComponent(CustomAudioScope scopeInit) {
+            scope = scopeInit;
             setLayout(new BorderLayout());
-            add(BorderLayout.CENTER, this.scope.getView());
+            add(BorderLayout.CENTER, scope.getView());
 
             oscPanel = new JPanel();
             oscPanel.setLayout(new GridLayout(2, 5));
@@ -301,8 +312,8 @@ public class ModuleSCOP implements Module {
             return audioScopeModel;
         }
 
-        public void setModel(AudioScopeModel audioScopeModel) {
-            this.audioScopeModel = audioScopeModel;
+        public void setModel(AudioScopeModel newAudioScopeModel) {
+            audioScopeModel = newAudioScopeModel;
             // Create a view for each probe.
             probeViews.clear();
             for (AudioScopeProbe probeModel : audioScopeModel.getProbes()) {
@@ -397,8 +408,8 @@ public class ModuleSCOP implements Module {
             return color;
         }
 
-        public void setColor(Color color) {
-            this.color = color;
+        public void setColor(Color newColor) {
+            color = newColor;
         }
 
         public ExponentialRangeModel getVerticalRangeModel() {
@@ -409,8 +420,8 @@ public class ModuleSCOP implements Module {
             return autoScaleButtonModel;
         }
 
-        public void setModel(WaveTraceModel waveTraceModel) {
-            this.waveTraceModel = waveTraceModel;
+        public void setModel(WaveTraceModel newWaveTraceModel) {
+            waveTraceModel = newWaveTraceModel;
         }
 
         public int convertRealToY(double r) {
@@ -475,12 +486,12 @@ public class ModuleSCOP implements Module {
             }
         }
 
-        public void setScale(int scale) {
-            this.scale = scale;
+        public void setScale(int newScale) {
+            scale = newScale;
         }
 
         public int getScale() {
-            return this.scale;
+            return scale;
         }
 
     }
@@ -489,8 +500,8 @@ public class ModuleSCOP implements Module {
         private AudioScopeProbe probeModel;
         private CustomWaveTraceView waveTrace;
 
-        public CustomAudioScopeProbeView(AudioScopeProbe probeModel) {
-            this.probeModel = probeModel;
+        public CustomAudioScopeProbeView(AudioScopeProbe probeModelInit) {
+            probeModel = probeModelInit;
             waveTrace = new CustomWaveTraceView(probeModel.getAutoScaleButtonModel(),
                     probeModel.getVerticalScaleModel());
             waveTrace.setModel(probeModel.getWaveTraceModel());

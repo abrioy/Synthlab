@@ -45,4 +45,13 @@
               files="ViewModuleFactory.java"/>
     <suppress checks="MagicNumber"
               files="ViewModuleOUT.java"/>
+
+
+    <suppress checks="HideUtilityClassConstructor"
+              files="ModuleFactory.java"/>
+    <suppress checks="HideUtilityClassConstructor"
+              files="ViewModuleFactory.java"/>
+
+    <suppress checks="VisibilityModifier"
+              files="ModuleVCF.java"/>
 </suppressions>

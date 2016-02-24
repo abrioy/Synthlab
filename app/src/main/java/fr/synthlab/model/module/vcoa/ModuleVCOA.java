@@ -1,7 +1,11 @@
 package fr.synthlab.model.module.vcoa;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.*;
+import com.jsyn.unitgen.SquareOscillator;
+import com.jsyn.unitgen.TriangleOscillator;
+import com.jsyn.unitgen.SawtoothOscillator;
+import com.jsyn.unitgen.SineOscillator;
+import com.jsyn.unitgen.PassThrough;
 import fr.synthlab.model.filter.FilterFm;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
@@ -94,7 +98,6 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     *
      * @return the list of port of the VCO
      */
     @Override
@@ -128,7 +131,6 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     *
      * @return the frequency f0 of the VCO
      */
     public double getFrequency() {
@@ -137,11 +139,12 @@ public class ModuleVCOA implements Module {
 
     /**
      * set the frequency of the VCO
-     * @param frequency new frequency
+     *
+     * @param newFrequency new frequency
      */
-    public void setFrequency(double frequency) {
-        this.frequency = frequency;
-        filterFm.setf0(frequency);
+    public void setFrequency(double newFrequency) {
+        frequency = newFrequency;
+        filterFm.setF0(frequency);
 
         if (fmInput.getConnected() == null) {
             squareOscillator.frequency.set(frequency);
@@ -156,7 +159,6 @@ public class ModuleVCOA implements Module {
      * When nothing is connected to the input port of fm, the 3 oscillators has the same frequency f0
      * When something is connected to the input port of fm, we connect the output port of fm filter
      * to input port of each oscillator
-     *
      */
     @Override
     public void update() {
@@ -184,8 +186,8 @@ public class ModuleVCOA implements Module {
         return shape;
     }
 
-    public void setShape(ShapeVCOA shape) {
-        this.shape = shape;
+    public void setShape(ShapeVCOA newShape) {
+        shape = newShape;
 
         switch (shape) {
             case TRIANGLE:
@@ -206,6 +208,4 @@ public class ModuleVCOA implements Module {
                 break;
         }
     }
-
-
 }
