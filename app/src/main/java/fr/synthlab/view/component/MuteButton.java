@@ -15,10 +15,10 @@ public class MuteButton extends Button {
 
     public void setToggle(boolean toggle) {
         if (toggle) {
-            this.getStyleClass().remove("mute-release");
+            this.getStyleClass().clear();
             this.getStyleClass().add("mute-pressed");
         } else {
-            this.getStyleClass().remove("mute-pressed");
+            this.getStyleClass().clear();
             this.getStyleClass().add("mute-release");
         }
     }
