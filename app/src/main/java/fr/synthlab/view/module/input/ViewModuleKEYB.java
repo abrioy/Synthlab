@@ -185,8 +185,12 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
 
         octaveLabel.setText(getOctave() + "");
 
-        this.setFocusTraversable(true);
-        this.setOnKeyPressed(event -> {
+        setFocusTraversable(true);
+        keyborEnventInit();
+    }
+
+    private void keyborEnventInit() {
+        setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case Q:
                     lastKeyPressed = NoteKEYB.C;

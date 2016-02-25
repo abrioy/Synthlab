@@ -50,15 +50,12 @@ public class MainWindowController implements Initializable {
             Platform.runLater(() -> {
                 workbench.setMinSize(newValue.getWidth() * zoomLevel.doubleValue(),
                         newValue.getHeight() * zoomLevel.doubleValue());
-
-
                 // Hack to force a layout refresh
                 Rectangle tempChild = new Rectangle();
                 workbench.getChildren().add(tempChild);
                 workbench.getChildren().remove(tempChild);
             });
         });
-
 
         zoomLevel.addListener((observable, oldValue, newValue) -> {
             final double zoom = Math.min(2, Math.max(0.5, newValue.doubleValue()));
@@ -69,14 +66,12 @@ public class MainWindowController implements Initializable {
             Platform.runLater(() -> {
                 workbench.setMinSize(workbenchScrollPane.getViewportBounds().getWidth() * zoom,
                         workbenchScrollPane.getViewportBounds().getHeight() * zoom);
-
                 // Hack to force a layout refresh
                 Rectangle tempChild = new Rectangle();
                 workbench.getChildren().add(tempChild);
                 workbench.getChildren().remove(tempChild);
             });
         });
-
 
         // Dirty hack to make sure we can drag everywhere on the workbench
         workbench.widthProperty().addListener((observable, oldValue, newValue) -> {
@@ -85,7 +80,6 @@ public class MainWindowController implements Initializable {
         workbench.heightProperty().addListener((observable, oldValue, newValue) -> {
             workbench.requestLayout();
         });
-
 
         // Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
@@ -110,7 +104,6 @@ public class MainWindowController implements Initializable {
                 } else {
                     LOGGER.fine("Showing back module \"" + db.getString() + "\" because it came back into the workspace.");
                 }
-
                 // We add the module to the workbench
                 workbench.addModule(draggedNewViewModule);
 
@@ -162,19 +155,16 @@ public class MainWindowController implements Initializable {
             }
         });
 
-
         toolboxController.setOnDragDone(event -> {
             if (draggedNewViewModule != null) {
                 // We never found a good position for the module
                 LOGGER.fine("Deleting module \"" + draggedNewViewModule.getModule().getType()
                         + "\" because we failed to find a place for it in the workspace.");
                 workbench.removeModule(draggedNewViewModule);
-
                 draggedNewViewModule = null;
                 workbench.hideGhost();
             }
         });
-
 
         workbench.setOnScroll(event -> {
             if (event.isControlDown()) {
@@ -184,13 +174,10 @@ public class MainWindowController implements Initializable {
                 } else {
                     newZoomLevel -= 0.1;
                 }
-
                 zoomLevel.set(newZoomLevel);
                 event.consume();
             }
         });
-
-
     }
 
     public final double getZoomLevel() {
