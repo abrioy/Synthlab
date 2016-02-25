@@ -65,6 +65,8 @@ public class ModuleFactory {
             case SEQ:
                 module = createSEQ();
                 break;
+            default:
+                break;
         }
         if (module != null) {
             LOGGER.finer("Module created: " + module.toString());

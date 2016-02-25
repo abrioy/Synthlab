@@ -206,6 +206,8 @@ public class ModuleVCOA implements Module {
                 passThrough.input.disconnectAll();
                 sineOscillator.output.connect(passThrough.input);
                 break;
+            default:
+                break;
         }
     }
 }

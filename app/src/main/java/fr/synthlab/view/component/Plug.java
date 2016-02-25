@@ -57,8 +57,9 @@ public class Plug extends StackPane {
                     return output;
                 case "modulation":
                     return modulation;
+                default:
+                    return other;
             }
-            return other;
         }
     }
 
