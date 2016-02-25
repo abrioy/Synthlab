@@ -54,4 +54,8 @@
 
     <suppress checks="VisibilityModifier"
               files="ModuleVCF.java"/>
+
+    <suppress files="Port.java" checks="DesignForExtension" lines="55-65" />
+    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="47-68" />
+    <suppress files="ModuleKEYB.java" checks="FinalParameters" lines="141" />
 </suppressions>

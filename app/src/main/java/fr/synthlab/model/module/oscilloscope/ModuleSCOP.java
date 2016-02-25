@@ -75,7 +75,7 @@ public class ModuleSCOP implements Module {
      *
      * @param synth Synthesizer
      */
-    public ModuleSCOP(Synthesizer synth) {
+    public ModuleSCOP(final Synthesizer synth) {
         scope = new CustomAudioScope(synth);
         pt = new PassThrough();
         in = new InputPort("in", this, pt.input);
@@ -94,7 +94,7 @@ public class ModuleSCOP implements Module {
      * @return Scope port
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -102,7 +102,7 @@ public class ModuleSCOP implements Module {
      * Start scope
      */
     @Override
-    public void start() {
+    public final void start() {
         scope.start();
     }
 
@@ -110,7 +110,7 @@ public class ModuleSCOP implements Module {
      * Stop scope
      */
     @Override
-    public void stop() {
+    public final void stop() {
         scope.stop();
     }
 
@@ -119,7 +119,6 @@ public class ModuleSCOP implements Module {
      */
     @Override
     public void update() {
-
     }
 
     /**
@@ -127,18 +126,18 @@ public class ModuleSCOP implements Module {
      *
      * @param scale new scale to display the oscilloscope
      */
-    public void setScale(int scale) {
+    public final void setScale(final int scale) {
         int s = Math.max(scale, 0);
         s = Math.min(s, 100);
         jOscillatorComponent.setScale(s);
     }
 
-    public int getScale() {
+    public final int getScale() {
         return jOscillatorComponent.getScale();
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.SCOP;
     }
 
@@ -147,7 +146,7 @@ public class ModuleSCOP implements Module {
      *
      * @return JComponent that displays the scope
      */
-    public JComponent getOscillatorJComponent() {
+    public final JComponent getOscillatorJComponent() {
         jOscillatorComponent.revalidate();
         jOscillatorComponent.repaint();
         return jOscillatorComponent;
@@ -161,7 +160,7 @@ public class ModuleSCOP implements Module {
         private JPanel oscPanel;
         private CustomAudioScope scope;
 
-        JOscillatorComponent(CustomAudioScope scopeInit) {
+        JOscillatorComponent(final CustomAudioScope scopeInit) {
             scope = scopeInit;
             setLayout(new BorderLayout());
             add(BorderLayout.CENTER, scope.getView());
@@ -178,7 +177,7 @@ public class ModuleSCOP implements Module {
          *
          * @param scale An integer between 0 and 100
          */
-        public void setScale(int scale) {
+        public void setScale(final int scale) {
             scope.getView().setScale(scale);
         }
 
@@ -219,15 +218,15 @@ public class ModuleSCOP implements Module {
         private CustomAudioScopeView audioScopeView = null;
         private AudioScopeModel audioScopeModel;
 
-        CustomAudioScope(Synthesizer synth) {
+        CustomAudioScope(final Synthesizer synth) {
             audioScopeModel = new AudioScopeModel(synth);
         }
 
-        public AudioScopeProbe addProbe(UnitOutputPort output) {
+        public AudioScopeProbe addProbe(final UnitOutputPort output) {
             return addProbe(output, 0);
         }
 
-        public AudioScopeProbe addProbe(UnitOutputPort output, int partIndex) {
+        public AudioScopeProbe addProbe(final UnitOutputPort output, final int partIndex) {
             return audioScopeModel.addProbe(output, partIndex);
         }
 
@@ -251,11 +250,11 @@ public class ModuleSCOP implements Module {
             return audioScopeView;
         }
 
-        public void setTriggerMode(AudioScope.TriggerMode triggerMode) {
+        public void setTriggerMode(final AudioScope.TriggerMode triggerMode) {
             audioScopeModel.setTriggerMode(triggerMode);
         }
 
-        public void setTriggerSource(AudioScopeProbe probe) {
+        public void setTriggerSource(final AudioScopeProbe probe) {
             audioScopeModel.setTriggerSource(probe);
         }
 
@@ -263,11 +262,11 @@ public class ModuleSCOP implements Module {
             return getModel().getTriggerModel().getLevelModel().getDoubleValue();
         }
 
-        public void setTriggerLevel(double level) {
+        public void setTriggerLevel(final double level) {
             getModel().getTriggerModel().getLevelModel().setDoubleValue(level);
         }
 
-        public void setViewMode(AudioScope.ViewMode waveform) {
+        public void setViewMode(final AudioScope.ViewMode waveform) {
         }
 
     }
@@ -311,7 +310,7 @@ public class ModuleSCOP implements Module {
             return audioScopeModel;
         }
 
-        public void setModel(AudioScopeModel newAudioScopeModel) {
+        public void setModel(final AudioScopeModel newAudioScopeModel) {
             audioScopeModel = newAudioScopeModel;
             // Create a view for each probe.
             probeViews.clear();
@@ -333,7 +332,7 @@ public class ModuleSCOP implements Module {
             return probeViews.toArray(new AudioScopeProbeView[probeViews.size()]);
         }
 
-        public void setScale(int scale) {
+        public void setScale(final int scale) {
             multipleWaveDisplay.setScale(scale);
         }
 
@@ -355,14 +354,14 @@ public class ModuleSCOP implements Module {
             setBackground(Color.BLACK);
         }
 
-        public void addWaveTrace(CustomWaveTraceView waveTraceView) {
+        public void addWaveTrace(final CustomWaveTraceView waveTraceView) {
             if (waveTraceView.getColor() == null) {
                 waveTraceView.setColor(defaultColors[waveTraceViews.size() % defaultColors.length]);
             }
             waveTraceViews.add(waveTraceView);
         }
 
-        public void setScale(int scale) {
+        public void setScale(final int scale) {
             for (CustomWaveTraceView wave : waveTraceViews) {
                 wave.setScale(scale);
             }
@@ -373,7 +372,7 @@ public class ModuleSCOP implements Module {
         }
 
         @Override
-        public void paintComponent(Graphics g) {
+        public void paintComponent(final Graphics g) {
             super.paintComponent(g);
             int width = getWidth();
             int height = getHeight();
@@ -397,7 +396,7 @@ public class ModuleSCOP implements Module {
         // Horizontal scale parameter
         private int scale;
 
-        CustomWaveTraceView(JToggleButton.ToggleButtonModel autoButtonModel, ExponentialRangeModel verticalRangeModel) {
+        CustomWaveTraceView(final JToggleButton.ToggleButtonModel autoButtonModel, final ExponentialRangeModel verticalRangeModel) {
             this.verticalScaleModel = verticalRangeModel;
             this.autoScaleButtonModel = autoButtonModel;
             this.scale = 4;
@@ -407,7 +406,7 @@ public class ModuleSCOP implements Module {
             return color;
         }
 
-        public void setColor(Color newColor) {
+        public void setColor(final Color newColor) {
             color = newColor;
         }
 
@@ -419,15 +418,15 @@ public class ModuleSCOP implements Module {
             return autoScaleButtonModel;
         }
 
-        public void setModel(WaveTraceModel newWaveTraceModel) {
+        public void setModel(final WaveTraceModel newWaveTraceModel) {
             waveTraceModel = newWaveTraceModel;
         }
 
-        public int convertRealToY(double r) {
+        public int convertRealToY(final double r) {
             return centerY - (int) (yScalar * r);
         }
 
-        public void drawWave(Graphics g, int width, int height) {
+        public void drawWave(final Graphics g, final int width, final int height) {
             double sampleMax = 0.0;
             double sampleMin = 0.0;
             g.setColor(color);
@@ -468,7 +467,7 @@ public class ModuleSCOP implements Module {
         }
 
         // Autoscale the vertical range.
-        private void autoScaleRange(double sampleMax) {
+        private void autoScaleRange(final double sampleMax) {
             if (autoScaleButtonModel.isSelected()) {
                 double scaledMax = sampleMax * 1.1;
                 double current = verticalScaleModel.getDoubleValue();
@@ -485,7 +484,7 @@ public class ModuleSCOP implements Module {
             }
         }
 
-        public void setScale(int newScale) {
+        public void setScale(final int newScale) {
             scale = newScale;
         }
 
@@ -499,7 +498,7 @@ public class ModuleSCOP implements Module {
         private AudioScopeProbe probeModel;
         private CustomWaveTraceView waveTrace;
 
-        CustomAudioScopeProbeView(AudioScopeProbe probeModelInit) {
+        CustomAudioScopeProbeView(final AudioScopeProbe probeModelInit) {
             probeModel = probeModelInit;
             waveTrace = new CustomWaveTraceView(probeModel.getAutoScaleButtonModel(),
                     probeModel.getVerticalScaleModel());

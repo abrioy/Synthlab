@@ -25,7 +25,7 @@ public enum NoteKEYB {
         return this.value;
     }
 
-    public static NoteKEYB fromValue(int val) {
+    public static NoteKEYB fromValue(final int val) {
         for (NoteKEYB k : NoteKEYB.values()) {
             if (k.getValue() == val) {
                 return k;

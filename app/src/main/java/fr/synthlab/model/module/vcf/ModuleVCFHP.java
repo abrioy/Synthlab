@@ -13,7 +13,7 @@ public class ModuleVCFHP extends ModuleVCF {
      */
     private FilterHighPass hpFilter = new FilterHighPass();
 
-    public ModuleVCFHP(Synthesizer synthesizer) {
+    public ModuleVCFHP(final Synthesizer synthesizer) {
         super(synthesizer);
         synthesizer.add(hpFilter);
         input = new InputPort("in", this, hpFilter.input);
@@ -28,7 +28,7 @@ public class ModuleVCFHP extends ModuleVCF {
      * start the module
      */
     @Override
-    public void start() {
+    public final void start() {
         super.start();
         hpFilter.start();
     }
@@ -37,7 +37,7 @@ public class ModuleVCFHP extends ModuleVCF {
      * stop the module
      */
     @Override
-    public void stop() {
+    public final void stop() {
         super.stop();
         hpFilter.stop();
     }
@@ -47,7 +47,7 @@ public class ModuleVCFHP extends ModuleVCF {
      * @param f0 the cut frequency
      */
     @Override
-    public void setF0(double f0) {
+    public final void setF0(final double f0) {
         super.setF0(f0);
         if (fmInput.getConnected() == null) {
             hpFilter.frequency.set(f0);
@@ -60,7 +60,7 @@ public class ModuleVCFHP extends ModuleVCF {
      * when the fm input port is disconnected, we set the frequency f0 to the HighPass filter
      */
     @Override
-    public void update() {
+    public final void update() {
         if (fmInput.getConnected() == null) {
             filterFm.output.disconnectAll();
             hpFilter.frequency.set(f0);
@@ -74,8 +74,7 @@ public class ModuleVCFHP extends ModuleVCF {
      * @return the type of the module
      */
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.VCFHP;
     }
-
 }

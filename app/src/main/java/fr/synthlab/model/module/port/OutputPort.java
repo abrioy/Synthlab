@@ -17,7 +17,7 @@ public class OutputPort extends Port {
      * @param m      The module containing this port
      * @param outputInit The JSyn port to assign
      */
-    public OutputPort(String name, Module m, ConnectableOutput outputInit) {
+    public OutputPort(final String name, final Module m, final ConnectableOutput outputInit) {
         super(name, m);
         output = outputInit;
     }
@@ -25,7 +25,7 @@ public class OutputPort extends Port {
     /**
      * @return The JSyn output port
      */
-    public ConnectableOutput getOutput() {
+    public final ConnectableOutput getOutput() {
         return output;
     }
 
@@ -35,7 +35,7 @@ public class OutputPort extends Port {
      * @param port Port to connect
      */
     @Override
-    public void connect(Port port) {
+    public final void connect(final Port port) {
         if (getConnected() != null) {
             throw new RuntimeException("Unable to connect \"" + port.getName()
                     + "\" to this port (" + this.getName() + ") because it is already connected to \""
@@ -50,7 +50,7 @@ public class OutputPort extends Port {
     /**
      * Disconnect the current connected port
      */
-    public void disconnect() {
+    public final void disconnect() {
         if (getConnected() instanceof InputPort) {
             output.disconnect(((InputPort) getConnected()).getInput());
         }

@@ -85,7 +85,7 @@ public class ModuleOUT implements Module {
      *
      * @param synthesizer where we get sound
      */
-    public ModuleOUT(Synthesizer synthesizer) {
+    public ModuleOUT(final Synthesizer synthesizer) {
         lineOutLeft = new LineOut();
         lineOutRight = new LineOut();
         lineOut = new LineOut();
@@ -120,7 +120,7 @@ public class ModuleOUT implements Module {
      *
      * @return true if we play sound
      */
-    public boolean isMute() {
+    public final boolean isMute() {
         return mute;
     }
 
@@ -129,7 +129,7 @@ public class ModuleOUT implements Module {
      *
      * @param newMute true if play sound
      */
-    public void setMute(boolean newMute) {
+    public final void setMute(final boolean newMute) {
         mute = newMute;
         if (isMute()) {
             stop();
@@ -138,7 +138,7 @@ public class ModuleOUT implements Module {
         }
     }
 
-    public void setRecording(boolean newRecording, File pickedFile) {
+    public final void setRecording(final boolean newRecording, final File pickedFile) {
         recording = newRecording;
 
         try {
@@ -171,7 +171,7 @@ public class ModuleOUT implements Module {
      * start play audio.
      */
     @Override
-    public void start() {
+    public final void start() {
         if (!isMute()) {
             lineOut.start();
             lineOutLeft.start();
@@ -186,7 +186,7 @@ public class ModuleOUT implements Module {
      * stop play audio.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         lineOut.stop();
         lineOutLeft.stop();
         lineOutRight.stop();
@@ -201,7 +201,7 @@ public class ModuleOUT implements Module {
      * @return only input port : mono, stereo right and stereo left
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -214,7 +214,7 @@ public class ModuleOUT implements Module {
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.OUT;
     }
 
@@ -223,7 +223,7 @@ public class ModuleOUT implements Module {
      *
      * @return attenuation
      */
-    public double getAttenuation() {
+    public final double getAttenuation() {
         return attenuatorLeft.getAttenuation();
     }
 
@@ -232,13 +232,13 @@ public class ModuleOUT implements Module {
      *
      * @param attenuation new attenuation
      */
-    public void setAttenuation(double attenuation) {
+    public final void setAttenuation(final double attenuation) {
         attenuatorLeft.setAttenuation(attenuation);
         attenuatorRight.setAttenuation(attenuation);
         attenuator.setAttenuation(attenuation);
     }
 
-    public boolean isRecording() {
+    public final boolean isRecording() {
         return recording;
     }
 }

@@ -55,7 +55,7 @@ public class ModuleMIX implements Module {
      *
      * @param syn synthesizer
      */
-    public ModuleMIX(Synthesizer syn) {
+    public ModuleMIX(final Synthesizer syn) {
         attenuator1 = new FilterAttenuator();
         attenuator2 = new FilterAttenuator();
         attenuator3 = new FilterAttenuator();
@@ -80,7 +80,6 @@ public class ModuleMIX implements Module {
         attenuator2.getOutput().connect(mix.getInput2());
         attenuator3.getOutput().connect(mix.getInput3());
         attenuator4.getOutput().connect(mix.getInput4());
-
     }
 
     /**
@@ -89,7 +88,7 @@ public class ModuleMIX implements Module {
      * @return ports can connect to other module
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -97,7 +96,7 @@ public class ModuleMIX implements Module {
      * start module.
      */
     @Override
-    public void start() {
+    public final void start() {
         attenuator1.start();
         attenuator2.start();
         attenuator3.start();
@@ -109,7 +108,7 @@ public class ModuleMIX implements Module {
      * stop module.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         attenuator1.stop();
         attenuator2.stop();
         attenuator3.stop();
@@ -130,7 +129,7 @@ public class ModuleMIX implements Module {
      * @return ModuleType.MIX
      */
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.MIX;
     }
 
@@ -139,7 +138,7 @@ public class ModuleMIX implements Module {
      *
      * @param attenuation to set
      */
-    public void setAttenuation1(double attenuation) {
+    public final void setAttenuation1(final double attenuation) {
         attenuator1.setAttenuation(attenuation);
     }
 
@@ -148,7 +147,7 @@ public class ModuleMIX implements Module {
      *
      * @param attenuation to set
      */
-    public void setAttenuation2(double attenuation) {
+    public final void setAttenuation2(final double attenuation) {
         attenuator2.setAttenuation(attenuation);
     }
 
@@ -157,7 +156,7 @@ public class ModuleMIX implements Module {
      *
      * @param attenuation to set
      */
-    public void setAttenuation3(double attenuation) {
+    public final void setAttenuation3(final double attenuation) {
         attenuator3.setAttenuation(attenuation);
     }
 
@@ -166,23 +165,23 @@ public class ModuleMIX implements Module {
      *
      * @param attenuation to set
      */
-    public void setAttenuation4(double attenuation) {
+    public final void setAttenuation4(final double attenuation) {
         attenuator4.setAttenuation(attenuation);
     }
 
-    public double getAttenuation1() {
+    public final double getAttenuation1() {
         return attenuator1.getAttenuation();
     }
 
-    public double getAttenuation2() {
+    public final double getAttenuation2() {
         return attenuator2.getAttenuation();
     }
 
-    public double getAttenuation3() {
+    public final double getAttenuation3() {
         return attenuator3.getAttenuation();
     }
 
-    public double getAttenuation4() {
+    public final double getAttenuation4() {
         return attenuator4.getAttenuation();
     }
 }

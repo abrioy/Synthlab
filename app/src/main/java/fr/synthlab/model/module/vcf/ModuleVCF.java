@@ -30,7 +30,7 @@ public abstract class ModuleVCF implements Module {
      */
     protected FilterFm filterFm;
 
-    public ModuleVCF(Synthesizer synthesizer) {
+    public ModuleVCF(final Synthesizer synthesizer) {
         filterFm = new FilterFm(f0);
 
         synthesizer.add(filterFm);
@@ -40,7 +40,7 @@ public abstract class ModuleVCF implements Module {
     }
 
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -56,17 +56,16 @@ public abstract class ModuleVCF implements Module {
 
     @Override
     public void update() {
-
     }
 
     @Override
     public abstract ModuleType getType();
 
-    public double getF0() {
+    public final double getF0() {
         return f0;
     }
 
-    public void setF0(double newF0) {
+    public void setF0(final double newF0) {
         f0 = newF0;
         filterFm.setF0(f0);
     }

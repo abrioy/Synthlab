@@ -72,7 +72,7 @@ public class ModuleKEYB implements Module {
      *
      * @param synth Synthesizer
      */
-    public ModuleKEYB(Synthesizer synth) {
+    public ModuleKEYB(final Synthesizer synth) {
         octave = referenceOctave;
 
         //Initialize
@@ -98,7 +98,7 @@ public class ModuleKEYB implements Module {
      * @return Keyboard port
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -106,7 +106,7 @@ public class ModuleKEYB implements Module {
      * Start keyboard.
      */
     @Override
-    public void start() {
+    public final void start() {
         filterOutKEYB.start();
     }
 
@@ -114,7 +114,7 @@ public class ModuleKEYB implements Module {
      * Stop keyboard.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         filterOutKEYB.stop();
     }
 
@@ -123,14 +123,13 @@ public class ModuleKEYB implements Module {
      */
     @Override
     public void update() {
-
     }
 
     /**
      * @return Type of this module
      */
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.KEYB;
     }
 
@@ -139,10 +138,10 @@ public class ModuleKEYB implements Module {
      *
      * @param newOctave New octave value
      */
-    public void changeOctave(int newOctave) {
+    public final void changeOctave(int newOctave) {
         newOctave = Math.max(newOctave, octaveMin);
         newOctave = Math.min(newOctave, octaveMax);
-        this.octave = newOctave;
+        octave = newOctave;
         if (lastNotePressed != null) {
             computeFrequency(lastNotePressed);
         }
@@ -153,7 +152,7 @@ public class ModuleKEYB implements Module {
      *
      * @param n New note pressed
      */
-    public void pressKey(NoteKEYB n) {
+    public final void pressKey(final NoteKEYB n) {
         keyboardFilter.releaseKey();
         keyboardFilter.pressKey();
         lastNotePressed = n;
@@ -165,7 +164,7 @@ public class ModuleKEYB implements Module {
      *
      * @param n New note
      */
-    private void computeFrequency(NoteKEYB n) {
+    private void computeFrequency(final NoteKEYB n) {
         filterOutKEYB.setTension(n.getValue() / 12.0 + (octave - referenceOctave));
     }
 
@@ -174,13 +173,13 @@ public class ModuleKEYB implements Module {
      *
      * @param noteKEYB note release
      */
-    public void releaseKey(NoteKEYB noteKEYB) {
+    public final void releaseKey(final NoteKEYB noteKEYB) {
         if (noteKEYB == lastNotePressed) {
             keyboardFilter.releaseKey();
         }
     }
 
-    public int getOctave() {
+    public final int getOctave() {
         return octave;
     }
 }

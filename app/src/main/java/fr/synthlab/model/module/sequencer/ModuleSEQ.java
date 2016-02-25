@@ -32,8 +32,7 @@ public class ModuleSEQ extends Observable implements Module {
      *
      * @param synth Synthesizer
      */
-    public ModuleSEQ(Synthesizer synth) {
-
+    public ModuleSEQ(final Synthesizer synth) {
         observers = new ArrayList<>();
 
         stepValues = new ArrayList<>();
@@ -54,7 +53,6 @@ public class ModuleSEQ extends Observable implements Module {
         OutputPort out = new OutputPort("out", this, seqFilter.output);
         ports.add(gate);
         ports.add(out);
-
     }
 
     /**
@@ -63,7 +61,7 @@ public class ModuleSEQ extends Observable implements Module {
      * @return Scope port
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -71,7 +69,7 @@ public class ModuleSEQ extends Observable implements Module {
      * Inherit method.
      */
     @Override
-    public void start() {
+    public final void start() {
         seqFilter.start();
     }
 
@@ -79,7 +77,7 @@ public class ModuleSEQ extends Observable implements Module {
      * Inherit method.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         seqFilter.stop();
     }
 
@@ -88,38 +86,37 @@ public class ModuleSEQ extends Observable implements Module {
      */
     @Override
     public void update() {
-
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.SEQ;
     }
 
 
-    public void setStepValue(int step, double value) {
+    public final void setStepValue(final int step, final double value) {
         stepValues.set(step, value);
     }
 
-    public void addObserver(Observer obs) {
+    public final void addObserver(final Observer obs) {
         observers.add(obs);
     }
 
-    public void removeObserver(Observer obs) {
+    public final void removeObserver(final Observer obs) {
         observers.remove(obs);
     }
 
-    public void updateObs() {
+    public final void updateObs() {
         for (Observer o : observers) {
             o.update(this, getCurrent());
         }
     }
 
-    public int getCurrent() {
+    public final int getCurrent() {
         return seqFilter.getCurrent();
     }
 
-    public void reset() {
+    public final void reset() {
         seqFilter.reset();
     }
 }

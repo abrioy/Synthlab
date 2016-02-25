@@ -49,7 +49,7 @@ public class ModuleVCA implements Module {
      * Constructor
      * @param synthesizer Synthesizer
      */
-    public ModuleVCA(Synthesizer synthesizer) {
+    public ModuleVCA(final Synthesizer synthesizer) {
         filterVCAam = new FilterVCAam(filterAttenuator.output);
 
         synthesizer.add(filterAttenuator);
@@ -68,7 +68,7 @@ public class ModuleVCA implements Module {
      *
      * @return the attenuation in DB
      */
-    public double getAttenuation() {
+    public final double getAttenuation() {
         return attenuation;
     }
 
@@ -76,7 +76,7 @@ public class ModuleVCA implements Module {
      * set the attenuation in DB
      * @param newAttenuation attenuation new attenuation
      */
-    public void setAttenuation(double newAttenuation) {
+    public final void setAttenuation(final double newAttenuation) {
         attenuation = newAttenuation;
         filterAttenuator.setAttenuation(attenuation);
     }
@@ -86,7 +86,7 @@ public class ModuleVCA implements Module {
      * @return VCA ports
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -94,7 +94,7 @@ public class ModuleVCA implements Module {
      * start the VCA
      */
     @Override
-    public void start() {
+    public final void start() {
         filterAttenuator.start();
         filterVCAam.start();
     }
@@ -103,7 +103,7 @@ public class ModuleVCA implements Module {
      * Stop the VCA
      */
     @Override
-    public void stop() {
+    public final void stop() {
         filterAttenuator.stop();
         filterVCAam.stop();
     }
@@ -113,7 +113,6 @@ public class ModuleVCA implements Module {
      */
     @Override
     public void update() {
-
     }
 
     /**
@@ -121,8 +120,7 @@ public class ModuleVCA implements Module {
      * @return the type of the module
      */
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.VCA;
     }
-
 }

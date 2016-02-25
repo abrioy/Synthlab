@@ -26,7 +26,7 @@ public class FilterAttenuator extends UnitFilter {
      * @param limit param manage by Jsyn
      */
     @Override
-    public void generate(int start, int limit) {
+    public final void generate(final int start, final int limit) {
         double[] inputs = input.getValues();
         double[] outputs = output.getValues();
         for (int i = start; i < limit; i++) {
@@ -40,7 +40,7 @@ public class FilterAttenuator extends UnitFilter {
      * getter on attenuation
      * @return attenuation
      */
-    public double getAttenuation() {
+    public final double getAttenuation() {
         return this.attenuation;
     }
 
@@ -48,7 +48,7 @@ public class FilterAttenuator extends UnitFilter {
      * setter attenuation in dB
      * @param decibels attenuation param
      */
-    public void setAttenuation(double decibels) {
+    public final void setAttenuation(final double decibels) {
         this.attenuation = AudioMath.decibelsToAmplitude(decibels);
     }
 }

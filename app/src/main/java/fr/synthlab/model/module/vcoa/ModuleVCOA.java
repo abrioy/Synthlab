@@ -77,7 +77,7 @@ public class ModuleVCOA implements Module {
      *
      * @param synthesizer Synthesizer
      */
-    public ModuleVCOA(Synthesizer synthesizer) {
+    public ModuleVCOA(final Synthesizer synthesizer) {
         synthesizer.add(squareOscillator);
         synthesizer.add(triangleOscillator);
         synthesizer.add(sawtoothOscillator);
@@ -101,7 +101,7 @@ public class ModuleVCOA implements Module {
      * @return the list of port of the VCO
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -109,7 +109,7 @@ public class ModuleVCOA implements Module {
      * Start the VCO
      */
     @Override
-    public void start() {
+    public final void start() {
         filterFm.start();
         squareOscillator.start();
         sawtoothOscillator.start();
@@ -121,7 +121,7 @@ public class ModuleVCOA implements Module {
      * Stop the VCO
      */
     @Override
-    public void stop() {
+    public final void stop() {
         filterFm.stop();
         squareOscillator.stop();
         sawtoothOscillator.stop();
@@ -133,7 +133,7 @@ public class ModuleVCOA implements Module {
     /**
      * @return the frequency f0 of the VCO
      */
-    public double getFrequency() {
+    public final double getFrequency() {
         return frequency;
     }
 
@@ -142,7 +142,7 @@ public class ModuleVCOA implements Module {
      *
      * @param newFrequency new frequency
      */
-    public void setFrequency(double newFrequency) {
+    public final void setFrequency(final double newFrequency) {
         frequency = newFrequency;
         filterFm.setF0(frequency);
 
@@ -161,7 +161,7 @@ public class ModuleVCOA implements Module {
      * to input port of each oscillator
      */
     @Override
-    public void update() {
+    public final void update() {
         if (fmInput.getConnected() == null) {
             filterFm.output.disconnectAll();
             squareOscillator.frequency.set(frequency);
@@ -177,16 +177,16 @@ public class ModuleVCOA implements Module {
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.VCOA;
     }
 
 
-    public ShapeVCOA getShape() {
+    public final ShapeVCOA getShape() {
         return shape;
     }
 
-    public void setShape(ShapeVCOA newShape) {
+    public final void setShape(final ShapeVCOA newShape) {
         shape = newShape;
 
         switch (shape) {

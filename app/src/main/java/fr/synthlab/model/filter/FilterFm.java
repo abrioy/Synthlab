@@ -12,7 +12,7 @@ public class FilterFm extends UnitFilter {
     }
 
     @Override
-    public void generate(int start, int limit) {
+    public final void generate(final int start, final int limit) {
         double[] inputs = input.getValues();
         double[] outputs = output.getValues();
 
@@ -21,7 +21,7 @@ public class FilterFm extends UnitFilter {
         }
     }
 
-    public void setF0(double v) {
+    public final void setF0(final double v) {
         f0 = v;
     }
 }

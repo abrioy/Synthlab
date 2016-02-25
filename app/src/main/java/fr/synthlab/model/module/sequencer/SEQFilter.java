@@ -22,7 +22,7 @@ public class SEQFilter extends UnitFilter {
      * @param stepValues list of value
      * @param seqInit        sequence
      */
-    public SEQFilter(List<Double> stepValues, ModuleSEQ seqInit) {
+    public SEQFilter(final List<Double> stepValues, final ModuleSEQ seqInit) {
         tension = stepValues;
         seq = seqInit;
         current = 0;
@@ -38,7 +38,7 @@ public class SEQFilter extends UnitFilter {
      * @param limit param managed by Jsyn
      */
     @Override
-    public void generate(int start, int limit) {
+    public final void generate(final int start, final int limit) {
         double[] gates = output.getValues();
         double[] inputs = input.getValues();
         for (int i = start; i < limit; i += 1) {
@@ -56,11 +56,11 @@ public class SEQFilter extends UnitFilter {
         }
     }
 
-    public int getCurrent() {
+    public final int getCurrent() {
         return current;
     }
 
-    public void reset() {
+    public final void reset() {
         current = 0;
     }
 }

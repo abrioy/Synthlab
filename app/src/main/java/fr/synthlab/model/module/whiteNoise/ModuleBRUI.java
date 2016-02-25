@@ -25,7 +25,7 @@ public class ModuleBRUI implements Module {
     private final ArrayList<Port> ports;
     private final WhiteNoise noise;
 
-    public ModuleBRUI(Synthesizer synthesizer) {
+    public ModuleBRUI(final Synthesizer synthesizer) {
         ports = new ArrayList<>();
         noise = new WhiteNoise();
         ports.add(new OutputPort("out", this, noise.output));
@@ -33,17 +33,17 @@ public class ModuleBRUI implements Module {
     }
 
     @Override
-    public void start() {
+    public final void start() {
         noise.start();
     }
 
     @Override
-    public void stop() {
+    public final void stop() {
         noise.stop();
     }
 
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -56,7 +56,7 @@ public class ModuleBRUI implements Module {
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.BRUI;
     }
 }

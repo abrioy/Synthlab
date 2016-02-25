@@ -23,7 +23,7 @@ public class ModuleEG implements Module {
 
     private EnvelopeDAHDSR envelope;
 
-    public ModuleEG(Synthesizer synth) {
+    public ModuleEG(final Synthesizer synth) {
         envelope = new EnvelopeDAHDSR();
         synth.add(envelope);
 
@@ -43,59 +43,58 @@ public class ModuleEG implements Module {
     }
 
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
     @Override
-    public void start() {
+    public final void start() {
         envelope.start();
     }
 
     @Override
-    public void stop() {
+    public final void stop() {
         envelope.stop();
     }
 
     @Override
     public void update() {
-
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.EG;
     }
 
-    public void setAttack(double attack) {
+    public final void setAttack(final double attack) {
         envelope.attack.set(attack);
     }
 
-    public void setDecay(double decay) {
+    public final void setDecay(final double decay) {
         envelope.decay.set(decay);
     }
 
-    public void setSustain(double sustain) {
+    public final void setSustain(final double sustain) {
         envelope.sustain.set(sustain);
     }
 
-    public void setRelease(double release) {
+    public final void setRelease(final double release) {
         envelope.release.set(release);
     }
 
-    public double getAttack() {
+    public final double getAttack() {
         return envelope.attack.get();
     }
 
-    public double getDecay() {
+    public final double getDecay() {
         return envelope.decay.get();
     }
 
-    public double getSustain() {
+    public final double getSustain() {
         return envelope.sustain.get();
     }
 
-    public double getRelease() {
+    public final double getRelease() {
         return envelope.release.get();
     }
 }

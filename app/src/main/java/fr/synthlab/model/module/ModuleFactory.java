@@ -26,7 +26,7 @@ public class ModuleFactory {
      */
     private static Synthesizer syn = JSyn.createSynthesizer();
 
-    public static Module createModule(ModuleType type) {
+    public static Module createModule(final ModuleType type) {
         Module module = null;
         switch (type) {
             case VCOA:

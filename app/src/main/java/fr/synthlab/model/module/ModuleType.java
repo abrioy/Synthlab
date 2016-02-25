@@ -19,12 +19,12 @@ public enum ModuleType {
     private String moduleName;
     private String moduleLongName;
 
-    ModuleType(String name, String longName) {
-        this.moduleName = name;
-        this.moduleLongName = longName;
+    ModuleType(final String name, final String longName) {
+        moduleName = name;
+        moduleLongName = longName;
     }
 
-    public static String getNameFromLong(String longName) {
+    public static String getNameFromLong(final String longName) {
         for (ModuleType m : values()) {
             if (m.getLongName().equals(longName)) {
                 return m.moduleName;

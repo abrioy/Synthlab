@@ -11,27 +11,27 @@ public class Port {
     private static final Logger LOGGER = Logger.getLogger(Port.class.getName());
 
     /**
-     * the name of the port
+     * the name of the port.
      */
     private String name;
 
     /**
-     * the port connected to this one
+     * the port connected to this one.
      */
     private Port port = null;
 
     /**
-     * the module which contains this port
+     * the module which contains this port.
      */
     private Module module;
 
     /**
-     * constructor
+     * constructor.
      *
      * @param nameInit name of the port
      * @param moduleInit    the module which contains this port
      */
-    public Port(String nameInit, Module moduleInit) {
+    public Port(final String nameInit, final Module moduleInit) {
         name = nameInit;
         module = moduleInit;
     }
@@ -39,11 +39,11 @@ public class Port {
     /**
      * @return the name of the port
      */
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public boolean isConnected() {
+    public final boolean isConnected() {
         return port != null;
     }
 
@@ -52,7 +52,7 @@ public class Port {
      *
      * @param portConnected Port to connect
      */
-    public void connect(Port portConnected) {
+    public void connect(final Port portConnected) {
         port = portConnected;
         module.update();
         port.setPort(this);
@@ -76,23 +76,23 @@ public class Port {
     /**
      * @return the port which is connected to this one
      */
-    public Port getConnected() {
+    public final Port getConnected() {
         return port;
     }
 
     /**
      * @return the module which contains this port
      */
-    public Module getModule() {
+    public final Module getModule() {
         return module;
     }
 
     /**
-     * set the connected port
+     * set the connected port.
      *
      * @param newPort the connected port
      */
-    public void setPort(Port newPort) {
+    public final void setPort(final Port newPort) {
         port = newPort;
     }
 }

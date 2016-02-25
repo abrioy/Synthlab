@@ -35,7 +35,6 @@ public class FilterMIX extends UnitGenerator {
      * constructor.
      */
     public FilterMIX() {
-
         input1 = new UnitInputPort("intern1");
         input2 = new UnitInputPort("intern2");
         input3 = new UnitInputPort("intern3");
@@ -53,7 +52,7 @@ public class FilterMIX extends UnitGenerator {
      *
      * @return input 1
      */
-    public UnitInputPort getInput1() {
+    public final UnitInputPort getInput1() {
         return input1;
     }
 
@@ -62,7 +61,7 @@ public class FilterMIX extends UnitGenerator {
      *
      * @return input 2
      */
-    public UnitInputPort getInput2() {
+    public final UnitInputPort getInput2() {
         return input2;
     }
 
@@ -71,7 +70,7 @@ public class FilterMIX extends UnitGenerator {
      *
      * @return input 3
      */
-    public UnitInputPort getInput3() {
+    public final UnitInputPort getInput3() {
         return input3;
     }
 
@@ -80,7 +79,7 @@ public class FilterMIX extends UnitGenerator {
      *
      * @return input 4
      */
-    public UnitInputPort getInput4() {
+    public final UnitInputPort getInput4() {
         return input4;
     }
 
@@ -91,7 +90,7 @@ public class FilterMIX extends UnitGenerator {
      * @param limit fin
      */
     @Override
-    public void generate(int start, int limit) {
+    public final void generate(final int start, final int limit) {
         double[] inputs1 = input1.getValues();
         double[] inputs2 = input2.getValues();
         double[] inputs3 = input3.getValues();
@@ -121,7 +120,7 @@ public class FilterMIX extends UnitGenerator {
      *
      * @return output
      */
-    public UnitOutputPort getOutput() {
+    public final UnitOutputPort getOutput() {
         return output;
     }
 }
