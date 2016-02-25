@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Test on the JavaFX component ResetButton.
+ */
 public class ResetButtonTest {
 
     /**
@@ -28,6 +31,9 @@ public class ResetButtonTest {
         resetButton = new ResetButton();
     }
 
+    /**
+     * Check initialization.
+     */
     @Test
     public void testInitialization() {
         assertTrue(resetButton.getStyleClass().contains("reset-button"));
