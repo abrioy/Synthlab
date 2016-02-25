@@ -23,7 +23,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class MenuBarController implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(MenuBarController.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(MenuBarController.class.getName());
 
     @FXML
     private MenuBar menuBar;
@@ -39,7 +40,8 @@ public class MenuBarController implements Initializable {
     public void initialize(final URL location, final ResourceBundle resources) {
     }
 
-    public final void setMainWindowController(final MainWindowController newMainWindowController) {
+    public final void setMainWindowController(
+            final MainWindowController newMainWindowController) {
         mainWindowController = newMainWindowController;
     }
 
@@ -71,11 +73,13 @@ public class MenuBarController implements Initializable {
     }
 
     public final void onClickViewZoomInc() {
-        mainWindowController.setZoomLevel(mainWindowController.getZoomLevel() + 0.2d);
+        mainWindowController.setZoomLevel(
+                mainWindowController.getZoomLevel() + 0.2d);
     }
 
     public final void onClickViewZoomDec() {
-        mainWindowController.setZoomLevel(mainWindowController.getZoomLevel() - 0.2d);
+        mainWindowController.setZoomLevel(
+                mainWindowController.getZoomLevel() - 0.2d);
     }
 
 
@@ -138,7 +142,8 @@ public class MenuBarController implements Initializable {
         chooser.setTitle(windowName);
 
         // Setting the correct extension
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(
+        FileChooser.ExtensionFilter extensionFilter
+                = new FileChooser.ExtensionFilter(
                 "Synthlab project (.syn)", "syn"
         );
         chooser.setSelectedExtensionFilter(extensionFilter);

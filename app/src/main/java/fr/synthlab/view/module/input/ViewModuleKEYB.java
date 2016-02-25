@@ -20,7 +20,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleKEYB extends ViewModule implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleKEYB.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleKEYB.class.getName());
 
     @FXML
     private KeyboardKey cKey;
@@ -67,7 +68,8 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void initialize(final URL location, final ResourceBundle resources) {
+    public final void initialize(
+            final URL location, final ResourceBundle resources) {
         /*
             Mouse pressed events
          */
@@ -351,12 +353,14 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void writeObject(final ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         o.writeDouble(this.octavePicker.getValue());
     }
 
     @Override
-    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
         this.octavePicker.setValue(o.readDouble());
     }
 }

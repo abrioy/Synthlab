@@ -22,7 +22,8 @@ import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 public class ToolboxController implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ToolboxController.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ToolboxController.class.getName());
     @FXML
     private TreeView<String> treeView;
 
@@ -41,8 +42,10 @@ public class ToolboxController implements Initializable {
     }
 
     @Override
-    public final void initialize(final URL location, final ResourceBundle resources) {
-        treeItemRoot.expandedProperty().addListener(listener -> makeListDraggable(treeView));
+    public final void initialize(
+            final URL location, final ResourceBundle resources) {
+        treeItemRoot.expandedProperty().addListener(
+                listener -> makeListDraggable(treeView));
 
         TreeItem<String> rootInput = new TreeItem<>("Input");
         TreeItem<String> rootOutput = new TreeItem<>("Output");
@@ -101,15 +104,19 @@ public class ToolboxController implements Initializable {
     private void makeListDraggable(final TreeView<String> item) {
         item.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
-            public TreeCell<String> call(final TreeView<String> stringTreeView) {
+            public TreeCell<String> call(
+                    final TreeView<String> stringTreeView) {
                 TreeCell<String> cell = new TreeCell<String>() {
-                    protected void updateItem(final String item, final boolean empty) {
+                    protected void updateItem(
+                            final String item, final boolean empty) {
                         super.updateItem(item, empty);
                         setText(item);
                     }
                 };
                 cell.setOnDragDetected(event -> {
-                    if (!cell.isEmpty() && !ModuleType.getNameFromLong(cell.getItem()).equals("")) {
+                    if (!cell.isEmpty()
+                            && !ModuleType.getNameFromLong(
+                            cell.getItem()).equals("")) {
                         Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
                         ClipboardContent cc = new ClipboardContent();
                         cc.putString(cell.getItem());

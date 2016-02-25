@@ -12,7 +12,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleREP extends ViewModule implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleREP.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleREP.class.getName());
 
     public ViewModuleREP(final Workbench workbench) {
         super(workbench);
@@ -29,6 +30,7 @@ public class ViewModuleREP extends ViewModule implements Initializable {
     }
 
     @Override
-    public void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
     }
 }

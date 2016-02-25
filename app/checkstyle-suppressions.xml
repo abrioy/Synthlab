@@ -56,9 +56,9 @@
               files="ModuleVCF.java"/>
 
     <suppress files="Port.java" checks="DesignForExtension" lines="55-65" />
-    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="47-68" />
+    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="47-69" />
 
     <suppress files="ModuleKEYB.java" checks="FinalParameters" lines="145" />
-    <suppress files="Knob.java" checks="FinalParameters" lines="579" />
-    <suppress files="Knob.java" checks="FinalParameters" lines="521" />
+    <suppress files="Knob.java" checks="FinalParameters" lines="566" />
+    <suppress files="Knob.java" checks="FinalParameters" lines="624" />
 </suppressions>

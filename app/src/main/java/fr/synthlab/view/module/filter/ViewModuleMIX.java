@@ -14,7 +14,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleMIX extends ViewModule implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleMIX.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleMIX.class.getName());
 
     /**
      * attenuator input 1.
@@ -144,13 +145,14 @@ public class ViewModuleMIX extends ViewModule implements Initializable {
     }
 
     /**
-     * initialise command
+     * initialise command.
      *
      * @param location  URL
      * @param resources ResourceBundle
      */
     @Override
-    public final void initialize(final URL location, final ResourceBundle resources) {
+    public final void initialize(
+            final URL location, final ResourceBundle resources) {
         attenuator1.valueProperty().addListener(event -> {
             attenuator1Cmd.run();
         });
@@ -166,7 +168,8 @@ public class ViewModuleMIX extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void writeObject(final ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         o.writeDouble(attenuator1.getValue());
         o.writeDouble(attenuator2.getValue());
         o.writeDouble(attenuator3.getValue());
@@ -174,7 +177,8 @@ public class ViewModuleMIX extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
         attenuator1.setValue(o.readDouble());
         attenuator2.setValue(o.readDouble());
         attenuator3.setValue(o.readDouble());

@@ -14,7 +14,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleEG extends ViewModule implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleEG.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleEG.class.getName());
 
     @FXML
     private Knob attack;
@@ -38,7 +39,8 @@ public class ViewModuleEG extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void initialize(final URL location, final ResourceBundle resources) {
+    public final void initialize(
+            final URL location, final ResourceBundle resources) {
         attack.valueProperty().addListener(event -> {
             changeAttackCommand.run();
         });
@@ -93,7 +95,8 @@ public class ViewModuleEG extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void writeObject(final ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         o.writeDouble(attack.getValue());
         o.writeDouble(decay.getValue());
         o.writeDouble(sustain.getValue());
@@ -101,7 +104,8 @@ public class ViewModuleEG extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
         attack.setValue(o.readDouble());
         decay.setValue(o.readDouble());
         sustain.setValue(o.readDouble());

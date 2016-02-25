@@ -11,7 +11,8 @@ import java.util.logging.Logger;
  * Created by corentin on 01/02/16.
  */
 public class OscilloscopeDrawing extends Pane {
-    private static final Logger LOGGER = Logger.getLogger(OscilloscopeDrawing.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(OscilloscopeDrawing.class.getName());
 
     private ModuleSCOP osc;
     private SwingNode swingNode;

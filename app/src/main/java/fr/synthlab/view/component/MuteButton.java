@@ -9,7 +9,8 @@ public class MuteButton extends Button {
 
     public MuteButton() {
         this.getStylesheets().add(
-                getClass().getResource("/gui/fxml/style/Module.css").toExternalForm());
+                getClass().getResource("/gui/fxml/style/Module.css")
+                        .toExternalForm());
         this.getStyleClass().add("mute-release");
     }
 

@@ -32,10 +32,11 @@ import java.io.File;
 import java.util.logging.Logger;
 
 public class ViewModuleFactory {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleFactory.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleFactory.class.getName());
 
-
-    public static ViewModule createViewModule(final ModuleType type, final Workbench workbench) {
+    public static ViewModule createViewModule(
+            final ModuleType type, final Workbench workbench) {
         ViewModule module = null;
         switch (type) {
             case VCOA:
@@ -80,7 +81,8 @@ public class ViewModuleFactory {
         if (module != null) {
             LOGGER.finer("ViewModule created: " + type.toString());
         } else {
-            LOGGER.severe("Unrecognised module type \"" + type.toString() + "\".");
+            LOGGER.severe("Unrecognised module type \""
+                    + type.toString() + "\".");
         }
         return module;
     }
@@ -96,10 +98,14 @@ public class ViewModuleFactory {
         ViewModuleMIX viewMixer = new ViewModuleMIX(workbench);
         viewMixer.setModule(vco);
 
-        viewMixer.setAttenuator1Cmd(() -> ((ModuleMIX) vco).setAttenuation1(viewMixer.getAttenuator1()));
-        viewMixer.setAttenuator2Cmd(() -> ((ModuleMIX) vco).setAttenuation2(viewMixer.getAttenuator2()));
-        viewMixer.setAttenuator3Cmd(() -> ((ModuleMIX) vco).setAttenuation3(viewMixer.getAttenuator3()));
-        viewMixer.setAttenuator4Cmd(() -> ((ModuleMIX) vco).setAttenuation4(viewMixer.getAttenuator4()));
+        viewMixer.setAttenuator1Cmd(() -> ((ModuleMIX) vco)
+                .setAttenuation1(viewMixer.getAttenuator1()));
+        viewMixer.setAttenuator2Cmd(() -> ((ModuleMIX) vco)
+                .setAttenuation2(viewMixer.getAttenuator2()));
+        viewMixer.setAttenuator3Cmd(() -> ((ModuleMIX) vco)
+                .setAttenuation3(viewMixer.getAttenuator3()));
+        viewMixer.setAttenuator4Cmd(() -> ((ModuleMIX) vco)
+                .setAttenuation4(viewMixer.getAttenuator4()));
         return viewMixer;
     }
 
@@ -112,10 +118,10 @@ public class ViewModuleFactory {
         ViewModuleVCOA viewVco = new ViewModuleVCOA(workbench);
         viewVco.setModule(vco);
 
-        viewVco.setChangeFreqCommand(() -> ((ModuleVCOA) vco).setFrequency(viewVco.getFreq()));
-
-        viewVco.setChangeShapeCommand(() -> ((ModuleVCOA) vco).setShape(viewVco.getSelectedShape()));
-
+        viewVco.setChangeFreqCommand(() -> ((ModuleVCOA) vco)
+                .setFrequency(viewVco.getFreq()));
+        viewVco.setChangeShapeCommand(() -> ((ModuleVCOA) vco)
+                .setShape(viewVco.getSelectedShape()));
         return viewVco;
     }
 
@@ -123,7 +129,8 @@ public class ViewModuleFactory {
         Module vca = ModuleFactory.createModule(ModuleType.VCA);
         ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
         viewVca.setModule(vca);
-        viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca).setAttenuation(viewVca.getAmpli()));
+        viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca)
+                .setAttenuation(viewVca.getAmpli()));
 
         return viewVca;
     }
@@ -132,15 +139,18 @@ public class ViewModuleFactory {
         Module out = ModuleFactory.createModule(ModuleType.OUT);
         ViewModuleOUT viewOut = new ViewModuleOUT(workbench);
         viewOut.setModule(out);
-        viewOut.setVolumeCommand(() -> ((ModuleOUT) out).setAttenuation(viewOut.getPicker().getValue()));
-        viewOut.setMuteCommand(() -> ((ModuleOUT) out).setMute(viewOut.isMute()));
+        viewOut.setVolumeCommand(() -> ((ModuleOUT) out)
+                .setAttenuation(viewOut.getPicker().getValue()));
+        viewOut.setMuteCommand(() -> ((ModuleOUT) out)
+                .setMute(viewOut.isMute()));
         viewOut.setRecordCommand(() -> {
             if (!((ModuleOUT) out).isRecording()) {
                 File recordingFile = viewOut.getRecordingFile();
                 if (recordingFile == null) {
                     viewOut.setIsRecording(false);
                 } else {
-                    ((ModuleOUT) out).setRecording(viewOut.isRecording(), recordingFile);
+                    ((ModuleOUT) out).setRecording(
+                            viewOut.isRecording(), recordingFile);
                 }
             } else {
                 viewOut.setIsRecording(false);
@@ -149,23 +159,25 @@ public class ViewModuleFactory {
         });
         return viewOut;
     }
-    private static ViewModule createViewModuleWhiteNoise(final Workbench workbench) {
+    private static ViewModule createViewModuleWhiteNoise(
+            final Workbench workbench) {
         Module brui = ModuleFactory.createModule(ModuleType.BRUI);
         ViewModuleBRUI viewNoise = new ViewModuleBRUI(workbench);
         viewNoise.setModule(brui);
-        //viewNoise.setVolumeCommand(() -> ((ModuleOUT) out).setAttenuation(viewNoise.getPicker().getValue()));
-        //viewNoise.setMuteCommand(() -> ((ModuleOUT) out).setMute(viewNoise.isMute()));
 
         return viewNoise;
     }
 
-    private static ViewModule createViewModuleOscilloscope(final Workbench workbench) {
+    private static ViewModule createViewModuleOscilloscope(
+            final Workbench workbench) {
         Module scop = ModuleFactory.createModule(ModuleType.SCOP);
         ViewModuleSCOP viewScop = new ViewModuleSCOP(workbench);
         viewScop.setModule(scop);
-        viewScop.setPickerCommand(() -> ((ModuleSCOP) scop).setScale(viewScop.getScale()));
+        viewScop.setPickerCommand(() -> ((ModuleSCOP) scop)
+                .setScale(viewScop.getScale()));
 
-        viewScop.getOscilloscopeDrawing().setModuleOscilloscope((ModuleSCOP) scop);
+        viewScop.getOscilloscopeDrawing()
+                .setModuleOscilloscope((ModuleSCOP) scop);
 
         return viewScop;
     }
@@ -183,13 +195,14 @@ public class ViewModuleFactory {
         ViewModuleEG viewEG = new ViewModuleEG(workbench);
         viewEG.setModule(eg);
 
-        viewEG.setChangeAttackCommand(() -> ((ModuleEG) eg).setAttack(viewEG.getAttack()));
-
-        viewEG.setChangeDecayCommand(() -> ((ModuleEG) eg).setDecay(viewEG.getDecay()));
-
-        viewEG.setChangeSustainCommand(() -> ((ModuleEG) eg).setSustain(viewEG.getSustain()));
-
-        viewEG.setChangeReleaseCommand(() -> ((ModuleEG) eg).setRelease(viewEG.getRelease()));
+        viewEG.setChangeAttackCommand(() -> ((ModuleEG) eg)
+                .setAttack(viewEG.getAttack()));
+        viewEG.setChangeDecayCommand(() -> ((ModuleEG) eg)
+                .setDecay(viewEG.getDecay()));
+        viewEG.setChangeSustainCommand(() -> ((ModuleEG) eg)
+                .setSustain(viewEG.getSustain()));
+        viewEG.setChangeReleaseCommand(() -> ((ModuleEG) eg)
+                .setRelease(viewEG.getRelease()));
 
         return viewEG;
     }
@@ -198,8 +211,10 @@ public class ViewModuleFactory {
         Module vcflp = ModuleFactory.createModule(ModuleType.VCFLP);
         ViewModuleVCFLP viewVcflp = new ViewModuleVCFLP(workbench);
         viewVcflp.setModule(vcflp);
-        viewVcflp.setChangeThresholdCommand(() -> ((ModuleVCFLP) vcflp).setF0(viewVcflp.getThreshold()));
-        viewVcflp.setChangeResonanceCommand(() -> ((ModuleVCFLP) vcflp).setResonance(viewVcflp.getResonance()));
+        viewVcflp.setChangeThresholdCommand(() -> ((ModuleVCFLP) vcflp)
+                .setF0(viewVcflp.getThreshold()));
+        viewVcflp.setChangeResonanceCommand(() -> ((ModuleVCFLP) vcflp)
+                .setResonance(viewVcflp.getResonance()));
 
         return viewVcflp;
     }
@@ -208,8 +223,8 @@ public class ViewModuleFactory {
         Module vcfhp = ModuleFactory.createModule(ModuleType.VCFHP);
         ViewModuleVCFHP viewVcfhp = new ViewModuleVCFHP(workbench);
         viewVcfhp.setModule(vcfhp);
-        viewVcfhp.setChangeThresholdCommand(() -> ((ModuleVCFHP) vcfhp).setF0(viewVcfhp.getThreshold()));
-
+        viewVcfhp.setChangeThresholdCommand(() -> ((ModuleVCFHP) vcfhp)
+                .setF0(viewVcfhp.getThreshold()));
         return viewVcfhp;
     }
 
@@ -217,9 +232,12 @@ public class ViewModuleFactory {
         Module keyb = ModuleFactory.createModule(ModuleType.KEYB);
         ViewModuleKEYB viewKEYB = new ViewModuleKEYB(workbench);
         viewKEYB.setModule(keyb);
-        viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb).pressKey(viewKEYB.getNotePressed()));
-        viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb).releaseKey(viewKEYB.getLastKeyReleased()));
-        viewKEYB.setOctaveChangeCommand(() -> ((ModuleKEYB) keyb).changeOctave(viewKEYB.getOctave()));
+        viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb)
+                .pressKey(viewKEYB.getNotePressed()));
+        viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb)
+                .releaseKey(viewKEYB.getLastKeyReleased()));
+        viewKEYB.setOctaveChangeCommand(() -> ((ModuleKEYB) keyb)
+                .changeOctave(viewKEYB.getOctave()));
 
         viewKEYB.setOnMouseClicked(event -> viewKEYB.requestFocus());
 
@@ -232,14 +250,22 @@ public class ViewModuleFactory {
         viewSEQ.setModule(seq);
 
         viewSEQ.setResetCommand(((ModuleSEQ) seq)::reset);
-        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq).setStepValue(0, viewSEQ.getStepValue(0)));
-        viewSEQ.setChangeStep2Command(() -> ((ModuleSEQ) seq).setStepValue(1, viewSEQ.getStepValue(1)));
-        viewSEQ.setChangeStep3Command(() -> ((ModuleSEQ) seq).setStepValue(2, viewSEQ.getStepValue(2)));
-        viewSEQ.setChangeStep4Command(() -> ((ModuleSEQ) seq).setStepValue(3, viewSEQ.getStepValue(3)));
-        viewSEQ.setChangeStep5Command(() -> ((ModuleSEQ) seq).setStepValue(4, viewSEQ.getStepValue(4)));
-        viewSEQ.setChangeStep6Command(() -> ((ModuleSEQ) seq).setStepValue(5, viewSEQ.getStepValue(5)));
-        viewSEQ.setChangeStep7Command(() -> ((ModuleSEQ) seq).setStepValue(6, viewSEQ.getStepValue(6)));
-        viewSEQ.setChangeStep8Command(() -> ((ModuleSEQ) seq).setStepValue(7, viewSEQ.getStepValue(7)));
+        viewSEQ.setChangeStep1Command(() -> ((ModuleSEQ) seq)
+                .setStepValue(0, viewSEQ.getStepValue(0)));
+        viewSEQ.setChangeStep2Command(() -> ((ModuleSEQ) seq)
+                .setStepValue(1, viewSEQ.getStepValue(1)));
+        viewSEQ.setChangeStep3Command(() -> ((ModuleSEQ) seq)
+                .setStepValue(2, viewSEQ.getStepValue(2)));
+        viewSEQ.setChangeStep4Command(() -> ((ModuleSEQ) seq)
+                .setStepValue(3, viewSEQ.getStepValue(3)));
+        viewSEQ.setChangeStep5Command(() -> ((ModuleSEQ) seq)
+                .setStepValue(4, viewSEQ.getStepValue(4)));
+        viewSEQ.setChangeStep6Command(() -> ((ModuleSEQ) seq)
+                .setStepValue(5, viewSEQ.getStepValue(5)));
+        viewSEQ.setChangeStep7Command(() -> ((ModuleSEQ) seq)
+                .setStepValue(6, viewSEQ.getStepValue(6)));
+        viewSEQ.setChangeStep8Command(() -> ((ModuleSEQ) seq)
+                .setStepValue(7, viewSEQ.getStepValue(7)));
 
         ((ModuleSEQ) seq).addObserver(viewSEQ);
 

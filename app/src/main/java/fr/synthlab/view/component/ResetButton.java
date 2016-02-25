@@ -9,7 +9,8 @@ public class ResetButton extends Button {
 
     public ResetButton() {
         this.getStylesheets().add(
-                getClass().getResource("/gui/fxml/style/Module.css").toExternalForm());
+                getClass().getResource("/gui/fxml/style/Module.css")
+                        .toExternalForm());
         this.getStyleClass().add("reset-button");
     }
 }

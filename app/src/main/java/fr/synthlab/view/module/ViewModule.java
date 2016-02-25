@@ -21,7 +21,8 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public abstract class ViewModule extends Pane implements Serializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModule.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModule.class.getName());
 
     private Workbench workbench;
     private Module module;
@@ -41,7 +42,8 @@ public abstract class ViewModule extends Pane implements Serializable {
         topPane.setFocusTraversable(false);
         topPane.setMaxHeight(30.0d);
         topPane.relocate(10, 5);
-        this.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
+        this.layoutBoundsProperty().addListener(
+                (observable, oldValue, newValue) -> {
             // Making sure the pane is always the right size
             topPane.setPrefWidth(oldValue.getWidth() - 20.0d);
         });
@@ -60,27 +62,31 @@ public abstract class ViewModule extends Pane implements Serializable {
         topPane.getChildren().add(closeButton);
         AnchorPane.setRightAnchor(closeButton, 0.0d);
         closeButton.setOnMouseClicked(event -> {
-            LOGGER.fine("Module \"" + module.getType() + "\" is asking to be closed.");
+            LOGGER.fine("Module \"" + module.getType()
+                    + "\" is asking to be closed.");
             workbench.onModuleCloseRequest(this);
             event.consume();
         });
     }
 
     protected final void loadFXML(final String fxmlPath) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+        FXMLLoader fxmlLoader
+                = new FXMLLoader(getClass().getResource(fxmlPath));
         fxmlLoader.setController(this);
 
         try {
             Parent root = fxmlLoader.load();
             this.getChildren().add(root);
         } catch (IOException exception) {
-            LOGGER.severe("Cannot load the specified FXML file: \"" + fxmlPath + "\".");
+            LOGGER.severe("Cannot load the specified FXML file: \""
+                    + fxmlPath + "\".");
             throw new RuntimeException(exception);
         }
 
         getPlugs().forEach(child -> {
             child.setWorkbench(workbench);
-            child.setGetPortCommand(() -> module.getPort(child.nameProperty().getValue()));
+            child.setGetPortCommand(() ->
+                    module.getPort(child.nameProperty().getValue()));
         });
         topPane.toFront();
     }
@@ -111,7 +117,9 @@ public abstract class ViewModule extends Pane implements Serializable {
         return null;
     }
 
-    public abstract void writeObject(final ObjectOutputStream o) throws IOException;
+    public abstract void writeObject(
+            final ObjectOutputStream o) throws IOException;
 
-    public abstract void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException;
+    public abstract void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException;
 }

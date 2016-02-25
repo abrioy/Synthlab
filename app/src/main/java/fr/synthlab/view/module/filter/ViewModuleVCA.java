@@ -15,7 +15,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleVCA extends ViewModule implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleVCA.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleVCA.class.getName());
 
     @FXML
     private Plug in;
@@ -36,7 +37,8 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void initialize(final URL url, final ResourceBundle resourceBundle) {
+    public final void initialize(
+            final URL url, final ResourceBundle resourceBundle) {
         ampli.valueProperty().addListener(event -> {
             updateAmply();
         });
@@ -46,7 +48,8 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
         changeAmpliCommand.run();
     }
 
-    public final void setChangeAmpliCommand(final Runnable newChangeAmpliCommand) {
+    public final void setChangeAmpliCommand(
+            final Runnable newChangeAmpliCommand) {
         changeAmpliCommand = newChangeAmpliCommand;
         changeAmpliCommand.run();
     }
@@ -56,12 +59,14 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void writeObject(final ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         o.writeDouble(ampli.getValue());
     }
 
     @Override
-    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
         ampli.setValue(o.readDouble());
     }
 }

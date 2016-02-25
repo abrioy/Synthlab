@@ -17,7 +17,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleVCOA extends ViewModule implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleVCOA.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleVCOA.class.getName());
 
     @FXML
     private Knob freq;
@@ -43,7 +44,8 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void initialize(final URL url, final ResourceBundle resourceBundle) {
+    public final void initialize(
+            final URL url, final ResourceBundle resourceBundle) {
         freq.valueProperty().addListener(event -> {
             updateFrequency();
         });
@@ -102,14 +104,16 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void writeObject(final ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         o.writeDouble(freq.getValue());
         o.writeDouble(freqLine.getValue());
         o.writeDouble(picker.getValue());
     }
 
     @Override
-    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
         freq.setValue(o.readDouble());
         freqLine.setValue(o.readDouble());
         picker.setValue(o.readDouble());
