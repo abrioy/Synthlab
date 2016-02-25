@@ -129,7 +129,7 @@ public class Workbench extends Pane {
             private String connectedPortName;
             private Color cableColor;
 
-            public PortReference(int parentUIDInit, String nameInit,
+            PortReference(int parentUIDInit, String nameInit,
                                  int connectedUIDInit, String connectedPortNameInit, Color cableColorInit) {
                 parentUID = parentUIDInit;
                 name = nameInit;

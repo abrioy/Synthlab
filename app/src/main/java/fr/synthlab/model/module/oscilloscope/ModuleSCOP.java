@@ -161,7 +161,7 @@ public class ModuleSCOP implements Module {
         private JPanel oscPanel;
         private CustomAudioScope scope;
 
-        public JOscillatorComponent(CustomAudioScope scopeInit) {
+        JOscillatorComponent(CustomAudioScope scopeInit) {
             scope = scopeInit;
             setLayout(new BorderLayout());
             add(BorderLayout.CENTER, scope.getView());
@@ -219,7 +219,7 @@ public class ModuleSCOP implements Module {
         private CustomAudioScopeView audioScopeView = null;
         private AudioScopeModel audioScopeModel;
 
-        public CustomAudioScope(Synthesizer synth) {
+        CustomAudioScope(Synthesizer synth) {
             audioScopeModel = new AudioScopeModel(synth);
         }
 
@@ -280,9 +280,8 @@ public class ModuleSCOP implements Module {
         private boolean showControls = false;
         private ScopeControlPanel controlPanel = null;
 
-        public CustomAudioScopeView() {
+        CustomAudioScopeView() {
         }
-
 
         private void setupGUI() {
             removeAll();
@@ -351,7 +350,7 @@ public class ModuleSCOP implements Module {
                 new Color(160, 230, 50), Color.BLUE, Color.RED, Color.BLACK, Color.MAGENTA, Color.GREEN, Color.ORANGE
         };
 
-        public CustomMultipleWaveDisplay() {
+        CustomMultipleWaveDisplay() {
             setOpaque(true);
             setBackground(Color.BLACK);
         }
@@ -398,7 +397,7 @@ public class ModuleSCOP implements Module {
         // Horizontal scale parameter
         private int scale;
 
-        public CustomWaveTraceView(JToggleButton.ToggleButtonModel autoButtonModel, ExponentialRangeModel verticalRangeModel) {
+        CustomWaveTraceView(JToggleButton.ToggleButtonModel autoButtonModel, ExponentialRangeModel verticalRangeModel) {
             this.verticalScaleModel = verticalRangeModel;
             this.autoScaleButtonModel = autoButtonModel;
             this.scale = 4;
@@ -500,7 +499,7 @@ public class ModuleSCOP implements Module {
         private AudioScopeProbe probeModel;
         private CustomWaveTraceView waveTrace;
 
-        public CustomAudioScopeProbeView(AudioScopeProbe probeModelInit) {
+        CustomAudioScopeProbeView(AudioScopeProbe probeModelInit) {
             probeModel = probeModelInit;
             waveTrace = new CustomWaveTraceView(probeModel.getAutoScaleButtonModel(),
                     probeModel.getVerticalScaleModel());
