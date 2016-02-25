@@ -60,14 +60,14 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
     private Runnable octaveChangeCommand;
     private NoteKEYB lastKeyPressed, lastKeyReleased;
 
-    public ViewModuleKEYB(Workbench workbench) {
+    public ViewModuleKEYB(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleKEYB.fxml");
         this.setId("pane");
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(final URL location, final ResourceBundle resources) {
         /*
             Mouse pressed events
          */
@@ -321,39 +321,38 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
         octaveLabel.setText(getOctave() + "");
     }
 
-    public int getOctave() {
+    public final int getOctave() {
         return (int) octavePicker.getValue();
     }
 
-    public void setKeyPressedCommand(Runnable command) {
+    public final void setKeyPressedCommand(final Runnable command) {
         this.keyPressedCommand = command;
     }
 
-    public void setKeyReleasedCommand(Runnable command) {
+    public final void setKeyReleasedCommand(final Runnable command) {
         this.keyReleasedCommand = command;
     }
 
-    public void setOctaveChangeCommand(Runnable command) {
+    public final void setOctaveChangeCommand(final Runnable command) {
         this.octaveChangeCommand = command;
         this.octaveChangeCommand.run();
     }
 
-    public NoteKEYB getNotePressed() {
+    public final NoteKEYB getNotePressed() {
         return lastKeyPressed;
     }
 
-    public NoteKEYB getLastKeyReleased() {
+    public final NoteKEYB getLastKeyReleased() {
         return lastKeyReleased;
     }
 
-
     @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o) throws IOException {
         o.writeDouble(this.octavePicker.getValue());
     }
 
     @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
         this.octavePicker.setValue(o.readDouble());
     }
 }

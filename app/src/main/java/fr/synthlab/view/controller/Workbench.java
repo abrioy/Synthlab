@@ -41,7 +41,6 @@ public class Workbench extends Pane {
     private Skin currentSkin = Skin.Default;
 
     public Workbench() {
-
         // Making the ghost a bit spookier
         dragGhost.setOpacity(0.40d); // #SoSpooky
 
@@ -53,15 +52,14 @@ public class Workbench extends Pane {
         });
 
         ModuleFactory.startSyn();
-
     }
 
-    private int serializeModuleToUID(Module module) {
+    private int serializeModuleToUID(final Module module) {
         return System.identityHashCode(module);
     }
 
 
-    public void serializeViewModules(ObjectOutputStream outputStream) throws IOException {
+    public final void serializeViewModules(final ObjectOutputStream outputStream) throws IOException {
         Collection<ViewModule> modules = getViewModules();
 
         // Writing the total number of modules
@@ -118,7 +116,7 @@ public class Workbench extends Pane {
         }
     }
 
-    public void deSerializeViewModules(ObjectInputStream inputStream) throws IOException {
+    public final void deSerializeViewModules(final ObjectInputStream inputStream) throws IOException {
         removeAllModules();
 
         Map<Integer, ViewModule> moduleList = new HashMap<>();
@@ -217,12 +215,11 @@ public class Workbench extends Pane {
     }
 
 
-    public void onRightClick() {
+    public final void onRightClick() {
         dropCable();
     }
 
-
-    public void removeAllModules() {
+    public final void removeAllModules() {
         getViewModules().forEach(this::removeModule);
     }
 
@@ -231,7 +228,7 @@ public class Workbench extends Pane {
      *
      * @param module Module to be deleted
      */
-    public void removeModule(ViewModule module) {
+    public final void removeModule(final ViewModule module) {
         module.getChildren().stream().filter(child -> child instanceof Pane).forEach(child -> {
             Pane core = (Pane) child;
             core.getChildren().stream().filter(plug -> plug instanceof Plug).forEach(plug -> {
@@ -254,7 +251,7 @@ public class Workbench extends Pane {
      *
      * @param module Module to be closed
      */
-    public void onModuleCloseRequest(ViewModule module) {
+    public final void onModuleCloseRequest(final ViewModule module) {
         removeModule(module);
     }
 
@@ -264,7 +261,7 @@ public class Workbench extends Pane {
      *
      * @param module Module to be added
      */
-    public void addModule(ViewModule module) {
+    public final void addModule(final ViewModule module) {
         this.getChildren().add(module);
         makeDraggable(module);
     }
@@ -318,7 +315,7 @@ public class Workbench extends Pane {
 
     }
 
-    public void displayGhost(ViewModule module) {
+    public final void displayGhost(final ViewModule module) {
         if (this.getChildren().contains(dragGhost)) {
             this.getChildren().remove(dragGhost);
             LOGGER.warning("The ghost was added again before it was properly removed.");
@@ -336,11 +333,11 @@ public class Workbench extends Pane {
         this.getChildren().add(dragGhost);
     }
 
-    public void hideGhost() {
+    public final void hideGhost() {
         this.getChildren().remove(dragGhost);
     }
 
-    public void moveGhost(double x, double y) {
+    public final void moveGhost(final double x, final double y) {
         dragGhost.relocate(
                 Math.max(moduleMargin, x),
                 Math.max(moduleMargin, y)
@@ -360,7 +357,7 @@ public class Workbench extends Pane {
      * @param bounds The bounds to check
      * @return The Bounds of the first colliding module if there any
      */
-    private Bounds checkCollisions(Node node, Bounds bounds) {
+    private Bounds checkCollisions(final Node node, final Bounds bounds) {
         for (ViewModule child : this.getViewModules()) {
             if (node != child) {
                 Bounds childBounds = child.getBoundsInParent();
@@ -379,7 +376,7 @@ public class Workbench extends Pane {
      * @param bounds
      * @return The center of the rectangle
      */
-    private Point2D getBoundsCenter(Bounds bounds) {
+    private Point2D getBoundsCenter(final Bounds bounds) {
         double x, y;
         x = bounds.getMinX() + (bounds.getWidth() / 2.0d);
         y = bounds.getMinY() + (bounds.getHeight() / 2.0d);
@@ -398,8 +395,7 @@ public class Workbench extends Pane {
      * @param expectedY The desired Y coordinate
      * @return A suggested location to move the module to
      */
-    public Point2D computeNewModulePosition(ViewModule node, double expectedX, double expectedY) {
-
+    public final Point2D computeNewModulePosition(final ViewModule node, final double expectedX, final double expectedY) {
         // Moving the ghost to where the module should be
         this.moveGhost(expectedX, expectedY);
 
@@ -483,7 +479,7 @@ public class Workbench extends Pane {
      *
      * @param plug Plug clicked
      */
-    public void plugClicked(Plug plug) {
+    public final void plugClicked(final Plug plug) {
         if (draggedCable == null) {
             Plug opposite = getConnectedPlug(plug);
             if (opposite != null) {
@@ -517,7 +513,7 @@ public class Workbench extends Pane {
      * @param in  the name is mandatory, we dont care if its in or out
      * @param out the name is mandatory, we dont care if its in or out
      */
-    private void connectPlugs(Plug in, Plug out) {
+    private void connectPlugs(final Plug in, final Plug out) {
         Port n1 = in.getPort();
         Port n2 = out.getPort();
         n1.connect(n2);
@@ -529,7 +525,7 @@ public class Workbench extends Pane {
      *
      * @param plug the name is mandatory, we dont care if its in or out
      */
-    private void disconnectPlug(Plug plug) {
+    private void disconnectPlug(final Plug plug) {
         Port p = plug.getPort();
         if (p.isConnected()) {
             p.disconnect();
@@ -556,7 +552,7 @@ public class Workbench extends Pane {
         });
     }
 
-    private Cable getConnectedCable(Plug plug) {
+    private Cable getConnectedCable(final Plug plug) {
         for (Cable c : getCables()) {
             if (c.getPluggedPlug() == plug) {
                 return c;
@@ -568,7 +564,7 @@ public class Workbench extends Pane {
         return null;
     }
 
-    private Plug getConnectedPlug(Plug plug) {
+    private Plug getConnectedPlug(final Plug plug) {
         for (Cable c : getCables()) {
             Plug opposite = c.getOppositePlug(plug);
             if (opposite != null) {
@@ -578,9 +574,8 @@ public class Workbench extends Pane {
         return null;
     }
 
-    private void dragCable(Cable cable, Plug plug) {
+    private void dragCable(final Cable cable, final Plug plug) {
         cable.unplug(plug);
-
     }
 
     /**
@@ -594,12 +589,11 @@ public class Workbench extends Pane {
         }
     }
 
-
-    public Skin getCurrentSkin() {
+    public final Skin getCurrentSkin() {
         return currentSkin;
     }
 
-    public void changeSkin(Skin skin) {
+    public final void changeSkin(final Skin skin) {
         LOGGER.fine("Skin changed from \"" + currentSkin + "\" to \"" + skin + "\".");
 
         this.getStylesheets().remove(currentSkin.getPath());

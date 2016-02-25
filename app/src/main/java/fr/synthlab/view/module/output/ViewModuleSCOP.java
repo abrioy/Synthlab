@@ -26,40 +26,39 @@ public class ViewModuleSCOP extends ViewModule implements Initializable {
     private Runnable pickerCmd;
     private Workbench w;
 
-    public ViewModuleSCOP(Workbench workbench) {
+    public ViewModuleSCOP(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
         w = workbench;
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public final void initialize(final URL url, final ResourceBundle resourceBundle) {
         picker.valueProperty().addListener(event -> {
             pickerCmd.run();
         });
-
     }
 
-    public void setPickerCommand(Runnable newPickerCmd) {
+    public final void setPickerCommand(Runnable newPickerCmd) {
         pickerCmd = newPickerCmd;
         pickerCmd.run();
     }
 
-    public int getScale() {
+    public final int getScale() {
         return (int) picker.getValue();
     }
 
-    public OscilloscopeDrawing getOscilloscopeDrawing() {
+    public final OscilloscopeDrawing getOscilloscopeDrawing() {
         return oscilloscopeDrawing;
     }
 
     @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o) throws IOException {
         o.writeDouble(picker.getValue());
     }
 
     @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
         picker.setValue(o.readDouble());
     }
 }

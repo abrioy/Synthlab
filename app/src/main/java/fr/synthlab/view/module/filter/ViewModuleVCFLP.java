@@ -37,13 +37,13 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
     private Runnable changeThresholdCommand;
     private Runnable changeResonanceCommand;
 
-    public ViewModuleVCFLP(Workbench workbench) {
+    public ViewModuleVCFLP(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleVCFLP.fxml");
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public final void initialize(final URL url, final ResourceBundle resourceBundle) {
         threshold.valueProperty().addListener(event -> {
             updateThreshold();
         });
@@ -60,37 +60,36 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
         frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
-    public void setChangeThresholdCommand(Runnable newChangeThresholdCommand) {
+    public final void setChangeThresholdCommand(final Runnable newChangeThresholdCommand) {
         changeThresholdCommand = newChangeThresholdCommand;
         changeThresholdCommand.run();
     }
 
-    public double getThreshold() {
+    public final double getThreshold() {
         return threshold.getValue();
     }
-
 
     private void updateResonance() {
         changeResonanceCommand.run();
     }
 
-    public void setChangeResonanceCommand(Runnable newChangeResonanceCommand) {
+    public final void setChangeResonanceCommand(final Runnable newChangeResonanceCommand) {
         changeResonanceCommand = newChangeResonanceCommand;
         this.changeResonanceCommand.run();
     }
 
-    public double getResonance() {
+    public final double getResonance() {
         return resonance.getValue();
     }
 
     @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o) throws IOException {
         o.writeDouble(threshold.getValue());
         o.writeDouble(resonance.getValue());
     }
 
     @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
         threshold.setValue(o.readDouble());
         resonance.setValue(o.readDouble());
     }

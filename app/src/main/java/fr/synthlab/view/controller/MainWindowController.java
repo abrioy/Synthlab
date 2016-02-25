@@ -41,7 +41,7 @@ public class MainWindowController implements Initializable {
     private DoubleProperty zoomLevel = new SimpleDoubleProperty(this, null, 1.0d);
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(final URL location, final ResourceBundle resources) {
         menuBarController.setWorkbench(workbench);
         menuBarController.setMainWindowController(this);
 
@@ -193,19 +193,19 @@ public class MainWindowController implements Initializable {
 
     }
 
-    public double getZoomLevel() {
+    public final double getZoomLevel() {
         return zoomLevel.get();
     }
 
-    public DoubleProperty zoomLevelProperty() {
+    public final DoubleProperty zoomLevelProperty() {
         return zoomLevel;
     }
 
-    public void setZoomLevel(double newZoomLevel) {
+    public final void setZoomLevel(final double newZoomLevel) {
         zoomLevel.set(newZoomLevel);
     }
 
-    public void setStageAndSetupListeners(Stage stage) {
+    public final void setStageAndSetupListeners(final Stage stage) {
         stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
             if (event.getButton() == MouseButton.SECONDARY) {
                 //Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));

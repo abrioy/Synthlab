@@ -43,7 +43,7 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
     private BooleanProperty isRecording = new SimpleBooleanProperty();
     private File pickedDirectory;
 
-    public ViewModuleOUT(Workbench workbench) {
+    public ViewModuleOUT(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
         this.setId("pane");
@@ -52,39 +52,39 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
         fileChooserButton.setPrefSize(30, 30);
     }
 
-    public Knob getPicker() {
+    public final Knob getPicker() {
         return picker;
     }
 
-    public void setVolumeCommand(Runnable newVolume) {
+    public final void setVolumeCommand(final Runnable newVolume) {
         volume = newVolume;
 
         // Init volume to the correct value
         volume.run();
     }
 
-    public void setMuteCommand(Runnable mute) {
+    public final void setMuteCommand(final Runnable mute) {
         this.muteCommand = mute;
         muteCommand.run();
     }
 
-    public boolean isMute() {
+    public final boolean isMute() {
         return isMuted.getValue();
     }
 
-    public void setRecordCommand(Runnable record) {
+    public final void setRecordCommand(final Runnable record) {
         this.recordCommand = record;
     }
 
-    public boolean isRecording() {
+    public final boolean isRecording() {
         return isRecording.getValue();
     }
 
-    public void setIsRecording(boolean value) {
+    public final void setIsRecording(final boolean value) {
         isRecording.setValue(value);
     }
 
-    public File getRecordingFile() {
+    public final File getRecordingFile() {
         Format formatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String date = formatter.format(new Date());
         String filename = "Synthlab_recording_" + date + ".wav";
@@ -114,28 +114,24 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(final URL location, final ResourceBundle resources) {
         picker.valueProperty().addListener(event -> {
             volume.run();
         });
-        muteButton.setOnAction(event -> {
-            isMuted.setValue(!isMuted.getValue());
-        });
+        muteButton.setOnAction(event -> isMuted.setValue(!isMuted.getValue()));
 
         isMuted.addListener((observable, oldValue, newValue) -> {
             muteButton.setToggle(newValue);
             muteCommand.run();
         });
 
-
         isRecording.addListener((observable, oldValue, newValue) -> {
             recordButton.setToggle(newValue);
             recordCommand.run();
         });
 
-        recordButton.setOnAction(event -> {
-            isRecording.setValue(!isRecording.getValue());
-        });
+        recordButton.setOnAction(event -> isRecording.setValue(!isRecording.getValue()));
+
         fileChooserButton.getStyleClass().add("file-button");
         fileChooserButton.setOnAction(event -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -156,13 +152,13 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
     }
 
     @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o) throws IOException {
         o.writeDouble(picker.getValue());
         o.writeBoolean(isMuted.getValue());
     }
 
     @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
         picker.setValue(o.readDouble());
         isMuted.setValue(o.readBoolean());
     }

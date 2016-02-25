@@ -36,15 +36,14 @@ public class MenuBarController implements Initializable {
     private Menu skinMenu;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void initialize(final URL location, final ResourceBundle resources) {
     }
 
-    public void setMainWindowController(MainWindowController newMainWindowController) {
+    public final void setMainWindowController(final MainWindowController newMainWindowController) {
         mainWindowController = newMainWindowController;
     }
 
-    public void setWorkbench(Workbench newWorkbench) {
+    public final void setWorkbench(final Workbench newWorkbench) {
         workbench = newWorkbench;
 
         ToggleGroup skinToggleGroup = new ToggleGroup();
@@ -63,29 +62,29 @@ public class MenuBarController implements Initializable {
         }
     }
 
-    public void setStage(Stage newStage) {
+    public final void setStage(final Stage newStage) {
         stage = newStage;
     }
 
-    public void onClickViewZoomReset() {
+    public final void onClickViewZoomReset() {
         mainWindowController.setZoomLevel(1.0d);
     }
 
-    public void onClickViewZoomInc() {
+    public final void onClickViewZoomInc() {
         mainWindowController.setZoomLevel(mainWindowController.getZoomLevel() + 0.2d);
     }
 
-    public void onClickViewZoomDec() {
+    public final void onClickViewZoomDec() {
         mainWindowController.setZoomLevel(mainWindowController.getZoomLevel() - 0.2d);
     }
 
 
-    public void onClickFileNew() {
+    public final void onClickFileNew() {
         workbench.removeAllModules();
         currentSaveFile = null;
     }
 
-    public void onClickFileOpen() {
+    public final void onClickFileOpen() {
         try {
             FileChooser chooser = createFileBrowser("Open a project.");
             File target = chooser.showOpenDialog(stage);
@@ -95,7 +94,7 @@ public class MenuBarController implements Initializable {
         }
     }
 
-    public void onClickFileReload() {
+    public final void onClickFileReload() {
         if (currentSaveFile != null) {
             try {
                 openSavedFile(currentSaveFile);
@@ -107,7 +106,7 @@ public class MenuBarController implements Initializable {
         }
     }
 
-    public void onClickFileSave() {
+    public final void onClickFileSave() {
         if (currentSaveFile != null) {
             try {
                 saveToFile(currentSaveFile);
@@ -119,7 +118,7 @@ public class MenuBarController implements Initializable {
         }
     }
 
-    public void onClickFileSaveAs() {
+    public final void onClickFileSaveAs() {
         try {
             FileChooser chooser = createFileBrowser("Save as...");
             File target = chooser.showSaveDialog(stage);
@@ -129,16 +128,12 @@ public class MenuBarController implements Initializable {
         }
     }
 
-    public void onClickFileExit() {
+    public final void onClickFileExit() {
         stage.fireEvent(
-                new WindowEvent(
-                        stage,
-                        WindowEvent.WINDOW_CLOSE_REQUEST
-                )
-        );
+                new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 
-    private FileChooser createFileBrowser(String windowName) {
+    private FileChooser createFileBrowser(final String windowName) {
         FileChooser chooser = new FileChooser();
         chooser.setTitle(windowName);
 

@@ -24,13 +24,13 @@ public class Plug extends StackPane {
 
     private Workbench workbench;
 
-    public void setWorkbench(Workbench newWorkbench) {
+    public final void setWorkbench(final Workbench newWorkbench) {
         workbench = newWorkbench;
     }
 
     private Callable<Port> getPortCommand = null;
 
-    public void setGetPortCommand(Callable<Port> newGetPortCommand) {
+    public final void setGetPortCommand(final Callable<Port> newGetPortCommand) {
         getPortCommand = newGetPortCommand;
     }
 
@@ -104,11 +104,11 @@ public class Plug extends StackPane {
         });
     }
 
-    public Point2D getCenter() {
+    public final Point2D getCenter() {
         return colorCircle.localToParent(colorCircle.getCenterX(), colorCircle.getCenterY());
     }
 
-    public Port getPort() {
+    public final Port getPort() {
         if (getPortCommand != null) {
             try {
                 return getPortCommand.call();
@@ -119,7 +119,7 @@ public class Plug extends StackPane {
         return null;
     }
 
-    public final void setType(String v) {
+    public final void setType(final String v) {
         type.set(v);
         colorCircle.setStroke(Type.getType(type.get()).color);
     }
@@ -133,35 +133,35 @@ public class Plug extends StackPane {
     }
 
 
-    public String getName() {
+    public final String getName() {
         return name.get();
     }
 
-    public StringProperty nameProperty() {
+    public final StringProperty nameProperty() {
         return name;
     }
 
-    public void setName(String newName) {
+    public final void setName(final String newName) {
         name.set(newName);
     }
 
-    public String getLabel() {
+    public final String getLabel() {
         return label.get();
     }
 
-    public StringProperty labelProperty() {
+    public final StringProperty labelProperty() {
         return label;
     }
 
-    public void setLabel(String newLabel) {
+    public final void setLabel(final String newLabel) {
         label.set(newLabel);
     }
 
-    public Cable getCable() {
+    public final Cable getCable() {
         return cable;
     }
 
-    public void setCable(Cable newCable) {
+    public final void setCable(final Cable newCable) {
         cable = newCable;
     }
 }

@@ -36,13 +36,12 @@ public class ToolboxController implements Initializable {
 
     private Consumer<DragEvent> onDragDone = null;
 
-    public void setOnDragDone(Consumer<DragEvent> newOnDragDone) {
+    public final void setOnDragDone(final Consumer<DragEvent> newOnDragDone) {
         onDragDone = newOnDragDone;
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public final void initialize(final URL location, final ResourceBundle resources) {
         treeItemRoot.expandedProperty().addListener(listener -> makeListDraggable(treeView));
 
         TreeItem<String> rootInput = new TreeItem<>("Input");
@@ -99,7 +98,7 @@ public class ToolboxController implements Initializable {
         }
     }
 
-    private void makeListDraggable(TreeView<String> item) {
+    private void makeListDraggable(final TreeView<String> item) {
         item.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
             public TreeCell<String> call(TreeView<String> stringTreeView) {

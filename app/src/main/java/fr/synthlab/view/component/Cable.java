@@ -24,7 +24,7 @@ public class Cable extends CubicCurve {
     private Circle circleOut;
     private Workbench workbench;
 
-    public Cable(Workbench workbenchInit, Plug inInit) {
+    public Cable(final Workbench workbenchInit, final Plug inInit) {
         in = inInit;
         in.setCable(this);
         workbench = workbenchInit;
@@ -32,7 +32,7 @@ public class Cable extends CubicCurve {
         init();
     }
 
-    public Cable(Workbench workbenchInit, Plug inInit, Plug outInit) {
+    public Cable(final Workbench workbenchInit, final Plug inInit, final Plug outInit) {
         in = inInit;
         in.setCable(this);
         out = outInit;
@@ -58,12 +58,12 @@ public class Cable extends CubicCurve {
         this.setMouseTransparent(true);
     }
 
-    public void updateCircles() {
+    public final void updateCircles() {
         circleIn.toFront();
         circleOut.toFront();
     }
 
-    public void update() {
+    public final void update() {
         Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
         Point2D outPosition = workbench.sceneToLocal(out.localToScene(out.getCenter()));
 
@@ -79,7 +79,7 @@ public class Cable extends CubicCurve {
         this.toFront();
     }
 
-    public void update(Point2D mouse) {
+    public final void update(final Point2D mouse) {
         Point2D correctedMouse = new Point2D(Math.max(circleRadius, mouse.getX()),
                 Math.max(circleRadius, mouse.getY()));
 
@@ -102,7 +102,7 @@ public class Cable extends CubicCurve {
         this.toFront();
     }
 
-    public Plug getOppositePlug(Plug plug) {
+    public final Plug getOppositePlug(final Plug plug) {
         if (in == null || out == null) {
             return null;
         }
@@ -115,7 +115,7 @@ public class Cable extends CubicCurve {
         }
     }
 
-    public Plug getPluggedPlug() {
+    public final Plug getPluggedPlug() {
         if (in == null) {
             return out;
         } else {
@@ -123,7 +123,7 @@ public class Cable extends CubicCurve {
         }
     }
 
-    public void setEmptyPlug(Plug plug) {
+    public final void setEmptyPlug(final Plug plug) {
         if (in == null) {
             in = plug;
             in.setCable(this);
@@ -133,19 +133,19 @@ public class Cable extends CubicCurve {
         }
     }
 
-    private void addCircle(Circle c, double x, double y) {
+    private void addCircle(final Circle c, final double x, final double y) {
         c.setCenterX(x);
         c.setCenterY(y);
         c.setRadius(circleRadius);
     }
 
-    public void allToFront() {
+    public final void allToFront() {
         circleIn.toFront();
         circleOut.toFront();
         this.toFront();
     }
 
-    public void unplug(Plug plug) {
+    public final void unplug(final Plug plug) {
         if (in == plug) {
             in.setCable(null);
             in = null;
@@ -157,12 +157,12 @@ public class Cable extends CubicCurve {
         }
     }
 
-    public void deleteCircles() {
+    public final void deleteCircles() {
         workbench.getChildren().remove(circleIn);
         workbench.getChildren().remove(circleOut);
     }
 
-    private void drawCable(Point2D start, Point2D end) {
+    private void drawCable(final Point2D start, final Point2D end) {
         double diffX = start.getX() - end.getX();
         double diffY = Math.abs(start.getY() - end.getY());
         this.setControlX1(start.getX() - diffX / 3);
@@ -173,12 +173,12 @@ public class Cable extends CubicCurve {
         this.setStroke(color);
     }
 
-    public void setColor(Color newColor) {
+    public final void setColor(final Color newColor) {
         color = newColor;
         setStroke(color);
     }
 
-    public Color getColor() {
+    public final Color getColor() {
         return color;
     }
 }

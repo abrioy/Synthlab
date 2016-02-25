@@ -29,14 +29,14 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
 
     private Runnable changeAmpliCommand;
 
-    public ViewModuleVCA(Workbench workbench) {
+    public ViewModuleVCA(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleVCA.fxml");
         this.setId("pane");
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public final void initialize(final URL url, final ResourceBundle resourceBundle) {
         ampli.valueProperty().addListener(event -> {
             updateAmply();
         });
@@ -46,23 +46,22 @@ public class ViewModuleVCA extends ViewModule implements Initializable {
         changeAmpliCommand.run();
     }
 
-    public void setChangeAmpliCommand(Runnable newChangeAmpliCommand) {
+    public final void setChangeAmpliCommand(final Runnable newChangeAmpliCommand) {
         changeAmpliCommand = newChangeAmpliCommand;
         changeAmpliCommand.run();
     }
 
-    public double getAmpli() {
+    public final double getAmpli() {
         return ampli.getValue();
     }
 
-
     @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o) throws IOException {
         o.writeDouble(ampli.getValue());
     }
 
     @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
         ampli.setValue(o.readDouble());
     }
 }

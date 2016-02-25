@@ -31,14 +31,14 @@ public class ViewModuleEG extends ViewModule implements Initializable {
     private Runnable changeReleaseCommand;
 
 
-    public ViewModuleEG(Workbench workbench) {
+    public ViewModuleEG(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleEG.fxml");
         this.setId("pane");
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(final URL location, final ResourceBundle resources) {
         attack.valueProperty().addListener(event -> {
             changeAttackCommand.run();
         });
@@ -56,44 +56,44 @@ public class ViewModuleEG extends ViewModule implements Initializable {
         });
     }
 
-    public double getAttack() {
+    public final double getAttack() {
         return attack.getValue();
     }
 
-    public double getDecay() {
+    public final double getDecay() {
         return decay.getValue();
     }
 
-    public double getSustain() {
+    public final double getSustain() {
         return sustain.getValue();
     }
 
-    public double getRelease() {
+    public final double getRelease() {
         return release.getValue();
     }
 
-    public void setChangeAttackCommand(Runnable command) {
+    public final void setChangeAttackCommand(final Runnable command) {
         this.changeAttackCommand = command;
         this.changeAttackCommand.run();
     }
 
-    public void setChangeDecayCommand(Runnable command) {
+    public final void setChangeDecayCommand(final Runnable command) {
         this.changeDecayCommand = command;
         this.changeDecayCommand.run();
     }
 
-    public void setChangeSustainCommand(Runnable command) {
+    public final void setChangeSustainCommand(final Runnable command) {
         this.changeSustainCommand = command;
         this.changeSustainCommand.run();
     }
 
-    public void setChangeReleaseCommand(Runnable command) {
+    public final void setChangeReleaseCommand(final Runnable command) {
         this.changeReleaseCommand = command;
         this.changeReleaseCommand.run();
     }
 
     @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o) throws IOException {
         o.writeDouble(attack.getValue());
         o.writeDouble(decay.getValue());
         o.writeDouble(sustain.getValue());
@@ -101,7 +101,7 @@ public class ViewModuleEG extends ViewModule implements Initializable {
     }
 
     @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
         attack.setValue(o.readDouble());
         decay.setValue(o.readDouble());
         sustain.setValue(o.readDouble());

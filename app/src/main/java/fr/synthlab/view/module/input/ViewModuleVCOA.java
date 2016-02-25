@@ -36,14 +36,14 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
     private Runnable changeShapeCommand;
     private Runnable changeFreqCommand;
 
-    public ViewModuleVCOA(Workbench workbench) {
+    public ViewModuleVCOA(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleVCO.fxml");
         this.setId("pane");
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public final void initialize(final URL url, final ResourceBundle resourceBundle) {
         freq.valueProperty().addListener(event -> {
             updateFrequency();
         });
@@ -65,19 +65,19 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
         frequencyLabel.setText(getFreq() + " Hz");
     }
 
-    public void setChangeShapeCommand(Runnable changeShape) {
+    public final void setChangeShapeCommand(final Runnable changeShape) {
         this.changeShapeCommand = changeShape;
         changeShapeCommand.run();
     }
 
 
-    public void setChangeFreqCommand(Runnable changeFreq) {
+    public final void setChangeFreqCommand(final Runnable changeFreq) {
         this.changeFreqCommand = changeFreq;
         changeFreqCommand.run();
     }
 
 
-    public double getFreq() {
+    public final double getFreq() {
         double f = freq.getValue() + freqLine.getValue();
         if (f < 0) {
             f = 0;
@@ -88,7 +88,7 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
         return f;
     }
 
-    public ShapeVCOA getSelectedShape() {
+    public final ShapeVCOA getSelectedShape() {
         switch ((int) picker.getValue()) {
             case 0:
                 return ShapeVCOA.TRIANGLE;
@@ -101,16 +101,15 @@ public class ViewModuleVCOA extends ViewModule implements Initializable {
         }
     }
 
-
     @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o) throws IOException {
         o.writeDouble(freq.getValue());
         o.writeDouble(freqLine.getValue());
         o.writeDouble(picker.getValue());
     }
 
     @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
         freq.setValue(o.readDouble());
         freqLine.setValue(o.readDouble());
         picker.setValue(o.readDouble());

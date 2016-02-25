@@ -36,7 +36,7 @@ public class OscilloscopeDrawing extends Pane {
         this.getChildren().add(pane);
     }
 
-    public void setModuleOscilloscope(ModuleSCOP oscilloscope) {
+    public final void setModuleOscilloscope(final ModuleSCOP oscilloscope) {
         osc = oscilloscope;
         swingNode.setContent(osc.getOscillatorJComponent());
         swingNode.setMouseTransparent(true);

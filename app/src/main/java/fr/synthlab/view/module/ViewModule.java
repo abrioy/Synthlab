@@ -29,7 +29,7 @@ public abstract class ViewModule extends Pane implements Serializable {
     private Label moduleName;
     private Button closeButton;
 
-    public ViewModule(Workbench workbenchInit) {
+    public ViewModule(final Workbench workbenchInit) {
         super();
 
         workbench = workbenchInit;
@@ -64,10 +64,9 @@ public abstract class ViewModule extends Pane implements Serializable {
             workbench.onModuleCloseRequest(this);
             event.consume();
         });
-
     }
 
-    protected void loadFXML(String fxmlPath) {
+    protected final void loadFXML(final String fxmlPath) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
         fxmlLoader.setController(this);
 
@@ -86,23 +85,23 @@ public abstract class ViewModule extends Pane implements Serializable {
         topPane.toFront();
     }
 
-    public Module getModule() {
+    public final Module getModule() {
         return module;
     }
 
-    public void setModule(Module newModule) {
+    public final void setModule(final Module newModule) {
         module = newModule;
         moduleName.setText(module.getType().getLongName());
     }
 
-    public Collection<Plug> getPlugs() {
+    public final Collection<Plug> getPlugs() {
         return this.lookupAll("Plug").stream()
                 .filter(child -> child instanceof Plug)
                 .map(child -> (Plug) child)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public Plug getPlugByName(String name) {
+    public final Plug getPlugByName(final String name) {
         Collection<Plug> plugs = getPlugs();
         for (Plug plug : plugs) {
             if (plug.getName().equals(name)) {
@@ -112,7 +111,7 @@ public abstract class ViewModule extends Pane implements Serializable {
         return null;
     }
 
-    public abstract void writeObject(ObjectOutputStream o) throws IOException;
+    public abstract void writeObject(final ObjectOutputStream o) throws IOException;
 
-    public abstract void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException;
+    public abstract void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException;
 }

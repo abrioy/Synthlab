@@ -13,7 +13,7 @@ public class RecordButton extends Button {
         this.getStyleClass().add("record-release");
     }
 
-    public void setToggle(boolean toggle) {
+    public final void setToggle(final boolean toggle) {
         if (toggle) {
             this.getStyleClass().clear();
             this.getStyleClass().add("record-pressed");

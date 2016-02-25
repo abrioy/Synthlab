@@ -215,7 +215,7 @@ public class Knob extends Pane {
         });
     }
 
-    private void moveKnob(double x, double y) {
+    private void moveKnob(final double x, final double y) {
         double centerX = getWidth() / 2.0d;
         double centerY = getHeight() / 2.0d;
         double theta = Math.atan2((y - centerY), (x - centerX));
@@ -263,7 +263,7 @@ public class Knob extends Pane {
      * {@inheritDoc}
      */
     @Override
-    protected void layoutChildren() {
+    protected final void layoutChildren() {
         double stepStart;
         double stepEnd;
         double smallScaleSize = scaleSize * 3.0d / 4.0d;
