@@ -15,7 +15,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -169,8 +168,14 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
         for (KeyboardKey key : keysColl) {
             // Ugly, but it saves a lot of space
             // The "-9" comes from the fact that NoteKEYB.C has a value of -9.
-            key.setOnMouseReleased(event -> {lastKeyReleased = NoteKEYB.fromValue(keysColl.indexOf(key) - 9); keyReleasedCommand.run();});
-            key.setOnMouseExited(event -> {lastKeyReleased = NoteKEYB.fromValue(keysColl.indexOf(key) - 9); keyReleasedCommand.run();});
+            key.setOnMouseReleased(event -> {
+                lastKeyReleased = NoteKEYB.fromValue(keysColl.indexOf(key) - 9);
+                keyReleasedCommand.run();
+            });
+            key.setOnMouseExited(event -> {
+                lastKeyReleased = NoteKEYB.fromValue(keysColl.indexOf(key) - 9);
+                keyReleasedCommand.run();
+            });
         }
 
         octavePicker.valueProperty().addListener(event -> {
@@ -343,9 +348,9 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
 
 
     @Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(this.octavePicker.getValue());
-	}
+    public void writeObject(ObjectOutputStream o) throws IOException {
+        o.writeDouble(this.octavePicker.getValue());
+    }
 
     @Override
     public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
