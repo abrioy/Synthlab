@@ -17,36 +17,37 @@ import java.util.logging.Logger;
  * with an other modular signal.
  */
 public class ModuleVCA implements Module {
-    private static final Logger LOGGER = Logger.getLogger(ModuleVCA.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleVCA.class.getName());
 
     /**
-     * The list of port of the VCA Module
+     * The list of port of the VCA Module.
      */
     private Collection<Port> ports = new ArrayList<>();
 
     /**
-     * inputs ports
+     * inputs ports.
      */
     private InputPort inputPort, inputPortAm;
     /**
-     * output port
+     * output port.
      */
     private OutputPort outputPort;
 
     /**
-     * attenuator filter
+     * attenuator filter.
      */
     private FilterAttenuator filterAttenuator = new FilterAttenuator();
 
     /**
-     * Attenuation modulator
+     * Attenuation modulator.
      */
     private FilterVCAam filterVCAam;
 
     private double attenuation = 0.0;
 
     /**
-     * Constructor
+     * Constructor.
      * @param synthesizer Synthesizer
      */
     public ModuleVCA(final Synthesizer synthesizer) {
@@ -65,7 +66,6 @@ public class ModuleVCA implements Module {
     }
 
     /**
-     *
      * @return the attenuation in DB
      */
     public final double getAttenuation() {
@@ -73,7 +73,7 @@ public class ModuleVCA implements Module {
     }
 
     /**
-     * set the attenuation in DB
+     * set the attenuation in DB.
      * @param newAttenuation attenuation new attenuation
      */
     public final void setAttenuation(final double newAttenuation) {
@@ -82,7 +82,7 @@ public class ModuleVCA implements Module {
     }
 
     /**
-     * get the list of ports of the VCA module
+     * get the list of ports of the VCA module.
      * @return VCA ports
      */
     @Override
@@ -91,7 +91,7 @@ public class ModuleVCA implements Module {
     }
 
     /**
-     * start the VCA
+     * start the VCA.
      */
     @Override
     public final void start() {
@@ -100,7 +100,7 @@ public class ModuleVCA implements Module {
     }
 
     /**
-     * Stop the VCA
+     * Stop the VCA.
      */
     @Override
     public final void stop() {
@@ -116,7 +116,6 @@ public class ModuleVCA implements Module {
     }
 
     /**
-     *
      * @return the type of the module
      */
     @Override

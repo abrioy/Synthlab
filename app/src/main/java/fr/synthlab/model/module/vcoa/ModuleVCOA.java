@@ -19,48 +19,50 @@ import java.util.logging.Logger;
 
 /**
  * VCO module ( Voltage Control Oscillator ) for generating a periodic
- * signal whose shape can be selected and the frequency can be controlled by another signal
+ * signal whose shape can be selected and
+ * the frequency can be controlled by another signal.
  */
 public class ModuleVCOA implements Module {
-    private static final Logger LOGGER = Logger.getLogger(ModuleVCOA.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleVCOA.class.getName());
 
     /**
-     * The list of port of the VCO module
+     * The list of port of the VCO module.
      */
     private Collection<Port> ports = new ArrayList<>();
 
     /**
-     * The frequency f0 of the VCO
+     * The frequency f0 of the VCO.
      */
     private double frequency = 450;
 
     /**
-     * Filter modulator
+     * Filter modulator.
      */
     private FilterFm filterFm = new FilterFm(frequency);
 
     /**
-     * Square oscillator
+     * Square oscillator.
      */
     private SquareOscillator squareOscillator = new SquareOscillator();
 
     /**
-     * Triangle Oscillator
+     * Triangle Oscillator.
      */
     private TriangleOscillator triangleOscillator = new TriangleOscillator();
 
     /**
-     * Sawtooth Oscillator
+     * Sawtooth Oscillator.
      */
     private SawtoothOscillator sawtoothOscillator = new SawtoothOscillator();
 
     /**
-     * Sin Oscillator
+     * Sin Oscillator.
      */
     private SineOscillator sineOscillator = new SineOscillator();
 
     /**
-     * Filter modulator input port
+     * Filter modulator input port.
      */
     private InputPort fmInput;
 
@@ -73,7 +75,7 @@ public class ModuleVCOA implements Module {
 
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param synthesizer Synthesizer
      */
@@ -106,7 +108,7 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     * Start the VCO
+     * Start the VCO.
      */
     @Override
     public final void start() {
@@ -118,7 +120,7 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     * Stop the VCO
+     * Stop the VCO.
      */
     @Override
     public final void stop() {
@@ -138,7 +140,7 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     * set the frequency of the VCO
+     * set the frequency of the VCO.
      *
      * @param newFrequency new frequency
      */
@@ -155,10 +157,13 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     * This method is called by the input port fm of the VCO when its state has changed
-     * When nothing is connected to the input port of fm, the 3 oscillators has the same frequency f0
-     * When something is connected to the input port of fm, we connect the output port of fm filter
-     * to input port of each oscillator
+     * This method is called by the input port fm of the VCO
+     * when its state has changed
+     * When nothing is connected to the input port of fm,
+     * the 3 oscillators has the same frequency f0
+     * When something is connected to the input port of fm,
+     * we connect the output port of fm filter
+     * to input port of each oscillator.
      */
     @Override
     public final void update() {

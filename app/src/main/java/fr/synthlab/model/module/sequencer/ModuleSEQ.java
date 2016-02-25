@@ -15,10 +15,11 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class ModuleSEQ extends Observable implements Module {
-    private static final Logger LOGGER = Logger.getLogger(ModuleSEQ.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleSEQ.class.getName());
 
     /**
-     * All ports
+     * All ports.
      */
     private ArrayList<Port> ports = new ArrayList<>();
 
@@ -28,7 +29,7 @@ public class ModuleSEQ extends Observable implements Module {
     private Collection<Observer> observers;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param synth Synthesizer
      */

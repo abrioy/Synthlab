@@ -13,7 +13,7 @@ public class FilterOutKEYB extends UnitGenerator {
     private UnitOutputPort gate;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public FilterOutKEYB() {
         tension = 0;

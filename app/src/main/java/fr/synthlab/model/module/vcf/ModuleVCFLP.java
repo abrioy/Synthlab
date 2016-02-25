@@ -8,7 +8,7 @@ import fr.synthlab.model.module.port.OutputPort;
 
 public class ModuleVCFLP extends ModuleVCF {
     /**
-     * JSyn lowPass Filter
+     * JSyn lowPass Filter.
      */
     private FilterLowPass lpFilter = new FilterLowPass();
 
@@ -27,7 +27,7 @@ public class ModuleVCFLP extends ModuleVCF {
     }
 
     /**
-     * start the module
+     * start the module.
      */
     @Override
     public final void start() {
@@ -36,7 +36,7 @@ public class ModuleVCFLP extends ModuleVCF {
     }
 
     /**
-     * stop the module
+     * stop the module.
      */
     @Override
     public final void stop() {
@@ -45,7 +45,7 @@ public class ModuleVCFLP extends ModuleVCF {
     }
 
     /**
-     * set the cut frequency
+     * set the cut frequency.
      * @param f0 the cut frequency
      */
     @Override
@@ -58,8 +58,10 @@ public class ModuleVCFLP extends ModuleVCF {
 
     /**
      * this method is called when we connect or disconnect the fm Input port
-     * when the fm input port is connected, we connect his output to the LowPass filter
-     * when the fm input port is disconnected, we set the frequency f0 to the LowPass filter
+     * when the fm input port is connected,
+     * we connect his output to the LowPass filter
+     * when the fm input port is disconnected,
+     * we set the frequency f0 to the LowPass filter.
      */
     @Override
     public final void update() {

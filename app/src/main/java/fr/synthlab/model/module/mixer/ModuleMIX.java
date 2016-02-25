@@ -18,7 +18,8 @@ import java.util.logging.Logger;
  * @see Module
  */
 public class ModuleMIX implements Module {
-    private static final Logger LOGGER = Logger.getLogger(ModuleMIX.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleMIX.class.getName());
 
     /**
      * attenuator on input 1.
@@ -117,7 +118,7 @@ public class ModuleMIX implements Module {
     }
 
     /**
-     * not use in this module
+     * not use in this module.
      */
     @Override
     public void update() {

@@ -13,17 +13,20 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Main extends Application {
-    private static final Logger APP_ROOT_LOGGER = Logger.getLogger("fr.synthlab");
+    private static final Logger APP_ROOT_LOGGER =
+            Logger.getLogger("fr.synthlab");
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     public static void main(final String[] args) {
         // Reading logging.properties
         if (System.getProperty("java.util.logging.config.file") == null) {
-            final InputStream inputStream = Main.class.getResourceAsStream("/logging.properties");
+            final InputStream inputStream = Main.class
+                    .getResourceAsStream("/logging.properties");
             try {
                 LogManager.getLogManager().readConfiguration(inputStream);
             } catch (final IOException e) {
-                Logger.getAnonymousLogger().severe("Could not load default logging.properties file");
+                Logger.getAnonymousLogger().severe(
+                        "Could not load default logging.properties file");
                 Logger.getAnonymousLogger().severe(e.getMessage());
             }
         }
@@ -35,7 +38,8 @@ public class Main extends Application {
 
     @Override
     public final void start(final Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/MainWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("/gui/fxml/MainWindow.fxml"));
         loader.load();
         Scene scene = new Scene(loader.getRoot());
 

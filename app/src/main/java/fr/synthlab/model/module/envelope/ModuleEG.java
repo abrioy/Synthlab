@@ -14,10 +14,11 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 public class ModuleEG implements Module {
-    private static final Logger LOGGER = Logger.getLogger(ModuleSCOP.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleSCOP.class.getName());
 
     /**
-     * All ports
+     * All ports.
      */
     private ArrayList<Port> ports = new ArrayList<>();
 
@@ -39,7 +40,6 @@ public class ModuleEG implements Module {
         envelope.decay.set(1.0);
         envelope.sustain.set(0.5);
         envelope.release.set(1.0);
-
     }
 
     @Override

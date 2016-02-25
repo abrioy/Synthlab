@@ -6,18 +6,20 @@ import fr.synthlab.model.module.Module;
 import java.util.logging.Logger;
 
 public class OutputPort extends Port {
-    private static final Logger LOGGER = Logger.getLogger(OutputPort.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(OutputPort.class.getName());
 
     private ConnectableOutput output;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param name   The name of this port
      * @param m      The module containing this port
      * @param outputInit The JSyn port to assign
      */
-    public OutputPort(final String name, final Module m, final ConnectableOutput outputInit) {
+    public OutputPort(final String name,
+                      final Module m, final ConnectableOutput outputInit) {
         super(name, m);
         output = outputInit;
     }
@@ -30,7 +32,7 @@ public class OutputPort extends Port {
     }
 
     /**
-     * Connect another port to this port
+     * Connect another port to this port.
      *
      * @param port Port to connect
      */
@@ -38,7 +40,8 @@ public class OutputPort extends Port {
     public final void connect(final Port port) {
         if (getConnected() != null) {
             throw new RuntimeException("Unable to connect \"" + port.getName()
-                    + "\" to this port (" + this.getName() + ") because it is already connected to \""
+                    + "\" to this port (" + this.getName()
+                    + ") because it is already connected to \""
                     + getConnected().getName() + "\".");
         }
         if (port instanceof InputPort) {
@@ -48,7 +51,7 @@ public class OutputPort extends Port {
     }
 
     /**
-     * Disconnect the current connected port
+     * Disconnect the current connected port.
      */
     public final void disconnect() {
         if (getConnected() instanceof InputPort) {

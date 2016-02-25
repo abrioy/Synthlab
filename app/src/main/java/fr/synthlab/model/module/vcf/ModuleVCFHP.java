@@ -9,7 +9,7 @@ import fr.synthlab.model.module.port.OutputPort;
 public class ModuleVCFHP extends ModuleVCF {
 
     /**
-     * JSyn highPass Filter
+     * JSyn highPass Filter.
      */
     private FilterHighPass hpFilter = new FilterHighPass();
 
@@ -25,7 +25,7 @@ public class ModuleVCFHP extends ModuleVCF {
     }
 
     /**
-     * start the module
+     * start the module.
      */
     @Override
     public final void start() {
@@ -34,7 +34,7 @@ public class ModuleVCFHP extends ModuleVCF {
     }
 
     /**
-     * stop the module
+     * stop the module.
      */
     @Override
     public final void stop() {
@@ -43,7 +43,7 @@ public class ModuleVCFHP extends ModuleVCF {
     }
 
     /**
-     * set the cut frequency
+     * set the cut frequency.
      * @param f0 the cut frequency
      */
     @Override
@@ -56,8 +56,10 @@ public class ModuleVCFHP extends ModuleVCF {
 
     /**
      * this method is called when we connect or disconnect the fm Input port
-     * when the fm input port is connected, we connect his output to the HighPass filter
-     * when the fm input port is disconnected, we set the frequency f0 to the HighPass filter
+     * when the fm input port is connected,
+     * we connect his output to the HighPass filter
+     * when the fm input port is disconnected,
+     * we set the frequency f0 to the HighPass filter.
      */
     @Override
     public final void update() {
@@ -70,7 +72,6 @@ public class ModuleVCFHP extends ModuleVCF {
     }
 
     /**
-     *
      * @return the type of the module
      */
     @Override

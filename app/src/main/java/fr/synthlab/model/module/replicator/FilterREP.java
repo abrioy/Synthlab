@@ -60,7 +60,7 @@ public class FilterREP extends UnitGenerator {
     }
 
     /**
-     * Getter on input
+     * Getter on input.
      * @return in
      */
     public final UnitInputPort getIn() {
@@ -68,7 +68,7 @@ public class FilterREP extends UnitGenerator {
     }
 
     /**
-     * Getter on Output 1
+     * Getter on Output 1.
      * @return out1
      */
     public final UnitOutputPort getOut1() {
@@ -76,7 +76,7 @@ public class FilterREP extends UnitGenerator {
     }
 
     /**
-     * Getter on Output 2
+     * Getter on Output 2.
      * @return out2
      */
     public final UnitOutputPort getOut2() {
@@ -84,7 +84,7 @@ public class FilterREP extends UnitGenerator {
     }
 
     /**
-     * Getter on Output 3
+     * Getter on Output 3.
      * @return out3
      */
     public final UnitOutputPort getOut3() {

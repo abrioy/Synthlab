@@ -69,7 +69,8 @@ public class Port {
             port = null;
             module.update();
         } else {
-            LOGGER.warning("Trying to disconnect a port that is not connected to anything.");
+            LOGGER.warning("Trying to disconnect a port"
+                    + " that is not connected to anything.");
         }
     }
 

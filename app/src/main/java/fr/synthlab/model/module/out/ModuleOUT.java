@@ -23,7 +23,8 @@ import java.util.logging.Logger;
  * @see Module
  */
 public class ModuleOUT implements Module {
-    private static final Logger LOGGER = Logger.getLogger(ModuleOUT.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleOUT.class.getName());
 
     /**
      * audio stereo left exit.
@@ -103,11 +104,17 @@ public class ModuleOUT implements Module {
         InputPort inRight = new InputPort("Right", this, attenuatorRight.input);
         interOut = new OutputPort("out", this, attenuator.output);
         interOutLeft = new OutputPort("outLeft", this, attenuatorLeft.output);
-        interOutRight = new OutputPort("outRight", this, attenuatorRight.output);
-        new InputPort("inLeft", this, lineOutLeft.input.getConnectablePart(0)).connect(interOutLeft);
-        new InputPort("inRight", this, lineOutRight.input.getConnectablePart(1)).connect(interOutRight);
-        new InputPort("in0", this, lineOut.input.getConnectablePart(0)).connect(interOut);
-        new InputPort("in1", this, lineOut.input.getConnectablePart(1)).connect(interOut);
+        interOutRight = new OutputPort(
+                "outRight", this, attenuatorRight.output);
+        new InputPort("inLeft", this,
+                lineOutLeft.input.getConnectablePart(0)).connect(interOutLeft);
+        new InputPort("inRight", this,
+                lineOutRight.input.getConnectablePart(1))
+                .connect(interOutRight);
+        new InputPort("in0", this,
+                lineOut.input.getConnectablePart(0)).connect(interOut);
+        new InputPort("in1", this,
+                lineOut.input.getConnectablePart(1)).connect(interOut);
         syn = synthesizer;
 
         ports.add(in);
@@ -138,25 +145,34 @@ public class ModuleOUT implements Module {
         }
     }
 
-    public final void setRecording(final boolean newRecording, final File pickedFile) {
+    public final void setRecording(
+            final boolean newRecording, final File pickedFile) {
         recording = newRecording;
 
         try {
             if (recording) {
                 waveRecorder = new WaveRecorder(syn, pickedFile);
-                ((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 0);
-                ((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 1);
-                ((UnitOutputPort) interOutLeft.getOutput()).connect(0, waveRecorder.getInput(), 0);
-                ((UnitOutputPort) interOutRight.getOutput()).connect(0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOut.getOutput()).connect(
+                        0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).connect(
+                        0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).connect(
+                        0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).connect(
+                        0, waveRecorder.getInput(), 1);
 
                 waveRecorder.start();
             } else if (waveRecorder != null) {
                 waveRecorder.stop();
 
-                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
-                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
-                ((UnitOutputPort) interOutLeft.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
-                ((UnitOutputPort) interOutRight.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOut.getOutput()).disconnect(
+                        0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).disconnect(
+                        0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).disconnect(
+                        0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).disconnect(
+                        0, waveRecorder.getInput(), 1);
 
                 waveRecorder.close();
 

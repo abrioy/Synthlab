@@ -3,7 +3,6 @@ package fr.synthlab.model.module.replicator;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
-import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -13,7 +12,8 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 public class ModuleREP implements Module {
-    private static final Logger LOGGER = Logger.getLogger(ModuleSCOP.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleREP.class.getName());
 
     /**
      * All ports.

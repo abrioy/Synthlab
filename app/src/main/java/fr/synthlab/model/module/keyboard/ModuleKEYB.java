@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class ModuleKEYB implements Module {
-    private static final Logger LOGGER = Logger.getLogger(ModuleKEYB.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleKEYB.class.getName());
 
     /**
      * Reference frequency A3.
@@ -25,9 +26,11 @@ public class ModuleKEYB implements Module {
     private final int referenceOctave = 3;
 
     /**
-     * Note corresponding to the reference frequency
-     * (changing it will only change the initial note being played on the oscillo,
-     * to generalize that a bit, we'd need to modify the formula in computeFrequency())
+     * Note corresponding to the reference frequency.
+     * (changing it will only change the initial note
+     * being played on the oscillo,
+     * to generalize that a bit, we'd need to modify
+     * the formula in computeFrequency()).
      */
     private final NoteKEYB referenceNote = NoteKEYB.A;
 
@@ -68,7 +71,7 @@ public class ModuleKEYB implements Module {
     private FilterKEYB keyboardFilter;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param synth Synthesizer
      */
@@ -86,7 +89,8 @@ public class ModuleKEYB implements Module {
         ports.add(out);
 
         //Gate port
-        OutputPort gate = new OutputPort("gate", this, keyboardFilter.getGate());
+        OutputPort gate
+                = new OutputPort("gate", this, keyboardFilter.getGate());
         ports.add(gate);
 
         this.pressKey(referenceNote);
@@ -134,7 +138,7 @@ public class ModuleKEYB implements Module {
     }
 
     /**
-     * Change keyboard's octave
+     * Change keyboard's octave.
      *
      * @param newOctave New octave value
      */
@@ -165,7 +169,8 @@ public class ModuleKEYB implements Module {
      * @param n New note
      */
     private void computeFrequency(final NoteKEYB n) {
-        filterOutKEYB.setTension(n.getValue() / 12.0 + (octave - referenceOctave));
+        filterOutKEYB.setTension(n.getValue()
+                / 12.0 + (octave - referenceOctave));
     }
 
     /**

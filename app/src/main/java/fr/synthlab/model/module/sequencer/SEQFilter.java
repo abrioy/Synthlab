@@ -17,7 +17,7 @@ public class SEQFilter extends UnitFilter {
     private double sigFrontStop;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param stepValues list of value
      * @param seqInit        sequence
@@ -32,7 +32,7 @@ public class SEQFilter extends UnitFilter {
     }
 
     /**
-     * Generate new values.Oscilloscope
+     * Generate new values.Oscilloscope.
      *
      * @param start param managed by Jsyn
      * @param limit param managed by Jsyn

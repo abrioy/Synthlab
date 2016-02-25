@@ -111,7 +111,8 @@ public class FilterMIX extends UnitGenerator {
             if (input4.isConnected()) {
                 div++;
             }
-            outputs[i] = (inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i]) / div;
+            outputs[i] = (inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i])
+                    / div;
         }
     }
 

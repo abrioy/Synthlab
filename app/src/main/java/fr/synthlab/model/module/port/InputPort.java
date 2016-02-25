@@ -9,21 +9,23 @@ import java.util.logging.Logger;
  *
  */
 public class InputPort extends Port {
-    private static final Logger LOGGER = Logger.getLogger(InputPort.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(InputPort.class.getName());
 
     /**
-     * The matching port in JSyn
+     * The matching port in JSyn.
      */
     private ConnectableInput input;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param name  The name of this port
      * @param m     The module containing this port
      * @param inputInit The JSyn port to assign
      */
-    public InputPort(final String name, final Module m, final ConnectableInput inputInit) {
+    public InputPort(final String name,
+                     final Module m, final ConnectableInput inputInit) {
         super(name, m);
         input = inputInit;
     }
@@ -44,7 +46,8 @@ public class InputPort extends Port {
     public final void connect(final Port port) {
         if (getConnected() != null) {
             throw new RuntimeException("Unable to connect \"" + port.getName()
-                    + "\" to this port (" + this.getName() + ") because it is already connected to \""
+                    + "\" to this port (" + this.getName()
+                    + ") because it is already connected to \""
                     + getConnected().getName() + "\".");
         }
 

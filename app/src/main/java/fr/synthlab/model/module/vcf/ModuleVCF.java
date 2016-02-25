@@ -14,19 +14,20 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 public abstract class ModuleVCF implements Module {
-
-    private static final Logger LOGGER = Logger.getLogger(ModuleVCF.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleVCF.class.getName());
 
     protected Collection<Port> ports = new ArrayList<>();
     protected InputPort fmInput;
     protected InputPort input;
     protected OutputPort output;
     /**
-     * Fréquence de coupure f0
+     * Fréquence de coupure f0.
      */
     protected double f0 = 440;
+
     /**
-     * Filter modulator
+     * Filter modulator.
      */
     protected FilterFm filterFm;
 
