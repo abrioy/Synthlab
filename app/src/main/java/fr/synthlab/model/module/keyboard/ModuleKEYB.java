@@ -17,29 +17,29 @@ public class ModuleKEYB implements Module {
     /**
      * Reference frequency A3.
      */
-    private final double REFERENCE_FREQUENCY = 440.0;
+    private final double referenceFrequency = 440.0;
 
     /**
      * Octave of the reference frequency.
      */
-    private final int REFERENCE_OCTAVE = 3;
+    private final int referenceOctave = 3;
 
     /**
      * Note corresponding to the reference frequency
      * (changing it will only change the initial note being played on the oscillo,
      * to generalize that a bit, we'd need to modify the formula in computeFrequency())
      */
-    private final NoteKEYB REFERENCE_NOTE = NoteKEYB.A;
+    private final NoteKEYB referenceNote = NoteKEYB.A;
 
     /**
      * Minimum octave.
      */
-    private final int OCTAVE_MIN = 0;
+    private final int octaveMin = 0;
 
     /**
      * Maximum octave.
      */
-    private final int OCTAVE_MAX = 7;
+    private final int octaveMax = 7;
 
     /**
      * Current octave.
@@ -73,7 +73,7 @@ public class ModuleKEYB implements Module {
      * @param synth Synthesizer
      */
     public ModuleKEYB(Synthesizer synth) {
-        octave = REFERENCE_OCTAVE;
+        octave = referenceOctave;
 
         //Initialize
         filterOutKEYB = new FilterOutKEYB();
@@ -89,7 +89,7 @@ public class ModuleKEYB implements Module {
         OutputPort gate = new OutputPort("gate", this, keyboardFilter.getGate());
         ports.add(gate);
 
-        this.pressKey(REFERENCE_NOTE);
+        this.pressKey(referenceNote);
     }
 
     /**
@@ -140,8 +140,8 @@ public class ModuleKEYB implements Module {
      * @param newOctave New octave value
      */
     public void changeOctave(int newOctave) {
-        newOctave = Math.max(newOctave, OCTAVE_MIN);
-        newOctave = Math.min(newOctave, OCTAVE_MAX);
+        newOctave = Math.max(newOctave, octaveMin);
+        newOctave = Math.min(newOctave, octaveMax);
         this.octave = newOctave;
         if (lastNotePressed != null) {
             computeFrequency(lastNotePressed);
@@ -166,7 +166,7 @@ public class ModuleKEYB implements Module {
      * @param n New note
      */
     private void computeFrequency(NoteKEYB n) {
-        filterOutKEYB.setTension(n.getValue() / 12.0 + (octave - REFERENCE_OCTAVE));
+        filterOutKEYB.setTension(n.getValue() / 12.0 + (octave - referenceOctave));
     }
 
     /**

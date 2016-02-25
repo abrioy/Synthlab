@@ -19,23 +19,23 @@
           label="out" name="out" type="output" />
 
     <FlowPane layoutX="25.0" layoutY="35.0" hgap="2">
-        <KeyboardKey fx:id="CKey" />
-        <KeyboardKey fx:id="DKey" />
-        <KeyboardKey fx:id="EKey" />
-        <KeyboardKey fx:id="FKey" />
-        <KeyboardKey fx:id="GKey" />
-        <KeyboardKey fx:id="AKey" />
-        <KeyboardKey fx:id="BKey" />
-        <KeyboardKey fx:id="CNextOctKey" />
+        <KeyboardKey fx:id="cKey" />
+        <KeyboardKey fx:id="dKey" />
+        <KeyboardKey fx:id="eKey" />
+        <KeyboardKey fx:id="fKey" />
+        <KeyboardKey fx:id="gKey" />
+        <KeyboardKey fx:id="aKey" />
+        <KeyboardKey fx:id="bKey" />
+        <KeyboardKey fx:id="cNextOctKey" />
     </FlowPane>
 
     <FlowPane layoutX="51.0" layoutY="35.0" hgap="12" pickOnBounds="false">
-        <KeyboardKey fx:id="CSharpKey" isWhiteKey="false" />
-        <KeyboardKey fx:id="DSharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="cSharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="dSharpKey" isWhiteKey="false" />
         <Rectangle height="0" width ="30" />
-        <KeyboardKey fx:id="FSharpKey" isWhiteKey="false" />
-        <KeyboardKey fx:id="GSharpKey" isWhiteKey="false" />
-        <KeyboardKey fx:id="ASharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="fSharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="gSharpKey" isWhiteKey="false" />
+        <KeyboardKey fx:id="aSharpKey" isWhiteKey="false" />
     </FlowPane>
 
     <Label fx:id="octaveLabel" layoutX="380.0" layoutY="55.0"

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public class Cable extends CubicCurve {
     private static final Logger LOGGER = Logger.getLogger(Cable.class.getName());
-    private final double CIRCLE_RADIUS = 12.0d;
+    private final double circleRadius = 12.0d;
     private Color color;
     private Plug in;
     private Plug out;
@@ -80,8 +80,8 @@ public class Cable extends CubicCurve {
     }
 
     public void update(Point2D mouse) {
-        Point2D correctedMouse = new Point2D(Math.max(CIRCLE_RADIUS, mouse.getX()),
-                Math.max(CIRCLE_RADIUS, mouse.getY()));
+        Point2D correctedMouse = new Point2D(Math.max(circleRadius, mouse.getX()),
+                Math.max(circleRadius, mouse.getY()));
 
         in = getPluggedPlug();
         if (out != null) {
@@ -136,7 +136,7 @@ public class Cable extends CubicCurve {
     private void addCircle(Circle c, double x, double y) {
         c.setCenterX(x);
         c.setCenterY(y);
-        c.setRadius(CIRCLE_RADIUS);
+        c.setRadius(circleRadius);
     }
 
     public void allToFront() {

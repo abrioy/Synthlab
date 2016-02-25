@@ -23,31 +23,31 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleKEYB.class.getName());
 
     @FXML
-    private KeyboardKey CKey;
+    private KeyboardKey cKey;
     @FXML
-    private KeyboardKey CSharpKey;
+    private KeyboardKey cSharpKey;
     @FXML
-    private KeyboardKey DKey;
+    private KeyboardKey dKey;
     @FXML
-    private KeyboardKey DSharpKey;
+    private KeyboardKey dSharpKey;
     @FXML
-    private KeyboardKey EKey;
+    private KeyboardKey eKey;
     @FXML
-    private KeyboardKey FKey;
+    private KeyboardKey fKey;
     @FXML
-    private KeyboardKey FSharpKey;
+    private KeyboardKey fSharpKey;
     @FXML
-    private KeyboardKey GKey;
+    private KeyboardKey gKey;
     @FXML
-    private KeyboardKey GSharpKey;
+    private KeyboardKey gSharpKey;
     @FXML
-    private KeyboardKey AKey;
+    private KeyboardKey aKey;
     @FXML
-    private KeyboardKey ASharpKey;
+    private KeyboardKey aSharpKey;
     @FXML
-    private KeyboardKey BKey;
+    private KeyboardKey bKey;
     @FXML
-    private KeyboardKey CNextOctKey;
+    private KeyboardKey cNextOctKey;
 
     @FXML
     private Knob octavePicker;
@@ -71,99 +71,99 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
         /*
             Mouse pressed events
          */
-        CKey.setOnMouseDragged(Event::consume);
-        CKey.setOnMousePressed(event -> {
+        cKey.setOnMouseDragged(Event::consume);
+        cKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.C;
             keyPressedCommand.run();
             event.consume();
         });
-        CSharpKey.setOnMouseDragged(Event::consume);
-        CSharpKey.setOnMousePressed(event -> {
+        cSharpKey.setOnMouseDragged(Event::consume);
+        cSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.CSharp;
             keyPressedCommand.run();
             event.consume();
         });
-        DKey.setOnMouseDragged(Event::consume);
-        DKey.setOnMousePressed(event -> {
+        dKey.setOnMouseDragged(Event::consume);
+        dKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.D;
             keyPressedCommand.run();
             event.consume();
         });
-        DSharpKey.setOnMouseDragged(Event::consume);
-        DSharpKey.setOnMousePressed(event -> {
+        dSharpKey.setOnMouseDragged(Event::consume);
+        dSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.DSharp;
             keyPressedCommand.run();
             event.consume();
         });
-        EKey.setOnMouseDragged(Event::consume);
-        EKey.setOnMousePressed(event -> {
+        eKey.setOnMouseDragged(Event::consume);
+        eKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.E;
             keyPressedCommand.run();
             event.consume();
         });
-        FKey.setOnMouseDragged(Event::consume);
-        FKey.setOnMousePressed(event -> {
+        fKey.setOnMouseDragged(Event::consume);
+        fKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.F;
             keyPressedCommand.run();
             event.consume();
         });
-        FSharpKey.setOnMouseDragged(Event::consume);
-        FSharpKey.setOnMousePressed(event -> {
+        fSharpKey.setOnMouseDragged(Event::consume);
+        fSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.FSharp;
             keyPressedCommand.run();
             event.consume();
         });
-        GKey.setOnMouseDragged(Event::consume);
-        GKey.setOnMousePressed(event -> {
+        gKey.setOnMouseDragged(Event::consume);
+        gKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.G;
             keyPressedCommand.run();
             event.consume();
         });
-        GSharpKey.setOnMouseDragged(Event::consume);
-        GSharpKey.setOnMousePressed(event -> {
+        gSharpKey.setOnMouseDragged(Event::consume);
+        gSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.GSharp;
             keyPressedCommand.run();
             event.consume();
         });
-        AKey.setOnMouseDragged(Event::consume);
-        AKey.setOnMousePressed(event -> {
+        aKey.setOnMouseDragged(Event::consume);
+        aKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.A;
             keyPressedCommand.run();
             event.consume();
         });
-        ASharpKey.setOnMouseDragged(Event::consume);
-        ASharpKey.setOnMousePressed(event -> {
+        aSharpKey.setOnMouseDragged(Event::consume);
+        aSharpKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.ASharp;
             keyPressedCommand.run();
             event.consume();
         });
-        BKey.setOnMouseDragged(Event::consume);
-        BKey.setOnMousePressed(event -> {
+        bKey.setOnMouseDragged(Event::consume);
+        bKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.B;
             keyPressedCommand.run();
             event.consume();
         });
-        CNextOctKey.setOnMouseDragged(Event::consume);
-        CNextOctKey.setOnMousePressed(event -> {
+        cNextOctKey.setOnMouseDragged(Event::consume);
+        cNextOctKey.setOnMousePressed(event -> {
             lastKeyPressed = NoteKEYB.C2;
             keyPressedCommand.run();
             event.consume();
         });
 
         List<KeyboardKey> keysColl = new ArrayList<>();
-        keysColl.add(CKey);
-        keysColl.add(CSharpKey);
-        keysColl.add(DKey);
-        keysColl.add(DSharpKey);
-        keysColl.add(EKey);
-        keysColl.add(FKey);
-        keysColl.add(FSharpKey);
-        keysColl.add(GKey);
-        keysColl.add(GSharpKey);
-        keysColl.add(AKey);
-        keysColl.add(ASharpKey);
-        keysColl.add(BKey);
-        keysColl.add(CNextOctKey);
+        keysColl.add(cKey);
+        keysColl.add(cSharpKey);
+        keysColl.add(dKey);
+        keysColl.add(dSharpKey);
+        keysColl.add(eKey);
+        keysColl.add(fKey);
+        keysColl.add(fSharpKey);
+        keysColl.add(gKey);
+        keysColl.add(gSharpKey);
+        keysColl.add(aKey);
+        keysColl.add(aSharpKey);
+        keysColl.add(bKey);
+        keysColl.add(cNextOctKey);
 
         for (KeyboardKey key : keysColl) {
             // Ugly, but it saves a lot of space
