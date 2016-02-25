@@ -24,7 +24,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleOUT extends ViewModule implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleOUT.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleOUT.class.getName());
 
     @FXML
     private Knob picker;
@@ -93,7 +94,8 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
         if (pickedDirectory == null) {
             file = new File(filename);
         } else {
-            file = new File(pickedDirectory.getPath() + File.separator + filename);
+            file = new File(pickedDirectory.getPath()
+                    + File.separator + filename);
         }
 
         try {
@@ -114,7 +116,8 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void initialize(final URL location, final ResourceBundle resources) {
+    public final void initialize(
+            final URL location, final ResourceBundle resources) {
         picker.valueProperty().addListener(event -> {
             volume.run();
         });
@@ -130,7 +133,8 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
             recordCommand.run();
         });
 
-        recordButton.setOnAction(event -> isRecording.setValue(!isRecording.getValue()));
+        recordButton.setOnAction(event ->
+                isRecording.setValue(!isRecording.getValue()));
 
         fileChooserButton.getStyleClass().add("file-button");
         fileChooserButton.setOnAction(event -> {
@@ -138,13 +142,16 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
             directoryChooser.setTitle("Output folder");
 
             if (pickedDirectory != null) {
-                directoryChooser.setInitialDirectory(pickedDirectory.getParentFile());
+                directoryChooser.setInitialDirectory(
+                        pickedDirectory.getParentFile());
             }
 
-            File selectedDirectory = directoryChooser.showDialog(getScene().getWindow());
+            File selectedDirectory = directoryChooser.showDialog(
+                    getScene().getWindow());
 
             if (selectedDirectory != null) {
-                LOGGER.info("New recording output directory selected: \"" + selectedDirectory.getPath() + "\".");
+                LOGGER.info("New recording output directory selected: \""
+                        + selectedDirectory.getPath() + "\".");
                 pickedDirectory = selectedDirectory;
             }
         });
@@ -152,13 +159,15 @@ public class ViewModuleOUT extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void writeObject(final ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         o.writeDouble(picker.getValue());
         o.writeBoolean(isMuted.getValue());
     }
 
     @Override
-    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
         picker.setValue(o.readDouble());
         isMuted.setValue(o.readBoolean());
     }

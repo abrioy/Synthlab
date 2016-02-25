@@ -15,7 +15,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleSCOP extends ViewModule implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleSCOP.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleSCOP.class.getName());
 
     @FXML
     private OscilloscopeDrawing oscilloscopeDrawing;
@@ -33,7 +34,8 @@ public class ViewModuleSCOP extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void initialize(final URL url, final ResourceBundle resourceBundle) {
+    public final void initialize(
+            final URL url, final ResourceBundle resourceBundle) {
         picker.valueProperty().addListener(event -> {
             pickerCmd.run();
         });
@@ -53,12 +55,14 @@ public class ViewModuleSCOP extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void writeObject(final ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         o.writeDouble(picker.getValue());
     }
 
     @Override
-    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
         picker.setValue(o.readDouble());
     }
 }

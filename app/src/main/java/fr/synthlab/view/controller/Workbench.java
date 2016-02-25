@@ -31,7 +31,8 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class Workbench extends Pane {
-    private static final Logger LOGGER = Logger.getLogger(Workbench.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(Workbench.class.getName());
 
     private final double moduleMargin = 2.0d;
     private ImageView dragGhost = new ImageView();
@@ -46,7 +47,8 @@ public class Workbench extends Pane {
 
         this.setOnMouseMoved(event -> {
             if (draggedCable != null) {
-                Point2D localPoint = this.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+                Point2D localPoint = this.sceneToLocal(
+                        new Point2D(event.getSceneX(), event.getSceneY()));
                 draggedCable.update(localPoint);
             }
         });
@@ -59,7 +61,8 @@ public class Workbench extends Pane {
     }
 
 
-    public final void serializeViewModules(final ObjectOutputStream outputStream) throws IOException {
+    public final void serializeViewModules(
+            final ObjectOutputStream outputStream) throws IOException {
         Collection<ViewModule> modules = getViewModules();
 
         // Writing the total number of modules
@@ -75,7 +78,8 @@ public class Workbench extends Pane {
 
             // Writing viewModule position
             Bounds viewModuleBounds = viewModule.getBoundsInParent();
-            LOGGER.fine("\tPosition: (" + viewModuleBounds.getMinX() + ", " + viewModuleBounds.getMinY() + ").");
+            LOGGER.fine("\tPosition: (" + viewModuleBounds.getMinX()
+                    + ", " + viewModuleBounds.getMinY() + ").");
             outputStream.writeDouble(viewModuleBounds.getMinX());
             outputStream.writeDouble(viewModuleBounds.getMinY());
 
@@ -111,12 +115,15 @@ public class Workbench extends Pane {
                 outputStream.writeDouble(cableColor.getRed());
                 outputStream.writeDouble(cableColor.getGreen());
                 outputStream.writeDouble(cableColor.getBlue());
-                LOGGER.fine("\t\t" + plug.getName() + "\t-- " + cableColor + "\t--> " + targetUID + "." + connectedPort.getName());
+                LOGGER.fine("\t\t" + plug.getName()
+                        + "\t-- " + cableColor + "\t--> "
+                        + targetUID + "." + connectedPort.getName());
             }
         }
     }
 
-    public final void deSerializeViewModules(final ObjectInputStream inputStream) throws IOException {
+    public final void deSerializeViewModules(
+            final ObjectInputStream inputStream) throws IOException {
         removeAllModules();
 
         Map<Integer, ViewModule> moduleList = new HashMap<>();
@@ -128,7 +135,9 @@ public class Workbench extends Pane {
             private Color cableColor;
 
             PortReference(final int parentUIDInit, final String nameInit,
-                                 final int connectedUIDInit, final String connectedPortNameInit, final Color cableColorInit) {
+                          final int connectedUIDInit,
+                          final String connectedPortNameInit,
+                          final Color cableColorInit) {
                 parentUID = parentUIDInit;
                 name = nameInit;
                 connectedUID = connectedUIDInit;
@@ -153,7 +162,8 @@ public class Workbench extends Pane {
                 LOGGER.fine("\tPosition: (" + xPos + ", " + yPos + ").");
 
                 // Creating new ViewModule and feeding it the gathered data
-                ViewModule viewModule = ViewModuleFactory.createViewModule(type, this);
+                ViewModule viewModule
+                        = ViewModuleFactory.createViewModule(type, this);
                 viewModule.relocate(xPos, yPos);
 
                 // Feeding data to the Module
@@ -172,16 +182,20 @@ public class Workbench extends Pane {
                 for (int j = 0; j < nbPlugs; j++) {
                     String plugName = (String) inputStream.readObject();
                     int connectedModuleId = inputStream.readInt();
-                    String connectedPortName = (String) inputStream.readObject();
+                    String connectedPortName
+                            = (String) inputStream.readObject();
                     double r = inputStream.readDouble();
                     double g = inputStream.readDouble();
                     double b = inputStream.readDouble();
                     Color cableColor = new Color(r, g, b, 1.0d);
                     portList.add(new PortReference(
-                            moduleUID, plugName, connectedModuleId, connectedPortName, cableColor));
-                    LOGGER.fine("\t\t" + plugName + "\t-- " + cableColor + "\t--> " + connectedModuleId + "." + connectedPortName);
+                            moduleUID, plugName, connectedModuleId,
+                            connectedPortName, cableColor));
+                    LOGGER.fine("\t\t" + plugName + "\t-- "
+                            + cableColor + "\t--> "
+                            + connectedModuleId + "."
+                            + connectedPortName);
                 }
-
                 this.addModule(viewModule);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -193,14 +207,18 @@ public class Workbench extends Pane {
         for (PortReference portReference : portList) {
             ViewModule viewModule = moduleList.get(portReference.parentUID);
             Plug plug = viewModule.getPlugByName(portReference.name);
-            ViewModule connectedViewModule = moduleList.get(portReference.connectedUID);
-            Plug connectedPlug = connectedViewModule.getPlugByName(portReference.connectedPortName);
+            ViewModule connectedViewModule = moduleList.get(
+                    portReference.connectedUID);
+            Plug connectedPlug = connectedViewModule.getPlugByName(
+                    portReference.connectedPortName);
 
             // Checking this port is not already connected
             if (!plug.getPort().isConnected()) {
-                LOGGER.fine("\t" + portReference.parentUID + "." + portReference.name
-                        + " -- " + portReference.cableColor + " --> "
-                        + portReference.connectedUID + "." + portReference.connectedPortName);
+                LOGGER.fine("\t" + portReference.parentUID
+                        + "." + portReference.name + " -- "
+                        + portReference.cableColor + " --> "
+                        + portReference.connectedUID + "."
+                        + portReference.connectedPortName);
                 this.connectPlugs(plug, connectedPlug);
                 Cable cable = new Cable(this, plug, connectedPlug);
                 cable.setColor(portReference.cableColor);
@@ -224,30 +242,32 @@ public class Workbench extends Pane {
     }
 
     /**
-     * Removes a module and all its connections for the workbench
+     * Removes a module and all its connections for the workbench.
      *
      * @param module Module to be deleted
      */
     public final void removeModule(final ViewModule module) {
-        module.getChildren().stream().filter(child -> child instanceof Pane).forEach(child -> {
+        module.getChildren().stream()
+                .filter(child -> child instanceof Pane)
+                .forEach(child -> {
             Pane core = (Pane) child;
-            core.getChildren().stream().filter(plug -> plug instanceof Plug).forEach(plug -> {
+            core.getChildren().stream()
+                    .filter(plug -> plug instanceof Plug)
+                    .forEach(plug -> {
                 Cable c = getConnectedCable((Plug) plug);
                 if (c != null) {
                     disconnectPlug((Plug) plug);
                     c.deleteCircles();
                     this.getChildren().remove(c);
                 }
-
             });
-
         });
         this.getChildren().remove(module);
     }
 
 
     /**
-     * Called when a module wants to be closed
+     * Called when a module wants to be closed.
      *
      * @param module Module to be closed
      */
@@ -257,7 +277,7 @@ public class Workbench extends Pane {
 
 
     /**
-     * Adds a module to the workbench at the position (0,0)
+     * Adds a module to the workbench at the position (0,0).
      *
      * @param module Module to be added
      */
@@ -267,7 +287,7 @@ public class Workbench extends Pane {
     }
 
     /**
-     * Ads listeners to a module to make it draggable across the workbench
+     * Ads listeners to a module to make it draggable across the workbench.
      *
      * @param module Module to be dragged
      */
@@ -280,8 +300,12 @@ public class Workbench extends Pane {
         final Delta mouseDelta = new Delta();
 
         module.setOnMousePressed(event -> {
-            Point2D mousePoint = this.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
-            Point2D localPoint = module.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+            Point2D mousePoint
+                    = sceneToLocal(
+                    new Point2D(event.getSceneX(), event.getSceneY()));
+            Point2D localPoint
+                    = module.sceneToLocal(
+                    new Point2D(event.getSceneX(), event.getSceneY()));
             mouseDelta.x = localPoint.getX();
             mouseDelta.y = localPoint.getY();
 
@@ -296,12 +320,15 @@ public class Workbench extends Pane {
         module.setOnMouseReleased(mouseEvent -> hideGhost());
 
         module.setOnMouseDragged(event -> {
-            Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
+            Point2D localPoint
+                    = workbench.sceneToLocal(
+                    new Point2D(event.getSceneX(), event.getSceneY()));
 
             double expectedX = localPoint.getX() - mouseDelta.x;
             double expectedY = localPoint.getY() - mouseDelta.y;
 
-            Point2D newLocation = computeNewModulePosition(module, expectedX, expectedY);
+            Point2D newLocation
+                    = computeNewModulePosition(module, expectedX, expectedY);
             if (newLocation != null) {
                 module.relocate(newLocation.getX(), newLocation.getY());
             }
@@ -318,11 +345,13 @@ public class Workbench extends Pane {
     public final void displayGhost(final ViewModule module) {
         if (this.getChildren().contains(dragGhost)) {
             this.getChildren().remove(dragGhost);
-            LOGGER.warning("The ghost was added again before it was properly removed.");
+            LOGGER.warning("The ghost was added again"
+                    + " before it was properly removed.");
         }
 
         // Creating a ghost image
-        WritableImage snapshot = module.snapshot(new SnapshotParameters(), null);
+        WritableImage snapshot
+                = module.snapshot(new SnapshotParameters(), null);
         dragGhost.setImage(snapshot);
         dragGhost.toFront();
         dragGhost.setMouseTransparent(true);
@@ -346,12 +375,15 @@ public class Workbench extends Pane {
     }
 
     private Collection<ViewModule> getViewModules() {
-        return this.getChildren().stream().filter(child -> child instanceof ViewModule)
-                .map(child -> (ViewModule) child).collect(Collectors.toCollection(ArrayList::new));
+        return this.getChildren().stream()
+                .filter(child -> child instanceof ViewModule)
+                .map(child -> (ViewModule) child).collect(
+                        Collectors.toCollection(ArrayList::new));
     }
 
     /**
-     * Checks if a Bounds is colliding with any module except the one provided in the parameter
+     * Checks if a Bounds is colliding with any
+     * module except the one provided in the parameter.
      *
      * @param node   The module to exclude for collision checking
      * @param bounds The bounds to check
@@ -371,9 +403,9 @@ public class Workbench extends Pane {
     }
 
     /**
-     * Computes the 2D center of a Bounds object
+     * Computes the 2D center of a Bounds object.
      *
-     * @param bounds
+     * @param bounds we need to find center
      * @return The center of the rectangle
      */
     private Point2D getBoundsCenter(final Bounds bounds) {
@@ -386,7 +418,8 @@ public class Workbench extends Pane {
 
     /**
      * Try and moves a module to the expected position.
-     * If the position is already occupied by another module or is out out bound,
+     * If the position is already occupied by another module*
+     * or is out out bound,
      * a ghost will be placed at this location and the module will be move to an
      * adjacent free position.
      *
@@ -395,7 +428,10 @@ public class Workbench extends Pane {
      * @param expectedY The desired Y coordinate
      * @return A suggested location to move the module to
      */
-    public final Point2D computeNewModulePosition(final ViewModule node, final double expectedX, final double expectedY) {
+    public final Point2D computeNewModulePosition(
+            final ViewModule node,
+            final double expectedX,
+            final double expectedY) {
         // Moving the ghost to where the module should be
         this.moveGhost(expectedX, expectedY);
 
@@ -419,7 +455,8 @@ public class Workbench extends Pane {
             if (collidingBounds == null) {
                 getCables().forEach(Cable::updateCircles);
                 // Updating the cable positions, just in case
-                getCables().stream().filter(c -> draggedCable != c).forEach(Cable::update);
+                getCables().stream().filter(c -> draggedCable != c)
+                        .forEach(Cable::update);
 
                 // The new position is not colliding with something
                 // We move the node
@@ -431,24 +468,34 @@ public class Workbench extends Pane {
                 Point2D newCenter = getBoundsCenter(newBounds);
                 Point2D collidingNodeCenter = getBoundsCenter(collidingBounds);
 
-                double distanceX = Math.abs(newCenter.getX() - collidingNodeCenter.getX());
-                double distanceY = Math.abs(newCenter.getY() - collidingNodeCenter.getY());
+                double distanceX = Math.abs(
+                        newCenter.getX() - collidingNodeCenter.getX());
+                double distanceY = Math.abs(
+                        newCenter.getY() - collidingNodeCenter.getY());
 
-                if ((distanceX / distanceY) > (collidingBounds.getWidth() / collidingBounds.getHeight())) {
+                if ((distanceX / distanceY)
+                        > (collidingBounds.getWidth()
+                        / collidingBounds.getHeight())) {
                     // We need to push it along the X axis
                     if (newCenter.getX() > collidingNodeCenter.getX()) {
                         // Right
                         newX = collidingBounds.getMaxX() + moduleMargin;
                     } else {
                         // Left
-                        newX = collidingBounds.getMinX() - newBounds.getWidth() - moduleMargin;
+                        newX = collidingBounds.getMinX()
+                                - newBounds.getWidth() - moduleMargin;
                     }
 
                     // We also snap it in place vertically
-                    if (Math.abs(collidingBounds.getMinY() - newBounds.getMinY()) < 20) {
+                    if (Math.abs(
+                            collidingBounds.getMinY() - newBounds.getMinY())
+                            < 20) {
                         newY = collidingBounds.getMinY();
-                    } else if (Math.abs(collidingBounds.getMaxY() - newBounds.getMaxY()) < 20) {
-                        newY = collidingBounds.getMaxY() - newBounds.getHeight();
+                    } else if (Math.abs(
+                            collidingBounds.getMaxY() - newBounds.getMaxY())
+                            < 20) {
+                        newY = collidingBounds.getMaxY()
+                                - newBounds.getHeight();
                     }
 
                 } else {
@@ -458,24 +505,29 @@ public class Workbench extends Pane {
                         newY = collidingBounds.getMaxY() + moduleMargin;
                     } else {
                         // Top
-                        newY = collidingBounds.getMinY() - newBounds.getHeight() - moduleMargin;
+                        newY = collidingBounds.getMinY()
+                                - newBounds.getHeight() - moduleMargin;
                     }
                     // We also snap it in place horizontally
-                    if (Math.abs(collidingBounds.getMinX() - newBounds.getMinX()) < 20) {
+                    if (Math.abs(
+                            collidingBounds.getMinX() - newBounds.getMinX())
+                            < 20) {
                         newX = collidingBounds.getMinX();
-                    } else if (Math.abs(collidingBounds.getMaxX() - newBounds.getMaxX()) < 20) {
+                    } else if (Math.abs(
+                            collidingBounds.getMaxX() - newBounds.getMaxX())
+                            < 20) {
                         newX = collidingBounds.getMaxX() - newBounds.getWidth();
                     }
                 }
             }
         }
-
-        // The loop didn't succeed in finding a non-colliding location, we don't move the node
+        // The loop didn't succeed in finding a non-colliding location,
+        // we don't move the node
         return null;
     }
 
     /**
-     * Handling event when plug is clicked
+     * Handling event when plug is clicked.
      *
      * @param plug Plug clicked
      */
@@ -507,8 +559,8 @@ public class Workbench extends Pane {
     }
 
     /**
-     * Function that call a connection between two port
-     * This function first retrieve the port of the two plug in parameter
+     * Function that call a connection between two port.
+     * This function first retrieve the port of the two plug in parameter.
      *
      * @param in  the name is mandatory, we dont care if its in or out
      * @param out the name is mandatory, we dont care if its in or out
@@ -520,8 +572,8 @@ public class Workbench extends Pane {
     }
 
     /**
-     * Function that call a connection between two port
-     * This function disconnects a plug from all its relation
+     * Function that call a connection between two port.
+     * This function disconnects a plug from all its relation.
      *
      * @param plug the name is mandatory, we dont care if its in or out
      */
@@ -533,13 +585,15 @@ public class Workbench extends Pane {
     }
 
     /**
-     * Returns the list of all currently active cables
+     * Returns the list of all currently active cables.
      *
-     * @return
+     * @return list of cable
      */
     private Collection<Cable> getCables() {
-        return this.getChildren().stream().filter(child -> child instanceof Cable)
-                .map(child -> (Cable) child).collect(Collectors.toCollection(ArrayList::new));
+        return this.getChildren().stream()
+                .filter(child -> child instanceof Cable)
+                .map(child -> (Cable) child).collect(
+                        Collectors.toCollection(ArrayList::new));
     }
 
     private void updateCables() {
@@ -579,7 +633,7 @@ public class Workbench extends Pane {
     }
 
     /**
-     * Drop cable based on lastClickedPlug
+     * Drop cable based on lastClickedPlug.
      */
     private void dropCable() {
         if (draggedCable != null) {
@@ -594,7 +648,8 @@ public class Workbench extends Pane {
     }
 
     public final void changeSkin(final Skin skin) {
-        LOGGER.fine("Skin changed from \"" + currentSkin + "\" to \"" + skin + "\".");
+        LOGGER.fine("Skin changed from \""
+                + currentSkin + "\" to \"" + skin + "\".");
 
         this.getStylesheets().remove(currentSkin.getPath());
         this.getStylesheets().add(skin.getPath());

@@ -30,7 +30,8 @@ public class Plug extends StackPane {
 
     private Callable<Port> getPortCommand = null;
 
-    public final void setGetPortCommand(final Callable<Port> newGetPortCommand) {
+    public final void setGetPortCommand(
+            final Callable<Port> newGetPortCommand) {
         getPortCommand = newGetPortCommand;
     }
 
@@ -63,10 +64,12 @@ public class Plug extends StackPane {
         }
     }
 
-
-    private final StringProperty label = new SimpleStringProperty(this, "label", "");
-    private final StringProperty name = new SimpleStringProperty(this, "name", "");
-    private final StringProperty type = new SimpleStringProperty(this, "type", "other");
+    private final StringProperty label
+            = new SimpleStringProperty(this, "label", "");
+    private final StringProperty name
+            = new SimpleStringProperty(this, "name", "");
+    private final StringProperty type
+            = new SimpleStringProperty(this, "type", "other");
 
     public Plug() {
         super();
@@ -75,7 +78,8 @@ public class Plug extends StackPane {
 
     private void init() {
         this.getStylesheets().add(
-                getClass().getResource("/gui/fxml/style/Plug.css").toExternalForm());
+                getClass().getResource("/gui/fxml/style/Plug.css")
+                        .toExternalForm());
         this.getStyleClass().add("plug");
 
         this.setAlignment(Pos.CENTER);
@@ -105,7 +109,8 @@ public class Plug extends StackPane {
     }
 
     public final Point2D getCenter() {
-        return colorCircle.localToParent(colorCircle.getCenterX(), colorCircle.getCenterY());
+        return colorCircle.localToParent(
+                colorCircle.getCenterX(), colorCircle.getCenterY());
     }
 
     public final Port getPort() {

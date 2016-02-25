@@ -16,7 +16,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleVCFLP extends ViewModule implements Initializable {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleVCFLP.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleVCFLP.class.getName());
 
     @FXML
     private Plug in;
@@ -43,7 +44,8 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void initialize(final URL url, final ResourceBundle resourceBundle) {
+    public final void initialize(
+            final URL url, final ResourceBundle resourceBundle) {
         threshold.valueProperty().addListener(event -> {
             updateThreshold();
         });
@@ -60,7 +62,8 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
         frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
-    public final void setChangeThresholdCommand(final Runnable newChangeThresholdCommand) {
+    public final void setChangeThresholdCommand(
+            final Runnable newChangeThresholdCommand) {
         changeThresholdCommand = newChangeThresholdCommand;
         changeThresholdCommand.run();
     }
@@ -73,7 +76,8 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
         changeResonanceCommand.run();
     }
 
-    public final void setChangeResonanceCommand(final Runnable newChangeResonanceCommand) {
+    public final void setChangeResonanceCommand(
+            final Runnable newChangeResonanceCommand) {
         changeResonanceCommand = newChangeResonanceCommand;
         this.changeResonanceCommand.run();
     }
@@ -83,13 +87,15 @@ public class ViewModuleVCFLP extends ViewModule implements Initializable {
     }
 
     @Override
-    public final void writeObject(final ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         o.writeDouble(threshold.getValue());
         o.writeDouble(resonance.getValue());
     }
 
     @Override
-    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
         threshold.setValue(o.readDouble());
         resonance.setValue(o.readDouble());
     }

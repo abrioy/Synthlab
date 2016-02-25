@@ -20,8 +20,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.logging.Logger;
 
-public class ViewModuleSEQ extends ViewModule implements Initializable, Observer {
-    private static final Logger LOGGER = Logger.getLogger(ViewModuleSEQ.class.getName());
+public class ViewModuleSEQ extends ViewModule
+        implements Initializable, Observer {
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleSEQ.class.getName());
 
     @FXML
     private ResetButton resetButton;
@@ -107,7 +109,8 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
     }
 
     @Override
-    public final void initialize(final URL location, final ResourceBundle resources) {
+    public final void initialize(
+            final URL location, final ResourceBundle resources) {
         stepPickers = new ArrayList<>();
 
         stepPickers.add(step1Picker);
@@ -155,14 +158,16 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
     }
 
     @Override
-    public final void writeObject(final ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         for (Knob a : stepPickers) {
             o.writeDouble(a.getValue());
         }
     }
 
     @Override
-    public final void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
         for (Knob a : stepPickers) {
             a.setValue(o.readDouble());
         }

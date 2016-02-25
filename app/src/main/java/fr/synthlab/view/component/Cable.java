@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  */
 
 public class Cable extends CubicCurve {
-    private static final Logger LOGGER = Logger.getLogger(Cable.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(Cable.class.getName());
     private final double circleRadius = 12.0d;
     private Color color;
     private Plug in;
@@ -32,7 +33,8 @@ public class Cable extends CubicCurve {
         init();
     }
 
-    public Cable(final Workbench workbenchInit, final Plug inInit, final Plug outInit) {
+    public Cable(final Workbench workbenchInit,
+                 final Plug inInit, final Plug outInit) {
         in = inInit;
         in.setCable(this);
         out = outInit;
@@ -64,8 +66,10 @@ public class Cable extends CubicCurve {
     }
 
     public final void update() {
-        Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
-        Point2D outPosition = workbench.sceneToLocal(out.localToScene(out.getCenter()));
+        Point2D inPosition = workbench.sceneToLocal(
+                in.localToScene(in.getCenter()));
+        Point2D outPosition = workbench.sceneToLocal(
+                out.localToScene(out.getCenter()));
 
         this.setStartX(inPosition.getX());
         this.setStartY(inPosition.getY());
@@ -80,7 +84,8 @@ public class Cable extends CubicCurve {
     }
 
     public final void update(final Point2D mouse) {
-        Point2D correctedMouse = new Point2D(Math.max(circleRadius, mouse.getX()),
+        Point2D correctedMouse = new Point2D(Math.max(
+                circleRadius, mouse.getX()),
                 Math.max(circleRadius, mouse.getY()));
 
         in = getPluggedPlug();
@@ -88,7 +93,8 @@ public class Cable extends CubicCurve {
             out.setCable(null);
             out = null;
         }
-        Point2D inPosition = workbench.sceneToLocal(in.localToScene(in.getCenter()));
+        Point2D inPosition = workbench.sceneToLocal(
+                in.localToScene(in.getCenter()));
 
         this.setStartX(inPosition.getX());
         this.setStartY(inPosition.getY());

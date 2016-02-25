@@ -9,7 +9,8 @@ public class RecordButton extends Button {
 
     public RecordButton() {
         this.getStylesheets().add(
-                getClass().getResource("/gui/fxml/style/Module.css").toExternalForm());
+                getClass().getResource("/gui/fxml/style/Module.css")
+                        .toExternalForm());
         this.getStyleClass().add("record-release");
     }
 

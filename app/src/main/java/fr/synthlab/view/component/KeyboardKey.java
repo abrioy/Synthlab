@@ -9,11 +9,13 @@ import javafx.scene.shape.Rectangle;
 import java.util.logging.Logger;
 
 public class KeyboardKey extends Rectangle {
-    private static final Logger LOGGER = Logger.getLogger(KeyboardKey.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(KeyboardKey.class.getName());
 
     private Workbench workbench;
 
-    private BooleanProperty isWhiteKey = new SimpleBooleanProperty(this, "isWhiteKey", true);
+    private BooleanProperty isWhiteKey
+            = new SimpleBooleanProperty(this, "isWhiteKey", true);
 
     public KeyboardKey() {
         super();
