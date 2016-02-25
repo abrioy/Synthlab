@@ -101,9 +101,9 @@ public class ToolboxController implements Initializable {
     private void makeListDraggable(final TreeView<String> item) {
         item.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
-            public TreeCell<String> call(TreeView<String> stringTreeView) {
+            public TreeCell<String> call(final TreeView<String> stringTreeView) {
                 TreeCell<String> cell = new TreeCell<String>() {
-                    protected void updateItem(String item, boolean empty) {
+                    protected void updateItem(final String item, final boolean empty) {
                         super.updateItem(item, empty);
                         setText(item);
                     }

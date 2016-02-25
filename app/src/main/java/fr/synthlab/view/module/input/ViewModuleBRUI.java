@@ -15,23 +15,21 @@ public class ViewModuleBRUI extends ViewModule implements Initializable {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleBRUI.class.getName());
 
 
-    public ViewModuleBRUI(Workbench workbench) {
+    public ViewModuleBRUI(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleWhiteNoise.fxml");
         this.setId("pane");
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void initialize(final URL location, final ResourceBundle resources) {
     }
 
     @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
-
+    public void writeObject(final ObjectOutputStream o) throws IOException {
     }
 
     @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
+    public void readObject(final ObjectInputStream o) throws IOException, ClassNotFoundException {
     }
 }

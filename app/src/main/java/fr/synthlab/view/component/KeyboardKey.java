@@ -23,7 +23,7 @@ public class KeyboardKey extends Rectangle {
         this.setHeight(150);
     }
 
-    public final void setIsWhiteKey(boolean whiteKey) {
+    public final void setIsWhiteKey(final boolean whiteKey) {
         this.isWhiteKey.setValue(whiteKey);
         if (whiteKey) {
             this.setHeight(150);

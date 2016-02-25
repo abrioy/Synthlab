@@ -346,7 +346,7 @@ public class Knob extends Pane {
      * @param valueOfAngle valueOfAngle to transform in angle
      * @return angle in degree
      */
-    private double valueToAngle(double valueOfAngle) {
+    private double valueToAngle(final double valueOfAngle) {
         double maxValue = getMax();
         double minValue = getMin();
         if (scaleType.get().equals("log")) {
@@ -361,7 +361,7 @@ public class Knob extends Pane {
      * @param angle in degree
      * @return value including log, linear and step.
      */
-    private double angleToValue(double angle) {
+    private double angleToValue(final double angle) {
         double maxValue = getMax();
         double minValue = getMin();
         double valueOfAngle;
@@ -387,7 +387,7 @@ public class Knob extends Pane {
         return speed.get();
     }
 
-    public final void setSpeed(double v) {
+    public final void setSpeed(final double v) {
         speed.set(v);
     }
 
@@ -410,7 +410,7 @@ public class Knob extends Pane {
      *
      * @param v to set
      */
-    public final void setValue(double v) {
+    public final void setValue(final double v) {
         value.set(v);
     }
 
@@ -437,7 +437,7 @@ public class Knob extends Pane {
      *
      * @param v value to set
      */
-    public final void setMin(double v) {
+    public final void setMin(final double v) {
         double v2 = (v <= 10.0) ? 10 : v;
         minExp = Math.log(v2);
         scale = (maxExp - minExp) / max.get() - min.get();
@@ -468,7 +468,7 @@ public class Knob extends Pane {
      *
      * @param v max
      */
-    public final void setMax(double v) {
+    public final void setMax(final double v) {
         max.set(v);
         maxExp = Math.log(v);
         scale = (maxExp - minExp) / max.get() - min.get();
@@ -498,7 +498,7 @@ public class Knob extends Pane {
      *
      * @param v new diameter
      */
-    public final void setDiameter(double v) {
+    public final void setDiameter(final double v) {
         diameter.set(v);
         knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
         scaleSize = (int) (diameter.get() / 5);
@@ -548,7 +548,7 @@ public class Knob extends Pane {
      *
      * @param v label
      */
-    public final void setLabel(String v) {
+    public final void setLabel(final String v) {
         label.set(v);
         name.setText(v);
     }
@@ -606,7 +606,7 @@ public class Knob extends Pane {
      *
      * @param v type
      */
-    public final void setStepType(boolean v) {
+    public final void setStepType(final boolean v) {
         stepType.set(v);
     }
 
@@ -642,7 +642,7 @@ public class Knob extends Pane {
      *
      * @param v new minAngle
      */
-    public final void setMinAngle(double v) {
+    public final void setMinAngle(final double v) {
         if (getScaleType().equals("enum")) {
             minAngle.set(225);
         } else {
@@ -673,7 +673,7 @@ public class Knob extends Pane {
      *
      * @param v new maxAngle
      */
-    public final void setMaxAngle(double v) {
+    public final void setMaxAngle(final double v) {
         if (getScaleType().equals("enum")) {
             maxAngle.set(-45);
         } else {

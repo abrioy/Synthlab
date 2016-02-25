@@ -16,7 +16,7 @@ public enum Skin {
 
     private String name;
 
-    Skin(String newName) {
+    Skin(final String newName) {
         name = newName;
     }
 

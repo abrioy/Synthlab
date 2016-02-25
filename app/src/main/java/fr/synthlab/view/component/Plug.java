@@ -45,11 +45,11 @@ public class Plug extends StackPane {
 
         private Color color;
 
-        Type(Color aColor) {
+        Type(final Color aColor) {
             color = aColor;
         }
 
-        public static Type getType(String name) {
+        public static Type getType(final String name) {
             switch (name) {
                 case "input":
                     return input;

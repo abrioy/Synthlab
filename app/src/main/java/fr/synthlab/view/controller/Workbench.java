@@ -127,8 +127,8 @@ public class Workbench extends Pane {
             private String connectedPortName;
             private Color cableColor;
 
-            PortReference(int parentUIDInit, String nameInit,
-                                 int connectedUIDInit, String connectedPortNameInit, Color cableColorInit) {
+            PortReference(final int parentUIDInit, final String nameInit,
+                                 final int connectedUIDInit, final String connectedPortNameInit, final Color cableColorInit) {
                 parentUID = parentUIDInit;
                 name = nameInit;
                 connectedUID = connectedUIDInit;
@@ -271,7 +271,7 @@ public class Workbench extends Pane {
      *
      * @param module Module to be dragged
      */
-    private void makeDraggable(ViewModule module) {
+    private void makeDraggable(final ViewModule module) {
         final Workbench workbench = this;
 
         class Delta {

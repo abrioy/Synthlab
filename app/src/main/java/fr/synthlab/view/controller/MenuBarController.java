@@ -154,7 +154,7 @@ public class MenuBarController implements Initializable {
         return chooser;
     }
 
-    private void openSavedFile(File file) throws IOException {
+    private void openSavedFile(final File file) throws IOException {
         if (file == null) {
             LOGGER.warning("Attempting to load a project from null file.");
         } else {
@@ -171,7 +171,7 @@ public class MenuBarController implements Initializable {
         }
     }
 
-    private void saveToFile(File file) throws IOException {
+    private void saveToFile(final File file) throws IOException {
         if (file == null) {
             LOGGER.warning("Attempting to save a project to a null file.");
         } else {

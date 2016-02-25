@@ -35,7 +35,7 @@ public class ViewModuleFactory {
     private static final Logger LOGGER = Logger.getLogger(ViewModuleFactory.class.getName());
 
 
-    public static ViewModule createViewModule(ModuleType type, Workbench workbench) {
+    public static ViewModule createViewModule(final ModuleType type, final Workbench workbench) {
         ViewModule module = null;
         switch (type) {
             case VCOA:
@@ -91,7 +91,7 @@ public class ViewModuleFactory {
      * @param workbench the workbench
      * @return viewModuleMixer
      */
-    private static ViewModule createViewModuleMixer(Workbench workbench) {
+    private static ViewModule createViewModuleMixer(final Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleType.MIX);
         ViewModuleMIX viewMixer = new ViewModuleMIX(workbench);
         viewMixer.setModule(vco);
@@ -107,7 +107,7 @@ public class ViewModuleFactory {
      * @return a viewModuleVCO attached to its module
      * @param workbench workbench
      */
-    private static ViewModule createViewModuleVCO(Workbench workbench) {
+    private static ViewModule createViewModuleVCO(final Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleType.VCOA);
         ViewModuleVCOA viewVco = new ViewModuleVCOA(workbench);
         viewVco.setModule(vco);
@@ -119,7 +119,7 @@ public class ViewModuleFactory {
         return viewVco;
     }
 
-    private static ViewModule createViewModuleVCA(Workbench workbench) {
+    private static ViewModule createViewModuleVCA(final Workbench workbench) {
         Module vca = ModuleFactory.createModule(ModuleType.VCA);
         ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
         viewVca.setModule(vca);
@@ -128,7 +128,7 @@ public class ViewModuleFactory {
         return viewVca;
     }
 
-    private static ViewModule createViewModuleOut(Workbench workbench) {
+    private static ViewModule createViewModuleOut(final Workbench workbench) {
         Module out = ModuleFactory.createModule(ModuleType.OUT);
         ViewModuleOUT viewOut = new ViewModuleOUT(workbench);
         viewOut.setModule(out);
@@ -142,16 +142,14 @@ public class ViewModuleFactory {
                 } else {
                     ((ModuleOUT) out).setRecording(viewOut.isRecording(), recordingFile);
                 }
-
             } else {
                 viewOut.setIsRecording(false);
                 ((ModuleOUT) out).setRecording(viewOut.isRecording(), null);
             }
         });
-
         return viewOut;
     }
-    private static ViewModule createViewModuleWhiteNoise(Workbench workbench) {
+    private static ViewModule createViewModuleWhiteNoise(final Workbench workbench) {
         Module brui = ModuleFactory.createModule(ModuleType.BRUI);
         ViewModuleBRUI viewNoise = new ViewModuleBRUI(workbench);
         viewNoise.setModule(brui);
@@ -161,7 +159,7 @@ public class ViewModuleFactory {
         return viewNoise;
     }
 
-    private static ViewModule createViewModuleOscilloscope(Workbench workbench) {
+    private static ViewModule createViewModuleOscilloscope(final Workbench workbench) {
         Module scop = ModuleFactory.createModule(ModuleType.SCOP);
         ViewModuleSCOP viewScop = new ViewModuleSCOP(workbench);
         viewScop.setModule(scop);
@@ -172,7 +170,7 @@ public class ViewModuleFactory {
         return viewScop;
     }
 
-    private static ViewModule createViewModuleREP(Workbench workbench) {
+    private static ViewModule createViewModuleREP(final Workbench workbench) {
         Module rep = ModuleFactory.createModule(ModuleType.REP);
         ViewModuleREP viewREP = new ViewModuleREP(workbench);
         viewREP.setModule(rep);
@@ -180,7 +178,7 @@ public class ViewModuleFactory {
         return viewREP;
     }
 
-    private static ViewModule createViewModuleEG(Workbench workbench) {
+    private static ViewModule createViewModuleEG(final Workbench workbench) {
         Module eg = ModuleFactory.createModule(ModuleType.EG);
         ViewModuleEG viewEG = new ViewModuleEG(workbench);
         viewEG.setModule(eg);
@@ -196,18 +194,17 @@ public class ViewModuleFactory {
         return viewEG;
     }
 
-    private static ViewModule createViewModuleVCFLP(Workbench workbench) {
+    private static ViewModule createViewModuleVCFLP(final Workbench workbench) {
         Module vcflp = ModuleFactory.createModule(ModuleType.VCFLP);
         ViewModuleVCFLP viewVcflp = new ViewModuleVCFLP(workbench);
         viewVcflp.setModule(vcflp);
         viewVcflp.setChangeThresholdCommand(() -> ((ModuleVCFLP) vcflp).setF0(viewVcflp.getThreshold()));
         viewVcflp.setChangeResonanceCommand(() -> ((ModuleVCFLP) vcflp).setResonance(viewVcflp.getResonance()));
 
-
         return viewVcflp;
     }
 
-    private static ViewModule createViewModuleVCFHP(Workbench workbench) {
+    private static ViewModule createViewModuleVCFHP(final Workbench workbench) {
         Module vcfhp = ModuleFactory.createModule(ModuleType.VCFHP);
         ViewModuleVCFHP viewVcfhp = new ViewModuleVCFHP(workbench);
         viewVcfhp.setModule(vcfhp);
@@ -216,7 +213,7 @@ public class ViewModuleFactory {
         return viewVcfhp;
     }
 
-    private static ViewModule createViewModuleKEYB(Workbench workbench) {
+    private static ViewModule createViewModuleKEYB(final Workbench workbench) {
         Module keyb = ModuleFactory.createModule(ModuleType.KEYB);
         ViewModuleKEYB viewKEYB = new ViewModuleKEYB(workbench);
         viewKEYB.setModule(keyb);
@@ -229,7 +226,7 @@ public class ViewModuleFactory {
         return viewKEYB;
     }
 
-    private static ViewModule createViewModuleSEQ(Workbench workbench) {
+    private static ViewModule createViewModuleSEQ(final Workbench workbench) {
         Module seq = ModuleFactory.createModule(ModuleType.SEQ);
         ViewModuleSEQ viewSEQ = new ViewModuleSEQ(workbench);
         viewSEQ.setModule(seq);
@@ -247,6 +244,5 @@ public class ViewModuleFactory {
         ((ModuleSEQ) seq).addObserver(viewSEQ);
 
         return viewSEQ;
-
     }
 }
