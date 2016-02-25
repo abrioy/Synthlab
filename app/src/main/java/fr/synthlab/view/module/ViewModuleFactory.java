@@ -219,7 +219,7 @@ public class ViewModuleFactory {
         ViewModuleKEYB viewKEYB = new ViewModuleKEYB(workbench);
         viewKEYB.setModule(keyb);
         viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb).pressKey(viewKEYB.getNotePressed()));
-        viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb).releaseKey(viewKEYB.getNotePressed()));
+        viewKEYB.setKeyReleasedCommand(() -> ((ModuleKEYB) keyb).releaseKey(viewKEYB.getLastKeyReleased()));
         viewKEYB.setOctaveChangeCommand(() -> ((ModuleKEYB) keyb).changeOctave(viewKEYB.getOctave()));
 
         viewKEYB.setOnMouseClicked(event -> viewKEYB.requestFocus());

@@ -154,6 +154,7 @@ public class ModuleKEYB implements Module {
      * @param n New note pressed
      */
     public void pressKey(NoteKEYB n) {
+        keyboardFilter.releaseKey();
         keyboardFilter.pressKey();
         lastNotePressed = n;
         computeFrequency(n);
