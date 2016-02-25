@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests on the Voltage Control Oscillator Type A module.
@@ -58,6 +59,50 @@ public class ModuleVCOATest {
     @Test
     public void testGetType() {
         assertEquals(ModuleType.VCOA, moduleVCOA.getType());
+    }
+
+    /**
+     * test getShape method.
+     */
+    @Test
+    public void testGetShape() {
+        assertNull(moduleVCOA.getShape());
+    }
+
+    /**
+     * test setShape method.
+     */
+    @Test
+    public void testSetShape() {
+        moduleVCOA.setShape(ShapeVCOA.TRIANGLE);
+        assertEquals(ShapeVCOA.TRIANGLE, moduleVCOA.getShape());
+    }
+
+    /**
+     * test setShape method.
+     */
+    @Test
+    public void testSetShape2() {
+        moduleVCOA.setShape(ShapeVCOA.SAWTOOTH);
+        assertEquals(ShapeVCOA.SAWTOOTH, moduleVCOA.getShape());
+    }
+
+    /**
+     * test setShape method.
+     */
+    @Test
+    public void testSetShape3() {
+        moduleVCOA.setShape(ShapeVCOA.SINE);
+        assertEquals(ShapeVCOA.SINE, moduleVCOA.getShape());
+    }
+
+    /**
+     * test setShape method.
+     */
+    @Test
+    public void testSetShape4() {
+        moduleVCOA.setShape(ShapeVCOA.SQUARE);
+        assertEquals(ShapeVCOA.SQUARE, moduleVCOA.getShape());
     }
 
     /**
