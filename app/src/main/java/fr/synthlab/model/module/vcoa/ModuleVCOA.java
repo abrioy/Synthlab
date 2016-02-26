@@ -1,11 +1,7 @@
 package fr.synthlab.model.module.vcoa;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.SquareOscillator;
-import com.jsyn.unitgen.TriangleOscillator;
-import com.jsyn.unitgen.SawtoothOscillator;
-import com.jsyn.unitgen.SineOscillator;
-import com.jsyn.unitgen.PassThrough;
+import com.jsyn.unitgen.*;
 import fr.synthlab.model.filter.FilterFm;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
@@ -95,7 +91,7 @@ public class ModuleVCOA implements Module {
 
         triangleOscillator.output.connect(passThrough.input);
 
-        // Initialize the frequency of the fm filter and the 3 oscillators
+        // Initialize the frequency of the fm filter and the 4 oscillators
         setFrequency(frequency);
     }
 
@@ -116,6 +112,7 @@ public class ModuleVCOA implements Module {
         squareOscillator.start();
         sawtoothOscillator.start();
         triangleOscillator.start();
+        sineOscillator.start();
         passThrough.start();
     }
 
@@ -160,7 +157,7 @@ public class ModuleVCOA implements Module {
      * This method is called by the input port fm of the VCO
      * when its state has changed
      * When nothing is connected to the input port of fm,
-     * the 3 oscillators has the same frequency f0
+     * the 4 oscillators has the same frequency f0
      * When something is connected to the input port of fm,
      * we connect the output port of fm filter
      * to input port of each oscillator.
