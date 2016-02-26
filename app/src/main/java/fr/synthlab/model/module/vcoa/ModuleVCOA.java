@@ -160,8 +160,8 @@ public class ModuleVCOA implements Module {
      */
     @Override
     public void update() {
+        filterFm.output.disconnectAll();
         if (fmInput.getConnected() == null) {
-            filterFm.output.disconnectAll();
             squareOscillator.frequency.set(frequency);
             triangleOscillator.frequency.set(frequency);
             sawtoothOscillator.frequency.set(frequency);
