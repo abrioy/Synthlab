@@ -20,14 +20,13 @@ public class KeyboardKey extends Rectangle {
     public KeyboardKey() {
         super();
 
-        this.setFill(Color.WHITE);
-        this.setWidth(40);
-        this.setHeight(150);
+        setIsWhiteKey(true);
     }
 
     public final void setIsWhiteKey(final boolean whiteKey) {
         this.isWhiteKey.setValue(whiteKey);
         if (whiteKey) {
+            this.setWidth(40);
             this.setHeight(150);
             this.setFill(Color.WHITE);
         } else {
