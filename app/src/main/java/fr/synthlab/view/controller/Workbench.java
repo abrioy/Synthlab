@@ -23,10 +23,7 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -533,8 +530,8 @@ public class Workbench extends Pane {
      */
     public final void plugClicked(final Plug plug) {
         if (draggedCable == null) {
-            Plug opposite = getConnectedPlug(plug);
-            if (opposite != null) {
+            Optional<Plug> opposite = getConnectedPlug(plug);
+            if (opposite.isPresent()) {
                 disconnectPlug(plug);
                 draggedCable = getConnectedCable(plug);
                 dragCable(draggedCable, plug);
@@ -608,24 +605,21 @@ public class Workbench extends Pane {
 
     private Cable getConnectedCable(final Plug plug) {
         for (Cable c : getCables()) {
-            if (c.getPluggedPlug() == plug) {
-                return c;
-            }
-            if (c.getOppositePlug(plug) != null) {
+            if (c.getPluggedPlug() == plug || c.getOppositePlug(plug).isPresent()) {
                 return c;
             }
         }
         return null;
     }
 
-    private Plug getConnectedPlug(final Plug plug) {
+    private Optional<Plug> getConnectedPlug(final Plug plug) {
         for (Cable c : getCables()) {
-            Plug opposite = c.getOppositePlug(plug);
-            if (opposite != null) {
+            Optional<Plug> opposite = c.getOppositePlug(plug);
+            if (opposite.isPresent()) {
                 return opposite;
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     private void dragCable(final Cable cable, final Plug plug) {

@@ -1,13 +1,14 @@
 package fr.synthlab.view.component;
 
-import fr.synthlab.view.controller.Workbench;
 import fr.synthlab.view.controller.ToolboxController;
+import fr.synthlab.view.controller.Workbench;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.StrokeLineCap;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -108,16 +109,16 @@ public class Cable extends CubicCurve {
         this.toFront();
     }
 
-    public final Plug getOppositePlug(final Plug plug) {
+    public final Optional<Plug> getOppositePlug(final Plug plug) {
         if (in == null || out == null) {
-            return null;
+            return Optional.empty();
         }
         if (in.equals(plug)) {
-            return out;
+            return Optional.of(out);
         } else if (out.equals(plug)) {
-            return in;
+            return Optional.of(in);
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 
