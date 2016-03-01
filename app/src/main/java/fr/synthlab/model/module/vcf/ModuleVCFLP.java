@@ -63,8 +63,8 @@ public class ModuleVCFLP extends ModuleVCF {
      */
     @Override
     public void update() {
+        filterFm.output.disconnectAll();
         if (fmInput.getConnected() == null) {
-            filterFm.output.disconnectAll();
             lpFilter.frequency.set(f0);
         } else {
             filterFm.output.connect(lpFilter.frequency);
