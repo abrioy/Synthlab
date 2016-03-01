@@ -56,21 +56,21 @@ public class ToolboxController implements Initializable {
         list.add(new TreeItem<>(ModuleType.VCOA.getLongName()));
         list.add(new TreeItem<>(ModuleType.BRUI.getLongName()));
         list.add(new TreeItem<>(ModuleType.KEYB.getLongName()));
-        rootInput.getChildren().addAll(list);
+		list.add(new TreeItem<>(ModuleType.SEQ.getLongName()));
+		rootInput.getChildren().addAll(list);
 
-        list.clear();
-        list.add(new TreeItem<>(ModuleType.OUT.getLongName()));
-        list.add(new TreeItem<>(ModuleType.SCOP.getLongName()));
-        rootOutput.getChildren().addAll(list);
+		list.clear();
+		list.add(new TreeItem<>(ModuleType.OUT.getLongName()));
+		list.add(new TreeItem<>(ModuleType.SCOP.getLongName()));
+		rootOutput.getChildren().addAll(list);
 
-        list.clear();
-        list.add(new TreeItem<>(ModuleType.VCA.getLongName()));
-        list.add(new TreeItem<>(ModuleType.REP.getLongName()));
-        list.add(new TreeItem<>(ModuleType.EG.getLongName()));
-        list.add(new TreeItem<>(ModuleType.VCFLP.getLongName()));
-        list.add(new TreeItem<>(ModuleType.VCFHP.getLongName()));
-        list.add(new TreeItem<>(ModuleType.MIX.getLongName()));
-        list.add(new TreeItem<>(ModuleType.SEQ.getLongName()));
+		list.clear();
+		list.add(new TreeItem<>(ModuleType.VCA.getLongName()));
+		list.add(new TreeItem<>(ModuleType.REP.getLongName()));
+		list.add(new TreeItem<>(ModuleType.EG.getLongName()));
+		list.add(new TreeItem<>(ModuleType.VCFLP.getLongName()));
+		list.add(new TreeItem<>(ModuleType.VCFHP.getLongName()));
+		list.add(new TreeItem<>(ModuleType.MIX.getLongName()));
         rootFilter.getChildren().addAll(list);
 
         treeView.setRoot(treeItemRoot);
