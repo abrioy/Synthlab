@@ -189,6 +189,7 @@ public class MainWindowController implements Initializable {
                 } else {
                     newZoomLevel -= 0.1;
                 }
+				newZoomLevel = Math.min(2, Math.max(0.5, newZoomLevel));
                 zoomLevel.set(newZoomLevel);
                 event.consume();
             }
