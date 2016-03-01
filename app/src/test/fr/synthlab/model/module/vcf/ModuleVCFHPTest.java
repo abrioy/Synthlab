@@ -26,7 +26,7 @@ public class ModuleVCFHPTest {
      */
     @Before
     public void setUp() {
-        moduleVCFHP = new ModuleVCFHP(JSyn.createSynthesizer());
+        moduleVCFHP = new ModuleVCFHPImpl(JSyn.createSynthesizer());
         moduleVCFHP.start();
     }
 

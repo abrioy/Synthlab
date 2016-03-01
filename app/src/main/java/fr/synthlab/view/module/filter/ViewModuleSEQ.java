@@ -1,180 +1,52 @@
 package fr.synthlab.view.module.filter;
 
-import fr.synthlab.view.component.Knob;
-import fr.synthlab.view.component.ResetButton;
-import fr.synthlab.view.controller.Workbench;
-import fr.synthlab.view.module.ViewModule;
-import javafx.application.Platform;
-import javafx.fxml.FXML;
+import javafx.css.Styleable;
+import javafx.event.EventTarget;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URL;
+import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.logging.Logger;
 
-public class ViewModuleSEQ extends ViewModule
-        implements Initializable, Observer {
-    private static final Logger LOGGER
-            = Logger.getLogger(ViewModuleSEQ.class.getName());
+/**
+ * Created by miow on 3/1/16.
+ */
+public interface ViewModuleSEQ extends EventTarget, Styleable, Serializable, Initializable, Observer {
+	void setResetCommand(Runnable reset);
 
-    @FXML
-    private ResetButton resetButton;
+	void setChangeStep1Command(Runnable command);
 
-    @FXML
-    private Knob step1Picker;
-    @FXML
-    private Knob step2Picker;
-    @FXML
-    private Knob step3Picker;
-    @FXML
-    private Knob step4Picker;
-    @FXML
-    private Knob step5Picker;
-    @FXML
-    private Knob step6Picker;
-    @FXML
-    private Knob step7Picker;
-    @FXML
-    private Knob step8Picker;
+	void setChangeStep2Command(Runnable command);
 
-    @FXML
-    private Label stepLabel;
+	void setChangeStep3Command(Runnable command);
 
-    private List<Knob> stepPickers;
+	void setChangeStep4Command(Runnable command);
 
-    private Runnable resetCommand;
-    private Runnable step1Command;
-    private Runnable step2Command;
-    private Runnable step3Command;
-    private Runnable step4Command;
-    private Runnable step5Command;
-    private Runnable step6Command;
-    private Runnable step7Command;
-    private Runnable step8Command;
+	void setChangeStep5Command(Runnable command);
 
+	void setChangeStep6Command(Runnable command);
 
-    public ViewModuleSEQ(final Workbench workbench) {
-        super(workbench);
-        this.loadFXML("/gui/fxml/module/ViewModuleSEQ.fxml");
-        this.setId("pane");
-        //resetButton.setPrefSize(30,30);
-    }
+	void setChangeStep7Command(Runnable command);
 
-    public final void setResetCommand(final Runnable reset) {
-        this.resetCommand = reset;
-    }
+	void setChangeStep8Command(Runnable command);
 
-    public final void setChangeStep1Command(final Runnable command) {
-        this.step1Command = command;
-    }
+	double getStepValue(int step);
 
-    public final void setChangeStep2Command(final Runnable command) {
-        this.step2Command = command;
-    }
+	@Override
+	void initialize(
+			URL location, ResourceBundle resources);
 
-    public final void setChangeStep3Command(final Runnable command) {
-        this.step3Command = command;
-    }
+	void writeObject(ObjectOutputStream o)
+					throws IOException;
 
-    public final void setChangeStep4Command(final Runnable command) {
-        this.step4Command = command;
-    }
+	void readObject(ObjectInputStream o)
+							throws IOException, ClassNotFoundException;
 
-    public final void setChangeStep5Command(final Runnable command) {
-        this.step5Command = command;
-    }
-
-    public final void setChangeStep6Command(final Runnable command) {
-        this.step6Command = command;
-    }
-
-    public final void setChangeStep7Command(final Runnable command) {
-        this.step7Command = command;
-    }
-
-    public final void setChangeStep8Command(final Runnable command) {
-        this.step8Command = command;
-    }
-
-    public final double getStepValue(final int step) {
-        return stepPickers.get(step).getValue();
-    }
-
-    @Override
-    public final void initialize(
-            final URL location, final ResourceBundle resources) {
-        stepPickers = new ArrayList<>();
-
-        stepPickers.add(step1Picker);
-        stepPickers.add(step2Picker);
-        stepPickers.add(step3Picker);
-        stepPickers.add(step4Picker);
-        stepPickers.add(step5Picker);
-        stepPickers.add(step6Picker);
-        stepPickers.add(step7Picker);
-        stepPickers.add(step8Picker);
-
-        resetButton.setOnAction(event -> resetCommand.run());
-
-        step1Picker.valueProperty().addListener(event -> {
-            step1Command.run();
-        });
-
-        step2Picker.valueProperty().addListener(event -> {
-            step2Command.run();
-        });
-
-        step3Picker.valueProperty().addListener(event -> {
-            step3Command.run();
-        });
-
-        step4Picker.valueProperty().addListener(event -> {
-            step4Command.run();
-        });
-
-        step5Picker.valueProperty().addListener(event -> {
-            step5Command.run();
-        });
-
-        step6Picker.valueProperty().addListener(event -> {
-            step6Command.run();
-        });
-
-        step7Picker.valueProperty().addListener(event -> {
-            step7Command.run();
-        });
-
-        step8Picker.valueProperty().addListener(event -> {
-            step8Command.run();
-        });
-    }
-
-    @Override
-    public final void writeObject(final ObjectOutputStream o)
-            throws IOException {
-        for (Knob a : stepPickers) {
-            o.writeDouble(a.getValue());
-        }
-    }
-
-    @Override
-    public final void readObject(final ObjectInputStream o)
-            throws IOException, ClassNotFoundException {
-        for (Knob a : stepPickers) {
-            a.setValue(o.readDouble());
-        }
-    }
-
-    @Override
-    public final void update(final Observable o, final Object arg) {
-        Platform.runLater(() -> stepLabel.setText(arg.toString()));
-    }
+	@Override
+	void update(Observable o, Object arg);
 }

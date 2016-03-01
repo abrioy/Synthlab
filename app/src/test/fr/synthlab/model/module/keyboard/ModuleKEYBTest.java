@@ -24,7 +24,7 @@ public class ModuleKEYBTest {
     @Before
     public void setUp() {
         Synthesizer synthesizer = JSyn.createSynthesizer();
-        moduleKEYB = new ModuleKEYB(synthesizer);
+        moduleKEYB = new ModuleKEYBImpl(synthesizer);
     }
 
     /**

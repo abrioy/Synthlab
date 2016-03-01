@@ -4,7 +4,6 @@ package fr.synthlab.model.module.vcf;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterFm;
 import fr.synthlab.model.module.Module;
-import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -40,33 +39,26 @@ public abstract class ModuleVCF implements Module {
         ports.add(fmInput);
     }
 
-    @Override
     public final Collection<Port> getPorts() {
         return ports;
     }
 
-    @Override
     public void start() {
         filterFm.start();
     }
 
-    @Override
     public void stop() {
         filterFm.stop();
     }
 
-    @Override
     public void update() {
     }
 
-    @Override
-    public abstract ModuleType getType();
-
-    public final double getF0() {
+	public final double getF0() {
         return f0;
     }
 
-    public void setF0(final double newF0) {
+	public void setF0(final double newF0) {
         f0 = newF0;
         filterFm.setF0(f0);
     }

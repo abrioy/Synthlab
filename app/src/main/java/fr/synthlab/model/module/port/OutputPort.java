@@ -5,7 +5,7 @@ import fr.synthlab.model.module.Module;
 
 import java.util.logging.Logger;
 
-public class OutputPort extends Port {
+public class OutputPort extends PortImpl {
     private static final Logger LOGGER
             = Logger.getLogger(OutputPort.class.getName());
 

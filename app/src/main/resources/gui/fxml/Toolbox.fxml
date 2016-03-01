@@ -13,7 +13,7 @@
         <TreeView fx:id="treeView" focusTraversable="false" prefWidth="190">
             <TreeItem fx:id="treeItemRoot"/>
         </TreeView>
-        <Label>Choose the color of cables</Label>
+        <Label>Cable color:</Label>
         <ColorPicker fx:id="colorPicker" prefHeight="26" prefWidth="190"/>
     </VBox>
 

@@ -26,7 +26,7 @@ public class ModuleVCATest {
      */
     @Before
     public void setUp() {
-        moduleVCA = new ModuleVCA(JSyn.createSynthesizer());
+        moduleVCA = new ModuleVCAImpl(JSyn.createSynthesizer());
         moduleVCA.start();
     }
 

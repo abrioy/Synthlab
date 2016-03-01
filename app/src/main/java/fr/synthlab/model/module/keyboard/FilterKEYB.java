@@ -21,27 +21,14 @@ public class FilterKEYB extends UnitGenerator {
         this.addPort(gate);
     }
 
-    /**
-     * Press key, voltage change to 5V.
-     */
-    public final void pressKey() {
+	public final void pressKey() {
         tension = 5;
     }
 
-    /**
-     * Release key, voltage change to -5V.
-     */
-    public final void releaseKey() {
+	public final void releaseKey() {
         tension = -5;
     }
 
-    /**
-     * Generate new values.
-     *
-     * @param start param manage by Jsyn
-     * @param limit param manage by Jsyn
-     */
-    @Override
     public final void generate(final int start, final int limit) {
         double[] gates = gate.getValues();
         for (int i = start; i < limit; i += 1) {
@@ -49,11 +36,11 @@ public class FilterKEYB extends UnitGenerator {
         }
     }
 
-    public final UnitOutputPort getGate() {
+	public final UnitOutputPort getGate() {
         return gate;
     }
 
-    public final double getTension() {
+	public final double getTension() {
         return tension;
     }
 }

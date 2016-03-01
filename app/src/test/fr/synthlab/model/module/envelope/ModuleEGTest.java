@@ -22,7 +22,7 @@ public class ModuleEGTest {
      */
     @Before
     public void setUp() {
-        moduleEG = new ModuleEG(JSyn.createSynthesizer());
+        moduleEG = new ModuleEGImpl(JSyn.createSynthesizer());
     }
 
     /**

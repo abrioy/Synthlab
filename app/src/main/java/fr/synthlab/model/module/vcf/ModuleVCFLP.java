@@ -1,89 +1,44 @@
 package fr.synthlab.model.module.vcf;
 
-import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.FilterLowPass;
+import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
-import fr.synthlab.model.module.port.InputPort;
-import fr.synthlab.model.module.port.OutputPort;
 
-public class ModuleVCFLP extends ModuleVCF {
-    /**
-     * JSyn lowPass Filter.
-     */
-    private FilterLowPass lpFilter = new FilterLowPass();
 
-    public ModuleVCFLP(final Synthesizer synthesizer) {
-        super(synthesizer);
+public interface ModuleVCFLP extends Module {
+	/**
+	 * start the module.
+	 */
+	void start();
 
-        synthesizer.add(lpFilter);
-        input = new InputPort("in", this, lpFilter.input);
-        output = new OutputPort("out", this, lpFilter.output);
+	/**
+	 * stop the module.
+	 */
+	void stop();
 
-        ports.add(input);
-        ports.add(output);
+	/**
+	 * set the cut frequency.
+	 * @param f0 the cut frequency
+	 */
+	void setF0(double f0);
 
-        setF0(f0);
-        setResonance(1);
-    }
+	/**
+	 * get the cut frequency
+	 * @return the cut frequency
+	 */
+	double getF0();
 
-    /**
-     * start the module.
-     */
-    @Override
-    public final void start() {
-        super.start();
-        lpFilter.start();
-    }
+	/**
+	 * this method is called when we connect or disconnect the fm Input port
+	 * when the fm input port is connected,
+	 * we connect his output to the LowPass filter
+	 * when the fm input port is disconnected,
+	 * we set the frequency f0 to the LowPass filter.
+	 */
+	void update();
 
-    /**
-     * stop the module.
-     */
-    @Override
-    public final void stop() {
-        super.stop();
-        lpFilter.stop();
-    }
+	ModuleType getType();
 
-    /**
-     * set the cut frequency.
-     * @param f0 the cut frequency
-     */
-    @Override
-    public final void setF0(final double f0) {
-        super.setF0(f0);
-        if (fmInput.getConnected() == null) {
-            lpFilter.frequency.set(f0);
-        }
-    }
+	double getResonance();
 
-    /**
-     * this method is called when we connect or disconnect the fm Input port
-     * when the fm input port is connected,
-     * we connect his output to the LowPass filter
-     * when the fm input port is disconnected,
-     * we set the frequency f0 to the LowPass filter.
-     */
-    @Override
-    public final void update() {
-        if (fmInput.getConnected() == null) {
-            filterFm.output.disconnectAll();
-            lpFilter.frequency.set(f0);
-        } else {
-            filterFm.output.connect(lpFilter.frequency);
-        }
-    }
-
-    @Override
-    public final ModuleType getType() {
-        return ModuleType.VCFLP;
-    }
-
-    public final double getResonance() {
-        return lpFilter.Q.get();
-    }
-
-    public final void setResonance(final double value) {
-        lpFilter.Q.set(value);
-    }
-
+	void setResonance(double value);
 }
