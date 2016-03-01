@@ -1,78 +1,32 @@
 package fr.synthlab.view.module.filter;
 
-
-import fr.synthlab.view.controller.Workbench;
-import fr.synthlab.view.component.Knob;
-import fr.synthlab.view.component.Plug;
-import fr.synthlab.view.module.ViewModule;
-import javafx.fxml.FXML;
+import javafx.css.Styleable;
+import javafx.event.EventTarget;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
-public class ViewModuleVCFHP extends ViewModule implements Initializable {
-    private static final Logger LOGGER
-            = Logger.getLogger(ViewModuleVCFLP.class.getName());
+/**
+ * Created by miow on 3/1/16.
+ */
+public interface ViewModuleVCFHP extends EventTarget, Styleable, Serializable, Initializable {
+	@Override
+	void initialize(
+			URL url, ResourceBundle resourceBundle);
 
-    @FXML
-    private Plug in;
-    @FXML
-    private Plug out;
-    @FXML
-    private Plug am;
+	void setChangeThresholdCommand(
+			Runnable newChangeThresholdCommand);
 
-    @FXML
-    private Knob threshold;
+	double getThreshold();
 
-    @FXML
-    private Label frequencyLabel;
+	void writeObject(ObjectOutputStream o)
+							throws IOException;
 
-    private Runnable changeThresholdCommand;
-
-    public ViewModuleVCFHP(final Workbench workbench) {
-        super(workbench);
-        this.loadFXML("/gui/fxml/module/ViewModuleVCFHP.fxml");
-    }
-
-    @Override
-    public final void initialize(
-            final URL url, final ResourceBundle resourceBundle) {
-        threshold.valueProperty().addListener(event -> {
-            updateThreshold();
-        });
-        frequencyLabel.setText(((int) getThreshold()) + " Hz");
-    }
-
-    private void updateThreshold() {
-        changeThresholdCommand.run();
-        frequencyLabel.setText(((int) getThreshold()) + " Hz");
-    }
-
-    public final void setChangeThresholdCommand(
-            final Runnable newChangeThresholdCommand) {
-        changeThresholdCommand = newChangeThresholdCommand;
-        changeThresholdCommand.run();
-    }
-
-    public final double getThreshold() {
-        return threshold.getValue();
-    }
-
-    @Override
-    public final void writeObject(final ObjectOutputStream o)
-            throws IOException {
-        o.writeDouble(threshold.getValue());
-    }
-
-    @Override
-    public final void readObject(final ObjectInputStream o)
-            throws IOException, ClassNotFoundException {
-        threshold.setValue(o.readDouble());
-    }
+	void readObject(ObjectInputStream o)
+									throws IOException, ClassNotFoundException;
 }

@@ -15,18 +15,12 @@ import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 
 import fr.synthlab.view.controller.Workbench;
-import fr.synthlab.view.module.filter.ViewModuleSEQ;
-import fr.synthlab.view.module.filter.ViewModuleEG;
-import fr.synthlab.view.module.filter.ViewModuleMIX;
-import fr.synthlab.view.module.filter.ViewModuleREP;
-import fr.synthlab.view.module.filter.ViewModuleVCA;
-import fr.synthlab.view.module.filter.ViewModuleVCFHP;
-import fr.synthlab.view.module.filter.ViewModuleVCFLP;
-import fr.synthlab.view.module.input.ViewModuleBRUI;
-import fr.synthlab.view.module.input.ViewModuleKEYB;
-import fr.synthlab.view.module.input.ViewModuleVCOA;
-import fr.synthlab.view.module.output.ViewModuleOUT;
-import fr.synthlab.view.module.output.ViewModuleSCOP;
+import fr.synthlab.view.module.filter.*;
+import fr.synthlab.view.module.input.ViewModuleBRUIImpl;
+import fr.synthlab.view.module.input.ViewModuleKEYBImpl;
+import fr.synthlab.view.module.input.ViewModuleVCOAImpl;
+import fr.synthlab.view.module.output.ViewModuleOUTImpl;
+import fr.synthlab.view.module.output.ViewModuleSCOPImpl;
 
 import java.io.File;
 import java.util.logging.Logger;
@@ -95,7 +89,7 @@ public class ViewModuleFactory {
      */
     private static ViewModule createViewModuleMixer(final Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleType.MIX);
-        ViewModuleMIX viewMixer = new ViewModuleMIX(workbench);
+        ViewModuleMIXImpl viewMixer = new ViewModuleMIXImpl(workbench);
         viewMixer.setModule(vco);
 
         viewMixer.setAttenuator1Cmd(() -> ((ModuleMIX) vco)
@@ -115,7 +109,7 @@ public class ViewModuleFactory {
      */
     private static ViewModule createViewModuleVCO(final Workbench workbench) {
         Module vco = ModuleFactory.createModule(ModuleType.VCOA);
-        ViewModuleVCOA viewVco = new ViewModuleVCOA(workbench);
+        ViewModuleVCOAImpl viewVco = new ViewModuleVCOAImpl(workbench);
         viewVco.setModule(vco);
 
         viewVco.setChangeFreqCommand(() -> ((ModuleVCOA) vco)
@@ -127,7 +121,7 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleVCA(final Workbench workbench) {
         Module vca = ModuleFactory.createModule(ModuleType.VCA);
-        ViewModuleVCA viewVca = new ViewModuleVCA(workbench);
+        ViewModuleVCAImpl viewVca = new ViewModuleVCAImpl(workbench);
         viewVca.setModule(vca);
         viewVca.setChangeAmpliCommand(() -> ((ModuleVCA) vca)
                 .setAttenuation(viewVca.getAmpli()));
@@ -137,7 +131,7 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleOut(final Workbench workbench) {
         Module out = ModuleFactory.createModule(ModuleType.OUT);
-        ViewModuleOUT viewOut = new ViewModuleOUT(workbench);
+        ViewModuleOUTImpl viewOut = new ViewModuleOUTImpl(workbench);
         viewOut.setModule(out);
         viewOut.setVolumeCommand(() -> ((ModuleOUT) out)
                 .setAttenuation(viewOut.getPicker().getValue()));
@@ -162,7 +156,7 @@ public class ViewModuleFactory {
     private static ViewModule createViewModuleWhiteNoise(
             final Workbench workbench) {
         Module brui = ModuleFactory.createModule(ModuleType.BRUI);
-        ViewModuleBRUI viewNoise = new ViewModuleBRUI(workbench);
+        ViewModuleBRUIImpl viewNoise = new ViewModuleBRUIImpl(workbench);
         viewNoise.setModule(brui);
 
         return viewNoise;
@@ -171,7 +165,7 @@ public class ViewModuleFactory {
     private static ViewModule createViewModuleOscilloscope(
             final Workbench workbench) {
         Module scop = ModuleFactory.createModule(ModuleType.SCOP);
-        ViewModuleSCOP viewScop = new ViewModuleSCOP(workbench);
+        ViewModuleSCOPImpl viewScop = new ViewModuleSCOPImpl(workbench);
         viewScop.setModule(scop);
         viewScop.setPickerCommand(() -> ((ModuleSCOP) scop)
                 .setScale(viewScop.getScale()));
@@ -184,7 +178,7 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleREP(final Workbench workbench) {
         Module rep = ModuleFactory.createModule(ModuleType.REP);
-        ViewModuleREP viewREP = new ViewModuleREP(workbench);
+        ViewModuleREPImpl viewREP = new ViewModuleREPImpl(workbench);
         viewREP.setModule(rep);
 
         return viewREP;
@@ -192,7 +186,7 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleEG(final Workbench workbench) {
         Module eg = ModuleFactory.createModule(ModuleType.EG);
-        ViewModuleEG viewEG = new ViewModuleEG(workbench);
+        ViewModuleEGImpl viewEG = new ViewModuleEGImpl(workbench);
         viewEG.setModule(eg);
 
         viewEG.setChangeAttackCommand(() -> ((ModuleEG) eg)
@@ -209,7 +203,7 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleVCFLP(final Workbench workbench) {
         Module vcflp = ModuleFactory.createModule(ModuleType.VCFLP);
-        ViewModuleVCFLP viewVcflp = new ViewModuleVCFLP(workbench);
+        ViewModuleVCFLPImpl viewVcflp = new ViewModuleVCFLPImpl(workbench);
         viewVcflp.setModule(vcflp);
         viewVcflp.setChangeThresholdCommand(() -> ((ModuleVCFLP) vcflp)
                 .setF0(viewVcflp.getThreshold()));
@@ -221,7 +215,7 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleVCFHP(final Workbench workbench) {
         Module vcfhp = ModuleFactory.createModule(ModuleType.VCFHP);
-        ViewModuleVCFHP viewVcfhp = new ViewModuleVCFHP(workbench);
+        ViewModuleVCFHPImpl viewVcfhp = new ViewModuleVCFHPImpl(workbench);
         viewVcfhp.setModule(vcfhp);
         viewVcfhp.setChangeThresholdCommand(() -> ((ModuleVCFHP) vcfhp)
                 .setF0(viewVcfhp.getThreshold()));
@@ -230,7 +224,7 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleKEYB(final Workbench workbench) {
         Module keyb = ModuleFactory.createModule(ModuleType.KEYB);
-        ViewModuleKEYB viewKEYB = new ViewModuleKEYB(workbench);
+        ViewModuleKEYBImpl viewKEYB = new ViewModuleKEYBImpl(workbench);
         viewKEYB.setModule(keyb);
         viewKEYB.setKeyPressedCommand(() -> ((ModuleKEYB) keyb)
                 .pressKey(viewKEYB.getNotePressed()));
@@ -246,7 +240,7 @@ public class ViewModuleFactory {
 
     private static ViewModule createViewModuleSEQ(final Workbench workbench) {
         Module seq = ModuleFactory.createModule(ModuleType.SEQ);
-        ViewModuleSEQ viewSEQ = new ViewModuleSEQ(workbench);
+        ViewModuleSEQImpl viewSEQ = new ViewModuleSEQImpl(workbench);
         viewSEQ.setModule(seq);
 
         viewSEQ.setResetCommand(((ModuleSEQ) seq)::reset);
