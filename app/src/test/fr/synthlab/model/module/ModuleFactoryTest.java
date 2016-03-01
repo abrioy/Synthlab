@@ -1,17 +1,17 @@
 package fr.synthlab.model.module;
 
-import fr.synthlab.model.module.envelope.ModuleEG;
-import fr.synthlab.model.module.keyboard.ModuleKEYB;
-import fr.synthlab.model.module.mixer.ModuleMIX;
-import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
-import fr.synthlab.model.module.out.ModuleOUT;
-import fr.synthlab.model.module.replicator.ModuleREP;
-import fr.synthlab.model.module.sequencer.ModuleSEQ;
-import fr.synthlab.model.module.vca.ModuleVCA;
-import fr.synthlab.model.module.vcf.ModuleVCFHP;
-import fr.synthlab.model.module.vcf.ModuleVCFLP;
-import fr.synthlab.model.module.vcoa.ModuleVCOA;
-import fr.synthlab.model.module.whiteNoise.ModuleBRUI;
+import fr.synthlab.model.module.envelope.ModuleEGImpl;
+import fr.synthlab.model.module.keyboard.ModuleKEYBImpl;
+import fr.synthlab.model.module.mixer.ModuleMIXImpl;
+import fr.synthlab.model.module.oscilloscope.ModuleSCOPImpl;
+import fr.synthlab.model.module.out.ModuleOUTImpl;
+import fr.synthlab.model.module.replicator.ModuleREPImpl;
+import fr.synthlab.model.module.sequencer.ModuleSEQImpl;
+import fr.synthlab.model.module.vca.ModuleVCAImpl;
+import fr.synthlab.model.module.vcf.ModuleVCFHPImpl;
+import fr.synthlab.model.module.vcf.ModuleVCFLPImpl;
+import fr.synthlab.model.module.vcoa.ModuleVCOAImpl;
+import fr.synthlab.model.module.whiteNoise.ModuleBRUIImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -26,7 +26,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleVCOA() {
-        assertTrue(ModuleFactory.createModule(ModuleType.VCOA) instanceof ModuleVCOA);
+        assertTrue(ModuleFactory.createModule(ModuleType.VCOA) instanceof ModuleVCOAImpl);
     }
 
     /**
@@ -35,7 +35,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleSCOP() {
-        assertTrue(ModuleFactory.createModule(ModuleType.SCOP) instanceof ModuleSCOP);
+        assertTrue(ModuleFactory.createModule(ModuleType.SCOP) instanceof ModuleSCOPImpl);
     }
 
     /**
@@ -44,7 +44,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleOUT() {
-        assertTrue(ModuleFactory.createModule(ModuleType.OUT) instanceof ModuleOUT);
+        assertTrue(ModuleFactory.createModule(ModuleType.OUT) instanceof ModuleOUTImpl);
     }
 
     /**
@@ -53,7 +53,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleVCA() {
-        assertTrue(ModuleFactory.createModule(ModuleType.VCA) instanceof ModuleVCA);
+        assertTrue(ModuleFactory.createModule(ModuleType.VCA) instanceof ModuleVCAImpl);
     }
 
     /**
@@ -62,7 +62,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleREP() {
-        assertTrue(ModuleFactory.createModule(ModuleType.REP) instanceof ModuleREP);
+        assertTrue(ModuleFactory.createModule(ModuleType.REP) instanceof ModuleREPImpl);
     }
 
     /**
@@ -71,7 +71,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleEG() {
-        assertTrue(ModuleFactory.createModule(ModuleType.EG) instanceof ModuleEG);
+        assertTrue(ModuleFactory.createModule(ModuleType.EG) instanceof ModuleEGImpl);
     }
 
     /**
@@ -80,7 +80,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleVCFLP() {
-        assertTrue(ModuleFactory.createModule(ModuleType.VCFLP) instanceof ModuleVCFLP);
+        assertTrue(ModuleFactory.createModule(ModuleType.VCFLP) instanceof ModuleVCFLPImpl);
     }
 
     /**
@@ -89,7 +89,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleVCFHP() {
-        assertTrue(ModuleFactory.createModule(ModuleType.VCFHP) instanceof ModuleVCFHP);
+        assertTrue(ModuleFactory.createModule(ModuleType.VCFHP) instanceof ModuleVCFHPImpl);
     }
 
     /**
@@ -98,7 +98,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleKEYB() {
-        assertTrue(ModuleFactory.createModule(ModuleType.KEYB) instanceof ModuleKEYB);
+        assertTrue(ModuleFactory.createModule(ModuleType.KEYB) instanceof ModuleKEYBImpl);
     }
 
     /**
@@ -107,7 +107,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleMIX() {
-        assertTrue(ModuleFactory.createModule(ModuleType.MIX) instanceof ModuleMIX);
+        assertTrue(ModuleFactory.createModule(ModuleType.MIX) instanceof ModuleMIXImpl);
     }
 
     /**
@@ -116,7 +116,7 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleBRUI() {
-        assertTrue(ModuleFactory.createModule(ModuleType.BRUI) instanceof ModuleBRUI);
+        assertTrue(ModuleFactory.createModule(ModuleType.BRUI) instanceof ModuleBRUIImpl);
     }
 
     /**
@@ -125,6 +125,6 @@ public class ModuleFactoryTest {
      */
     @Test
     public void testCreateModuleSEQ() {
-        assertTrue(ModuleFactory.createModule(ModuleType.SEQ) instanceof ModuleSEQ);
+        assertTrue(ModuleFactory.createModule(ModuleType.SEQ) instanceof ModuleSEQImpl);
     }
 }

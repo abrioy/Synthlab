@@ -22,7 +22,7 @@ public class ModuleREPTest {
      */
     @Before
     public void setUp() {
-        moduleREP = new ModuleREP(JSyn.createSynthesizer());
+        moduleREP = new ModuleREPImpl(JSyn.createSynthesizer());
     }
 
     /**

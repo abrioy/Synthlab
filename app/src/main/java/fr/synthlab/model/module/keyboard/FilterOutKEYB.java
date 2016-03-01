@@ -21,11 +21,6 @@ public class FilterOutKEYB extends UnitGenerator {
         this.addPort(gate);
     }
 
-    /**
-     * Generate new values.
-     * @param start param manage by Jsyn
-     * @param limit param manage by Jsyn
-     */
     @Override
     public final void generate(final int start, final int limit) {
         double[] gates = gate.getValues();
@@ -34,11 +29,11 @@ public class FilterOutKEYB extends UnitGenerator {
         }
     }
 
-    public final void setTension(final double newTension) {
+	public final void setTension(final double newTension) {
         tension = newTension;
     }
 
-    public final UnitOutputPort getGate() {
+	public final UnitOutputPort getGate() {
         return gate;
     }
 }

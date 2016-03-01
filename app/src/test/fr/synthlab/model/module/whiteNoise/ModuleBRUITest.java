@@ -13,14 +13,14 @@ public class ModuleBRUITest extends TestCase {
     /**
      * Module tested
      */
-    private ModuleBRUI moduleBRUI;
+    private ModuleBRUIImpl moduleBRUI;
 
     /**
      * Initialize.
      */
     public void setUp() {
         Synthesizer synth = JSyn.createSynthesizer();
-        moduleBRUI = new ModuleBRUI(synth);
+        moduleBRUI = new ModuleBRUIImpl(synth);
     }
 
     /**

@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  * Test on ModuleOUT
- * @see ModuleOUT
+ * @see ModuleOUTImpl
  * @author johan
  */
 public class ModuleOUTTest {
@@ -27,7 +27,7 @@ public class ModuleOUTTest {
     @Before
     public void setUp() {
         Synthesizer synthesizer = JSyn.createSynthesizer();
-        moduleOut = new ModuleOUT(synthesizer);
+        moduleOut = new ModuleOUTImpl(synthesizer);
     }
 
     /**

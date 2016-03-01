@@ -2,98 +2,41 @@ package fr.synthlab.model.module.port;
 
 import fr.synthlab.model.module.Module;
 
-import java.util.logging.Logger;
 
-/**
- *
- */
-public class Port {
-    private static final Logger LOGGER = Logger.getLogger(Port.class.getName());
+public interface Port {
+	/**
+	 * @return the name of the port
+	 */
+	String getName();
 
-    /**
-     * the name of the port.
-     */
-    private String name;
+	boolean isConnected();
 
-    /**
-     * the port connected to this one.
-     */
-    private Port port = null;
+	/**
+	 * connect this port to another port.
+	 *
+	 * @param portConnected Port to connect
+	 */
+	void connect(Port portConnected);
 
-    /**
-     * the module which contains this port.
-     */
-    private Module module;
+	/**
+	 * disconnect this port.
+	 */
+	void disconnect();
 
-    /**
-     * constructor.
-     *
-     * @param nameInit name of the port
-     * @param moduleInit    the module which contains this port
-     */
-    public Port(final String nameInit, final Module moduleInit) {
-        name = nameInit;
-        module = moduleInit;
-    }
+	/**
+	 * @return the port which is connected to this one
+	 */
+	Port getConnected();
 
-    /**
-     * @return the name of the port
-     */
-    public final String getName() {
-        return name;
-    }
+	/**
+	 * @return the module which contains this port
+	 */
+	Module getModule();
 
-    public final boolean isConnected() {
-        return port != null;
-    }
-
-    /**
-     * connect this port to another port.
-     *
-     * @param portConnected Port to connect
-     */
-    public void connect(final Port portConnected) {
-        port = portConnected;
-        module.update();
-        port.setPort(this);
-        port.getModule().update();
-    }
-
-    /**
-     * disconnect this port.
-     */
-    public void disconnect() {
-        if (port != null) {
-            port.setPort(null);
-            port.getModule().update();
-            port = null;
-            module.update();
-        } else {
-            LOGGER.warning("Trying to disconnect a port"
-                    + " that is not connected to anything.");
-        }
-    }
-
-    /**
-     * @return the port which is connected to this one
-     */
-    public final Port getConnected() {
-        return port;
-    }
-
-    /**
-     * @return the module which contains this port
-     */
-    public final Module getModule() {
-        return module;
-    }
-
-    /**
-     * set the connected port.
-     *
-     * @param newPort the connected port
-     */
-    public final void setPort(final Port newPort) {
-        port = newPort;
-    }
+	/**
+	 * set the connected port.
+	 *
+	 * @param newPort the connected port
+	 */
+	void setPort(Port newPort);
 }

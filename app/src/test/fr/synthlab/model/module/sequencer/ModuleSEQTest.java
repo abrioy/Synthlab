@@ -22,7 +22,7 @@ public class ModuleSEQTest {
      */
     @Before
     public void setUp() {
-        moduleSEQ = new ModuleSEQ(JSyn.createSynthesizer());
+        moduleSEQ = new ModuleSEQImpl(JSyn.createSynthesizer());
     }
 
     /**

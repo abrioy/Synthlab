@@ -26,7 +26,7 @@ public class ModuleVCFLPTest {
      */
     @Before
     public void setUp() {
-        moduleVCFLP = new ModuleVCFLP(JSyn.createSynthesizer());
+        moduleVCFLP = new ModuleVCFLPImpl(JSyn.createSynthesizer());
         moduleVCFLP.start();
     }
 

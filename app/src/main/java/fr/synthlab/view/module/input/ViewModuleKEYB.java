@@ -1,6 +1,7 @@
 package fr.synthlab.view.module.input;
 
 import fr.synthlab.model.module.keyboard.NoteKEYB;
+import fr.synthlab.model.module.keyboard.NoteKEYBImpl;
 import fr.synthlab.view.component.KeyboardKey;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.controller.Workbench;
@@ -75,79 +76,79 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
          */
         cKey.setOnMouseDragged(Event::consume);
         cKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.C;
+            lastKeyPressed = NoteKEYBImpl.C;
             keyPressedCommand.run();
             event.consume();
         });
         cSharpKey.setOnMouseDragged(Event::consume);
         cSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.CSharp;
+            lastKeyPressed = NoteKEYBImpl.CSharp;
             keyPressedCommand.run();
             event.consume();
         });
         dKey.setOnMouseDragged(Event::consume);
         dKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.D;
+            lastKeyPressed = NoteKEYBImpl.D;
             keyPressedCommand.run();
             event.consume();
         });
         dSharpKey.setOnMouseDragged(Event::consume);
         dSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.DSharp;
+            lastKeyPressed = NoteKEYBImpl.DSharp;
             keyPressedCommand.run();
             event.consume();
         });
         eKey.setOnMouseDragged(Event::consume);
         eKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.E;
+            lastKeyPressed = NoteKEYBImpl.E;
             keyPressedCommand.run();
             event.consume();
         });
         fKey.setOnMouseDragged(Event::consume);
         fKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.F;
+            lastKeyPressed = NoteKEYBImpl.F;
             keyPressedCommand.run();
             event.consume();
         });
         fSharpKey.setOnMouseDragged(Event::consume);
         fSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.FSharp;
+            lastKeyPressed = NoteKEYBImpl.FSharp;
             keyPressedCommand.run();
             event.consume();
         });
         gKey.setOnMouseDragged(Event::consume);
         gKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.G;
+            lastKeyPressed = NoteKEYBImpl.G;
             keyPressedCommand.run();
             event.consume();
         });
         gSharpKey.setOnMouseDragged(Event::consume);
         gSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.GSharp;
+            lastKeyPressed = NoteKEYBImpl.GSharp;
             keyPressedCommand.run();
             event.consume();
         });
         aKey.setOnMouseDragged(Event::consume);
         aKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.A;
+            lastKeyPressed = NoteKEYBImpl.A;
             keyPressedCommand.run();
             event.consume();
         });
         aSharpKey.setOnMouseDragged(Event::consume);
         aSharpKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.ASharp;
+            lastKeyPressed = NoteKEYBImpl.ASharp;
             keyPressedCommand.run();
             event.consume();
         });
         bKey.setOnMouseDragged(Event::consume);
         bKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.B;
+            lastKeyPressed = NoteKEYBImpl.B;
             keyPressedCommand.run();
             event.consume();
         });
         cNextOctKey.setOnMouseDragged(Event::consume);
         cNextOctKey.setOnMousePressed(event -> {
-            lastKeyPressed = NoteKEYB.C2;
+            lastKeyPressed = NoteKEYBImpl.C2;
             keyPressedCommand.run();
             event.consume();
         });
@@ -171,11 +172,11 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
             // Ugly, but it saves a lot of space
             // The "-9" comes from the fact that NoteKEYB.C has a value of -9.
             key.setOnMouseReleased(event -> {
-                lastKeyReleased = NoteKEYB.fromValue(keysColl.indexOf(key) - 9);
+                lastKeyReleased = NoteKEYBImpl.fromValue(keysColl.indexOf(key) - 9);
                 keyReleasedCommand.run();
             });
             key.setOnMouseExited(event -> {
-                lastKeyReleased = NoteKEYB.fromValue(keysColl.indexOf(key) - 9);
+                lastKeyReleased = NoteKEYBImpl.fromValue(keysColl.indexOf(key) - 9);
                 keyReleasedCommand.run();
             });
         }
@@ -195,55 +196,55 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
         setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case Q:
-                    lastKeyPressed = NoteKEYB.C;
+                    lastKeyPressed = NoteKEYBImpl.C;
                     keyPressedCommand.run();
                     break;
                 case S:
-                    lastKeyPressed = NoteKEYB.D;
+                    lastKeyPressed = NoteKEYBImpl.D;
                     keyPressedCommand.run();
                     break;
                 case D:
-                    lastKeyPressed = NoteKEYB.E;
+                    lastKeyPressed = NoteKEYBImpl.E;
                     keyPressedCommand.run();
                     break;
                 case F:
-                    lastKeyPressed = NoteKEYB.F;
+                    lastKeyPressed = NoteKEYBImpl.F;
                     keyPressedCommand.run();
                     break;
                 case G:
-                    lastKeyPressed = NoteKEYB.G;
+                    lastKeyPressed = NoteKEYBImpl.G;
                     keyPressedCommand.run();
                     break;
                 case H:
-                    lastKeyPressed = NoteKEYB.A;
+                    lastKeyPressed = NoteKEYBImpl.A;
                     keyPressedCommand.run();
                     break;
                 case J:
-                    lastKeyPressed = NoteKEYB.B;
+                    lastKeyPressed = NoteKEYBImpl.B;
                     keyPressedCommand.run();
                     break;
                 case K:
-                    lastKeyPressed = NoteKEYB.C2;
+                    lastKeyPressed = NoteKEYBImpl.C2;
                     keyPressedCommand.run();
                     break;
                 case Z:
-                    lastKeyPressed = NoteKEYB.CSharp;
+                    lastKeyPressed = NoteKEYBImpl.CSharp;
                     keyPressedCommand.run();
                     break;
                 case E:
-                    lastKeyPressed = NoteKEYB.DSharp;
+                    lastKeyPressed = NoteKEYBImpl.DSharp;
                     keyPressedCommand.run();
                     break;
                 case T:
-                    lastKeyPressed = NoteKEYB.FSharp;
+                    lastKeyPressed = NoteKEYBImpl.FSharp;
                     keyPressedCommand.run();
                     break;
                 case Y:
-                    lastKeyPressed = NoteKEYB.GSharp;
+                    lastKeyPressed = NoteKEYBImpl.GSharp;
                     keyPressedCommand.run();
                     break;
                 case U:
-                    lastKeyPressed = NoteKEYB.ASharp;
+                    lastKeyPressed = NoteKEYBImpl.ASharp;
                     keyPressedCommand.run();
                     break;
                 case X:
@@ -265,55 +266,55 @@ public class ViewModuleKEYB extends ViewModule implements Initializable {
         this.setOnKeyReleased(event -> {
             switch (event.getCode()) {
                 case Q:
-                    lastKeyReleased = NoteKEYB.C;
+                    lastKeyReleased = NoteKEYBImpl.C;
                     keyReleasedCommand.run();
                     break;
                 case S:
-                    lastKeyReleased = NoteKEYB.D;
+                    lastKeyReleased = NoteKEYBImpl.D;
                     keyReleasedCommand.run();
                     break;
                 case D:
-                    lastKeyReleased = NoteKEYB.E;
+                    lastKeyReleased = NoteKEYBImpl.E;
                     keyReleasedCommand.run();
                     break;
                 case F:
-                    lastKeyReleased = NoteKEYB.F;
+                    lastKeyReleased = NoteKEYBImpl.F;
                     keyReleasedCommand.run();
                     break;
                 case G:
-                    lastKeyReleased = NoteKEYB.G;
+                    lastKeyReleased = NoteKEYBImpl.G;
                     keyReleasedCommand.run();
                     break;
                 case H:
-                    lastKeyReleased = NoteKEYB.A;
+                    lastKeyReleased = NoteKEYBImpl.A;
                     keyReleasedCommand.run();
                     break;
                 case J:
-                    lastKeyReleased = NoteKEYB.B;
+                    lastKeyReleased = NoteKEYBImpl.B;
                     keyReleasedCommand.run();
                     break;
                 case K:
-                    lastKeyReleased = NoteKEYB.C2;
+                    lastKeyReleased = NoteKEYBImpl.C2;
                     keyReleasedCommand.run();
                     break;
                 case Z:
-                    lastKeyReleased = NoteKEYB.CSharp;
+                    lastKeyReleased = NoteKEYBImpl.CSharp;
                     keyReleasedCommand.run();
                     break;
                 case E:
-                    lastKeyReleased = NoteKEYB.DSharp;
+                    lastKeyReleased = NoteKEYBImpl.DSharp;
                     keyReleasedCommand.run();
                     break;
                 case T:
-                    lastKeyReleased = NoteKEYB.FSharp;
+                    lastKeyReleased = NoteKEYBImpl.FSharp;
                     keyReleasedCommand.run();
                     break;
                 case Y:
-                    lastKeyReleased = NoteKEYB.GSharp;
+                    lastKeyReleased = NoteKEYBImpl.GSharp;
                     keyReleasedCommand.run();
                     break;
                 case U:
-                    lastKeyReleased = NoteKEYB.ASharp;
+                    lastKeyReleased = NoteKEYBImpl.ASharp;
                     keyReleasedCommand.run();
                     break;
                 default:

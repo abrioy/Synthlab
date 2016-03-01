@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 /**
  *
  */
-public class InputPort extends Port {
+public class InputPort extends PortImpl {
     private static final Logger LOGGER
             = Logger.getLogger(InputPort.class.getName());
 

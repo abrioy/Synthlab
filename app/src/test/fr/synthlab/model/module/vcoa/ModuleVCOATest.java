@@ -27,7 +27,7 @@ public class ModuleVCOATest {
      */
     @Before
     public void setUp() {
-        moduleVCOA = new ModuleVCOA(JSyn.createSynthesizer());
+        moduleVCOA = new ModuleVCOAImpl(JSyn.createSynthesizer());
         moduleVCOA.start();
     }
 

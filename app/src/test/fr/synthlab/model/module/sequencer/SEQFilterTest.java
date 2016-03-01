@@ -41,7 +41,7 @@ public class SEQFilterTest {
         stepValues.add(0.0);
         stepValues.add(0.0);
         stepValues.add(0.0);
-        seqFilter = new SEQFilter(stepValues, mockModuleSEQ);
+        seqFilter = new SEQFilterImpl(stepValues, mockModuleSEQ);
     }
 
     /**

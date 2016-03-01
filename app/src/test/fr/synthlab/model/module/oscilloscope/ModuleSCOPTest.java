@@ -25,7 +25,7 @@ public class ModuleSCOPTest {
     @Before
     public void setUp() {
         Synthesizer synth = JSyn.createSynthesizer();
-        moduleOsc = new ModuleSCOP(synth);
+        moduleOsc = new ModuleSCOPImpl(synth);
     }
 
     /**

@@ -25,7 +25,7 @@ public class ModuleMIXTest {
     @Before
     public void setUp() {
         Synthesizer synth = JSyn.createSynthesizer();
-        moduleMIX = new ModuleMIX(synth);
+        moduleMIX = new ModuleMIXImpl(synth);
     }
 
     /**

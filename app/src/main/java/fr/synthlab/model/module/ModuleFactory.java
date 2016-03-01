@@ -2,18 +2,25 @@ package fr.synthlab.model.module;
 
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
-import fr.synthlab.model.module.envelope.ModuleEG;
+import fr.synthlab.model.module.envelope.ModuleEGImpl;
 import fr.synthlab.model.module.keyboard.ModuleKEYB;
-import fr.synthlab.model.module.mixer.ModuleMIX;
+import fr.synthlab.model.module.keyboard.ModuleKEYBImpl;
+import fr.synthlab.model.module.mixer.ModuleMIXImpl;
 import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
+import fr.synthlab.model.module.oscilloscope.ModuleSCOPImpl;
 import fr.synthlab.model.module.out.ModuleOUT;
-import fr.synthlab.model.module.replicator.ModuleREP;
+import fr.synthlab.model.module.out.ModuleOUTImpl;
+import fr.synthlab.model.module.replicator.ModuleREPImpl;
 import fr.synthlab.model.module.sequencer.ModuleSEQ;
+import fr.synthlab.model.module.sequencer.ModuleSEQImpl;
 import fr.synthlab.model.module.vca.ModuleVCA;
-import fr.synthlab.model.module.vcf.ModuleVCFHP;
+import fr.synthlab.model.module.vca.ModuleVCAImpl;
+import fr.synthlab.model.module.vcf.ModuleVCFHPImpl;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
+import fr.synthlab.model.module.vcf.ModuleVCFLPImpl;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
-import fr.synthlab.model.module.whiteNoise.ModuleBRUI;
+import fr.synthlab.model.module.vcoa.ModuleVCOAImpl;
+import fr.synthlab.model.module.whiteNoise.ModuleBRUIImpl;
 
 import java.util.logging.Logger;
 
@@ -80,67 +87,67 @@ public class ModuleFactory {
     }
 
     private static Module createMix() {
-        return new ModuleMIX(syn);
+        return new ModuleMIXImpl(syn);
     }
 
     private static Module createNoise() {
-        return new ModuleBRUI(syn);
+        return new ModuleBRUIImpl(syn);
     }
 
     /**
      * @return a new VCO
      */
     private static ModuleVCOA createVCO() {
-        return new ModuleVCOA(syn);
+        return new ModuleVCOAImpl(syn);
     }
 
     /**
      * @return a new Oscilloscope
      */
     private static ModuleSCOP createOscilloscope() {
-        return new ModuleSCOP(syn);
+        return new ModuleSCOPImpl(syn);
     }
 
     /**
      * @return a new ModuleOUT
      */
     private static ModuleOUT createOut() {
-        return new ModuleOUT(syn);
+        return new ModuleOUTImpl(syn);
     }
 
     /**
      * @return a new ModuleVCA
      */
     private static ModuleVCA createVCA() {
-        return new ModuleVCA(syn);
+        return new ModuleVCAImpl(syn);
     }
 
     /**
      * @return a new ModuleREP
      */
     private static Module createREP() {
-        return new ModuleREP(syn);
+        return new ModuleREPImpl(syn);
     }
 
     /**
      * @return a new ModuleEG
      */
     private static Module createEG() {
-        return new ModuleEG(syn);
+        return new ModuleEGImpl(syn);
     }
 
     /**
      * @return a new ModuleVCFLP
      */
     private static ModuleVCFLP createVCFLP() {
-        return new ModuleVCFLP(syn);
+        return new ModuleVCFLPImpl(syn);
     }
 
     /**
      * @return a new ModuleVCHP
      */
     private static Module createVCFHP() {
-        return new ModuleVCFHP(syn);
+        return new ModuleVCFHPImpl(syn);
     }
 
 
@@ -148,14 +155,14 @@ public class ModuleFactory {
      * @return a new ModuleKEYB
      */
     private static ModuleKEYB createKEYB() {
-        return new ModuleKEYB(syn);
+        return new ModuleKEYBImpl(syn);
     }
 
     /**
      * @return a new ModuleSEQ
      */
     private static ModuleSEQ createSEQ() {
-        return new ModuleSEQ(syn);
+        return new ModuleSEQImpl(syn);
     }
 
     public static Synthesizer getSyn() {

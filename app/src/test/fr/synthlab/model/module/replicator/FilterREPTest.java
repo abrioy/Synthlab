@@ -20,7 +20,7 @@ public class FilterREPTest {
      */
     @Before
     public void setUp() {
-        filterREP = new FilterREP();
+        filterREP = new FilterREPImpl();
     }
 
     /**
