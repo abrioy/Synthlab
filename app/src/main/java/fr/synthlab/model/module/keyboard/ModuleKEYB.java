@@ -1,7 +1,6 @@
 package fr.synthlab.model.module.keyboard;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.SineOscillator;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.OutputPort;
@@ -61,7 +60,7 @@ public class ModuleKEYB implements Module {
     /**
      * Oscillator to generate frequency.
      */
-    private FilterOutKEYB sineOscillator;
+    private FilterOutKEYB keyboardOutFilter;
 
     /**
      * Filter to manage the gate port.
@@ -76,13 +75,13 @@ public class ModuleKEYB implements Module {
         octave = REFERENCE_OCTAVE;
 
         //Initialize
-        sineOscillator = new FilterOutKEYB();
+        keyboardOutFilter = new FilterOutKEYB();
         keyboardFilter = new FilterKEYB();
-        synth.add(sineOscillator);
+        synth.add(keyboardOutFilter);
         synth.add(keyboardFilter);
 
         //Output port
-        OutputPort out = new OutputPort("out", this, sineOscillator.getGate());
+        OutputPort out = new OutputPort("out", this, keyboardOutFilter.getGate());
         ports.add(out);
 
         //Gate port
@@ -106,7 +105,7 @@ public class ModuleKEYB implements Module {
      */
     @Override
     public void start() {
-        sineOscillator.start();
+        keyboardOutFilter.start();
     }
 
     /**
@@ -114,7 +113,7 @@ public class ModuleKEYB implements Module {
      */
     @Override
     public void stop() {
-        sineOscillator.stop();
+        keyboardOutFilter.stop();
     }
 
     /**
@@ -162,12 +161,7 @@ public class ModuleKEYB implements Module {
      * @param n New note
      */
     private void computeFrequency(NoteKEYB n){
-        double freq = REFERENCE_FREQUENCY * Math.pow(2, (n.getValue()/12.0))*Math.pow(2, (octave - REFERENCE_OCTAVE));
-        freq = ((freq - 110*Math.pow(2, octave - 1)) /
-                (110*Math.pow(2, octave) - 110*Math.pow(2, octave - 1)))
-        + (octave - REFERENCE_OCTAVE);
-        freq = ((double) n.getValue())/12.0 + (octave - REFERENCE_OCTAVE);
-        sineOscillator.setTension(freq);
+        keyboardOutFilter.setTension(((double) n.getValue())/12.0 + (octave - REFERENCE_OCTAVE));
     }
 
     /**

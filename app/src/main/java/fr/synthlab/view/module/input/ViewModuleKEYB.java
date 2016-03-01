@@ -9,6 +9,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -58,7 +59,9 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     Runnable keyPressedCommand;
     Runnable keyReleasedCommand;
     Runnable octaveChangeCommand;
+
     NoteKEYB lastKeyPressed;
+    KeyCode lastKeyPressedKeyCode;
 
     public ViewModuleKEYB(Workbench workbench) {
         super(workbench);
@@ -184,6 +187,26 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 
         this.setFocusTraversable(true);
         this.setOnKeyPressed(event -> {
+            // FIXME: Worst code ever
+            switch (event.getCode()) {
+                case Q:
+                case S:
+                case D:
+                case F:
+                case G:
+                case H:
+                case J:
+                case K:
+                case Z:
+                case E:
+                case T:
+                case Y:
+                case U:
+                    lastKeyPressedKeyCode = event.getCode();
+                default:
+                    break;
+            }
+
             switch (event.getCode()) {
                 case Q:
                     lastKeyPressed = NoteKEYB.C;
@@ -252,24 +275,9 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         });
 
         this.setOnKeyReleased(event -> {
-            switch (event.getCode()) {
-                case Q:
-                case S:
-                case D:
-                case F:
-                case G:
-                case H:
-                case J:
-                case K:
-                case Z:
-                case E:
-                case T:
-                case Y:
-                case U:
-                    keyReleasedCommand.run();
-					event.consume();
-                default:
-                    break;
+            if (event.getCode().equals(lastKeyPressedKeyCode)) {
+                keyReleasedCommand.run();
+                event.consume();
             }
         });
     }
