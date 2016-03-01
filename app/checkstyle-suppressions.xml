@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.0//EN"
+        "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+
+<suppressions>
+  <suppress checks="AvoidInlineConditionals"
+            files="Knob.java"/>
+  <suppress checks="MagicNumber"
+            files="ModuleEG.java"/>
+  <suppress checks="MagicNumber"
+            files="FilterKEYB.java"/>
+  <suppress checks="MagicNumber"
+            files="ModuleKEYB.java"/>
+  <suppress checks="MagicNumber"
+            files="ModuleSCOP.java"/>
+  <suppress checks="MagicNumber"
+            files="SEQFilter.java"/>
+  <suppress checks="MagicNumber"
+            files="FilterVCAam.java"/>
+  <suppress checks="MagicNumber"
+            files="ModuleVCF.java"/>
+  <suppress checks="MagicNumber"
+            files="ModuleVCOA.java"/>
+  <suppress checks="MagicNumber"
+            files="KeyboardKey.java"/>
+  <suppress checks="MagicNumber"
+            files="Knob.java"/>
+  <suppress checks="MagicNumber"
+            files="Cable.java"/>
+  <suppress checks="MagicNumber"
+            files="Workbench.java"/>
+  <suppress checks="MagicNumber"
+            files="Plug.java"/>
+    <suppress checks="MagicNumber"
+              files="MainWindowController.java"/>
+    <suppress checks="MagicNumber"
+              files="MenuBarController.java"/>
+    <suppress checks="MagicNumber"
+              files="ToolboxController.java"/>
+    <suppress checks="MagicNumber"
+              files="ViewModule.java"/>
+    <suppress checks="MagicNumber"
+              files="ViewModuleFactory.java"/>
+    <suppress checks="MagicNumber"
+              files="ViewModuleOUT.java"/>
+
+
+    <suppress checks="HideUtilityClassConstructor"
+              files="ModuleFactory.java"/>
+    <suppress checks="HideUtilityClassConstructor"
+              files="ViewModuleFactory.java"/>
+
+    <suppress checks="VisibilityModifier"
+              files="ModuleVCF.java"/>
+
+    <suppress files="Port.java" checks="DesignForExtension" lines="55-65" />
+    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="47-69" />
+
+    <suppress files="ModuleKEYB.java" checks="FinalParameters" lines="145" />
+    <suppress files="Knob.java" checks="FinalParameters" lines="566" />
+    <suppress files="Knob.java" checks="FinalParameters" lines="624" />
+</suppressions>

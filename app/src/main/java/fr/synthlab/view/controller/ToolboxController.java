@@ -22,7 +22,8 @@ import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 public class ToolboxController implements Initializable {
-    private static final Logger logger = Logger.getLogger(ToolboxController.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ToolboxController.class.getName());
     @FXML
     private TreeView<String> treeView;
 
@@ -36,17 +37,18 @@ public class ToolboxController implements Initializable {
 
     private Consumer<DragEvent> onDragDone = null;
 
-    public void setOnDragDone(Consumer<DragEvent> onDragDone) {
-        this.onDragDone = onDragDone;
+    public final void setOnDragDone(final Consumer<DragEvent> newOnDragDone) {
+        onDragDone = newOnDragDone;
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        treeItemRoot.expandedProperty().addListener(listener -> makeListDraggable(treeView));
+    public final void initialize(
+            final URL location, final ResourceBundle resources) {
+        treeItemRoot.expandedProperty().addListener(
+                listener -> makeListDraggable(treeView));
 
         TreeItem<String> rootInput = new TreeItem<>("Input");
-        TreeItem<String> rootOutput= new TreeItem<>("Output ");
+        TreeItem<String> rootOutput = new TreeItem<>("Output");
         TreeItem<String> rootFilter = new TreeItem<>("Filter");
         treeItemRoot.getChildren().addAll(rootInput, rootOutput, rootFilter);
 
@@ -80,8 +82,8 @@ public class ToolboxController implements Initializable {
         treeView.setShowRoot(false);
 
         int length = 0;
-        for(TreeItem item : treeItemRoot.getChildren()){
-            length += (1+item.getChildren().size());
+        for (TreeItem item : treeItemRoot.getChildren()) {
+            length += (1 + item.getChildren().size());
         }
         treeView.setPrefHeight(length * 25);
 
@@ -94,23 +96,27 @@ public class ToolboxController implements Initializable {
 
     private void colorChange() {
         color = colorPicker.getValue();
-        if (!colorPicker.getCustomColors().contains(color)){
+        if (!colorPicker.getCustomColors().contains(color)) {
             colorPicker.getCustomColors().add(color);
         }
     }
 
-    private void makeListDraggable(TreeView<String> item) {
+    private void makeListDraggable(final TreeView<String> item) {
         item.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
-            public TreeCell<String> call(TreeView<String> stringTreeView) {
+            public TreeCell<String> call(
+                    final TreeView<String> stringTreeView) {
                 TreeCell<String> cell = new TreeCell<String>() {
-                    protected void updateItem(String item, boolean empty) {
+                    protected void updateItem(
+                            final String item, final boolean empty) {
                         super.updateItem(item, empty);
                         setText(item);
                     }
                 };
                 cell.setOnDragDetected(event -> {
-                    if (!cell.isEmpty() && !ModuleType.getNameFromLong(cell.getItem()).equals("")) {
+                    if (!cell.isEmpty()
+                            && !ModuleType.getNameFromLong(
+                            cell.getItem()).equals("")) {
                         Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
                         ClipboardContent cc = new ClipboardContent();
                         cc.putString(cell.getItem());
@@ -127,8 +133,7 @@ public class ToolboxController implements Initializable {
         });
     }
 
-    public static Color getColor(){
+    public static Color getColor() {
         return color;
     }
-
 }

@@ -14,23 +14,24 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 public abstract class ModuleVCF implements Module {
-
-    private static final Logger logger = Logger.getLogger(ModuleVCF.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleVCF.class.getName());
 
     protected Collection<Port> ports = new ArrayList<>();
     protected InputPort fmInput;
     protected InputPort input;
     protected OutputPort output;
     /**
-     * Fréquence de coupure f0
+     * Fréquence de coupure f0.
      */
     protected double f0 = 440;
+
     /**
-     * Filter modulator
+     * Filter modulator.
      */
     protected FilterFm filterFm;
 
-    public ModuleVCF(Synthesizer synthesizer) {
+    public ModuleVCF(final Synthesizer synthesizer) {
         filterFm = new FilterFm(f0);
 
         synthesizer.add(filterFm);
@@ -40,7 +41,7 @@ public abstract class ModuleVCF implements Module {
     }
 
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -56,18 +57,17 @@ public abstract class ModuleVCF implements Module {
 
     @Override
     public void update() {
-
     }
 
     @Override
     public abstract ModuleType getType();
 
-    public double getF0() {
+    public final double getF0() {
         return f0;
     }
 
-    public void setF0(double f0) {
-        this.f0 = f0;
-        filterFm.setf0(f0);
+    public void setF0(final double newF0) {
+        f0 = newF0;
+        filterFm.setF0(f0);
     }
 }

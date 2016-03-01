@@ -13,11 +13,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
-import java.util.*;
+import java.util.Observer;
+import java.util.ResourceBundle;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Observable;
 import java.util.logging.Logger;
 
-public class ViewModuleSEQ extends ViewModule implements Initializable, Observer{
-    private static final Logger logger = Logger.getLogger(ViewModuleSEQ.class.getName());
+public class ViewModuleSEQ extends ViewModule
+        implements Initializable, Observer {
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleSEQ.class.getName());
 
     @FXML
     private ResetButton resetButton;
@@ -55,48 +61,56 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
     private Runnable step8Command;
 
 
-    public ViewModuleSEQ(Workbench workbench) {
+    public ViewModuleSEQ(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleSEQ.fxml");
         this.setId("pane");
         //resetButton.setPrefSize(30,30);
     }
 
-    public void setResetCommand(Runnable reset) {
+    public final void setResetCommand(final Runnable reset) {
         this.resetCommand = reset;
     }
 
-    public void setChangeStep1Command(Runnable command) {
+    public final void setChangeStep1Command(final Runnable command) {
         this.step1Command = command;
     }
-    public void setChangeStep2Command(Runnable command) {
+
+    public final void setChangeStep2Command(final Runnable command) {
         this.step2Command = command;
     }
-    public void setChangeStep3Command(Runnable command) {
+
+    public final void setChangeStep3Command(final Runnable command) {
         this.step3Command = command;
     }
-    public void setChangeStep4Command(Runnable command) {
+
+    public final void setChangeStep4Command(final Runnable command) {
         this.step4Command = command;
     }
-    public void setChangeStep5Command(Runnable command) {
+
+    public final void setChangeStep5Command(final Runnable command) {
         this.step5Command = command;
     }
-    public void setChangeStep6Command(Runnable command) {
+
+    public final void setChangeStep6Command(final Runnable command) {
         this.step6Command = command;
     }
-    public void setChangeStep7Command(Runnable command) {
+
+    public final void setChangeStep7Command(final Runnable command) {
         this.step7Command = command;
     }
-    public void setChangeStep8Command(Runnable command) {
+
+    public final void setChangeStep8Command(final Runnable command) {
         this.step8Command = command;
     }
 
-    public double getStepValue(int step) {
+    public final double getStepValue(final int step) {
         return stepPickers.get(step).getValue();
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(
+            final URL location, final ResourceBundle resources) {
         stepPickers = new ArrayList<>();
 
         stepPickers.add(step1Picker);
@@ -144,21 +158,23 @@ public class ViewModuleSEQ extends ViewModule implements Initializable, Observer
     }
 
     @Override
-    public void writeObject(ObjectOutputStream o) throws IOException {
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
         for (Knob a : stepPickers) {
             o.writeDouble(a.getValue());
         }
     }
 
     @Override
-    public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		for (Knob a : stepPickers){
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
+        for (Knob a : stepPickers) {
             a.setValue(o.readDouble());
         }
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public final void update(final Observable o, final Object arg) {
         Platform.runLater(() -> stepLabel.setText(arg.toString()));
     }
 }

@@ -13,51 +13,52 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Main extends Application {
-	private static final Logger APP_ROOT_LOGGER = Logger.getLogger("fr.synthlab");
-	private static final Logger logger = Logger.getLogger(Main.class.getName());
+    private static final Logger APP_ROOT_LOGGER =
+            Logger.getLogger("fr.synthlab");
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
-	public static void main(String[] args) {
+    public static void main(final String[] args) {
+        // Reading logging.properties
+        if (System.getProperty("java.util.logging.config.file") == null) {
+            final InputStream inputStream = Main.class
+                    .getResourceAsStream("/logging.properties");
+            try {
+                LogManager.getLogManager().readConfiguration(inputStream);
+            } catch (final IOException e) {
+                Logger.getAnonymousLogger().severe(
+                        "Could not load default logging.properties file");
+                Logger.getAnonymousLogger().severe(e.getMessage());
+            }
+        }
 
-		// Reading logging.properties
-		if (System.getProperty("java.util.logging.config.file") == null) {
-			final InputStream inputStream = Main.class.getResourceAsStream("/logging.properties");
-			try {
-				LogManager.getLogManager().readConfiguration(inputStream);
-			} catch (final IOException e) {
-				Logger.getAnonymousLogger().severe("Could not load default logging.properties file");
-				Logger.getAnonymousLogger().severe(e.getMessage());
-			}
-		}
+        System.setProperty("javafx.embed.singleThread", "true");
 
-		System.setProperty("javafx.embed.singleThread", "true");
+        launch(args);
+    }
 
-		launch(args);
-
-	}
-
-	@Override
-	public void start(Stage stage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/MainWindow.fxml"));
-		loader.load();
-		Scene scene = new Scene(loader.getRoot());
+    @Override
+    public final void start(final Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("/gui/fxml/MainWindow.fxml"));
+        loader.load();
+        Scene scene = new Scene(loader.getRoot());
 
 
-		stage.setTitle("Synthlab");
-		stage.setScene(scene);
-		stage.setOnShown(we -> logger.fine("Main window opened."));
-		stage.setOnCloseRequest(we -> {
-			stage.close();
-			logger.fine("Main window closed.");
-		});
-		stage.setOnCloseRequest(t -> {
-			Platform.exit();
-			System.exit(0);
-		});
+        stage.setTitle("Synthlab");
+        stage.setScene(scene);
+        stage.setOnShown(we -> LOGGER.fine("Main window opened."));
+        stage.setOnCloseRequest(we -> {
+            stage.close();
+            LOGGER.fine("Main window closed.");
+        });
+        stage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
+        });
 
-		MainWindowController controller = loader.getController();
-		controller.setStageAndSetupListeners(stage);
-		stage.setMaximized(true);
-		stage.show();
-	}
-
+        MainWindowController controller = loader.getController();
+        controller.setStageAndSetupListeners(stage);
+        stage.setMaximized(true);
+        stage.show();
+    }
 }

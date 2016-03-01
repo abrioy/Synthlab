@@ -17,39 +17,40 @@ import java.util.logging.Logger;
  * with an other modular signal.
  */
 public class ModuleVCA implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleVCA.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleVCA.class.getName());
 
     /**
-     * The list of port of the VCA Module
+     * The list of port of the VCA Module.
      */
     private Collection<Port> ports = new ArrayList<>();
 
     /**
-     * inputs ports
+     * inputs ports.
      */
     private InputPort inputPort, inputPortAm;
     /**
-     * output port
+     * output port.
      */
     private OutputPort outputPort;
 
     /**
-     * attenuator filter
+     * attenuator filter.
      */
     private FilterAttenuator filterAttenuator = new FilterAttenuator();
 
     /**
-     * Attenuation modulator
+     * Attenuation modulator.
      */
     private FilterVCAam filterVCAam;
 
     private double attenuation = 0.0;
 
     /**
-     * Constructor
-     * @param synthesizer
+     * Constructor.
+     * @param synthesizer Synthesizer
      */
-    public ModuleVCA(Synthesizer synthesizer) {
+    public ModuleVCA(final Synthesizer synthesizer) {
         filterVCAam = new FilterVCAam(filterAttenuator.output);
 
         synthesizer.add(filterAttenuator);
@@ -65,45 +66,44 @@ public class ModuleVCA implements Module {
     }
 
     /**
-     *
      * @return the attenuation in DB
      */
-    public double getAttenuation() {
+    public final double getAttenuation() {
         return attenuation;
     }
 
     /**
-     * set the attenuation in DB
-     * @param attenuation
+     * set the attenuation in DB.
+     * @param newAttenuation attenuation new attenuation
      */
-    public void setAttenuation(double attenuation) {
-        this.attenuation = attenuation;
+    public final void setAttenuation(final double newAttenuation) {
+        attenuation = newAttenuation;
         filterAttenuator.setAttenuation(attenuation);
     }
 
     /**
-     * get the list of ports of the VCA module
-     * @return
+     * get the list of ports of the VCA module.
+     * @return VCA ports
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
     /**
-     * start the VCA
+     * start the VCA.
      */
     @Override
-    public void start() {
+    public final void start() {
         filterAttenuator.start();
         filterVCAam.start();
     }
 
     /**
-     * Stop the VCA
+     * Stop the VCA.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         filterAttenuator.stop();
         filterVCAam.stop();
     }
@@ -113,16 +113,13 @@ public class ModuleVCA implements Module {
      */
     @Override
     public void update() {
-
     }
 
     /**
-     *
      * @return the type of the module
      */
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.VCA;
     }
-
 }

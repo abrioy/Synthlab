@@ -8,11 +8,11 @@ import fr.synthlab.model.module.port.OutputPort;
 
 public class ModuleVCFLP extends ModuleVCF {
     /**
-     * JSyn lowPass Filter
+     * JSyn lowPass Filter.
      */
     private FilterLowPass lpFilter = new FilterLowPass();
 
-    public ModuleVCFLP(Synthesizer synthesizer) {
+    public ModuleVCFLP(final Synthesizer synthesizer) {
         super(synthesizer);
 
         synthesizer.add(lpFilter);
@@ -27,29 +27,29 @@ public class ModuleVCFLP extends ModuleVCF {
     }
 
     /**
-     * start the module
+     * start the module.
      */
     @Override
-    public void start() {
+    public final void start() {
         super.start();
         lpFilter.start();
     }
 
     /**
-     * stop the module
+     * stop the module.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         super.stop();
         lpFilter.stop();
     }
 
     /**
-     * set the cut frequency
+     * set the cut frequency.
      * @param f0 the cut frequency
      */
     @Override
-    public void setF0(double f0) {
+    public final void setF0(final double f0) {
         super.setF0(f0);
         if (fmInput.getConnected() == null) {
             lpFilter.frequency.set(f0);
@@ -58,8 +58,10 @@ public class ModuleVCFLP extends ModuleVCF {
 
     /**
      * this method is called when we connect or disconnect the fm Input port
-     * when the fm input port is connected, we connect his output to the LowPass filter
-     * when the fm input port is disconnected, we set the frequency f0 to the LowPass filter
+     * when the fm input port is connected,
+     * we connect his output to the LowPass filter
+     * when the fm input port is disconnected,
+     * we set the frequency f0 to the LowPass filter.
      */
     @Override
     public void update() {
@@ -72,15 +74,15 @@ public class ModuleVCFLP extends ModuleVCF {
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.VCFLP;
     }
 
-    public double getResonance() {
+    public final double getResonance() {
         return lpFilter.Q.get();
     }
 
-    public void setResonance(double value) {
+    public final void setResonance(final double value) {
         lpFilter.Q.set(value);
     }
 

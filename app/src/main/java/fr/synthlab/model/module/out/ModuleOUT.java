@@ -22,8 +22,9 @@ import java.util.logging.Logger;
  * @author johan
  * @see Module
  */
-public class ModuleOUT implements Module{
-    private static final Logger logger = Logger.getLogger(ModuleOUT.class.getName());
+public class ModuleOUT implements Module {
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleOUT.class.getName());
 
     /**
      * audio stereo left exit.
@@ -82,9 +83,10 @@ public class ModuleOUT implements Module{
 
     /**
      * constructor.
+     *
      * @param synthesizer where we get sound
      */
-    public ModuleOUT(Synthesizer synthesizer){
+    public ModuleOUT(final Synthesizer synthesizer) {
         lineOutLeft = new LineOut();
         lineOutRight = new LineOut();
         lineOut = new LineOut();
@@ -102,11 +104,17 @@ public class ModuleOUT implements Module{
         InputPort inRight = new InputPort("Right", this, attenuatorRight.input);
         interOut = new OutputPort("out", this, attenuator.output);
         interOutLeft = new OutputPort("outLeft", this, attenuatorLeft.output);
-        interOutRight = new OutputPort("outRight", this, attenuatorRight.output);
-        new InputPort("inLeft", this, lineOutLeft.input.getConnectablePart(0)).connect(interOutLeft);
-        new InputPort("inRight", this, lineOutRight.input.getConnectablePart(1)).connect(interOutRight);
-        new InputPort("in0", this, lineOut.input.getConnectablePart(0)).connect(interOut);
-        new InputPort("in1", this, lineOut.input.getConnectablePart(1)).connect(interOut);
+        interOutRight = new OutputPort(
+                "outRight", this, attenuatorRight.output);
+        new InputPort("inLeft", this,
+                lineOutLeft.input.getConnectablePart(0)).connect(interOutLeft);
+        new InputPort("inRight", this,
+                lineOutRight.input.getConnectablePart(1))
+                .connect(interOutRight);
+        new InputPort("in0", this,
+                lineOut.input.getConnectablePart(0)).connect(interOut);
+        new InputPort("in1", this,
+                lineOut.input.getConnectablePart(1)).connect(interOut);
         syn = synthesizer;
 
         ports.add(in);
@@ -116,18 +124,20 @@ public class ModuleOUT implements Module{
 
     /**
      * getter on mute.
+     *
      * @return true if we play sound
      */
-    public boolean isMute() {
+    public final boolean isMute() {
         return mute;
     }
 
     /**
      * setter on mute start or stop play audio.
-     * @param mute true if play sound
+     *
+     * @param newMute true if play sound
      */
-    public void setMute(boolean mute) {
-        this.mute = mute;
+    public final void setMute(final boolean newMute) {
+        mute = newMute;
         if (isMute()) {
             stop();
         } else {
@@ -135,25 +145,34 @@ public class ModuleOUT implements Module{
         }
     }
 
-    public void setRecording(boolean recording, File pickedFile) {
-        this.recording= recording;
+    public final void setRecording(
+            final boolean newRecording, final File pickedFile) {
+        recording = newRecording;
 
         try {
             if (recording) {
-				waveRecorder = new WaveRecorder(syn, pickedFile);
-				((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 0);
-				((UnitOutputPort) interOut.getOutput()).connect(0, waveRecorder.getInput(), 1);
-				((UnitOutputPort) interOutLeft.getOutput()).connect(0, waveRecorder.getInput(), 0);
-				((UnitOutputPort) interOutRight.getOutput()).connect(0, waveRecorder.getInput(), 1);
+                waveRecorder = new WaveRecorder(syn, pickedFile);
+                ((UnitOutputPort) interOut.getOutput()).connect(
+                        0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).connect(
+                        0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).connect(
+                        0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).connect(
+                        0, waveRecorder.getInput(), 1);
 
-				waveRecorder.start();
+                waveRecorder.start();
             } else if (waveRecorder != null) {
                 waveRecorder.stop();
 
-                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
-                ((UnitOutputPort) interOut.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
-                ((UnitOutputPort) interOutLeft.getOutput()).disconnect(0, waveRecorder.getInput(), 0);
-                ((UnitOutputPort) interOutRight.getOutput()).disconnect(0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOut.getOutput()).disconnect(
+                        0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOut.getOutput()).disconnect(
+                        0, waveRecorder.getInput(), 1);
+                ((UnitOutputPort) interOutLeft.getOutput()).disconnect(
+                        0, waveRecorder.getInput(), 0);
+                ((UnitOutputPort) interOutRight.getOutput()).disconnect(
+                        0, waveRecorder.getInput(), 1);
 
                 waveRecorder.close();
 
@@ -168,7 +187,7 @@ public class ModuleOUT implements Module{
      * start play audio.
      */
     @Override
-    public void start() {
+    public final void start() {
         if (!isMute()) {
             lineOut.start();
             lineOutLeft.start();
@@ -183,7 +202,7 @@ public class ModuleOUT implements Module{
      * stop play audio.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         lineOut.stop();
         lineOutLeft.stop();
         lineOutRight.stop();
@@ -194,10 +213,11 @@ public class ModuleOUT implements Module{
 
     /**
      * getter on ports input and output.
+     *
      * @return only input port : mono, stereo right and stereo left
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -210,29 +230,31 @@ public class ModuleOUT implements Module{
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.OUT;
     }
 
     /**
      * getter on attenuation.
+     *
      * @return attenuation
      */
-    public double getAttenuation(){
+    public final double getAttenuation() {
         return attenuatorLeft.getAttenuation();
     }
 
     /**
      * setter on attenuation.
+     *
      * @param attenuation new attenuation
      */
-    public void setAttenuation(double attenuation){
+    public final void setAttenuation(final double attenuation) {
         attenuatorLeft.setAttenuation(attenuation);
         attenuatorRight.setAttenuation(attenuation);
         attenuator.setAttenuation(attenuation);
     }
 
-    public boolean isRecording() {
+    public final boolean isRecording() {
         return recording;
     }
 }

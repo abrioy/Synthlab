@@ -1,9 +1,11 @@
 package fr.synthlab.view.component;
 
+import fr.synthlab.util.JavaFXThreadingRule;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,6 +16,12 @@ import static org.junit.Assert.assertEquals;
  * @author johan
  */
 public class KnobTest {
+
+    /**
+     * Rule to test JavaFX Thread.
+     */
+    @Rule
+    public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
     /**
      * knob tested
@@ -183,7 +191,7 @@ public class KnobTest {
      */
     @Test
     public void testGetLabel() {
-        assertEquals("linear",knob.getLabel());
+        assertEquals("",knob.getLabel());
     }
 
     /**
@@ -210,7 +218,7 @@ public class KnobTest {
      */
     @Test
     public void testGetStep() {
-        assertEquals(0,knob.getStep());
+        assertEquals(20,knob.getStep());
     }
 
     /**
@@ -219,6 +227,6 @@ public class KnobTest {
     @Test
     public void testStepProperty() {
         IntegerProperty property = knob.stepProperty();
-        assertEquals(0,property.get());
+        assertEquals(20,property.get());
     }
 }

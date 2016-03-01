@@ -17,49 +17,50 @@ public class SEQFilter extends UnitFilter {
     private double sigFrontStop;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param stepValues list of value
-     * @param seq sequence
+     * @param seqInit        sequence
      */
-    public SEQFilter(List<Double> stepValues, ModuleSEQ seq) {
+    public SEQFilter(final List<Double> stepValues, final ModuleSEQ seqInit) {
         tension = stepValues;
-        this.seq = seq;
+        seq = seqInit;
         current = 0;
 
-        signalFront = 0.1/2;
-        sigFrontStop = -0.000001/2;
+        signalFront = 0.1 / 2;
+        sigFrontStop = -0.000001 / 2;
     }
 
     /**
-     * Generate new values.Oscilloscope
+     * Generate new values.Oscilloscope.
+     *
      * @param start param managed by Jsyn
      * @param limit param managed by Jsyn
      */
     @Override
-    public void generate(int start, int limit) {
+    public final void generate(final int start, final int limit) {
         double[] gates = output.getValues();
         double[] inputs = input.getValues();
         for (int i = start; i < limit; i += 1) {
             if (attend) {
-                if ( inputs[i] <= sigFrontStop ) {
+                if (inputs[i] <= sigFrontStop) {
                     attend = false;
                 }
-            }
-            else if (inputs[i] >= signalFront ){
+            } else if (inputs[i] >= signalFront) {
                 attend = true;
                 current++;
-                current= current % tension.size();
+                current = current % tension.size();
                 seq.updateObs();
             }
             gates[i] = tension.get(current);
         }
     }
 
-    public int getCurrent() {
+    public final int getCurrent() {
         return current;
     }
 
-    public void reset() {
-        current=0;
+    public final void reset() {
+        current = 0;
     }
 }

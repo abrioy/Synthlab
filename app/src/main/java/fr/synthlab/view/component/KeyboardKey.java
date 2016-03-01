@@ -9,23 +9,24 @@ import javafx.scene.shape.Rectangle;
 import java.util.logging.Logger;
 
 public class KeyboardKey extends Rectangle {
-    private static final Logger logger = Logger.getLogger(KeyboardKey.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(KeyboardKey.class.getName());
 
     private Workbench workbench;
 
-    private BooleanProperty isWhiteKey = new SimpleBooleanProperty(this, "isWhiteKey", true);
+    private BooleanProperty isWhiteKey
+            = new SimpleBooleanProperty(this, "isWhiteKey", true);
 
     public KeyboardKey() {
         super();
 
-        this.setFill(Color.WHITE);
-        this.setWidth(40);
-        this.setHeight(150);
+        setIsWhiteKey(true);
     }
 
-    public final void setIsWhiteKey(boolean whiteKey) {
+    public final void setIsWhiteKey(final boolean whiteKey) {
         this.isWhiteKey.setValue(whiteKey);
         if (whiteKey) {
+            this.setWidth(40);
             this.setHeight(150);
             this.setFill(Color.WHITE);
         } else {

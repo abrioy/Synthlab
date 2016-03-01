@@ -15,50 +15,54 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleSCOP extends ViewModule implements Initializable {
-	private static final Logger logger = Logger.getLogger(ViewModuleSCOP.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleSCOP.class.getName());
 
-	@FXML
-	OscilloscopeDrawing oscilloscopeDrawing;
+    @FXML
+    private OscilloscopeDrawing oscilloscopeDrawing;
 
-	@FXML
-	private Knob picker;
+    @FXML
+    private Knob picker;
 
-	private Runnable pickerCmd;
-	private Workbench w;
-	public ViewModuleSCOP(Workbench workbench) {
-		super(workbench);
-		this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
-		w=workbench;
-	}
+    private Runnable pickerCmd;
+    private Workbench w;
 
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-		picker.valueProperty().addListener(event -> {
-			pickerCmd.run();
-		});
+    public ViewModuleSCOP(final Workbench workbench) {
+        super(workbench);
+        this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
+        w = workbench;
+    }
 
-	}
+    @Override
+    public final void initialize(
+            final URL url, final ResourceBundle resourceBundle) {
+        picker.valueProperty().addListener(event -> {
+            pickerCmd.run();
+        });
+    }
 
-	public void setPickerCommand(Runnable pickerCmd) {
-		this.pickerCmd = pickerCmd;
-		pickerCmd.run();
-	}
+    public final void setPickerCommand(final Runnable newPickerCmd) {
+        pickerCmd = newPickerCmd;
+        pickerCmd.run();
+    }
 
-	public int getScale() {
-		return (int) picker.getValue();
-	}
+    public final int getScale() {
+        return (int) picker.getValue();
+    }
 
-	public OscilloscopeDrawing getOscilloscopeDrawing() {
-		return oscilloscopeDrawing;
-	}
+    public final OscilloscopeDrawing getOscilloscopeDrawing() {
+        return oscilloscopeDrawing;
+    }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(picker.getValue());
-	}
+    @Override
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
+        o.writeDouble(picker.getValue());
+    }
 
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		picker.setValue(o.readDouble());
-	}
+    @Override
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
+        picker.setValue(o.readDouble());
+    }
 }

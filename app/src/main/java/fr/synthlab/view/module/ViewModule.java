@@ -21,98 +21,105 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public abstract class ViewModule extends Pane implements Serializable {
-	private static final Logger logger = Logger.getLogger(ViewModule.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModule.class.getName());
 
-	private Workbench workbench;
-	private Module module;
-	private AnchorPane topPane;
-	private Label moduleName;
-	private Button closeButton;
-	public ViewModule(Workbench workbench) {
-	
-		super();
+    private Workbench workbench;
+    private Module module;
+    private AnchorPane topPane;
+    private Label moduleName;
+    private Button closeButton;
 
-		this.workbench = workbench;
-		this.getStyleClass().add("module-frame");
-		this.getStylesheets().add("/gui/fxml/style/Module.css");
-		this.applyCss();
+    public ViewModule(final Workbench workbenchInit) {
+        super();
 
-		topPane = new AnchorPane();
-		topPane.setFocusTraversable(false);
-		topPane.setMaxHeight(30.0d);
-		topPane.relocate(10, 5);
-		this.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
-			// Making sure the pane is always the right size
-			topPane.setPrefWidth(oldValue.getWidth() - 20.0d);
-		});
-		this.getChildren().add(topPane);
+        workbench = workbenchInit;
+        this.getStyleClass().add("module-frame");
+        this.getStylesheets().add("/gui/fxml/style/Module.css");
+        this.applyCss();
 
-		moduleName = new Label();
-		moduleName.setFocusTraversable(false);
-		moduleName.setFont(new Font("Arial", 20));
-		topPane.getChildren().add(moduleName);
-		AnchorPane.setLeftAnchor(moduleName, 0.0d);
+        topPane = new AnchorPane();
+        topPane.setFocusTraversable(false);
+        topPane.setMaxHeight(30.0d);
+        topPane.relocate(10, 5);
+        this.layoutBoundsProperty().addListener(
+                (observable, oldValue, newValue) -> {
+            // Making sure the pane is always the right size
+            topPane.setPrefWidth(oldValue.getWidth() - 20.0d);
+        });
+        this.getChildren().add(topPane);
 
-		closeButton = new Button();
-		closeButton.setFocusTraversable(false);
-		closeButton.getStyleClass().add("close-button");
-		closeButton.setPrefSize(5, 5);
-		topPane.getChildren().add(closeButton);
-		AnchorPane.setRightAnchor(closeButton, 0.0d);
-		closeButton.setOnMouseClicked(event -> {
-			logger.fine("Module \"" + module.getType() + "\" is asking to be closed.");
-			workbench.onModuleCloseRequest(this);
-			event.consume();
-		});
+        moduleName = new Label();
+        moduleName.setFocusTraversable(false);
+        moduleName.setFont(new Font("Arial", 20));
+        topPane.getChildren().add(moduleName);
+        AnchorPane.setLeftAnchor(moduleName, 0.0d);
 
-	}
+        closeButton = new Button();
+        closeButton.setFocusTraversable(false);
+        closeButton.getStyleClass().add("close-button");
+        closeButton.setPrefSize(5, 5);
+        topPane.getChildren().add(closeButton);
+        AnchorPane.setRightAnchor(closeButton, 0.0d);
+        closeButton.setOnMouseClicked(event -> {
+            LOGGER.fine("Module \"" + module.getType()
+                    + "\" is asking to be closed.");
+            workbench.onModuleCloseRequest(this);
+            event.consume();
+        });
+    }
 
-	protected void loadFXML(String fxmlPath) {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
-		fxmlLoader.setController(this);
+    protected final void loadFXML(final String fxmlPath) {
+        FXMLLoader fxmlLoader
+                = new FXMLLoader(getClass().getResource(fxmlPath));
+        fxmlLoader.setController(this);
 
-		try {
-			Parent root = fxmlLoader.load();
-			this.getChildren().add(root);
-		} catch (IOException exception) {
-			logger.severe("Cannot load the specified FXML file: \""+fxmlPath+"\".");
-			throw new RuntimeException(exception);
-		}
+        try {
+            Parent root = fxmlLoader.load();
+            this.getChildren().add(root);
+        } catch (IOException exception) {
+            LOGGER.severe("Cannot load the specified FXML file: \""
+                    + fxmlPath + "\".");
+            throw new RuntimeException(exception);
+        }
 
-		getPlugs().forEach(child -> {
-			child.setWorkbench(workbench);
-			child.setGetPortCommand(() -> module.getPort(child.nameProperty().getValue()));
-		});
-		topPane.toFront();
-	}
+        getPlugs().forEach(child -> {
+            child.setWorkbench(workbench);
+            child.setGetPortCommand(() ->
+                    module.getPort(child.nameProperty().getValue()));
+        });
+        topPane.toFront();
+    }
 
-	public Module getModule() {
-		return module;
-	}
+    public final Module getModule() {
+        return module;
+    }
 
-	public void setModule(Module module) {
-		this.module = module;
-		moduleName.setText(module.getType().getLongName());
-	}
+    public final void setModule(final Module newModule) {
+        module = newModule;
+        moduleName.setText(module.getType().getLongName());
+    }
 
-	public Collection<Plug> getPlugs(){
-		return this.lookupAll("Plug").stream()
-				.filter(child -> child instanceof Plug)
-				.map(child -> (Plug) child)
-				.collect(Collectors.toCollection(ArrayList::new));
-	}
+    public final Collection<Plug> getPlugs() {
+        return this.lookupAll("Plug").stream()
+                .filter(child -> child instanceof Plug)
+                .map(child -> (Plug) child)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
 
-	public Plug getPlugByName(String name){
-		Collection<Plug> plugs = getPlugs();
-		for(Plug plug : plugs) {
-			if(plug.getName().equals(name)){
-				return plug;
-			}
-		}
-		return null;
-	}
+    public final Plug getPlugByName(final String name) {
+        Collection<Plug> plugs = getPlugs();
+        for (Plug plug : plugs) {
+            if (plug.getName().equals(name)) {
+                return plug;
+            }
+        }
+        return null;
+    }
 
-	public abstract void writeObject(ObjectOutputStream o) throws IOException;
-	public abstract void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException;
+    public abstract void writeObject(
+            final ObjectOutputStream o) throws IOException;
 
+    public abstract void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException;
 }

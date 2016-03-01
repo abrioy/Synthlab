@@ -6,27 +6,28 @@ import com.softsynth.math.AudioMath;
 import java.util.logging.Logger;
 
 /**
- * attenuator filter
+ * attenuator filter.
  * @author johan
  */
 public class FilterAttenuator extends UnitFilter {
     /**
-     * logger
+     * LOGGER.
      */
-    private static final Logger logger = Logger.getLogger(FilterAttenuator.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(FilterAttenuator.class.getName());
 
     /**
-     * attenuation amplitude
+     * attenuation amplitude.
      */
     private double attenuation = 1;
 
     /**
-     * generate new values
+     * generate new values.
      * @param start param manage by Jsyn
      * @param limit param manage by Jsyn
      */
     @Override
-    public void generate(int start, int limit) {
+    public final void generate(final int start, final int limit) {
         double[] inputs = input.getValues();
         double[] outputs = output.getValues();
         for (int i = start; i < limit; i++) {
@@ -37,18 +38,18 @@ public class FilterAttenuator extends UnitFilter {
     }
 
     /**
-     * getter on attenuation
+     * getter on attenuation.
      * @return attenuation
      */
-    public double getAttenuation() {
+    public final double getAttenuation() {
         return this.attenuation;
     }
 
     /**
-     * setter attenuation in dB
+     * setter attenuation in dB.
      * @param decibels attenuation param
      */
-    public void setAttenuation(double decibels) {
+    public final void setAttenuation(final double decibels) {
         this.attenuation = AudioMath.decibelsToAmplitude(decibels);
     }
 }

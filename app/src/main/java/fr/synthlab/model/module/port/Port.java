@@ -8,91 +8,92 @@ import java.util.logging.Logger;
  *
  */
 public class Port {
-	private static final Logger logger = Logger.getLogger(Port.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Port.class.getName());
 
     /**
-     * the name of the port
+     * the name of the port.
      */
     private String name;
 
     /**
-     * the port connected to this one
+     * the port connected to this one.
      */
     private Port port = null;
 
     /**
-     * the module which contains this port
+     * the module which contains this port.
      */
     private Module module;
 
     /**
-     * constructor
+     * constructor.
      *
-     * @param name name of the port
-     * @param m    the module which contains this port
+     * @param nameInit name of the port
+     * @param moduleInit    the module which contains this port
      */
-    public Port(String name, Module m) {
-        this.name = name;
-        this.module = m;
+    public Port(final String nameInit, final Module moduleInit) {
+        name = nameInit;
+        module = moduleInit;
     }
 
     /**
-     *
      * @return the name of the port
      */
-    public String getName(){
+    public final String getName() {
         return name;
     }
 
-	public boolean isConnected() { return port != null; }
+    public final boolean isConnected() {
+        return port != null;
+    }
 
     /**
-     * connect this port to another port
-     * @param port
+     * connect this port to another port.
+     *
+     * @param portConnected Port to connect
      */
-    public void connect(Port port){
-        this.port = port;
+    public void connect(final Port portConnected) {
+        port = portConnected;
         module.update();
         port.setPort(this);
         port.getModule().update();
     }
 
     /**
-     * disconnect this port
+     * disconnect this port.
      */
-    public void disconnect(){
-        if(port != null){
-			port.setPort(null);
-			port.getModule().update();
-			port = null;
-			module.update();
-		}
-		else{
-			logger.warning("Trying to disconnect a port that is not connected to anything.");
-		}
-	}
+    public void disconnect() {
+        if (port != null) {
+            port.setPort(null);
+            port.getModule().update();
+            port = null;
+            module.update();
+        } else {
+            LOGGER.warning("Trying to disconnect a port"
+                    + " that is not connected to anything.");
+        }
+    }
 
     /**
-     *
      * @return the port which is connected to this one
      */
-    public Port getConnected(){
+    public final Port getConnected() {
         return port;
     }
 
     /**
-     *
      * @return the module which contains this port
      */
-    public Module getModule() {
+    public final Module getModule() {
         return module;
     }
 
     /**
-     * set the connected port
-     * @param port the connected port
+     * set the connected port.
+     *
+     * @param newPort the connected port
      */
-    public void setPort(Port port) {
-        this.port = port;
+    public final void setPort(final Port newPort) {
+        port = newPort;
     }
 }

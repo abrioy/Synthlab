@@ -1,7 +1,11 @@
 package fr.synthlab.model.module.vcoa;
 
 import com.jsyn.Synthesizer;
-import com.jsyn.unitgen.*;
+import com.jsyn.unitgen.PassThrough;
+import com.jsyn.unitgen.SawtoothOscillator;
+import com.jsyn.unitgen.SineOscillator;
+import com.jsyn.unitgen.SquareOscillator;
+import com.jsyn.unitgen.TriangleOscillator;
 import fr.synthlab.model.filter.FilterFm;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
@@ -15,48 +19,50 @@ import java.util.logging.Logger;
 
 /**
  * VCO module ( Voltage Control Oscillator ) for generating a periodic
- * signal whose shape can be selected and the frequency can be controlled by another signal
+ * signal whose shape can be selected and
+ * the frequency can be controlled by another signal.
  */
 public class ModuleVCOA implements Module {
-	private static final Logger logger = Logger.getLogger(ModuleVCOA.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleVCOA.class.getName());
 
     /**
-     * The list of port of the VCO module
+     * The list of port of the VCO module.
      */
     private Collection<Port> ports = new ArrayList<>();
 
     /**
-     * The frequency f0 of the VCO
+     * The frequency f0 of the VCO.
      */
     private double frequency = 450;
 
     /**
-     * Filter modulator
+     * Filter modulator.
      */
     private FilterFm filterFm = new FilterFm(frequency);
 
     /**
-     * Square oscillator
+     * Square oscillator.
      */
     private SquareOscillator squareOscillator = new SquareOscillator();
 
     /**
-     * Triangle Oscillator
+     * Triangle Oscillator.
      */
     private TriangleOscillator triangleOscillator = new TriangleOscillator();
 
     /**
-     * Sawtooth Oscillator
+     * Sawtooth Oscillator.
      */
     private SawtoothOscillator sawtoothOscillator = new SawtoothOscillator();
 
     /**
-     * Sin Oscillator
+     * Sin Oscillator.
      */
     private SineOscillator sineOscillator = new SineOscillator();
 
     /**
-     * Filter modulator input port
+     * Filter modulator input port.
      */
     private InputPort fmInput;
 
@@ -69,11 +75,11 @@ public class ModuleVCOA implements Module {
 
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param synthesizer
+     * @param synthesizer Synthesizer
      */
-    public ModuleVCOA(Synthesizer synthesizer) {
+    public ModuleVCOA(final Synthesizer synthesizer) {
         synthesizer.add(squareOscillator);
         synthesizer.add(triangleOscillator);
         synthesizer.add(sawtoothOscillator);
@@ -94,19 +100,18 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     *
      * @return the list of port of the VCO
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
     /**
-     * Start the VCO
+     * Start the VCO.
      */
     @Override
-    public void start() {
+    public final void start() {
         filterFm.start();
         squareOscillator.start();
         sawtoothOscillator.start();
@@ -116,10 +121,10 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     * Stop the VCO
+     * Stop the VCO.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         filterFm.stop();
         squareOscillator.stop();
         sawtoothOscillator.stop();
@@ -129,20 +134,20 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     *
      * @return the frequency f0 of the VCO
      */
-    public double getFrequency() {
+    public final double getFrequency() {
         return frequency;
     }
 
     /**
-     * set the frequency of the VCO
-     * @param frequency
+     * set the frequency of the VCO.
+     *
+     * @param newFrequency new frequency
      */
-    public void setFrequency(double frequency) {
-        this.frequency = frequency;
-        filterFm.setf0(frequency);
+    public final void setFrequency(final double newFrequency) {
+        frequency = newFrequency;
+        filterFm.setF0(frequency);
 
         if (fmInput.getConnected() == null) {
             squareOscillator.frequency.set(frequency);
@@ -162,7 +167,8 @@ public class ModuleVCOA implements Module {
      * to input port of each oscillator.
      */
     @Override
-    public void update() {
+
+    public final void update() {
         filterFm.output.disconnectAll();
         if (fmInput.getConnected() == null) {
             squareOscillator.frequency.set(frequency);
@@ -178,17 +184,17 @@ public class ModuleVCOA implements Module {
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.VCOA;
     }
 
 
-    public ShapeVCOA getShape() {
+    public final ShapeVCOA getShape() {
         return shape;
     }
 
-    public void setShape(ShapeVCOA shape) {
-        this.shape = shape;
+    public final void setShape(final ShapeVCOA newShape) {
+        shape = newShape;
 
         switch (shape) {
             case TRIANGLE:
@@ -207,8 +213,8 @@ public class ModuleVCOA implements Module {
                 passThrough.input.disconnectAll();
                 sineOscillator.output.connect(passThrough.input);
                 break;
+            default:
+                break;
         }
     }
-
-
 }

@@ -17,7 +17,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class ViewModuleVCFHP extends ViewModule implements Initializable {
-    private static final Logger logger = Logger.getLogger(ViewModuleVCFLP.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ViewModuleVCFLP.class.getName());
 
     @FXML
     private Plug in;
@@ -34,41 +35,44 @@ public class ViewModuleVCFHP extends ViewModule implements Initializable {
 
     private Runnable changeThresholdCommand;
 
-    public ViewModuleVCFHP(Workbench workbench) {
+    public ViewModuleVCFHP(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleVCFHP.fxml");
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public final void initialize(
+            final URL url, final ResourceBundle resourceBundle) {
         threshold.valueProperty().addListener(event -> {
             updateThreshold();
         });
-        frequencyLabel.setText(((int)getThreshold())+" Hz");
+        frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
     private void updateThreshold() {
         changeThresholdCommand.run();
-        frequencyLabel.setText(((int)getThreshold())+" Hz");
+        frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
-    public void setChangeThresholdCommand(Runnable changeThresholdCommand) {
-        this.changeThresholdCommand = changeThresholdCommand;
+    public final void setChangeThresholdCommand(
+            final Runnable newChangeThresholdCommand) {
+        changeThresholdCommand = newChangeThresholdCommand;
         changeThresholdCommand.run();
     }
 
-    public double getThreshold() {
+    public final double getThreshold() {
         return threshold.getValue();
     }
 
+    @Override
+    public final void writeObject(final ObjectOutputStream o)
+            throws IOException {
+        o.writeDouble(threshold.getValue());
+    }
 
-	@Override
-	public void writeObject(ObjectOutputStream o) throws IOException {
-		o.writeDouble(threshold.getValue());
-	}
-
-	@Override
-	public void readObject(ObjectInputStream o) throws IOException, ClassNotFoundException {
-		threshold.setValue(o.readDouble());
-	}
+    @Override
+    public final void readObject(final ObjectInputStream o)
+            throws IOException, ClassNotFoundException {
+        threshold.setValue(o.readDouble());
+    }
 }

@@ -3,7 +3,6 @@ package fr.synthlab.model.module.replicator;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
-import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -13,7 +12,8 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 public class ModuleREP implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleSCOP.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleREP.class.getName());
 
     /**
      * All ports.
@@ -27,8 +27,9 @@ public class ModuleREP implements Module {
 
     /**
      * Constructor.
+     * @param synthesizer Synthesizer
      */
-    public ModuleREP(Synthesizer synthesizer) {
+    public ModuleREP(final Synthesizer synthesizer) {
         filterREP = new FilterREP();
 
         InputPort in = new InputPort("in", this, filterREP.getIn());
@@ -48,7 +49,7 @@ public class ModuleREP implements Module {
      * @return Scope port
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -56,7 +57,7 @@ public class ModuleREP implements Module {
      * Start module.
      */
     @Override
-    public void start() {
+    public final void start() {
         filterREP.start();
     }
 
@@ -64,7 +65,7 @@ public class ModuleREP implements Module {
      * Stop module.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         filterREP.stop();
     }
 
@@ -73,12 +74,10 @@ public class ModuleREP implements Module {
      */
     @Override
     public void update() {
-
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.REP;
     }
-
 }

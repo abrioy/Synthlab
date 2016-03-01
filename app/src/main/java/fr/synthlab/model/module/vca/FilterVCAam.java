@@ -8,12 +8,12 @@ import com.softsynth.math.AudioMath;
 public class FilterVCAam extends UnitFilter {
     private UnitOutputPort inputVca;
 
-    public FilterVCAam(UnitOutputPort in) {
+    public FilterVCAam(final UnitOutputPort in) {
         inputVca = in;
     }
 
     @Override
-    public void generate(int start, int limit) {
+    public final void generate(final int start, final int limit) {
 
         double[] inputs = input.getValues();
         double[] inputsVca = inputVca.getValues();
@@ -23,10 +23,11 @@ public class FilterVCAam extends UnitFilter {
             double am = inputs[i];
             double inVca = inputsVca[i];
 
-            if (am > 0.0 || am < 0.0)
+            if (am > 0.0 || am < 0.0) {
                 outputs[i] = inVca * AudioMath.decibelsToAmplitude(am * 12);
-            else
+            } else {
                 outputs[i] = 0.0;
+            }
         }
     }
 }

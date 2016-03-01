@@ -12,34 +12,37 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class ModuleKEYB implements Module {
-    private static final Logger logger = Logger.getLogger(ModuleKEYB.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(ModuleKEYB.class.getName());
 
     /**
      * Reference frequency A3.
      */
-    private final double REFERENCE_FREQUENCY = 440.0;
+    private final double referenceFrequency = 440.0;
 
     /**
      * Octave of the reference frequency.
      */
-    private final int REFERENCE_OCTAVE = 3;
+    private final int referenceOctave = 3;
 
     /**
-     * Note corresponding to the reference frequency
-     * (changing it will only change the initial note being played on the oscillo,
-     * to generalize that a bit, we'd need to modify the formula in computeFrequency())
+     * Note corresponding to the reference frequency.
+     * (changing it will only change the initial note
+     * being played on the oscillo,
+     * to generalize that a bit, we'd need to modify
+     * the formula in computeFrequency()).
      */
-    private final NoteKEYB REFERENCE_NOTE = NoteKEYB.A;
+    private final NoteKEYB referenceNote = NoteKEYB.A;
 
     /**
      * Minimum octave.
      */
-    private final int OCTAVE_MIN = 0;
+    private final int octaveMin = 0;
 
     /**
      * Maximum octave.
      */
-    private final int OCTAVE_MAX = 7;
+    private final int octaveMax = 7;
 
     /**
      * Current octave.
@@ -68,11 +71,12 @@ public class ModuleKEYB implements Module {
     private FilterKEYB keyboardFilter;
 
     /**
-     * Constructor
-     * @param synth
+     * Constructor.
+     *
+     * @param synth Synthesizer
      */
-    public ModuleKEYB(Synthesizer synth) {
-        octave = REFERENCE_OCTAVE;
+    public ModuleKEYB(final Synthesizer synth) {
+        octave = referenceOctave;
 
         //Initialize
         filterOutKEYB = new FilterOutKEYB();
@@ -85,18 +89,20 @@ public class ModuleKEYB implements Module {
         ports.add(out);
 
         //Gate port
-        OutputPort gate = new OutputPort("gate", this, keyboardFilter.getGate());
+        OutputPort gate
+                = new OutputPort("gate", this, keyboardFilter.getGate());
         ports.add(gate);
 
-        this.pressKey(REFERENCE_NOTE);
+        this.pressKey(referenceNote);
     }
 
     /**
      * Getter on ports output.
+     *
      * @return Keyboard port
      */
     @Override
-    public Collection<Port> getPorts() {
+    public final Collection<Port> getPorts() {
         return ports;
     }
 
@@ -104,7 +110,7 @@ public class ModuleKEYB implements Module {
      * Start keyboard.
      */
     @Override
-    public void start() {
+    public final void start() {
         filterOutKEYB.start();
     }
 
@@ -112,7 +118,7 @@ public class ModuleKEYB implements Module {
      * Stop keyboard.
      */
     @Override
-    public void stop() {
+    public final void stop() {
         filterOutKEYB.stop();
     }
 
@@ -121,26 +127,25 @@ public class ModuleKEYB implements Module {
      */
     @Override
     public void update() {
-
     }
 
     /**
-     *
      * @return Type of this module
      */
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return ModuleType.KEYB;
     }
 
     /**
-     * Change keyboard's octave
+     * Change keyboard's octave.
+     *
      * @param newOctave New octave value
      */
-    public void changeOctave(int newOctave) {
-        newOctave = Math.max(newOctave, OCTAVE_MIN);
-        newOctave = Math.min(newOctave, OCTAVE_MAX);
-        this.octave = newOctave;
+    public final void changeOctave(int newOctave) {
+        newOctave = Math.max(newOctave, octaveMin);
+        newOctave = Math.min(newOctave, octaveMax);
+        octave = newOctave;
         if (lastNotePressed != null) {
             computeFrequency(lastNotePressed);
         }
@@ -148,9 +153,10 @@ public class ModuleKEYB implements Module {
 
     /**
      * Method to compute and send the new frequency in the oscilloscope.
+     *
      * @param n New note pressed
      */
-    public void pressKey(NoteKEYB n) {
+    public final void pressKey(final NoteKEYB n) {
         keyboardFilter.releaseKey();
         keyboardFilter.pressKey();
         lastNotePressed = n;
@@ -159,22 +165,26 @@ public class ModuleKEYB implements Module {
 
     /**
      * Compute the new frequency.
+     *
      * @param n New note
      */
-    private void computeFrequency(NoteKEYB n){
-        filterOutKEYB.setTension(n.getValue()/12.0 + (octave - REFERENCE_OCTAVE));
+    private void computeFrequency(final NoteKEYB n) {
+        filterOutKEYB.setTension(n.getValue()
+                / 12.0 + (octave - referenceOctave));
     }
 
     /**
      * Release the currently pressed key.
+     *
+     * @param noteKEYB note release
      */
-    public void releaseKey(NoteKEYB noteKEYB) {
+    public final void releaseKey(final NoteKEYB noteKEYB) {
         if (noteKEYB == lastNotePressed) {
             keyboardFilter.releaseKey();
         }
     }
 
-    public int getOctave() {
+    public final int getOctave() {
         return octave;
     }
 }

@@ -43,11 +43,11 @@ public class FilterREP extends UnitGenerator {
     /**
      * Generate new value for all output.
      *
-     * @param start
-     * @param limit
+     * @param start param manage by Jsyn
+     * @param limit param manage by Jsyn
      */
     @Override
-    public void generate(int start, int limit) {
+    public final void generate(final int start, final int limit) {
         double[] inputs = in.getValues();
         double[] outputs1 = out1.getValues();
         double[] outputs2 = out2.getValues();
@@ -60,34 +60,34 @@ public class FilterREP extends UnitGenerator {
     }
 
     /**
-     * Getter on input
+     * Getter on input.
      * @return in
      */
-    public UnitInputPort getIn() {
+    public final UnitInputPort getIn() {
         return in;
     }
 
     /**
-     * Getter on Output 1
+     * Getter on Output 1.
      * @return out1
      */
-    public UnitOutputPort getOut1() {
+    public final UnitOutputPort getOut1() {
         return out1;
     }
 
     /**
-     * Getter on Output 2
+     * Getter on Output 2.
      * @return out2
      */
-    public UnitOutputPort getOut2() {
+    public final UnitOutputPort getOut2() {
         return out2;
     }
 
     /**
-     * Getter on Output 3
+     * Getter on Output 3.
      * @return out3
      */
-    public UnitOutputPort getOut3() {
+    public final UnitOutputPort getOut3() {
         return out3;
     }
 }

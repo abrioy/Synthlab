@@ -13,7 +13,7 @@ public class FilterOutKEYB extends UnitGenerator {
     private UnitOutputPort gate;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public FilterOutKEYB() {
         tension = 0;
@@ -27,18 +27,18 @@ public class FilterOutKEYB extends UnitGenerator {
      * @param limit param manage by Jsyn
      */
     @Override
-    public void generate(int start, int limit) {
+    public final void generate(final int start, final int limit) {
         double[] gates = gate.getValues();
         for (int i = start; i < limit; i += 1) {
             gates[i] = tension;
         }
     }
 
-    public void setTension(double tension) {
-        this.tension = tension;
+    public final void setTension(final double newTension) {
+        tension = newTension;
     }
 
-    public UnitOutputPort getGate() {
+    public final UnitOutputPort getGate() {
         return gate;
     }
 }
