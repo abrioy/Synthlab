@@ -64,9 +64,9 @@ public class ModuleVCFLP extends ModuleVCF {
      * we set the frequency f0 to the LowPass filter.
      */
     @Override
-    public final void update() {
+    public void update() {
+        filterFm.output.disconnectAll();
         if (fmInput.getConnected() == null) {
-            filterFm.output.disconnectAll();
             lpFilter.frequency.set(f0);
         } else {
             filterFm.output.connect(lpFilter.frequency);

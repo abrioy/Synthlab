@@ -62,9 +62,9 @@ public class ModuleVCFHP extends ModuleVCF {
      * we set the frequency f0 to the HighPass filter.
      */
     @Override
-    public final void update() {
+    public void update() {
+        filterFm.output.disconnectAll();
         if (fmInput.getConnected() == null) {
-            filterFm.output.disconnectAll();
             hpFilter.frequency.set(f0);
         } else {
             filterFm.output.connect(hpFilter.frequency);
