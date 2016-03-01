@@ -17,12 +17,21 @@ public enum NoteKEYB {
 
     private final int value;
 
-    private NoteKEYB(int value) {
+    NoteKEYB(int value) {
         this.value = value;
     }
 
     public int getValue() {
         return this.value;
+    }
+
+    public static NoteKEYB fromValue(int val) {
+        for (NoteKEYB k : NoteKEYB.values()) {
+            if (k.getValue() == val) {
+                return k;
+            }
+        }
+        return null;
     }
 
 }

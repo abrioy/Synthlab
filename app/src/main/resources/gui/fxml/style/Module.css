@@ -92,6 +92,23 @@
         -fx-border-color: transparent;
         -fx-text-fill: transparent;}
 
+.file-button{
+        -fx-background-image: url("../../texture/file.png") ;
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;
+        -fx-background-color: transparent;
+        -fx-background-size: contain;
+        -fx-border-color: transparent;
+        -fx-text-fill: transparent ;
+}
+.file-button:armed{
+        -fx-background-image: url("../../texture/file-pressed.png") ;
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;
+        -fx-background-color: transparent;
+        -fx-background-size: contain;
+        -fx-border-color: transparent;
+        -fx-text-fill: transparent;}
 #rectStereo {
     -fx-fill:transparent;
     -fx-stroke: rgba(136, 221, 153, 0.5);
@@ -120,5 +137,13 @@
     -fx-stroke-width:2;
     -fx-arc-height: 20;
     -fx-arc-width: 20;
+    -fx-stroke-line-cap: butt;
+}
+#rectRecord {
+    -fx-fill:transparent;
+    -fx-stroke: rgba(250,70, 70, 0.5);
+    -fx-stroke-width:2;
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
     -fx-stroke-line-cap: butt;
 }

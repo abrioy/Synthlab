@@ -241,10 +241,11 @@ public class Knob extends Pane {
 			for (int t = 0; t < step.get()-1; t++) {
 				angleLocal = angleLocalNext;
 				angleLocalNext = (angleInterval*(t+1) + getMaxAngle());
-				if (angleLocal<angle && angle<((angleLocalNext-angleLocal)/2)+angleLocal) {
+				if (angleLocal<angle && angle<=((angleLocalNext-angleLocal)/2)+angleLocal) {
 					rotate.setAngle(-angleLocal);
 					angle=angleLocal;
-				}
+
+                }
 				else if (((angleLocalNext-angleLocal)/2)+angleLocal<angle && angle<angleLocalNext){
 					rotate.setAngle(-angleLocalNext);
 					angle=angleLocalNext;
@@ -260,8 +261,8 @@ public class Knob extends Pane {
      */
     @Override
     protected void layoutChildren() {
-        double stepStart = 0;
-        double stepEnd = 0;
+        double stepStart;
+        double stepEnd;
         double smallScaleSize = scaleSize * 3.0d / 4.0d;
         double arcDistance = scaleSize*0.4d;
         double arcRadius=(diameter.doubleValue() / 2.0) + arcDistance;

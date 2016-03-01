@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeItem?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.Pane?>
@@ -12,6 +13,7 @@
         <TreeView fx:id="treeView" focusTraversable="false" prefWidth="190">
             <TreeItem fx:id="treeItemRoot"/>
         </TreeView>
+        <Label>Choose the color of cables</Label>
         <ColorPicker fx:id="colorPicker" prefHeight="26" prefWidth="190"/>
     </VBox>
 

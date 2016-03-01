@@ -6,7 +6,7 @@ import com.jsyn.unitgen.UnitFilter;
 import com.softsynth.math.AudioMath;
 
 public class FilterVCAam extends UnitFilter {
-    public UnitOutputPort inputVca;
+    private UnitOutputPort inputVca;
 
     public FilterVCAam(UnitOutputPort in) {
         inputVca = in;

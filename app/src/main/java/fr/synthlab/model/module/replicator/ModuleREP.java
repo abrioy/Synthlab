@@ -1,6 +1,6 @@
 package fr.synthlab.model.module.replicator;
 
-import com.jsyn.unitgen.PassThrough;
+import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.oscilloscope.ModuleSCOP;
@@ -16,25 +16,31 @@ public class ModuleREP implements Module {
     private static final Logger logger = Logger.getLogger(ModuleSCOP.class.getName());
 
     /**
-     * All ports
+     * All ports.
      */
     private ArrayList<Port> ports = new ArrayList<>();
 
     /**
-     * Constructor
+     * Filter with an input and 3 outputs.
      */
-    public ModuleREP() {
-        PassThrough pt = new PassThrough();
+    private FilterREP filterREP;
 
-        InputPort in = new InputPort("in", this, pt.input);
-        OutputPort out1 = new OutputPort("out1", this, pt.output);
-        OutputPort out2 = new OutputPort("out2", this, pt.output);
-        OutputPort out3 = new OutputPort("out3", this, pt.output);
+    /**
+     * Constructor.
+     */
+    public ModuleREP(Synthesizer synthesizer) {
+        filterREP = new FilterREP();
+
+        InputPort in = new InputPort("in", this, filterREP.getIn());
+        OutputPort out1 = new OutputPort("out1", this, filterREP.getOut1());
+        OutputPort out2 = new OutputPort("out2", this, filterREP.getOut2());
+        OutputPort out3 = new OutputPort("out3", this, filterREP.getOut3());
+
         ports.add(in);
         ports.add(out1);
         ports.add(out2);
         ports.add(out3);
-
+        synthesizer.add(filterREP);
     }
 
     /**
@@ -47,19 +53,19 @@ public class ModuleREP implements Module {
     }
 
     /**
-     * Inherit method.
+     * Start module.
      */
     @Override
     public void start() {
-
+        filterREP.start();
     }
 
     /**
-     * Inherit method.
+     * Stop module.
      */
     @Override
     public void stop() {
-
+        filterREP.stop();
     }
 
     /**

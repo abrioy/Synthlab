@@ -20,6 +20,7 @@ public class Plug extends StackPane {
 	private static final Logger logger = Logger.getLogger(Plug.class.getName());
 
 	private Circle colorCircle;
+	private Cable cable;
 
 	private Workbench workbench;
 	public void setWorkbench(Workbench workbench) {
@@ -151,5 +152,13 @@ public class Plug extends StackPane {
 
 	public void setLabel(String label) {
 		this.label.set(label);
+	}
+
+	public Cable getCable() {
+		return cable;
+	}
+
+	public void setCable(Cable cable) {
+		this.cable = cable;
 	}
 }

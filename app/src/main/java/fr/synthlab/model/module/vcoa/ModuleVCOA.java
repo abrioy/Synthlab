@@ -89,7 +89,7 @@ public class ModuleVCOA implements Module {
 
         triangleOscillator.output.connect(passThrough.input);
 
-        // Initialize the frequency of the fm filter and the 3 oscillators
+        // Initialize the frequency of the fm filter and the 4 oscillators
         setFrequency(frequency);
     }
 
@@ -111,6 +111,7 @@ public class ModuleVCOA implements Module {
         squareOscillator.start();
         sawtoothOscillator.start();
         triangleOscillator.start();
+        sineOscillator.start();
         passThrough.start();
     }
 
@@ -152,16 +153,18 @@ public class ModuleVCOA implements Module {
     }
 
     /**
-     * This method is called by the input port fm of the VCO when its state has changed
-     * When nothing is connected to the input port of fm, the 3 oscillators has the same frequency f0
-     * When something is connected to the input port of fm, we connect the output port of fm filter
-     * to input port of each oscillator
-     *
+     * This method is called by the input port fm of the VCO
+     * when its state has changed
+     * When nothing is connected to the input port of fm,
+     * the 4 oscillators has the same frequency f0
+     * When something is connected to the input port of fm,
+     * we connect the output port of fm filter
+     * to input port of each oscillator.
      */
     @Override
     public void update() {
+        filterFm.output.disconnectAll();
         if (fmInput.getConnected() == null) {
-            filterFm.output.disconnectAll();
             squareOscillator.frequency.set(frequency);
             triangleOscillator.frequency.set(frequency);
             sawtoothOscillator.frequency.set(frequency);

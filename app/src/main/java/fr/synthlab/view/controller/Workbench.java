@@ -5,9 +5,9 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleFactory;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.Port;
+import fr.synthlab.view.Skin;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
-import fr.synthlab.view.Skin;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
@@ -18,6 +18,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -58,6 +59,7 @@ public class Workbench extends Pane {
 	private int serializeModuleToUID(Module module){
 		return System.identityHashCode(module);
 	}
+
 
 	public void serializeViewModules(ObjectOutputStream outputStream) throws IOException {
 		Collection<ViewModule> modules = getViewModules();
@@ -106,7 +108,12 @@ public class Workbench extends Pane {
 				int targetUID = serializeModuleToUID(connectedPort.getModule());
 				outputStream.writeInt(targetUID);
 				outputStream.writeObject(connectedPort.getName());
-				logger.fine("\t\t"+plug.getName()+"\t-> "+targetUID+"."+connectedPort.getName());
+				// Storing the color of the connections
+				Color cableColor = plug.getCable().getColor();
+				outputStream.writeDouble(cableColor.getRed());
+				outputStream.writeDouble(cableColor.getGreen());
+				outputStream.writeDouble(cableColor.getBlue());
+				logger.fine("\t\t"+plug.getName()+"\t-- "+cableColor+"\t--> "+targetUID+"."+connectedPort.getName());
 			}
 		}
 	}
@@ -120,12 +127,14 @@ public class Workbench extends Pane {
 			public String name;
 			public int connectedUID;
 			public String connectedPortName;
+			public Color cableColor;
 
-			public PortReference(int parentUID, String name, int connectedUID, String connectedPortName) {
+			public PortReference(int parentUID, String name, int connectedUID, String connectedPortName, Color cableColor) {
 				this.parentUID = parentUID;
 				this.name = name;
 				this.connectedUID = connectedUID;
 				this.connectedPortName = connectedPortName;
+				this.cableColor = cableColor;
 			}
 		}
 		Collection<PortReference> portList = new ArrayList<>();
@@ -160,13 +169,18 @@ public class Workbench extends Pane {
 
 				// Adding this module's port to the list
 				int nbPlugs = inputStream.readInt();
-				logger.fine("\tRestoring "+nbPlugs+" connections");
+				logger.fine("\tFound "+nbPlugs+" connections");
 				for (int j = 0; j < nbPlugs; j++) {
 					String plugName = (String)inputStream.readObject();
 					int connectedModuleId = inputStream.readInt();
 					String connectedPortName = (String)inputStream.readObject();
-					portList.add(new PortReference(moduleUID, plugName, connectedModuleId, connectedPortName));
-					logger.fine("\t\t"+plugName+"\t-> "+connectedModuleId+"."+connectedPortName);
+					double r = inputStream.readDouble();
+					double g = inputStream.readDouble();
+					double b = inputStream.readDouble();
+					Color cableColor = new Color(r, g, b, 1.0d);
+					portList.add(new PortReference(
+							moduleUID, plugName, connectedModuleId, connectedPortName, cableColor));
+					logger.fine("\t\t"+plugName+"\t-- "+cableColor+"\t--> "+connectedModuleId+"."+connectedPortName);
 				}
 
 				this.addModule(viewModule);
@@ -176,7 +190,7 @@ public class Workbench extends Pane {
 		}
 
 		// Resolving connections
-		logger.info("Restoring connections");
+		logger.fine("Restoring "+portList.size()+" connections");
 		for(PortReference portReference : portList) {
 			ViewModule viewModule = moduleList.get(portReference.parentUID);
 			Plug plug = viewModule.getPlugByName(portReference.name);
@@ -185,15 +199,18 @@ public class Workbench extends Pane {
 
 			// Checking this port is not already connected
 			if(!plug.getPort().isConnected()) {
-				logger.info("\t"+portReference.parentUID+"."+portReference.name+" -> "
+				logger.fine("\t"+portReference.parentUID+"."+portReference.name
+						+" -- "+portReference.cableColor+" --> "
 						+portReference.connectedUID+"."+portReference.connectedPortName);
 				this.connectPlugs(plug, connectedPlug);
 				Cable cable = new Cable(this, plug, connectedPlug);
+				cable.setColor(portReference.cableColor);
 				this.getChildren().add(cable);
-				cable.updateCircles();
-				cable.update();
 			}
 		}
+		// Updating cable positions
+		getCables().forEach(Cable::updateCircles);
+		getCables().forEach(Cable::update);
 
 		inputStream.close();
 	}
@@ -274,9 +291,7 @@ public class Workbench extends Pane {
 			workbench.displayGhost(module);
 		});
 
-        module.setOnMouseReleased(mouseEvent -> {
-            hideGhost();
-        });
+        module.setOnMouseReleased(mouseEvent -> hideGhost());
 
         module.setOnMouseDragged(event -> {
 			Point2D localPoint = workbench.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
@@ -327,13 +342,8 @@ public class Workbench extends Pane {
 	}
 
 	private Collection<ViewModule> getViewModules() {
-		Collection<ViewModule> modules = new ArrayList<>();
-		for (Node child : this.getChildren()) {
-			if (child instanceof ViewModule) {
-				modules.add((ViewModule) child);
-			}
-		}
-		return modules;
+		return this.getChildren().stream().filter(child -> child instanceof ViewModule)
+				.map(child -> (ViewModule) child).collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	/**
@@ -402,12 +412,9 @@ public class Workbench extends Pane {
 
 			Bounds collidingBounds = checkCollisions(node, newBounds);
 			if (collidingBounds == null) {
+				getCables().forEach(Cable::updateCircles);
 				// Updating the cable positions, just in case
-				for (Cable c : getCables()) {
-					if (draggedCable != c) {
-						c.update();
-					}
-				}
+                getCables().stream().filter(c -> draggedCable != c).forEach(Cable::update);
 
 				// The new position is not colliding with something
 				// We move the node
@@ -487,7 +494,7 @@ public class Workbench extends Pane {
 			if(getConnectedCable(plug)==null) {
 				Plug fixedPlug = draggedCable.getPluggedPlug();
 				if (fixedPlug != plug) {
-					draggedCable.setUnpluggedPlug(plug);
+					draggedCable.setEmptyPlug(plug);
 					connectPlugs(plug, fixedPlug);
 					draggedCable.update();
 					draggedCable = null;
@@ -528,13 +535,8 @@ public class Workbench extends Pane {
      * @return
      */
     private Collection<Cable> getCables() {
-        Collection<Cable> cables = new ArrayList<>();
-        for (Node child : this.getChildren()) {
-            if (child instanceof Cable) {
-                cables.add((Cable) child);
-            }
-        }
-        return cables;
+        return this.getChildren().stream().filter(child -> child instanceof Cable)
+                .map(child -> (Cable) child).collect(Collectors.toCollection(ArrayList::new));
     }
 
 	private void updateCables() {
@@ -542,7 +544,7 @@ public class Workbench extends Pane {
 
 		getCables().forEach(cable -> {
 			if (draggedCable!=cable){
-				((Cable)cable).update();
+				cable.update();
 			}
 		});
 	}

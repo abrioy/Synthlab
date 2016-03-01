@@ -16,6 +16,7 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -23,31 +24,31 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     private static final Logger logger = Logger.getLogger(ViewModuleKEYB.class.getName());
 
     @FXML
-	KeyboardKey CKey;
+    private KeyboardKey CKey;
     @FXML
-	KeyboardKey CSharpKey;
+	private KeyboardKey CSharpKey;
     @FXML
-	KeyboardKey DKey;
+	private KeyboardKey DKey;
     @FXML
-	KeyboardKey DSharpKey;
+	private KeyboardKey DSharpKey;
     @FXML
-	KeyboardKey EKey;
+	private KeyboardKey EKey;
     @FXML
-	KeyboardKey FKey;
+	private KeyboardKey FKey;
     @FXML
-	KeyboardKey FSharpKey;
+	private KeyboardKey FSharpKey;
     @FXML
-	KeyboardKey GKey;
+	private KeyboardKey GKey;
     @FXML
-	KeyboardKey GSharpKey;
+	private KeyboardKey GSharpKey;
     @FXML
-	KeyboardKey AKey;
+	private KeyboardKey AKey;
     @FXML
-	KeyboardKey ASharpKey;
+	private KeyboardKey ASharpKey;
     @FXML
-	KeyboardKey BKey;
+	private KeyboardKey BKey;
     @FXML
-	KeyboardKey CNextOctKey;
+	private KeyboardKey CNextOctKey;
 
     @FXML
     Knob octavePicker;
@@ -58,7 +59,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
     Runnable keyPressedCommand;
     Runnable keyReleasedCommand;
     Runnable octaveChangeCommand;
-    NoteKEYB lastKeyPressed;
+    NoteKEYB lastKeyPressed, lastKeyReleased;
 
     public ViewModuleKEYB(Workbench workbench) {
         super(workbench);
@@ -150,7 +151,7 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
 			event.consume();
         });
 
-        Collection<KeyboardKey> keysColl = new ArrayList<KeyboardKey>();
+        List<KeyboardKey> keysColl = new ArrayList<>();
         keysColl.add(CKey);
         keysColl.add(CSharpKey);
         keysColl.add(DKey);
@@ -166,13 +167,10 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         keysColl.add(CNextOctKey);
 
         for (KeyboardKey key : keysColl) {
-            key.setOnMouseReleased(event -> {
-                keyReleasedCommand.run();
-            });
-
-            key.setOnMouseExited(event -> {
-                keyReleasedCommand.run();
-            });
+            // Ugly, but it saves a lot of space
+            // The "-9" comes from the fact that NoteKEYB.C has a value of -9.
+            key.setOnMouseReleased(event -> {lastKeyReleased = NoteKEYB.fromValue(keysColl.indexOf(key) - 9); keyReleasedCommand.run();});
+            key.setOnMouseExited(event -> {lastKeyReleased = NoteKEYB.fromValue(keysColl.indexOf(key) - 9); keyReleasedCommand.run();});
         }
 
         octavePicker.valueProperty().addListener(event -> {
@@ -254,23 +252,61 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         this.setOnKeyReleased(event -> {
             switch (event.getCode()) {
                 case Q:
-                case S:
-                case D:
-                case F:
-                case G:
-                case H:
-                case J:
-                case K:
-                case Z:
-                case E:
-                case T:
-                case Y:
-                case U:
+                    lastKeyReleased = NoteKEYB.C;
                     keyReleasedCommand.run();
-					event.consume();
+                    break;
+                case S:
+                    lastKeyReleased = NoteKEYB.D;
+                    keyReleasedCommand.run();
+                    break;
+                case D:
+                    lastKeyReleased = NoteKEYB.E;
+                    keyReleasedCommand.run();
+                    break;
+                case F:
+                    lastKeyReleased = NoteKEYB.F;
+                    keyReleasedCommand.run();
+                    break;
+                case G:
+                    lastKeyReleased = NoteKEYB.G;
+                    keyReleasedCommand.run();
+                    break;
+                case H:
+                    lastKeyReleased = NoteKEYB.A;
+                    keyReleasedCommand.run();
+                    break;
+                case J:
+                    lastKeyReleased = NoteKEYB.B;
+                    keyReleasedCommand.run();
+                    break;
+                case K:
+                    lastKeyReleased = NoteKEYB.C2;
+                    keyReleasedCommand.run();
+                    break;
+                case Z:
+                    lastKeyReleased = NoteKEYB.CSharp;
+                    keyReleasedCommand.run();
+                    break;
+                case E:
+                    lastKeyReleased = NoteKEYB.DSharp;
+                    keyReleasedCommand.run();
+                    break;
+                case T:
+                    lastKeyReleased = NoteKEYB.FSharp;
+                    keyReleasedCommand.run();
+                    break;
+                case Y:
+                    lastKeyReleased = NoteKEYB.GSharp;
+                    keyReleasedCommand.run();
+                    break;
+                case U:
+                    lastKeyReleased = NoteKEYB.ASharp;
+                    keyReleasedCommand.run();
+                    break;
                 default:
                     break;
             }
+            event.consume();
         });
     }
 
@@ -299,7 +335,12 @@ public class ViewModuleKEYB extends ViewModule implements Initializable{
         return lastKeyPressed;
     }
 
-	@Override
+    public NoteKEYB getLastKeyReleased() {
+        return lastKeyReleased;
+    }
+
+
+    @Override
 	public void writeObject(ObjectOutputStream o) throws IOException {
 		o.writeDouble(this.octavePicker.getValue());
 	}
