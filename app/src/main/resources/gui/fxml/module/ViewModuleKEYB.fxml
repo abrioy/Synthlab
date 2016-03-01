@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import fr.synthlab.view.component.Knob?>
+<?import fr.synthlab.view.component.KnobImpl?>
 <?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
@@ -42,8 +42,8 @@
            styleClass="display"
            prefHeight="44.0" prefWidth="40.0" text="" />
 
-    <Knob fx:id="octavePicker" label="octave"
-          diameter="40.0" layoutX="400.0" layoutY="135.0"
-          min="0" max="7" step="8" value="3" stepType="true"/>
+    <KnobImpl fx:id="octavePicker" label="octave"
+              diameter="40.0" layoutX="400.0" layoutY="135.0"
+              min="0" max="7" step="8" value="3" stepType="true"/>
 
 </Pane>

@@ -7,16 +7,16 @@
 <?import javafx.scene.image.Image?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="400" prefWidth="250" minHeight="400" minWidth="250" maxHeight="400" maxWidth="250">
-    <Knob fx:id="picker"
-          diameter="90.0" layoutX="130.0" layoutY="105.0"
-          min="0" max="3" step="4"  maxAngle="-45" minAngle="225" scaleType="enum" stepType="true"/>
+    <KnobImpl fx:id="picker"
+              diameter="90.0" layoutX="130.0" layoutY="105.0"
+              min="0" max="3" step="4" maxAngle="-45" minAngle="225" scaleType="enum" stepType="true"/>
 
-    <Knob fx:id="freq" label="Frequency"
-          diameter="85.0" layoutX="85.0" layoutY="250.0"
-          min="0" max="22000" scaleType="log" value="440"/>
-    <Knob fx:id="freqLine"
-          diameter="52.0" layoutX="190.0" layoutY="250.0"
-          min="-25" max="25" speed="0.5"/>
+    <KnobImpl fx:id="freq" label="Frequency"
+              diameter="85.0" layoutX="85.0" layoutY="250.0"
+              min="0" max="22000" scaleType="log" value="440"/>
+    <KnobImpl fx:id="freqLine"
+              diameter="52.0" layoutX="190.0" layoutY="250.0"
+              min="-25" max="25" speed="0.5"/>
     <Label fx:id="frequencyLabel" layoutX="75.0" layoutY="320.0"
            styleClass="display"
            prefHeight="44.0" prefWidth="100.0" text="" />

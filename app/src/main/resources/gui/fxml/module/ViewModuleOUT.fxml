@@ -20,9 +20,9 @@
         </image>
     </ImageView>
 
-    <Knob fx:id="picker" label="Gain"
-          diameter="70.0" layoutX="55.0" layoutY="270.0"
-          min="-12" max="12"/>
+    <KnobImpl fx:id="picker" label="Gain"
+              diameter="70.0" layoutX="55.0" layoutY="270.0"
+              min="-12" max="12"/>
 
     <RecordButton fx:id="recordButton"
                   layoutX="195.0" layoutY="230.0">
