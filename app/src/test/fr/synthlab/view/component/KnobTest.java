@@ -257,17 +257,26 @@ public class KnobTest {
         assertEquals(20,property.get());
     }
 
+    /**
+     * test speed init.
+     */
     @Test
     public void testGetSpeed() {
         assertEquals(Double.MAX_VALUE, knob.getSpeed(), 0.1);
     }
 
+    /**
+     * test set speed to 5.
+     */
     @Test
     public void testSetSpeed() {
         knob.setSpeed(5.0);
         assertEquals(5.0, knob.getSpeed(), 0.1);
     }
 
+    /**
+     * test speed init property.
+     */
     @Test
     public void testSpeedProperty() {
         DoubleProperty speedProperty = knob.speedProperty();
@@ -276,23 +285,45 @@ public class KnobTest {
         assertEquals(Double.MAX_VALUE, speedProperty.getValue(), 0.00001);
     }
 
+    /**
+     * test set stepType to true.
+     */
     @Test
     public void testSetStepType() {
         knob.setStepType(true);
         assertTrue(knob.getStepType());
     }
 
+    /**
+     * test set stepType to false.
+     */
     @Test
     public void testSetStepType2() {
         knob.setStepType(false);
         assertFalse(knob.getStepType());
     }
 
+    /**
+     * test set stepType to false.
+     */
+    @Test
+    public void testSetStepType3() {
+        knob.setStepType(true);
+        knob.setStepType(false);
+        assertFalse(knob.getStepType());
+    }
+
+    /**
+     * test get stepType.
+     */
     @Test
     public void testGetStepType() {
         assertFalse(knob.getStepType());
     }
 
+    /**
+     * test stepType property.
+     */
     @Test
     public void testStepTypeProperty() {
         BooleanProperty stepTypeProperty = knob.stepTypeProperty();
@@ -301,23 +332,35 @@ public class KnobTest {
         assertFalse(stepTypeProperty.getValue());
     }
 
+    /**
+     * test get minAngle.
+     */
     @Test
     public void testGetMinAngle() {
         assertEquals(240, knob.getMinAngle(), 0.0001);
     }
 
+    /**
+     * test set minAngle to 120.
+     */
     @Test
     public void testSetMinAngle() {
         knob.setMinAngle(120);
         assertEquals(120, knob.getMinAngle(), 0.0001);
     }
 
+    /**
+     * test set minAngle to -120.
+     */
     @Test
     public void testSetMinAngle2() {
         knob.setMinAngle(-120);
         assertEquals(-120, knob.getMinAngle(), 0.0001);
     }
 
+    /**
+     * test minAngle property.
+     */
     @Test
     public void testMinAngleProperty() {
         DoubleProperty angleProperty = knob.minAngleProperty();
@@ -326,23 +369,35 @@ public class KnobTest {
         assertEquals(240, angleProperty.getValue(),0.00001);
     }
 
+    /**
+     * test get maxAngle.
+     */
     @Test
     public void testGetMaxAngle() {
         assertEquals(-60, knob.getMaxAngle(), 0.00000001);
     }
 
+    /**
+     * test set maxAngle to 30.
+     */
     @Test
     public void testSetMaxAngle() {
         knob.setMaxAngle(30);
         assertEquals(30, knob.getMaxAngle(), 0.0001);
     }
 
+    /**
+     * test set maxAngle to -500.
+     */
     @Test
     public void testSetMaxAngle2() {
         knob.setMaxAngle(-500);
         assertEquals(-500, knob.getMaxAngle(), 0.0001);
     }
 
+    /**
+     * test maxAngle property.
+     */
     @Test
     public void testMaxAngleProperty() {
         DoubleProperty angleProperty = knob.maxAngleProperty();
