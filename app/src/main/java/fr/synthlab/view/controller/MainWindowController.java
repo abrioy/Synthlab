@@ -1,6 +1,8 @@
 package fr.synthlab.view.controller;
 
 import fr.synthlab.model.module.ModuleType;
+import fr.synthlab.view.Skin;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleFactory;
 import javafx.application.Platform;
@@ -35,6 +37,8 @@ public class MainWindowController implements Initializable {
     private BorderPane mainPane;
     @FXML
     private ScrollPane workbenchScrollPane;
+
+	private Skin currentSkin = Skin.Default;
 
     private ViewModule draggedNewViewModule = null;
     private DoubleProperty zoomLevel
@@ -213,4 +217,22 @@ public class MainWindowController implements Initializable {
     public final void setStageAndSetupListeners(final Stage stage) {
         menuBarController.setStage(stage);
     }
+
+
+
+	public final Skin getCurrentSkin() {
+		return currentSkin;
+	}
+
+	public final void changeSkin(final Skin skin) {
+		LOGGER.fine("Skin changed from \""
+				+ currentSkin + "\" to \"" + skin + "\".");
+
+		workbench.getStylesheets().clear(); // The remove does not properly removes the stylesheet
+		//workbench.getStylesheets().remove(currentSkin.getPath());
+		workbench.getStylesheets().add(skin.getPath());
+		workbench.applyCss();
+
+		workbench.getViewModules().forEach(ViewModule::applyCss);
+	}
 }

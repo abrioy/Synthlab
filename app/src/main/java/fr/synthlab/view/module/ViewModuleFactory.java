@@ -14,7 +14,7 @@ import fr.synthlab.model.module.vcf.ModuleVCFHP;
 import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.module.filter.*;
 import fr.synthlab.view.module.input.ViewModuleBRUIImpl;
 import fr.synthlab.view.module.input.ViewModuleKEYBImpl;

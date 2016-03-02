@@ -2,7 +2,7 @@ package fr.synthlab.view.component;
 
 import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.controller.ToolboxController;
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;

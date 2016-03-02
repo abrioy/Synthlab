@@ -38,8 +38,12 @@ public class KnobImpl extends Pane implements Knob {
     /**
      * draw zone.
      */
-    private final Region knob;
+    private final Region knobturn;
 
+    /**
+     * draw another zone.
+     */
+    private final Region knobBody;
 
     /**
      * size of scale.
@@ -162,13 +166,21 @@ public class KnobImpl extends Pane implements Knob {
      */
     public KnobImpl() {
         super();
-        knob = new Region();
-        knob.getStylesheets().add(
+        knobturn = new Region();
+        knobturn.getStylesheets().add(
                 getClass().getResource("/gui/fxml/style/Knob.css")
                         .toExternalForm()); //add css
-        knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
-        knob.getStyleClass().add("knob");
-        knob.getTransforms().add(rotate);
+        knobturn.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        knobturn.getStyleClass().add("knobturn");
+        knobturn.getTransforms().add(rotate);
+
+        knobBody = new Region();
+        knobBody.getStylesheets().add(
+                getClass().getResource("/gui/fxml/style/Knob.css")
+                        .toExternalForm()); //add css
+        knobBody.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        knobBody.getStyleClass().add("knobBody");
+        knobBody.setMouseTransparent(true);
 
         setMaxHeight(Double.MIN_VALUE);
         setMaxWidth(Double.MIN_VALUE);
@@ -185,7 +197,9 @@ public class KnobImpl extends Pane implements Knob {
         minLine.setStroke(Color.WHITE);
         maxLine.setStroke(Color.WHITE);
         getChildren().addAll(minLine, maxLine);
-        getChildren().add(knob);
+        getChildren().add(knobturn);
+        getChildren().add(knobBody);
+
         arc.setFill(Color.TRANSPARENT);
         arc.setStroke(Color.WHITE);
         getChildren().add(arc);
@@ -204,7 +218,7 @@ public class KnobImpl extends Pane implements Knob {
         });
 
         diameter.addListener((observable, oldValue, newValue) -> {
-            knob.setPrefSize(newValue.doubleValue(), newValue.doubleValue());
+            knobturn.setPrefSize(newValue.doubleValue(), newValue.doubleValue());
             scaleSize = (int) (diameter.get() / 5);
         });
 
@@ -321,15 +335,17 @@ public class KnobImpl extends Pane implements Knob {
                         * Math.sin(Math.toRadians(-getMaxAngle())));
         double knobX = 0 - getDiameter() / 2.0;
         double knobY = 0 - getDiameter() / 2.0;
-        knob.setLayoutX(knobX);
-        knob.setLayoutY(knobY);
+        knobturn.setLayoutX(knobX);
+        knobturn.setLayoutY(knobY);
+        knobBody.setLayoutX(knobX);
+        knobBody.setLayoutY(knobY);
         double angle = valueToAngle(getValue());
         double angleLocal;
         double angleInterval =
                 ((getMaxAngle() - getMinAngle()) / (step.get() - 1));
         if (getMinAngle() >= angle && angle >= getMaxAngle()) {
-            rotate.setPivotX(knob.getWidth() / 2.0);
-            rotate.setPivotY(knob.getHeight() / 2.0);
+            rotate.setPivotX(knobturn.getWidth() / 2.0);
+            rotate.setPivotY(knobturn.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
         if (step.get() != 0) { //draw scale
@@ -505,7 +521,9 @@ public class KnobImpl extends Pane implements Knob {
     @Override
     public final void setDiameter(final double v) {
         diameter.set(v);
-        knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        knobturn.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        knobBody.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+
         scaleSize = (int) (diameter.get() / 5);
     }
 

@@ -1,5 +1,10 @@
-.knob {
+.knobturn {
     -fx-background-color: transparent;
-    -fx-background-image: url("../../texture/knob.png");
+    -fx-background-image: url("../../texture/knobturn.png");
+    -fx-background-size: stretch;
+}
+.knobBody {
+    -fx-background-color: transparent;
+    -fx-background-image: url("../../texture/knobBody.png");
     -fx-background-size: stretch;
 }
