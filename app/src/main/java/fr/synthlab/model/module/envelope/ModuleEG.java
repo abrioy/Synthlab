@@ -6,7 +6,10 @@ import fr.synthlab.model.module.port.Port;
 
 import java.util.Collection;
 
-
+/**
+ * Envelope module.
+ * @see Module
+ */
 public interface ModuleEG extends Module {
     @Override
     Collection<Port> getPorts();

@@ -14,7 +14,8 @@ import java.util.ResourceBundle;
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleVCFLP extends EventTarget, Styleable, Serializable, Initializable {
+public interface ViewModuleVCFLP
+        extends EventTarget, Styleable, Serializable, Initializable {
     @Override
     void initialize(
             URL url, ResourceBundle resourceBundle);
@@ -33,5 +34,5 @@ public interface ViewModuleVCFLP extends EventTarget, Styleable, Serializable, I
                                     throws IOException;
 
     void readObject(ObjectInputStream o)
-                                            throws IOException, ClassNotFoundException;
+            throws IOException, ClassNotFoundException;
 }

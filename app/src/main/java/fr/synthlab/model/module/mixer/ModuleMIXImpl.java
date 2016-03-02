@@ -12,8 +12,9 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 /**
- * out module to play sound on sound card.
+ * mix module.
  * @author johan
+ * @see ModuleMIX
  */
 public class ModuleMIXImpl implements ModuleMIX {
     private static final Logger LOGGER

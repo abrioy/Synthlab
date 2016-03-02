@@ -10,6 +10,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Implementation module Keyboard.
+ * @see ModuleKEYB
+ */
 public class ModuleKEYBImpl implements ModuleKEYB {
     private static final Logger LOGGER
             = Logger.getLogger(ModuleKEYBImpl.class.getName());

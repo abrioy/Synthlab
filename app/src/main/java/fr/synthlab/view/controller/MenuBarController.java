@@ -1,7 +1,8 @@
 package fr.synthlab.view.controller;
 
-
 import fr.synthlab.view.Skin;
+import fr.synthlab.view.controller.workbench.Workbench;
+import fr.synthlab.view.controller.workbench.WorkbenchSerializer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
@@ -18,6 +19,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -43,18 +45,15 @@ public class MenuBarController implements Initializable {
     public final void setMainWindowController(
             final MainWindowController newMainWindowController) {
         mainWindowController = newMainWindowController;
-    }
-
-    public final void setWorkbench(final Workbench newWorkbench) {
-        workbench = newWorkbench;
 
         ToggleGroup skinToggleGroup = new ToggleGroup();
-        Skin currentSkin = workbench.getCurrentSkin();
+        Skin currentSkin = mainWindowController.getCurrentSkin();
         for (Skin skin : Skin.values()) {
             RadioMenuItem skinItem = new RadioMenuItem();
             skinItem.setToggleGroup(skinToggleGroup);
             skinItem.setText(skin.getName());
-            skinItem.setOnAction(event -> workbench.changeSkin(skin));
+            skinItem.setOnAction(
+                    event -> mainWindowController.changeSkin(skin));
 
             if (skin.equals(currentSkin)) {
                 skinItem.setSelected(true);
@@ -62,6 +61,10 @@ public class MenuBarController implements Initializable {
 
             skinMenu.getItems().add(skinItem);
         }
+    }
+
+    public final void setWorkbench(final Workbench newWorkbench) {
+        workbench = newWorkbench;
     }
 
     public final void setStage(final Stage newStage) {
@@ -106,7 +109,7 @@ public class MenuBarController implements Initializable {
                 e.printStackTrace();
             }
         } else {
-            onClickFileOpen();
+            onClickFileSaveAs();
         }
     }
 
@@ -169,7 +172,7 @@ public class MenuBarController implements Initializable {
             FileInputStream fileStream = new FileInputStream(file);
             ObjectInputStream inputStream = new ObjectInputStream(fileStream);
 
-            workbench.deSerializeViewModules(inputStream);
+            WorkbenchSerializer.deSerializeViewModules(workbench, inputStream);
 
             inputStream.close();
             fileStream.close();
@@ -186,7 +189,7 @@ public class MenuBarController implements Initializable {
             FileOutputStream fileSteam = new FileOutputStream(file);
             ObjectOutputStream outputStream = new ObjectOutputStream(fileSteam);
 
-            workbench.serializeViewModules(outputStream);
+            WorkbenchSerializer.serializeViewModules(workbench, outputStream);
             outputStream.close();
             fileSteam.close();
         }

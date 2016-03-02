@@ -4,6 +4,11 @@ import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
+/**
+ * Implement in mix filter.
+ * @see UnitGenerator
+ * @see FilterMIX
+ */
 public class FilterMIXImpl extends UnitGenerator implements FilterMIX {
 
     /**

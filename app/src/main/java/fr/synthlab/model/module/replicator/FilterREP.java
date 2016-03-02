@@ -3,7 +3,9 @@ package fr.synthlab.model.module.replicator;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 
-
+/**
+ * Filter to replicate module.
+ */
 public interface FilterREP {
     /**
      * Generate new value for all output.

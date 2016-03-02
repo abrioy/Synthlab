@@ -7,7 +7,9 @@ import fr.synthlab.model.module.port.Port;
 import java.io.File;
 import java.util.Collection;
 
-
+/**
+ * Module out.
+ */
 public interface ModuleOUT extends Module {
     /**
      * getter on mute.

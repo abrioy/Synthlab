@@ -1,7 +1,7 @@
 package fr.synthlab.view.component;
 
 import fr.synthlab.util.JavaFXThreadingRule;
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;

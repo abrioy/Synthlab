@@ -22,7 +22,7 @@ public interface ModuleVCFHP extends Module {
     void setF0(double f0);
 
     /**
-     * get the cut frequency
+     * get the cut frequency.
      * @return the cut frequency
      */
     double getF0();

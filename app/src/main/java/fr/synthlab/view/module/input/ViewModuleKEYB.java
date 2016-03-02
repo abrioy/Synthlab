@@ -15,7 +15,8 @@ import java.util.ResourceBundle;
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleKEYB extends EventTarget, Styleable, Serializable, Initializable {
+public interface ViewModuleKEYB
+        extends EventTarget, Styleable, Serializable, Initializable {
     @Override
     void initialize(
             URL location, ResourceBundle resources);
@@ -36,5 +37,5 @@ public interface ViewModuleKEYB extends EventTarget, Styleable, Serializable, In
                     throws IOException;
 
     void readObject(ObjectInputStream o)
-                            throws IOException, ClassNotFoundException;
+            throws IOException, ClassNotFoundException;
 }

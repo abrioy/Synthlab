@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of module EG.
+ * @see ModuleEG
+ */
 public class ModuleEGImpl implements ModuleEG {
     private static final Logger LOGGER
             = Logger.getLogger(ModuleSCOPImpl.class.getName());

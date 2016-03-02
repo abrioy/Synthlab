@@ -6,7 +6,10 @@ import fr.synthlab.model.module.port.Port;
 
 import java.util.Collection;
 
-
+/**
+ * Mix Module.
+ * @see Module
+ */
 public interface ModuleMIX extends Module {
     /**
      * getter on lists port.

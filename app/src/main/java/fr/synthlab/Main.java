@@ -12,6 +12,10 @@ import java.io.InputStream;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+/**
+ * main class. Start program.
+ * @see Application
+ */
 public class Main extends Application {
     private static final Logger APP_ROOT_LOGGER =
             Logger.getLogger("fr.synthlab");

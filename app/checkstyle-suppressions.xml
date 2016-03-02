@@ -6,27 +6,28 @@
 
 <suppressions>
   <suppress checks="AvoidInlineConditionals"
-            files="Knob.java"/>
+            files="KnobImpl.java"/>
+
   <suppress checks="MagicNumber"
-            files="ModuleEG.java"/>
+            files="ModuleEGImpl.java"/>
   <suppress checks="MagicNumber"
             files="FilterKEYB.java"/>
   <suppress checks="MagicNumber"
-            files="ModuleKEYB.java"/>
+            files="ModuleKEYBImpl.java"/>
   <suppress checks="MagicNumber"
-            files="ModuleSCOP.java"/>
+            files="ModuleSCOPImpl.java"/>
   <suppress checks="MagicNumber"
-            files="SEQFilter.java"/>
+            files="SEQFilterImpl.java"/>
   <suppress checks="MagicNumber"
             files="FilterVCAam.java"/>
   <suppress checks="MagicNumber"
             files="ModuleVCF.java"/>
   <suppress checks="MagicNumber"
-            files="ModuleVCOA.java"/>
+            files="ModuleVCOAImpl.java"/>
   <suppress checks="MagicNumber"
             files="KeyboardKey.java"/>
   <suppress checks="MagicNumber"
-            files="Knob.java"/>
+            files="KnobImpl.java"/>
   <suppress checks="MagicNumber"
             files="Cable.java"/>
   <suppress checks="MagicNumber"
@@ -44,21 +45,27 @@
     <suppress checks="MagicNumber"
               files="ViewModuleFactory.java"/>
     <suppress checks="MagicNumber"
-              files="ViewModuleOUT.java"/>
+              files="ViewModuleOUTImpl.java"/>
 
+    <suppress files="MainWindowController.java"
+              checks="MethodLength" />
 
     <suppress checks="HideUtilityClassConstructor"
               files="ModuleFactory.java"/>
-    <suppress checks="HideUtilityClassConstructor"
-              files="ViewModuleFactory.java"/>
+  <suppress checks="HideUtilityClassConstructor"
+            files="ViewModuleFactory.java"/>
+  <suppress checks="HideUtilityClassConstructor"
+            files="WorkbenchSerializer.java"/>
 
-    <suppress checks="VisibilityModifier"
-              files="ModuleVCF.java"/>
+  <suppress checks="VisibilityModifier"
+            files="ModuleVCF.java"/>
+  <suppress checks="VisibilityModifier"
+            files="CableManager.java" lines="16"/>
 
-    <suppress files="Port.java" checks="DesignForExtension" lines="55-65" />
-    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="47-69" />
+    <suppress files="PortImpl.java" checks="DesignForExtension" lines="50-65" />
+    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="45-69" />
 
-    <suppress files="ModuleKEYB.java" checks="FinalParameters" lines="145" />
-    <suppress files="Knob.java" checks="FinalParameters" lines="566" />
-    <suppress files="Knob.java" checks="FinalParameters" lines="624" />
+    <suppress files="ModuleKEYBImpl.java" checks="FinalParameters" lines="123" />
+    <suppress files="KnobImpl.java" checks="FinalParameters" lines="570" />
+    <suppress files="KnobImpl.java" checks="FinalParameters" lines="604" />
 </suppressions>

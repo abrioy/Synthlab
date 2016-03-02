@@ -1,16 +1,5 @@
 package fr.synthlab.view.component;
 
-import javafx.event.Event;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Arc;
-import javafx.scene.shape.ArcType;
-import javafx.scene.shape.Line;
-import javafx.scene.transform.Rotate;
-
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -20,8 +9,22 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javafx.event.Event;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Line;
+import javafx.scene.transform.Rotate;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -30,15 +33,20 @@ import java.util.logging.Logger;
  * @see Region
  */
 public class KnobImpl extends Pane implements Knob {
-    private static final Logger LOGGER = Logger.getLogger(KnobImpl.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(KnobImpl.class.getName());
 
     private static final Color STEP_COLOR = Color.WHITE;
 
     /**
      * draw zone.
      */
-    private final Region knob;
+    private final Region knobturn;
 
+    /**
+     * draw another zone.
+     */
+    private final Region knobBody;
 
     /**
      * size of scale.
@@ -161,13 +169,21 @@ public class KnobImpl extends Pane implements Knob {
      */
     public KnobImpl() {
         super();
-        knob = new Region();
-        knob.getStylesheets().add(
+        knobturn = new Region();
+        knobturn.getStylesheets().add(
                 getClass().getResource("/gui/fxml/style/Knob.css")
                         .toExternalForm()); //add css
-        knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
-        knob.getStyleClass().add("knob");
-        knob.getTransforms().add(rotate);
+        knobturn.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        knobturn.getStyleClass().add("knobturn");
+        knobturn.getTransforms().add(rotate);
+
+        knobBody = new Region();
+        knobBody.getStylesheets().add(
+                getClass().getResource("/gui/fxml/style/Knob.css")
+                        .toExternalForm()); //add css
+        knobBody.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        knobBody.getStyleClass().add("knobBody");
+        knobBody.setMouseTransparent(true);
 
         setMaxHeight(Double.MIN_VALUE);
         setMaxWidth(Double.MIN_VALUE);
@@ -184,7 +200,9 @@ public class KnobImpl extends Pane implements Knob {
         minLine.setStroke(Color.WHITE);
         maxLine.setStroke(Color.WHITE);
         getChildren().addAll(minLine, maxLine);
-        getChildren().add(knob);
+        getChildren().add(knobturn);
+        getChildren().add(knobBody);
+
         arc.setFill(Color.TRANSPARENT);
         arc.setStroke(Color.WHITE);
         getChildren().add(arc);
@@ -203,7 +221,8 @@ public class KnobImpl extends Pane implements Knob {
         });
 
         diameter.addListener((observable, oldValue, newValue) -> {
-            knob.setPrefSize(newValue.doubleValue(), newValue.doubleValue());
+            knobturn.setPrefSize(newValue.doubleValue(),
+                    newValue.doubleValue());
             scaleSize = (int) (diameter.get() / 5);
         });
 
@@ -223,6 +242,16 @@ public class KnobImpl extends Pane implements Knob {
         heightProperty().addListener((observable, oldValue, newValue) -> {
             updatePositions();
         });
+
+        setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2
+                    && event.getButton() == MouseButton.PRIMARY) {
+                if (!this.scaleType.get().equals("enum")) {
+                    showPickerPopup();
+                }
+            }
+        });
+
     }
 
     private void moveKnob(final double x, final double y) {
@@ -320,15 +349,17 @@ public class KnobImpl extends Pane implements Knob {
                         * Math.sin(Math.toRadians(-getMaxAngle())));
         double knobX = 0 - getDiameter() / 2.0;
         double knobY = 0 - getDiameter() / 2.0;
-        knob.setLayoutX(knobX);
-        knob.setLayoutY(knobY);
+        knobturn.setLayoutX(knobX);
+        knobturn.setLayoutY(knobY);
+        knobBody.setLayoutX(knobX);
+        knobBody.setLayoutY(knobY);
         double angle = valueToAngle(getValue());
         double angleLocal;
         double angleInterval =
                 ((getMaxAngle() - getMinAngle()) / (step.get() - 1));
         if (getMinAngle() >= angle && angle >= getMaxAngle()) {
-            rotate.setPivotX(knob.getWidth() / 2.0);
-            rotate.setPivotY(knob.getHeight() / 2.0);
+            rotate.setPivotX(knobturn.getWidth() / 2.0);
+            rotate.setPivotY(knobturn.getHeight() / 2.0);
             rotate.setAngle(-angle);
         }
         if (step.get() != 0) { //draw scale
@@ -353,10 +384,10 @@ public class KnobImpl extends Pane implements Knob {
                 line.setStroke(interColor);
                 line.setStartX(
                         centerX + (diameter.doubleValue() / 2.0 + stepStart)
-                        * Math.cos(Math.toRadians(angleLocal)));
+                                * Math.cos(Math.toRadians(angleLocal)));
                 line.setStartY(
                         centerY + (diameter.doubleValue() / 2.0 + stepStart)
-                        * Math.sin(Math.toRadians(angleLocal)));
+                                * Math.sin(Math.toRadians(angleLocal)));
                 line.setEndX(centerX + (diameter.doubleValue() / 2.0 + stepEnd)
                         * Math.cos(Math.toRadians(angleLocal)));
                 line.setEndY(centerY + (diameter.doubleValue() / 2.0 + stepEnd)
@@ -428,6 +459,24 @@ public class KnobImpl extends Pane implements Knob {
         }
     }
 
+    public final void showPickerPopup() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Adjust " + label.get());
+        dialog.setHeaderText("Modify the value of this property");
+        dialog.setResizable(true);
+        dialog.getEditor().setText(String.valueOf(this.getValue()));
+
+        Optional<String> res = dialog.showAndWait();
+        if (res.isPresent()) {
+            try {
+                this.setValue(Double.parseDouble(res.get()));
+            } catch (NumberFormatException e) {
+                LOGGER.warning("Enable to parse \""
+                        + res.get() + "\" into a number.");
+            }
+        }
+    }
+
     @Override
     public final double getSpeed() {
         return speed.get();
@@ -451,7 +500,9 @@ public class KnobImpl extends Pane implements Knob {
 
     @Override
     public final void setValue(final double v) {
-        value.set(v);
+        double newValue = Math.max(getMin(), v);
+        newValue = Math.min(getMax(), newValue);
+        value.set(newValue);
     }
 
     @Override
@@ -470,7 +521,7 @@ public class KnobImpl extends Pane implements Knob {
         minExp = Math.log(v2);
         scale = (maxExp - minExp) / max.get() - min.get();
         coef = (scale * 0) - minExp;
-        min.set(v);
+        min.set(v2);
     }
 
     @Override
@@ -504,7 +555,9 @@ public class KnobImpl extends Pane implements Knob {
     @Override
     public final void setDiameter(final double v) {
         diameter.set(v);
-        knob.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        knobturn.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+        knobBody.setPrefSize(diameter.doubleValue(), diameter.doubleValue());
+
         scaleSize = (int) (diameter.get() / 5);
     }
 

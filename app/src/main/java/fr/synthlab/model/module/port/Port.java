@@ -2,7 +2,9 @@ package fr.synthlab.model.module.port;
 
 import fr.synthlab.model.module.Module;
 
-
+/**
+ * Port interface.
+ */
 public interface Port {
     /**
      * @return the name of the port

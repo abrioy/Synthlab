@@ -15,7 +15,8 @@ import java.util.ResourceBundle;
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleVCOA extends EventTarget, Styleable, Serializable, Initializable {
+public interface ViewModuleVCOA
+        extends EventTarget, Styleable, Serializable, Initializable {
     @Override
     void initialize(
             URL url, ResourceBundle resourceBundle);
@@ -32,5 +33,5 @@ public interface ViewModuleVCOA extends EventTarget, Styleable, Serializable, In
                     throws IOException;
 
     void readObject(ObjectInputStream o)
-                            throws IOException, ClassNotFoundException;
+            throws IOException, ClassNotFoundException;
 }

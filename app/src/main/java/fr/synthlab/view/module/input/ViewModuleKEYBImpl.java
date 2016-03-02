@@ -4,7 +4,7 @@ import fr.synthlab.model.module.keyboard.NoteKEYB;
 import fr.synthlab.model.module.keyboard.NoteKEYBImpl;
 import fr.synthlab.view.component.KeyboardKey;
 import fr.synthlab.view.component.Knob;
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -171,11 +171,13 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
             // Ugly, but it saves a lot of space
             // The "-9" comes from the fact that NoteKEYB.C has a value of -9.
             key.setOnMouseReleased(event -> {
-                lastKeyReleased = NoteKEYBImpl.fromValue(keysColl.indexOf(key) - 9);
+                lastKeyReleased = NoteKEYBImpl.fromValue(
+                        keysColl.indexOf(key) - 9);
                 keyReleasedCommand.run();
             });
             key.setOnMouseExited(event -> {
-                lastKeyReleased = NoteKEYBImpl.fromValue(keysColl.indexOf(key) - 9);
+                lastKeyReleased = NoteKEYBImpl.fromValue(
+                        keysColl.indexOf(key) - 9);
                 keyReleasedCommand.run();
             });
         }

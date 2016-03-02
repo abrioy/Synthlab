@@ -5,10 +5,12 @@ import fr.synthlab.model.module.Module;
 import java.util.logging.Logger;
 
 /**
- *
+ * Implementation of port
+ * @see Port
  */
 public abstract class PortImpl implements Port {
-    private static final Logger LOGGER = Logger.getLogger(PortImpl.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(PortImpl.class.getName());
 
     /**
      * the name of the port.

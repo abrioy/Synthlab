@@ -17,8 +17,9 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 /**
- * out module to play sound on sound card.
+ * Implementation of out module to play sound on sound card.
  * @author johan
+ * @see ModuleOUT
  */
 public class ModuleOUTImpl implements ModuleOUT {
     private static final Logger LOGGER
