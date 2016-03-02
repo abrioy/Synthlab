@@ -156,11 +156,9 @@ public class Cable extends CubicCurve {
         if (in == plug) {
             in.setCable(null);
             in = null;
-        } else {
-            if (out != null) {
-                out.setCable(null);
-                out = null;
-            }
+        } else if(out == plug){
+            out.setCable(null);
+            out = null;
         }
     }
 
