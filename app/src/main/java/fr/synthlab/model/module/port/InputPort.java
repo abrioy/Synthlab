@@ -6,7 +6,8 @@ import fr.synthlab.model.module.Module;
 import java.util.logging.Logger;
 
 /**
- *
+ * Input port
+ * @see PortImpl
  */
 public class InputPort extends PortImpl {
     private static final Logger LOGGER

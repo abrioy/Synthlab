@@ -33,7 +33,8 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 /**
- * Module oscilloscope to display the transmitted signal.
+ * Implementation of module oscilloscope to display the transmitted signal.
+ * @see ModuleSCOP
  */
 public class ModuleSCOPImpl implements ModuleSCOP {
     private static final Logger LOGGER

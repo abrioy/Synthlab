@@ -7,7 +7,10 @@ import fr.synthlab.model.module.port.Port;
 import javax.swing.JComponent;
 import java.util.Collection;
 
-
+/**
+ * oscilloscope module.
+ * @see Module
+ */
 public interface ModuleSCOP extends Module {
     /**
      * Getter on ports input and output.

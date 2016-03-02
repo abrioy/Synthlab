@@ -3,7 +3,9 @@ package fr.synthlab.model.module.mixer;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 
-
+/**
+ * Filter to mix module.
+ */
 public interface FilterMIX {
     /**
      * getter on input1.

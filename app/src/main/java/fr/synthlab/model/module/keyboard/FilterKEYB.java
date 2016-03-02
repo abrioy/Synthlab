@@ -3,6 +3,10 @@ package fr.synthlab.model.module.keyboard;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
+/**
+ * Filter to keyboard.
+ * @see UnitGenerator
+ */
 public class FilterKEYB extends UnitGenerator {
 
     /**

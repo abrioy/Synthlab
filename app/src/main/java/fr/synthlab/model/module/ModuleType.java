@@ -1,5 +1,8 @@
 package fr.synthlab.model.module;
 
+/**
+ * Singleton for different module type.
+ */
 public enum ModuleType {
     VCOA("VCOA", "VCO Type A"),
     VCA("VCA", "VCA"),

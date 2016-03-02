@@ -6,7 +6,10 @@ import fr.synthlab.model.module.port.Port;
 
 import java.util.Collection;
 
-
+/**
+ * keyboard module
+ * @see Module
+ */
 public interface ModuleKEYB extends Module {
     /**
      * Getter on ports output.
