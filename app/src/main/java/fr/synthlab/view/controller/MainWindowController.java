@@ -2,6 +2,7 @@ package fr.synthlab.view.controller;
 
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.view.Skin;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import fr.synthlab.view.module.ViewModuleFactory;
 import javafx.application.Platform;

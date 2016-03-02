@@ -1,6 +1,6 @@
 package fr.synthlab.view.module.filter;
 
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;

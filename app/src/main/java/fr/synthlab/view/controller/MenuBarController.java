@@ -2,6 +2,8 @@ package fr.synthlab.view.controller;
 
 
 import fr.synthlab.view.Skin;
+import fr.synthlab.view.controller.workbench.Workbench;
+import fr.synthlab.view.controller.workbench.WorkbenchSerializer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;

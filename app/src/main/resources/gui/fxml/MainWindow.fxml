@@ -1,4 +1,4 @@
-<?import fr.synthlab.view.controller.Workbench?>
+<?import fr.synthlab.view.controller.workbench.Workbench?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.Group?>

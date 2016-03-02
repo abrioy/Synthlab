@@ -1,4 +1,4 @@
-package fr.synthlab.view.controller;
+package fr.synthlab.view.controller.workbench;
 
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;

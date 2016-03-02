@@ -4,7 +4,7 @@ import fr.synthlab.model.module.keyboard.NoteKEYB;
 import fr.synthlab.model.module.keyboard.NoteKEYBImpl;
 import fr.synthlab.view.component.KeyboardKey;
 import fr.synthlab.view.component.Knob;
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import javafx.event.Event;
 import javafx.fxml.FXML;

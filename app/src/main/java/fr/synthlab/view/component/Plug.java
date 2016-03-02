@@ -1,7 +1,7 @@
 package fr.synthlab.view.component;
 
 import fr.synthlab.model.module.port.Port;
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.Event;

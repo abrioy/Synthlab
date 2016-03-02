@@ -2,7 +2,7 @@ package fr.synthlab.view.module.filter;
 
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.ResetButton;
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
