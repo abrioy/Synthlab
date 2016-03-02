@@ -2,7 +2,6 @@ package fr.synthlab.model.module.mixer;
 
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterAttenuator;
-import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -15,7 +14,6 @@ import java.util.logging.Logger;
 /**
  * out module to play sound on sound card.
  * @author johan
- * @see Module
  */
 public class ModuleMIXImpl implements ModuleMIX {
     private static final Logger LOGGER

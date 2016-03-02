@@ -5,7 +5,6 @@ import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.LineOut;
 import com.jsyn.util.WaveRecorder;
 import fr.synthlab.model.filter.FilterAttenuator;
-import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -20,7 +19,6 @@ import java.util.logging.Logger;
 /**
  * out module to play sound on sound card.
  * @author johan
- * @see Module
  */
 public class ModuleOUTImpl implements ModuleOUT {
     private static final Logger LOGGER
