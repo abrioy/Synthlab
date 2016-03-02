@@ -12,7 +12,8 @@ import java.util.ResourceBundle;
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleOUT extends EventTarget, Styleable, Serializable, Initializable {
+public interface ViewModuleOUT
+        extends EventTarget, Styleable, Serializable, Initializable {
    Knob getPicker();
 
    void setVolumeCommand(Runnable newVolume);
@@ -37,5 +38,5 @@ public interface ViewModuleOUT extends EventTarget, Styleable, Serializable, Ini
                throws IOException;
 
    void readObject(ObjectInputStream o)
-                     throws IOException, ClassNotFoundException;
+           throws IOException, ClassNotFoundException;
 }

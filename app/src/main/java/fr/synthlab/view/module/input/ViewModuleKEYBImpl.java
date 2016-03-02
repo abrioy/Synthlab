@@ -171,11 +171,13 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
             // Ugly, but it saves a lot of space
             // The "-9" comes from the fact that NoteKEYB.C has a value of -9.
             key.setOnMouseReleased(event -> {
-                lastKeyReleased = NoteKEYBImpl.fromValue(keysColl.indexOf(key) - 9);
+                lastKeyReleased = NoteKEYBImpl.fromValue(
+                        keysColl.indexOf(key) - 9);
                 keyReleasedCommand.run();
             });
             key.setOnMouseExited(event -> {
-                lastKeyReleased = NoteKEYBImpl.fromValue(keysColl.indexOf(key) - 9);
+                lastKeyReleased = NoteKEYBImpl.fromValue(
+                        keysColl.indexOf(key) - 9);
                 keyReleasedCommand.run();
             });
         }

@@ -14,7 +14,8 @@ import java.util.ResourceBundle;
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleVCA extends EventTarget, Styleable, Serializable, Initializable {
+public interface ViewModuleVCA
+        extends EventTarget, Styleable, Serializable, Initializable {
     @Override
     void initialize(
             URL url, ResourceBundle resourceBundle);

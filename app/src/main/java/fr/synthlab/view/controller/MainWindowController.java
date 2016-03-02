@@ -74,12 +74,14 @@ public class MainWindowController implements Initializable {
             });
         });
         // Dirty hack to make sure we can drag everywhere on the workbench
-        workbench.widthProperty().addListener((observable, oldValue, newValue) -> {
+        workbench.widthProperty().addListener(
+                (observable, oldValue, newValue) -> {
             workbench.requestLayout();
             workbenchScrollPane.requestLayout();
             workbench.getParent().requestLayout();
         });
-        workbench.heightProperty().addListener((observable, oldValue, newValue) -> {
+        workbench.heightProperty().addListener(
+                (observable, oldValue, newValue) -> {
             workbench.requestLayout();
             workbenchScrollPane.requestLayout();
             workbench.getParent().requestLayout();

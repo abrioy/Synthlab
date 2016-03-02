@@ -14,7 +14,8 @@ import java.util.ResourceBundle;
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleMIX extends EventTarget, Styleable, Serializable, Initializable {
+public interface ViewModuleMIX
+        extends EventTarget, Styleable, Serializable, Initializable {
     /**
      * getter on value attenution of input 1.
      *

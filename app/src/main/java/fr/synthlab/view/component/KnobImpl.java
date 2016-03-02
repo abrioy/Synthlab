@@ -30,7 +30,8 @@ import java.util.logging.Logger;
  * @see Region
  */
 public class KnobImpl extends Pane implements Knob {
-    private static final Logger LOGGER = Logger.getLogger(KnobImpl.class.getName());
+    private static final Logger LOGGER
+            = Logger.getLogger(KnobImpl.class.getName());
 
     private static final Color STEP_COLOR = Color.WHITE;
 

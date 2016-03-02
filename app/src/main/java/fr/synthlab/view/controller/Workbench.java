@@ -557,7 +557,7 @@ public class Workbench extends Pane {
                     draggedCable = connectedCable;
                     // FIXME: Update connectedCable ?
                 } else {
-                    // Dropping the cable because we clicked twice on the same plug
+                    //Dropping the cable because we clicked twice on the plug
                     dropCable();
                 }
             } else {
@@ -611,8 +611,8 @@ public class Workbench extends Pane {
     public final void changeSkin(final Skin skin) {
         LOGGER.fine("Skin changed from \""
                 + currentSkin + "\" to \"" + skin + "\".");
-
-        this.getStylesheets().clear(); // The remove does not properly removes the stylesheet
+        // The remove does not properly removes the stylesheet
+        this.getStylesheets().clear();
         //this.getStylesheets().remove(currentSkin.getPath());
         this.getStylesheets().add(skin.getPath());
         this.applyCss();

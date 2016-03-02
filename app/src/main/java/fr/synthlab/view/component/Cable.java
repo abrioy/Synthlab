@@ -101,7 +101,8 @@ public class Cable extends CubicCurve {
             }
             plug2 = null;
         } else {
-            LOGGER.severe("Trying to disconnect a cable from a plug it is not connected to.");
+            LOGGER.severe("Trying to disconnect a cable"
+                    + " from a plug it is not connected to.");
         }
     }
 
@@ -111,7 +112,8 @@ public class Cable extends CubicCurve {
         } else if (plug1 == null && plug2 != null) {
             return plug2;
         } else {
-            LOGGER.warning("Trying to get information on a connected plug when there is 0 or 2 connected plugs.");
+            LOGGER.warning("Trying to get information on a connected"
+                    + " plug when there is 0 or 2 connected plugs.");
             return null;
         }
     }

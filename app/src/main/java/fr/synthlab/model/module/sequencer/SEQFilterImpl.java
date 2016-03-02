@@ -22,7 +22,8 @@ public class SEQFilterImpl extends UnitFilter implements SEQFilter {
      * @param stepValues list of value
      * @param seqInit        sequence
      */
-    public SEQFilterImpl(final List<Double> stepValues, final ModuleSEQ seqInit) {
+    public SEQFilterImpl(final List<Double> stepValues,
+                         final ModuleSEQ seqInit) {
         tension = stepValues;
         seq = seqInit;
         current = 0;
