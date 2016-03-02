@@ -122,4 +122,12 @@ public class ModuleOUTTest {
         assertEquals(moduleOut, p.getModule());
         assertFalse(p.isConnected());
     }
+
+    /**
+     * test is recording.
+     */
+    @Test
+    public void testIsRecording() {
+        assertFalse(moduleOut.isRecording());
+    }
 }

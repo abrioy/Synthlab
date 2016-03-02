@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.concurrent.Callable;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.any;
@@ -72,7 +74,7 @@ public class CableTest {
     public void testGetPluggedPlug2() {
         Plug newPlug = new Plug();
         cable.connectPlug(newPlug);
-        assertSame(plug, cable.getConnectedPlug());
+        assertSame(plug, cable.getOppositePlug(newPlug));
         assertSame(newPlug, cable.getOppositePlug(plug));
     }
 
@@ -133,7 +135,7 @@ public class CableTest {
      * test disconnectPlug.
      */
     @Test
-    public void testUnplug() {
+    public void testDisconnectPlug() {
         Plug newPlug = new Plug();
         cable.connectPlug(newPlug);
         cable.disconnectPlug(plug);
@@ -144,7 +146,7 @@ public class CableTest {
      * test disconnectPlug.
      */
     @Test
-    public void testUnplug2() {
+    public void testDisconnectPlug2() {
         Plug newPlug = new Plug();
         cable.connectPlug(newPlug);
         cable.disconnectPlug(newPlug);
@@ -155,14 +157,14 @@ public class CableTest {
      * test disconnectPlug.
      */
     @Test
-    public void testUnplug3() {
+    public void testDisconnectPlug3() {
         Plug newPlug = new Plug();
         cable.connectPlug(newPlug);
 
         Plug otherPlug = new Plug();
 
         cable.disconnectPlug(otherPlug);
-        assertSame(plug, cable.getConnectedPlug());
+        assertSame(plug, cable.getOppositePlug(newPlug));
         assertSame(newPlug, cable.getOppositePlug(plug));
     }
 
