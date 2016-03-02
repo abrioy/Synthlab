@@ -65,7 +65,7 @@
     <suppress files="PortImpl.java" checks="DesignForExtension" lines="50-65" />
     <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="45-69" />
 
-    <suppress files="ModuleKEYB.java" checks="FinalParameters" lines="145" />
-    <suppress files="Knob.java" checks="FinalParameters" lines="566" />
-    <suppress files="Knob.java" checks="FinalParameters" lines="624" />
+    <suppress files="ModuleKEYBImpl.java" checks="FinalParameters" lines="123" />
+    <suppress files="KnobImpl.java" checks="FinalParameters" lines="536" />
+    <suppress files="KnobImpl.java" checks="FinalParameters" lines="570" />
 </suppressions>

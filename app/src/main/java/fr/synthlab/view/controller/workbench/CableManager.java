@@ -15,7 +15,7 @@ public class CableManager {
     private Workbench workbench;
     public Cable draggedCable;
 
-    public CableManager(Workbench workbenchParam) {
+    public CableManager(final Workbench workbenchParam) {
         this.workbench = workbenchParam;
     }
 
@@ -56,7 +56,6 @@ public class CableManager {
                 draggedCable.update();
                 draggedCable = null;
             }
-
         }
     }
 
@@ -71,7 +70,7 @@ public class CableManager {
         });
     }
 
-    public final void removeCable(Cable cable) {
+    public final void removeCable(final Cable cable) {
         cable.dispose();
         workbench.getChildren().remove(cable);
     }

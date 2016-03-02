@@ -356,7 +356,7 @@ public class Workbench extends Pane {
         return null;
     }
 
-    public final void plugClicked(Plug plug) {
+    public final void plugClicked(final Plug plug) {
         cableManager.plugClicked(plug);
     }
 

@@ -60,7 +60,7 @@ public class Cable extends CubicCurve {
         this.setMouseTransparent(true);
     }
 
-    private void connectPorts(Port port1, Port port2) {
+    private void connectPorts(final Port port1, final Port port2) {
         if (port1 != null && port2 != null) {
             port1.connect(port2);
         } else {
@@ -69,7 +69,7 @@ public class Cable extends CubicCurve {
     }
 
 
-    public final void connectPlug(Plug plug) {
+    public final void connectPlug(final Plug plug) {
         if (plug1 == null) {
             plug1 = plug;
             plug1.setCable(this);
