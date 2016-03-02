@@ -11,6 +11,7 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests on the Voltage Control Filter Low Pass
@@ -91,6 +92,14 @@ public class ModuleVCFLPTest {
         assertEquals("out", p.getName());
         assertEquals(moduleVCFLP, p.getModule());
         assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort3(){
+        assertNull(moduleVCFLP.getPort(""));
     }
 
     /**

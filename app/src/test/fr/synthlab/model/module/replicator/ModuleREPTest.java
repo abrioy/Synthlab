@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests on the replicator module.
@@ -85,5 +86,13 @@ public class ModuleREPTest {
         assertEquals("out3", p.getName());
         assertEquals(moduleREP, p.getModule());
         assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort5(){
+        assertNull(moduleREP.getPort(""));
     }
 }

@@ -117,4 +117,12 @@ public class ModuleSCOPTest {
         assertEquals(moduleOsc, p.getModule());
         assertFalse(p.isConnected());
     }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort3(){
+        assertNull(moduleOsc.getPort(""));
+    }
 }

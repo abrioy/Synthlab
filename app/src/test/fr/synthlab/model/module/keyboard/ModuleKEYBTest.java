@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests on the keyboard module.
@@ -109,5 +110,13 @@ public class ModuleKEYBTest {
         assertEquals("out", p.getName());
         assertEquals(moduleKEYB, p.getModule());
         assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort3(){
+        assertNull(moduleKEYB.getPort(""));
     }
 }

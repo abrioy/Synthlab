@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 /**
  * Test on white noise module.
@@ -54,5 +55,13 @@ public class ModuleBRUITest {
         assertEquals("out", p.getName());
         assertEquals(moduleBRUI, p.getModule());
         assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort2(){
+        assertNull(moduleBRUI.getPort(""));
     }
 }

@@ -124,6 +124,14 @@ public class ModuleOUTTest {
     }
 
     /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort4(){
+        assertNull(moduleOut.getPort(""));
+    }
+
+    /**
      * test is recording.
      */
     @Test

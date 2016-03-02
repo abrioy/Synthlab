@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests on the envelope generator module.
@@ -131,5 +132,13 @@ public class ModuleEGTest {
         assertEquals("out", p.getName());
         assertEquals(moduleEG, p.getModule());
         assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort3(){
+        assertNull(moduleEG.getPort(""));
     }
 }

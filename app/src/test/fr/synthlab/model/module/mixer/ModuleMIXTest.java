@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 /**
  * Tests on the mixer module.
@@ -211,5 +212,13 @@ public class ModuleMIXTest {
         assertEquals("out", p.getName());
         assertEquals(moduleMIX, p.getModule());
         assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort6(){
+        assertNull(moduleMIX.getPort(""));
     }
 }

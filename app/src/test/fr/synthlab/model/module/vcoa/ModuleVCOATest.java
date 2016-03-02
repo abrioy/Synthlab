@@ -127,6 +127,14 @@ public class ModuleVCOATest {
     }
 
     /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort3(){
+        assertNull(moduleVCOA.getPort(""));
+    }
+
+    /**
      * After execution.
      */
     @After
