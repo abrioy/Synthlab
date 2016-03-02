@@ -134,7 +134,7 @@ public class Cable extends CubicCurve {
         if (in == null) {
             in = plug;
             in.setCable(this);
-        } else {
+        } else if (out == null){
             out = plug;
             out.setCable(this);
         }

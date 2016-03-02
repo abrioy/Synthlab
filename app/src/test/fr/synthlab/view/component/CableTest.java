@@ -151,6 +151,38 @@ public class CableTest {
     }
 
     /**
+     * test set empty plug.
+     */
+    @Test
+    public void testSetEmptyPlug2() {
+        Plug newPlug = new Plug();
+        cable.setEmptyPlug(newPlug);
+        cable.unplug(plug);
+
+        Plug otherPlug = new Plug();
+
+        cable.setEmptyPlug(otherPlug);
+
+        assertSame(otherPlug, cable.getOppositePlug(newPlug).get());
+        assertSame(newPlug, cable.getOppositePlug(otherPlug).get());
+    }
+
+    /**
+     * test set empty plug.
+     */
+    @Test
+    public void testSetEmptyPlug3() {
+        Plug newPlug = new Plug();
+        cable.setEmptyPlug(newPlug);
+
+        Plug otherPlug = new Plug();
+        cable.setEmptyPlug(otherPlug);
+
+        assertSame(newPlug, cable.getOppositePlug(plug).get());
+        assertSame(plug, cable.getOppositePlug(newPlug).get());
+    }
+
+    /**
      * test unplug.
      */
     @Test
