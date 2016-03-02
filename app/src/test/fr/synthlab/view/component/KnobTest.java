@@ -1,6 +1,7 @@
 package fr.synthlab.view.component;
 
 import fr.synthlab.util.JavaFXThreadingRule;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
@@ -8,7 +9,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Test on Knob
@@ -28,6 +29,9 @@ public class KnobTest {
      */
     private Knob knob;
 
+    /**
+     * Initialize.
+     */
     @Before
     public void setUp(){
         knob = new KnobImpl();
@@ -112,7 +116,6 @@ public class KnobTest {
         assertEquals(5,knob.getMax(),0.00000001);
     }
 
-
     /**
      * test max init property.
      */
@@ -122,7 +125,6 @@ public class KnobTest {
         assertEquals(100,property.get(),0.00000001);
     }
 
-
     /**
      * test Diameter init.
      */
@@ -130,7 +132,6 @@ public class KnobTest {
     public void testGetDiameter() {
         assertEquals(200,knob.getDiameter(),0.00000001);
     }
-
 
     /**
      * test diameter set to 5.
@@ -150,7 +151,6 @@ public class KnobTest {
         assertEquals(200,property.get(),0.00000001);
     }
 
-
     /**
      * test scaleType set to log.
      */
@@ -158,6 +158,24 @@ public class KnobTest {
     public void testSetScaleType() {
         knob.setScaleType("log");
         assertEquals("log",knob.getScaleType());
+    }
+
+    /**
+     * test scaleType set to enum.
+     */
+    @Test
+    public void testSetScaleType2() {
+        knob.setScaleType("enum");
+        assertEquals("enum",knob.getScaleType());
+    }
+
+    /**
+     * test scaleType set to nothing.
+     */
+    @Test
+    public void testSetScaleType3() {
+        knob.setScaleType("");
+        assertEquals("linear",knob.getScaleType());
     }
 
     /**
@@ -214,6 +232,15 @@ public class KnobTest {
     }
 
     /**
+     * test step set to -5.
+     */
+    @Test
+    public void testSetStep2() {
+        knob.setStep(-5);
+        assertEquals(0,knob.getStep());
+    }
+
+    /**
      * test step init.
      */
     @Test
@@ -228,5 +255,154 @@ public class KnobTest {
     public void testStepProperty() {
         IntegerProperty property = knob.stepProperty();
         assertEquals(20,property.get());
+    }
+
+    /**
+     * test speed init.
+     */
+    @Test
+    public void testGetSpeed() {
+        assertEquals(Double.MAX_VALUE, knob.getSpeed(), 0.1);
+    }
+
+    /**
+     * test set speed to 5.
+     */
+    @Test
+    public void testSetSpeed() {
+        knob.setSpeed(5.0);
+        assertEquals(5.0, knob.getSpeed(), 0.1);
+    }
+
+    /**
+     * test speed init property.
+     */
+    @Test
+    public void testSpeedProperty() {
+        DoubleProperty speedProperty = knob.speedProperty();
+        assertEquals(knob, speedProperty.getBean());
+        assertEquals("slow", speedProperty.getName());
+        assertEquals(Double.MAX_VALUE, speedProperty.getValue(), 0.00001);
+    }
+
+    /**
+     * test set stepType to true.
+     */
+    @Test
+    public void testSetStepType() {
+        knob.setStepType(true);
+        assertTrue(knob.getStepType());
+    }
+
+    /**
+     * test set stepType to false.
+     */
+    @Test
+    public void testSetStepType2() {
+        knob.setStepType(false);
+        assertFalse(knob.getStepType());
+    }
+
+    /**
+     * test set stepType to false.
+     */
+    @Test
+    public void testSetStepType3() {
+        knob.setStepType(true);
+        knob.setStepType(false);
+        assertFalse(knob.getStepType());
+    }
+
+    /**
+     * test get stepType.
+     */
+    @Test
+    public void testGetStepType() {
+        assertFalse(knob.getStepType());
+    }
+
+    /**
+     * test stepType property.
+     */
+    @Test
+    public void testStepTypeProperty() {
+        BooleanProperty stepTypeProperty = knob.stepTypeProperty();
+        assertEquals(knob, stepTypeProperty.getBean());
+        assertEquals("stepType", stepTypeProperty.getName());
+        assertFalse(stepTypeProperty.getValue());
+    }
+
+    /**
+     * test get minAngle.
+     */
+    @Test
+    public void testGetMinAngle() {
+        assertEquals(240, knob.getMinAngle(), 0.0001);
+    }
+
+    /**
+     * test set minAngle to 120.
+     */
+    @Test
+    public void testSetMinAngle() {
+        knob.setMinAngle(120);
+        assertEquals(120, knob.getMinAngle(), 0.0001);
+    }
+
+    /**
+     * test set minAngle to -120.
+     */
+    @Test
+    public void testSetMinAngle2() {
+        knob.setMinAngle(-120);
+        assertEquals(-120, knob.getMinAngle(), 0.0001);
+    }
+
+    /**
+     * test minAngle property.
+     */
+    @Test
+    public void testMinAngleProperty() {
+        DoubleProperty angleProperty = knob.minAngleProperty();
+        assertEquals(knob, angleProperty.getBean());
+        assertEquals("minAngle", angleProperty.getName());
+        assertEquals(240, angleProperty.getValue(),0.00001);
+    }
+
+    /**
+     * test get maxAngle.
+     */
+    @Test
+    public void testGetMaxAngle() {
+        assertEquals(-60, knob.getMaxAngle(), 0.00000001);
+    }
+
+    /**
+     * test set maxAngle to 30.
+     */
+    @Test
+    public void testSetMaxAngle() {
+        knob.setMaxAngle(30);
+        assertEquals(30, knob.getMaxAngle(), 0.0001);
+    }
+
+    /**
+     * test set maxAngle to -500.
+     */
+    @Test
+    public void testSetMaxAngle2() {
+        knob.setMaxAngle(-500);
+        assertEquals(-500, knob.getMaxAngle(), 0.0001);
+    }
+
+    /**
+     * test maxAngle property.
+     */
+    @Test
+    public void testMaxAngleProperty() {
+        DoubleProperty angleProperty = knob.maxAngleProperty();
+        assertEquals(knob, angleProperty.getBean());
+        assertEquals("maxAngle", angleProperty.getName());
+        assertEquals(-60, angleProperty.getValue(),0.00001);
     }
 }
