@@ -491,6 +491,8 @@ public class KnobImpl extends Pane implements Knob {
 	public final void setValue(final double v) {
 		double newValue = Math.max(getMin(), v);
 		newValue = Math.min(getMax(), newValue);
+		LOGGER.info(String.valueOf(getMin()));
+		LOGGER.info(String.valueOf(v));
         value.set(newValue);
     }
 
@@ -510,7 +512,7 @@ public class KnobImpl extends Pane implements Knob {
         minExp = Math.log(v2);
         scale = (maxExp - minExp) / max.get() - min.get();
         coef = (scale * 0) - minExp;
-        min.set(v);
+        min.set(v2);
     }
 
     @Override
