@@ -15,7 +15,7 @@ public class CableManager {
 	private Workbench workbench;
 	public Cable draggedCable;
 
-	public CableManager(Workbench workbench){
+	public CableManager(Workbench workbench) {
 		this.workbench = workbench;
 	}
 
@@ -27,20 +27,19 @@ public class CableManager {
 	public final void plugClicked(final Plug plug) {
 		Cable connectedCable = plug.getCable();
 		if (draggedCable == null) {
-			if(connectedCable != null){
+			if (connectedCable != null) {
 				// We drag the cable that was connected to the plug
 				connectedCable.disconnectPlug(plug);
 				draggedCable = connectedCable;
-			}
-			else{
+			} else {
 				// We create a new cable to drag
 				draggedCable = new Cable(workbench, plug);
 				workbench.getChildren().add(draggedCable);
 				draggedCable.update();
 			}
 		} else {
-			if(connectedCable != null) {
-				if (draggedCable.getConnectedPlug() != plug){
+			if (connectedCable != null) {
+				if (draggedCable.getConnectedPlug() != plug) {
 					// Switching dragged cable
 					connectedCable.disconnectPlug(plug);
 					draggedCable.connectPlug(plug);
@@ -48,13 +47,11 @@ public class CableManager {
 					draggedCable.update();
 					draggedCable = connectedCable;
 					// FIXME: Update connectedCable ?
-				}
-				else {
+				} else {
 					// Dropping the cable because we clicked twice on the same plug
 					dropCable();
 				}
-			}
-			else {
+			} else {
 				draggedCable.connectPlug(plug);
 				draggedCable.update();
 				draggedCable = null;
@@ -62,8 +59,6 @@ public class CableManager {
 
 		}
 	}
-
-
 
 
 	public void updateCables() {
