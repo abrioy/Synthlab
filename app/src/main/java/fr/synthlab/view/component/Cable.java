@@ -4,7 +4,6 @@ import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.controller.ToolboxController;
 import fr.synthlab.view.controller.workbench.Workbench;
 import javafx.geometry.Point2D;
-import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.CubicCurve;
@@ -59,12 +58,6 @@ public class Cable extends CubicCurve {
         this.setStrokeWidth(10);
         this.setStrokeLineCap(StrokeLineCap.ROUND);
         this.setMouseTransparent(true);
-
-		setOnMouseClicked(event -> {
-			if (event.getClickCount() == 2 && event.getButton() == MouseButton.PRIMARY) {
-				
-			}
-		});
     }
 
 	private void connectPorts(Port port1, Port port2){
