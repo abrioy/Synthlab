@@ -1,8 +1,11 @@
 package fr.synthlab.view.component;
 
+import javafx.beans.property.*;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -11,17 +14,9 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -239,6 +234,15 @@ public class KnobImpl extends Pane implements Knob {
         heightProperty().addListener((observable, oldValue, newValue) -> {
             updatePositions();
         });
+
+		setOnMouseClicked(event -> {
+			if (event.getClickCount() == 2 && event.getButton() == MouseButton.PRIMARY) {
+				if(!this.scaleType.get().equals("enum")) {
+					showPickerPopup();
+				}
+			}
+		});
+
     }
 
     private void moveKnob(final double x, final double y) {
@@ -446,6 +450,24 @@ public class KnobImpl extends Pane implements Knob {
         }
     }
 
+	public void showPickerPopup(){
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Adjust "+label.get());
+		dialog.setHeaderText("Modify the value of this property");
+		dialog.setResizable(true);
+		dialog.getEditor().setText(String.valueOf(this.getValue()));
+
+		Optional<String> res = dialog.showAndWait();
+		if(res.isPresent()){
+			try {
+				this.setValue(Double.parseDouble(res.get()));
+			}
+			catch (NumberFormatException e){
+				LOGGER.warning("Enable to parse \""+res.get()+"\" into a number.");
+			}
+		}
+	}
+
     @Override
     public final double getSpeed() {
         return speed.get();
@@ -469,7 +491,9 @@ public class KnobImpl extends Pane implements Knob {
 
     @Override
     public final void setValue(final double v) {
-        value.set(v);
+		double newValue = Math.max(getMin(), v);
+		newValue = Math.min(getMax(), newValue);
+        value.set(newValue);
     }
 
     @Override
@@ -488,7 +512,7 @@ public class KnobImpl extends Pane implements Knob {
         minExp = Math.log(v2);
         scale = (maxExp - minExp) / max.get() - min.get();
         coef = (scale * 0) - minExp;
-        min.set(v);
+        min.set(v2);
     }
 
     @Override
@@ -637,4 +661,6 @@ public class KnobImpl extends Pane implements Knob {
     public final DoubleProperty maxAngleProperty() {
         return maxAngle;
     }
+
+
 }
