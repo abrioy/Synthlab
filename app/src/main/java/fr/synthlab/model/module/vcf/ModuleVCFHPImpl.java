@@ -46,7 +46,7 @@ public class ModuleVCFHPImpl extends ModuleVCF implements ModuleVCFHP {
 
 
     @Override
-    public void update() {
+    public final void update() {
         filterFm.output.disconnectAll();
         if (fmInput.getConnected() == null) {
             hpFilter.frequency.set(f0);

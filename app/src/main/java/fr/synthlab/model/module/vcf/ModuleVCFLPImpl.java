@@ -47,7 +47,7 @@ public class ModuleVCFLPImpl extends ModuleVCF implements ModuleVCFLP {
     }
 
     @Override
-    public void update() {
+    public final void update() {
         filterFm.output.disconnectAll();
         if (fmInput.getConnected() == null) {
             lpFilter.frequency.set(f0);

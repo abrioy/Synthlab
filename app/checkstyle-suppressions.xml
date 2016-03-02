@@ -62,8 +62,8 @@
   <suppress checks="VisibilityModifier"
             files="CableManager.java" lines="16"/>
 
-    <suppress files="Port.java" checks="DesignForExtension" lines="55-65" />
-    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="47-69" />
+    <suppress files="PortImpl.java" checks="DesignForExtension" lines="50-65" />
+    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="45-69" />
 
     <suppress files="ModuleKEYB.java" checks="FinalParameters" lines="145" />
     <suppress files="Knob.java" checks="FinalParameters" lines="566" />

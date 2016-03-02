@@ -61,7 +61,7 @@ public class CableManager {
     }
 
 
-    public void updateCables() {
+    public final void updateCables() {
         workbench.getCables().forEach(Cable::updateCircles);
 
         workbench.getCables().forEach(cable -> {
@@ -71,12 +71,12 @@ public class CableManager {
         });
     }
 
-    public void removeCable(Cable cable) {
+    public final void removeCable(Cable cable) {
         cable.dispose();
         workbench.getChildren().remove(cable);
     }
 
-    public void dropCable() {
+    public final void dropCable() {
         if (draggedCable != null) {
             removeCable(draggedCable);
             draggedCable = null;

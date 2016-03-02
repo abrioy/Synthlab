@@ -192,7 +192,7 @@ public class Workbench extends Pane {
         dragGhost.toFront();
     }
 
-    public Collection<ViewModule> getViewModules() {
+    public final Collection<ViewModule> getViewModules() {
         return this.getChildren().stream()
                 .filter(child -> child instanceof ViewModule)
                 .map(child -> (ViewModule) child).collect(
@@ -204,7 +204,7 @@ public class Workbench extends Pane {
      *
      * @return list of cable
      */
-    protected Collection<Cable> getCables() {
+    protected final Collection<Cable> getCables() {
         return this.getChildren().stream()
                 .filter(child -> child instanceof Cable)
                 .map(child -> (Cable) child).collect(
@@ -356,8 +356,7 @@ public class Workbench extends Pane {
         return null;
     }
 
-
-    public void plugClicked(Plug plug) {
+    public final void plugClicked(Plug plug) {
         cableManager.plugClicked(plug);
     }
 

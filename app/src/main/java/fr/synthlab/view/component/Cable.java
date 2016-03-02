@@ -69,7 +69,7 @@ public class Cable extends CubicCurve {
     }
 
 
-    public void connectPlug(Plug plug) {
+    public final void connectPlug(Plug plug) {
         if (plug1 == null) {
             plug1 = plug;
             plug1.setCable(this);
