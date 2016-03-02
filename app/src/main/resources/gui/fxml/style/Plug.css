@@ -1,6 +1,6 @@
 .plug {
     -fx-background-color: transparent;
-    -fx-background-image: url("../../texture/plug.png");
+    -fx-background-image: url("../../texture/plug2.png");
     -fx-background-size: stretch;
 }
 .label {
