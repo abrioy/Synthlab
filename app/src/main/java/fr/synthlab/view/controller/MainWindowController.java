@@ -227,8 +227,8 @@ public class MainWindowController implements Initializable {
      public final void changeSkin(final Skin skin) {
           LOGGER.fine("Skin changed from \""
                     + currentSkin + "\" to \"" + skin + "\".");
-
-          workbench.getStylesheets().clear(); // The remove does not properly removes the stylesheet
+         // The remove does not properly removes the stylesheet
+          workbench.getStylesheets().clear();
           //workbench.getStylesheets().remove(currentSkin.getPath());
           workbench.getStylesheets().add(skin.getPath());
           workbench.applyCss();

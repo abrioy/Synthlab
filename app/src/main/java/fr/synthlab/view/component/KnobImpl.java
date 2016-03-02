@@ -218,7 +218,8 @@ public class KnobImpl extends Pane implements Knob {
         });
 
         diameter.addListener((observable, oldValue, newValue) -> {
-            knobturn.setPrefSize(newValue.doubleValue(), newValue.doubleValue());
+            knobturn.setPrefSize(newValue.doubleValue(),
+                    newValue.doubleValue());
             scaleSize = (int) (diameter.get() / 5);
         });
 

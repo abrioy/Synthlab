@@ -48,7 +48,7 @@ public class CableManager {
                     draggedCable = connectedCable;
                     // FIXME: Update connectedCable ?
                 } else {
-                    // Dropping the cable because we clicked twice on the same plug
+                    // Dropping the cable because we clicked twice on the plug
                     dropCable();
                 }
             } else {
