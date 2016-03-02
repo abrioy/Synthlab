@@ -57,8 +57,10 @@
   <suppress checks="HideUtilityClassConstructor"
             files="WorkbenchSerializer.java"/>
 
-    <suppress checks="VisibilityModifier"
-              files="ModuleVCF.java"/>
+  <suppress checks="VisibilityModifier"
+            files="ModuleVCF.java"/>
+  <suppress checks="VisibilityModifier"
+            files="CableManager.java" lines="16"/>
 
     <suppress files="Port.java" checks="DesignForExtension" lines="55-65" />
     <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="47-69" />
