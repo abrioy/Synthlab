@@ -1,5 +1,6 @@
 package fr.synthlab.model.module;
 
+import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.envelope.ModuleEGImpl;
 import fr.synthlab.model.module.keyboard.ModuleKEYBImpl;
 import fr.synthlab.model.module.mixer.ModuleMIXImpl;
@@ -14,6 +15,8 @@ import fr.synthlab.model.module.vcoa.ModuleVCOAImpl;
 import fr.synthlab.model.module.whiteNoise.ModuleBRUIImpl;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -126,5 +129,14 @@ public class ModuleFactoryTest {
     @Test
     public void testCreateModuleSEQ() {
         assertTrue(ModuleFactory.createModule(ModuleType.SEQ) instanceof ModuleSEQImpl);
+    }
+
+    /**
+     * test get synthesizer.
+     */
+    @Test
+    public void testGetSyn() {
+        assertNotNull(ModuleFactory.getSyn());
+        assertTrue(ModuleFactory.getSyn() instanceof Synthesizer);
     }
 }
