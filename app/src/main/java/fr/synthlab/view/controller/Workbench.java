@@ -1,14 +1,10 @@
 package fr.synthlab.view.controller;
 
 
-import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleFactory;
-import fr.synthlab.model.module.ModuleType;
-import fr.synthlab.model.module.port.Port;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
-import fr.synthlab.view.module.ViewModuleFactory;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -18,15 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -37,7 +27,7 @@ public class Workbench extends Pane {
     private final double moduleMargin = 2.0d;
     private ImageView dragGhost = new ImageView();
 
-    private Cable draggedCable;
+	private CableManager cableManager;
 
 
 
@@ -45,197 +35,24 @@ public class Workbench extends Pane {
         // Making the ghost a bit spookier
         dragGhost.setOpacity(0.40d); // #SoSpooky
 
+		cableManager = new CableManager(this);
+
         this.setOnMouseMoved(event -> {
-            if (draggedCable != null) {
+            if (cableManager.draggedCable != null) {
                 Point2D localPoint = this.sceneToLocal(
                         new Point2D(event.getSceneX(), event.getSceneY()));
-                draggedCable.update(localPoint);
+				cableManager.draggedCable.update(localPoint);
             }
         });
 
 		this.setOnMouseClicked(event -> {
 			if (event.getButton() == MouseButton.SECONDARY) {
-				dropCable();
+				cableManager.dropCable();
 				event.consume();
 			}
 		});
 
         ModuleFactory.startSyn();
-    }
-
-    private int serializeModuleToUID(final Module module) {
-        return System.identityHashCode(module);
-    }
-
-
-    public final void serializeViewModules(
-            final ObjectOutputStream outputStream) throws IOException {
-        Collection<ViewModule> modules = getViewModules();
-
-        // Writing the total number of modules
-        outputStream.writeInt(modules.size());
-
-        for (ViewModule viewModule : modules) {
-            Module module = viewModule.getModule();
-
-            // Writing module type
-            ModuleType type = module.getType();
-            LOGGER.fine("Saving module of type \"" + type + "\".");
-            outputStream.writeObject(type);
-
-            // Writing viewModule position
-            Bounds viewModuleBounds = viewModule.getBoundsInParent();
-            LOGGER.fine("\tPosition: (" + viewModuleBounds.getMinX()
-                    + ", " + viewModuleBounds.getMinY() + ").");
-            outputStream.writeDouble(viewModuleBounds.getMinX());
-            outputStream.writeDouble(viewModuleBounds.getMinY());
-
-            // Writing ViewModule data
-            LOGGER.fine("\tData.");
-            viewModule.writeObject(outputStream);
-
-            // Writing ViewModule connections
-            // Writing the UID of this module
-            int uid = serializeModuleToUID(viewModule.getModule());
-            LOGGER.fine("\tId: " + uid);
-            outputStream.writeInt(uid);
-
-            // Writing all the ports
-            Collection<Plug> plugs = viewModule.getPlugs();
-            // Filtering connected ports
-            Collection<Plug> connectedPlugs = plugs.stream()
-                    .filter(plug -> plug.getPort().isConnected())
-                    .collect(Collectors.toList());
-
-            int nbPlugs = connectedPlugs.size();
-            outputStream.writeInt(nbPlugs);
-            LOGGER.fine("\tConnections (" + nbPlugs + ")");
-            for (Plug plug : connectedPlugs) {
-                outputStream.writeObject(plug.getName());
-                // Storing the ID of the connected module
-                Port connectedPort = plug.getPort().getConnected();
-                int targetUID = serializeModuleToUID(connectedPort.getModule());
-                outputStream.writeInt(targetUID);
-                outputStream.writeObject(connectedPort.getName());
-                // Storing the color of the connections
-                Color cableColor = plug.getCable().getColor();
-                outputStream.writeDouble(cableColor.getRed());
-                outputStream.writeDouble(cableColor.getGreen());
-                outputStream.writeDouble(cableColor.getBlue());
-                LOGGER.fine("\t\t" + plug.getName()
-                        + "\t-- " + cableColor + "\t--> "
-                        + targetUID + "." + connectedPort.getName());
-            }
-        }
-    }
-
-    public final void deSerializeViewModules(
-            final ObjectInputStream inputStream) throws IOException {
-        removeAllModules();
-
-        Map<Integer, ViewModule> moduleList = new HashMap<>();
-        class PortReference {
-            private int parentUID;
-            private String name;
-            private int connectedUID;
-            private String connectedPortName;
-            private Color cableColor;
-
-            PortReference(final int parentUIDInit, final String nameInit,
-                          final int connectedUIDInit,
-                          final String connectedPortNameInit,
-                          final Color cableColorInit) {
-                parentUID = parentUIDInit;
-                name = nameInit;
-                connectedUID = connectedUIDInit;
-                connectedPortName = connectedPortNameInit;
-                cableColor = cableColorInit;
-            }
-        }
-        Collection<PortReference> portList = new ArrayList<>();
-
-        // Reading the number of modules
-        int nbModules = inputStream.readInt();
-
-        for (int i = 0; i < nbModules; i++) {
-            try {
-                // Reading type
-                ModuleType type = (ModuleType) inputStream.readObject();
-                LOGGER.fine("Restoring a module of type \"" + type + "\".");
-
-                // Reading position
-                double xPos = inputStream.readDouble();
-                double yPos = inputStream.readDouble();
-                LOGGER.fine("\tPosition: (" + xPos + ", " + yPos + ").");
-
-                // Creating new ViewModule and feeding it the gathered data
-                ViewModule viewModule
-                        = ViewModuleFactory.createViewModule(type, this);
-                viewModule.relocate(xPos, yPos);
-
-                // Feeding data to the Module
-                LOGGER.fine("\tData.");
-                viewModule.readObject(inputStream);
-
-                // Reading connections
-                // Adding this module to the global list
-                int moduleUID = inputStream.readInt();
-                LOGGER.fine("\tId: " + moduleUID);
-                moduleList.put(moduleUID, viewModule);
-
-                // Adding this module's port to the list
-                int nbPlugs = inputStream.readInt();
-                LOGGER.fine("\tFound " + nbPlugs + " connections");
-                for (int j = 0; j < nbPlugs; j++) {
-                    String plugName = (String) inputStream.readObject();
-                    int connectedModuleId = inputStream.readInt();
-                    String connectedPortName
-                            = (String) inputStream.readObject();
-                    double r = inputStream.readDouble();
-                    double g = inputStream.readDouble();
-                    double b = inputStream.readDouble();
-                    Color cableColor = new Color(r, g, b, 1.0d);
-                    portList.add(new PortReference(
-                            moduleUID, plugName, connectedModuleId,
-                            connectedPortName, cableColor));
-                    LOGGER.fine("\t\t" + plugName + "\t-- "
-                            + cableColor + "\t--> "
-                            + connectedModuleId + "."
-                            + connectedPortName);
-                }
-                this.addModule(viewModule);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // Resolving connections
-        LOGGER.fine("Restoring " + portList.size() + " connections");
-        for (PortReference portReference : portList) {
-            ViewModule viewModule = moduleList.get(portReference.parentUID);
-            Plug plug = viewModule.getPlugByName(portReference.name);
-            ViewModule connectedViewModule = moduleList.get(
-                    portReference.connectedUID);
-            Plug connectedPlug = connectedViewModule.getPlugByName(
-                    portReference.connectedPortName);
-
-            // Checking this port is not already connected
-            if (!plug.getPort().isConnected()) {
-                LOGGER.fine("\t" + portReference.parentUID
-                        + "." + portReference.name + " -- "
-                        + portReference.cableColor + " --> "
-                        + portReference.connectedUID + "."
-                        + portReference.connectedPortName);
-                Cable cable = new Cable(this, plug, connectedPlug);
-                cable.setColor(portReference.cableColor);
-                this.getChildren().add(cable);
-            }
-        }
-        // Updating cable positions
-        getCables().forEach(Cable::updateCircles);
-        getCables().forEach(Cable::update);
-
-        inputStream.close();
     }
 
 
@@ -259,7 +76,7 @@ public class Workbench extends Pane {
 						Cable c = ((Plug) plug).getCable();
 
 						if (c != null) {
-							removeCable(c);
+							cableManager.removeCable(c);
 						}
 					});
 				});
@@ -310,9 +127,9 @@ public class Workbench extends Pane {
             mouseDelta.x = localPoint.getX();
             mouseDelta.y = localPoint.getY();
 
-            workbench.updateCables();
-            if (draggedCable != null) {
-                draggedCable.update(mousePoint);
+			cableManager.updateCables();
+            if (cableManager.draggedCable != null) {
+				cableManager.draggedCable.update(mousePoint);
             }
 
             workbench.displayGhost(module);
@@ -334,9 +151,9 @@ public class Workbench extends Pane {
                 module.relocate(newLocation.getX(), newLocation.getY());
             }
 
-			workbench.updateCables();
-            if (draggedCable != null) {
-                draggedCable.update(localPoint);
+			cableManager.updateCables();
+            if (cableManager.draggedCable != null) {
+				cableManager.draggedCable.update(localPoint);
             }
             dragGhost.toFront();
         });
@@ -381,6 +198,18 @@ public class Workbench extends Pane {
                 .map(child -> (ViewModule) child).collect(
                         Collectors.toCollection(ArrayList::new));
     }
+
+	/**
+	 * Returns the list of all currently active cables.
+	 *
+	 * @return list of cable
+	 */
+	protected Collection<Cable> getCables() {
+		return this.getChildren().stream()
+				.filter(child -> child instanceof Cable)
+				.map(child -> (Cable) child).collect(
+						Collectors.toCollection(ArrayList::new));
+	}
 
     /**
      * Checks if a Bounds is colliding with any
@@ -456,7 +285,7 @@ public class Workbench extends Pane {
             if (collidingBounds == null) {
                 getCables().forEach(Cable::updateCircles);
                 // Updating the cable positions, just in case
-                getCables().stream().filter(c -> draggedCable != c)
+                getCables().stream().filter(c -> cableManager.draggedCable != c)
                         .forEach(Cable::update);
 
                 // The new position is not colliding with something
@@ -527,84 +356,9 @@ public class Workbench extends Pane {
         return null;
     }
 
-    /**
-     * Handling event when plug is clicked.
-     *
-     * @param plug Plug clicked
-     */
-    public final void plugClicked(final Plug plug) {
-		Cable connectedCable = plug.getCable();
-        if (draggedCable == null) {
-			if(connectedCable != null){
-				// We drag the cable that was connected to the plug
-				connectedCable.disconnectPlug(plug);
-				draggedCable = connectedCable;
-			}
-			else{
-				// We create a new cable to drag
-				draggedCable = new Cable(this, plug);
-				this.getChildren().add(draggedCable);
-				draggedCable.update();
-			}
-        } else {
-			if(connectedCable != null) {
-				if (draggedCable.getConnectedPlug() != plug){
-					// Switching dragged cable
-					connectedCable.disconnectPlug(plug);
-					draggedCable.connectPlug(plug);
 
-					draggedCable.update();
-					draggedCable = connectedCable;
-					// FIXME: Update connectedCable ?
-				}
-				else {
-					// Dropping the cable because we clicked twice on the same plug
-					dropCable();
-				}
-			}
-            else {
-				draggedCable.connectPlug(plug);
-				draggedCable.update();
-				draggedCable = null;
-            }
-
-        }
-    }
-
-
-    /**
-     * Returns the list of all currently active cables.
-     *
-     * @return list of cable
-     */
-    private Collection<Cable> getCables() {
-        return this.getChildren().stream()
-                .filter(child -> child instanceof Cable)
-                .map(child -> (Cable) child).collect(
-                        Collectors.toCollection(ArrayList::new));
-    }
-
-    private void updateCables() {
-        getCables().forEach(Cable::updateCircles);
-
-        getCables().forEach(cable -> {
-            if (draggedCable != cable) {
-                cable.update();
-            }
-        });
-    }
-
-	private void removeCable(Cable cable) {
-		cable.dispose();
-		this.getChildren().remove(cable);
+	public void plugClicked(Plug plug) {
+		cableManager.plugClicked(plug);
 	}
-
-    private void dropCable() {
-        if (draggedCable != null) {
-			removeCable(draggedCable);
-			draggedCable = null;
-        }
-    }
-
 
 }

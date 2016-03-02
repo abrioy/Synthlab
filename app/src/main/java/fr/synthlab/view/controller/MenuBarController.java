@@ -38,7 +38,7 @@ public class MenuBarController implements Initializable {
     public final void setMainWindowController(
             final MainWindowController newMainWindowController) {
         mainWindowController = newMainWindowController;
-		
+
 		ToggleGroup skinToggleGroup = new ToggleGroup();
 		Skin currentSkin = mainWindowController.getCurrentSkin();
 		for (Skin skin : Skin.values()) {
@@ -164,7 +164,7 @@ public class MenuBarController implements Initializable {
             FileInputStream fileStream = new FileInputStream(file);
             ObjectInputStream inputStream = new ObjectInputStream(fileStream);
 
-            workbench.deSerializeViewModules(inputStream);
+            WorkbenchSerializer.deSerializeViewModules(workbench, inputStream);
 
             inputStream.close();
             fileStream.close();
@@ -181,7 +181,7 @@ public class MenuBarController implements Initializable {
             FileOutputStream fileSteam = new FileOutputStream(file);
             ObjectOutputStream outputStream = new ObjectOutputStream(fileSteam);
 
-            workbench.serializeViewModules(outputStream);
+			WorkbenchSerializer.serializeViewModules(workbench, outputStream);
             outputStream.close();
             fileSteam.close();
         }

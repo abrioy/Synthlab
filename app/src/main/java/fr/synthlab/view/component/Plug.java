@@ -26,7 +26,7 @@ public class Plug extends StackPane {
     private Workbench workbench;
 
     public final void setWorkbench(final Workbench newWorkbench) {
-        workbench = newWorkbench;
+        this.workbench = newWorkbench;
     }
 
     private Callable<Port> getPortCommand = null;
