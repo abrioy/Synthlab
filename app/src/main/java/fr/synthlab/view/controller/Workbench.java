@@ -54,12 +54,12 @@ public class Workbench extends Pane {
             }
         });
 
-		this.setOnMouseClicked(event -> {
-			if (event.getButton() == MouseButton.SECONDARY) {
-				dropCable();
-				event.consume();
-			}
-		});
+        this.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                dropCable();
+                event.consume();
+            }
+        });
 
         ModuleFactory.startSyn();
     }
@@ -253,18 +253,18 @@ public class Workbench extends Pane {
         module.getChildren().stream()
                 .filter(child -> child instanceof Pane)
                 .forEach(child -> {
-            Pane core = (Pane) child;
-            core.getChildren().stream()
-                    .filter(plug -> plug instanceof Plug)
-					.forEach(plug -> {
-						Cable c = ((Plug) plug).getCable();
+                    Pane core = (Pane) child;
+                    core.getChildren().stream()
+                            .filter(plug -> plug instanceof Plug)
+                            .forEach(plug -> {
+                                Cable c = ((Plug) plug).getCable();
 
-						if (c != null) {
-							removeCable(c);
-						}
-					});
-				});
-		this.getChildren().remove(module);
+                                if (c != null) {
+                                    removeCable(c);
+                                }
+                            });
+                });
+        this.getChildren().remove(module);
     }
 
 
@@ -335,7 +335,7 @@ public class Workbench extends Pane {
                 module.relocate(newLocation.getX(), newLocation.getY());
             }
 
-			workbench.updateCables();
+            workbench.updateCables();
             if (draggedCable != null) {
                 draggedCable.update(localPoint);
             }
@@ -534,39 +534,36 @@ public class Workbench extends Pane {
      * @param plug Plug clicked
      */
     public final void plugClicked(final Plug plug) {
-		Cable connectedCable = plug.getCable();
+        Cable connectedCable = plug.getCable();
         if (draggedCable == null) {
-			if(connectedCable != null){
-				// We drag the cable that was connected to the plug
-				connectedCable.disconnectPlug(plug);
-				draggedCable = connectedCable;
-			}
-			else{
-				// We create a new cable to drag
-				draggedCable = new Cable(this, plug);
-				this.getChildren().add(draggedCable);
-				draggedCable.update();
-			}
+            if (connectedCable != null) {
+                // We drag the cable that was connected to the plug
+                connectedCable.disconnectPlug(plug);
+                draggedCable = connectedCable;
+            } else {
+                // We create a new cable to drag
+                draggedCable = new Cable(this, plug);
+                this.getChildren().add(draggedCable);
+                draggedCable.update();
+            }
         } else {
-			if(connectedCable != null) {
-				if (draggedCable.getConnectedPlug() != plug){
-					// Switching dragged cable
-					connectedCable.disconnectPlug(plug);
-					draggedCable.connectPlug(plug);
+            if (connectedCable != null) {
+                if (draggedCable.getConnectedPlug() != plug) {
+                    // Switching dragged cable
+                    connectedCable.disconnectPlug(plug);
+                    draggedCable.connectPlug(plug);
 
-					draggedCable.update();
-					draggedCable = connectedCable;
-					// FIXME: Update connectedCable ?
-				}
-				else {
-					// Dropping the cable because we clicked twice on the same plug
-					dropCable();
-				}
-			}
-            else {
-				draggedCable.connectPlug(plug);
-				draggedCable.update();
-				draggedCable = null;
+                    draggedCable.update();
+                    draggedCable = connectedCable;
+                    // FIXME: Update connectedCable ?
+                } else {
+                    // Dropping the cable because we clicked twice on the same plug
+                    dropCable();
+                }
+            } else {
+                draggedCable.connectPlug(plug);
+                draggedCable.update();
+                draggedCable = null;
             }
 
         }
@@ -595,15 +592,15 @@ public class Workbench extends Pane {
         });
     }
 
-	private void removeCable(Cable cable) {
-		cable.dispose();
-		this.getChildren().remove(cable);
-	}
+    private void removeCable(Cable cable) {
+        cable.dispose();
+        this.getChildren().remove(cable);
+    }
 
     private void dropCable() {
         if (draggedCable != null) {
-			removeCable(draggedCable);
-			draggedCable = null;
+            removeCable(draggedCable);
+            draggedCable = null;
         }
     }
 
@@ -620,8 +617,6 @@ public class Workbench extends Pane {
         this.getStylesheets().add(skin.getPath());
         this.applyCss();
 
-        for (ViewModule viewModule : getViewModules()) {
-            viewModule.applyCss();
-        }
+        getViewModules().forEach(ViewModule::applyCss);
     }
 }
