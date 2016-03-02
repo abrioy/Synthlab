@@ -87,7 +87,16 @@ public class KnobTest {
     @Test
     public void testSetMin() {
         knob.setMin(5);
-        assertEquals(5,knob.getMin(),0.00000001);
+        assertEquals(10,knob.getMin(),0.00000001);
+    }
+
+    /**
+     * test change min by 20.
+     */
+    @Test
+    public void testSetMin2() {
+        knob.setMin(20);
+        assertEquals(20,knob.getMin(),0.00000001);
     }
 
     /**
