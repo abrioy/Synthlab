@@ -11,8 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
@@ -211,13 +209,6 @@ public class MainWindowController implements Initializable {
     }
 
     public final void setStageAndSetupListeners(final Stage stage) {
-        stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            if (event.getButton() == MouseButton.SECONDARY) {
-                //Point2D localPoint = workbench.sceneToLocal(
-                // new Point2D(event.getSceneX(), event.getSceneY()));
-                workbench.onRightClick();
-            }
-        });
         menuBarController.setStage(stage);
     }
 }

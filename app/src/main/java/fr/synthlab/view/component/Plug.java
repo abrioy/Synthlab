@@ -8,6 +8,7 @@ import javafx.event.Event;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -93,8 +94,10 @@ public class Plug extends StackPane {
         this.getChildren().add(colorCircle);
 
         colorCircle.setOnMouseClicked(event -> {
-            workbench.plugClicked(this);
-            event.consume();
+			if(event.getButton() == MouseButton.PRIMARY) {
+				workbench.plugClicked(this);
+				event.consume();
+			}
         });
 
         colorCircle.setOnMousePressed(Event::consume);

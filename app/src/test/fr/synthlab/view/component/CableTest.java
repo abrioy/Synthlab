@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.any;
@@ -60,62 +58,11 @@ public class CableTest {
     }
 
     /**
-     * test get opposite plug.
-     */
-    @Test
-    public void testGetOppositePlug() {
-        assertEquals(Optional.empty(), cable.getOppositePlug(plug));
-    }
-
-    /**
-     * test get opposite plug.
-     */
-    @Test
-    public void testGetOppositePlug2() {
-        Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        cable.unplug(plug);
-        assertEquals(Optional.empty(), cable.getOppositePlug(newPlug));
-    }
-
-    /**
-     * test get opposite plug.
-     */
-    @Test
-    public void testGetOppositePlug3() {
-        Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        assertEquals(plug, cable.getOppositePlug(newPlug).get());
-    }
-
-    /**
-     * test get opposite plug.
-     */
-    @Test
-    public void testGetOppositePlug4() {
-        Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        assertEquals(newPlug, cable.getOppositePlug(plug).get());
-    }
-
-    /**
-     * test get opposite plug.
-     */
-    @Test
-    public void testGetOppositePlug5() {
-        Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        Plug otherPlug = new Plug();
-
-        assertEquals(Optional.empty(), cable.getOppositePlug(otherPlug));
-    }
-
-    /**
      * test get plugged plug.
      */
     @Test
     public void testGetPluggedPlug() {
-        assertSame(plug, cable.getPluggedPlug());
+        assertSame(plug, cable.getConnectedPlug());
     }
 
     /**
@@ -124,9 +71,9 @@ public class CableTest {
     @Test
     public void testGetPluggedPlug2() {
         Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        assertSame(plug, cable.getPluggedPlug());
-        assertSame(newPlug, cable.getOppositePlug(plug).get());
+        cable.connectPlug(newPlug);
+        assertSame(plug, cable.getConnectedPlug());
+        assertSame(newPlug, cable.getOppositePlug(plug));
     }
 
     /**
@@ -135,9 +82,9 @@ public class CableTest {
     @Test
     public void testGetPluggedPlug3() {
         Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        cable.unplug(plug);
-        assertSame(newPlug, cable.getPluggedPlug());
+        cable.connectPlug(newPlug);
+        cable.disconnectPlug(plug);
+        assertSame(newPlug, cable.getConnectedPlug());
     }
 
     /**
@@ -146,8 +93,8 @@ public class CableTest {
     @Test
     public void testSetEmptyPlug() {
         Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        assertSame(newPlug, cable.getOppositePlug(plug).get());
+        cable.connectPlug(newPlug);
+        assertSame(newPlug, cable.getOppositePlug(plug));
     }
 
     /**
@@ -156,15 +103,15 @@ public class CableTest {
     @Test
     public void testSetEmptyPlug2() {
         Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        cable.unplug(plug);
+        cable.connectPlug(newPlug);
+        cable.disconnectPlug(plug);
 
         Plug otherPlug = new Plug();
 
-        cable.setEmptyPlug(otherPlug);
+        cable.connectPlug(otherPlug);
 
-        assertSame(otherPlug, cable.getOppositePlug(newPlug).get());
-        assertSame(newPlug, cable.getOppositePlug(otherPlug).get());
+        assertSame(otherPlug, cable.getOppositePlug(newPlug));
+        assertSame(newPlug, cable.getOppositePlug(otherPlug));
     }
 
     /**
@@ -173,50 +120,50 @@ public class CableTest {
     @Test
     public void testSetEmptyPlug3() {
         Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
+        cable.connectPlug(newPlug);
 
         Plug otherPlug = new Plug();
-        cable.setEmptyPlug(otherPlug);
+        cable.connectPlug(otherPlug);
 
-        assertSame(newPlug, cable.getOppositePlug(plug).get());
-        assertSame(plug, cable.getOppositePlug(newPlug).get());
+        assertSame(newPlug, cable.getOppositePlug(plug));
+        assertSame(plug, cable.getOppositePlug(newPlug));
     }
 
     /**
-     * test unplug.
+     * test disconnectPlug.
      */
     @Test
     public void testUnplug() {
         Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        cable.unplug(plug);
-        assertSame(newPlug, cable.getPluggedPlug());
+        cable.connectPlug(newPlug);
+        cable.disconnectPlug(plug);
+        assertSame(newPlug, cable.getConnectedPlug());
     }
 
     /**
-     * test unplug.
+     * test disconnectPlug.
      */
     @Test
     public void testUnplug2() {
         Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
-        cable.unplug(newPlug);
-        assertSame(plug, cable.getPluggedPlug());
+        cable.connectPlug(newPlug);
+        cable.disconnectPlug(newPlug);
+        assertSame(plug, cable.getConnectedPlug());
     }
 
     /**
-     * test unplug.
+     * test disconnectPlug.
      */
     @Test
     public void testUnplug3() {
         Plug newPlug = new Plug();
-        cable.setEmptyPlug(newPlug);
+        cable.connectPlug(newPlug);
 
         Plug otherPlug = new Plug();
 
-        cable.unplug(otherPlug);
-        assertSame(plug, cable.getPluggedPlug());
-        assertSame(newPlug, cable.getOppositePlug(plug).get());
+        cable.disconnectPlug(otherPlug);
+        assertSame(plug, cable.getConnectedPlug());
+        assertSame(newPlug, cable.getOppositePlug(plug));
     }
 
     /**
@@ -224,7 +171,7 @@ public class CableTest {
      */
     @Test
     public void testDeleteCircle() {
-        cable.deleteCircles();
+        cable.dispose();
         verify(observableList, times(2)).remove(any(Circle.class));
     }
 

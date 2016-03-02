@@ -17,13 +17,17 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -49,6 +53,13 @@ public class Workbench extends Pane {
                 draggedCable.update(localPoint);
             }
         });
+
+		this.setOnMouseClicked(event -> {
+			if (event.getButton() == MouseButton.SECONDARY) {
+				dropCable();
+				event.consume();
+			}
+		});
 
         ModuleFactory.startSyn();
     }
@@ -216,7 +227,6 @@ public class Workbench extends Pane {
                         + portReference.cableColor + " --> "
                         + portReference.connectedUID + "."
                         + portReference.connectedPortName);
-                this.connectPlugs(plug, connectedPlug);
                 Cable cable = new Cable(this, plug, connectedPlug);
                 cable.setColor(portReference.cableColor);
                 this.getChildren().add(cable);
@@ -229,10 +239,6 @@ public class Workbench extends Pane {
         inputStream.close();
     }
 
-
-    public final void onRightClick() {
-        dropCable();
-    }
 
     public final void removeAllModules() {
         getViewModules().forEach(this::removeModule);
@@ -250,16 +256,15 @@ public class Workbench extends Pane {
             Pane core = (Pane) child;
             core.getChildren().stream()
                     .filter(plug -> plug instanceof Plug)
-                    .forEach(plug -> {
-                Cable c = getConnectedCable((Plug) plug);
-                if (c != null) {
-                    disconnectPlug((Plug) plug);
-                    c.deleteCircles();
-                    this.getChildren().remove(c);
-                }
-            });
-        });
-        this.getChildren().remove(module);
+					.forEach(plug -> {
+						Cable c = ((Plug) plug).getCable();
+
+						if (c != null) {
+							removeCable(c);
+						}
+					});
+				});
+		this.getChildren().remove(module);
     }
 
 
@@ -330,7 +335,7 @@ public class Workbench extends Pane {
                 module.relocate(newLocation.getX(), newLocation.getY());
             }
 
-            updateCables();
+			workbench.updateCables();
             if (draggedCable != null) {
                 draggedCable.update(localPoint);
             }
@@ -529,57 +534,44 @@ public class Workbench extends Pane {
      * @param plug Plug clicked
      */
     public final void plugClicked(final Plug plug) {
+		Cable connectedCable = plug.getCable();
         if (draggedCable == null) {
-            Optional<Plug> opposite = getConnectedPlug(plug);
-            if (opposite.isPresent()) {
-                disconnectPlug(plug);
-                draggedCable = getConnectedCable(plug);
-                dragCable(draggedCable, plug);
-            } else {
-                draggedCable = new Cable(this, plug);
-                this.getChildren().add(draggedCable);
-            }
+			if(connectedCable != null){
+				// We drag the cable that was connected to the plug
+				connectedCable.disconnectPlug(plug);
+				draggedCable = connectedCable;
+			}
+			else{
+				// We create a new cable to drag
+				draggedCable = new Cable(this, plug);
+				this.getChildren().add(draggedCable);
+				draggedCable.update();
+			}
         } else {
-            if (getConnectedCable(plug) == null) {
-                Plug fixedPlug = draggedCable.getPluggedPlug();
-                if (fixedPlug != plug) {
-                    draggedCable.setEmptyPlug(plug);
-                    connectPlugs(plug, fixedPlug);
-                    draggedCable.update();
-                    draggedCable = null;
-                } else {
-                    dropCable();
-                }
+			if(connectedCable != null) {
+				if (draggedCable.getConnectedPlug() != plug){
+					// Switching dragged cable
+					connectedCable.disconnectPlug(plug);
+					draggedCable.connectPlug(plug);
+
+					draggedCable.update();
+					draggedCable = connectedCable;
+					// FIXME: Update connectedCable ?
+				}
+				else {
+					// Dropping the cable because we clicked twice on the same plug
+					dropCable();
+				}
+			}
+            else {
+				draggedCable.connectPlug(plug);
+				draggedCable.update();
+				draggedCable = null;
             }
 
         }
     }
 
-    /**
-     * Function that call a connection between two port.
-     * This function first retrieve the port of the two plug in parameter.
-     *
-     * @param in  the name is mandatory, we dont care if its in or out
-     * @param out the name is mandatory, we dont care if its in or out
-     */
-    private void connectPlugs(final Plug in, final Plug out) {
-        Port n1 = in.getPort();
-        Port n2 = out.getPort();
-        n1.connect(n2);
-    }
-
-    /**
-     * Function that call a connection between two port.
-     * This function disconnects a plug from all its relation.
-     *
-     * @param plug the name is mandatory, we dont care if its in or out
-     */
-    private void disconnectPlug(final Plug plug) {
-        Port p = plug.getPort();
-        if (p.isConnected()) {
-            p.disconnect();
-        }
-    }
 
     /**
      * Returns the list of all currently active cables.
@@ -603,37 +595,15 @@ public class Workbench extends Pane {
         });
     }
 
-    private Cable getConnectedCable(final Plug plug) {
-        for (Cable c : getCables()) {
-            if (c.getPluggedPlug() == plug || c.getOppositePlug(plug).isPresent()) {
-                return c;
-            }
-        }
-        return null;
-    }
+	private void removeCable(Cable cable) {
+		cable.dispose();
+		this.getChildren().remove(cable);
+	}
 
-    private Optional<Plug> getConnectedPlug(final Plug plug) {
-        for (Cable c : getCables()) {
-            Optional<Plug> opposite = c.getOppositePlug(plug);
-            if (opposite.isPresent()) {
-                return opposite;
-            }
-        }
-        return Optional.empty();
-    }
-
-    private void dragCable(final Cable cable, final Plug plug) {
-        cable.unplug(plug);
-    }
-
-    /**
-     * Drop cable based on lastClickedPlug.
-     */
     private void dropCable() {
         if (draggedCable != null) {
-            draggedCable.deleteCircles();
-            this.getChildren().remove(draggedCable);
-            draggedCable = null;
+			removeCable(draggedCable);
+			draggedCable = null;
         }
     }
 

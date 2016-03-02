@@ -61,9 +61,6 @@ public abstract class PortImpl implements Port {
             port.getModule().update();
             port = null;
             module.update();
-        } else {
-            LOGGER.warning("Trying to disconnect a port"
-                    + " that is not connected to anything.");
         }
     }
 
