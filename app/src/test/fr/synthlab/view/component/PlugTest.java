@@ -62,7 +62,7 @@ public class PlugTest {
 
     /**
      * test set get port command.
-     * @Exception call exception
+     * @throws Exception call exception
      */
     @Test
     public void testSetGetPortCommand() throws Exception {
