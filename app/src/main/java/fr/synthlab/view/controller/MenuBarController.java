@@ -41,20 +41,20 @@ public class MenuBarController implements Initializable {
             final MainWindowController newMainWindowController) {
         mainWindowController = newMainWindowController;
 
-		ToggleGroup skinToggleGroup = new ToggleGroup();
-		Skin currentSkin = mainWindowController.getCurrentSkin();
-		for (Skin skin : Skin.values()) {
-			RadioMenuItem skinItem = new RadioMenuItem();
-			skinItem.setToggleGroup(skinToggleGroup);
-			skinItem.setText(skin.getName());
-			skinItem.setOnAction(event -> mainWindowController.changeSkin(skin));
+        ToggleGroup skinToggleGroup = new ToggleGroup();
+        Skin currentSkin = mainWindowController.getCurrentSkin();
+        for (Skin skin : Skin.values()) {
+            RadioMenuItem skinItem = new RadioMenuItem();
+            skinItem.setToggleGroup(skinToggleGroup);
+            skinItem.setText(skin.getName());
+            skinItem.setOnAction(event -> mainWindowController.changeSkin(skin));
 
-			if (skin.equals(currentSkin)) {
-				skinItem.setSelected(true);
-			}
+            if (skin.equals(currentSkin)) {
+                skinItem.setSelected(true);
+            }
 
-			skinMenu.getItems().add(skinItem);
-		}
+            skinMenu.getItems().add(skinItem);
+        }
     }
 
     public final void setWorkbench(final Workbench newWorkbench) {
@@ -183,7 +183,7 @@ public class MenuBarController implements Initializable {
             FileOutputStream fileSteam = new FileOutputStream(file);
             ObjectOutputStream outputStream = new ObjectOutputStream(fileSteam);
 
-			WorkbenchSerializer.serializeViewModules(workbench, outputStream);
+            WorkbenchSerializer.serializeViewModules(workbench, outputStream);
             outputStream.close();
             fileSteam.close();
         }

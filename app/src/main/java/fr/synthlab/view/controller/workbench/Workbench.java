@@ -27,7 +27,7 @@ public class Workbench extends Pane {
     private final double moduleMargin = 2.0d;
     private ImageView dragGhost = new ImageView();
 
-	private CableManager cableManager;
+    private CableManager cableManager;
 
 
 
@@ -35,22 +35,22 @@ public class Workbench extends Pane {
         // Making the ghost a bit spookier
         dragGhost.setOpacity(0.40d); // #SoSpooky
 
-		cableManager = new CableManager(this);
+        cableManager = new CableManager(this);
 
         this.setOnMouseMoved(event -> {
             if (cableManager.draggedCable != null) {
                 Point2D localPoint = this.sceneToLocal(
                         new Point2D(event.getSceneX(), event.getSceneY()));
-				cableManager.draggedCable.update(localPoint);
+                cableManager.draggedCable.update(localPoint);
             }
         });
 
-		this.setOnMouseClicked(event -> {
-			if (event.getButton() == MouseButton.SECONDARY) {
-				cableManager.dropCable();
-				event.consume();
-			}
-		});
+        this.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                cableManager.dropCable();
+                event.consume();
+            }
+        });
 
         ModuleFactory.startSyn();
     }
@@ -72,15 +72,15 @@ public class Workbench extends Pane {
             Pane core = (Pane) child;
             core.getChildren().stream()
                     .filter(plug -> plug instanceof Plug)
-					.forEach(plug -> {
-						Cable c = ((Plug) plug).getCable();
+                    .forEach(plug -> {
+                        Cable c = ((Plug) plug).getCable();
 
-						if (c != null) {
-							cableManager.removeCable(c);
-						}
-					});
-				});
-		this.getChildren().remove(module);
+                        if (c != null) {
+                            cableManager.removeCable(c);
+                        }
+                    });
+                });
+        this.getChildren().remove(module);
     }
 
 
@@ -127,9 +127,9 @@ public class Workbench extends Pane {
             mouseDelta.x = localPoint.getX();
             mouseDelta.y = localPoint.getY();
 
-			cableManager.updateCables();
+            cableManager.updateCables();
             if (cableManager.draggedCable != null) {
-				cableManager.draggedCable.update(mousePoint);
+                cableManager.draggedCable.update(mousePoint);
             }
 
             workbench.displayGhost(module);
@@ -151,9 +151,9 @@ public class Workbench extends Pane {
                 module.relocate(newLocation.getX(), newLocation.getY());
             }
 
-			cableManager.updateCables();
+            cableManager.updateCables();
             if (cableManager.draggedCable != null) {
-				cableManager.draggedCable.update(localPoint);
+                cableManager.draggedCable.update(localPoint);
             }
             dragGhost.toFront();
         });
@@ -199,17 +199,17 @@ public class Workbench extends Pane {
                         Collectors.toCollection(ArrayList::new));
     }
 
-	/**
-	 * Returns the list of all currently active cables.
-	 *
-	 * @return list of cable
-	 */
-	protected Collection<Cable> getCables() {
-		return this.getChildren().stream()
-				.filter(child -> child instanceof Cable)
-				.map(child -> (Cable) child).collect(
-						Collectors.toCollection(ArrayList::new));
-	}
+    /**
+     * Returns the list of all currently active cables.
+     *
+     * @return list of cable
+     */
+    protected Collection<Cable> getCables() {
+        return this.getChildren().stream()
+                .filter(child -> child instanceof Cable)
+                .map(child -> (Cable) child).collect(
+                        Collectors.toCollection(ArrayList::new));
+    }
 
     /**
      * Checks if a Bounds is colliding with any
@@ -357,8 +357,8 @@ public class Workbench extends Pane {
     }
 
 
-	public void plugClicked(Plug plug) {
-		cableManager.plugClicked(plug);
-	}
+    public void plugClicked(Plug plug) {
+        cableManager.plugClicked(plug);
+    }
 
 }

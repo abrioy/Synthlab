@@ -38,7 +38,7 @@ public class MainWindowController implements Initializable {
     @FXML
     private ScrollPane workbenchScrollPane;
 
-	private Skin currentSkin = Skin.Default;
+     private Skin currentSkin = Skin.Default;
 
     private ViewModule draggedNewViewModule = null;
     private DoubleProperty zoomLevel
@@ -220,19 +220,19 @@ public class MainWindowController implements Initializable {
 
 
 
-	public final Skin getCurrentSkin() {
-		return currentSkin;
-	}
+     public final Skin getCurrentSkin() {
+          return currentSkin;
+     }
 
-	public final void changeSkin(final Skin skin) {
-		LOGGER.fine("Skin changed from \""
-				+ currentSkin + "\" to \"" + skin + "\".");
+     public final void changeSkin(final Skin skin) {
+          LOGGER.fine("Skin changed from \""
+                    + currentSkin + "\" to \"" + skin + "\".");
 
-		workbench.getStylesheets().clear(); // The remove does not properly removes the stylesheet
-		//workbench.getStylesheets().remove(currentSkin.getPath());
-		workbench.getStylesheets().add(skin.getPath());
-		workbench.applyCss();
+          workbench.getStylesheets().clear(); // The remove does not properly removes the stylesheet
+          //workbench.getStylesheets().remove(currentSkin.getPath());
+          workbench.getStylesheets().add(skin.getPath());
+          workbench.applyCss();
 
-		workbench.getViewModules().forEach(ViewModule::applyCss);
-	}
+          workbench.getViewModules().forEach(ViewModule::applyCss);
+     }
 }

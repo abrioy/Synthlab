@@ -46,15 +46,16 @@
               files="ViewModuleFactory.java"/>
     <suppress checks="MagicNumber"
               files="ViewModuleOUTImpl.java"/>
-    
+
     <suppress files="MainWindowController.java"
               checks="MethodLength" />
 
-
     <suppress checks="HideUtilityClassConstructor"
               files="ModuleFactory.java"/>
-    <suppress checks="HideUtilityClassConstructor"
-              files="ViewModuleFactory.java"/>
+  <suppress checks="HideUtilityClassConstructor"
+            files="ViewModuleFactory.java"/>
+  <suppress checks="HideUtilityClassConstructor"
+            files="WorkbenchSerializer.java"/>
 
     <suppress checks="VisibilityModifier"
               files="ModuleVCF.java"/>
