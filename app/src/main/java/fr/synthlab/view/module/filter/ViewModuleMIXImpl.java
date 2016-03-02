@@ -68,52 +68,52 @@ public class ViewModuleMIXImpl extends ViewModule implements ViewModuleMIX {
     }
 
     @Override
-	public final double getAttenuator1() {
+    public final double getAttenuator1() {
         return attenuator1.getValue();
     }
 
     @Override
-	public final double getAttenuator2() {
+    public final double getAttenuator2() {
         return attenuator2.getValue();
     }
 
     @Override
-	public final double getAttenuator3() {
+    public final double getAttenuator3() {
         return attenuator3.getValue();
     }
 
     @Override
-	public final double getAttenuator4() {
+    public final double getAttenuator4() {
         return attenuator4.getValue();
     }
 
     @Override
-	public final void setAttenuator1Cmd(final Runnable newAttenuator1Cmd) {
+    public final void setAttenuator1Cmd(final Runnable newAttenuator1Cmd) {
         attenuator1Cmd = newAttenuator1Cmd;
         attenuator1Cmd.run();
     }
 
     @Override
-	public final void setAttenuator2Cmd(final Runnable newAttenuator2Cmd) {
+    public final void setAttenuator2Cmd(final Runnable newAttenuator2Cmd) {
         attenuator2Cmd = newAttenuator2Cmd;
         attenuator2Cmd.run();
     }
 
     @Override
-	public final void setAttenuator3Cmd(final Runnable newAttenuator3Cmd) {
+    public final void setAttenuator3Cmd(final Runnable newAttenuator3Cmd) {
         attenuator3Cmd = newAttenuator3Cmd;
         attenuator3Cmd.run();
     }
 
     @Override
-	public final void setAttenuator4Cmd(final Runnable newAttenuator4Cmd) {
+    public final void setAttenuator4Cmd(final Runnable newAttenuator4Cmd) {
         attenuator4Cmd = newAttenuator4Cmd;
         attenuator4Cmd.run();
     }
 
     @Override
     public final void initialize(
-			final URL location, final ResourceBundle resources) {
+            final URL location, final ResourceBundle resources) {
         attenuator1.valueProperty().addListener(event -> {
             attenuator1Cmd.run();
         });

@@ -67,58 +67,58 @@ public class ViewModuleSEQImpl extends ViewModule
     }
 
     @Override
-	public final void setResetCommand(final Runnable reset) {
+    public final void setResetCommand(final Runnable reset) {
         this.resetCommand = reset;
     }
 
     @Override
-	public final void setChangeStep1Command(final Runnable command) {
+    public final void setChangeStep1Command(final Runnable command) {
         this.step1Command = command;
     }
 
     @Override
-	public final void setChangeStep2Command(final Runnable command) {
+    public final void setChangeStep2Command(final Runnable command) {
         this.step2Command = command;
     }
 
     @Override
-	public final void setChangeStep3Command(final Runnable command) {
+    public final void setChangeStep3Command(final Runnable command) {
         this.step3Command = command;
     }
 
     @Override
-	public final void setChangeStep4Command(final Runnable command) {
+    public final void setChangeStep4Command(final Runnable command) {
         this.step4Command = command;
     }
 
     @Override
-	public final void setChangeStep5Command(final Runnable command) {
+    public final void setChangeStep5Command(final Runnable command) {
         this.step5Command = command;
     }
 
     @Override
-	public final void setChangeStep6Command(final Runnable command) {
+    public final void setChangeStep6Command(final Runnable command) {
         this.step6Command = command;
     }
 
     @Override
-	public final void setChangeStep7Command(final Runnable command) {
+    public final void setChangeStep7Command(final Runnable command) {
         this.step7Command = command;
     }
 
     @Override
-	public final void setChangeStep8Command(final Runnable command) {
+    public final void setChangeStep8Command(final Runnable command) {
         this.step8Command = command;
     }
 
     @Override
-	public final double getStepValue(final int step) {
+    public final double getStepValue(final int step) {
         return stepPickers.get(step).getValue();
     }
 
     @Override
     public final void initialize(
-			final URL location, final ResourceBundle resources) {
+            final URL location, final ResourceBundle resources) {
         stepPickers = new ArrayList<>();
 
         stepPickers.add(step1Picker);

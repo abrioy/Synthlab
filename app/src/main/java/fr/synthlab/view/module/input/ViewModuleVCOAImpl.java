@@ -44,7 +44,7 @@ public class ViewModuleVCOAImpl extends ViewModule implements ViewModuleVCOA {
 
     @Override
     public final void initialize(
-			final URL url, final ResourceBundle resourceBundle) {
+            final URL url, final ResourceBundle resourceBundle) {
         freq.valueProperty().addListener(event -> {
             updateFrequency();
         });
@@ -67,21 +67,21 @@ public class ViewModuleVCOAImpl extends ViewModule implements ViewModuleVCOA {
     }
 
     @Override
-	public final void setChangeShapeCommand(final Runnable changeShape) {
+    public final void setChangeShapeCommand(final Runnable changeShape) {
         this.changeShapeCommand = changeShape;
         changeShapeCommand.run();
     }
 
 
     @Override
-	public final void setChangeFreqCommand(final Runnable changeFreq) {
+    public final void setChangeFreqCommand(final Runnable changeFreq) {
         this.changeFreqCommand = changeFreq;
         changeFreqCommand.run();
     }
 
 
     @Override
-	public final double getFreq() {
+    public final double getFreq() {
         double f = freq.getValue() + freqLine.getValue();
         if (f < 0) {
             f = 0;
@@ -93,7 +93,7 @@ public class ViewModuleVCOAImpl extends ViewModule implements ViewModuleVCOA {
     }
 
     @Override
-	public final ShapeVCOA getSelectedShape() {
+    public final ShapeVCOA getSelectedShape() {
         switch ((int) picker.getValue()) {
             case 0:
                 return ShapeVCOA.TRIANGLE;

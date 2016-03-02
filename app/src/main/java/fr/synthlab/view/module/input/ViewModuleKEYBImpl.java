@@ -69,7 +69,7 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
 
     @Override
     public final void initialize(
-			final URL location, final ResourceBundle resources) {
+            final URL location, final ResourceBundle resources) {
         /*
             Mouse pressed events
          */
@@ -328,33 +328,33 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
     }
 
     @Override
-	public final int getOctave() {
+    public final int getOctave() {
         return (int) octavePicker.getValue();
     }
 
     @Override
-	public final void setKeyPressedCommand(final Runnable command) {
+    public final void setKeyPressedCommand(final Runnable command) {
         this.keyPressedCommand = command;
     }
 
     @Override
-	public final void setKeyReleasedCommand(final Runnable command) {
+    public final void setKeyReleasedCommand(final Runnable command) {
         this.keyReleasedCommand = command;
     }
 
     @Override
-	public final void setOctaveChangeCommand(final Runnable command) {
+    public final void setOctaveChangeCommand(final Runnable command) {
         this.octaveChangeCommand = command;
         this.octaveChangeCommand.run();
     }
 
     @Override
-	public final NoteKEYB getNotePressed() {
+    public final NoteKEYB getNotePressed() {
         return lastKeyPressed;
     }
 
     @Override
-	public final NoteKEYB getLastKeyReleased() {
+    public final NoteKEYB getLastKeyReleased() {
         return lastKeyReleased;
     }
 

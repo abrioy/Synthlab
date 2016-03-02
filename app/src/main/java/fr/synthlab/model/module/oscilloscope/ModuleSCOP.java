@@ -9,48 +9,48 @@ import java.util.Collection;
 
 
 public interface ModuleSCOP extends Module {
-	/**
-	 * Getter on ports input and output.
-	 *
-	 * @return Scope port
-	 */
-	@Override
-	Collection<Port> getPorts();
+    /**
+     * Getter on ports input and output.
+     *
+     * @return Scope port
+     */
+    @Override
+    Collection<Port> getPorts();
 
-	/**
-	 * Start scope.
-	 */
-	@Override
-	void start();
+    /**
+     * Start scope.
+     */
+    @Override
+    void start();
 
-	/**
-	 * Stop scope.
-	 */
-	@Override
-	void stop();
+    /**
+     * Stop scope.
+     */
+    @Override
+    void stop();
 
-	/**
-	 * Inherit method.
-	 */
-	@Override
-	void update();
+    /**
+     * Inherit method.
+     */
+    @Override
+    void update();
 
-	/**
-	 * Changes the scale (i.e. the zoom) of the graphical output of the module.
-	 *
-	 * @param scale new scale to display the oscilloscope
-	 */
-	void setScale(int scale);
+    /**
+     * Changes the scale (i.e. the zoom) of the graphical output of the module.
+     *
+     * @param scale new scale to display the oscilloscope
+     */
+    void setScale(int scale);
 
-	int getScale();
+    int getScale();
 
-	@Override
-	ModuleType getType();
+    @Override
+    ModuleType getType();
 
-	/**
-	 * Getter on the Scope panel.
-	 *
-	 * @return JComponent that displays the scope
-	 */
-	JComponent getOscillatorJComponent();
+    /**
+     * Getter on the Scope panel.
+     *
+     * @return JComponent that displays the scope
+     */
+    JComponent getOscillatorJComponent();
 }

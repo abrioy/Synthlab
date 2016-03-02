@@ -15,23 +15,23 @@ import java.util.ResourceBundle;
  * Created by miow on 3/1/16.
  */
 public interface ViewModuleVCFLP extends EventTarget, Styleable, Serializable, Initializable {
-	@Override
-	void initialize(
-			URL url, ResourceBundle resourceBundle);
+    @Override
+    void initialize(
+            URL url, ResourceBundle resourceBundle);
 
-	void setChangeThresholdCommand(
-			Runnable newChangeThresholdCommand);
+    void setChangeThresholdCommand(
+            Runnable newChangeThresholdCommand);
 
-	double getThreshold();
+    double getThreshold();
 
-	void setChangeResonanceCommand(
-			Runnable newChangeResonanceCommand);
+    void setChangeResonanceCommand(
+            Runnable newChangeResonanceCommand);
 
-	double getResonance();
+    double getResonance();
 
-	void writeObject(ObjectOutputStream o)
-									throws IOException;
+    void writeObject(ObjectOutputStream o)
+                                    throws IOException;
 
-	void readObject(ObjectInputStream o)
-											throws IOException, ClassNotFoundException;
+    void readObject(ObjectInputStream o)
+                                            throws IOException, ClassNotFoundException;
 }

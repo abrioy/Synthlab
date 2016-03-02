@@ -53,12 +53,12 @@ public class ViewModuleOUTImpl extends ViewModule implements ViewModuleOUT {
     }
 
     @Override
-	public final Knob getPicker() {
+   public final Knob getPicker() {
         return picker;
     }
 
     @Override
-	public final void setVolumeCommand(final Runnable newVolume) {
+   public final void setVolumeCommand(final Runnable newVolume) {
         volume = newVolume;
 
         // Init volume to the correct value
@@ -66,33 +66,33 @@ public class ViewModuleOUTImpl extends ViewModule implements ViewModuleOUT {
     }
 
     @Override
-	public final void setMuteCommand(final Runnable mute) {
+   public final void setMuteCommand(final Runnable mute) {
         this.muteCommand = mute;
         muteCommand.run();
     }
 
     @Override
-	public final boolean isMute() {
+   public final boolean isMute() {
         return isMuted.getValue();
     }
 
     @Override
-	public final void setRecordCommand(final Runnable record) {
+   public final void setRecordCommand(final Runnable record) {
         this.recordCommand = record;
     }
 
     @Override
-	public final boolean isRecording() {
+   public final boolean isRecording() {
         return isRecording.getValue();
     }
 
     @Override
-	public final void setIsRecording(final boolean value) {
+   public final void setIsRecording(final boolean value) {
         isRecording.setValue(value);
     }
 
     @Override
-	public final File getRecordingFile() {
+   public final File getRecordingFile() {
         Format formatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String date = formatter.format(new Date());
         String filename = "Synthlab_recording_" + date + ".wav";
@@ -124,7 +124,7 @@ public class ViewModuleOUTImpl extends ViewModule implements ViewModuleOUT {
 
     @Override
     public final void initialize(
-			final URL location, final ResourceBundle resources) {
+         final URL location, final ResourceBundle resources) {
         picker.valueProperty().addListener(event -> {
             volume.run();
         });

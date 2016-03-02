@@ -646,7 +646,7 @@ public class Workbench extends Pane {
                 + currentSkin + "\" to \"" + skin + "\".");
 
         this.getStylesheets().clear(); // The remove does not properly removes the stylesheet
-		//this.getStylesheets().remove(currentSkin.getPath());
+        //this.getStylesheets().remove(currentSkin.getPath());
         this.getStylesheets().add(skin.getPath());
         this.applyCss();
 

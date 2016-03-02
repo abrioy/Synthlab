@@ -15,18 +15,18 @@ import java.util.ResourceBundle;
  * Created by miow on 3/1/16.
  */
 public interface ViewModuleVCA extends EventTarget, Styleable, Serializable, Initializable {
-	@Override
-	void initialize(
-			URL url, ResourceBundle resourceBundle);
+    @Override
+    void initialize(
+            URL url, ResourceBundle resourceBundle);
 
-	void setChangeAmpliCommand(
-			Runnable newChangeAmpliCommand);
+    void setChangeAmpliCommand(
+            Runnable newChangeAmpliCommand);
 
-	double getAmpli();
+    double getAmpli();
 
-	void writeObject(ObjectOutputStream o)
-							throws IOException;
+    void writeObject(ObjectOutputStream o)
+                            throws IOException;
 
-	void readObject(ObjectInputStream o)
-									throws IOException, ClassNotFoundException;
+    void readObject(ObjectInputStream o)
+                                    throws IOException, ClassNotFoundException;
 }

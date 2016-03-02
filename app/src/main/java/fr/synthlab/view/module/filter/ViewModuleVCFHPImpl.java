@@ -41,7 +41,7 @@ public class ViewModuleVCFHPImpl extends ViewModule implements ViewModuleVCFHP {
 
     @Override
     public final void initialize(
-			final URL url, final ResourceBundle resourceBundle) {
+            final URL url, final ResourceBundle resourceBundle) {
         threshold.valueProperty().addListener(event -> {
             updateThreshold();
         });
@@ -54,14 +54,14 @@ public class ViewModuleVCFHPImpl extends ViewModule implements ViewModuleVCFHP {
     }
 
     @Override
-	public final void setChangeThresholdCommand(
-			final Runnable newChangeThresholdCommand) {
+    public final void setChangeThresholdCommand(
+            final Runnable newChangeThresholdCommand) {
         changeThresholdCommand = newChangeThresholdCommand;
         changeThresholdCommand.run();
     }
 
     @Override
-	public final double getThreshold() {
+    public final double getThreshold() {
         return threshold.getValue();
     }
 

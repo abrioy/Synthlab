@@ -65,12 +65,12 @@ public class ModuleVCAImpl implements ModuleVCA {
     }
 
     @Override
-	public final double getAttenuation() {
+    public final double getAttenuation() {
         return attenuation;
     }
 
     @Override
-	public final void setAttenuation(final double newAttenuation) {
+    public final void setAttenuation(final double newAttenuation) {
         attenuation = newAttenuation;
         filterAttenuator.setAttenuation(attenuation);
     }

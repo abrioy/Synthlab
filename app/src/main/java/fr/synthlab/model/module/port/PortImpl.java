@@ -37,17 +37,17 @@ public abstract class PortImpl implements Port {
     }
 
     @Override
-	public final String getName() {
+    public final String getName() {
         return name;
     }
 
     @Override
-	public final boolean isConnected() {
+    public final boolean isConnected() {
         return port != null;
     }
 
     @Override
-	public void connect(final Port portConnected) {
+    public void connect(final Port portConnected) {
         port = portConnected;
         module.update();
         port.setPort(this);
@@ -55,7 +55,7 @@ public abstract class PortImpl implements Port {
     }
 
     @Override
-	public void disconnect() {
+    public void disconnect() {
         if (port != null) {
             port.setPort(null);
             port.getModule().update();
@@ -68,17 +68,17 @@ public abstract class PortImpl implements Port {
     }
 
     @Override
-	public final Port getConnected() {
+    public final Port getConnected() {
         return port;
     }
 
     @Override
-	public final Module getModule() {
+    public final Module getModule() {
         return module;
     }
 
     @Override
-	public final void setPort(final Port newPort) {
+    public final void setPort(final Port newPort) {
         port = newPort;
     }
 }

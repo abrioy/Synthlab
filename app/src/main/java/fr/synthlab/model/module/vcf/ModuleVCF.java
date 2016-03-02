@@ -54,11 +54,11 @@ public abstract class ModuleVCF implements Module {
     public void update() {
     }
 
-	public final double getF0() {
+    public final double getF0() {
         return f0;
     }
 
-	public void setF0(final double newF0) {
+    public void setF0(final double newF0) {
         f0 = newF0;
         filterFm.setF0(f0);
     }

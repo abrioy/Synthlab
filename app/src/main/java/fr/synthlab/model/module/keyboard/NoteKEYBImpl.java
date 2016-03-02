@@ -22,7 +22,7 @@ public enum NoteKEYBImpl implements NoteKEYB {
     }
 
     @Override
-	public int getValue() {
+    public int getValue() {
         return this.value;
     }
 

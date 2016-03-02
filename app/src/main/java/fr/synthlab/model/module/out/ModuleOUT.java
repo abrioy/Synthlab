@@ -9,66 +9,66 @@ import java.util.Collection;
 
 
 public interface ModuleOUT extends Module {
-	/**
-	 * getter on mute.
-	 *
-	 * @return true if we play sound
-	 */
-	boolean isMute();
+    /**
+     * getter on mute.
+     *
+     * @return true if we play sound
+     */
+    boolean isMute();
 
-	/**
-	 * setter on mute start or stop play audio.
-	 *
-	 * @param newMute true if play sound
-	 */
-	void setMute(boolean newMute);
+    /**
+     * setter on mute start or stop play audio.
+     *
+     * @param newMute true if play sound
+     */
+    void setMute(boolean newMute);
 
-	void setRecording(
-			boolean newRecording, File pickedFile);
+    void setRecording(
+            boolean newRecording, File pickedFile);
 
-	/**
-	 * start play audio.
-	 */
-	@Override
-	void start();
+    /**
+     * start play audio.
+     */
+    @Override
+    void start();
 
-	/**
-	 * stop play audio.
-	 */
-	@Override
-	void stop();
+    /**
+     * stop play audio.
+     */
+    @Override
+    void stop();
 
-	/**
-	 * getter on ports input and output.
-	 *
-	 * @return only input port : mono, stereo right and stereo left
-	 */
-	@Override
-	Collection<Port> getPorts();
+    /**
+     * getter on ports input and output.
+     *
+     * @return only input port : mono, stereo right and stereo left
+     */
+    @Override
+    Collection<Port> getPorts();
 
-	/**
-	 * inherit method.
-	 * nothing to do in the disconnect of port.
-	 */
-	@Override
-	void update();
+    /**
+     * inherit method.
+     * nothing to do in the disconnect of port.
+     */
+    @Override
+    void update();
 
-	@Override
-	ModuleType getType();
+    @Override
+    ModuleType getType();
 
-	/**
-	 * getter on attenuation.
-	 *
-	 * @return attenuation
-	 */
-	double getAttenuation();
+    /**
+     * getter on attenuation.
+     *
+     * @return attenuation
+     */
+    double getAttenuation();
 
-	/**
-	 * setter on attenuation.
-	 *
-	 * @param attenuation new attenuation
-	 */
-	void setAttenuation(double attenuation);
+    /**
+     * setter on attenuation.
+     *
+     * @param attenuation new attenuation
+     */
+    void setAttenuation(double attenuation);
 
-	boolean isRecording();
+    boolean isRecording();
 }

@@ -29,11 +29,11 @@ public class FilterOutKEYB extends UnitGenerator {
         }
     }
 
-	public final void setTension(final double newTension) {
+    public final void setTension(final double newTension) {
         tension = newTension;
     }
 
-	public final UnitOutputPort getGate() {
+    public final UnitOutputPort getGate() {
         return gate;
     }
 }

@@ -81,34 +81,34 @@ public class ModuleSEQImpl extends Observable implements ModuleSEQ {
 
 
     @Override
-	public final void setStepValue(final int step, final double value) {
+    public final void setStepValue(final int step, final double value) {
         stepValues.set(step, value);
     }
 
     @Override
-	public final void addObserver(final Observer obs) {
+    public final void addObserver(final Observer obs) {
         observers.add(obs);
     }
 
     @Override
-	public final void removeObserver(final Observer obs) {
+    public final void removeObserver(final Observer obs) {
         observers.remove(obs);
     }
 
     @Override
-	public final void updateObs() {
+    public final void updateObs() {
         for (Observer o : observers) {
             o.update(this, getCurrent());
         }
     }
 
     @Override
-	public final int getCurrent() {
+    public final int getCurrent() {
         return seqFilter.getCurrent();
     }
 
     @Override
-	public final void reset() {
+    public final void reset() {
         seqFilter.reset();
     }
 }

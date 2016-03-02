@@ -48,22 +48,22 @@ public class FilterMIXImpl extends UnitGenerator implements FilterMIX {
     }
 
     @Override
-	public final UnitInputPort getInput1() {
+    public final UnitInputPort getInput1() {
         return input1;
     }
 
     @Override
-	public final UnitInputPort getInput2() {
+    public final UnitInputPort getInput2() {
         return input2;
     }
 
     @Override
-	public final UnitInputPort getInput3() {
+    public final UnitInputPort getInput3() {
         return input3;
     }
 
     @Override
-	public final UnitInputPort getInput4() {
+    public final UnitInputPort getInput4() {
         return input4;
     }
 
@@ -95,7 +95,7 @@ public class FilterMIXImpl extends UnitGenerator implements FilterMIX {
     }
 
     @Override
-	public final UnitOutputPort getOutput() {
+    public final UnitOutputPort getOutput() {
         return output;
     }
 }

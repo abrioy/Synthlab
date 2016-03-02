@@ -15,11 +15,11 @@ import java.util.ResourceBundle;
  * Created by miow on 3/1/16.
  */
 public interface ViewModuleBRUI extends EventTarget, Styleable, Serializable, Initializable {
-	@Override
-	void initialize(URL location, ResourceBundle resources);
+    @Override
+    void initialize(URL location, ResourceBundle resources);
 
-	void writeObject(ObjectOutputStream o) throws IOException;
+    void writeObject(ObjectOutputStream o) throws IOException;
 
-	void readObject(ObjectInputStream o)
-			throws IOException, ClassNotFoundException;
+    void readObject(ObjectInputStream o)
+            throws IOException, ClassNotFoundException;
 }

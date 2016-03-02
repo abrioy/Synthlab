@@ -109,14 +109,14 @@ public class ModuleSCOPImpl implements ModuleSCOP {
     }
 
     @Override
-	public final void setScale(final int scale) {
+    public final void setScale(final int scale) {
         int s = Math.max(scale, 0);
         s = Math.min(s, 100);
         jOscillatorComponent.setScale(s);
     }
 
     @Override
-	public final int getScale() {
+    public final int getScale() {
         return jOscillatorComponent.getScale();
     }
 
@@ -126,7 +126,7 @@ public class ModuleSCOPImpl implements ModuleSCOP {
     }
 
     @Override
-	public final JComponent getOscillatorJComponent() {
+    public final JComponent getOscillatorJComponent() {
         jOscillatorComponent.revalidate();
         jOscillatorComponent.repaint();
         return jOscillatorComponent;

@@ -54,22 +54,22 @@ public class FilterREPImpl extends UnitGenerator implements FilterREP {
     }
 
     @Override
-	public final UnitInputPort getIn() {
+    public final UnitInputPort getIn() {
         return in;
     }
 
     @Override
-	public final UnitOutputPort getOut1() {
+    public final UnitOutputPort getOut1() {
         return out1;
     }
 
     @Override
-	public final UnitOutputPort getOut2() {
+    public final UnitOutputPort getOut2() {
         return out2;
     }
 
     @Override
-	public final UnitOutputPort getOut3() {
+    public final UnitOutputPort getOut3() {
         return out3;
     }
 }

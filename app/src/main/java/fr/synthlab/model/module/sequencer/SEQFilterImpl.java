@@ -51,12 +51,12 @@ public class SEQFilterImpl extends UnitFilter implements SEQFilter {
     }
 
     @Override
-	public final int getCurrent() {
+    public final int getCurrent() {
         return current;
     }
 
     @Override
-	public final void reset() {
+    public final void reset() {
         current = 0;
     }
 }
