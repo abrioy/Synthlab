@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 /**
  * Test on Knob
- * @see Knob
+ * @see KnobImpl
  * @author johan
  */
 public class KnobTest {
@@ -34,7 +34,7 @@ public class KnobTest {
      */
     @Before
     public void setUp(){
-        knob = new Knob();
+        knob = new KnobImpl();
     }
 
     /**

@@ -4,3 +4,7 @@
     -fx-background-repeat: repeat !important;
     -fx-background-position: center center !important;
 }
+
+.label{
+    -fx-text-fill: #000 !important;
+}

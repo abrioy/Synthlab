@@ -76,13 +76,15 @@ public class MainWindowController implements Initializable {
             });
         });
         // Dirty hack to make sure we can drag everywhere on the workbench
-        workbench.widthProperty().addListener(
-                (observable, oldValue, newValue) -> {
+        workbench.widthProperty().addListener((observable, oldValue, newValue) -> {
             workbench.requestLayout();
+			workbenchScrollPane.requestLayout();
+			workbench.getParent().requestLayout();
         });
-        workbench.heightProperty().addListener(
-                (observable, oldValue, newValue) -> {
-            workbench.requestLayout();
+        workbench.heightProperty().addListener((observable, oldValue, newValue) -> {
+			workbench.requestLayout();
+			workbenchScrollPane.requestLayout();
+			workbench.getParent().requestLayout();
         });
         // Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
@@ -189,6 +191,7 @@ public class MainWindowController implements Initializable {
                 } else {
                     newZoomLevel -= 0.1;
                 }
+				newZoomLevel = Math.min(2, Math.max(0.5, newZoomLevel));
                 zoomLevel.set(newZoomLevel);
                 event.consume();
             }

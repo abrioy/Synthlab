@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import fr.synthlab.view.component.Knob?>
+<?import fr.synthlab.view.component.KnobImpl?>
 <?import fr.synthlab.view.component.Plug?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
@@ -21,36 +21,36 @@
               maxWidth="300" maxHeight="30"
               minWidth="300" minHeight="30"
               prefWidth="300" prefHeight="30" hgap="80">
-        <Knob fx:id="step1Picker" label="1"
-              diameter="40.0"
-              min="-1" max="1" value="0" />
-        <Knob fx:id="step2Picker" label="2"
-              diameter="40.0"
-              min="-1" max="1" value="0" />
-        <Knob fx:id="step3Picker" label="3"
-              diameter="40.0"
-              min="-1" max="1" value="0" />
-        <Knob fx:id="step4Picker" label="4"
-              diameter="40.0"
-              min="-1" max="1" value="0" />
+        <KnobImpl fx:id="step1Picker" label="1"
+                  diameter="40.0"
+                  min="-1" max="1" value="0" />
+        <KnobImpl fx:id="step2Picker" label="2"
+                  diameter="40.0"
+                  min="-1" max="1" value="0" />
+        <KnobImpl fx:id="step3Picker" label="3"
+                  diameter="40.0"
+                  min="-1" max="1" value="0" />
+        <KnobImpl fx:id="step4Picker" label="4"
+                  diameter="40.0"
+                  min="-1" max="1" value="0" />
     </FlowPane>
 
     <FlowPane layoutX="115.0" layoutY="155.0"
               maxWidth="300" maxHeight="30"
               minWidth="300" minHeight="30"
               prefWidth="300" prefHeight="30" hgap="80">
-        <Knob fx:id="step5Picker" label="5"
-              diameter="40.0"
-              min="-1" max="1" value="0" />
-        <Knob fx:id="step6Picker" label="6"
-              diameter="40.0"
-              min="-1" max="1" value="0" />
-        <Knob fx:id="step7Picker" label="7"
-              diameter="40.0"
-              min="-1" max="1" value="0" />
-        <Knob fx:id="step8Picker" label="8"
-              diameter="40.0"
-              min="-1" max="1" value="0" />
+        <KnobImpl fx:id="step5Picker" label="5"
+                  diameter="40.0"
+                  min="-1" max="1" value="0" />
+        <KnobImpl fx:id="step6Picker" label="6"
+                  diameter="40.0"
+                  min="-1" max="1" value="0" />
+        <KnobImpl fx:id="step7Picker" label="7"
+                  diameter="40.0"
+                  min="-1" max="1" value="0" />
+        <KnobImpl fx:id="step8Picker" label="8"
+                  diameter="40.0"
+                  min="-1" max="1" value="0" />
     </FlowPane>
 
     <Label fx:id="stepLabel" layoutX="420.0" layoutY="45.0"

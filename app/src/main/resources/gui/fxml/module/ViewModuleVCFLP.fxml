@@ -4,12 +4,13 @@
 <?import javafx.scene.layout.Pane?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
       prefHeight="198" prefWidth="250" minHeight="198" minWidth="250" maxHeight="198" maxWidth="250">
-    <Knob fx:id="threshold" label="Threshold"
-          diameter="75.0" layoutX="125.0" layoutY="90.0"
-          min="0" max="22000" scaleType="log" value="22000" />
+    <KnobImpl fx:id="threshold" label="Threshold"
+              diameter="75.0" layoutX="125.0" layoutY="105.0"
+              min="0" max="22000" scaleType="log" value="10" />
 
-    <Knob fx:id="resonance" diameter="40.0" layoutX="200.0" layoutY="105.0"
-          min="1" max="100" value="1" />
+    <KnobImpl fx:id="resonance" label="Resonance"
+              diameter="40.0" layoutX="205.0" layoutY="105.0"
+              min="1" max="100" value="1" />
 
     <Label fx:id="frequencyLabel" layoutX="85.0" layoutY="160.0"
            styleClass="display"

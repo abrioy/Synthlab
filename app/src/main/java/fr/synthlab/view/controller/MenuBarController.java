@@ -74,12 +74,12 @@ public class MenuBarController implements Initializable {
 
     public final void onClickViewZoomInc() {
         mainWindowController.setZoomLevel(
-                mainWindowController.getZoomLevel() + 0.2d);
+                mainWindowController.getZoomLevel() - 0.2d);
     }
 
     public final void onClickViewZoomDec() {
         mainWindowController.setZoomLevel(
-                mainWindowController.getZoomLevel() - 0.2d);
+                mainWindowController.getZoomLevel() + 0.2d);
     }
 
 

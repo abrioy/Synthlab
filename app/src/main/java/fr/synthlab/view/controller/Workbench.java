@@ -645,13 +645,12 @@ public class Workbench extends Pane {
         LOGGER.fine("Skin changed from \""
                 + currentSkin + "\" to \"" + skin + "\".");
 
-        this.getStylesheets().remove(currentSkin.getPath());
+        this.getStylesheets().clear(); // The remove does not properly removes the stylesheet
+		//this.getStylesheets().remove(currentSkin.getPath());
         this.getStylesheets().add(skin.getPath());
         this.applyCss();
 
         for (ViewModule viewModule : getViewModules()) {
-            viewModule.getStylesheets().remove(currentSkin.getPath());
-            viewModule.getStylesheets().add(skin.getPath());
             viewModule.applyCss();
         }
     }
