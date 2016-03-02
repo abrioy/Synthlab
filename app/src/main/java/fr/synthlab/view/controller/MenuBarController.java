@@ -103,7 +103,7 @@ public class MenuBarController implements Initializable {
                 e.printStackTrace();
             }
         } else {
-            onClickFileOpen();
+            onClickFileSaveAs();
         }
     }
 
