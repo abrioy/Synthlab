@@ -1,6 +1,14 @@
 package fr.synthlab.view.component;
 
-import javafx.beans.property.*;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -235,13 +243,14 @@ public class KnobImpl extends Pane implements Knob {
             updatePositions();
         });
 
-		setOnMouseClicked(event -> {
-			if (event.getClickCount() == 2 && event.getButton() == MouseButton.PRIMARY) {
-				if(!this.scaleType.get().equals("enum")) {
-					showPickerPopup();
-				}
-			}
-		});
+        setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2
+                    && event.getButton() == MouseButton.PRIMARY) {
+                if (!this.scaleType.get().equals("enum")) {
+                    showPickerPopup();
+                }
+            }
+        });
 
     }
 
@@ -375,10 +384,10 @@ public class KnobImpl extends Pane implements Knob {
                 line.setStroke(interColor);
                 line.setStartX(
                         centerX + (diameter.doubleValue() / 2.0 + stepStart)
-                        * Math.cos(Math.toRadians(angleLocal)));
+                                * Math.cos(Math.toRadians(angleLocal)));
                 line.setStartY(
                         centerY + (diameter.doubleValue() / 2.0 + stepStart)
-                        * Math.sin(Math.toRadians(angleLocal)));
+                                * Math.sin(Math.toRadians(angleLocal)));
                 line.setEndX(centerX + (diameter.doubleValue() / 2.0 + stepEnd)
                         * Math.cos(Math.toRadians(angleLocal)));
                 line.setEndY(centerY + (diameter.doubleValue() / 2.0 + stepEnd)
@@ -450,23 +459,23 @@ public class KnobImpl extends Pane implements Knob {
         }
     }
 
-	public void showPickerPopup(){
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Adjust "+label.get());
-		dialog.setHeaderText("Modify the value of this property");
-		dialog.setResizable(true);
-		dialog.getEditor().setText(String.valueOf(this.getValue()));
+    public final void showPickerPopup() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Adjust " + label.get());
+        dialog.setHeaderText("Modify the value of this property");
+        dialog.setResizable(true);
+        dialog.getEditor().setText(String.valueOf(this.getValue()));
 
-		Optional<String> res = dialog.showAndWait();
-		if(res.isPresent()){
-			try {
-				this.setValue(Double.parseDouble(res.get()));
-			}
-			catch (NumberFormatException e){
-				LOGGER.warning("Enable to parse \""+res.get()+"\" into a number.");
-			}
-		}
-	}
+        Optional<String> res = dialog.showAndWait();
+        if (res.isPresent()) {
+            try {
+                this.setValue(Double.parseDouble(res.get()));
+            } catch (NumberFormatException e) {
+                LOGGER.warning("Enable to parse \""
+                        + res.get() + "\" into a number.");
+            }
+        }
+    }
 
     @Override
     public final double getSpeed() {
@@ -491,8 +500,8 @@ public class KnobImpl extends Pane implements Knob {
 
     @Override
     public final void setValue(final double v) {
-		double newValue = Math.max(getMin(), v);
-		newValue = Math.min(getMax(), newValue);
+        double newValue = Math.max(getMin(), v);
+        newValue = Math.min(getMax(), newValue);
         value.set(newValue);
     }
 
@@ -661,6 +670,4 @@ public class KnobImpl extends Pane implements Knob {
     public final DoubleProperty maxAngleProperty() {
         return maxAngle;
     }
-
-
 }
