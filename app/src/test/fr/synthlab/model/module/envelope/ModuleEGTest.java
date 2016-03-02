@@ -2,10 +2,12 @@ package fr.synthlab.model.module.envelope;
 
 import com.jsyn.JSyn;
 import fr.synthlab.model.module.ModuleType;
+import fr.synthlab.model.module.port.Port;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Tests on the envelope generator module.
@@ -107,5 +109,27 @@ public class ModuleEGTest {
     public void testSetRelease() {
         moduleEG.setRelease(10.0);
         assertEquals(10.0, moduleEG.getRelease(), 0.000000001);
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort(){
+        Port p = moduleEG.getPort("gate");
+        assertEquals("gate", p.getName());
+        assertEquals(moduleEG, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort2(){
+        Port p = moduleEG.getPort("out");
+        assertEquals("out", p.getName());
+        assertEquals(moduleEG, p.getModule());
+        assertFalse(p.isConnected());
     }
 }

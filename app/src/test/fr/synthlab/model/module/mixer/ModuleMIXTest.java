@@ -4,10 +4,12 @@ import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import com.softsynth.math.AudioMath;
 import fr.synthlab.model.module.ModuleType;
+import fr.synthlab.model.module.port.Port;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Tests on the mixer module.
@@ -154,5 +156,60 @@ public class ModuleMIXTest {
         moduleMIX.setAttenuation4(-5);
         double expected_res = AudioMath.decibelsToAmplitude(-5);
         assertEquals(expected_res, moduleMIX.getAttenuation4(), 0.00000000000001);
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort(){
+        Port p = moduleMIX.getPort("in1");
+        assertEquals("in1", p.getName());
+        assertEquals(moduleMIX, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort2(){
+        Port p = moduleMIX.getPort("in2");
+        assertEquals("in2", p.getName());
+        assertEquals(moduleMIX, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort3(){
+        Port p = moduleMIX.getPort("in3");
+        assertEquals("in3", p.getName());
+        assertEquals(moduleMIX, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort4(){
+        Port p = moduleMIX.getPort("in4");
+        assertEquals("in4", p.getName());
+        assertEquals(moduleMIX, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort5(){
+        Port p = moduleMIX.getPort("out");
+        assertEquals("out", p.getName());
+        assertEquals(moduleMIX, p.getModule());
+        assertFalse(p.isConnected());
     }
 }
