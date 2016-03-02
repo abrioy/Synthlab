@@ -5,7 +5,6 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleFactory;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.Port;
-import fr.synthlab.view.Skin;
 import fr.synthlab.view.component.Cable;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
@@ -40,7 +39,7 @@ public class Workbench extends Pane {
 
     private Cable draggedCable;
 
-    private Skin currentSkin = Skin.Default;
+
 
     public Workbench() {
         // Making the ghost a bit spookier
@@ -376,7 +375,7 @@ public class Workbench extends Pane {
         dragGhost.toFront();
     }
 
-    private Collection<ViewModule> getViewModules() {
+    public Collection<ViewModule> getViewModules() {
         return this.getChildren().stream()
                 .filter(child -> child instanceof ViewModule)
                 .map(child -> (ViewModule) child).collect(
@@ -607,21 +606,5 @@ public class Workbench extends Pane {
         }
     }
 
-    public final Skin getCurrentSkin() {
-        return currentSkin;
-    }
 
-    public final void changeSkin(final Skin skin) {
-        LOGGER.fine("Skin changed from \""
-                + currentSkin + "\" to \"" + skin + "\".");
-
-        this.getStylesheets().clear(); // The remove does not properly removes the stylesheet
-		//this.getStylesheets().remove(currentSkin.getPath());
-        this.getStylesheets().add(skin.getPath());
-        this.applyCss();
-
-        for (ViewModule viewModule : getViewModules()) {
-            viewModule.applyCss();
-        }
-    }
 }

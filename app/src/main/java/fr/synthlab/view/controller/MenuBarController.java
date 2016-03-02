@@ -12,12 +12,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -43,25 +38,25 @@ public class MenuBarController implements Initializable {
     public final void setMainWindowController(
             final MainWindowController newMainWindowController) {
         mainWindowController = newMainWindowController;
+		
+		ToggleGroup skinToggleGroup = new ToggleGroup();
+		Skin currentSkin = mainWindowController.getCurrentSkin();
+		for (Skin skin : Skin.values()) {
+			RadioMenuItem skinItem = new RadioMenuItem();
+			skinItem.setToggleGroup(skinToggleGroup);
+			skinItem.setText(skin.getName());
+			skinItem.setOnAction(event -> mainWindowController.changeSkin(skin));
+
+			if (skin.equals(currentSkin)) {
+				skinItem.setSelected(true);
+			}
+
+			skinMenu.getItems().add(skinItem);
+		}
     }
 
     public final void setWorkbench(final Workbench newWorkbench) {
         workbench = newWorkbench;
-
-        ToggleGroup skinToggleGroup = new ToggleGroup();
-        Skin currentSkin = workbench.getCurrentSkin();
-        for (Skin skin : Skin.values()) {
-            RadioMenuItem skinItem = new RadioMenuItem();
-            skinItem.setToggleGroup(skinToggleGroup);
-            skinItem.setText(skin.getName());
-            skinItem.setOnAction(event -> workbench.changeSkin(skin));
-
-            if (skin.equals(currentSkin)) {
-                skinItem.setSelected(true);
-            }
-
-            skinMenu.getItems().add(skinItem);
-        }
     }
 
     public final void setStage(final Stage newStage) {
