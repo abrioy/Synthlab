@@ -6,27 +6,28 @@
 
 <suppressions>
   <suppress checks="AvoidInlineConditionals"
-            files="Knob.java"/>
+            files="KnobImpl.java"/>
+
   <suppress checks="MagicNumber"
-            files="ModuleEG.java"/>
+            files="ModuleEGImpl.java"/>
   <suppress checks="MagicNumber"
             files="FilterKEYB.java"/>
   <suppress checks="MagicNumber"
-            files="ModuleKEYB.java"/>
+            files="ModuleKEYBImpl.java"/>
   <suppress checks="MagicNumber"
-            files="ModuleSCOP.java"/>
+            files="ModuleSCOPImpl.java"/>
   <suppress checks="MagicNumber"
-            files="SEQFilter.java"/>
+            files="SEQFilterImpl.java"/>
   <suppress checks="MagicNumber"
             files="FilterVCAam.java"/>
   <suppress checks="MagicNumber"
             files="ModuleVCF.java"/>
   <suppress checks="MagicNumber"
-            files="ModuleVCOA.java"/>
+            files="ModuleVCOAImpl.java"/>
   <suppress checks="MagicNumber"
             files="KeyboardKey.java"/>
   <suppress checks="MagicNumber"
-            files="Knob.java"/>
+            files="KnobImpl.java"/>
   <suppress checks="MagicNumber"
             files="Cable.java"/>
   <suppress checks="MagicNumber"
@@ -44,7 +45,7 @@
     <suppress checks="MagicNumber"
               files="ViewModuleFactory.java"/>
     <suppress checks="MagicNumber"
-              files="ViewModuleOUT.java"/>
+              files="ViewModuleOUTImpl.java"/>
 
 
     <suppress checks="HideUtilityClassConstructor"

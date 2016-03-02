@@ -94,7 +94,7 @@ public class Plug extends StackPane {
         this.getChildren().add(colorCircle);
 
         colorCircle.setOnMouseClicked(event -> {
-            if(event.getButton() == MouseButton.PRIMARY) {
+            if (event.getButton() == MouseButton.PRIMARY) {
                 workbench.plugClicked(this);
                 event.consume();
             }

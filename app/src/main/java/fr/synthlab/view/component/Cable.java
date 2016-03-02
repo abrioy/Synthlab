@@ -60,32 +60,29 @@ public class Cable extends CubicCurve {
         this.setMouseTransparent(true);
     }
 
-    private void connectPorts(Port port1, Port port2){
-        if(port1 != null && port2 != null) {
+    private void connectPorts(Port port1, Port port2) {
+        if (port1 != null && port2 != null) {
             port1.connect(port2);
-        }
-        else{
+        } else {
             LOGGER.severe("Trying to connect a null port.");
         }
     }
 
 
-    public void connectPlug(Plug plug){
-        if(plug1 == null){
+    public void connectPlug(Plug plug) {
+        if (plug1 == null) {
             plug1 = plug;
             plug1.setCable(this);
-            if(plug2 != null){
+            if (plug2 != null) {
                 connectPorts(plug1.getPort(), plug2.getPort());
             }
-        }
-        else if(plug2 == null){
+        } else if (plug2 == null) {
             plug2 = plug;
             plug2.setCable(this);
-            if(plug1 != null){
+            if (plug1 != null) {
                 connectPorts(plug1.getPort(), plug2.getPort());
             }
-        }
-        else{
+        } else {
             LOGGER.severe("Trying to connect a cable to more than 2 plugs.");
         }
     }
@@ -93,19 +90,17 @@ public class Cable extends CubicCurve {
     public final void disconnectPlug(final Plug plug) {
         if (plug1 == plug) {
             plug1.setCable(null);
-            if(plug1.getPort() != null){
+            if (plug1.getPort() != null) {
                 plug1.getPort().disconnect();
             }
             plug1 = null;
-        }
-        else if (plug2 == plug) {
+        } else if (plug2 == plug) {
             plug2.setCable(null);
-            if(plug2.getPort() != null){
+            if (plug2.getPort() != null) {
                 plug2.getPort().disconnect();
             }
             plug2 = null;
-        }
-        else{
+        } else {
             LOGGER.severe("Trying to disconnect a cable from a plug it is not connected to.");
         }
     }
@@ -113,18 +108,16 @@ public class Cable extends CubicCurve {
     public final Plug getConnectedPlug() {
         if (plug1 != null && plug2 == null) {
             return plug1;
-        }
-        else if (plug1 == null && plug2 != null) {
+        } else if (plug1 == null && plug2 != null) {
             return plug2;
-        }
-        else {
+        } else {
             LOGGER.warning("Trying to get information on a connected plug when there is 0 or 2 connected plugs.");
             return null;
         }
     }
 
     public final void update() {
-        if(plug1 != null && plug2 != null) {
+        if (plug1 != null && plug2 != null) {
             Point2D position1 = workbench.sceneToLocal(
                     plug1.localToScene(plug1.getCenter()));
             Point2D position2 = workbench.sceneToLocal(
@@ -133,10 +126,9 @@ public class Cable extends CubicCurve {
             drawCable(position1, position2);
 
             this.toFront();
-        }
-        else {
+        } else {
             Plug plug = getConnectedPlug();
-            if (plug != null){
+            if (plug != null) {
                 Point2D plugPosition = workbench.sceneToLocal(
                         plug.localToScene(plug.getCenter()));
 
@@ -187,14 +179,14 @@ public class Cable extends CubicCurve {
     }
 
     public final void dispose() {
-        if(plug1 != null) {
+        if (plug1 != null) {
             plug1.setCable(null);
             if (plug1.getPort() != null) {
                 plug1.getPort().disconnect();
             }
         }
 
-        if(plug2 != null) {
+        if (plug2 != null) {
             plug2.setCable(null);
             if (plug2.getPort() != null) {
                 plug2.getPort().disconnect();
