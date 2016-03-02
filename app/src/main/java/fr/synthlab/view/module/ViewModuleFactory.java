@@ -15,7 +15,13 @@ import fr.synthlab.model.module.vcf.ModuleVCFLP;
 import fr.synthlab.model.module.vcoa.ModuleVCOA;
 
 import fr.synthlab.view.controller.workbench.Workbench;
-import fr.synthlab.view.module.filter.*;
+import fr.synthlab.view.module.filter.ViewModuleSEQImpl;
+import fr.synthlab.view.module.filter.ViewModuleEGImpl;
+import fr.synthlab.view.module.filter.ViewModuleMIXImpl;
+import fr.synthlab.view.module.filter.ViewModuleREPImpl;
+import fr.synthlab.view.module.filter.ViewModuleVCAImpl;
+import fr.synthlab.view.module.filter.ViewModuleVCFHPImpl;
+import fr.synthlab.view.module.filter.ViewModuleVCFLPImpl;
 import fr.synthlab.view.module.input.ViewModuleBRUIImpl;
 import fr.synthlab.view.module.input.ViewModuleKEYBImpl;
 import fr.synthlab.view.module.input.ViewModuleVCOAImpl;
