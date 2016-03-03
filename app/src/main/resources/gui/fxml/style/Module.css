@@ -17,7 +17,7 @@
     -fx-alignment:center-right;
     -fx-border-color: #333;
     -fx-background-color: #000;
-    -fx-text-fill: #A0E632;
+    -fx-text-fill: #A0E632 !important;
 }
 
 
@@ -146,4 +146,7 @@
     -fx-arc-height: 5;
     -fx-arc-width: 5;
     -fx-stroke-line-cap: butt;
+}
+.colored-line{
+    -fx-stroke:  #EFEFEF ;
 }

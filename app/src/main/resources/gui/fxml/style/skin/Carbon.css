@@ -4,3 +4,17 @@
     -fx-background-repeat: repeat !important;
     -fx-background-position: center center !important;
 }
+.label{
+    -fx-text-fill: #FFFFFF !important;
+}
+
+.colored-line{
+    -fx-stroke:  #EFEFEF !important;
+}
+
+#workbench {
+    -fx-background-image: url("../../../texture/carbon-bg.png");
+    -fx-background-repeat: repeat;
+    -fx-background-size: 56 56 !important;
+    -fx-background-attachment: fixed;
+}
