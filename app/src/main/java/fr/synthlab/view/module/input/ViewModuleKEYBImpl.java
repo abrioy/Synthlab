@@ -1,7 +1,6 @@
 package fr.synthlab.view.module.input;
 
 import fr.synthlab.model.module.keyboard.NoteKEYB;
-import fr.synthlab.model.module.keyboard.NoteKEYB;
 import fr.synthlab.view.component.KeyboardKey;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.controller.workbench.Workbench;
@@ -190,10 +189,10 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
         octaveLabel.setText(getOctave() + "");
 
         setFocusTraversable(true);
-        keyborEnventInit();
+        keyboardEventInit();
     }
 
-    private void keyborEnventInit() {
+    private void keyboardEventInit() {
         setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case Q:
