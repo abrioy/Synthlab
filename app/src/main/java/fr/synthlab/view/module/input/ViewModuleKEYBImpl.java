@@ -363,7 +363,12 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
     public final void writeObject(final ObjectOutputStream o)
             throws IOException {
         o.writeDouble(this.octavePicker.getValue());
-        o.writeInt(lastKeyPressed.getValue());
+        if (lastKeyPressed != null){
+            o.writeInt(lastKeyPressed.getValue());
+        }
+        else {
+            o.writeInt(0);
+        }
     }
 
     @Override
@@ -371,5 +376,8 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
             throws IOException, ClassNotFoundException {
         this.octavePicker.setValue(o.readDouble());
         this.lastKeyPressed = NoteKEYB.fromValue(o.readInt());
+        if(keyPressedCommand != null){
+            keyPressedCommand.run();
+        }
     }
 }
