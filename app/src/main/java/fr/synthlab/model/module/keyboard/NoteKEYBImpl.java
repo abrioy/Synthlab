@@ -1,5 +1,9 @@
 package fr.synthlab.model.module.keyboard;
 
+/**
+ * Enum different note.
+ * @see NoteKEYB
+ */
 public enum NoteKEYBImpl implements NoteKEYB {
     C(-9),
     CSharp(-8),
@@ -22,7 +26,7 @@ public enum NoteKEYBImpl implements NoteKEYB {
     }
 
     @Override
-	public int getValue() {
+    public int getValue() {
         return this.value;
     }
 

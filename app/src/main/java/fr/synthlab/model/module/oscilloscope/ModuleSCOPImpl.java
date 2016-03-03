@@ -10,7 +10,6 @@ import com.jsyn.scope.swing.AudioScopeProbeView;
 import com.jsyn.scope.swing.ScopeControlPanel;
 import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.unitgen.PassThrough;
-import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -34,8 +33,8 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 /**
- * Module oscilloscope to display the transmitted signal.
- * @see Module
+ * Implementation of module oscilloscope to display the transmitted signal.
+ * @see ModuleSCOP
  */
 public class ModuleSCOPImpl implements ModuleSCOP {
     private static final Logger LOGGER
@@ -109,14 +108,14 @@ public class ModuleSCOPImpl implements ModuleSCOP {
     }
 
     @Override
-	public final void setScale(final int scale) {
+    public final void setScale(final int scale) {
         int s = Math.max(scale, 0);
         s = Math.min(s, 100);
         jOscillatorComponent.setScale(s);
     }
 
     @Override
-	public final int getScale() {
+    public final int getScale() {
         return jOscillatorComponent.getScale();
     }
 
@@ -126,7 +125,7 @@ public class ModuleSCOPImpl implements ModuleSCOP {
     }
 
     @Override
-	public final JComponent getOscillatorJComponent() {
+    public final JComponent getOscillatorJComponent() {
         jOscillatorComponent.revalidate();
         jOscillatorComponent.repaint();
         return jOscillatorComponent;

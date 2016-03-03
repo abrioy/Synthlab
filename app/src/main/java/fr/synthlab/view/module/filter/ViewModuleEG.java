@@ -14,30 +14,31 @@ import java.util.ResourceBundle;
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleEG extends EventTarget, Styleable, Serializable, Initializable {
-	@Override
-	void initialize(
-			URL location, ResourceBundle resources);
+public interface ViewModuleEG
+        extends EventTarget, Styleable, Serializable, Initializable {
+    @Override
+    void initialize(
+            URL location, ResourceBundle resources);
 
-	double getAttack();
+    double getAttack();
 
-	double getDecay();
+    double getDecay();
 
-	double getSustain();
+    double getSustain();
 
-	double getRelease();
+    double getRelease();
 
-	void setChangeAttackCommand(Runnable command);
+    void setChangeAttackCommand(Runnable command);
 
-	void setChangeDecayCommand(Runnable command);
+    void setChangeDecayCommand(Runnable command);
 
-	void setChangeSustainCommand(Runnable command);
+    void setChangeSustainCommand(Runnable command);
 
-	void setChangeReleaseCommand(Runnable command);
+    void setChangeReleaseCommand(Runnable command);
 
-	void writeObject(ObjectOutputStream o)
-					throws IOException;
+    void writeObject(ObjectOutputStream o)
+                    throws IOException;
 
-	void readObject(ObjectInputStream o)
-							throws IOException, ClassNotFoundException;
+    void readObject(ObjectInputStream o)
+                            throws IOException, ClassNotFoundException;
 }

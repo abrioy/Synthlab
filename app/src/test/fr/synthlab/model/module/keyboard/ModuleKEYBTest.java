@@ -3,10 +3,12 @@ package fr.synthlab.model.module.keyboard;
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.module.ModuleType;
+import fr.synthlab.model.module.port.Port;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Tests on the keyboard module.
@@ -85,5 +87,27 @@ public class ModuleKEYBTest {
     public void testChangeOctave4() {
         moduleKEYB.changeOctave(10);
         assertEquals(7,moduleKEYB.getOctave());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort(){
+        Port p = moduleKEYB.getPort("gate");
+        assertEquals("gate", p.getName());
+        assertEquals(moduleKEYB, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort2(){
+        Port p = moduleKEYB.getPort("out");
+        assertEquals("out", p.getName());
+        assertEquals(moduleKEYB, p.getModule());
+        assertFalse(p.isConnected());
     }
 }

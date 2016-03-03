@@ -9,8 +9,7 @@ import org.junit.Test;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Tests on the Voltage Control Oscillator Type A module.
@@ -103,6 +102,28 @@ public class ModuleVCOATest {
     public void testSetShape4() {
         moduleVCOA.setShape(ShapeVCOA.SQUARE);
         assertEquals(ShapeVCOA.SQUARE, moduleVCOA.getShape());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort(){
+        Port p = moduleVCOA.getPort("fm");
+        assertEquals("fm", p.getName());
+        assertEquals(moduleVCOA, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort2(){
+        Port p = moduleVCOA.getPort("out");
+        assertEquals("out", p.getName());
+        assertEquals(moduleVCOA, p.getModule());
+        assertFalse(p.isConnected());
     }
 
     /**

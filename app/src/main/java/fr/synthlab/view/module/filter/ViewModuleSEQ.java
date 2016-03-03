@@ -16,37 +16,38 @@ import java.util.ResourceBundle;
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleSEQ extends EventTarget, Styleable, Serializable, Initializable, Observer {
-	void setResetCommand(Runnable reset);
+public interface ViewModuleSEQ
+        extends EventTarget, Styleable, Serializable, Initializable, Observer {
+    void setResetCommand(Runnable reset);
 
-	void setChangeStep1Command(Runnable command);
+    void setChangeStep1Command(Runnable command);
 
-	void setChangeStep2Command(Runnable command);
+    void setChangeStep2Command(Runnable command);
 
-	void setChangeStep3Command(Runnable command);
+    void setChangeStep3Command(Runnable command);
 
-	void setChangeStep4Command(Runnable command);
+    void setChangeStep4Command(Runnable command);
 
-	void setChangeStep5Command(Runnable command);
+    void setChangeStep5Command(Runnable command);
 
-	void setChangeStep6Command(Runnable command);
+    void setChangeStep6Command(Runnable command);
 
-	void setChangeStep7Command(Runnable command);
+    void setChangeStep7Command(Runnable command);
 
-	void setChangeStep8Command(Runnable command);
+    void setChangeStep8Command(Runnable command);
 
-	double getStepValue(int step);
+    double getStepValue(int step);
 
-	@Override
-	void initialize(
-			URL location, ResourceBundle resources);
+    @Override
+    void initialize(
+            URL location, ResourceBundle resources);
 
-	void writeObject(ObjectOutputStream o)
-					throws IOException;
+    void writeObject(ObjectOutputStream o)
+                    throws IOException;
 
-	void readObject(ObjectInputStream o)
-							throws IOException, ClassNotFoundException;
+    void readObject(ObjectInputStream o)
+                            throws IOException, ClassNotFoundException;
 
-	@Override
-	void update(Observable o, Object arg);
+    @Override
+    void update(Observable o, Object arg);
 }

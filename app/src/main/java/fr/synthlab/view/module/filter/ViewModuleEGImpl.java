@@ -1,6 +1,6 @@
 package fr.synthlab.view.module.filter;
 
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.module.ViewModule;
 import javafx.fxml.FXML;
@@ -39,7 +39,7 @@ public class ViewModuleEGImpl extends ViewModule implements ViewModuleEG {
 
     @Override
     public final void initialize(
-			final URL location, final ResourceBundle resources) {
+            final URL location, final ResourceBundle resources) {
         attack.valueProperty().addListener(event -> {
             changeAttackCommand.run();
         });
@@ -58,45 +58,45 @@ public class ViewModuleEGImpl extends ViewModule implements ViewModuleEG {
     }
 
     @Override
-	public final double getAttack() {
+    public final double getAttack() {
         return attack.getValue();
     }
 
     @Override
-	public final double getDecay() {
+    public final double getDecay() {
         return decay.getValue();
     }
 
     @Override
-	public final double getSustain() {
+    public final double getSustain() {
         return sustain.getValue();
     }
 
     @Override
-	public final double getRelease() {
+    public final double getRelease() {
         return release.getValue();
     }
 
     @Override
-	public final void setChangeAttackCommand(final Runnable command) {
+    public final void setChangeAttackCommand(final Runnable command) {
         this.changeAttackCommand = command;
         this.changeAttackCommand.run();
     }
 
     @Override
-	public final void setChangeDecayCommand(final Runnable command) {
+    public final void setChangeDecayCommand(final Runnable command) {
         this.changeDecayCommand = command;
         this.changeDecayCommand.run();
     }
 
     @Override
-	public final void setChangeSustainCommand(final Runnable command) {
+    public final void setChangeSustainCommand(final Runnable command) {
         this.changeSustainCommand = command;
         this.changeSustainCommand.run();
     }
 
     @Override
-	public final void setChangeReleaseCommand(final Runnable command) {
+    public final void setChangeReleaseCommand(final Runnable command) {
         this.changeReleaseCommand = command;
         this.changeReleaseCommand.run();
     }

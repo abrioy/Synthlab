@@ -5,6 +5,10 @@ import fr.synthlab.model.module.Module;
 
 import java.util.logging.Logger;
 
+/**
+ * Output Port.
+ * @see PortImpl
+ */
 public class OutputPort extends PortImpl {
     private static final Logger LOGGER
             = Logger.getLogger(OutputPort.class.getName());

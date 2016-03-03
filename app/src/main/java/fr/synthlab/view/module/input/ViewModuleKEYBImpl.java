@@ -4,7 +4,7 @@ import fr.synthlab.model.module.keyboard.NoteKEYB;
 import fr.synthlab.model.module.keyboard.NoteKEYBImpl;
 import fr.synthlab.view.component.KeyboardKey;
 import fr.synthlab.view.component.Knob;
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.module.ViewModule;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -69,7 +69,7 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
 
     @Override
     public final void initialize(
-			final URL location, final ResourceBundle resources) {
+            final URL location, final ResourceBundle resources) {
         /*
             Mouse pressed events
          */
@@ -171,11 +171,13 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
             // Ugly, but it saves a lot of space
             // The "-9" comes from the fact that NoteKEYB.C has a value of -9.
             key.setOnMouseReleased(event -> {
-                lastKeyReleased = NoteKEYBImpl.fromValue(keysColl.indexOf(key) - 9);
+                lastKeyReleased = NoteKEYBImpl.fromValue(
+                        keysColl.indexOf(key) - 9);
                 keyReleasedCommand.run();
             });
             key.setOnMouseExited(event -> {
-                lastKeyReleased = NoteKEYBImpl.fromValue(keysColl.indexOf(key) - 9);
+                lastKeyReleased = NoteKEYBImpl.fromValue(
+                        keysColl.indexOf(key) - 9);
                 keyReleasedCommand.run();
             });
         }
@@ -328,33 +330,33 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
     }
 
     @Override
-	public final int getOctave() {
+    public final int getOctave() {
         return (int) octavePicker.getValue();
     }
 
     @Override
-	public final void setKeyPressedCommand(final Runnable command) {
+    public final void setKeyPressedCommand(final Runnable command) {
         this.keyPressedCommand = command;
     }
 
     @Override
-	public final void setKeyReleasedCommand(final Runnable command) {
+    public final void setKeyReleasedCommand(final Runnable command) {
         this.keyReleasedCommand = command;
     }
 
     @Override
-	public final void setOctaveChangeCommand(final Runnable command) {
+    public final void setOctaveChangeCommand(final Runnable command) {
         this.octaveChangeCommand = command;
         this.octaveChangeCommand.run();
     }
 
     @Override
-	public final NoteKEYB getNotePressed() {
+    public final NoteKEYB getNotePressed() {
         return lastKeyPressed;
     }
 
     @Override
-	public final NoteKEYB getLastKeyReleased() {
+    public final NoteKEYB getLastKeyReleased() {
         return lastKeyReleased;
     }
 

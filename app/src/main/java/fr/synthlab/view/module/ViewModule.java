@@ -1,7 +1,7 @@
 package fr.synthlab.view.module;
 
 import fr.synthlab.model.module.Module;
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.component.Plug;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

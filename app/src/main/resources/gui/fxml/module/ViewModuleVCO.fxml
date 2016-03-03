@@ -13,7 +13,7 @@
 
     <KnobImpl fx:id="freq" label="Frequency"
               diameter="85.0" layoutX="85.0" layoutY="250.0"
-              min="0" max="22000" scaleType="log" value="440"/>
+              min="10" max="22000" scaleType="log" value="440"/>
     <KnobImpl fx:id="freqLine"
               diameter="52.0" layoutX="190.0" layoutY="250.0"
               min="-25" max="25" speed="0.5"/>

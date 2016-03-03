@@ -124,12 +124,12 @@ public class ModuleVCOAImpl implements ModuleVCOA {
     }
 
     @Override
-	public final double getFrequency() {
+    public final double getFrequency() {
         return frequency;
     }
 
     @Override
-	public final void setFrequency(final double newFrequency) {
+    public final void setFrequency(final double newFrequency) {
         frequency = newFrequency;
         filterFm.setF0(frequency);
 
@@ -165,12 +165,12 @@ public class ModuleVCOAImpl implements ModuleVCOA {
 
 
     @Override
-	public final ShapeVCOA getShape() {
+    public final ShapeVCOA getShape() {
         return shape;
     }
 
     @Override
-	public final void setShape(final ShapeVCOA newShape) {
+    public final void setShape(final ShapeVCOA newShape) {
         shape = newShape;
 
         switch (shape) {

@@ -3,6 +3,10 @@ package fr.synthlab.model.module.keyboard;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
+/**
+ * Filter out to keyboard
+ * @see UnitGenerator
+ */
 public class FilterOutKEYB extends UnitGenerator {
 
     /**
@@ -29,11 +33,11 @@ public class FilterOutKEYB extends UnitGenerator {
         }
     }
 
-	public final void setTension(final double newTension) {
+    public final void setTension(final double newTension) {
         tension = newTension;
     }
 
-	public final UnitOutputPort getGate() {
+    public final UnitOutputPort getGate() {
         return gate;
     }
 }

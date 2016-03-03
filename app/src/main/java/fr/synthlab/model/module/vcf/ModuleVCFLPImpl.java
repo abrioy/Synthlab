@@ -47,7 +47,7 @@ public class ModuleVCFLPImpl extends ModuleVCF implements ModuleVCFLP {
     }
 
     @Override
-    public void update() {
+    public final void update() {
         filterFm.output.disconnectAll();
         if (fmInput.getConnected() == null) {
             lpFilter.frequency.set(f0);
@@ -62,12 +62,12 @@ public class ModuleVCFLPImpl extends ModuleVCF implements ModuleVCFLP {
     }
 
     @Override
-	public final double getResonance() {
+    public final double getResonance() {
         return lpFilter.Q.get();
     }
 
     @Override
-	public final void setResonance(final double value) {
+    public final void setResonance(final double value) {
         lpFilter.Q.set(value);
     }
 

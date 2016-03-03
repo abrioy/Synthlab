@@ -2,7 +2,6 @@ package fr.synthlab.model.module.mixer;
 
 import com.jsyn.Synthesizer;
 import fr.synthlab.model.filter.FilterAttenuator;
-import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -13,9 +12,9 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 /**
- * out module to play sound on sound card.
+ * mix module.
  * @author johan
- * @see Module
+ * @see ModuleMIX
  */
 public class ModuleMIXImpl implements ModuleMIX {
     private static final Logger LOGGER
@@ -116,42 +115,42 @@ public class ModuleMIXImpl implements ModuleMIX {
     }
 
     @Override
-	public final void setAttenuation1(final double attenuation) {
+    public final void setAttenuation1(final double attenuation) {
         attenuator1.setAttenuation(attenuation);
     }
 
     @Override
-	public final void setAttenuation2(final double attenuation) {
+    public final void setAttenuation2(final double attenuation) {
         attenuator2.setAttenuation(attenuation);
     }
 
     @Override
-	public final void setAttenuation3(final double attenuation) {
+    public final void setAttenuation3(final double attenuation) {
         attenuator3.setAttenuation(attenuation);
     }
 
     @Override
-	public final void setAttenuation4(final double attenuation) {
+    public final void setAttenuation4(final double attenuation) {
         attenuator4.setAttenuation(attenuation);
     }
 
     @Override
-	public final double getAttenuation1() {
+    public final double getAttenuation1() {
         return attenuator1.getAttenuation();
     }
 
     @Override
-	public final double getAttenuation2() {
+    public final double getAttenuation2() {
         return attenuator2.getAttenuation();
     }
 
     @Override
-	public final double getAttenuation3() {
+    public final double getAttenuation3() {
         return attenuator3.getAttenuation();
     }
 
     @Override
-	public final double getAttenuation4() {
+    public final double getAttenuation4() {
         return attenuator4.getAttenuation();
     }
 }

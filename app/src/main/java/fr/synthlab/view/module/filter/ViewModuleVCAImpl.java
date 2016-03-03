@@ -1,6 +1,6 @@
 package fr.synthlab.view.module.filter;
 
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
@@ -37,7 +37,7 @@ public class ViewModuleVCAImpl extends ViewModule implements ViewModuleVCA {
 
     @Override
     public final void initialize(
-			final URL url, final ResourceBundle resourceBundle) {
+            final URL url, final ResourceBundle resourceBundle) {
         ampli.valueProperty().addListener(event -> {
             updateAmply();
         });
@@ -48,14 +48,14 @@ public class ViewModuleVCAImpl extends ViewModule implements ViewModuleVCA {
     }
 
     @Override
-	public final void setChangeAmpliCommand(
-			final Runnable newChangeAmpliCommand) {
+    public final void setChangeAmpliCommand(
+            final Runnable newChangeAmpliCommand) {
         changeAmpliCommand = newChangeAmpliCommand;
         changeAmpliCommand.run();
     }
 
     @Override
-	public final double getAmpli() {
+    public final double getAmpli() {
         return ampli.getValue();
     }
 

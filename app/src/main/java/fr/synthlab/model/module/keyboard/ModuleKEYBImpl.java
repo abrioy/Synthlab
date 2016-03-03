@@ -10,6 +10,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Implementation module Keyboard.
+ * @see ModuleKEYB
+ */
 public class ModuleKEYBImpl implements ModuleKEYB {
     private static final Logger LOGGER
             = Logger.getLogger(ModuleKEYBImpl.class.getName());
@@ -120,7 +124,7 @@ public class ModuleKEYBImpl implements ModuleKEYB {
     }
 
     @Override
-	public final void changeOctave(int newOctave) {
+    public final void changeOctave(int newOctave) {
         newOctave = Math.max(newOctave, octaveMin);
         newOctave = Math.min(newOctave, octaveMax);
         octave = newOctave;
@@ -130,7 +134,7 @@ public class ModuleKEYBImpl implements ModuleKEYB {
     }
 
     @Override
-	public final void pressKey(final NoteKEYB n) {
+    public final void pressKey(final NoteKEYB n) {
         keyboardFilter.releaseKey();
         keyboardFilter.pressKey();
         lastNotePressed = n;
@@ -148,14 +152,14 @@ public class ModuleKEYBImpl implements ModuleKEYB {
     }
 
     @Override
-	public final void releaseKey(final NoteKEYB noteKEYB) {
+    public final void releaseKey(final NoteKEYB noteKEYB) {
         if (noteKEYB == lastNotePressed) {
             keyboardFilter.releaseKey();
         }
     }
 
     @Override
-	public final int getOctave() {
+    public final int getOctave() {
         return octave;
     }
 }

@@ -5,37 +5,43 @@ import javafx.css.Styleable;
 import javafx.event.EventTarget;
 import javafx.fxml.Initializable;
 
-import java.io.*;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.io.File;
+import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleOUT extends EventTarget, Styleable, Serializable, Initializable {
-	Knob getPicker();
+public interface ViewModuleOUT
+        extends EventTarget, Styleable, Serializable, Initializable {
+    Knob getPicker();
 
-	void setVolumeCommand(Runnable newVolume);
+    void setVolumeCommand(Runnable newVolume);
 
-	void setMuteCommand(Runnable mute);
+    void setMuteCommand(Runnable mute);
 
-	boolean isMute();
+    boolean isMute();
 
-	void setRecordCommand(Runnable record);
+    void setRecordCommand(Runnable record);
 
-	boolean isRecording();
+    boolean isRecording();
 
-	void setIsRecording(boolean value);
+    void setIsRecording(boolean value);
 
-	File getRecordingFile();
+    File getRecordingFile();
 
-	@Override
-	void initialize(
-			URL location, ResourceBundle resources);
+    @Override
+    void initialize(
+            URL location, ResourceBundle resources);
 
-	void writeObject(ObjectOutputStream o)
-					throws IOException;
+    void writeObject(ObjectOutputStream o)
+            throws IOException;
 
-	void readObject(ObjectInputStream o)
-							throws IOException, ClassNotFoundException;
+    void readObject(ObjectInputStream o)
+            throws IOException, ClassNotFoundException;
 }

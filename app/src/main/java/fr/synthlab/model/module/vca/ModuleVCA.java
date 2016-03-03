@@ -8,45 +8,45 @@ import java.util.Collection;
 
 
 public interface ModuleVCA extends Module {
-	/**
-	 * @return the attenuation in DB
-	 */
-	double getAttenuation();
+    /**
+     * @return the attenuation in DB
+     */
+    double getAttenuation();
 
-	/**
-	 * set the attenuation in DB.
-	 * @param newAttenuation attenuation new attenuation
-	 */
-	void setAttenuation(double newAttenuation);
+    /**
+     * set the attenuation in DB.
+     * @param newAttenuation attenuation new attenuation
+     */
+    void setAttenuation(double newAttenuation);
 
-	/**
-	 * get the list of ports of the VCA module.
-	 * @return VCA ports
-	 */
-	@Override
-	Collection<Port> getPorts();
+    /**
+     * get the list of ports of the VCA module.
+     * @return VCA ports
+     */
+    @Override
+    Collection<Port> getPorts();
 
-	/**
-	 * start the VCA.
-	 */
-	@Override
-	void start();
+    /**
+     * start the VCA.
+     */
+    @Override
+    void start();
 
-	/**
-	 * Stop the VCA.
-	 */
-	@Override
-	void stop();
+    /**
+     * Stop the VCA.
+     */
+    @Override
+    void stop();
 
-	/**
-	 *
-	 */
-	@Override
-	void update();
+    /**
+     *
+     */
+    @Override
+    void update();
 
-	/**
-	 * @return the type of the module
-	 */
-	@Override
-	ModuleType getType();
+    /**
+     * @return the type of the module
+     */
+    @Override
+    ModuleType getType();
 }

@@ -5,15 +5,15 @@ import com.jsyn.unitgen.UnitSource;
 
 
 public interface SEQFilter extends UnitSink, UnitSource {
-	/**
-	 * Generate new values.Oscilloscope.
-	 *
-	 * @param start param managed by Jsyn
-	 * @param limit param managed by Jsyn
-	 */
-	void generate(int start, int limit);
+    /**
+     * Generate new values.Oscilloscope.
+     *
+     * @param start param managed by Jsyn
+     * @param limit param managed by Jsyn
+     */
+    void generate(int start, int limit);
 
-	int getCurrent();
+    int getCurrent();
 
-	void reset();
+    void reset();
 }

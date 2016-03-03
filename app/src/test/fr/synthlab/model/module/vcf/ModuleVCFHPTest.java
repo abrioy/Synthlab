@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Tests on the Voltage Control Filter High Pass
@@ -56,6 +57,28 @@ public class ModuleVCFHPTest {
     @Test
     public void testGetType() {
         assertEquals(ModuleType.VCFHP, moduleVCFHP.getType());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort(){
+        Port p = moduleVCFHP.getPort("in");
+        assertEquals("in", p.getName());
+        assertEquals(moduleVCFHP, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort2(){
+        Port p = moduleVCFHP.getPort("out");
+        assertEquals("out", p.getName());
+        assertEquals(moduleVCFHP, p.getModule());
+        assertFalse(p.isConnected());
     }
 
     /**

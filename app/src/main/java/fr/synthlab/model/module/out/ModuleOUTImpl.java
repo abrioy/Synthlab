@@ -5,7 +5,6 @@ import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.LineOut;
 import com.jsyn.util.WaveRecorder;
 import fr.synthlab.model.filter.FilterAttenuator;
-import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
@@ -18,9 +17,9 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 /**
- * out module to play sound on sound card.
+ * Implementation of out module to play sound on sound card.
  * @author johan
- * @see Module
+ * @see ModuleOUT
  */
 public class ModuleOUTImpl implements ModuleOUT {
     private static final Logger LOGGER
@@ -123,12 +122,12 @@ public class ModuleOUTImpl implements ModuleOUT {
     }
 
     @Override
-	public final boolean isMute() {
+    public final boolean isMute() {
         return mute;
     }
 
     @Override
-	public final void setMute(final boolean newMute) {
+    public final void setMute(final boolean newMute) {
         mute = newMute;
         if (isMute()) {
             stop();
@@ -138,8 +137,8 @@ public class ModuleOUTImpl implements ModuleOUT {
     }
 
     @Override
-	public final void setRecording(
-			final boolean newRecording, final File pickedFile) {
+    public final void setRecording(
+            final boolean newRecording, final File pickedFile) {
         recording = newRecording;
 
         try {
@@ -213,19 +212,19 @@ public class ModuleOUTImpl implements ModuleOUT {
     }
 
     @Override
-	public final double getAttenuation() {
+    public final double getAttenuation() {
         return attenuatorLeft.getAttenuation();
     }
 
     @Override
-	public final void setAttenuation(final double attenuation) {
+    public final void setAttenuation(final double attenuation) {
         attenuatorLeft.setAttenuation(attenuation);
         attenuatorRight.setAttenuation(attenuation);
         attenuator.setAttenuation(attenuation);
     }
 
     @Override
-	public final boolean isRecording() {
+    public final boolean isRecording() {
         return recording;
     }
 }

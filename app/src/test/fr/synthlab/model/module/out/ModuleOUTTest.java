@@ -4,6 +4,7 @@ import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
 import com.softsynth.math.AudioMath;
 import fr.synthlab.model.module.ModuleType;
+import fr.synthlab.model.module.port.Port;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -87,5 +88,46 @@ public class ModuleOUTTest {
     @Test
     public void testGetType() {
         assertEquals(ModuleType.OUT, moduleOut.getType());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort(){
+        Port p = moduleOut.getPort("in");
+        assertEquals("in", p.getName());
+        assertEquals(moduleOut, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort2(){
+        Port p = moduleOut.getPort("Right");
+        assertEquals("Right", p.getName());
+        assertEquals(moduleOut, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort3(){
+        Port p = moduleOut.getPort("Left");
+        assertEquals("Left", p.getName());
+        assertEquals(moduleOut, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test is recording.
+     */
+    @Test
+    public void testIsRecording() {
+        assertFalse(moduleOut.isRecording());
     }
 }

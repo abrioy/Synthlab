@@ -1,6 +1,6 @@
 package fr.synthlab.view.module.output;
 
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.OscilloscopeDrawing;
 import fr.synthlab.view.module.ViewModule;
@@ -34,25 +34,25 @@ public class ViewModuleSCOPImpl extends ViewModule implements ViewModuleSCOP {
 
     @Override
     public final void initialize(
-			final URL url, final ResourceBundle resourceBundle) {
+            final URL url, final ResourceBundle resourceBundle) {
         picker.valueProperty().addListener(event -> {
             pickerCmd.run();
         });
     }
 
     @Override
-	public final void setPickerCommand(final Runnable newPickerCmd) {
+    public final void setPickerCommand(final Runnable newPickerCmd) {
         pickerCmd = newPickerCmd;
         pickerCmd.run();
     }
 
     @Override
-	public final int getScale() {
+    public final int getScale() {
         return (int) picker.getValue();
     }
 
     @Override
-	public final OscilloscopeDrawing getOscilloscopeDrawing() {
+    public final OscilloscopeDrawing getOscilloscopeDrawing() {
         return oscilloscopeDrawing;
     }
 

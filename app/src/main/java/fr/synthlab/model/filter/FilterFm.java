@@ -1,8 +1,11 @@
 package fr.synthlab.model.filter;
 
-
 import com.jsyn.unitgen.UnitFilter;
 
+/**
+ * Filter for VCOA and VCF.
+ * @see UnitFilter
+ */
 public class FilterFm extends UnitFilter {
 
     private double f0;

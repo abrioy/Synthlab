@@ -1,7 +1,7 @@
 package fr.synthlab.view.component;
 
 import fr.synthlab.model.module.port.Port;
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.Event;
@@ -26,7 +26,7 @@ public class Plug extends StackPane {
     private Workbench workbench;
 
     public final void setWorkbench(final Workbench newWorkbench) {
-        workbench = newWorkbench;
+        this.workbench = newWorkbench;
     }
 
     private Callable<Port> getPortCommand = null;
@@ -94,10 +94,10 @@ public class Plug extends StackPane {
         this.getChildren().add(colorCircle);
 
         colorCircle.setOnMouseClicked(event -> {
-			if(event.getButton() == MouseButton.PRIMARY) {
-				workbench.plugClicked(this);
-				event.consume();
-			}
+            if (event.getButton() == MouseButton.PRIMARY) {
+                workbench.plugClicked(this);
+                event.consume();
+            }
         });
 
         colorCircle.setOnMousePressed(Event::consume);

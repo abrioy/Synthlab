@@ -15,26 +15,27 @@ import java.util.ResourceBundle;
 /**
  * Created by miow on 3/1/16.
  */
-public interface ViewModuleKEYB extends EventTarget, Styleable, Serializable, Initializable {
-	@Override
-	void initialize(
-			URL location, ResourceBundle resources);
+public interface ViewModuleKEYB
+        extends EventTarget, Styleable, Serializable, Initializable {
+    @Override
+    void initialize(
+            URL location, ResourceBundle resources);
 
-	int getOctave();
+    int getOctave();
 
-	void setKeyPressedCommand(Runnable command);
+    void setKeyPressedCommand(Runnable command);
 
-	void setKeyReleasedCommand(Runnable command);
+    void setKeyReleasedCommand(Runnable command);
 
-	void setOctaveChangeCommand(Runnable command);
+    void setOctaveChangeCommand(Runnable command);
 
-	NoteKEYB getNotePressed();
+    NoteKEYB getNotePressed();
 
-	NoteKEYB getLastKeyReleased();
+    NoteKEYB getLastKeyReleased();
 
-	void writeObject(ObjectOutputStream o)
-					throws IOException;
+    void writeObject(ObjectOutputStream o)
+                    throws IOException;
 
-	void readObject(ObjectInputStream o)
-							throws IOException, ClassNotFoundException;
+    void readObject(ObjectInputStream o)
+            throws IOException, ClassNotFoundException;
 }

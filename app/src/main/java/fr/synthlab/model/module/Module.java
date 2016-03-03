@@ -4,7 +4,9 @@ import fr.synthlab.model.module.port.Port;
 
 import java.util.Collection;
 
-
+/**
+ * Module interface.
+ */
 public interface Module {
     Collection<Port> getPorts();
 

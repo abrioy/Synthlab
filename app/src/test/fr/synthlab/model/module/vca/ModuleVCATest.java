@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Tests on the Voltage Control Amplifier.
@@ -56,6 +57,39 @@ public class ModuleVCATest {
     @Test
     public void testGetType() {
         assertEquals(ModuleType.VCA, moduleVCA.getType());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort(){
+        Port p = moduleVCA.getPort("in");
+        assertEquals("in", p.getName());
+        assertEquals(moduleVCA, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort2(){
+        Port p = moduleVCA.getPort("am");
+        assertEquals("am", p.getName());
+        assertEquals(moduleVCA, p.getModule());
+        assertFalse(p.isConnected());
+    }
+
+    /**
+     * test get port by name.
+     */
+    @Test
+    public void testGetPort3(){
+        Port p = moduleVCA.getPort("out");
+        assertEquals("out", p.getName());
+        assertEquals(moduleVCA, p.getModule());
+        assertFalse(p.isConnected());
     }
 
     /**

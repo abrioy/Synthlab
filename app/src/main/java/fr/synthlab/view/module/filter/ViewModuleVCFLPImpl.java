@@ -1,6 +1,6 @@
 package fr.synthlab.view.module.filter;
 
-import fr.synthlab.view.controller.Workbench;
+import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
 import fr.synthlab.view.module.ViewModule;
@@ -44,7 +44,7 @@ public class ViewModuleVCFLPImpl extends ViewModule implements ViewModuleVCFLP {
 
     @Override
     public final void initialize(
-			final URL url, final ResourceBundle resourceBundle) {
+            final URL url, final ResourceBundle resourceBundle) {
         threshold.valueProperty().addListener(event -> {
             updateThreshold();
         });
@@ -62,14 +62,14 @@ public class ViewModuleVCFLPImpl extends ViewModule implements ViewModuleVCFLP {
     }
 
     @Override
-	public final void setChangeThresholdCommand(
-			final Runnable newChangeThresholdCommand) {
+    public final void setChangeThresholdCommand(
+            final Runnable newChangeThresholdCommand) {
         changeThresholdCommand = newChangeThresholdCommand;
         changeThresholdCommand.run();
     }
 
     @Override
-	public final double getThreshold() {
+    public final double getThreshold() {
         return threshold.getValue();
     }
 
@@ -78,14 +78,14 @@ public class ViewModuleVCFLPImpl extends ViewModule implements ViewModuleVCFLP {
     }
 
     @Override
-	public final void setChangeResonanceCommand(
-			final Runnable newChangeResonanceCommand) {
+    public final void setChangeResonanceCommand(
+            final Runnable newChangeResonanceCommand) {
         changeResonanceCommand = newChangeResonanceCommand;
         this.changeResonanceCommand.run();
     }
 
     @Override
-	public final double getResonance() {
+    public final double getResonance() {
         return resonance.getValue();
     }
 

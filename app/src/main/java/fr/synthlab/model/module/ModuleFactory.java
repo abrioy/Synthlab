@@ -24,7 +24,10 @@ import fr.synthlab.model.module.whiteNoise.ModuleBRUIImpl;
 
 import java.util.logging.Logger;
 
-
+/**
+ * Module Factory.
+ * Create module.
+ */
 public class ModuleFactory {
     private static final Logger LOGGER
             = Logger.getLogger(ModuleFactory.class.getName());
