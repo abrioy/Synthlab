@@ -1,6 +1,21 @@
 .module-frame {
-    -fx-border-color: #333  !important;
-    -fx-background-image: url("../../../texture/skins/aluminum.jpg") !important;
+    -fx-border-color: #CCCCCC  !important;
+    -fx-background-image: url("../../../texture/skins/aluminum.png") !important;
     -fx-background-repeat: repeat !important;
     -fx-background-position: center center !important;
+}
+
+.label{
+    -fx-text-fill: #000 !important;
+}
+
+.colored-line{
+    -fx-stroke:  #000 !important;
+}
+
+#workbench {
+    -fx-background-image: url("../../../texture/aluminum-bg.png");
+    -fx-background-repeat: repeat;
+        -fx-background-size: 120 120 !important;
+    -fx-background-attachment: fixed;
 }

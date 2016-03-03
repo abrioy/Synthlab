@@ -1,10 +1,21 @@
 .module-frame {
-    -fx-border-color: #333  !important;
+    -fx-border-color: #EF9999  !important;
     -fx-background-image: url("../../../texture/skins/colorful.png") !important;
     -fx-background-repeat: repeat !important;
     -fx-background-position: center center !important;
 }
 
 .label{
-    -fx-text-fill: #000 !important;
+    -fx-text-fill: #111 !important;
+}
+
+.colored-line{
+    -fx-stroke:  #111 !important;
+}
+
+#workbench {
+    -fx-background-image: url("../../../texture/colorful-bg.png");
+    -fx-background-repeat: repeat;
+    -fx-background-size: 300 300 !important;
+    -fx-background-attachment: fixed;
 }
