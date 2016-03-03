@@ -35,7 +35,7 @@ public class ModuleKEYBImpl implements ModuleKEYB {
      * to generalize that a bit, we'd need to modify
      * the formula in computeFrequency()).
      */
-    private final NoteKEYB referenceNote = NoteKEYBImpl.A;
+    private final NoteKEYB referenceNote = NoteKEYB.A;
 
     /**
      * Minimum octave.

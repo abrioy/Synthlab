@@ -6,7 +6,7 @@
       prefHeight="198" prefWidth="250" minHeight="198" minWidth="250" maxHeight="198" maxWidth="250">
     <KnobImpl fx:id="threshold" label="Threshold"
               diameter="75.0" layoutX="125.0" layoutY="105.0"
-              min="0" max="22000" scaleType="log" value="10" />
+              min="0" max="22000" scaleType="log" value="22000" />
 
     <KnobImpl fx:id="resonance" label="Resonance"
               diameter="40.0" layoutX="205.0" layoutY="105.0"

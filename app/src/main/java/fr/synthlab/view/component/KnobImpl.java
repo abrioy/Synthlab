@@ -197,14 +197,13 @@ public class KnobImpl extends Pane implements Knob {
             event.consume();
         });
 
-        minLine.setStroke(Color.WHITE);
-        maxLine.setStroke(Color.WHITE);
+        minLine.getStyleClass().add("colored-line");
+        maxLine.getStyleClass().add("colored-line");
         getChildren().addAll(minLine, maxLine);
         getChildren().add(knobturn);
         getChildren().add(knobBody);
 
         arc.setFill(Color.TRANSPARENT);
-        arc.setStroke(Color.WHITE);
         getChildren().add(arc);
 
         name = new Label(getLabel());
@@ -381,7 +380,7 @@ public class KnobImpl extends Pane implements Knob {
             for (int x = 1; x < step.get() - 1; x++) {
                 angleLocal = -(angleInterval * x + getMinAngle());
                 Line line = new Line();
-                line.setStroke(interColor);
+                line.getStyleClass().add("colored-line");
                 line.setStartX(
                         centerX + (diameter.doubleValue() / 2.0 + stepStart)
                                 * Math.cos(Math.toRadians(angleLocal)));
@@ -406,8 +405,11 @@ public class KnobImpl extends Pane implements Knob {
         arc.setMouseTransparent(true);
         if (getScaleType().equals("enum")) {
             arc.setStroke(Color.TRANSPARENT);
+        } else {
+            updatePositions();
+            arc.getStyleClass().add("colored-line");
+
         }
-        updatePositions();
     }
 
     /**
@@ -521,7 +523,7 @@ public class KnobImpl extends Pane implements Knob {
         minExp = Math.log(v2);
         scale = (maxExp - minExp) / max.get() - min.get();
         coef = (scale * 0) - minExp;
-        min.set(v2);
+        min.set(v);
     }
 
     @Override
