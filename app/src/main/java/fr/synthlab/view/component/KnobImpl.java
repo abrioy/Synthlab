@@ -523,7 +523,7 @@ public class KnobImpl extends Pane implements Knob {
         minExp = Math.log(v2);
         scale = (maxExp - minExp) / max.get() - min.get();
         coef = (scale * 0) - minExp;
-        min.set(v2);
+        min.set(v);
     }
 
     @Override
