@@ -107,11 +107,13 @@ public class ModuleKEYBImpl implements ModuleKEYB {
     @Override
     public final void start() {
         filterOutKEYB.start();
+        keyboardFilter.start();
     }
 
     @Override
     public final void stop() {
         filterOutKEYB.stop();
+        keyboardFilter.stop();
     }
 
     @Override
