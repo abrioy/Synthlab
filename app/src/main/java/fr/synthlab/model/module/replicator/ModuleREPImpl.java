@@ -10,7 +10,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
+/**
+ * implement replicator module.
+ */
 public class ModuleREPImpl implements ModuleREP {
+    /**
+     * logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ModuleREPImpl.class.getName());
 

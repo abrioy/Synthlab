@@ -3,7 +3,9 @@ package fr.synthlab.model.module.vcf;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 
-
+/**
+ * module VCF high Pass.
+ */
 public interface ModuleVCFHP extends Module {
     /**
      * start the module.

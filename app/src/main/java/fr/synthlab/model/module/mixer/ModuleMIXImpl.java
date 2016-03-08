@@ -17,6 +17,9 @@ import java.util.logging.Logger;
  * @see ModuleMIX
  */
 public class ModuleMIXImpl implements ModuleMIX {
+    /**
+     * logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ModuleMIXImpl.class.getName());
 

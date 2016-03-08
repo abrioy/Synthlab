@@ -37,6 +37,9 @@ import java.util.logging.Logger;
  * @see ModuleSCOP
  */
 public class ModuleSCOPImpl implements ModuleSCOP {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ModuleSCOPImpl.class.getName());
 

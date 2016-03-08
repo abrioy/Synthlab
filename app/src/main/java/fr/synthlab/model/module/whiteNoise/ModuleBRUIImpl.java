@@ -12,11 +12,14 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 /**
- * out module to play sound on sound card.
+ * Implementation of white noise.
  * @author johan
  * @see Module
  */
 public class ModuleBRUIImpl implements Module, ModuleBRUI {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ModuleBRUIImpl.class.getName());
 
@@ -24,8 +27,16 @@ public class ModuleBRUIImpl implements Module, ModuleBRUI {
      * list of ports.
      */
     private final ArrayList<Port> ports;
+
+    /**
+     * jsyn white noise.
+     */
     private final WhiteNoise noise;
 
+    /**
+     * constructor.
+     * @param synthesizer of jsyn
+     */
     public ModuleBRUIImpl(final Synthesizer synthesizer) {
         ports = new ArrayList<>();
         noise = new WhiteNoise();

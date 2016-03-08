@@ -45,6 +45,10 @@ public interface ModuleSCOP extends Module {
      */
     void setScale(int scale);
 
+    /**
+     * getter on zoom.
+     * @return scale level
+     */
     int getScale();
 
     @Override

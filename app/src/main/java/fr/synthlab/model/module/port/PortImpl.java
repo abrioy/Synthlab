@@ -9,6 +9,9 @@ import java.util.logging.Logger;
  * @see Port
  */
 public abstract class PortImpl implements Port {
+    /**
+     * logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(PortImpl.class.getName());
 

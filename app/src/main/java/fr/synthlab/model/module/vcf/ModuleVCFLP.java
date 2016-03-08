@@ -3,7 +3,9 @@ package fr.synthlab.model.module.vcf;
 import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 
-
+/**
+ * module VCF Low Pass.
+ */
 public interface ModuleVCFLP extends Module {
     /**
      * start the module.
@@ -36,9 +38,20 @@ public interface ModuleVCFLP extends Module {
      */
     void update();
 
+    /**
+     * @return the type of the module
+     */
     ModuleType getType();
 
+    /**
+     * getter on resonance.
+     * @return resonance
+     */
     double getResonance();
 
+    /**
+     * setter on resonance.
+     * @param value to set
+     */
     void setResonance(double value);
 }

@@ -10,6 +10,9 @@ import java.util.logging.Logger;
  * @see PortImpl
  */
 public class InputPort extends PortImpl {
+    /**
+     * logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(InputPort.class.getName());
 

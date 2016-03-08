@@ -6,6 +6,9 @@ import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 
+/**
+ * Implementation of module VCF high Pass.
+ */
 public class ModuleVCFHPImpl extends ModuleVCF implements ModuleVCFHP {
 
     /**
@@ -13,6 +16,10 @@ public class ModuleVCFHPImpl extends ModuleVCF implements ModuleVCFHP {
      */
     private FilterHighPass hpFilter = new FilterHighPass();
 
+    /**
+     * constructor.
+     * @param synthesizer of jsyn
+     */
     public ModuleVCFHPImpl(final Synthesizer synthesizer) {
         super(synthesizer);
         synthesizer.add(hpFilter);

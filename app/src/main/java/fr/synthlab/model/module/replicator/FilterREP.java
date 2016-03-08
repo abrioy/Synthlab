@@ -4,7 +4,7 @@ import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 
 /**
- * Filter to replicate module.
+ * Filter to replicator module.
  */
 public interface FilterREP {
     /**

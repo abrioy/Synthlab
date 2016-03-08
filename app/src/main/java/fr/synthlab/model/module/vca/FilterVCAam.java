@@ -5,9 +5,19 @@ import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitFilter;
 import com.softsynth.math.AudioMath;
 
+/**
+ * filter for the VCA.
+ */
 public class FilterVCAam extends UnitFilter {
+    /**
+     * input of filter.
+     */
     private UnitOutputPort inputVca;
 
+    /**
+     * constructor.
+     * @param in input
+     */
     public FilterVCAam(final UnitOutputPort in) {
         inputVca = in;
     }

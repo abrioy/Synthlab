@@ -10,9 +10,15 @@ import java.util.logging.Logger;
  * @see PortImpl
  */
 public class OutputPort extends PortImpl {
+    /**
+     * logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(OutputPort.class.getName());
 
+    /**
+     * the port out jsyn.
+     */
     private ConnectableOutput output;
 
     /**

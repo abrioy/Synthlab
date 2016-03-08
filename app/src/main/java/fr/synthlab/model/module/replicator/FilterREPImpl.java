@@ -4,6 +4,9 @@ import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
+/**
+ * filter to replicator module.
+ */
 public class FilterREPImpl extends UnitGenerator implements FilterREP {
 
     /**
