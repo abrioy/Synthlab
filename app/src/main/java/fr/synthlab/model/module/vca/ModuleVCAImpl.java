@@ -16,6 +16,9 @@ import java.util.logging.Logger;
  * with an other modular signal.
  */
 public class ModuleVCAImpl implements ModuleVCA {
+    /**
+     * logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ModuleVCAImpl.class.getName());
 
@@ -43,6 +46,9 @@ public class ModuleVCAImpl implements ModuleVCA {
      */
     private FilterVCAam filterVCAam;
 
+    /**
+     * attenuation.
+     */
     private double attenuation = 0.0;
 
     /**

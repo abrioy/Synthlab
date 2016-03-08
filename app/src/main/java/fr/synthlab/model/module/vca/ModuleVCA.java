@@ -6,7 +6,9 @@ import fr.synthlab.model.module.port.Port;
 
 import java.util.Collection;
 
-
+/**
+ * module VCA (Voltage Control Amplifier).
+ */
 public interface ModuleVCA extends Module {
     /**
      * @return the attenuation in DB
