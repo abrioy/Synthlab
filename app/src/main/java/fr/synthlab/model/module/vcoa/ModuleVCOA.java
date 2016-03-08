@@ -61,7 +61,7 @@ public interface ModuleVCOA extends Module {
     ShapeVCOA getShape();
 
     /**
-     * setter of type
+     * setter of type.
      * @param newShape form oscillation.
      */
     void setShape(ShapeVCOA newShape);

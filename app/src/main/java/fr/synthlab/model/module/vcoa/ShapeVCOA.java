@@ -13,11 +13,11 @@ public enum ShapeVCOA {
      */
     SQUARE,
     /**
-     * sawtooth
+     * sawtooth.
      */
     SAWTOOTH,
     /**
-     * sine
+     * sine.
      */
     SINE
 }
