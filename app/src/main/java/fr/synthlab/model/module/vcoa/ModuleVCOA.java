@@ -56,7 +56,7 @@ public interface ModuleVCOA extends Module {
     ModuleType getType();
 
     /**
-     * @return the form
+     * @return the form.
      */
     ShapeVCOA getShape();
 
