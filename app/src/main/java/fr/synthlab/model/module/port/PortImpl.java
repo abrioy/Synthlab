@@ -5,7 +5,7 @@ import fr.synthlab.model.module.Module;
 import java.util.logging.Logger;
 
 /**
- * Implementation of port
+ * Abstract Implementation of port.
  * @see Port
  */
 public abstract class PortImpl implements Port {
