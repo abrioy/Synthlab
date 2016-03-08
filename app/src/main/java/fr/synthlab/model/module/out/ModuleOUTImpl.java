@@ -22,6 +22,9 @@ import java.util.logging.Logger;
  * @see ModuleOUT
  */
 public class ModuleOUTImpl implements ModuleOUT {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ModuleOUTImpl.class.getName());
 
@@ -35,10 +38,19 @@ public class ModuleOUTImpl implements ModuleOUT {
      */
     private final LineOut lineOutRight;
 
+    /**
+     * intern port between output and filter.
+     */
     private final OutputPort interOut;
 
+    /**
+     * intern port between output Left and filter.
+     */
     private final OutputPort interOutLeft;
 
+    /**
+     * intern port between output Right and filter.
+     */
     private final OutputPort interOutRight;
 
     /**
@@ -77,7 +89,14 @@ public class ModuleOUTImpl implements ModuleOUT {
      */
     private boolean mute = false;
 
+    /**
+     * sound to record.
+     */
     private WaveRecorder waveRecorder;
+
+    /**
+     * status of record.
+     */
     private boolean recording = false;
 
     /**
