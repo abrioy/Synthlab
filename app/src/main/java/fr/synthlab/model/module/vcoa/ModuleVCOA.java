@@ -6,7 +6,9 @@ import fr.synthlab.model.module.port.Port;
 
 import java.util.Collection;
 
-
+/**
+ * Module VCOA.
+ */
 public interface ModuleVCOA extends Module {
     /**
      * @return the list of port of the VCO
@@ -53,7 +55,14 @@ public interface ModuleVCOA extends Module {
     @Override
     ModuleType getType();
 
+    /**
+     * @return the form
+     */
     ShapeVCOA getShape();
 
+    /**
+     * setter of type
+     * @param newShape form oscillation.
+     */
     void setShape(ShapeVCOA newShape);
 }
