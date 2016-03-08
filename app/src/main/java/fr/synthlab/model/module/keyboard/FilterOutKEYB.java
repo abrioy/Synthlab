@@ -4,7 +4,7 @@ import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
 /**
- * Filter out to keyboard
+ * Filter out to keyboard.
  * @see UnitGenerator
  */
 public class FilterOutKEYB extends UnitGenerator {

@@ -13,7 +13,7 @@
 
     <KnobImpl fx:id="freq" label="Frequency"
               diameter="85.0" layoutX="85.0" layoutY="250.0"
-              min="10" max="22000" scaleType="log" value="440"/>
+              min="0" max="22000" scaleType="log" value="440"/>
     <KnobImpl fx:id="freqLine"
               diameter="52.0" layoutX="190.0" layoutY="250.0"
               min="-25" max="25" speed="0.5"/>
@@ -26,30 +26,30 @@
     <Plug fx:id="out"
           layoutX="195.0" layoutY="345.0"
           label="out" name="out" type="output" />
-    <ImageView fitHeight="50.0"
-               fitWidth="50.0"
-               layoutX="47.0"
-               layoutY="37.0"
+    <ImageView fitHeight="70.0"
+               fitWidth="70.0"
+               layoutX="35.0"
+               layoutY="27.0"
                preserveRatio="true">
         <Image url="@../../texture/signal-square.png"/>
     </ImageView>
-    <ImageView fitHeight="50.0"
-               fitWidth="50.0"
-               layoutX="52.0"
-               layoutY="137.0"
+    <ImageView fitHeight="70.0"
+               fitWidth="70.0"
+               layoutX="42.0"
+               layoutY="130.0"
                preserveRatio="true">
         <Image url="@../../texture/signal-triangle.png"/>
     </ImageView>
-    <ImageView fitHeight="50.0"
-               fitWidth="50.0"
-               layoutX="167.0"
-               layoutY="37.0"
+    <ImageView fitHeight="70.0"
+               fitWidth="70.0"
+               layoutX="162.0"
+               layoutY="32.0"
                preserveRatio="true">
         <Image url="@../../texture/signal-saw.png"/>
     </ImageView>
-    <ImageView fitHeight="50.0"
-               fitWidth="50.0"
-               layoutX="167.0"
+    <ImageView fitHeight="75.0"
+               fitWidth="75.0"
+               layoutX="160.0"
                layoutY="137.0"
                preserveRatio="true">
         <Image url="@../../texture/signal-sin.png"/>

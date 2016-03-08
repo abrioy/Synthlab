@@ -1,6 +1,21 @@
 .module-frame {
     -fx-border-color: #333  !important;
-    -fx-background-image: url("../../../texture/skins/black1.jpg") !important;
+    -fx-background-image: url("../../../texture/skins/black1.png") !important;
     -fx-background-repeat: repeat !important;
     -fx-background-position: center center !important;
+}
+.label{
+    -fx-text-fill: #FFFFFF !important;
+}
+
+.colored-line{
+    -fx-stroke:  #EFEFEF !important;
+}
+
+#workbench {
+    -fx-background-image: url("../../../texture/black-bg.png");
+    -fx-background-repeat: repeat;
+        -fx-background-size: 10 10 !important;
+
+    -fx-background-attachment: fixed;
 }
