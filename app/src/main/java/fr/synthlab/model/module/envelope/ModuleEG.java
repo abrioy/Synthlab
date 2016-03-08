@@ -26,19 +26,47 @@ public interface ModuleEG extends Module {
     @Override
     ModuleType getType();
 
+    /**
+     * setter on attack.
+     * @param attack to set
+     */
     void setAttack(double attack);
 
+    /**
+     * setter on decay.
+     * @param decay to set
+     */
     void setDecay(double decay);
 
+    /**
+     * setter on sustain.
+     * @param sustain to set
+     */
     void setSustain(double sustain);
 
+    /**
+     * setter on release.
+     * @param release to set
+     */
     void setRelease(double release);
 
+    /**
+     * @return attack
+     */
     double getAttack();
 
+    /**
+     * @return decay
+     */
     double getDecay();
 
+    /**
+     * @return sustain
+     */
     double getSustain();
 
+    /**
+     * @return release
+     */
     double getRelease();
 }
