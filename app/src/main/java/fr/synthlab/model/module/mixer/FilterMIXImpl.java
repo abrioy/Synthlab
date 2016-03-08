@@ -80,22 +80,27 @@ public class FilterMIXImpl extends UnitGenerator implements FilterMIX {
         double[] inputs4 = input4.getValues();
         double[] outputs = output.getValues();
         int div;
+        double sum;
         for (int i = start; i < limit; i++) {
+            sum = 0;
             div = 0;
             if (input1.isConnected()) {
+                sum += inputs1[i];
                 div++;
             }
             if (input2.isConnected()) {
+                sum += inputs2[i];
                 div++;
             }
             if (input3.isConnected()) {
+                sum += inputs3[i];
                 div++;
             }
             if (input4.isConnected()) {
+                sum += inputs4[i];
                 div++;
             }
-            outputs[i] = (inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i])
-                    / div;
+            outputs[i] = sum / div;
         }
     }
 
