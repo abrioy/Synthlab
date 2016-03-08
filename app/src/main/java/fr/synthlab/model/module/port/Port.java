@@ -11,6 +11,10 @@ public interface Port {
      */
     String getName();
 
+    /**
+     * getter on state of port.
+     * @return if is connect
+     */
     boolean isConnected();
 
     /**

@@ -64,5 +64,9 @@ public interface ModuleKEYB extends Module {
      */
     void releaseKey(NoteKEYB noteKEYB);
 
+    /**
+     * getter on octave.
+     * @return the current octave
+     */
     int getOctave();
 }

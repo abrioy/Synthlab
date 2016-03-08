@@ -15,6 +15,9 @@ import java.util.logging.Logger;
  * @see ModuleKEYB
  */
 public class ModuleKEYBImpl implements ModuleKEYB {
+    /**
+     * logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ModuleKEYBImpl.class.getName());
 

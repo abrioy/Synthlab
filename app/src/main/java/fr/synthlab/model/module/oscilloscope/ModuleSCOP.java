@@ -4,7 +4,7 @@ import fr.synthlab.model.module.Module;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.Port;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.util.Collection;
 
 /**
@@ -45,6 +45,10 @@ public interface ModuleSCOP extends Module {
      */
     void setScale(int scale);
 
+    /**
+     * getter on zoom.
+     * @return scale level
+     */
     int getScale();
 
     @Override

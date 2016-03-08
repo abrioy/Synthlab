@@ -29,6 +29,9 @@ import java.util.logging.Logger;
  * Create module.
  */
 public class ModuleFactory {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ModuleFactory.class.getName());
 
@@ -37,6 +40,11 @@ public class ModuleFactory {
      */
     private static Synthesizer syn = JSyn.createSynthesizer();
 
+    /**
+     * create module.
+     * @param type of module create
+     * @return new module
+     */
     public static Module createModule(final ModuleType type) {
         Module module = null;
         switch (type) {
@@ -89,10 +97,16 @@ public class ModuleFactory {
         return module;
     }
 
+    /**
+     * @return a new mix module
+     */
     private static Module createMix() {
         return new ModuleMIXImpl(syn);
     }
 
+    /**
+     * @return a new white noise module
+     */
     private static Module createNoise() {
         return new ModuleBRUIImpl(syn);
     }
@@ -168,10 +182,16 @@ public class ModuleFactory {
         return new ModuleSEQImpl(syn);
     }
 
+    /**
+     * @return the synthesizer
+     */
     public static Synthesizer getSyn() {
         return syn;
     }
 
+    /**
+     * start synthesizer.
+     */
     public static void startSyn() {
         syn.start();
     }

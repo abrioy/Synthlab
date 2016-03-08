@@ -3,7 +3,6 @@ package fr.synthlab.model.module.envelope;
 import com.jsyn.Synthesizer;
 import com.jsyn.unitgen.EnvelopeDAHDSR;
 import fr.synthlab.model.module.ModuleType;
-import fr.synthlab.model.module.oscilloscope.ModuleSCOPImpl;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
 import fr.synthlab.model.module.port.Port;
@@ -17,16 +16,26 @@ import java.util.logging.Logger;
  * @see ModuleEG
  */
 public class ModuleEGImpl implements ModuleEG {
+    /**
+     * logger.
+     */
     private static final Logger LOGGER
-            = Logger.getLogger(ModuleSCOPImpl.class.getName());
+            = Logger.getLogger(ModuleEGImpl.class.getName());
 
     /**
      * All ports.
      */
     private ArrayList<Port> ports = new ArrayList<>();
 
+    /**
+     * envelope in jsyn.
+     */
     private EnvelopeDAHDSR envelope;
 
+    /**
+     * constructor.
+     * @param synth synthesizer
+     */
     public ModuleEGImpl(final Synthesizer synth) {
         envelope = new EnvelopeDAHDSR();
         synth.add(envelope);

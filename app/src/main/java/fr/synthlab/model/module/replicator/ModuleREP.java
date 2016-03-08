@@ -6,7 +6,9 @@ import fr.synthlab.model.module.port.Port;
 
 import java.util.Collection;
 
-
+/**
+ * replicator module.
+ */
 public interface ModuleREP extends Module {
     /**
      * Getter on ports input and output.

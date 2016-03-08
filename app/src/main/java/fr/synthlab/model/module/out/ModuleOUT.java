@@ -25,6 +25,11 @@ public interface ModuleOUT extends Module {
      */
     void setMute(boolean newMute);
 
+    /**
+     * start/stop record.
+     * @param newRecording if start or stop
+     * @param pickedFile file where is the record
+     */
     void setRecording(
             boolean newRecording, File pickedFile);
 
@@ -72,5 +77,9 @@ public interface ModuleOUT extends Module {
      */
     void setAttenuation(double attenuation);
 
+    /**
+     * getter on recording.
+     * @return if it is record
+     */
     boolean isRecording();
 }

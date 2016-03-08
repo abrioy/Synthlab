@@ -14,6 +14,9 @@ public class FilterOutKEYB extends UnitGenerator {
      */
     private double tension;
 
+    /**
+     * port gate.
+     */
     private UnitOutputPort gate;
 
     /**
@@ -33,10 +36,18 @@ public class FilterOutKEYB extends UnitGenerator {
         }
     }
 
+    /**
+     * setter on tension.
+     * @param newTension tension to set
+     */
     public final void setTension(final double newTension) {
         tension = newTension;
     }
 
+    /**
+     * getter on gate.
+     * @return port gate
+     */
     public final UnitOutputPort getGate() {
         return gate;
     }

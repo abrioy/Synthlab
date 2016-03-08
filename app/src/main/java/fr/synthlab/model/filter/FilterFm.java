@@ -8,12 +8,24 @@ import com.jsyn.unitgen.UnitFilter;
  */
 public class FilterFm extends UnitFilter {
 
+    /**
+     * Modulation frequency.
+     */
     private double f0;
 
+    /**
+     * constructor.
+     * @param f0Init to set on f0
+     */
     public FilterFm(final double f0Init) {
         f0 = f0Init;
     }
 
+    /**
+     * generate tension.
+     * @param start start
+     * @param limit stop
+     */
     @Override
     public final void generate(final int start, final int limit) {
         double[] inputs = input.getValues();
@@ -24,6 +36,10 @@ public class FilterFm extends UnitFilter {
         }
     }
 
+    /**
+     * setter on f0.
+     * @param v to set on f0
+     */
     public final void setF0(final double v) {
         f0 = v;
     }
