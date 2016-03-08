@@ -5,13 +5,19 @@ import com.jsyn.unitgen.FilterLowPass;
 import fr.synthlab.model.module.ModuleType;
 import fr.synthlab.model.module.port.InputPort;
 import fr.synthlab.model.module.port.OutputPort;
-
+/**
+ * Implementation module VCF Low Pass.
+ */
 public class ModuleVCFLPImpl extends ModuleVCF implements ModuleVCFLP {
     /**
      * JSyn lowPass Filter.
      */
     private FilterLowPass lpFilter = new FilterLowPass();
 
+    /**
+     * constructor.
+     * @param synthesizer of jsyn
+     */
     public ModuleVCFLPImpl(final Synthesizer synthesizer) {
         super(synthesizer);
 
@@ -70,5 +76,4 @@ public class ModuleVCFLPImpl extends ModuleVCF implements ModuleVCFLP {
     public final void setResonance(final double value) {
         lpFilter.Q.set(value);
     }
-
 }
