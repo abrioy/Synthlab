@@ -13,7 +13,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of module sequence.
+ */
 public class ModuleSEQImpl extends Observable implements ModuleSEQ {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ModuleSEQImpl.class.getName());
 
@@ -22,9 +28,18 @@ public class ModuleSEQImpl extends Observable implements ModuleSEQ {
      */
     private ArrayList<Port> ports = new ArrayList<>();
 
+    /**
+     * filter for detect change of sequence.
+     */
     private SEQFilterImpl seqFilter;
+    /**
+     * sequence.
+     */
     private List<Double> stepValues;
 
+    /**
+     * observer of current sequence.
+     */
     private Collection<Observer> observers;
 
     /**

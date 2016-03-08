@@ -4,16 +4,38 @@ import com.jsyn.unitgen.UnitFilter;
 
 import java.util.List;
 
+/**
+ * Implementation of filter for the Sequencer.
+ */
 public class SEQFilterImpl extends UnitFilter implements SEQFilter {
 
     /**
      * Output voltage to the output of the sequencer.
      */
     private final List<Double> tension;
+
+    /**
+     * module sequence.
+     */
     private ModuleSEQ seq;
+
+    /**
+     * current sequence.
+     */
     private int current;
+
+    /**
+     * signal to change sequence.
+     */
     private double signalFront;
+
+    /**
+     * is in attend of sigFrontStop.
+     */
     private boolean attend;
+    /**
+     * signal to wait a signalFront.
+     */
     private double sigFrontStop;
 
     /**

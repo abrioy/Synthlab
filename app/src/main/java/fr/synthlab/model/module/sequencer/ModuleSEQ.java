@@ -7,7 +7,9 @@ import fr.synthlab.model.module.port.Port;
 import java.util.Collection;
 import java.util.Observer;
 
-
+/**
+ * module sequence.
+ */
 public interface ModuleSEQ extends Module {
     /**
      * Getter on ports input and output.
@@ -38,15 +40,39 @@ public interface ModuleSEQ extends Module {
     @Override
     ModuleType getType();
 
+    /**
+     * set value of sequence.
+     * @param step position in the sequence
+     * @param value new value
+     */
     void setStepValue(int step, double value);
 
+    /**
+     * add observer of current sequence.
+     * @param obs observer
+     */
     void addObserver(Observer obs);
 
+    /**
+     * remove observer of current sequence.
+     * @param obs observer
+     */
     void removeObserver(Observer obs);
 
+
+    /**
+     * notify all observer.
+     */
     void updateObs();
 
+    /**
+     * getter of position in the sequence.
+     * @return current sequence
+     */
     int getCurrent();
 
+    /**
+     * restart sequence.
+     */
     void reset();
 }
