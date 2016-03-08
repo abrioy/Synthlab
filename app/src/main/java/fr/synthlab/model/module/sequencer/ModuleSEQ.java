@@ -59,7 +59,6 @@ public interface ModuleSEQ extends Module {
      */
     void removeObserver(Observer obs);
 
-
     /**
      * notify all observer.
      */

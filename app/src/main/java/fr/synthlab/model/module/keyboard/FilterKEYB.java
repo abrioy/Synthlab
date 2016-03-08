@@ -14,6 +14,9 @@ public class FilterKEYB extends UnitGenerator {
      */
     private double tension;
 
+    /**
+     * gate port of keyboard.
+     */
     private UnitOutputPort gate;
 
     /**
@@ -25,14 +28,21 @@ public class FilterKEYB extends UnitGenerator {
         this.addPort(gate);
     }
 
+    /**
+     * action when press key.
+     */
     public final void pressKey() {
         tension = 5;
     }
 
+    /**
+     * action when release key.
+     */
     public final void releaseKey() {
         tension = -5;
     }
 
+    @Override
     public final void generate(final int start, final int limit) {
         double[] gates = gate.getValues();
         for (int i = start; i < limit; i += 1) {
@@ -40,10 +50,18 @@ public class FilterKEYB extends UnitGenerator {
         }
     }
 
+    /**
+     * getter on gate port.
+     * @return port gate
+     */
     public final UnitOutputPort getGate() {
         return gate;
     }
 
+    /**
+     * getter on current tension.
+     * @return tension
+     */
     public final double getTension() {
         return tension;
     }
