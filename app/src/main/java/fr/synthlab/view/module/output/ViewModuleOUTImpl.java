@@ -22,27 +22,67 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Implementation view module out.
+ */
 public class ViewModuleOUTImpl extends ViewModule implements ViewModuleOUT {
+    /**
+     * logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleOUTImpl.class.getName());
 
+    /**
+     * knob on attenuation.
+     */
     @FXML
     private Knob picker;
+    /**
+     * mute button.
+     */
     @FXML
     private MuteButton muteButton;
+    /**
+     * record button.
+     */
     @FXML
     private RecordButton recordButton;
+    /**
+     * choose button for save audio.
+     */
     @FXML
     private Button fileChooserButton;
 
+    /**
+     * command execute on change volume.
+     */
     private Runnable volume;
+    /**
+     * command execute on mute.
+     */
     private Runnable muteCommand;
+    /**
+     * command execute on record.
+     */
     private Runnable recordCommand;
 
+    /**
+     * property for mute.
+     */
     private BooleanProperty isMuted = new SimpleBooleanProperty();
+    /**
+     * property for record.
+     */
     private BooleanProperty isRecording = new SimpleBooleanProperty();
+    /**
+     * current directory for audio save.
+     */
     private File pickedDirectory;
 
+    /**
+     * constructor.
+     * @param workbench current workbench
+     */
     public ViewModuleOUTImpl(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOUT.fxml");
