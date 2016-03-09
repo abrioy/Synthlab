@@ -3,10 +3,12 @@ package fr.synthlab.view.component;
 import javafx.scene.control.Button;
 
 /**
- * Created by pollt on 2/9/16.
+ * Reset button for sequencer.
  */
 public class ResetButton extends Button {
-
+    /**
+     * constructor.
+     */
     public ResetButton() {
         this.getStylesheets().add(
                 getClass().getResource("/gui/fxml/style/Module.css")

@@ -3,10 +3,13 @@ package fr.synthlab.view.component;
 import javafx.scene.control.Button;
 
 /**
- * Created by pollt on 2/9/16.
+ * Mute button.
  */
 public class MuteButton extends Button {
 
+    /**
+     * constructor.
+     */
     public MuteButton() {
         this.getStylesheets().add(
                 getClass().getResource("/gui/fxml/style/Module.css")
@@ -14,6 +17,10 @@ public class MuteButton extends Button {
         this.getStyleClass().add("mute-release");
     }
 
+    /**
+     * action.
+     * @param toggle new state of button
+     */
     public final void setToggle(final boolean toggle) {
         this.getStyleClass().clear();
         if (toggle) {

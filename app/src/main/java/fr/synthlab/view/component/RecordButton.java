@@ -3,10 +3,12 @@ package fr.synthlab.view.component;
 import javafx.scene.control.Button;
 
 /**
- * Created by pollt on 2/9/16.
+ * Record Button.
  */
 public class RecordButton extends Button {
-
+    /**
+     * constructor.
+     */
     public RecordButton() {
         this.getStylesheets().add(
                 getClass().getResource("/gui/fxml/style/Module.css")
@@ -14,6 +16,10 @@ public class RecordButton extends Button {
         this.getStyleClass().add("record-release");
     }
 
+    /**
+     * action.
+     * @param toggle new state of button
+     */
     public final void setToggle(final boolean toggle) {
         this.getStyleClass().clear();
         if (toggle) {
