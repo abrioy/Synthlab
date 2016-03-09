@@ -31,10 +31,22 @@ import fr.synthlab.view.module.output.ViewModuleSCOPImpl;
 import java.io.File;
 import java.util.logging.Logger;
 
+/**
+ * factory for view module.
+ */
 public class ViewModuleFactory {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleFactory.class.getName());
 
+    /**
+     * create view module.
+     * @param type of module
+     * @param workbench current workbench
+     * @return new view module
+     */
     public static ViewModule createViewModule(
             final ModuleType type, final Workbench workbench) {
         ViewModule module = null;
@@ -125,6 +137,10 @@ public class ViewModuleFactory {
         return viewVco;
     }
 
+    /**
+     * @return a viewModuleVCA attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleVCA(final Workbench workbench) {
         Module vca = ModuleFactory.createModule(ModuleType.VCA);
         ViewModuleVCAImpl viewVca = new ViewModuleVCAImpl(workbench);
@@ -135,6 +151,10 @@ public class ViewModuleFactory {
         return viewVca;
     }
 
+    /**
+     * @return a viewModuleOut attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleOut(final Workbench workbench) {
         Module out = ModuleFactory.createModule(ModuleType.OUT);
         ViewModuleOUTImpl viewOut = new ViewModuleOUTImpl(workbench);
@@ -159,6 +179,11 @@ public class ViewModuleFactory {
         });
         return viewOut;
     }
+
+    /**
+     * @return a viewModuleWhiteNoise attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleWhiteNoise(
             final Workbench workbench) {
         Module brui = ModuleFactory.createModule(ModuleType.BRUI);
@@ -168,6 +193,10 @@ public class ViewModuleFactory {
         return viewNoise;
     }
 
+    /**
+     * @return a viewModuleOscilloscope attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleOscilloscope(
             final Workbench workbench) {
         Module scop = ModuleFactory.createModule(ModuleType.SCOP);
@@ -182,6 +211,10 @@ public class ViewModuleFactory {
         return viewScop;
     }
 
+    /**
+     * @return a viewModuleRep attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleREP(final Workbench workbench) {
         Module rep = ModuleFactory.createModule(ModuleType.REP);
         ViewModuleREPImpl viewREP = new ViewModuleREPImpl(workbench);
@@ -190,6 +223,10 @@ public class ViewModuleFactory {
         return viewREP;
     }
 
+    /**
+     * @return a viewModuleEG attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleEG(final Workbench workbench) {
         Module eg = ModuleFactory.createModule(ModuleType.EG);
         ViewModuleEGImpl viewEG = new ViewModuleEGImpl(workbench);
@@ -203,10 +240,13 @@ public class ViewModuleFactory {
                 .setSustain(viewEG.getSustain()));
         viewEG.setChangeReleaseCommand(() -> ((ModuleEG) eg)
                 .setRelease(viewEG.getRelease()));
-
         return viewEG;
     }
 
+    /**
+     * @return a viewModuleVCFLP attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleVCFLP(final Workbench workbench) {
         Module vcflp = ModuleFactory.createModule(ModuleType.VCFLP);
         ViewModuleVCFLPImpl viewVcflp = new ViewModuleVCFLPImpl(workbench);
@@ -219,6 +259,10 @@ public class ViewModuleFactory {
         return viewVcflp;
     }
 
+    /**
+     * @return a viewModuleVCLHP attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleVCFHP(final Workbench workbench) {
         Module vcfhp = ModuleFactory.createModule(ModuleType.VCFHP);
         ViewModuleVCFHPImpl viewVcfhp = new ViewModuleVCFHPImpl(workbench);
@@ -228,6 +272,10 @@ public class ViewModuleFactory {
         return viewVcfhp;
     }
 
+    /**
+     * @return a viewModuleKeyb attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleKEYB(final Workbench workbench) {
         Module keyb = ModuleFactory.createModule(ModuleType.KEYB);
         ViewModuleKEYBImpl viewKEYB = new ViewModuleKEYBImpl(workbench);
@@ -244,6 +292,10 @@ public class ViewModuleFactory {
         return viewKEYB;
     }
 
+    /**
+     * @return a viewModuleSEQ attached to its module
+     * @param workbench workbench
+     */
     private static ViewModule createViewModuleSEQ(final Workbench workbench) {
         Module seq = ModuleFactory.createModule(ModuleType.SEQ);
         ViewModuleSEQImpl viewSEQ = new ViewModuleSEQImpl(workbench);
@@ -268,7 +320,6 @@ public class ViewModuleFactory {
                 .setStepValue(7, viewSEQ.getStepValue(7)));
 
         ((ModuleSEQ) seq).addObserver(viewSEQ);
-
         return viewSEQ;
     }
 }
