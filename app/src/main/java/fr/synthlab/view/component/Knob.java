@@ -8,13 +8,23 @@ import javafx.css.Styleable;
 import javafx.event.EventTarget;
 
 /**
- * Created by miow on 3/1/16.
+ * Knob.
  */
 public interface Knob extends EventTarget, Styleable {
+    /**
+     * @return speed
+     */
     double getSpeed();
 
+    /**
+     * setter on speed.
+     * @param v to set
+     */
     void setSpeed(double v);
 
+    /**
+     * @return speed property
+     */
     DoubleProperty speedProperty();
 
     /**
