@@ -6,7 +6,7 @@ import fr.synthlab.view.component.Plug;
 import java.util.logging.Logger;
 
 /**
- * Created by miow on 3/2/16.
+ * Cable Manager.
  */
 public class CableManager {
     private static final Logger LOGGER

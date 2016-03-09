@@ -1,7 +1,7 @@
 package fr.synthlab.view;
 
 /**
- * Created by miow on 2/12/16.
+ * Enum for skin.
  */
 public enum Skin {
     Default("Default"),

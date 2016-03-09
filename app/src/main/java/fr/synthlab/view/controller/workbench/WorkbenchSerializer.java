@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
- * Created by miow on 3/2/16.
+ * Serializer for the workbench.
  */
 public class WorkbenchSerializer {
     private static final Logger LOGGER

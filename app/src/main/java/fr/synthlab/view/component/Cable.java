@@ -12,7 +12,7 @@ import javafx.scene.shape.StrokeLineCap;
 import java.util.logging.Logger;
 
 /**
- * Created by pollt on 2/2/16.
+ * Cable.
  */
 
 public class Cable extends CubicCurve {

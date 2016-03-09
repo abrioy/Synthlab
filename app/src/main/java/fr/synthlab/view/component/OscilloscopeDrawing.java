@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 import java.util.logging.Logger;
 
 /**
- * Created by corentin on 01/02/16.
+ * Draw oscilloscope.
  */
 public class OscilloscopeDrawing extends Pane {
     private static final Logger LOGGER

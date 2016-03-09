@@ -166,7 +166,7 @@ public abstract class ViewModule extends Pane implements Serializable {
      * @param o where is save
      * @throws IOException if save can't open
      */
-    abstract void writeObject(ObjectOutputStream o)
+    public abstract void writeObject(ObjectOutputStream o)
             throws IOException;
 
     /**
