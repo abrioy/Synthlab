@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by miow on 3/1/16.
+ * View module Keyboard.
  */
 public interface ViewModuleKEYB
         extends EventTarget, Styleable, Serializable, Initializable {
@@ -21,21 +21,51 @@ public interface ViewModuleKEYB
     void initialize(
             URL location, ResourceBundle resources);
 
+    /**
+     * @return current octave
+     */
     int getOctave();
 
+    /**
+     * setter on command execute on key pressed.
+     * @param command to set
+     */
     void setKeyPressedCommand(Runnable command);
-
+    /**
+     * setter on command execute on key released.
+     * @param command to set
+     */
     void setKeyReleasedCommand(Runnable command);
-
+    /**
+     * setter on command execute on octave change.
+     * @param command to set
+     */
     void setOctaveChangeCommand(Runnable command);
 
+    /**
+     * @return last note pressed
+     */
     NoteKEYB getNotePressed();
 
+    /**
+     * @return last key released
+     */
     NoteKEYB getLastKeyReleased();
 
+    /**
+     * write in o for save workbench.
+     * @param o where is save
+     * @throws IOException if save can't open
+     */
     void writeObject(ObjectOutputStream o)
-                    throws IOException;
+            throws IOException;
 
+    /**
+     * reload object.
+     * @param o where is reload
+     * @throws IOException if save can't open
+     * @throws ClassNotFoundException if a save class can't be found
+     */
     void readObject(ObjectInputStream o)
             throws IOException, ClassNotFoundException;
 }
