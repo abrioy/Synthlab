@@ -1,6 +1,5 @@
 package fr.synthlab.view.module.filter;
 
-
 import fr.synthlab.view.controller.workbench.Workbench;
 import fr.synthlab.view.component.Knob;
 import fr.synthlab.view.component.Plug;
@@ -15,25 +14,53 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of View module VCFHP.
+ */
 public class ViewModuleVCFHPImpl extends ViewModule implements ViewModuleVCFHP {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleVCFLPImpl.class.getName());
 
+    /**
+     * plug in.
+     */
     @FXML
     private Plug in;
+    /**
+     * plug out.
+     */
     @FXML
     private Plug out;
+    /**
+     * plug am.
+     */
     @FXML
     private Plug am;
 
+    /**
+     * knob threshold.
+     */
     @FXML
     private Knob threshold;
 
+    /**
+     * frequency label.
+     */
     @FXML
     private Label frequencyLabel;
 
+    /**
+     * command execute on change on knob threshold.
+     */
     private Runnable changeThresholdCommand;
 
+    /**
+     * constructor.
+     * @param workbench current workbench
+     */
     public ViewModuleVCFHPImpl(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleVCFHP.fxml");
@@ -48,6 +75,9 @@ public class ViewModuleVCFHPImpl extends ViewModule implements ViewModuleVCFHP {
         frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
+    /**
+     * execution of command.
+     */
     private void updateThreshold() {
         changeThresholdCommand.run();
         frequencyLabel.setText(((int) getThreshold()) + " Hz");
