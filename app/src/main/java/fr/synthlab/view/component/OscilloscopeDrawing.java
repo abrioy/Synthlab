@@ -11,10 +11,19 @@ import java.util.logging.Logger;
  * Draw oscilloscope.
  */
 public class OscilloscopeDrawing extends Pane {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(OscilloscopeDrawing.class.getName());
 
+    /**
+     * model module.
+     */
     private ModuleSCOP osc;
+    /**
+     * swing node.
+     */
     private SwingNode swingNode;
 
     /*
@@ -25,11 +34,17 @@ public class OscilloscopeDrawing extends Pane {
     }
     */
 
+    /**
+     * constructor.
+     */
     public OscilloscopeDrawing() {
         super();
         init();
     }
 
+    /**
+     * init view.
+     */
     private void init() {
         swingNode = new SwingNode();
         StackPane pane = new StackPane();
@@ -37,6 +52,10 @@ public class OscilloscopeDrawing extends Pane {
         this.getChildren().add(pane);
     }
 
+    /**
+     * setter on model module.
+     * @param oscilloscope to set
+     */
     public final void setModuleOscilloscope(final ModuleSCOP oscilloscope) {
         osc = oscilloscope;
         swingNode.setContent(osc.getOscillatorJComponent());

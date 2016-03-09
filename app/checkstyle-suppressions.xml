@@ -68,6 +68,6 @@
     <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="69" />
 
     <suppress files="ModuleKEYBImpl.java" checks="FinalParameters" lines="132" />
-    <suppress files="KnobImpl.java" checks="FinalParameters" lines="572" />
-    <suppress files="KnobImpl.java" checks="FinalParameters" lines="606" />
+    <suppress files="KnobImpl.java" checks="FinalParameters" lines="599" />
+    <suppress files="KnobImpl.java" checks="FinalParameters" lines="633" />
 </suppressions>

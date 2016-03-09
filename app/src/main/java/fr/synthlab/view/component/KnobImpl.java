@@ -33,9 +33,15 @@ import java.util.logging.Logger;
  * @see Region
  */
 public class KnobImpl extends Pane implements Knob {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(KnobImpl.class.getName());
 
+    /**
+     * color for draw step.
+     */
     private static final Color STEP_COLOR = Color.WHITE;
 
     /**
@@ -73,7 +79,14 @@ public class KnobImpl extends Pane implements Knob {
      */
     private final Arc arc = new Arc();
 
+    /**
+     * last position.
+     */
     private double lastAngularPosition = 80.0d;
+
+    /**
+     * speed property.
+     */
     private DoubleProperty speed
             = new SimpleDoubleProperty(this, "slow", Double.MAX_VALUE);
 
@@ -152,6 +165,9 @@ public class KnobImpl extends Pane implements Knob {
      */
     private double scale = (maxExp - minExp) / max.get() - min.get();
 
+    /**
+     * line collection.
+     */
     private Collection<Line> lines = new ArrayList<>();
 
     /**
@@ -253,6 +269,11 @@ public class KnobImpl extends Pane implements Knob {
 
     }
 
+    /**
+     * move knob.
+     * @param x mouse position
+     * @param y mouse position
+     */
     private void moveKnob(final double x, final double y) {
         double centerX = getWidth() / 2.0d;
         double centerY = getHeight() / 2.0d;
@@ -454,6 +475,9 @@ public class KnobImpl extends Pane implements Knob {
         return Math.min(maxValue, valueOfAngle);
     }
 
+    /**
+     * update position.
+     */
     private void updatePositions() {
         for (Node node : getChildren()) {
             node.translateXProperty().set(getWidth() / 2.0d);
@@ -461,6 +485,9 @@ public class KnobImpl extends Pane implements Knob {
         }
     }
 
+    /**
+     * popup to set value.
+     */
     public final void showPickerPopup() {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Adjust " + label.get());

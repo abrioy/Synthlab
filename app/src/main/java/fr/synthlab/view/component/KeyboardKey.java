@@ -12,20 +12,35 @@ import java.util.logging.Logger;
  * draw keyboard key.
  */
 public class KeyboardKey extends Rectangle {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(KeyboardKey.class.getName());
 
+    /**
+     * workbench.
+     */
     private Workbench workbench;
 
+    /**
+     * is white property.
+     */
     private BooleanProperty isWhiteKey
             = new SimpleBooleanProperty(this, "isWhiteKey", true);
 
+    /**
+     * constructor.
+     */
     public KeyboardKey() {
         super();
-
         setIsWhiteKey(true);
     }
 
+    /**
+     * setter on white property value.
+     * @param whiteKey value to set
+     */
     public final void setIsWhiteKey(final boolean whiteKey) {
         this.isWhiteKey.setValue(whiteKey);
         if (whiteKey) {
@@ -39,10 +54,16 @@ public class KeyboardKey extends Rectangle {
         }
     }
 
+    /**
+     * @return white property
+     */
     public final BooleanProperty isWhiteKeyProperty() {
         return isWhiteKey;
     }
 
+    /**
+     * @return white property value
+     */
     public final boolean getIsWhiteKey() {
         return isWhiteKey.getValue();
     }
