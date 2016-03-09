@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by miow on 3/1/16.
+ * view module mixer.
  */
 public interface ViewModuleMIX
         extends EventTarget, Styleable, Serializable, Initializable {
@@ -82,9 +82,20 @@ public interface ViewModuleMIX
     void initialize(
             URL location, ResourceBundle resources);
 
+    /**
+     * write in o for save workbench.
+     * @param o where is save
+     * @throws IOException if save can't open
+     */
     void writeObject(ObjectOutputStream o)
-                    throws IOException;
+            throws IOException;
 
+    /**
+     * reload object.
+     * @param o where is reload
+     * @throws IOException if save can't open
+     * @throws ClassNotFoundException if a save class can't be found
+     */
     void readObject(ObjectInputStream o)
                             throws IOException, ClassNotFoundException;
 }
