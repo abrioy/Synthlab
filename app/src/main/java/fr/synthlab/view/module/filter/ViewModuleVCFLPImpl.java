@@ -14,29 +14,62 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Implementation view module VCFLP.
+ */
 public class ViewModuleVCFLPImpl extends ViewModule implements ViewModuleVCFLP {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleVCFLPImpl.class.getName());
-
+    /**
+     * plug in.
+     */
     @FXML
     private Plug in;
+    /**
+     * plug out.
+     */
     @FXML
     private Plug out;
+    /**
+     * plug am.
+     */
     @FXML
     private Plug am;
 
+    /**
+     * knob threshold.
+     */
     @FXML
     private Knob threshold;
 
+    /**
+     * knob resonance.
+     */
     @FXML
     private Knob resonance;
 
+    /**
+     * frequency label.
+     */
     @FXML
     private Label frequencyLabel;
 
+    /**
+     * command execute on change frequency.
+     */
     private Runnable changeThresholdCommand;
+    /**
+     * command execute on change resonance.
+     */
     private Runnable changeResonanceCommand;
 
+    /**
+     * constructor.
+     * @param workbench current workbench
+     */
     public ViewModuleVCFLPImpl(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleVCFLP.fxml");
@@ -56,6 +89,9 @@ public class ViewModuleVCFLPImpl extends ViewModule implements ViewModuleVCFLP {
         frequencyLabel.setText(((int) getThreshold()) + " Hz");
     }
 
+    /**
+     * execute update frequency.
+     */
     private void updateThreshold() {
         changeThresholdCommand.run();
         frequencyLabel.setText(((int) getThreshold()) + " Hz");
@@ -73,6 +109,9 @@ public class ViewModuleVCFLPImpl extends ViewModule implements ViewModuleVCFLP {
         return threshold.getValue();
     }
 
+    /**
+     * execute update resonance.
+     */
     private void updateResonance() {
         changeResonanceCommand.run();
     }
