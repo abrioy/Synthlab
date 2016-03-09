@@ -12,7 +12,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of view module mixer.
+ */
 public class ViewModuleMIXImpl extends ViewModule implements ViewModuleMIX {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleMIXImpl.class.getName());
 
