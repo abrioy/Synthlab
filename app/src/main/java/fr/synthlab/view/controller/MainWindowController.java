@@ -22,7 +22,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-
+/**
+ * controller for main windows.
+ */
 public class MainWindowController implements Initializable {
     private static final Logger LOGGER
             = Logger.getLogger(MainWindowController.class.getName());

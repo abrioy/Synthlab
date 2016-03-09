@@ -8,6 +8,9 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.logging.Logger;
 
+/**
+ * draw keyboard key.
+ */
 public class KeyboardKey extends Rectangle {
     private static final Logger LOGGER
             = Logger.getLogger(KeyboardKey.class.getName());

@@ -21,6 +21,9 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
+/**
+ * controller for toolbox.
+ */
 public class ToolboxController implements Initializable {
     private static final Logger LOGGER
             = Logger.getLogger(ToolboxController.class.getName());

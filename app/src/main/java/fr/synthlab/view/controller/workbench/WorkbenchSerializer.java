@@ -100,6 +100,10 @@ public class WorkbenchSerializer {
         workbench.removeAllModules();
 
         Map<Integer, ViewModule> moduleList = new HashMap<>();
+
+        /**
+         * class to referenced port.
+         */
         class PortReference {
             private int parentUID;
             private String name;

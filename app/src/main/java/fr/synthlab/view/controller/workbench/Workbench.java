@@ -20,6 +20,9 @@ import java.util.Collection;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * draw workbench.
+ */
 public class Workbench extends Pane {
     private static final Logger LOGGER
             = Logger.getLogger(Workbench.class.getName());
@@ -112,6 +115,9 @@ public class Workbench extends Pane {
     private void makeDraggable(final ViewModule module) {
         final Workbench workbench = this;
 
+        /**
+         * delta class.
+         */
         class Delta {
             private double x, y;
         }

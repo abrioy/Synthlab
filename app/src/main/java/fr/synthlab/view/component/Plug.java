@@ -17,6 +17,9 @@ import javafx.scene.shape.StrokeType;
 import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
+/**
+ * draw plug.
+ */
 public class Plug extends StackPane {
     private static final Logger LOGGER = Logger.getLogger(Plug.class.getName());
 
@@ -39,6 +42,9 @@ public class Plug extends StackPane {
 
     private Label nameLabel;
 
+    /**
+     * type of plug.
+     */
     public enum Type {
         input(Color.LIGHTBLUE),
         output(Color.ORANGE),

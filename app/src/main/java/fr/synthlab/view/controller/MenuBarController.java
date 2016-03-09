@@ -24,6 +24,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * controller for menu bar.
+ */
 public class MenuBarController implements Initializable {
     private static final Logger LOGGER
             = Logger.getLogger(MenuBarController.class.getName());
