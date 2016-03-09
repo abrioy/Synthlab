@@ -13,19 +13,41 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * view module scop.
+ */
 public class ViewModuleSCOPImpl extends ViewModule implements ViewModuleSCOP {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleSCOPImpl.class.getName());
 
+    /**
+     * draw oscilloscope.
+     */
     @FXML
     private OscilloscopeDrawing oscilloscopeDrawing;
 
+    /**
+     * scale knob.
+     */
     @FXML
     private Knob picker;
 
+    /**
+     * action on knob change.
+     */
     private Runnable pickerCmd;
+    /**
+     * workbench.
+     */
     private Workbench w;
 
+    /**
+     * constructor.
+     * @param workbench current workbench
+     */
     public ViewModuleSCOPImpl(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleOscilloscope.fxml");
