@@ -10,10 +10,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of view module repeater.
+ */
 public class ViewModuleREPImpl extends ViewModule implements ViewModuleREP {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleREPImpl.class.getName());
 
+    /**
+     * constructor.
+     * @param workbench current workbench
+     */
     public ViewModuleREPImpl(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleREP.fxml");
