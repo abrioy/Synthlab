@@ -18,48 +18,116 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * implementation of view module keyboard.
+ */
 public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleKEYBImpl.class.getName());
 
+    /**
+     * c key.
+     */
     @FXML
     private KeyboardKey cKey;
+    /**
+     * c sharp key.
+     */
     @FXML
     private KeyboardKey cSharpKey;
+    /**
+     * d key.
+     */
     @FXML
     private KeyboardKey dKey;
+    /**
+     * d sharp key.
+     */
     @FXML
     private KeyboardKey dSharpKey;
+    /**
+     * e key.
+     */
     @FXML
     private KeyboardKey eKey;
+    /**
+     * f key.
+     */
     @FXML
     private KeyboardKey fKey;
+    /**
+     * f sharp key.
+     */
     @FXML
     private KeyboardKey fSharpKey;
+    /**
+     * g key.
+     */
     @FXML
     private KeyboardKey gKey;
+    /**
+     * g sharp key.
+     */
     @FXML
     private KeyboardKey gSharpKey;
+    /**
+     * a key.
+     */
     @FXML
     private KeyboardKey aKey;
+    /**
+     * a sharp key.
+     */
     @FXML
     private KeyboardKey aSharpKey;
+    /**
+     * b key.
+     */
     @FXML
     private KeyboardKey bKey;
+    /**
+     * c2 key.
+     */
     @FXML
     private KeyboardKey cNextOctKey;
-
+    /**
+     * knob on octave.
+     */
     @FXML
     private Knob octavePicker;
-
+    /**
+     * octave label.
+     */
     @FXML
     private Label octaveLabel;
 
+    /**
+     * command execute when key is pressed.
+     */
     private Runnable keyPressedCommand;
+
+    /**
+     * command execute when key is released.
+     */
     private Runnable keyReleasedCommand;
+
+    /**
+     * command execute when octave change.
+     */
     private Runnable octaveChangeCommand;
+
+    /**
+     * the last key press and release.
+     */
     private NoteKEYB lastKeyPressed, lastKeyReleased;
 
+    /**
+     * construtor.
+     * @param workbench current workbench
+     */
     public ViewModuleKEYBImpl(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleKEYB.fxml");
@@ -192,6 +260,9 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
         keyboardEventInit();
     }
 
+    /**
+     * switch to init event on keyboard.
+     */
     private void keyboardEventInit() {
         setOnKeyPressed(event -> {
             switch (event.getCode()) {
@@ -324,6 +395,9 @@ public class ViewModuleKEYBImpl extends ViewModule implements ViewModuleKEYB {
         });
     }
 
+    /**
+     * update view of octave.
+     */
     private void updateOctave() {
         octaveLabel.setText(getOctave() + "");
     }
