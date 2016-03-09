@@ -20,16 +20,41 @@ import java.util.Collection;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * view module abstract class.
+ */
 public abstract class ViewModule extends Pane implements Serializable {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModule.class.getName());
 
+    /**
+     * workbench.
+     */
     private Workbench workbench;
+    /**
+     * model module.
+     */
     private Module module;
+    /**
+     * panel.
+     */
     private AnchorPane topPane;
+    /**
+     * module name.
+     */
     private Label moduleName;
+    /**
+     * close button.
+     */
     private Button closeButton;
 
+    /**
+     * constructor.
+     * @param workbenchInit current workbench
+     */
     public ViewModule(final Workbench workbenchInit) {
         super();
 
@@ -69,6 +94,10 @@ public abstract class ViewModule extends Pane implements Serializable {
         });
     }
 
+    /**
+     * loader for FXML.
+     * @param fxmlPath fxml to load
+     */
     protected final void loadFXML(final String fxmlPath) {
         FXMLLoader fxmlLoader
                 = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -91,15 +120,25 @@ public abstract class ViewModule extends Pane implements Serializable {
         topPane.toFront();
     }
 
+    /**
+     * @return model module
+     */
     public final Module getModule() {
         return module;
     }
 
+    /**
+     * setter on model module.
+     * @param newModule to set
+     */
     public final void setModule(final Module newModule) {
         module = newModule;
         moduleName.setText(module.getType().getLongName());
     }
 
+    /**
+     * @return collection of all plug
+     */
     public final Collection<Plug> getPlugs() {
         return this.lookupAll("Plug").stream()
                 .filter(child -> child instanceof Plug)
@@ -107,6 +146,11 @@ public abstract class ViewModule extends Pane implements Serializable {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * find a plug by its name.
+     * @param name of plug
+     * @return plug found
+     */
     public final Plug getPlugByName(final String name) {
         Collection<Plug> plugs = getPlugs();
         for (Plug plug : plugs) {
@@ -117,9 +161,20 @@ public abstract class ViewModule extends Pane implements Serializable {
         return null;
     }
 
-    public abstract void writeObject(
-            final ObjectOutputStream o) throws IOException;
+    /**
+     * write in o for save workbench.
+     * @param o where is save
+     * @throws IOException if save can't open
+     */
+    abstract void writeObject(ObjectOutputStream o)
+            throws IOException;
 
+    /**
+     * reload object.
+     * @param o where is reload
+     * @throws IOException if save can't open
+     * @throws ClassNotFoundException if a save class can't be found
+     */
     public abstract void readObject(final ObjectInputStream o)
             throws IOException, ClassNotFoundException;
 }
