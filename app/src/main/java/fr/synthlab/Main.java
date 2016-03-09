@@ -17,10 +17,15 @@ import java.util.logging.Logger;
  * @see Application
  */
 public class Main extends Application {
-    private static final Logger APP_ROOT_LOGGER =
-            Logger.getLogger("fr.synthlab");
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
+    /**
+     * start application.
+     * @param args argument given on start
+     */
     public static void main(final String[] args) {
         // Reading logging.properties
         if (System.getProperty("java.util.logging.config.file") == null) {
