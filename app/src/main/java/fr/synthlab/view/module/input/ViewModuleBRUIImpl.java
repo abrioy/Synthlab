@@ -10,11 +10,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of view module white noise.
+ */
 public class ViewModuleBRUIImpl extends ViewModule implements ViewModuleBRUI {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleBRUIImpl.class.getName());
 
-
+    /**
+     * constructor.
+     * @param workbench current workbench
+     */
     public ViewModuleBRUIImpl(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleWhiteNoise.fxml");
