@@ -13,22 +13,46 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of view module VCA.
+ */
 public class ViewModuleVCAImpl extends ViewModule implements ViewModuleVCA {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleVCAImpl.class.getName());
 
+    /**
+     * plug in.
+     */
     @FXML
     private Plug in;
+    /**
+     * plug out.
+     */
     @FXML
     private Plug out;
+    /**
+     * plug am.
+     */
     @FXML
     private Plug am;
-
+    /**
+     * knob amplification.
+     */
     @FXML
     private Knob ampli;
 
+    /**
+     * command execute on change amplification.
+     */
     private Runnable changeAmpliCommand;
 
+    /**
+     * constructor.
+     * @param workbench current workbench
+     */
     public ViewModuleVCAImpl(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleVCA.fxml");
@@ -43,6 +67,9 @@ public class ViewModuleVCAImpl extends ViewModule implements ViewModuleVCA {
         });
     }
 
+    /**
+     * execute amplification change.
+     */
     private void updateAmply() {
         changeAmpliCommand.run();
     }
