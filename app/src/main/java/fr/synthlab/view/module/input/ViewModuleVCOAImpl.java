@@ -15,27 +15,59 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+/**
+ * Implementation module VCOA.
+ */
 public class ViewModuleVCOAImpl extends ViewModule implements ViewModuleVCOA {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ViewModuleVCOAImpl.class.getName());
-
+    /**
+     * frequency knob.
+     */
     @FXML
     private Knob freq;
+    /**
+     * modulation frequency knob.
+     */
     @FXML
     private Knob freqLine;
+    /**
+     * form of audio.
+     */
     @FXML
     private Knob picker;
+    /**
+     * plug in.
+     */
     @FXML
     private Plug in;
+    /**
+     * plug out.
+     */
     @FXML
     private Plug out;
+    /**
+     * Label frequency.
+     */
     @FXML
     private Label frequencyLabel;
 
-    // Commands
+    /**
+     * command execute on change on knob picker.
+     */
     private Runnable changeShapeCommand;
+    /**
+     * command execute on change frequency.
+     */
     private Runnable changeFreqCommand;
 
+    /**
+     * constructor.
+     * @param workbench current workbench
+     */
     public ViewModuleVCOAImpl(final Workbench workbench) {
         super(workbench);
         this.loadFXML("/gui/fxml/module/ViewModuleVCO.fxml");
@@ -56,11 +88,12 @@ public class ViewModuleVCOAImpl extends ViewModule implements ViewModuleVCOA {
         picker.valueProperty().addListener(event -> {
             changeShapeCommand.run();
         });
-
-
         frequencyLabel.setText(getFreq() + " Hz");
     }
 
+    /**
+     * update frequency.
+     */
     private void updateFrequency() {
         changeFreqCommand.run();
         frequencyLabel.setText(getFreq() + " Hz");
@@ -72,13 +105,11 @@ public class ViewModuleVCOAImpl extends ViewModule implements ViewModuleVCOA {
         changeShapeCommand.run();
     }
 
-
     @Override
     public final void setChangeFreqCommand(final Runnable changeFreq) {
         this.changeFreqCommand = changeFreq;
         changeFreqCommand.run();
     }
-
 
     @Override
     public final double getFreq() {
