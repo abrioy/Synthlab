@@ -63,7 +63,9 @@
             files="CableManager.java" lines="16"/>
 
     <suppress files="PortImpl.java" checks="DesignForExtension" lines="50-65" />
-    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="45-69" />
+    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="74" />
+    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="94" />
+    <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="69" />
 
     <suppress files="ModuleKEYBImpl.java" checks="FinalParameters" lines="132" />
     <suppress files="KnobImpl.java" checks="FinalParameters" lines="572" />
