@@ -60,7 +60,7 @@
   <suppress checks="VisibilityModifier"
             files="ModuleVCF.java"/>
   <suppress checks="VisibilityModifier"
-            files="CableManager.java" lines="16"/>
+            files="CableManager.java" lines="26"/>
 
     <suppress files="PortImpl.java" checks="DesignForExtension" lines="50-65" />
     <suppress files="ModuleVCF.java" checks="DesignForExtension" lines="74" />

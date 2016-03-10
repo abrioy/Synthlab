@@ -9,12 +9,26 @@ import java.util.logging.Logger;
  * Cable Manager.
  */
 public class CableManager {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(CableManager.class.getName());
 
+    /**
+     * current workbench.
+     */
     private Workbench workbench;
+
+    /**
+     * cable managed.
+     */
     public Cable draggedCable;
 
+    /**
+     * constructor.
+     * @param workbenchParam current workbench
+     */
     public CableManager(final Workbench workbenchParam) {
         this.workbench = workbenchParam;
     }
@@ -60,6 +74,9 @@ public class CableManager {
     }
 
 
+    /**
+     * update all cables.
+     */
     public final void updateCables() {
         workbench.getCables().forEach(Cable::updateCircles);
 
@@ -70,11 +87,18 @@ public class CableManager {
         });
     }
 
+    /**
+     * delete a cable.
+     * @param cable need to be delete
+     */
     public final void removeCable(final Cable cable) {
         cable.dispose();
         workbench.getChildren().remove(cable);
     }
 
+    /**
+     * drop cable.
+     */
     public final void dropCable() {
         if (draggedCable != null) {
             removeCable(draggedCable);
