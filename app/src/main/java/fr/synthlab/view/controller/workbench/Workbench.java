@@ -24,16 +24,29 @@ import java.util.stream.Collectors;
  * draw workbench.
  */
 public class Workbench extends Pane {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(Workbench.class.getName());
-
+    /**
+     * margin around module.
+     */
     private final double moduleMargin = 2.0d;
+
+    /**
+     * ghost of module.
+     */
     private ImageView dragGhost = new ImageView();
 
+    /**
+     * manager for the cable.
+     */
     private CableManager cableManager;
 
-
-
+    /**
+     * constructor.
+     */
     public Workbench() {
         // Making the ghost a bit spookier
         dragGhost.setOpacity(0.40d); // #SoSpooky
@@ -58,7 +71,9 @@ public class Workbench extends Pane {
         ModuleFactory.startSyn();
     }
 
-
+    /**
+     * clean workbench.
+     */
     public final void removeAllModules() {
         getViewModules().forEach(this::removeModule);
     }
@@ -163,9 +178,12 @@ public class Workbench extends Pane {
             }
             dragGhost.toFront();
         });
-
     }
 
+    /**
+     * create gosh.
+     * @param module need a gosh
+     */
     public final void displayGhost(final ViewModule module) {
         if (this.getChildren().contains(dragGhost)) {
             this.getChildren().remove(dragGhost);
@@ -186,10 +204,18 @@ public class Workbench extends Pane {
         this.getChildren().add(dragGhost);
     }
 
+    /**
+     * destroy ghost.
+     */
     public final void hideGhost() {
         this.getChildren().remove(dragGhost);
     }
 
+    /**
+     * move ghost.
+     * @param x position
+     * @param y position
+     */
     public final void moveGhost(final double x, final double y) {
         dragGhost.relocate(
                 Math.max(moduleMargin, x),
@@ -198,6 +224,9 @@ public class Workbench extends Pane {
         dragGhost.toFront();
     }
 
+    /**
+     * @return get all view module
+     */
     public final Collection<ViewModule> getViewModules() {
         return this.getChildren().stream()
                 .filter(child -> child instanceof ViewModule)
@@ -362,8 +391,11 @@ public class Workbench extends Pane {
         return null;
     }
 
+    /**
+     * manage plug and cable.
+     * @param plug clicked
+     */
     public final void plugClicked(final Plug plug) {
         cableManager.plugClicked(plug);
     }
-
 }
