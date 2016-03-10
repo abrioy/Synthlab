@@ -14,25 +14,58 @@ import java.util.logging.Logger;
 /**
  * Cable.
  */
-
 public class Cable extends CubicCurve {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(Cable.class.getName());
+    /**
+     * size of end of cable.
+     */
     private final double circleRadius = 12.0d;
+    /**
+     * color.
+     */
     private Color color;
+    /**
+     * plug one.
+     */
     private Plug plug1;
+    /**
+     * plug two.
+     */
     private Plug plug2;
+    /**
+     * circle 1.
+     */
     private Circle circle1;
+    /**
+     * cable 2.
+     */
     private Circle circle2;
+    /**
+     * current workbench.
+     */
     private Workbench workbench;
 
+    /**
+     * constructor.
+     * @param workbenchInit current workbench
+     * @param inInit first plug
+     */
     public Cable(final Workbench workbenchInit, final Plug inInit) {
         connectPlug(inInit);
         workbench = workbenchInit;
-
         init();
     }
 
+    /**
+     * constructor.
+     * @param workbenchInit current workbench
+     * @param inInit first plug
+     * @param outInit second plug
+     */
     public Cable(final Workbench workbenchInit,
                  final Plug inInit, final Plug outInit) {
         connectPlug(inInit);
@@ -42,6 +75,9 @@ public class Cable extends CubicCurve {
         init();
     }
 
+    /**
+     * init cable.
+     */
     private void init() {
         circle1 = new Circle();
         circle2 = new Circle();
@@ -60,6 +96,11 @@ public class Cable extends CubicCurve {
         this.setMouseTransparent(true);
     }
 
+    /**
+     * try connect module by their port.
+     * @param port1 first port
+     * @param port2 second port
+     */
     private void connectPorts(final Port port1, final Port port2) {
         if (port1 != null && port2 != null) {
             port1.connect(port2);
@@ -68,7 +109,10 @@ public class Cable extends CubicCurve {
         }
     }
 
-
+    /**
+     * connect plug.
+     * @param plug plug to connect
+     */
     public final void connectPlug(final Plug plug) {
         if (plug1 == null) {
             plug1 = plug;
@@ -87,6 +131,10 @@ public class Cable extends CubicCurve {
         }
     }
 
+    /**
+     * disconnect plug.
+     * @param plug disconnected
+     */
     public final void disconnectPlug(final Plug plug) {
         if (plug1 == plug) {
             plug1.setCable(null);
@@ -106,6 +154,9 @@ public class Cable extends CubicCurve {
         }
     }
 
+    /**
+     * @return return plug connected if cable is connected in only one side
+     */
     public final Plug getConnectedPlug() {
         if (plug1 != null && plug2 == null) {
             return plug1;
@@ -118,6 +169,9 @@ public class Cable extends CubicCurve {
         }
     }
 
+    /**
+     * update cable view.
+     */
     public final void update() {
         if (plug1 != null && plug2 != null) {
             Point2D position1 = workbench.sceneToLocal(
@@ -140,6 +194,9 @@ public class Cable extends CubicCurve {
         }
     }
 
+    /**
+     * update cable view when cable is linked to the mouse.
+     */
     public final void update(final Point2D mouse) {
         Point2D correctedMouse = new Point2D(Math.max(
                 circleRadius, mouse.getX()),
@@ -157,11 +214,19 @@ public class Cable extends CubicCurve {
         }
     }
 
+    /**
+     * update end of cable.
+     */
     public final void updateCircles() {
         circle1.toFront();
         circle2.toFront();
     }
 
+    /**
+     * get plug opposite.
+     * @param plug plug know
+     * @return the other plug
+     */
     public final Plug getOppositePlug(final Plug plug) {
         if (plug1 == null || plug2 == null) {
             return null;
@@ -175,11 +240,20 @@ public class Cable extends CubicCurve {
         }
     }
 
+    /**
+     * move cable.
+     * @param c circle
+     * @param x position
+     * @param y position
+     */
     private void moveCircle(final Circle c, final double x, final double y) {
         c.setCenterX(x);
         c.setCenterY(y);
     }
 
+    /**
+     * disconnect cable.
+     */
     public final void dispose() {
         if (plug1 != null) {
             plug1.setCable(null);
@@ -187,18 +261,21 @@ public class Cable extends CubicCurve {
                 plug1.getPort().disconnect();
             }
         }
-
         if (plug2 != null) {
             plug2.setCable(null);
             if (plug2.getPort() != null) {
                 plug2.getPort().disconnect();
             }
         }
-
         workbench.getChildren().remove(circle1);
         workbench.getChildren().remove(circle2);
     }
 
+    /**
+     * draw cable.
+     * @param start position 1
+     * @param end position 2
+     */
     private void drawCable(final Point2D start, final Point2D end) {
         this.setStartX(start.getX());
         this.setStartY(start.getY());
@@ -218,11 +295,18 @@ public class Cable extends CubicCurve {
         this.setStroke(color);
     }
 
+    /**
+     * setter on color.
+     * @param newColor to set
+     */
     public final void setColor(final Color newColor) {
         color = newColor;
         setStroke(color);
     }
 
+    /**
+     * @return color cable
+     */
     public final Color getColor() {
         return color;
     }
