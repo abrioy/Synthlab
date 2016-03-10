@@ -25,21 +25,41 @@ import java.util.logging.Logger;
  * controller for toolbox.
  */
 public class ToolboxController implements Initializable {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(ToolboxController.class.getName());
+    /**
+     * tree for module.
+     */
     @FXML
     private TreeView<String> treeView;
-
+    /**
+     * tree item for module.
+     */
     @FXML
     private TreeItem<String> treeItemRoot;
-
+    /**
+     * choose color for next cable.
+     */
     @FXML
     private ColorPicker colorPicker;
 
+    /**
+     * current color for next cable.
+     */
     private static Color color = Color.BLACK;
 
+    /**
+     * event to manage drag and drop module.
+     */
     private Consumer<DragEvent> onDragDone = null;
 
+    /**
+     * setter onDragDone module.
+     * @param newOnDragDone to set
+     */
     public final void setOnDragDone(final Consumer<DragEvent> newOnDragDone) {
         onDragDone = newOnDragDone;
     }
@@ -97,6 +117,9 @@ public class ToolboxController implements Initializable {
         color = colorPicker.getValue();
     }
 
+    /**
+     * change color for next cable.
+     */
     private void colorChange() {
         color = colorPicker.getValue();
         if (!colorPicker.getCustomColors().contains(color)) {
@@ -104,6 +127,10 @@ public class ToolboxController implements Initializable {
         }
     }
 
+    /**
+     * make tree item drag and drop.
+     * @param item item to make drag and drop
+     */
     private void makeListDraggable(final TreeView<String> item) {
         item.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
@@ -136,6 +163,9 @@ public class ToolboxController implements Initializable {
         });
     }
 
+    /**
+     * @return color for next cable
+     */
     public static Color getColor() {
         return color;
     }
