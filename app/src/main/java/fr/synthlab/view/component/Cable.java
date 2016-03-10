@@ -196,6 +196,7 @@ public class Cable extends CubicCurve {
 
     /**
      * update cable view when cable is linked to the mouse.
+     * @param mouse mouse linked
      */
     public final void update(final Point2D mouse) {
         Point2D correctedMouse = new Point2D(Math.max(
