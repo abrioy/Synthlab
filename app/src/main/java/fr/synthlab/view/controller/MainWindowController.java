@@ -26,23 +26,50 @@ import java.util.logging.Logger;
  * controller for main windows.
  */
 public class MainWindowController implements Initializable {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(MainWindowController.class.getName());
-
+    /**
+     * Workbench.
+     */
     @FXML
     private Workbench workbench;
+    /**
+     * Menu.
+     */
     @FXML
     private MenuBarController menuBarController;
+    /**
+     * toolbox for module.
+     */
     @FXML
     private ToolboxController toolboxController;
+    /**
+     * main pane.
+     */
     @FXML
     private BorderPane mainPane;
+    /**
+     * scroll for the workbench.
+     */
     @FXML
     private ScrollPane workbenchScrollPane;
 
-     private Skin currentSkin = Skin.Default;
+    /**
+     * current skin.
+     */
+    private Skin currentSkin = Skin.Default;
 
+    /**
+     * current module drag and drop.
+     */
     private ViewModule draggedNewViewModule = null;
+
+    /**
+     * property on zoom.
+     */
     private DoubleProperty zoomLevel
             = new SimpleDoubleProperty(this, null, 1.0d);
 
@@ -54,15 +81,15 @@ public class MainWindowController implements Initializable {
         // Setting the workspace to at least be as big as the scrollpane
         workbenchScrollPane.viewportBoundsProperty()
                 .addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> {
-                workbench.setMinSize(newValue.getWidth()
-                        * zoomLevel.doubleValue(),
-                        newValue.getHeight() * zoomLevel.doubleValue());
-                Rectangle tempChild = new Rectangle();
-                workbench.getChildren().add(tempChild);
-                workbench.getChildren().remove(tempChild);
-            });
-        });
+                    Platform.runLater(() -> {
+                        workbench.setMinSize(newValue.getWidth()
+                                        * zoomLevel.doubleValue(),
+                                newValue.getHeight() * zoomLevel.doubleValue());
+                        Rectangle tempChild = new Rectangle();
+                        workbench.getChildren().add(tempChild);
+                        workbench.getChildren().remove(tempChild);
+                    });
+                });
         zoomLevel.addListener((observable, oldValue, newValue) -> {
             final double zoom
                     = Math.min(2, Math.max(0.5, newValue.doubleValue()));
@@ -82,16 +109,16 @@ public class MainWindowController implements Initializable {
         // Dirty hack to make sure we can drag everywhere on the workbench
         workbench.widthProperty().addListener(
                 (observable, oldValue, newValue) -> {
-            workbench.requestLayout();
-            workbenchScrollPane.requestLayout();
-            workbench.getParent().requestLayout();
-        });
+                    workbench.requestLayout();
+                    workbenchScrollPane.requestLayout();
+                    workbench.getParent().requestLayout();
+                });
         workbench.heightProperty().addListener(
                 (observable, oldValue, newValue) -> {
-            workbench.requestLayout();
-            workbenchScrollPane.requestLayout();
-            workbench.getParent().requestLayout();
-        });
+                    workbench.requestLayout();
+                    workbenchScrollPane.requestLayout();
+                    workbench.getParent().requestLayout();
+                });
         // Handling incoming drags from the toolbox
         workbench.setOnDragEntered(event -> {
             Dragboard db = event.getDragboard();
@@ -204,37 +231,58 @@ public class MainWindowController implements Initializable {
         });
     }
 
+    /**
+     * @return zoom value
+     */
     public final double getZoomLevel() {
         return zoomLevel.get();
     }
 
+    /**
+     * @return zoom property
+     */
     public final DoubleProperty zoomLevelProperty() {
         return zoomLevel;
     }
 
+    /**
+     * setter on zoom value.
+     *
+     * @param newZoomLevel to set
+     */
     public final void setZoomLevel(final double newZoomLevel) {
         zoomLevel.set(newZoomLevel);
     }
 
+    /**
+     * setter on stage for menu.
+     *
+     * @param stage to set
+     */
     public final void setStageAndSetupListeners(final Stage stage) {
         menuBarController.setStage(stage);
     }
 
+    /**
+     * @return current skin
+     */
+    public final Skin getCurrentSkin() {
+        return currentSkin;
+    }
 
+    /**
+     * setter on skin.
+     * @param skin new skin
+     */
+    public final void changeSkin(final Skin skin) {
+        LOGGER.fine("Skin changed from \""
+                + currentSkin + "\" to \"" + skin + "\".");
+        // The remove does not properly removes the stylesheet
+        workbench.getStylesheets().clear();
+        //workbench.getStylesheets().remove(currentSkin.getPath());
+        workbench.getStylesheets().add(skin.getPath());
+        workbench.applyCss();
 
-     public final Skin getCurrentSkin() {
-          return currentSkin;
-     }
-
-     public final void changeSkin(final Skin skin) {
-          LOGGER.fine("Skin changed from \""
-                    + currentSkin + "\" to \"" + skin + "\".");
-         // The remove does not properly removes the stylesheet
-          workbench.getStylesheets().clear();
-          //workbench.getStylesheets().remove(currentSkin.getPath());
-          workbench.getStylesheets().add(skin.getPath());
-          workbench.applyCss();
-
-          workbench.getViewModules().forEach(ViewModule::applyCss);
-     }
+        workbench.getViewModules().forEach(ViewModule::applyCss);
+    }
 }
