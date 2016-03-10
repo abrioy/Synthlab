@@ -24,14 +24,26 @@ import java.util.stream.Collectors;
  * Serializer for the workbench.
  */
 public class WorkbenchSerializer {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER
             = Logger.getLogger(WorkbenchSerializer.class.getName());
 
+    /**
+     * @param module to hash.
+     * @return hash code of module
+     */
     private static int serializeModuleToUID(final Module module) {
         return System.identityHashCode(module);
     }
 
-
+    /**
+     * serialize and save view module.
+     * @param workbench current workbench
+     * @param outputStream file for save
+     * @throws IOException write or read error
+     */
     public static void serializeViewModules(
             final Workbench workbench,
             final ObjectOutputStream outputStream) throws IOException {
@@ -94,6 +106,12 @@ public class WorkbenchSerializer {
         }
     }
 
+    /**
+     * reload a view module.
+     * @param workbench current workbench
+     * @param inputStream file where module is safe
+     * @throws IOException write or read error
+     */
     public static void deSerializeViewModules(
             final Workbench workbench,
             final ObjectInputStream inputStream) throws IOException {
@@ -111,6 +129,14 @@ public class WorkbenchSerializer {
             private String connectedPortName;
             private Color cableColor;
 
+            /**
+             * constructor.
+             * @param parentUIDInit parent
+             * @param nameInit name
+             * @param connectedUIDInit connect
+             * @param connectedPortNameInit name port connected
+             * @param cableColorInit cable color
+             */
             PortReference(final int parentUIDInit, final String nameInit,
                           final int connectedUIDInit,
                           final String connectedPortNameInit,
@@ -207,5 +233,4 @@ public class WorkbenchSerializer {
 
         inputStream.close();
     }
-
 }
