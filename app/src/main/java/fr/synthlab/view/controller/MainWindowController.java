@@ -163,10 +163,16 @@ public class MainWindowController implements Initializable {
                 Point2D localPoint
                         = workbench.sceneToLocal(
                         new Point2D(event.getSceneX(), event.getSceneY()));
+                double expectedX =
+                        localPoint.getX()
+                                - draggedNewViewModule.getWidth() / 2;
+                double expectedY =
+                        localPoint.getY()
+                                - draggedNewViewModule.getHeight() / 2;
                 Point2D newLocation
                         = workbench.computeNewModulePosition(
-                        draggedNewViewModule, localPoint.getX(),
-                        localPoint.getY());
+                        draggedNewViewModule,
+                        expectedX, expectedY);
                 if (newLocation != null) {
                     draggedNewViewModule.setVisible(true);
                     draggedNewViewModule.relocate(
