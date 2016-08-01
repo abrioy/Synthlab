@@ -7,3 +7,6 @@ ISTIC, Université de Rennes 1
 
 
 ![alt tag](https://raw.githubusercontent.com/abrioy/Synthlab/master/synthlab.gif)
+
+
+Site de référence : http://www.catsonsynthesizersinspace.com/
