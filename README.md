@@ -10,3 +10,5 @@ ISTIC, Université de Rennes 1
 
 
 Site de référence : http://www.catsonsynthesizersinspace.com/
+Mirror : https://web.archive.org/web/20160409060623/http://www.catsonsynthesizersinspace.com/
+
